@@ -1,28 +1,28 @@
 ﻿using R2API;
 using System;
 
-namespace HenryMod.Modules
+namespace DekuMod.Modules
 {
     internal static class Tokens
     {
         internal static void AddTokens()
         {
-            #region Henry
-            string prefix = HenryPlugin.developerPrefix + "_HENRY_BODY_";
+            #region Deku
+            string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 
-            string desc = "Henry is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Sword is a good all-rounder while Boxing Gloves are better for laying a beatdown on more powerful foes." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Pistol is a powerful anti air, with its low cooldown and high damage." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Roll has a lingering armor buff that helps to use it aggressively." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Bomb can be used to wipe crowds with ease." + Environment.NewLine + Environment.NewLine;
+            string desc = "Deku is high risk survivor that hurts himself to power up his skills.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Delaware Smash  is a simple ranged attack; when powered up increases its AOE and piercing enemies." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Detroit smash is a chargeable punch that gains AOE as you charge; when powered up turns it into St. Louis Smash, increasing its AOE and piercing enemies." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Blackwhip allows him to move through the environment and grapple on to enemies; when powered up lets him pull multiple enemies towards him." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > One for All 100% enables Deku to use one powered up skill at the cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, searching for a new identity.";
             string outroFailure = "..and so he vanished, forever a blank slate.";
 
-            LanguageAPI.Add(prefix + "NAME", "Henry");
+            LanguageAPI.Add(prefix + "NAME", "Deku");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
-            LanguageAPI.Add(prefix + "SUBTITLE", "The Chosen One");
-            LanguageAPI.Add(prefix + "LORE", "sample lore");
+            LanguageAPI.Add(prefix + "SUBTITLE", "Ninth One For All User");
+            LanguageAPI.Add(prefix + "LORE", "I forgot to mention this, but this is the story of how I became the world's greatest hero");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
@@ -32,7 +32,7 @@ namespace HenryMod.Modules
             #endregion
 
             #region Passive
-            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Henry passive");
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Deku passive");
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
             #endregion
 
@@ -57,9 +57,9 @@ namespace HenryMod.Modules
             #endregion
 
             #region Achievements
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", "Henry: Mastery");
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", "As Henry, beat the game or obliterate on Monsoon.");
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", "Henry: Mastery");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", "Deku: Mastery");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", "As Deku, beat the game or obliterate on Monsoon.");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", "Deku: Mastery");
             #endregion
             #endregion
         }

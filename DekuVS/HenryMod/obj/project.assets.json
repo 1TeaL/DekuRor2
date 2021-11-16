@@ -187,9 +187,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Theodore 3\\Risk of Rain 2 modding\\Mods\\DekuRor2\\DekuVS\\HenryMod\\HenryMod.csproj",
-      "projectName": "HenryMod",
-      "projectPath": "F:\\Theodore 3\\Risk of Rain 2 modding\\Mods\\DekuRor2\\DekuVS\\HenryMod\\HenryMod.csproj",
+      "projectUniqueName": "F:\\Theodore 3\\Risk of Rain 2 modding\\Mods\\DekuRor2\\DekuVS\\HenryMod\\DekuMod.csproj",
+      "projectName": "DekuMod",
+      "projectPath": "F:\\Theodore 3\\Risk of Rain 2 modding\\Mods\\DekuRor2\\DekuVS\\HenryMod\\DekuMod.csproj",
       "packagesPath": "C:\\Users\\theod\\.nuget\\packages\\",
       "outputPath": "F:\\Theodore 3\\Risk of Rain 2 modding\\Mods\\DekuRor2\\DekuVS\\HenryMod\\obj\\",
       "projectStyle": "PackageReference",

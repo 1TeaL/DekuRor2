@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "a+GyY8sytOQ/pcU9s3IGDvUy1/lGHvh4bYedsRFRBvuIrInonoomfnfdb3AUi6/hVrYBQhdJWvzHKrLQFgg3rQ==",
+  "dgSpecHash": "W9kjXXzrmmUhZrilvDLYpBIiPbQKz2hS8r36RbGj9zHXcqNw5vCBaR1TWDFjMAbth/ir7IH0EqloAcx6asKTkw==",
   "success": true,
-  "projectFilePath": "F:\\Theodore 3\\Risk of Rain 2 modding\\Mods\\DekuRor2\\DekuVS\\HenryMod\\HenryMod.csproj",
+  "projectFilePath": "F:\\Theodore 3\\Risk of Rain 2 modding\\Mods\\DekuRor2\\DekuVS\\HenryMod\\DekuMod.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\theod\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\theod\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"

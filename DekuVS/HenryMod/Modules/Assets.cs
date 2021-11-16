@@ -7,7 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using RoR2.UI;
 
-namespace HenryMod.Modules
+namespace DekuMod.Modules
 {
     internal static class Assets
     {
@@ -33,7 +33,7 @@ namespace HenryMod.Modules
         private static string[] assetNames = new string[0];
 
         // CHANGE THIS
-        private const string assetbundleName = "myassetbundle";
+        private const string assetbundleName = "DekuAssetBundle";
 
         internal static void Initialize()
         {
@@ -52,7 +52,7 @@ namespace HenryMod.Modules
         {
             if (mainAssetBundle == null)
             {
-                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HenryMod." + assetbundleName))
+                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DekuMod." + assetbundleName))
                 {
                     mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
                 }
@@ -63,7 +63,7 @@ namespace HenryMod.Modules
 
         internal static void LoadSoundbank()
         {
-            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("HenryMod.HenryBank.bnk"))
+            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("DekuMod.HenryBank.bnk"))
             {
                 byte[] array = new byte[manifestResourceStream2.Length];
                 manifestResourceStream2.Read(array, 0, array.Length);
@@ -82,28 +82,28 @@ namespace HenryMod.Modules
             // feel free to delete everything in here and load in your own assets instead
             // it should work fine even if left as is- even if the assets aren't in the bundle
 
-            swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
+            //swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
 
-            bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
+            //bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
 
-            if (bombExplosionEffect)
-            {
-                ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
-                shakeEmitter.amplitudeTimeDecay = true;
-                shakeEmitter.duration = 0.5f;
-                shakeEmitter.radius = 200f;
-                shakeEmitter.scaleShakeRadiusWithLocalScale = false;
+            //if (bombExplosionEffect)
+            //{
+            //    ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
+            //    shakeEmitter.amplitudeTimeDecay = true;
+            //    shakeEmitter.duration = 0.5f;
+            //    shakeEmitter.radius = 200f;
+            //    shakeEmitter.scaleShakeRadiusWithLocalScale = false;
 
-                shakeEmitter.wave = new Wave
-                {
-                    amplitude = 1f,
-                    frequency = 40f,
-                    cycleOffset = 0f
-                };
-            }
+            //    shakeEmitter.wave = new Wave
+            //    {
+            //        amplitude = 1f,
+            //        frequency = 40f,
+            //        cycleOffset = 0f
+            //    };
+            //}
 
-            swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
-            swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
+            //swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
+            //swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

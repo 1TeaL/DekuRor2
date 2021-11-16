@@ -1,9 +1,9 @@
-﻿using HenryMod.SkillStates;
-using HenryMod.SkillStates.BaseStates;
+﻿using DekuMod.SkillStates;
+using DekuMod.SkillStates.BaseStates;
 using System.Collections.Generic;
 using System;
 
-namespace HenryMod.Modules
+namespace DekuMod.Modules
 {
     public static class States
     {

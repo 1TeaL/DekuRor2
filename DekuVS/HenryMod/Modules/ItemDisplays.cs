@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace DekuMod.Modules
 {
     internal static class ItemDisplays
     {

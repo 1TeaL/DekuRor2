@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace DekuMod.Modules
 {
     public static class Buffs
     {
@@ -13,7 +13,7 @@ namespace HenryMod.Modules
 
         internal static void RegisterBuffs()
         {
-            armorBuff = AddNewBuff("HenryArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            armorBuff = AddNewBuff("DekuArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
         }
 
         // simple helper method

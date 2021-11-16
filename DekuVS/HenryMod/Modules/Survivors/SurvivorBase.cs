@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules.Survivors
+namespace DekuMod.Modules.Survivors
 {
     internal abstract class SurvivorBase
     {
@@ -57,6 +57,7 @@ namespace HenryMod.Modules.Survivors
 
                 Modules.Prefabs.RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, bodyName.ToUpper(), characterUnlockableDef, sortPosition);
 
+                
                 InitializeHitboxes();
                 InitializeSkills();
                 InitializeSkins();

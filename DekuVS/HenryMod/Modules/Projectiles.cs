@@ -4,7 +4,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace HenryMod.Modules
+namespace DekuMod.Modules
 {
     internal static class Projectiles
     {

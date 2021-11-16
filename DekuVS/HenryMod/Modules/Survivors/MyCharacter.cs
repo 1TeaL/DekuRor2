@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules.Survivors
+namespace DekuMod.Modules.Survivors
 {
     internal class MyCharacter : SurvivorBase
     {
-        internal override string bodyName { get; set; } = "Henry";
+        internal override string bodyName { get; set; } = "Deku";
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
@@ -20,41 +20,33 @@ namespace HenryMod.Modules.Survivors
 
         internal override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
-            armor = 20f,
-            armorGrowth = 0f,
-            bodyName = "HenryBody",
-            bodyNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_NAME",
+            armor = 70f,
+            armorGrowth = 5f,
+            bodyName = "DekuBody",
+            bodyNameToken = DekuPlugin.developerPrefix + "_DEKU_BODY_NAME",
             bodyColor = Color.grey,
-            characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon("Deku"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            damage = 12f,
-            healthGrowth = 33f,
+            damage = 20f,
+            healthGrowth = 20f,
             healthRegen = 1.5f,
-            jumpCount = 1,
-            maxHealth = 110f,
-            subtitleNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_SUBTITLE",
+            jumpCount = 2,
+            maxHealth = 100f,
+            subtitleNameToken = DekuPlugin.developerPrefix + "_DEKU_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
-        internal override int mainRendererIndex { get; set; } = 2;
+        internal static Material dekuMat = Modules.Assets.CreateMaterial("matDeku");
+        internal override int mainRendererIndex { get; set; } = 0;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
-                new CustomRendererInfo
-                {
-                    childName = "SwordModel",
-                    material = henryMat,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "GunModel",
-                    material = henryMat,
-                },
-                new CustomRendererInfo
+                new CustomRendererInfo            
                 {
                     childName = "Model",
-                    material = henryMat
-                }};
+                    material = dekuMat
+                }}; 
+
+
 
         internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
 
@@ -85,7 +77,7 @@ namespace HenryMod.Modules.Survivors
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
 
-            Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
+            Transform hitboxTransform = childLocator.FindChild("SmashHitbox");
             Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
         }
 
@@ -93,7 +85,7 @@ namespace HenryMod.Modules.Survivors
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            string prefix = HenryPlugin.developerPrefix;
+            string prefix = DekuPlugin.developerPrefix;
 
             #region Primary
             Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
@@ -200,7 +192,7 @@ namespace HenryMod.Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(HenryPlugin.developerPrefix + "_HENRY_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(DekuPlugin.developerPrefix + "_DEKU_BODY_DEFAULT_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
                 mainRenderer,
@@ -208,19 +200,10 @@ namespace HenryMod.Modules.Survivors
 
             defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
             {
+               
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySword"),
-                    renderer = defaultRenderers[0].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryGun"),
-                    renderer = defaultRenderers[1].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenry"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Mesh"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
                 }
             };
@@ -228,39 +211,39 @@ namespace HenryMod.Modules.Survivors
             skins.Add(defaultSkin);
             #endregion
 
-            #region MasterySkin
-            Material masteryMat = Modules.Assets.CreateMaterial("matHenryAlt");
-            CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
-            {
-                masteryMat,
-                masteryMat,
-                masteryMat,
-                masteryMat
-            });
+            //#region MasterySkin
+            //Material masteryMat = Modules.Assets.CreateMaterial("matHenryAlt");
+            //CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
+            //{
+            //    masteryMat,
+            //    masteryMat,
+            //    masteryMat,
+            //    masteryMat
+            //});
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(HenryPlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
-                masteryRendererInfos,
-                mainRenderer,
-                model,
-                masterySkinUnlockableDef);
+            //SkinDef masterySkin = Modules.Skins.CreateSkinDef(DekuPlugin.developerPrefix + "_DEKU_BODY_MASTERY_SKIN_NAME",
+            //    Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
+            //    masteryRendererInfos,
+            //    mainRenderer,
+            //    model,
+            //    masterySkinUnlockableDef);
 
-            masterySkin.meshReplacements = new SkinDef.MeshReplacement[]
-            {
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySwordAlt"),
-                    renderer = defaultRenderers[0].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryAlt"),
-                    renderer = defaultRenderers[instance.mainRendererIndex].renderer
-                }
-            };
+            //masterySkin.meshReplacements = new SkinDef.MeshReplacement[]
+            //{
+            //    new SkinDef.MeshReplacement
+            //    {
+            //        mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySwordAlt"),
+            //        renderer = defaultRenderers[0].renderer
+            //    },
+            //    new SkinDef.MeshReplacement
+            //    {
+            //        mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryAlt"),
+            //        renderer = defaultRenderers[instance.mainRendererIndex].renderer
+            //    }
+            //};
 
-            skins.Add(masterySkin);
-            #endregion
+            //skins.Add(masterySkin);
+            //#endregion
 
             skinController.skins = skins.ToArray();
         }
