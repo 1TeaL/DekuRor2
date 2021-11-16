@@ -1,0 +1,536 @@
+fileFormatVersion: 2
+guid: b8983cd87559066478511894046caa45
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: 001
+    100002: 002
+    100004: 003
+    100006: 004
+    100008: 004_end
+    100010: 005
+    100012: 005_end
+    100014: 006
+    100016: 006_end
+    100018: 007
+    100020: 007_end
+    100022: AC_Goggles
+    100024: AC_Goggles_end
+    100026: Armature
+    100028: Body.001
+    100030: Bone
+    100032: Chest
+    100034: //RootNode
+    100036: Eye_L
+    100038: Eye_L_end
+    100040: Eye_R
+    100042: Eye_R_end
+    100044: Head
+    100046: Hips
+    100048: IndexFinger1_L
+    100050: IndexFinger1_R
+    100052: IndexFinger2_L
+    100054: IndexFinger2_R
+    100056: IndexFinger3_L
+    100058: IndexFinger3_L_end
+    100060: IndexFinger3_R
+    100062: IndexFinger3_R_end
+    100064: Jaw_A
+    100066: L
+    100068: L_001
+    100070: L_001_end
+    100072: L_002
+    100074: L_003
+    100076: L_003_end
+    100078: L_Browskin_A
+    100080: L_Browskin_B
+    100082: L_Browskin_C
+    100084: L_Browskin_D
+    100086: L_Browskin_E
+    100088: L_Eyebrow_A
+    100090: L_Eyebrow_A_end
+    100092: L_Eyebrow_B
+    100094: L_Eyebrow_B_end
+    100096: L_Eyebrow_C
+    100098: L_Eyebrow_C_end
+    100100: L_Eyebrow_D
+    100102: L_Eyebrow_D_end
+    100104: L_Eyebrow_E
+    100106: L_Eyebrow_E_end
+    100108: L_Eyelid_A
+    100110: L_Eyelid_A_end
+    100112: L_Eyelid_B
+    100114: L_Eyelid_B_end
+    100116: L_Eyelid_C
+    100118: L_Eyelid_C_end
+    100120: L_Eyelid_D
+    100122: L_Eyelid_D_end
+    100124: L_I_Eyelid
+    100126: L_I_Eyelid_end
+    100128: L_Lip_A
+    100130: L_Lip_A_end
+    100132: L_Lip_B
+    100134: L_Lip_B_end
+    100136: L_Lip_C
+    100138: L_Lip_C_end
+    100140: L_Lip_D
+    100142: L_Lip_D_end
+    100144: L_O_Eyelid
+    100146: L_O_Eyelid_end
+    100148: L_U_Eyelid_A
+    100150: L_U_Eyelid_A_end
+    100152: L_U_Eyelid_B
+    100154: L_U_Eyelid_B_end
+    100156: L_U_Eyelid_C
+    100158: L_U_Eyelid_C_end
+    100160: L_U_Eyelid_D
+    100162: L_U_Eyelid_D_end
+    100164: L_U_Lip_A
+    100166: L_U_Lip_A_end
+    100168: L_U_Lip_B
+    100170: L_U_Lip_B_end
+    100172: L_U_Lip_C
+    100174: L_U_Lip_C_end
+    100176: Left ankle
+    100178: Left arm
+    100180: Left elbow
+    100182: Left knee
+    100184: Left leg
+    100186: Left shoulder
+    100188: Left toe
+    100190: Left toe_end
+    100192: Left wrist
+    100194: LeftEye
+    100196: LeftEye_end
+    100198: LittleFinger1_L
+    100200: LittleFinger1_R
+    100202: LittleFinger2_L
+    100204: LittleFinger2_R
+    100206: LittleFinger3_L
+    100208: LittleFinger3_L_end
+    100210: LittleFinger3_R
+    100212: LittleFinger3_R_end
+    100214: MiddleFinger1_L
+    100216: MiddleFinger1_R
+    100218: MiddleFinger2_L
+    100220: MiddleFinger2_R
+    100222: MiddleFinger3_L
+    100224: MiddleFinger3_L_end
+    100226: MiddleFinger3_R
+    100228: MiddleFinger3_R_end
+    100230: Neck
+    100232: R
+    100234: R_001
+    100236: R_001_end
+    100238: R_002
+    100240: R_003
+    100242: R_003_end
+    100244: R_Browskin_A
+    100246: R_Browskin_B
+    100248: R_Browskin_C
+    100250: R_Browskin_D
+    100252: R_Browskin_E
+    100254: R_Eyebrow_A
+    100256: R_Eyebrow_A_end
+    100258: R_Eyebrow_B
+    100260: R_Eyebrow_B_end
+    100262: R_Eyebrow_C
+    100264: R_Eyebrow_C_end
+    100266: R_Eyebrow_D
+    100268: R_Eyebrow_D_end
+    100270: R_Eyebrow_E
+    100272: R_Eyebrow_E_end
+    100274: R_Eyelid_A
+    100276: R_Eyelid_A_end
+    100278: R_Eyelid_B
+    100280: R_Eyelid_B_end
+    100282: R_Eyelid_C
+    100284: R_Eyelid_C_end
+    100286: R_Eyelid_D
+    100288: R_Eyelid_D_end
+    100290: R_I_Eyelid
+    100292: R_I_Eyelid_end
+    100294: R_Lip_A
+    100296: R_Lip_A_end
+    100298: R_Lip_B
+    100300: R_Lip_B_end
+    100302: R_Lip_C
+    100304: R_Lip_C_end
+    100306: R_Lip_D
+    100308: R_Lip_D_end
+    100310: R_O_Eyelid
+    100312: R_O_Eyelid_end
+    100314: R_U_Eyelid_A
+    100316: R_U_Eyelid_A_end
+    100318: R_U_Eyelid_B
+    100320: R_U_Eyelid_B_end
+    100322: R_U_Eyelid_C
+    100324: R_U_Eyelid_C_end
+    100326: R_U_Eyelid_D
+    100328: R_U_Eyelid_D_end
+    100330: R_U_Lip_A
+    100332: R_U_Lip_A_end
+    100334: R_U_Lip_B
+    100336: R_U_Lip_B_end
+    100338: R_U_Lip_C
+    100340: R_U_Lip_C_end
+    100342: Right ankle
+    100344: Right arm
+    100346: Right elbow
+    100348: Right knee
+    100350: Right leg
+    100352: Right shoulder
+    100354: Right toe
+    100356: Right toe_end
+    100358: Right wrist
+    100360: RightEye
+    100362: RightEye_end
+    100364: RingFinger1_L
+    100366: RingFinger1_R
+    100368: RingFinger2_L
+    100370: RingFinger2_R
+    100372: RingFinger3_L
+    100374: RingFinger3_L_end
+    100376: RingFinger3_R
+    100378: RingFinger3_R_end
+    100380: Spine
+    100382: T_Lip
+    100384: T_Lip_end
+    100386: Thumb0_L
+    100388: Thumb0_R
+    100390: Thumb1_L
+    100392: Thumb1_R
+    100394: Thumb2_L
+    100396: Thumb2_L_end
+    100398: Thumb2_R
+    100400: Thumb2_R_end
+    100402: Tongue_A
+    100404: Tongue_B
+    100406: Tongue_B_end
+    100408: U_Lip
+    100410: U_Lip_end
+    100412: U_Teeth
+    100414: U_Teeth_end
+    400000: 001
+    400002: 002
+    400004: 003
+    400006: 004
+    400008: 004_end
+    400010: 005
+    400012: 005_end
+    400014: 006
+    400016: 006_end
+    400018: 007
+    400020: 007_end
+    400022: AC_Goggles
+    400024: AC_Goggles_end
+    400026: Armature
+    400028: Body.001
+    400030: Bone
+    400032: Chest
+    400034: //RootNode
+    400036: Eye_L
+    400038: Eye_L_end
+    400040: Eye_R
+    400042: Eye_R_end
+    400044: Head
+    400046: Hips
+    400048: IndexFinger1_L
+    400050: IndexFinger1_R
+    400052: IndexFinger2_L
+    400054: IndexFinger2_R
+    400056: IndexFinger3_L
+    400058: IndexFinger3_L_end
+    400060: IndexFinger3_R
+    400062: IndexFinger3_R_end
+    400064: Jaw_A
+    400066: L
+    400068: L_001
+    400070: L_001_end
+    400072: L_002
+    400074: L_003
+    400076: L_003_end
+    400078: L_Browskin_A
+    400080: L_Browskin_B
+    400082: L_Browskin_C
+    400084: L_Browskin_D
+    400086: L_Browskin_E
+    400088: L_Eyebrow_A
+    400090: L_Eyebrow_A_end
+    400092: L_Eyebrow_B
+    400094: L_Eyebrow_B_end
+    400096: L_Eyebrow_C
+    400098: L_Eyebrow_C_end
+    400100: L_Eyebrow_D
+    400102: L_Eyebrow_D_end
+    400104: L_Eyebrow_E
+    400106: L_Eyebrow_E_end
+    400108: L_Eyelid_A
+    400110: L_Eyelid_A_end
+    400112: L_Eyelid_B
+    400114: L_Eyelid_B_end
+    400116: L_Eyelid_C
+    400118: L_Eyelid_C_end
+    400120: L_Eyelid_D
+    400122: L_Eyelid_D_end
+    400124: L_I_Eyelid
+    400126: L_I_Eyelid_end
+    400128: L_Lip_A
+    400130: L_Lip_A_end
+    400132: L_Lip_B
+    400134: L_Lip_B_end
+    400136: L_Lip_C
+    400138: L_Lip_C_end
+    400140: L_Lip_D
+    400142: L_Lip_D_end
+    400144: L_O_Eyelid
+    400146: L_O_Eyelid_end
+    400148: L_U_Eyelid_A
+    400150: L_U_Eyelid_A_end
+    400152: L_U_Eyelid_B
+    400154: L_U_Eyelid_B_end
+    400156: L_U_Eyelid_C
+    400158: L_U_Eyelid_C_end
+    400160: L_U_Eyelid_D
+    400162: L_U_Eyelid_D_end
+    400164: L_U_Lip_A
+    400166: L_U_Lip_A_end
+    400168: L_U_Lip_B
+    400170: L_U_Lip_B_end
+    400172: L_U_Lip_C
+    400174: L_U_Lip_C_end
+    400176: Left ankle
+    400178: Left arm
+    400180: Left elbow
+    400182: Left knee
+    400184: Left leg
+    400186: Left shoulder
+    400188: Left toe
+    400190: Left toe_end
+    400192: Left wrist
+    400194: LeftEye
+    400196: LeftEye_end
+    400198: LittleFinger1_L
+    400200: LittleFinger1_R
+    400202: LittleFinger2_L
+    400204: LittleFinger2_R
+    400206: LittleFinger3_L
+    400208: LittleFinger3_L_end
+    400210: LittleFinger3_R
+    400212: LittleFinger3_R_end
+    400214: MiddleFinger1_L
+    400216: MiddleFinger1_R
+    400218: MiddleFinger2_L
+    400220: MiddleFinger2_R
+    400222: MiddleFinger3_L
+    400224: MiddleFinger3_L_end
+    400226: MiddleFinger3_R
+    400228: MiddleFinger3_R_end
+    400230: Neck
+    400232: R
+    400234: R_001
+    400236: R_001_end
+    400238: R_002
+    400240: R_003
+    400242: R_003_end
+    400244: R_Browskin_A
+    400246: R_Browskin_B
+    400248: R_Browskin_C
+    400250: R_Browskin_D
+    400252: R_Browskin_E
+    400254: R_Eyebrow_A
+    400256: R_Eyebrow_A_end
+    400258: R_Eyebrow_B
+    400260: R_Eyebrow_B_end
+    400262: R_Eyebrow_C
+    400264: R_Eyebrow_C_end
+    400266: R_Eyebrow_D
+    400268: R_Eyebrow_D_end
+    400270: R_Eyebrow_E
+    400272: R_Eyebrow_E_end
+    400274: R_Eyelid_A
+    400276: R_Eyelid_A_end
+    400278: R_Eyelid_B
+    400280: R_Eyelid_B_end
+    400282: R_Eyelid_C
+    400284: R_Eyelid_C_end
+    400286: R_Eyelid_D
+    400288: R_Eyelid_D_end
+    400290: R_I_Eyelid
+    400292: R_I_Eyelid_end
+    400294: R_Lip_A
+    400296: R_Lip_A_end
+    400298: R_Lip_B
+    400300: R_Lip_B_end
+    400302: R_Lip_C
+    400304: R_Lip_C_end
+    400306: R_Lip_D
+    400308: R_Lip_D_end
+    400310: R_O_Eyelid
+    400312: R_O_Eyelid_end
+    400314: R_U_Eyelid_A
+    400316: R_U_Eyelid_A_end
+    400318: R_U_Eyelid_B
+    400320: R_U_Eyelid_B_end
+    400322: R_U_Eyelid_C
+    400324: R_U_Eyelid_C_end
+    400326: R_U_Eyelid_D
+    400328: R_U_Eyelid_D_end
+    400330: R_U_Lip_A
+    400332: R_U_Lip_A_end
+    400334: R_U_Lip_B
+    400336: R_U_Lip_B_end
+    400338: R_U_Lip_C
+    400340: R_U_Lip_C_end
+    400342: Right ankle
+    400344: Right arm
+    400346: Right elbow
+    400348: Right knee
+    400350: Right leg
+    400352: Right shoulder
+    400354: Right toe
+    400356: Right toe_end
+    400358: Right wrist
+    400360: RightEye
+    400362: RightEye_end
+    400364: RingFinger1_L
+    400366: RingFinger1_R
+    400368: RingFinger2_L
+    400370: RingFinger2_R
+    400372: RingFinger3_L
+    400374: RingFinger3_L_end
+    400376: RingFinger3_R
+    400378: RingFinger3_R_end
+    400380: Spine
+    400382: T_Lip
+    400384: T_Lip_end
+    400386: Thumb0_L
+    400388: Thumb0_R
+    400390: Thumb1_L
+    400392: Thumb1_R
+    400394: Thumb2_L
+    400396: Thumb2_L_end
+    400398: Thumb2_R
+    400400: Thumb2_R_end
+    400402: Tongue_A
+    400404: Tongue_B
+    400406: Tongue_B_end
+    400408: U_Lip
+    400410: U_Lip_end
+    400412: U_Teeth
+    400414: U_Teeth_end
+    2100000: Dekuall
+    4300000: Body.001
+    7400000: Leg smash.001
+    7400002: Fall.001
+    7400004: Finger flick.001
+    7400006: Jump.001
+    7400008: Idle.001
+    7400010: Leg smash.002
+    7400012: running.001
+    7400014: Smash Charge.001
+    7400016: Smash charge attack.001
+    7400018: Smash charging
+    7400020: Smash full charge.001
+    7400022: walking.001
+    7400024: Armature|Entrance
+    7400026: Armature|Fall
+    7400028: Armature|Finger flick
+    7400030: Armature|Idle
+    7400032: Armature|impact
+    7400034: Armature|Jump
+    7400036: Armature|Leg smash
+    7400038: Armature|running
+    7400040: Armature|Smash Charge
+    7400042: Armature|Smash charge attack
+    7400044: Armature|Smash charging
+    7400046: Armature|Smash full charge
+    7400048: Armature|walking
+    9500000: //RootNode
+    13700000: Body.001
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

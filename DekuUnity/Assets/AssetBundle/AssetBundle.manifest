@@ -1,0 +1,12 @@
+ManifestFileVersion: 0
+CRC: 3546727718
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: myassetbundle
+      Dependencies:
+        Dependency_0: deku
+    Info_1:
+      Name: deku
+      Dependencies:
+        Dependency_0: myassetbundle
