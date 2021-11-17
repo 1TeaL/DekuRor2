@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2317657571
+CRC: 1689034560
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 49feced9e45468ac43f61e2e330cdeea
+    Hash: 7bd28be6de9967d6a03bd2121608149c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 972103ac939f0471d19a07f535135cc4
@@ -209,4 +209,4 @@ Assets:
 - Assets/HenryUnityProject/Assets/HenryAssets/VFX/HenryBazookaExplosionEffect.prefab
 - Assets/HenryUnityProject/Assets/HenryAssets/Animations/Roll.anim
 Dependencies:
-- F:/Theodore 3/Risk of Rain 2 modding/Unity/DekuRor2/Assets/AssetBundle/deku
+- F:/Theodore 3/Risk of Rain 2 modding/Mods/DekuRor2/DekuUnity/Assets/AssetBundle/dekuassetbundle
