@@ -88,7 +88,37 @@ namespace DekuMod.Modules.Survivors
             string prefix = DekuPlugin.developerPrefix;
 
             #region Primary
+<<<<<<< Updated upstream
             Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
+=======
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
+            SkillDef shootSkillDef2 = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "Primary",
+                skillNameToken = prefix + "_DEKU_PRIMARY_NAME",
+                skillDescriptionToken = prefix + "_DEKU_PRIMARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("primary attack"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            Modules.Skills.AddPrimarySkill(bodyPrefab, shootSkillDef2);
+>>>>>>> Stashed changes
             #endregion
 
             #region Secondary

@@ -1,6 +1,9 @@
 ﻿using EntityStates;
 using RoR2;
 using UnityEngine;
+using RoR2.Audio;
+using System;
+using UnityEngine.Networking;
 
 namespace DekuMod.SkillStates
 {
@@ -9,11 +12,16 @@ namespace DekuMod.SkillStates
         public static float damageCoefficient = Modules.StaticValues.gunDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.6f;
-        public static float force = 800f;
-        public static float recoil = 3f;
+        public static float force = 1000f;
+        public static float recoil = 1f;
         public static float range = 256f;
+<<<<<<< Updated upstream
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
+=======
+        //public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerLaserTurbine");
+        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerHuntressSnipe"); 
+>>>>>>> Stashed changes
         private float duration;
         private float fireTime;
         private bool hasFired;
@@ -25,9 +33,11 @@ namespace DekuMod.SkillStates
             this.duration = Shoot.baseDuration / this.attackSpeedStat;
             this.fireTime = 0.2f * this.duration;
             base.characterBody.SetAimTimer(2f);
-            this.muzzleString = "Muzzle";
+            this.muzzleString = "LFinger";
 
-            base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
+            base.PlayAnimation("LeftArm, Override", "FingerFlick");
+            //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "ShootGun.playbackRate", this.duration, 0.05f);       
+            //base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
         }
 
         public override void OnExit()
@@ -70,7 +80,7 @@ namespace DekuMod.SkillStates
                         smartCollision = false,
                         procChainMask = default(ProcChainMask),
                         procCoefficient = procCoefficient,
-                        radius = 0.75f,
+                        radius = 1.5f,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
                         weapon = null,

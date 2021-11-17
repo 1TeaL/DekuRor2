@@ -1,9 +1,17 @@
 ManifestFileVersion: 0
+<<<<<<< Updated upstream
 CRC: 2317657571
 Hashes:
   AssetFileHash:
     serializedVersion: 2
     Hash: 49feced9e45468ac43f61e2e330cdeea
+=======
+CRC: 330959895
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: df32b77c60c9ea7ee9bc1ecbc5197575
+>>>>>>> Stashed changes
   TypeTreeHash:
     serializedVersion: 2
     Hash: 972103ac939f0471d19a07f535135cc4
@@ -158,6 +166,7 @@ Assets:
 - Assets/HenryUnityProject/Assets/HenryAssets/Animations/IdleIn.anim
 - Assets/HenryUnityProject/Assets/HenryAssets/VFX/Materials/matSwingShadow.mat
 - Assets/HenryUnityProject/Assets/HenryAssets/Textures/texHenryJediEmission.png
+- Assets/HenryUnityProject/Assets/HenryAssets/Animations/animHenry.controller
 - Assets/HenryUnityProject/Assets/HenryAssets/Mesh/meshDanteCoat.mesh
 - Assets/HenryUnityProject/Assets/HenryAssets/Animations/RestIdle.anim
 - Assets/HenryUnityProject/Assets/HenryAssets/Animations/ThrowBomb.anim
