@@ -1,16 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< Updated upstream
-CRC: 3546727718
-=======
-CRC: 1014827170
->>>>>>> Stashed changes
+CRC: 2583617770
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: myassetbundle
       Dependencies:
-        Dependency_0: deku
+        Dependency_0: dekuassetbundle
     Info_1:
-      Name: deku
+      Name: dekuassetbundle
       Dependencies:
         Dependency_0: myassetbundle

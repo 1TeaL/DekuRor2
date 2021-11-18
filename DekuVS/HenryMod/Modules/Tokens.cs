@@ -65,3 +65,41 @@ namespace DekuMod.Modules
         }
     }
 }
+//            string outro = "..and so he left, searching for a new world to save.";
+//            string outroFailure = "..and so he vanished, continuing his journey to become the greatest Hero.";
+
+//            LanguageAPI.Add(prefix + "NAME", "Deku");
+//            LanguageAPI.Add(prefix + "DESCRIPTION", desc);
+//            LanguageAPI.Add(prefix + "SUBTITLE", "Ninth One For All User");
+//            LanguageAPI.Add(prefix + "LORE", "I forgot to mention this, but this is the story of how I became the world's greatest hero");
+//            LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
+//            LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
+
+//            #region Skins
+//            LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
+//            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Alternate");
+//            #endregion
+
+//            #region Passive
+//            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Deku passive");
+//            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
+//            #endregion
+
+//            #region Primary
+//            LanguageAPI.Add(prefix + "DEKU_PRIMARY_NAME", "Delaware Smash Air Force");
+//            LanguageAPI.Add(prefix + "DEKU_PRIMARY_DESCRIPTION", Helpers.agilePrefix + "Shoot a blast of compressed air, doing <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
+//            #endregion
+
+//            #region Secondary
+//            LanguageAPI.Add(prefix + "DEKU_SECONDARY_NAME", "Detroit Smash");
+//            LanguageAPI.Add(prefix + "DEKU_SECONDARY_DESCRIPTION", Helpers.agilePrefix + "Charge up One For All's power into a fist, dealing up to <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
+//            #endregion
+
+//            #region Utility
+//            LanguageAPI.Add(prefix + "DEKU_UTILITY_NAME", "Blackwhip");
+//            LanguageAPI.Add(prefix + "DEKU_UTILITY_DESCRIPTION", "Fire Blackwhip forward, dealing <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage. Pulling light targets and moving towards heavy targets</style>");
+//            #endregion
+
+//            #region Special
+//            LanguageAPI.Add(prefix + "DEKU_SPECIAL_NAME", "OFA 100%");
+//            LanguageAPI.Add(prefix + "DEKU_SPECIAL_DESCRIPTION", "Use One For All at full power, <style=cIsUtility>boosting the next ability cast</style>.");

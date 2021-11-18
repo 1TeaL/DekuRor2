@@ -15,13 +15,8 @@ namespace DekuMod.SkillStates
         public static float force = 1000f;
         public static float recoil = 1f;
         public static float range = 256f;
-<<<<<<< Updated upstream
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
 
-=======
-        //public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerLaserTurbine");
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerHuntressSnipe"); 
->>>>>>> Stashed changes
         private float duration;
         private float fireTime;
         private bool hasFired;
@@ -35,7 +30,7 @@ namespace DekuMod.SkillStates
             base.characterBody.SetAimTimer(2f);
             this.muzzleString = "LFinger";
 
-            base.PlayAnimation("LeftArm, Override", "FingerFlick");
+            base.PlayAnimation("LeftArm, Override", "FingerFlick","Attack.playbackRate", 1.8f);
             //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "ShootGun.playbackRate", this.duration, 0.05f);       
             //base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
         }
