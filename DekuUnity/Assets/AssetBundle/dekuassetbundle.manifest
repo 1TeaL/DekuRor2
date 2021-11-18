@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 335568482
+CRC: 1181177125
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a5fafd13aff22660f0ff60a1eb2d8ea7
+    Hash: 1633724c90941aca2db027080a74c1c6
   TypeTreeHash:
     serializedVersion: 2
     Hash: e2bdfcc9e91c780b368e748dee5ff1cc
@@ -45,38 +45,38 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Deku/GUI/texDekuIcon.png
-- Assets/Deku/Animations/Armature_Jump.anim
+- Assets/Deku/Animations/Jump.anim
 - Assets/Deku/DekuDisplay.prefab
 - Assets/Deku/Animations/anim.controller
-- Assets/Deku/Animations/Armature_Entrance loop.anim
-- Assets/Deku/Animations/Armature_Finger flick.anim
+- Assets/Deku/Animations/EntranceLoop.anim
+- Assets/Deku/Animations/FingerFlick.anim
 - Assets/Deku/MainHurtbox.prefab
-- Assets/Deku/Animations/Armature_Smash full charge.anim
+- Assets/Deku/Animations/SmashFullCharge.anim
 - Assets/Deku/GUI/utility skill.png
 - Assets/Deku/Body.001(Clone).prefab
 - Assets/Deku/GUI/secondary upgrade coloured.png
-- Assets/Deku/Animations/Armature_Landing.anim
+- Assets/Deku/Animations/Landing.anim
 - Assets/Deku/Animations/AIIdle.anim
 - Assets/Deku/dekuror2.fbx
-- Assets/Deku/Animations/Armature_Fall.anim
+- Assets/Deku/Animations/Fall.anim
 - Assets/Deku/matDeku.mat
 - Assets/Deku/GUI/deku portrait.png
-- Assets/Deku/Animations/Armature_Smash charging.anim
+- Assets/Deku/Animations/SmashCharging.anim
 - Assets/Deku/Mesh.mesh
-- Assets/Deku/Animations/Armature_Entrance.anim
-- Assets/Deku/Animations/Armature_running.anim
-- Assets/Deku/Animations/Armature_Leg smash.anim
+- Assets/Deku/Animations/Entrance.anim
+- Assets/Deku/Animations/Sprinting.anim
+- Assets/Deku/Animations/LegSmash.anim
 - Assets/Deku/GUI/ultimate.png
-- Assets/Deku/Animations/Armature_Smash Charge.anim
+- Assets/Deku/Animations/SmashCharge.anim
 - Assets/Deku/Model.prefab
 - Assets/Deku/Deku all mats 3584x2049.png
 - Assets/Deku/GUI/secondary attack.png
 - Assets/Deku/SwordHitbox.prefab
-- Assets/Deku/Animations/Armature_walking.anim
+- Assets/Deku/Animations/Running.anim
 - Assets/Deku/mdlDeku.prefab
-- Assets/Deku/Animations/Armature_impact.anim
+- Assets/Deku/Animations/Impact.anim
 - Assets/Deku/GUI/primary attack.png
-- Assets/Deku/Animations/Armature_Smash charge attack.anim
+- Assets/Deku/Animations/SmashChargeAttack.anim
 - Assets/Deku/Animations/animDisplay.controller
 Dependencies:
 - F:/Theodore 3/Risk of Rain 2 modding/Mods/DekuRor2/DekuUnity/Assets/AssetBundle/myassetbundle

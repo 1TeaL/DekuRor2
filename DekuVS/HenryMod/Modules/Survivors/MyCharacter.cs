@@ -88,10 +88,6 @@ namespace DekuMod.Modules.Survivors
             string prefix = DekuPlugin.developerPrefix;
 
             #region Primary
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
             //Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
             SkillDef shootSkillDef2 = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -102,7 +98,7 @@ namespace DekuMod.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -119,6 +115,7 @@ namespace DekuMod.Modules.Survivors
             });
 
             Modules.Skills.AddPrimarySkill(bodyPrefab, shootSkillDef2);
+
             #endregion
 
             #region Secondary

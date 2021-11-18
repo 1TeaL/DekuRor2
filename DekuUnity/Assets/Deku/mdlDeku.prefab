@@ -1673,16 +1673,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformPairs:
   - name: MainHurtbox
-    transform: {fileID: 9113786664817438444, guid: 02a50d64f8952214e9a2c75691a5746b,
-      type: 3}
+    transform: {fileID: 1459650641417097284}
   - name: Model
-    transform: {fileID: 1789191984218155257, guid: 7220ddfa8ff113a4ab2bb6a517f0e73f,
-      type: 3}
+    transform: {fileID: 4377348067431844432}
   - name: SmashHitbox
-    transform: {fileID: 8142553500692531449, guid: 8bc90fdb505112d478eb500387f8bb2a,
-      type: 3}
+    transform: {fileID: 8260240657507828430}
   - name: Armature
     transform: {fileID: 0}
+  - name: LFinger
+    transform: {fileID: 4377348067431844814}
 --- !u!1 &4377348067431749244
 GameObject:
   m_ObjectHideFlags: 0
