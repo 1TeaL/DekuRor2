@@ -88,6 +88,10 @@ namespace DekuMod.Modules.Survivors
             string prefix = DekuPlugin.developerPrefix;
 
             #region Primary
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             //Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
             SkillDef shootSkillDef2 = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
