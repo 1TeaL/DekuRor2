@@ -1209,6 +1209,11 @@ PrefabInstance:
       propertyPath: transformPairs.Array.data[2].transform
       value: 
       objectReference: {fileID: 2881389281999983181}
+    - target: {fileID: 2549799851167259685, guid: bb8ebcb13243a1148950fedb5d6c2fe4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00267
+      objectReference: {fileID: 0}
     - target: {fileID: 4454064418550187750, guid: bb8ebcb13243a1148950fedb5d6c2fe4,
         type: 3}
       propertyPath: m_LocalPosition.y

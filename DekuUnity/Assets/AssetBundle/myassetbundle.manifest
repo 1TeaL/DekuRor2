@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1689034560
+CRC: 2162751606
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7bd28be6de9967d6a03bd2121608149c
+    Hash: b87a270ddcd96dc5a4aff4183a3d4b6f
   TypeTreeHash:
     serializedVersion: 2
     Hash: 972103ac939f0471d19a07f535135cc4
@@ -123,6 +123,7 @@ Assets:
 - Assets/HenryUnityProject/Assets/HenryAssets/Mesh/meshYamato.mesh
 - Assets/HenryUnityProject/Assets/HenryAssets/VFX/Textures/texDust.png
 - Assets/HenryUnityProject/Assets/HenryAssets/VFX/Textures/texHitSpark.png
+- Assets/HenryUnityProject/Assets/HenryAssets/Animations/animHenry.controller
 - Assets/HenryUnityProject/Assets/HenryAssets/Materials/matBoxingGlove.mat
 - Assets/HenryUnityProject/Assets/HenryAssets/Materials/matHenryAlt.mat
 - Assets/HenryUnityProject/Assets/HenryAssets/Animations/WalkF.anim

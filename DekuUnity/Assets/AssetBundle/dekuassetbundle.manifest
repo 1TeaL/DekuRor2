@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1181177125
+CRC: 3612797106
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1633724c90941aca2db027080a74c1c6
+    Hash: 9fd1246b9395153afd4f2071c5a3ef1e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e2bdfcc9e91c780b368e748dee5ff1cc
+    Hash: b757e221fe29ace486a2437fa3c79e5a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -24,6 +24,8 @@ ClassTypes:
 - Class: 43
   Script: {instanceID: 0}
 - Class: 48
+  Script: {instanceID: 0}
+- Class: 65
   Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
@@ -43,17 +45,21 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+- Class: 319
+  Script: {instanceID: 0}
 Assets:
 - Assets/Deku/GUI/texDekuIcon.png
+- Assets/Deku/Animations/SmashRelease.anim
 - Assets/Deku/Animations/Jump.anim
 - Assets/Deku/DekuDisplay.prefab
+- Assets/Deku/Animations/maskDekuImpact.mask
 - Assets/Deku/Animations/anim.controller
 - Assets/Deku/Animations/EntranceLoop.anim
-- Assets/Deku/Animations/FingerFlick.anim
 - Assets/Deku/MainHurtbox.prefab
+- Assets/Deku/Animations/maskDekuBody.mask
 - Assets/Deku/Animations/SmashFullCharge.anim
+- Assets/Deku/Animations/maskDekuGesture.mask
 - Assets/Deku/GUI/utility skill.png
-- Assets/Deku/Body.001(Clone).prefab
 - Assets/Deku/GUI/secondary upgrade coloured.png
 - Assets/Deku/Animations/Landing.anim
 - Assets/Deku/Animations/AIIdle.anim
@@ -65,6 +71,8 @@ Assets:
 - Assets/Deku/Mesh.mesh
 - Assets/Deku/Animations/Entrance.anim
 - Assets/Deku/Animations/Sprinting.anim
+- Assets/Deku/Animations/FingerFlick.anim
+- Assets/Deku/Animations/maskDekuRightArm.mask
 - Assets/Deku/Animations/LegSmash.anim
 - Assets/Deku/GUI/ultimate.png
 - Assets/Deku/Animations/SmashCharge.anim
@@ -74,6 +82,7 @@ Assets:
 - Assets/Deku/SwordHitbox.prefab
 - Assets/Deku/Animations/Running.anim
 - Assets/Deku/mdlDeku.prefab
+- Assets/Deku/Animations/maskDekuLeftArm.mask
 - Assets/Deku/Animations/Impact.anim
 - Assets/Deku/GUI/primary attack.png
 - Assets/Deku/Animations/SmashChargeAttack.anim

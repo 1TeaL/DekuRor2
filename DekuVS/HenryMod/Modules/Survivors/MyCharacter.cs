@@ -20,8 +20,8 @@ namespace DekuMod.Modules.Survivors
 
         internal override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
-            armor = 70f,
-            armorGrowth = 5f,
+            armor = 50f,
+            armorGrowth = 0.5f,
             bodyName = "DekuBody",
             bodyNameToken = DekuPlugin.developerPrefix + "_DEKU_BODY_NAME",
             bodyColor = Color.grey,
@@ -79,6 +79,13 @@ namespace DekuMod.Modules.Survivors
 
             Transform hitboxTransform = childLocator.FindChild("SmashHitbox");
             Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
+        
+
+            Transform hitboxTransform2 = childLocator.FindChild("ModelHitbox");
+            Modules.Prefabs.SetupHitbox(model, hitboxTransform2, "ModelHitbox");
+
+            Transform hitboxTransform3 = childLocator.FindChild("BigModelHitbox");
+            Modules.Prefabs.SetupHitbox(model, hitboxTransform3, "BigModelHitbox");
         }
 
         internal override void InitializeSkills()
@@ -89,13 +96,13 @@ namespace DekuMod.Modules.Survivors
 
             #region Primary
             //Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
-            SkillDef shootSkillDef2 = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef airforceSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "Primary",
                 skillNameToken = prefix + "_DEKU_PRIMARY_NAME",
                 skillDescriptionToken = prefix + "_DEKU_PRIMARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("primary attack"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Airforce)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -114,29 +121,29 @@ namespace DekuMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, shootSkillDef2);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, airforceSkillDef);
 
             #endregion
 
             #region Secondary
-            SkillDef shootSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef smashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_SECONDARY_GUN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
-                activationStateMachineName = "Slide",
+                skillName = prefix + "_DEKU_SECONDARY_NAME",
+                skillNameToken = prefix + "_DEKU_SECONDARY_NAME",
+                skillDescriptionToken = prefix + "_DEKU_SECONDARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("secondary attack"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
+                interruptPriority = EntityStates.InterruptPriority.Frozen,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -144,7 +151,7 @@ namespace DekuMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, shootSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, smashSkillDef);
             #endregion
 
             #region Utility
@@ -153,7 +160,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
                 skillNameToken = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
                 skillDescriptionToken = prefix + "_HENRY_BODY_UTILITY_ROLL_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("utility skill"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Roll)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -181,7 +188,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
                 skillNameToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
                 skillDescriptionToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,

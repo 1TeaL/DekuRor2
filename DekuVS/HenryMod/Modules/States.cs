@@ -11,10 +11,10 @@ namespace DekuMod.Modules
 
         internal static void RegisterStates()
         {
-            entityStates.Add(typeof(BaseMeleeAttack));
-            entityStates.Add(typeof(SlashCombo));
+            entityStates.Add(typeof(Smash));
+            //entityStates.Add(typeof(SlashCombo));
 
-            entityStates.Add(typeof(Shoot));
+            entityStates.Add(typeof(Airforce));
 
             entityStates.Add(typeof(Roll));
 

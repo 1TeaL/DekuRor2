@@ -16,8 +16,8 @@ namespace DekuMod.Modules
             desc = desc + "< ! > Blackwhip allows him to move through the environment and grapple on to enemies; when powered up lets him pull multiple enemies towards him." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > One for All 100% enables Deku to use one powered up skill at the cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
 
-            string outro = "..and so he left, searching for a new identity.";
-            string outroFailure = "..and so he vanished, forever a blank slate.";
+            string outro = "..and so he left, continuing his journey to become the greatest hero.";
+            string outroFailure = "..goodbye..One For All.";
 
             LanguageAPI.Add(prefix + "NAME", "Deku");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
@@ -37,13 +37,13 @@ namespace DekuMod.Modules
             #endregion
 
             #region Primary
-            LanguageAPI.Add(prefix + "PRIMARY_SLASH_NAME", "Sword");
-            LanguageAPI.Add(prefix + "PRIMARY_SLASH_DESCRIPTION", Helpers.agilePrefix + $"Swing forward for <style=cIsDamage>{100f * StaticValues.swordDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_NAME", "Delaware Smash Air Force");
+            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", Helpers.agilePrefix + $"Delaware Smash for <style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}%  damage</style>.");
             #endregion
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}% damage</style>.");
             #endregion
 
             #region Utility
