@@ -54,7 +54,7 @@ namespace DekuMod
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             // survivor initialization
-            new MyCharacter().Initialize();
+            new Deku().Initialize();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
@@ -67,7 +67,7 @@ namespace DekuMod
         private void LateSetup(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj)
         {
             // have to set item displays later now because they require direct object references..
-            Modules.Survivors.MyCharacter.instance.SetItemDisplays();
+            Modules.Survivors.Deku.instance.SetItemDisplays();
         }
 
         private void Hook()
@@ -79,10 +79,11 @@ namespace DekuMod
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
+            //regen 
             orig(self);
 
 
-            if (self)
+            if (self.baseNameToken == "TEALDEKU")
             {
                 HealthComponent hp = self.healthComponent;
                 float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;

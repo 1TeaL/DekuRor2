@@ -292,6 +292,9 @@ ModelImporter:
     7400028: Armature|AIdle
     7400030: Armature|FalltoLand
     7400032: Armature|SmashRelease
+    7400034: Armature|ShootStyleDash
+    7400036: Armature|ShootStyleDashExit
+    7400038: Armature|OFA
     9500000: //RootNode
     11100000: //RootNode
     13700000: Body.001

@@ -4,12 +4,19 @@ using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DekuMod.SkillStates;
+using EntityStates;
 
 namespace DekuMod.Modules.Survivors
 {
-    internal class MyCharacter : SurvivorBase
+    internal class Deku : SurvivorBase
     {
         internal override string bodyName { get; set; } = "Deku";
+
+        internal static SkillDef primaryboostSkillDef;
+        internal static SkillDef secondaryboostSkillDef;
+        internal static SkillDef utilityboostSkillDef;
+        internal static SkillDef ofaDownSkillDef;
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
@@ -23,7 +30,7 @@ namespace DekuMod.Modules.Survivors
             armor = 15f,
             armorGrowth = 0.5f,
             bodyName = "DekuBody",
-            bodyNameToken = DekuPlugin.developerPrefix + "_DEKU_BODY_NAME",
+            bodyNameToken = DekuPlugin.developerPrefix + "DEKU",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Deku"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
@@ -40,17 +47,17 @@ namespace DekuMod.Modules.Survivors
         internal override int mainRendererIndex { get; set; } = 0;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
-                new CustomRendererInfo            
+                new CustomRendererInfo
                 {
                     childName = "Model",
                     material = dekuMat
-                }}; 
+                }};
 
 
 
         internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
 
-        // item display stuffs
+ //item display stuffs
         internal override ItemDisplayRuleSet itemDisplayRuleSet { get; set; }
         internal override List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules { get; set; }
 
@@ -72,7 +79,7 @@ namespace DekuMod.Modules.Survivors
             base.InitializeDoppelganger();
         }
 
-        
+
 
         internal override void InitializeHitboxes()
         {
@@ -81,7 +88,7 @@ namespace DekuMod.Modules.Survivors
 
             Transform hitboxTransform = childLocator.FindChild("SmashHitbox");
             Modules.Prefabs.SetupHitbox(model, hitboxTransform, "SwordHitbox");
-        
+
 
             Transform hitboxTransform2 = childLocator.FindChild("ModelHitbox");
             Modules.Prefabs.SetupHitbox(model, hitboxTransform2, "ModelHitbox");
@@ -92,7 +99,7 @@ namespace DekuMod.Modules.Survivors
             Transform hitboxTransform4 = childLocator.FindChild("BodyHitbox");
             Modules.Prefabs.SetupHitbox(model, hitboxTransform4, "BodyHitbox");
         }
-        
+
 
 
         internal override void InitializeSkills()
@@ -102,49 +109,50 @@ namespace DekuMod.Modules.Survivors
             string prefix = DekuPlugin.developerPrefix;
 
             #region Primary
-            //Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
-            SkillDef airforceSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = "Delaware Smash Airforce",
-                skillNameToken = "Delaware Smash Airforce",
-                skillDescriptionToken = "Deku flicks his fingers, dealing damage to enemies with range",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("primary attack"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Airforce)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 0f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Any,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
-            });
+            Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new SerializableEntityStateType(typeof(Airforce)), "Weapon", prefix + "Delaware Smash Airforce", prefix + "Delaware Smash Airforce", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("primary attack"), true));
+            //SkillDef airforceSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            //{
+                
+            //    //skillName = "Delaware Smash Airforce",
+            //    //skillNameToken = "Delaware Smash Airforce",
+            //    //skillDescriptionToken = "Deku flicks his fingers, dealing damage to enemies with range",
+            //    //skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("primary attack"),
+            //    //activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce)),
+            //    //activationStateMachineName = "Weapon",
+            //    //baseMaxStock = 1,
+            //    //baseRechargeInterval = 0f,
+            //    //beginSkillCooldownOnSkillEnd = false,
+            //    //canceledFromSprinting = false,
+            //    //forceSprintDuringState = false,
+            //    //fullRestockOnAssign = true,
+            //    //interruptPriority = EntityStates.InterruptPriority.Any,
+            //    //resetCooldownTimerOnUse = false,
+            //    //isCombatSkill = true,
+            //    //mustKeyPress = false,
+            //    //cancelSprintingOnActivation = false,
+            //    //rechargeStock = 1,
+            //    //requiredStock = 1,
+            //    //stockToConsume = 1,
+            //    //keywordTokens = new string[] { "KEYWORD_AGILE" }
+            //});
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, airforceSkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, airforceSkillDef);
 
 
 
             #endregion
 
             #region Secondary
-            SkillDef smashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef skillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Detroit Smash",
                 skillNameToken = "Detroit Smash",
                 skillDescriptionToken = "Deku charges up a Detroit Smash, taking damage during the charge",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("secondary attack"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 2f,
+                baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -158,22 +166,53 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
+
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, smashSkillDef);
+            //SkillDef skillDef2 = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            //{
+            //    skillName = "Detroit Smash",
+            //    skillNameToken = "Detroit Smash",
+            //    skillDescriptionToken = "Deku charges up a Detroit Smash, taking damage during the charge",
+            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("secondary attack"),
+            //    activationState = new SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
+            //    activationStateMachineName = "Weapon",
+            //    baseMaxStock = 1,
+            //    baseRechargeInterval = 4f,
+            //    beginSkillCooldownOnSkillEnd = false,
+            //    canceledFromSprinting = false,
+            //    forceSprintDuringState = false,
+            //    fullRestockOnAssign = true,
+            //    interruptPriority = EntityStates.InterruptPriority.Skill,
+            //    resetCooldownTimerOnUse = false,
+            //    isCombatSkill = true,
+            //    mustKeyPress = false,
+            //    cancelSprintingOnActivation = false,
+            //    rechargeStock = 1,
+            //    requiredStock = 1,
+            //    stockToConsume = 1,
+            //    keywordTokens = new string[] { "KEYWORD_AGILE" }
+
+            //});
+
+            Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]
+            {
+                skillDef,
+                //skillDef2
+            });
             #endregion
 
             #region Utility
-            SkillDef shootstyleSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef skillDef3 = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName =  "Shoot Style",
+                skillName = "Shoot Style",
                 skillNameToken = "Shoot Style",
                 skillDescriptionToken = "Deku dashes up to 3 times, hitting enemies",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("utility skill"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Roll)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleDash)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
-                baseRechargeInterval = 2f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -186,23 +225,52 @@ namespace DekuMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                
+
             });
 
-            Modules.Skills.AddUtilitySkills(bodyPrefab, shootstyleSkillDef);
+            //SkillDef skillDef4 = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            //{
+            //    skillName = "Shoot Style",
+            //    skillNameToken = "Shoot Style",
+            //    skillDescriptionToken = "Deku dashes up to 3 times, hitting enemies",
+            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("utility skill"),
+            //    activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleDash)),
+            //    activationStateMachineName = "Body",
+            //    baseMaxStock = 1,
+            //    baseRechargeInterval = 6f,
+            //    beginSkillCooldownOnSkillEnd = true,
+            //    canceledFromSprinting = false,
+            //    forceSprintDuringState = false,
+            //    fullRestockOnAssign = true,
+            //    interruptPriority = EntityStates.InterruptPriority.Skill,
+            //    resetCooldownTimerOnUse = false,
+            //    isCombatSkill = false,
+            //    mustKeyPress = false,
+            //    cancelSprintingOnActivation = false,
+            //    rechargeStock = 1,
+            //    requiredStock = 1,
+            //    stockToConsume = 1,
+
+            //});
+
+            Skills.AddUtilitySkills(this.bodyPrefab, new SkillDef[]
+            {
+                skillDef3,
+                //skillDef4
+            });
             #endregion
 
             #region Special
-            SkillDef ofaSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef skillDef5 = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "One For All 100%",
                 skillNameToken = "OFA 100%",
                 skillDescriptionToken = "Push your body to its limits, boosting your abilities but at a cost",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.OFAstate)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -217,15 +285,14 @@ namespace DekuMod.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, ofaSkillDef);
 
-            //SkillDef ofadownSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            //SkillDef skillDef6 = Modules.Skills.CreateSkillDef(new SkillDefInfo
             //{
             //    skillName = "One For All Down",
             //    skillNameToken = "OFA Down",
             //    skillDescriptionToken = "Go back to your body's limits",
             //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate"),
-            //    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+            //    activationState = new SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
             //    activationStateMachineName = "Weapon",
             //    baseMaxStock = 1,
             //    baseRechargeInterval = 10f,
@@ -243,7 +310,117 @@ namespace DekuMod.Modules.Survivors
             //    stockToConsume = 1
             //});
 
-            //Modules.Skills.AddSpecialSkills(bodyPrefab, ofadownSkillDef);
+            Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
+            {
+                skillDef5,
+                //skillDef6
+            });
+            #endregion
+            #region Boosted Skills
+
+            Deku.primaryboostSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "Detroit Smash",
+                skillNameToken = "Detroit Smash",
+                skillDescriptionToken = "Deku charges up a Detroit Smash, taking damage during the charge",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("secondary attack"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+
+            });
+
+            Deku.secondaryboostSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "Detroit Smash",
+                skillNameToken = "Detroit Smash",
+                skillDescriptionToken = "Deku charges up a Detroit Smash, taking damage during the charge",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("secondary attack"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+
+            });
+
+            Deku.utilityboostSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "Detroit Smash",
+                skillNameToken = "Detroit Smash",
+                skillDescriptionToken = "Deku charges up a Detroit Smash, taking damage during the charge",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("secondary attack"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+
+            });
+
+            Deku.ofaDownSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "Detroit Smash",
+                skillNameToken = "Detroit Smash",
+                skillDescriptionToken = "Deku charges up a Detroit Smash, taking damage during the charge",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("utlimate"),
+                activationState = new SerializableEntityStateType(typeof(OFAdown)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                
+
+            });
             #endregion
         }
 
@@ -270,7 +447,7 @@ namespace DekuMod.Modules.Survivors
 
             defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
             {
-               
+
                 new SkinDef.MeshReplacement
                 {
                     mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Mesh"),
@@ -315,14 +492,14 @@ namespace DekuMod.Modules.Survivors
             //skins.Add(masterySkin);
             //#endregion
 
-            skinController.skins = skins.ToArray();
+            //skinController.skins = skins.ToArray();
         }
 
         internal override void SetItemDisplays()
         {
             itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
 
-            // add item displays here
+            //add item displays here
             //  HIGHLY recommend using KingEnderBrine's ItemDisplayPlacementHelper mod for this
             #region Item Displays
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
@@ -2954,3 +3131,4 @@ localScale = new Vector3(0.1233F, 0.1233F, 0.1233F),
         }
     }
 }
+

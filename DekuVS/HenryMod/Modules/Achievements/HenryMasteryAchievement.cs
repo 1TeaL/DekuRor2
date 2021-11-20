@@ -27,7 +27,7 @@ namespace DekuMod.Modules.Achievements
 
         public override BodyIndex LookUpRequiredBodyIndex()
         {
-            return BodyCatalog.FindBodyIndex(Modules.Survivors.MyCharacter.instance.fullBodyName);
+            return BodyCatalog.FindBodyIndex(Modules.Survivors.Deku.instance.fullBodyName);
         }
 
         public void ClearCheck(Run run, RunReport runReport)

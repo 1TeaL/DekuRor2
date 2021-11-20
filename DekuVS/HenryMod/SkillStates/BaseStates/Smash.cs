@@ -20,7 +20,7 @@ namespace DekuMod.SkillStates.BaseStates
 
         ////private float earlyExitTime;
         public float smashage;
-        public float duration;
+        public float duration = 1f;
         //private bool hasFired;
         //private float hitPauseTimer;
         //private OverlapAttack attack;
@@ -37,13 +37,13 @@ namespace DekuMod.SkillStates.BaseStates
         private int baseMaxCharge = 8;
         private float maxDistance;
         private float chargePercent;
-        private float baseDistance = 3f;
+        private float baseDistance = 2f;
         private RaycastHit raycastHit;
         private float hitDis;
-        private float baseDamageMult = 8f;
+        private float baseDamageMult = 5f;
         private float damageMult;
         private float radius;
-        private float baseRadius = 0.8f;
+        private float baseRadius = 0.5f;
         private Vector3 maxMoveVec;
         //private Vector3 randRelPos;
         //private int randFreq;
@@ -70,7 +70,7 @@ namespace DekuMod.SkillStates.BaseStates
 
             DamageInfo damageInfo = new DamageInfo();
             //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-            damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+            damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.15f;
             damageInfo.position = base.characterBody.corePosition;
             damageInfo.force = Vector3.zero;
             damageInfo.damageColorIndex = DamageColorIndex.Default;
@@ -91,7 +91,7 @@ namespace DekuMod.SkillStates.BaseStates
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
             aimRay.origin = base.characterBody.corePosition;
-            this.maxDistance = (5f + 10f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
+            this.maxDistance = (8f + 10f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
             bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;
@@ -99,7 +99,7 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = this.baseDamageMult + 4f * (this.chargePercent * this.baseDamageMult);
+            this.damageMult = this.baseDamageMult + 6f * (this.chargePercent * this.baseDamageMult);
             this.radius = (this.baseRadius * this.damageMult + 10f) / 2f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;
@@ -125,34 +125,35 @@ namespace DekuMod.SkillStates.BaseStates
         
         public override void FixedUpdate()
         {
+            
+
             base.FixedUpdate();
             bool flag = IsKeyDownAuthority();
             if (flag)
-
-            {
-                this.damageMult = this.baseDamageMult + 4f * (this.chargePercent * this.baseDamageMult);
-                
-                this.chargePercent = base.fixedAge / this.maxCharge;                
-                this.IndicatorUpdator();
-                if (NetworkServer.active && base.healthComponent && smashage >= 1f && base.isAuthority)
-                {
+            { 
+            this.chargePercent = base.fixedAge / this.maxCharge;
+            this.IndicatorUpdator();
+            
+                //if (NetworkServer.active && base.healthComponent && smashage >= duration)
+                //{
                     
-                    DamageInfo damageInfo = new DamageInfo();
-                    //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-                    damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-                    damageInfo.position = base.characterBody.corePosition;
-                    damageInfo.force = Vector3.zero;
-                    damageInfo.damageColorIndex = DamageColorIndex.Default;
-                    damageInfo.crit = false;
-                    damageInfo.attacker = null;
-                    damageInfo.inflictor = null;
-                    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                    damageInfo.procCoefficient = 0f;
-                    damageInfo.procChainMask = default(ProcChainMask);
-                    base.healthComponent.TakeDamage(damageInfo);
-                    smashage = 0f;
-                }
-                else this.smashage = smashage + Time.fixedDeltaTime;
+                //    DamageInfo damageInfo = new DamageInfo();
+                //    //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
+                //    damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+                //    damageInfo.position = base.characterBody.corePosition;
+                //    damageInfo.force = Vector3.zero;
+                //    damageInfo.damageColorIndex = DamageColorIndex.Default;
+                //    damageInfo.crit = false;
+                //    damageInfo.attacker = null;
+                //    damageInfo.inflictor = null;
+                //    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                //    damageInfo.procCoefficient = 0f;
+                //    damageInfo.procChainMask = default(ProcChainMask);
+                //    base.healthComponent.TakeDamage(damageInfo);
+                //    smashage = 0f;
+                //}
+                //else this.smashage = smashage + Time.fixedDeltaTime;
+
             }
             else
             {

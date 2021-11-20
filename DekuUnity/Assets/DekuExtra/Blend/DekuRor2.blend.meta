@@ -211,6 +211,7 @@ ModelImporter:
     100410: U_Lip_end
     100412: U_Teeth
     100414: U_Teeth_end
+    100416: Plane
     400000: 001
     400002: 002
     400004: 003
@@ -419,8 +420,13 @@ ModelImporter:
     400410: U_Lip_end
     400412: U_Teeth
     400414: U_Teeth_end
+    400416: Plane
     2100000: Dekuall
+    2100002: No Name
+    2300000: Plane
+    3300000: Plane
     4300000: Body.001
+    4300002: Plane
     7400000: Leg smash.001
     7400002: Fall.001
     7400004: Finger flick.001
@@ -446,6 +452,13 @@ ModelImporter:
     7400044: Armature|Smash charging
     7400046: Armature|Smash full charge
     7400048: Armature|walking
+    7400050: Armature|AIdle
+    7400052: Armature|Entrance loop
+    7400054: Armature|FalltoLand
+    7400056: Armature|OFA
+    7400058: Armature|ShootStyleDash
+    7400060: Armature|ShootStyleDashExit
+    7400062: Armature|SmashRelease
     9500000: //RootNode
     13700000: Body.001
   externalObjects: {}

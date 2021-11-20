@@ -11,6 +11,8 @@ namespace DekuMod.Modules
 
         internal static List<BuffDef> buffDefs = new List<BuffDef>();
 
+        internal static BuffDef ofaBuff;
+
         internal static void RegisterBuffs()
         {
             armorBuff = AddNewBuff("DekuArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);

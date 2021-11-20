@@ -8,7 +8,7 @@ namespace DekuMod.SkillStates
     {
         public static float damageCoefficient = Modules.StaticValues.airforceDamageCoefficient;
         public static float procCoefficient = 1f;
-        public static float baseDuration = 0.5f;
+        public static float baseDuration = 0.4f;
         public static float force = 1000f;
         public static float recoil = 1f;
         public static float range = 100f;
@@ -27,7 +27,7 @@ namespace DekuMod.SkillStates
             base.characterBody.SetAimTimer(2f);
             this.muzzleString = "LFinger";
 
-            base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.5f);
+            base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.3f);
             //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "ShootGun.playbackRate", this.duration, 0.05f);       
             //base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
         }
@@ -43,7 +43,7 @@ namespace DekuMod.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(1.5f);
+                base.characterBody.AddSpreadBloom(1f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
                 Util.PlaySound("HenryShootPistol", base.gameObject);
 
@@ -54,7 +54,7 @@ namespace DekuMod.SkillStates
 
                     new BulletAttack
                     {
-                        bulletCount = 1,
+                        bulletCount = 1U,
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
                         damage = Airforce.damageCoefficient * this.damageStat,

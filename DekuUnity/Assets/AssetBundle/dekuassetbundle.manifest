@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 730079852
+CRC: 3079379733
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 73cb083a2e22221aab183abada1a8f80
+    Hash: 2eb14730dfd60ae8b695c95d92c6e6d7
   TypeTreeHash:
     serializedVersion: 2
     Hash: b757e221fe29ace486a2437fa3c79e5a
@@ -55,6 +55,7 @@ Assets:
 - Assets/Deku/GUI/ultimate.png
 - Assets/Deku/DekuDisplay.prefab
 - Assets/Deku/Animations/EntranceLoop.anim
+- Assets/Deku/Animations/ShootStyleDashExit.anim
 - Assets/Deku/Animations/LegSmashExit.anim
 - Assets/Deku/GUI/utility skill.png
 - Assets/Deku/Animations/maskDekuBody.mask
@@ -63,6 +64,7 @@ Assets:
 - Assets/Deku/Animations/Landing.anim
 - Assets/Deku/Animations/AIIdle.anim
 - Assets/Deku/dekuror2.fbx
+- Assets/Deku/Animations/ShootStyleDash.anim
 - Assets/Deku/Animations/Fall.anim
 - Assets/Deku/mdlDeku.prefab
 - Assets/Deku/Animations/SmashCharging.anim
@@ -74,6 +76,7 @@ Assets:
 - Assets/Deku/Animations/maskDekuRightArm.mask
 - Assets/Deku/GUI/secondary upgrade coloured.png
 - Assets/Deku/Animations/LegSmash.anim
+- Assets/Deku/Animations/OFA.anim
 - Assets/Deku/Animations/SmashCharge.anim
 - Assets/Deku/Animations/Running.anim
 - Assets/Deku/GUI/secondary attack.png
