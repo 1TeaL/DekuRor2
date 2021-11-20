@@ -14,8 +14,10 @@ namespace DekuMod.Modules
 
         internal const float smashCoefficient = 8f;
 
-        internal const float airforceDamageCoefficient = 1.2f;
+        internal const float airforceDamageCoefficient = 1.8f;
 
         internal const float bombDamageCoefficient = 16f;
+
+        internal const float BlackwhipdamageCoefficient = 1f;
     }
 }

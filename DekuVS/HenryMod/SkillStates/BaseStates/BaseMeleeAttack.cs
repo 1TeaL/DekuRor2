@@ -7,18 +7,18 @@ using UnityEngine.Networking;
 
 namespace DekuMod.SkillStates.BaseStates
 {
-    public class Smash : BaseSkillState
+    public class BaseMeleeAttack : BaseSkillState
     {
         public int swingIndex;
 
-        protected string hitboxName = "ModelHitbox";
+        protected string hitboxName = "Sword";
 
-        protected DamageType damageType = DamageType.Stun1s;
+        protected DamageType damageType = DamageType.Generic;
         protected float damageCoefficient = 3.5f;
         protected float procCoefficient = 1f;
         protected float pushForce = 300f;
         protected Vector3 bonusForce = Vector3.zero;
-        protected float baseDuration = 6f;
+        protected float baseDuration = 1f;
         protected float attackStartTime = 0.2f;
         protected float attackEndTime = 0.4f;
         protected float baseEarlyExitTime = 0.4f;
@@ -29,7 +29,7 @@ namespace DekuMod.SkillStates.BaseStates
 
         protected string swingSoundString = "";
         protected string hitSoundString = "";
-        protected string muzzleString = "RShoulder";
+        protected string muzzleString = "SwingCenter";
         protected GameObject swingEffectPrefab;
         protected GameObject hitEffectPrefab;
         protected NetworkSoundEventIndex impactSound;
@@ -46,13 +46,6 @@ namespace DekuMod.SkillStates.BaseStates
         private BaseState.HitStopCachedState hitStopCachedState;
         private Vector3 storedVelocity;
 
-        protected bool ShouldKeepChargingAuthority()
-        {
-            return base.IsKeyDownAuthority() && (this.duration * (.8f + (.2f * base.attackSpeedStat)) <= 3000f);
-        }
-
-
-
         public override void OnEnter()
         {
             base.OnEnter();
@@ -62,8 +55,7 @@ namespace DekuMod.SkillStates.BaseStates
             this.animator = base.GetModelAnimator();
             base.StartAimMode(0.5f + this.duration, false);
             base.characterBody.outOfCombatStopwatch = 0f;
-            //this.animator.SetBool("attacking", true);
-            this.animator.SetBool("isCharging", true);
+            this.animator.SetBool("attacking", true);
 
             HitBoxGroup hitBoxGroup = null;
             Transform modelTransform = base.GetModelTransform();
@@ -92,7 +84,7 @@ namespace DekuMod.SkillStates.BaseStates
 
         protected virtual void PlayAttackAnimation()
         {
-            base.PlayCrossfade("RightArm, Override", "SmashCharge", "Attack.playbackRate", this.duration, 0.05f);
+            base.PlayCrossfade("Gesture, Override", "Slash" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
         }
 
         public override void OnExit()
@@ -115,7 +107,7 @@ namespace DekuMod.SkillStates.BaseStates
 
             if (!this.hasHopped)
             {
-                if (base.characterMotor && !base.characterMotor.isGrounded && this.hitHopVelocity > 0f)               
+                if (base.characterMotor && !base.characterMotor.isGrounded && this.hitHopVelocity > 0f)
                 {
                     base.SmallHop(base.characterMotor, this.hitHopVelocity);
                 }
@@ -161,7 +153,7 @@ namespace DekuMod.SkillStates.BaseStates
             if (index == 0) index = 1;
             else index = 0;
 
-            this.outer.SetNextState(new Smash
+            this.outer.SetNextState(new BaseMeleeAttack
             {
                 swingIndex = index
             });
@@ -170,11 +162,6 @@ namespace DekuMod.SkillStates.BaseStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            if (base.fixedAge >= this.duration)
-            {
-                this.animator.SetBool("isFullyCharged", true);
-            }
 
             this.hitPauseTimer -= Time.fixedDeltaTime;
 
@@ -192,41 +179,29 @@ namespace DekuMod.SkillStates.BaseStates
             else
             {
                 if (base.characterMotor) base.characterMotor.velocity = Vector3.zero;
-                if (this.animator) this.animator.SetFloat("Attack.playbackRate", 0f);
+                if (this.animator) this.animator.SetFloat("Swing.playbackRate", 0f);
             }
 
-            //if (this.stopwatch >= (this.duration * this.attackStartTime) && this.stopwatch <= (this.duration * this.attackEndTime))
-            //{
-            //    this.FireAttack();
-            //}
-
-            //if (this.stopwatch >= (this.duration - this.earlyExitTime) && base.isAuthority)
-            //{
-            //    if (base.inputBank.skill1.down)
-            //    {
-            //        if (!this.hasFired) this.FireAttack();
-            //        this.SetNextState();
-            //        return;
-            //    }
-            //}
-
-            if (hasFired && base.isAuthority)
+            if (this.stopwatch >= (this.duration * this.attackStartTime) && this.stopwatch <= (this.duration * this.attackEndTime))
             {
-                this.animator.SetBool("isCharging", false);
-                this.animator.SetBool("isFullyCharged", false);
-                this.outer.SetNextStateToMain();
-                return;
+                this.FireAttack();
             }
-            if (!ShouldKeepChargingAuthority())
+
+            if (this.stopwatch >= (this.duration - this.earlyExitTime) && base.isAuthority)
             {
-                if (!hasFired) 
+                if (base.inputBank.skill1.down)
                 {
-                    this.animator.SetBool("isCharging", false);
-                    hasFired = true;
-                    this.FireAttack();
+                    if (!this.hasFired) this.FireAttack();
+                    this.SetNextState();
+                    return;
                 }
             }
 
+            if (this.stopwatch >= this.duration && base.isAuthority)
+            {
+                this.outer.SetNextStateToMain();
+                return;
+            }
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

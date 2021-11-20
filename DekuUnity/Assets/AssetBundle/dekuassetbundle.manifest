@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3612797106
+CRC: 730079852
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9fd1246b9395153afd4f2071c5a3ef1e
+    Hash: 73cb083a2e22221aab183abada1a8f80
   TypeTreeHash:
     serializedVersion: 2
     Hash: b757e221fe29ace486a2437fa3c79e5a
@@ -48,43 +48,41 @@ ClassTypes:
 - Class: 319
   Script: {instanceID: 0}
 Assets:
-- Assets/Deku/GUI/texDekuIcon.png
 - Assets/Deku/Animations/SmashRelease.anim
 - Assets/Deku/Animations/Jump.anim
-- Assets/Deku/DekuDisplay.prefab
+- Assets/Deku/GUI/primary attack.png
 - Assets/Deku/Animations/maskDekuImpact.mask
-- Assets/Deku/Animations/anim.controller
+- Assets/Deku/GUI/ultimate.png
+- Assets/Deku/DekuDisplay.prefab
 - Assets/Deku/Animations/EntranceLoop.anim
-- Assets/Deku/MainHurtbox.prefab
+- Assets/Deku/Animations/LegSmashExit.anim
+- Assets/Deku/GUI/utility skill.png
 - Assets/Deku/Animations/maskDekuBody.mask
 - Assets/Deku/Animations/SmashFullCharge.anim
 - Assets/Deku/Animations/maskDekuGesture.mask
-- Assets/Deku/GUI/utility skill.png
-- Assets/Deku/GUI/secondary upgrade coloured.png
 - Assets/Deku/Animations/Landing.anim
 - Assets/Deku/Animations/AIIdle.anim
 - Assets/Deku/dekuror2.fbx
 - Assets/Deku/Animations/Fall.anim
-- Assets/Deku/matDeku.mat
-- Assets/Deku/GUI/deku portrait.png
+- Assets/Deku/mdlDeku.prefab
 - Assets/Deku/Animations/SmashCharging.anim
+- Assets/Deku/GUI/deku portrait.png
 - Assets/Deku/Mesh.mesh
 - Assets/Deku/Animations/Entrance.anim
 - Assets/Deku/Animations/Sprinting.anim
 - Assets/Deku/Animations/FingerFlick.anim
 - Assets/Deku/Animations/maskDekuRightArm.mask
+- Assets/Deku/GUI/secondary upgrade coloured.png
 - Assets/Deku/Animations/LegSmash.anim
-- Assets/Deku/GUI/ultimate.png
 - Assets/Deku/Animations/SmashCharge.anim
-- Assets/Deku/Model.prefab
-- Assets/Deku/Deku all mats 3584x2049.png
-- Assets/Deku/GUI/secondary attack.png
-- Assets/Deku/SwordHitbox.prefab
 - Assets/Deku/Animations/Running.anim
-- Assets/Deku/mdlDeku.prefab
+- Assets/Deku/GUI/secondary attack.png
+- Assets/Deku/GUI/texDekuIcon.png
+- Assets/Deku/Animations/anim.controller
+- Assets/Deku/matDeku.mat
 - Assets/Deku/Animations/maskDekuLeftArm.mask
 - Assets/Deku/Animations/Impact.anim
-- Assets/Deku/GUI/primary attack.png
+- Assets/Deku/Deku all mats 3584x2049.png
 - Assets/Deku/Animations/SmashChargeAttack.anim
 - Assets/Deku/Animations/animDisplay.controller
 Dependencies:

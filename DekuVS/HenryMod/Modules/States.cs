@@ -12,6 +12,8 @@ namespace DekuMod.Modules
         internal static void RegisterStates()
         {
             entityStates.Add(typeof(Smash));
+            entityStates.Add(typeof(SmashRelease));
+            entityStates.Add(typeof(ShootStyle));
             //entityStates.Add(typeof(SlashCombo));
 
             entityStates.Add(typeof(Airforce));

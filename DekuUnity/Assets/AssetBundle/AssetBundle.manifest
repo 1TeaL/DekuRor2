@@ -1,11 +1,10 @@
 ManifestFileVersion: 0
-CRC: 98272976
+CRC: 4187249237
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: myassetbundle
-      Dependencies:
-        Dependency_0: dekuassetbundle
+      Dependencies: {}
     Info_1:
       Name: dekuassetbundle
       Dependencies:
