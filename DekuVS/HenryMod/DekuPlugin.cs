@@ -74,9 +74,31 @@ namespace DekuMod
         {
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
-            
+            //On.RoR2.HealthComponent.TakeDamage += BlackwhipPull;            
         }
 
+        //private void BlackwhipPull(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo damageInfo)
+        //{
+        //    if (damageInfo?.attacker)
+        //    {
+        //        var attackerBody = damageInfo.attacker.GetComponent<RoR2.CharacterBody>();
+        //        if (attackerBody)
+        //        {
+
+        //            {
+        //                //Thanks Chen for fixing this.
+        //                float mass;
+        //                if (self.body.characterMotor) mass = self.body.characterMotor.mass;
+        //                else if (self.body.rigidbody) mass = self.body.rigidbody.mass;
+        //                else mass = 1f;
+
+        //                var forceCalc = 3f;
+        //                damageInfo.force += Vector3.Normalize(attackerBody.corePosition - self.body.corePosition) * forceCalc * mass;
+        //            }
+        //        }
+        //    }
+        //    orig(self, damageInfo);
+        //}
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
             //regen 
@@ -87,12 +109,12 @@ namespace DekuMod
                 self.armor *= 10f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen *= -10f;
-                self.damage *= 2f;
+                self.regen += -15f;
+                self.damage *= 1.5f;
             }
             
-            bool flag = self; 
-            if (flag)                
+
+            if (self.baseNameToken == DekuPlugin.developerPrefix + "DEKU")                
             {
                 if (!flag2)
                 {

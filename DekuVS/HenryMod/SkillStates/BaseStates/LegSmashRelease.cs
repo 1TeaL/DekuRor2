@@ -24,7 +24,7 @@ namespace DekuMod.SkillStates.BaseStates
 			
 			base.OnEnter();
             base.characterMotor.velocity = Vector3.zero;
-			base.PlayAnimation("FullBody, Override", "LegSmashFollow","Attack.playbackRate", 0.1f);
+			base.PlayAnimation("FullBody, Override", "LegSmashFollow","Attack.playbackRate", 0.3f);
 			Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
@@ -40,6 +40,8 @@ namespace DekuMod.SkillStates.BaseStates
 		{
 
 			base.OnExit();
+
+			base.PlayAnimation("FullBody, Override", "LegSmashExit", "Attack.playbackRate", 0.3f);
 			EffectData effectData = new EffectData
 			{
 				scale = this.radius * 2f,

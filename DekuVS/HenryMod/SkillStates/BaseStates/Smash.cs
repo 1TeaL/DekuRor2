@@ -91,7 +91,7 @@ namespace DekuMod.SkillStates.BaseStates
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
             aimRay.origin = base.characterBody.corePosition;
-            this.maxDistance = (4f + 4f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
+            this.maxDistance = (4f + 8f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
             bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;

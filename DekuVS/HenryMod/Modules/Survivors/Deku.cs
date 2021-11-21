@@ -212,7 +212,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = "Blackwhip",
                 skillDescriptionToken = "Blackwhip enemies, pulling them together <style=cIsDamage>200% damage per hit</style>",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("utility"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.BlackwhipRicochet)),
+                activationState = new SerializableEntityStateType(typeof(DekuMod.SkillStates.BlackwhipPull)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 6f,

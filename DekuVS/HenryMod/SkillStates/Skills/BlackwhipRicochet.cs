@@ -38,6 +38,7 @@ namespace DekuMod.SkillStates
             base.characterBody.AddSpreadBloom(1.5f);
             EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.muzzleString, false);
             //Util.PlaySound("TTGLTokoRifleFire", base.gameObject);
+            
 
             if (base.isAuthority)
             {
@@ -46,6 +47,7 @@ namespace DekuMod.SkillStates
             if (NetworkServer.active)
             {
                 this.FireServer(this.initialAimRay);
+
             }
         }
 
@@ -100,8 +102,8 @@ namespace DekuMod.SkillStates
                 queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                 hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
             };
-            if (maxRicochetCount > 0 && bulletAttack.isCrit)
-            //if (maxRicochetCount > 0)
+            //if (maxRicochetCount > 0 && bulletAttack.isCrit)
+            if (maxRicochetCount > 0)
             {
                 bulletAttack.hitCallback = delegate (ref BulletAttack.BulletHit hitInfo)
                 {

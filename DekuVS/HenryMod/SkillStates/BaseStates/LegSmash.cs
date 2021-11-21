@@ -34,16 +34,16 @@ namespace DekuMod.SkillStates.BaseStates
         protected Animator animator;
         private GameObject areaIndicator;
         private float maxCharge;
-        private int baseMaxCharge = 4;
+        private int baseMaxCharge = 2;
         private float maxDistance;
         private float chargePercent;
         private float baseDistance = 2f;
         private RaycastHit raycastHit;
         private float hitDis;
-        private float baseDamageMult = 8f;
+        private float baseDamageMult = 4f;
         private float damageMult;
         private float radius;
-        private float baseRadius = 1f;
+        private float baseRadius = 1.5f;
         private Vector3 maxMoveVec;
         private Vector3 randRelPos;
         private int randFreq;
@@ -100,7 +100,7 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = this.baseDamageMult + 2f * (this.chargePercent * this.baseDamageMult);
+            this.damageMult = this.baseDamageMult + 4f * (this.chargePercent * this.baseDamageMult);
             this.radius = (this.baseRadius * this.damageMult + 20f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;
@@ -129,7 +129,7 @@ namespace DekuMod.SkillStates.BaseStates
             
 
             base.FixedUpdate();
-            bool flag = IsKeyDownAuthority();
+            bool flag = base.fixedAge < this.maxCharge && IsKeyDownAuthority();
             if (flag)
             {
                 this.chargePercent = base.fixedAge / this.maxCharge;
