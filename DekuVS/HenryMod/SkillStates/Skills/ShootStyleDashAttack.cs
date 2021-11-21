@@ -16,7 +16,7 @@ namespace DekuMod.SkillStates
 		public static GameObject blinkPrefab;
 		public static float duration = 3f;
 		//public static float damageCoefficient;
-		public static float damageFrequency = 0.4f;
+		public static float damageFrequency = 0.2f;
 		public static float procCoefficient = 1f;
 		public static string beginSoundString;
 		public static string endSoundString;

@@ -1,111 +1,110 @@
-﻿//using EntityStates;
-//using RoR2;
-//using UnityEngine;
+﻿using EntityStates;
+using EntityStates.VagrantMonster;
+using RoR2;
+using System;
+using UnityEngine;
+using UnityEngine.Networking;
 
-//namespace DekuMod.SkillStates
-//{
-//    public class Airforce : BaseSkillState
-//    {
-//        public static float damageCoefficient = Modules.StaticValues.airforceDamageCoefficient;
-//        public static float procCoefficient = 1f;
-//        public static float baseDuration = 0.4f;
-//        public static float force = 1000f;
-//        public static float recoil = 1f;
-//        public static float range = 100f;
+namespace DekuMod.SkillStates
+{
+    public class DelawareSmash : BaseSkillState
+    {
+        public static float damageCoefficient = 6f;
+        public float baseDuration = 0.5f;
+        private float duration;
+        public static event Action<int> Compacted;
+        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerSmokeChase");
+        public static GameObject explosionPrefab = Resources.Load<GameObject>("prefabs/effects/MageLightningBombExplosion");
 
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            Ray aimRay = base.GetAimRay();
+            this.duration = this.baseDuration;
+            Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
+            //Util.PlaySound(DiggerPlugin.Sounds.Backblast, base.gameObject);
+            base.StartAimMode(0.6f, true);
 
-//        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerSmokeChase"); 
-//        private float duration;
-//        private float fireTime;
-//        private bool hasFired;
-//        private string muzzleString;
+            base.characterMotor.disableAirControlUntilCollision = false;
 
-//        public override void OnEnter()
-//        {
-//            base.OnEnter();
-//            this.duration = Airforce.baseDuration / this.attackSpeedStat;
-//            this.fireTime = 0.2f * this.duration;
-//            base.characterBody.SetAimTimer(2f);
-//            this.muzzleString = "LFinger";
+            float angle = Vector3.Angle(new Vector3(0, -1, 0), aimRay.direction);
+            if (angle < 60)
+            {
+                base.PlayAnimation("FullBody, Override", "DelawareSmashUp");
+            }
+            else if (angle > 120)
+            {
+                base.PlayAnimation("FullBody, Override", "DelawareSmashDown");
+            }
+            else
+            {
+                base.PlayAnimation("FullBody, Override", "DelawareSmash");
+            }
 
-//            base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.5f);
-//            //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "ShootGun.playbackRate", this.duration, 0.05f);       
-//            //base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
-//        }
+            if (NetworkServer.active) base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 
-//        public override void OnExit()
-//        {
-//            base.OnExit();
-//        }
+            if (base.isAuthority)
+            {
+                Vector3 theSpot = aimRay.origin + 8 * aimRay.direction;
 
-//        private void Fire()
-//        {
-//            if (!this.hasFired)
-//            {
-//                this.hasFired = true;
+                BlastAttack blastAttack = new BlastAttack();
+                blastAttack.radius = 15f;
+                blastAttack.procCoefficient = 2f;
+                blastAttack.position = theSpot;
+                blastAttack.attacker = base.gameObject;
+                //blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+                blastAttack.crit = base.RollCrit();
+                blastAttack.baseDamage = this.damageStat * DelawareSmash.damageCoefficient;
+                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                blastAttack.baseForce = 600f;
+                blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                blastAttack.damageType = DamageType.Stun1s;
+                blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+                BlastAttack.Result result = blastAttack.Fire();
 
-//                base.characterBody.AddSpreadBloom(1f);
-//                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-//                Util.PlaySound("HenryShootPistol", base.gameObject);
+                //EffectData effectData = new EffectData();
+                //effectData.origin = theSpot;
+                //effectData.scale = 15;
+                EffectData effectData = new EffectData();
+                {
+                effectData.scale = 15;
+                effectData.origin = theSpot;
+                };
 
-//                if (base.isAuthority)
-//                {
-//                    Ray aimRay = base.GetAimRay();
-//                    base.AddRecoil(-1f * Airforce.recoil, -2f * Airforce.recoil, -0.5f * Airforce.recoil, 0.5f * Airforce.recoil);
+                EffectManager.SpawnEffect(explosionPrefab, effectData, true);
 
-//                    new BulletAttack
-//                    {
-//                        bulletCount = 1U,
-//                        aimVector = aimRay.direction,
-//                        origin = aimRay.origin,
-//                        damage = Airforce.damageCoefficient * this.damageStat,
-//                        damageColorIndex = DamageColorIndex.Default,
-//                        damageType = DamageType.Generic,
-//                        falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-//                        maxDistance = Airforce.range,
-//                        force = Airforce.force,
-//                        hitMask = LayerIndex.CommonMasks.bullet,
-//                        minSpread = 0f,
-//                        maxSpread = 0f,
-//                        isCrit = base.RollCrit(),
-//                        owner = base.gameObject,
-//                        muzzleName = muzzleString,
-//                        smartCollision = false,
-//                        procChainMask = default(ProcChainMask),
-//                        procCoefficient = procCoefficient,
-//                        radius = 0.5f,
-//                        sniper = false,
-//                        stopperMask = LayerIndex.CommonMasks.bullet,
-//                        weapon = null,
-//                        tracerEffectPrefab = Airforce.tracerEffectPrefab,
-//                        spreadPitchScale = 0f,
-//                        spreadYawScale = 0f,
-//                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-//                        hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
-//                    }.Fire();
-//                }
-//            }
-//        }
+                base.characterMotor.velocity = -100 * aimRay.direction;
 
-//        public override void FixedUpdate()
-//        {
-//            base.FixedUpdate();
+                Compacted?.Invoke(result.hitCount);
+            }
+        }
 
-//            if (base.fixedAge >= this.fireTime)
-//            {
-//                this.Fire();
-//            }
+        public override void OnExit()
+        {
+            if (NetworkServer.active)
+            {
+                base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+                base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
+            }
 
-//            if (base.fixedAge >= this.duration && base.isAuthority)
-//            {
-//                this.outer.SetNextStateToMain();
-//                return;
-//            }
-//        }
+            base.characterMotor.velocity *= 0.2f;
 
-//        public override InterruptPriority GetMinimumInterruptPriority()
-//        {
-//            return InterruptPriority.Skill;
-//        }
-//    }
-//}
+            base.OnExit();
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            if ((base.fixedAge >= this.duration && base.isAuthority) || (!base.IsKeyDownAuthority()))
+            {
+                this.outer.SetNextStateToMain();
+                return;
+            }
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.Skill;
+        }
+    }
+}

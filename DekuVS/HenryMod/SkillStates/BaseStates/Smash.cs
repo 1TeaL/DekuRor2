@@ -34,21 +34,21 @@ namespace DekuMod.SkillStates.BaseStates
         protected Animator animator;
         private GameObject areaIndicator;
         private float maxCharge;
-        private int baseMaxCharge = 8;
+        private int baseMaxCharge = 4;
         private float maxDistance;
         private float chargePercent;
-        private float baseDistance = 2f;
+        private float baseDistance = 4f;
         private RaycastHit raycastHit;
         private float hitDis;
-        private float baseDamageMult = 5f;
+        private float baseDamageMult = 3f;
         private float damageMult;
         private float radius;
-        private float baseRadius = 0.5f;
+        private float baseRadius = 1.5f;
         private Vector3 maxMoveVec;
-        //private Vector3 randRelPos;
-        //private int randFreq;
-        //private bool reducerFlipFlop;
-        //private GameObject effectPrefab = Resources.Load<GameObject>("Prefabs/effects/LightningStakeNova");
+        private Vector3 randRelPos;
+        private int randFreq;
+        private bool reducerFlipFlop;
+        private GameObject effectPrefab = Resources.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
         public static float healthCostFraction;
 
@@ -68,19 +68,19 @@ namespace DekuMod.SkillStates.BaseStates
             base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 0.2f);
             Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
 
-            DamageInfo damageInfo = new DamageInfo();
+            //DamageInfo damageInfo = new DamageInfo();
             //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-            damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.15f;
-            damageInfo.position = base.characterBody.corePosition;
-            damageInfo.force = Vector3.zero;
-            damageInfo.damageColorIndex = DamageColorIndex.Default;
-            damageInfo.crit = false;
-            damageInfo.attacker = null;
-            damageInfo.inflictor = null;
-            damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-            damageInfo.procCoefficient = 0f;
-            damageInfo.procChainMask = default(ProcChainMask);
-            base.healthComponent.TakeDamage(damageInfo);
+            //damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.10f;
+            //damageInfo.position = base.characterBody.corePosition;
+            //damageInfo.force = Vector3.zero;
+            //damageInfo.damageColorIndex = DamageColorIndex.Default;
+            //damageInfo.crit = false;
+            //damageInfo.attacker = null;
+            //damageInfo.inflictor = null;
+            //damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+            //damageInfo.procCoefficient = 0f;
+            //damageInfo.procChainMask = default(ProcChainMask);
+            //base.healthComponent.TakeDamage(damageInfo);
 
 
             GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
@@ -91,7 +91,7 @@ namespace DekuMod.SkillStates.BaseStates
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
             aimRay.origin = base.characterBody.corePosition;
-            this.maxDistance = (8f + 10f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
+            this.maxDistance = (4f + 4f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
             bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;
@@ -99,8 +99,8 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = this.baseDamageMult + 6f * (this.chargePercent * this.baseDamageMult);
-            this.radius = (this.baseRadius * this.damageMult + 10f) / 2f;
+            this.damageMult = this.baseDamageMult + 3f * (this.chargePercent * this.baseDamageMult);
+            this.radius = (this.baseRadius * this.damageMult + 20f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;
             this.areaIndicator.transform.localPosition = aimRay.origin + this.maxMoveVec;
@@ -111,8 +111,7 @@ namespace DekuMod.SkillStates.BaseStates
         }
         public override void OnExit()
         {
-            //animator.SetBool("isCharging", false);
-            GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.None;
+
             base.characterMotor.walkSpeedPenaltyCoefficient = 1f;
             bool flag = this.areaIndicator;
             if (flag)
@@ -130,9 +129,31 @@ namespace DekuMod.SkillStates.BaseStates
             base.FixedUpdate();
             bool flag = IsKeyDownAuthority();
             if (flag)
-            { 
-            this.chargePercent = base.fixedAge / this.maxCharge;
-            this.IndicatorUpdator();
+            {
+                this.chargePercent = base.fixedAge / this.maxCharge;
+                this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+                this.randFreq = Random.Range(1, this.baseMaxCharge * 100) / 100;
+                bool flag2 = this.reducerFlipFlop;
+                if (flag2)
+                {
+                    bool flag3 = (float)this.randFreq <= this.chargePercent;
+                    if (flag3)
+                    {
+                        EffectData effectData = new EffectData
+                        {
+                            scale = 1f,
+                            origin = base.characterBody.corePosition + this.randRelPos
+                        };
+                        EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                    }
+                    this.reducerFlipFlop = false;
+                }
+                else
+                {
+                    this.reducerFlipFlop = true;
+                }
+
+                this.IndicatorUpdator();
             
                 //if (NetworkServer.active && base.healthComponent && smashage >= duration)
                 //{

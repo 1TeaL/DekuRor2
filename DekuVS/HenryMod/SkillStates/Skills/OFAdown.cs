@@ -9,7 +9,7 @@ namespace DekuMod.SkillStates
     public class OFAdown: BaseSkillState
 
     {
-		public static float baseDuration = 0.1f;
+		public static float baseDuration = 0.5f;
 		private float duration;
 		public override void OnEnter()
 		{
@@ -19,8 +19,9 @@ namespace DekuMod.SkillStates
 			bool active = NetworkServer.active;
 			if (active)
 			{
-				base.characterBody.RemoveBuff(RoR2Content.Buffs.Slow30);
+				base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
 			}
+			base.PlayAnimation("FullBody, Override", "OFA", "Attack.playbackRate", this.duration);
 			//base.PlayAnimation("Bazooka, Override", "BazookaExit", "Bazooka.playbackRate", this.duration);
 			//Util.PlaySound("HenryBazookaUnequip", base.gameObject);
 			//bool flag = base.cameraTargetParams;

@@ -50,7 +50,7 @@ namespace DekuMod.SkillStates
 			{
 				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 			}
-			base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", EvisDash.dashPrepDuration);
+			base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", dashPrepDuration);
 			this.dashVector = base.inputBank.aimDirection;
 			base.characterDirection.forward = this.dashVector;
 		}

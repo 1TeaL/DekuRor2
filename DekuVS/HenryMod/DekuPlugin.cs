@@ -80,17 +80,35 @@ namespace DekuMod
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
             //regen 
-            orig(self);
-
-
-            if (self.baseNameToken == "TEALDEKU")
+            orig.Invoke(self);
+            bool flag2 = self.HasBuff(Modules.Buffs.ofaBuff);
+            if (flag2)
             {
-                HealthComponent hp = self.healthComponent;
-                float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
-                float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
-                self.regen += regen;
-                               
+                self.armor *= 10f;
+                self.moveSpeed *= 1.5f;
+                self.attackSpeed *= 1.5f;
+                self.regen *= -10f;
+                self.damage *= 2f;
             }
+            
+            bool flag = self; 
+            if (flag)                
+            {
+                if (!flag2)
+                {
+
+                    HealthComponent hp = self.healthComponent;
+                    float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
+                    float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
+                    self.regen += regen;
+                    //Chat.AddMessage("hpregen activated");
+                }
+                
+
+            }
+
+
+
         }
 
     }

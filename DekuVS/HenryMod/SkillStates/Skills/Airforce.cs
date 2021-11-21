@@ -9,9 +9,9 @@ namespace DekuMod.SkillStates
         public static float damageCoefficient = Modules.StaticValues.airforceDamageCoefficient;
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.4f;
-        public static float force = 1000f;
+        public static float force = 300f;
         public static float recoil = 1f;
-        public static float range = 100f;
+        public static float range = 200f;
 
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerSmokeChase"); 
         private float duration;

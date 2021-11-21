@@ -34,7 +34,7 @@ namespace DekuMod.SkillStates.BaseStates
         }
         public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return InterruptPriority.PrioritySkill;
+			return InterruptPriority.Frozen;
 		}
 		public override void OnExit()
 		{

@@ -102,6 +102,11 @@ namespace DekuMod.Modules
             };
         }
 
+        internal static SkillDef CreatePrimarySkillDef(SerializableEntityStateType serializableEntityStateType, string v1, string v2, Sprite sprite, bool v3)
+        {
+            throw new NotImplementedException();
+        }
+
         internal static void AddUtilitySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
         {
             foreach (SkillDef i in skillDefs)

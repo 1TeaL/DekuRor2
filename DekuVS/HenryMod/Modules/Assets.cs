@@ -124,6 +124,8 @@ namespace DekuMod.Modules
             return newTracer;
         }
 
+        
+
         internal static NetworkSoundEventDef CreateNetworkSoundEventDef(string eventName)
         {
             NetworkSoundEventDef networkSoundEventDef = ScriptableObject.CreateInstance<NetworkSoundEventDef>();

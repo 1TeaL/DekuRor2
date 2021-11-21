@@ -9,11 +9,11 @@ namespace DekuMod.SkillStates
 
 	public class OFAstate : BaseSkillState
 	{
-		public static float baseDuration = 0.3f;
+		public static float baseDuration = 0.5f;
 		public static SkillDef primaryDef = Deku.primaryboostSkillDef;
 		public static SkillDef secondaryDef = Deku.secondaryboostSkillDef;
 		public static SkillDef utilityDef = Deku.utilityboostSkillDef;
-		public static SkillDef specialDef = Deku.ofaDownSkillDef;
+		public static SkillDef specialDef = Deku.ofadownSkillDef;
 
 
 		private float duration;
@@ -25,10 +25,10 @@ namespace DekuMod.SkillStates
 
 			bool active = NetworkServer.active;
 			if (active)
-			{
-				base.characterBody.AddBuff(RoR2Content.Buffs.Slow30);
+			{ 				
+				base.characterBody.AddBuff(Modules.Buffs.ofaBuff);
 			}
-            base.PlayAnimation("FullBody, Override", "OFA");
+            base.PlayAnimation("FullBody, Override", "OFA", "Atack.playbackRate", this.duration);
 
 			//Util.PlaySound("HenryBazookaEquip", base.gameObject);
 			base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAstate.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
@@ -51,7 +51,7 @@ namespace DekuMod.SkillStates
 				this.outer.SetNextStateToMain();
 			}
 		}
-				public override InterruptPriority GetMinimumInterruptPriority()
+		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Frozen;
 		}
