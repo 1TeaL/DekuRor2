@@ -29,7 +29,7 @@ namespace DekuMod.SkillStates.BaseStates
             //EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
             EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
             base.characterMotor.rootMotion += this.moveVec;
-            //base.characterMotor.velocity += this.moveVec* 4;
+            //base.characterMotor.velocity += this.moveVec * 2;
 
         }
         public override InterruptPriority GetMinimumInterruptPriority()
@@ -60,7 +60,7 @@ namespace DekuMod.SkillStates.BaseStates
 					teamIndex = base.teamComponent.teamIndex,
 					crit = base.RollCrit(),
 					procChainMask = default(ProcChainMask),
-					procCoefficient = 1f,
+					procCoefficient = 3f,
 					falloffModel = BlastAttack.FalloffModel.None,
 					damageColorIndex = DamageColorIndex.Default,
 					damageType = DamageType.Stun1s,

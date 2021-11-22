@@ -17,17 +17,19 @@ namespace DekuMod.SkillStates
 		private Vector3 dashVector = Vector3.zero;
 		public static float smallHopVelocity = 0.5f;
 		public static float dashPrepDuration = 0.1f;
-		public static float dashDuration = 0.2f;
-		public static float speedCoefficient = 18f;
+		public static float dashDuration = 0.1f;
+		public static float speedCoefficient = 15f;
 		public static string beginSoundString;
 		public static string endSoundString;
-		public static float overlapSphereRadius = 2f;
+		public static float overlapSphereRadius = 5f;
 		public static float lollypopFactor = 1f;
         private Animator animator;
         private CharacterModel characterModel;
         private HurtBoxGroup hurtboxGroup;
 		private bool isDashing;
 		private CameraTargetParams.AimRequest aimRequest;
+
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -50,9 +52,23 @@ namespace DekuMod.SkillStates
 			{
 				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 			}
-			base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", dashPrepDuration);
+			base.PlayAnimation("FullBody, Override", "LegSmashFollow", "Attack.playbackRate", dashPrepDuration);
 			this.dashVector = base.inputBank.aimDirection;
 			base.characterDirection.forward = this.dashVector;
+
+			DamageInfo damageInfo = new DamageInfo();
+			//damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
+			damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
+			damageInfo.position = base.characterBody.corePosition;
+			damageInfo.force = Vector3.zero;
+			damageInfo.damageColorIndex = DamageColorIndex.Default;
+			damageInfo.crit = false;
+			damageInfo.attacker = null;
+			damageInfo.inflictor = null;
+			damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+			damageInfo.procCoefficient = 0f;
+			damageInfo.procChainMask = default(ProcChainMask);
+			base.healthComponent.TakeDamage(damageInfo);
 		}
 		private void CreateBlinkEffect(Vector3 origin)
 		{
@@ -126,7 +142,7 @@ namespace DekuMod.SkillStates
 			{
 				aimRequest.Dispose();
 			}
-			base.PlayAnimation("FullBody, Override", "ShootStyleDash");
+			base.PlayAnimation("FullBody, Override", "LegSmash", "Attack.playbackRate", dashPrepDuration);
 			if (NetworkServer.active)
 			{
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);

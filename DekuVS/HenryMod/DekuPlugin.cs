@@ -74,6 +74,7 @@ namespace DekuMod
         {
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
+
             //On.RoR2.HealthComponent.TakeDamage += BlackwhipPull;            
         }
 
@@ -106,11 +107,11 @@ namespace DekuMod
             bool flag2 = self.HasBuff(Modules.Buffs.ofaBuff);
             if (flag2)
             {
-                self.armor *= 10f;
+                self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen += -15f;
-                self.damage *= 1.5f;
+                self.regen *= -8f;
+                self.damage *= 2f;
             }
             
 

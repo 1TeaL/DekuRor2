@@ -8,7 +8,7 @@ namespace DekuMod.SkillStates
     {
         public static float damageCoefficient = Modules.StaticValues.airforceDamageCoefficient;
         public static float procCoefficient = 1f;
-        public static float baseDuration = 0.4f;
+        public static float baseDuration = 0.5f;
         public static float force = 300f;
         public static float recoil = 1f;
         public static float range = 200f;
@@ -54,7 +54,7 @@ namespace DekuMod.SkillStates
 
                     new BulletAttack
                     {
-                        bulletCount = 1U,
+                        bulletCount = 2U,
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
                         damage = Airforce.damageCoefficient * this.damageStat,
@@ -75,6 +75,7 @@ namespace DekuMod.SkillStates
                         radius = 0.5f,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
+                        //stopperMask = LayerIndex.world.mask,
                         weapon = null,
                         tracerEffectPrefab = Airforce.tracerEffectPrefab,
                         spreadPitchScale = 0f,

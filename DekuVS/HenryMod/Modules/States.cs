@@ -13,7 +13,7 @@ namespace DekuMod.Modules
         {
             entityStates.Add(typeof(Smash));
             entityStates.Add(typeof(SmashRelease));
-            entityStates.Add(typeof(ShootStyle));
+            entityStates.Add(typeof(ShootStyleBullet));
             entityStates.Add(typeof(ShootStyleDash));
             entityStates.Add(typeof(ShootStyleDashAttack));
             //entityStates.Add(typeof(SlashCombo));

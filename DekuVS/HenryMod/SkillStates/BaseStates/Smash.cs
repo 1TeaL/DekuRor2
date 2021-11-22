@@ -34,16 +34,16 @@ namespace DekuMod.SkillStates.BaseStates
         protected Animator animator;
         private GameObject areaIndicator;
         private float maxCharge;
-        private int baseMaxCharge = 4;
+        private int baseMaxCharge = 3;
         private float maxDistance;
         private float chargePercent;
-        private float baseDistance = 4f;
+        private float baseDistance = 2f;
         private RaycastHit raycastHit;
         private float hitDis;
-        private float baseDamageMult = 3f;
+        private float baseDamageMult = 6f;
         private float damageMult;
         private float radius;
-        private float baseRadius = 1.5f;
+        private float baseRadius = 2f;
         private Vector3 maxMoveVec;
         private Vector3 randRelPos;
         private int randFreq;
@@ -68,19 +68,19 @@ namespace DekuMod.SkillStates.BaseStates
             base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 0.2f);
             Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
 
-            //DamageInfo damageInfo = new DamageInfo();
+            DamageInfo damageInfo = new DamageInfo();
             //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-            //damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.10f;
-            //damageInfo.position = base.characterBody.corePosition;
-            //damageInfo.force = Vector3.zero;
-            //damageInfo.damageColorIndex = DamageColorIndex.Default;
-            //damageInfo.crit = false;
-            //damageInfo.attacker = null;
-            //damageInfo.inflictor = null;
-            //damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-            //damageInfo.procCoefficient = 0f;
-            //damageInfo.procChainMask = default(ProcChainMask);
-            //base.healthComponent.TakeDamage(damageInfo);
+            damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
+            damageInfo.position = base.characterBody.corePosition;
+            damageInfo.force = Vector3.zero;
+            damageInfo.damageColorIndex = DamageColorIndex.Default;
+            damageInfo.crit = false;
+            damageInfo.attacker = null;
+            damageInfo.inflictor = null;
+            damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+            damageInfo.procCoefficient = 0f;
+            damageInfo.procChainMask = default(ProcChainMask);
+            base.healthComponent.TakeDamage(damageInfo);
 
 
             GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
@@ -91,7 +91,7 @@ namespace DekuMod.SkillStates.BaseStates
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
             aimRay.origin = base.characterBody.corePosition;
-            this.maxDistance = (4f + 8f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
+            this.maxDistance = (1f + 4f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
             bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;
@@ -99,7 +99,7 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = this.baseDamageMult + 3f * (this.chargePercent * this.baseDamageMult);
+            this.damageMult = this.baseDamageMult + 2f * (this.chargePercent * this.baseDamageMult);
             this.radius = (this.baseRadius * this.damageMult + 20f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;
@@ -124,10 +124,10 @@ namespace DekuMod.SkillStates.BaseStates
         
         public override void FixedUpdate()
         {
-            
+
 
             base.FixedUpdate();
-            bool flag = IsKeyDownAuthority();
+            bool flag = base.fixedAge < this.maxCharge && base.IsKeyDownAuthority();
             if (flag)
             {
                 this.chargePercent = base.fixedAge / this.maxCharge;
@@ -152,8 +152,10 @@ namespace DekuMod.SkillStates.BaseStates
                 {
                     this.reducerFlipFlop = true;
                 }
-
+                //base.characterMotor.walkSpeedPenaltyCoefficient = 1f - this.chargePercent / 3f;
                 this.IndicatorUpdator();
+            }
+
             
                 //if (NetworkServer.active && base.healthComponent && smashage >= duration)
                 //{
@@ -175,7 +177,7 @@ namespace DekuMod.SkillStates.BaseStates
                 //}
                 //else this.smashage = smashage + Time.fixedDeltaTime;
 
-            }
+            
             else
             {
                 bool isAuthority = base.isAuthority;

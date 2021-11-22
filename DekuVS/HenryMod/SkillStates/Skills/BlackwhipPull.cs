@@ -14,21 +14,21 @@ namespace DekuMod.SkillStates
 	{
 		private GameObject areaIndicator;
 
-		public static float duration = 10f;
-		public static float maxTetherDistance = 40f;
-		public static float tetherMulchDistance = 5f;
+		public static float duration = 4f;
+		public static float maxTetherDistance = 20f;
+		public static float tetherMulchDistance = 10f;
 		public static float tetherMulchDamageScale = 2f;
-		public static float tetherMulchTickIntervalScale = 0.5f;
+		public static float tetherMulchTickIntervalScale = 2f;
 		public static float damagePerSecond = 2f;
-		public static float damageTickFrequency = 3f;
-		public static float entryDuration = 1f;
+		public static float damageTickFrequency = 1f;
+		public static float entryDuration = 0.2f;
 		public static GameObject mulchEffectPrefab;
 		public static string enterSoundString;
 		public static string beginMulchSoundString;
 		public static string stopMulchSoundString;
 		private GameObject mulchEffect;
 		private Transform muzzleTransform;
-		private List<Skills.TarTetherController> tetherControllers;
+		private List<TarTetherController> tetherControllers;
 		private float stopwatch;
 		private uint soundID;
 
@@ -42,10 +42,11 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			this.stopwatch = 0f;
-			//if (NetworkServer.active && base.characterBody)
-			////{
-			//	base.characterBody.AddBuff(RoR2Content.Buffs.ArmorBoost);
-			//}
+            if (NetworkServer.active && base.characterBody)
+            {
+                base.characterBody.AddBuff(RoR2Content.Buffs.Cripple);
+            }
+            //base.characterMotor.walkSpeedPenaltyCoefficient = 0f;
             if (base.modelLocator)
             {
                 
@@ -57,9 +58,10 @@ namespace DekuMod.SkillStates
             }
             this.subState = BlackwhipPull.SubState.Entry;
             //base.PlayCrossfade("Body", "PrepSiphon", "PrepSiphon.playbackRate", BlackwhipPull.entryDuration, 0.1f);
-            base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", 0.1f);
-			//this.soundID = Util.PlayAttackSpeedSound(Recover.enterSoundString, base.gameObject, this.attackSpeedStat);
-		}
+            base.PlayAnimation("RightArm, Override", "Blackwhip");
+			this.areaIndicator = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+			this.soundID = Util.PlayAttackSpeedSound(Recover.enterSoundString, base.gameObject, this.attackSpeedStat);
+        }
 
 
 		private void FireTethers()
@@ -67,14 +69,15 @@ namespace DekuMod.SkillStates
 			Vector3 position = this.muzzleTransform.position;
 			float breakDistanceSqr = BlackwhipPull.maxTetherDistance * BlackwhipPull.maxTetherDistance;
 			List<GameObject> list = new List<GameObject>();
-			this.tetherControllers = new List<Skills.TarTetherController>();
+			this.tetherControllers = new List<TarTetherController>();
 			BullseyeSearch bullseyeSearch = new BullseyeSearch();
 			bullseyeSearch.searchOrigin = position;
 			bullseyeSearch.maxDistanceFilter = BlackwhipPull.maxTetherDistance;
-			bullseyeSearch.teamMaskFilter = TeamMask.AllExcept(TeamIndex.Player);
+            bullseyeSearch.teamMaskFilter = TeamMask.AllExcept(TeamIndex.Player);
+            //bullseyeSearch.teamMaskFilter = TeamMask.allButNeutral;
 			bullseyeSearch.sortMode = BullseyeSearch.SortMode.Distance;
 			bullseyeSearch.filterByLoS = true;
-			bullseyeSearch.searchDirection = Vector3.up;
+			bullseyeSearch.searchDirection = Vector3.forward;
 			bullseyeSearch.RefreshCandidates();
 			bullseyeSearch.FilterOutGameObject(base.gameObject);
 			List<HurtBox> list2 = bullseyeSearch.GetResults().ToList<HurtBox>();
@@ -94,7 +97,7 @@ namespace DekuMod.SkillStates
 			for (int j = 0; j < list.Count; j++)
 			{
 				GameObject gameObject2 = UnityEngine.Object.Instantiate<GameObject>(original, position, Quaternion.identity);
-				Skills.TarTetherController component = gameObject2.GetComponent<Skills.TarTetherController>();
+				TarTetherController component = gameObject2.GetComponent<TarTetherController>();
 				component.NetworkownerRoot = base.gameObject;
 				component.NetworktargetRoot = list[j];
 				component.breakDistanceSqr = breakDistanceSqr;
@@ -130,16 +133,21 @@ namespace DekuMod.SkillStates
 			{
 				EntityState.Destroy(this.mulchEffect);
 			}
-			//AkSoundEngine.StopPlayingID(this.soundID);
-			Util.PlaySound(Recover.stopMulchSoundString, base.gameObject);
-			//if (NetworkServer.active && base.characterBody)
-			//{
-			//	base.characterBody.RemoveBuff(RoR2Content.Buffs.ArmorBoost);
-			//}
+            AkSoundEngine.StopPlayingID(this.soundID);
+            Util.PlaySound(Recover.stopMulchSoundString, base.gameObject);
+            if (NetworkServer.active && base.characterBody)
+            {
+                base.characterBody.RemoveBuff(RoR2Content.Buffs.Cripple);
+            }
+            bool flag = this.areaIndicator;
+			if (flag)
+			{
+				EntityState.Destroy(this.areaIndicator);
+			}
 			base.OnExit();
 		}
 
-		private static void RemoveDeadTethersFromList(List<Skills.TarTetherController> tethersList)
+		private static void RemoveDeadTethersFromList(List<TarTetherController> tethersList)
 		{
 			for (int i = tethersList.Count - 1; i >= 0; i--)
 			{
@@ -169,12 +177,12 @@ namespace DekuMod.SkillStates
 						this.mulchEffect = UnityEngine.Object.Instantiate<GameObject>(Recover.mulchEffectPrefab, this.muzzleTransform.position, Quaternion.identity);
 						ChildLocator component = this.mulchEffect.gameObject.GetComponent<ChildLocator>();
 						if (component)
-						{
-							//if (this.areaIndicator.transform)
-							//{
-							//	this.areaIndicator.transform.localScale = new Vector3(BlackwhipPull.maxTetherDistance * 2f, BlackwhipPull.maxTetherDistance * 2f, BlackwhipPull.maxTetherDistance * 2f);
-							//}
-						}
+                        {
+                            if (this.areaIndicator.transform)
+                            {
+                                this.areaIndicator.transform.localScale = new Vector3(BlackwhipPull.maxTetherDistance * 2f, BlackwhipPull.maxTetherDistance * 2f, BlackwhipPull.maxTetherDistance * 2f);
+                            }
+                        }
 						this.mulchEffect.transform.parent = this.muzzleTransform;
 						return;
 					}

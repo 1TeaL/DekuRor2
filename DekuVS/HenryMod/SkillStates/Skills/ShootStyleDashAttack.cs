@@ -14,13 +14,13 @@ namespace DekuMod.SkillStates
 		public static float damageCoefficient = Modules.StaticValues.ShootStyleDashAttackDamageCoeffcient;
 		private Transform modelTransform;
 		public static GameObject blinkPrefab;
-		public static float duration = 3f;
+		public static float duration = 4f;
 		//public static float damageCoefficient;
-		public static float damageFrequency = 0.2f;
-		public static float procCoefficient = 1f;
+		public static float damageFrequency = 0.1f;
+		public static float procCoefficient = 2f;
 		public static string beginSoundString;
 		public static string endSoundString;
-		public static float maxRadius = 4f;
+		public static float maxRadius = 8f;
 		public static GameObject hitEffectPrefab;
 		public static string slashSoundString;
 		public static string impactSoundString;
@@ -107,6 +107,7 @@ namespace DekuMod.SkillStates
 							damageInfo.procCoefficient = procCoefficient;
 							damageInfo.position = hurtBox2.transform.position;
 							damageInfo.crit = this.crit;
+							damageInfo.damageType = DamageType.AOE;
 							hurtBox2.healthComponent.TakeDamage(damageInfo);
 							GlobalEventManager.instance.OnHitEnemy(damageInfo, hurtBox2.healthComponent.gameObject);
 							GlobalEventManager.instance.OnHitAll(damageInfo, hurtBox2.healthComponent.gameObject);
@@ -138,6 +139,10 @@ namespace DekuMod.SkillStates
 			bullseyeSearch.RefreshCandidates();
 			bullseyeSearch.FilterOutGameObject(base.gameObject);
 			return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
+		}
+		public override InterruptPriority GetMinimumInterruptPriority()
+		{
+			return InterruptPriority.PrioritySkill;
 		}
 		public override void OnExit()
 		{
@@ -177,6 +182,7 @@ namespace DekuMod.SkillStates
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 				base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, Evis.lingeringInvincibilityDuration);
 			}
+			base.PlayAnimation("Fullbody, Override", "LegSmashExit", "Attack.playbackRate", 0.1f);
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			base.SmallHop(base.characterMotor, smallHopVelocity);
 			base.OnExit();

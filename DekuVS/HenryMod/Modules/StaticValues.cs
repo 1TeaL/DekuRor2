@@ -22,7 +22,7 @@ namespace DekuMod.Modules
 
         internal const float BlackwhipDamageCoefficient = 1f;
 
-        internal const float ShootStyleDashAttackDamageCoeffcient = 2f;
+        internal const float ShootStyleDashAttackDamageCoeffcient = 3f;
 
 
     }

@@ -413,6 +413,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3558884864555329517, guid: 39502dc7f8d82264ea4e48ba2d869e86,
+        type: 3}
+      propertyPath: transformPairs.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558884864555329517, guid: 39502dc7f8d82264ea4e48ba2d869e86,
+        type: 3}
+      propertyPath: transformPairs.Array.data[11].name
+      value: RFoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558884864555329517, guid: 39502dc7f8d82264ea4e48ba2d869e86,
+        type: 3}
+      propertyPath: transformPairs.Array.data[11].transform
+      value: 
+      objectReference: {fileID: 1181187557}
     - target: {fileID: 4377348067431749242, guid: 39502dc7f8d82264ea4e48ba2d869e86,
         type: 3}
       propertyPath: m_Name
@@ -845,6 +860,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39502dc7f8d82264ea4e48ba2d869e86, type: 3}
+--- !u!4 &1181187557 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4377348067431844762, guid: 39502dc7f8d82264ea4e48ba2d869e86,
+    type: 3}
+  m_PrefabInstance: {fileID: 1181187556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1654026000
 GameObject:
   m_ObjectHideFlags: 0

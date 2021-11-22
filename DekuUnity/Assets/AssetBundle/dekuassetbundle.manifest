@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2930480165
+CRC: 1632681060
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ae8dec8d01a81b01830edf6c1ee878fe
+    Hash: 3b7ebdbbd174bbca8c1c9437fc48ed60
   TypeTreeHash:
     serializedVersion: 2
     Hash: b757e221fe29ace486a2437fa3c79e5a
@@ -51,17 +51,17 @@ Assets:
 - Assets/Deku/Animations/DelawareSmashUp.anim
 - Assets/Deku/Animations/SmashRelease.anim
 - Assets/Deku/Animations/Jump.anim
-- Assets/Deku/GUI/primaryupgrade.png
+- Assets/Deku/GUI/delaware.png
 - Assets/Deku/GUI/primary attack.png
 - Assets/Deku/Animations/maskDekuImpact.mask
 - Assets/Deku/GUI/ultimate.png
 - Assets/Deku/DekuDisplay.prefab
 - Assets/Deku/Animations/EntranceLoop.anim
 - Assets/Deku/Animations/ShootStyleDashExit.anim
-- Assets/Deku/GUI/primary.png
+- Assets/Deku/GUI/airforce.png
 - Assets/Deku/Animations/LegSmashExit.anim
 - Assets/Deku/Animations/Blackwhip.anim
-- Assets/Deku/GUI/utilityupgrade.png
+- Assets/Deku/GUI/blackwhip.png
 - Assets/Deku/Animations/maskDekuBody.mask
 - Assets/Deku/Animations/SmashFullCharge.anim
 - Assets/Deku/Animations/maskDekuGesture.mask
@@ -81,14 +81,14 @@ Assets:
 - Assets/Deku/Animations/FingerFlick.anim
 - Assets/Deku/Animations/LegSmash.anim
 - Assets/Deku/Animations/maskDekuRightArm.mask
-- Assets/Deku/GUI/secondaryupgrade.png
+- Assets/Deku/GUI/stlouis.png
 - Assets/Deku/Animations/LegSmashCharge.anim
 - Assets/Deku/Animations/OFA.anim
 - Assets/Deku/Animations/SmashCharge.anim
 - Assets/Deku/Animations/Running.anim
-- Assets/Deku/GUI/secondary attack.png
+- Assets/Deku/GUI/detroit.png
 - Assets/Deku/GUI/texDekuIcon.png
-- Assets/Deku/GUI/utility.png
+- Assets/Deku/GUI/shootstyle.png
 - Assets/Deku/Animations/anim.controller
 - Assets/Deku/matDeku.mat
 - Assets/Deku/Animations/maskDekuLeftArm.mask

@@ -34,13 +34,13 @@ namespace DekuMod.SkillStates.BaseStates
         protected Animator animator;
         private GameObject areaIndicator;
         private float maxCharge;
-        private int baseMaxCharge = 2;
+        private int baseMaxCharge = 4;
         private float maxDistance;
         private float chargePercent;
-        private float baseDistance = 2f;
+        private float baseDistance = 4f;
         private RaycastHit raycastHit;
         private float hitDis;
-        private float baseDamageMult = 4f;
+        private float baseDamageMult = 6f;
         private float damageMult;
         private float radius;
         private float baseRadius = 1.5f;
@@ -71,7 +71,7 @@ namespace DekuMod.SkillStates.BaseStates
 
             //DamageInfo damageInfo = new DamageInfo();
             //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-            //damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.15f;
+            //damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.10f;
             //damageInfo.position = base.characterBody.corePosition;
             //damageInfo.force = Vector3.zero;
             //damageInfo.damageColorIndex = DamageColorIndex.Default;
@@ -92,7 +92,7 @@ namespace DekuMod.SkillStates.BaseStates
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
             aimRay.origin = base.characterBody.corePosition;
-            this.maxDistance = (4f + 4f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
+            this.maxDistance = (1f + 4f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
             bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;
@@ -100,7 +100,7 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = this.baseDamageMult + 4f * (this.chargePercent * this.baseDamageMult);
+            this.damageMult = this.baseDamageMult + 6f * (this.chargePercent * this.baseDamageMult);
             this.radius = (this.baseRadius * this.damageMult + 20f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;
@@ -112,8 +112,7 @@ namespace DekuMod.SkillStates.BaseStates
         }
         public override void OnExit()
         {
-            //animator.SetBool("isCharging", false);
-            GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.None;
+
             base.characterMotor.walkSpeedPenaltyCoefficient = 1f;
             bool flag = this.areaIndicator;
             if (flag)
@@ -123,13 +122,13 @@ namespace DekuMod.SkillStates.BaseStates
             }
             base.OnExit();
         }
-        
+
         public override void FixedUpdate()
         {
-            
+
 
             base.FixedUpdate();
-            bool flag = base.fixedAge < this.maxCharge && IsKeyDownAuthority();
+            bool flag = IsKeyDownAuthority();
             if (flag)
             {
                 this.chargePercent = base.fixedAge / this.maxCharge;
@@ -154,7 +153,7 @@ namespace DekuMod.SkillStates.BaseStates
                 {
                     this.reducerFlipFlop = true;
                 }
-                base.characterMotor.walkSpeedPenaltyCoefficient = 1f - this.chargePercent / 3f;
+
                 this.IndicatorUpdator();
 
                 //if (NetworkServer.active && base.healthComponent && smashage >= duration)

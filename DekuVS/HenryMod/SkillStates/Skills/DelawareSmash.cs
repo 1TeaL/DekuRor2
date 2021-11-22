@@ -27,6 +27,20 @@ namespace DekuMod.SkillStates
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
+            DamageInfo damageInfo = new DamageInfo();
+            //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
+            damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
+            damageInfo.position = base.characterBody.corePosition;
+            damageInfo.force = Vector3.zero;
+            damageInfo.damageColorIndex = DamageColorIndex.Default;
+            damageInfo.crit = false;
+            damageInfo.attacker = null;
+            damageInfo.inflictor = null;
+            damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+            damageInfo.procCoefficient = 0f;
+            damageInfo.procChainMask = default(ProcChainMask);
+            base.healthComponent.TakeDamage(damageInfo);
+
             float angle = Vector3.Angle(new Vector3(0, -1, 0), aimRay.direction);
             if (angle < 60)
             {
@@ -73,7 +87,7 @@ namespace DekuMod.SkillStates
 
                 EffectManager.SpawnEffect(explosionPrefab, effectData, true);
 
-                base.characterMotor.velocity = -100 * aimRay.direction;
+                base.characterMotor.velocity = -70 * aimRay.direction;
 
                 Compacted?.Invoke(result.hitCount);
             }
@@ -87,7 +101,7 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
             }
 
-            base.characterMotor.velocity *= 0.2f;
+            base.characterMotor.velocity *= 0.1f;
 
             base.OnExit();
         }
@@ -104,7 +118,7 @@ namespace DekuMod.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

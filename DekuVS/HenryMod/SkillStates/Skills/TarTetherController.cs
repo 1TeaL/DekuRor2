@@ -10,7 +10,35 @@ namespace DekuMod.SkillStates.Skills
 	[RequireComponent(typeof(BezierCurveLine))]
 	public class TarTetherController : NetworkBehaviour
 	{
-		// Token: 0x06001AB0 RID: 6832 RVA: 0x0006C769 File Offset: 0x0006A969
+		[SyncVar]
+		public GameObject targetRoot;
+		[SyncVar]
+		public GameObject ownerRoot;
+		public float reelSpeed = 40f;
+		[NonSerialized]
+		public float mulchDistanceSqr;
+		[NonSerialized]
+		public float breakDistanceSqr;
+		[NonSerialized]
+		public float mulchDamageScale;
+		[NonSerialized]
+		public float mulchTickIntervalScale;
+		[NonSerialized]
+		public float damageCoefficientPerTick;
+		[NonSerialized]
+		public float tickInterval;
+		[NonSerialized]
+		public float tickTimer;
+		public float attachTime;
+		private float fixedAge;
+		private float age;
+		private bool beginSiphon;
+		private BezierCurveLine bezierCurveLine;
+		private HealthComponent targetHealthComponent;
+		private HealthComponent ownerHealthComponent;
+		private CharacterBody ownerBody;
+		private NetworkInstanceId ___targetRootNetId;
+		private NetworkInstanceId ___ownerRootNetId;
 		private void Awake()
 		{
 			this.bezierCurveLine = base.GetComponent<BezierCurveLine>();
@@ -257,73 +285,5 @@ namespace DekuMod.SkillStates.Skills
 			}
 		}
 
-        // Token: 0x040016F7 RID: 5879
-        [SyncVar]
-        public GameObject targetRoot;
-
-        //Token: 0x040016F8 RID: 5880
-		[SyncVar]
-        public GameObject ownerRoot;
-
-		// Token: 0x040016F9 RID: 5881
-		public float reelSpeed = 12f;
-
-		// Token: 0x040016FA RID: 5882
-		[NonSerialized]
-		public float mulchDistanceSqr;
-
-		// Token: 0x040016FB RID: 5883
-		[NonSerialized]
-		public float breakDistanceSqr;
-
-		// Token: 0x040016FC RID: 5884
-		[NonSerialized]
-		public float mulchDamageScale;
-
-		// Token: 0x040016FD RID: 5885
-		[NonSerialized]
-		public float mulchTickIntervalScale;
-
-		// Token: 0x040016FE RID: 5886
-		[NonSerialized]
-		public float damageCoefficientPerTick;
-
-		// Token: 0x040016FF RID: 5887
-		[NonSerialized]
-		public float tickInterval;
-
-		// Token: 0x04001700 RID: 5888
-		[NonSerialized]
-		public float tickTimer;
-
-		// Token: 0x04001701 RID: 5889
-		public float attachTime;
-
-		// Token: 0x04001702 RID: 5890
-		private float fixedAge;
-
-		// Token: 0x04001703 RID: 5891
-		private float age;
-
-		// Token: 0x04001704 RID: 5892
-		private bool beginSiphon;
-
-		// Token: 0x04001705 RID: 5893
-		private DekuMod.SkillStates.BezierCurveLine bezierCurveLine;
-
-		// Token: 0x04001706 RID: 5894
-		private HealthComponent targetHealthComponent;
-
-		// Token: 0x04001707 RID: 5895
-		private HealthComponent ownerHealthComponent;
-
-		// Token: 0x04001708 RID: 5896
-		private CharacterBody ownerBody;
-
-		// Token: 0x04001709 RID: 5897
-		private NetworkInstanceId ___targetRootNetId;
-
-		// Token: 0x0400170A RID: 5898
-		private NetworkInstanceId ___ownerRootNetId;
 	}
 }

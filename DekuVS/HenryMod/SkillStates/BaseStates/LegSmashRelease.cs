@@ -6,32 +6,32 @@ using UnityEngine;
 
 namespace DekuMod.SkillStates.BaseStates
 {
-    internal class LegSmashRelease : BaseSkillState
-    {
-        internal float damageMult;
-        internal float radius;
-        private GameObject muzzlePrefab = Resources.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
-        //private string lMuzzleString = "LFinger";
-        private string rMuzzleString = "RFoot";
-        internal Vector3 moveVec;
+	internal class LegSmashRelease : BaseSkillState
+	{
+		internal float damageMult;
+		internal float radius;
+		private GameObject muzzlePrefab = Resources.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
+		//private string lMuzzleString = "LFinger";
+		private string rMuzzleString = "RFoot";
+		internal Vector3 moveVec;
 		private GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
 		private float baseForce = 600f;
-		
-		
+
+
 
 		public override void OnEnter()
-        {
-			
+		{
+
 			base.OnEnter();
-            base.characterMotor.velocity = Vector3.zero;
-			base.PlayAnimation("FullBody, Override", "LegSmashFollow","Attack.playbackRate", 0.3f);
+			base.characterMotor.velocity = Vector3.zero;
+			base.PlayAnimation("FullBody, Override", "LegSmashFollow", "Attack.playbackRate", 0.3f);
 			Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
-			base.characterMotor.rootMotion += this.moveVec;
-			//base.characterMotor.velocity += this.moveVec* 4;
+            base.characterMotor.rootMotion += this.moveVec;
+            //base.characterMotor.velocity += this.moveVec * 4;
 
-		}
+        }
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Frozen;
@@ -40,8 +40,6 @@ namespace DekuMod.SkillStates.BaseStates
 		{
 
 			base.OnExit();
-
-			base.PlayAnimation("FullBody, Override", "LegSmashExit", "Attack.playbackRate", 0.3f);
 			EffectData effectData = new EffectData
 			{
 				scale = this.radius * 2f,
@@ -62,7 +60,7 @@ namespace DekuMod.SkillStates.BaseStates
 					teamIndex = base.teamComponent.teamIndex,
 					crit = base.RollCrit(),
 					procChainMask = default(ProcChainMask),
-					procCoefficient = 1f,
+					procCoefficient = 3f,
 					falloffModel = BlastAttack.FalloffModel.None,
 					damageColorIndex = DamageColorIndex.Default,
 					damageType = DamageType.Stun1s,

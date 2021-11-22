@@ -21,7 +21,7 @@ namespace DekuMod.SkillStates
 			{
 				base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
 			}
-			base.PlayAnimation("FullBody, Override", "OFA", "Attack.playbackRate", this.duration);
+			//base.PlayAnimation("FullBody, Override", "OFA", "Attack.playbackRate", this.duration);
 			//base.PlayAnimation("Bazooka, Override", "BazookaExit", "Bazooka.playbackRate", this.duration);
 			//Util.PlaySound("HenryBazookaUnequip", base.gameObject);
 			//bool flag = base.cameraTargetParams;
