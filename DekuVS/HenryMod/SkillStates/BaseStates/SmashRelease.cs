@@ -25,9 +25,10 @@ namespace DekuMod.SkillStates.BaseStates
 			base.OnEnter();
             base.characterMotor.velocity = Vector3.zero;
 			base.PlayAnimation("FullBody, Override", "SmashChargeAttack", "Attack.playbackRate", 0.3f);
-			Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
-            //EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
-            EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
+			//Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
+			AkSoundEngine.PostEvent(3289116818, this.gameObject);
+			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
+			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
             base.characterMotor.rootMotion += this.moveVec;
             //base.characterMotor.velocity += this.moveVec * 2;
 

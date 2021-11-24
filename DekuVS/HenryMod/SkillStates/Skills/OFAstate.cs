@@ -9,7 +9,7 @@ namespace DekuMod.SkillStates
 
 	public class OFAstate : BaseSkillState
 	{
-		public static float baseDuration = 0.5f;
+		public static float baseDuration = 0.05f;
 		public static SkillDef primaryDef = Deku.primaryboostSkillDef;
 		public static SkillDef secondaryDef = Deku.secondaryboostSkillDef;
 		public static SkillDef utilityDef = Deku.utilityboostSkillDef;
@@ -28,8 +28,10 @@ namespace DekuMod.SkillStates
 			{ 				
 				base.characterBody.AddBuff(Modules.Buffs.ofaBuff);
 			}
-            base.PlayAnimation("FullBody, Override", "OFA", "Atack.playbackRate", this.duration);
+            base.PlayAnimation("FullBody, Override", "OFA", "Atack.playbackRate", 0.05f;
 
+			AkSoundEngine.PostEvent(3940341776, this.gameObject);
+			AkSoundEngine.PostEvent(2493696431, this.gameObject);
 			//Util.PlaySound("HenryBazookaEquip", base.gameObject);
 			base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAstate.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, OFAstate.secondaryDef, GenericSkill.SkillOverridePriority.Contextual);

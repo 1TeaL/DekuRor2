@@ -9,7 +9,7 @@ namespace DekuMod.SkillStates
     public class OFAdown: BaseSkillState
 
     {
-		public static float baseDuration = 0.5f;
+		public static float baseDuration = 0.05f;
 		private float duration;
 		public override void OnEnter()
 		{

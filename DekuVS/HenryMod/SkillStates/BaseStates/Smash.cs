@@ -66,22 +66,24 @@ namespace DekuMod.SkillStates.BaseStates
             this.areaIndicator.SetActive(true);
             //base.PlayCrossfade("RightArm, Override", "SmashCharge", 0.2f);
             base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 0.2f);
-            Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
+            //Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
+            AkSoundEngine.PostEvent(3806074874, this.gameObject);
 
-            DamageInfo damageInfo = new DamageInfo();
-            //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-            damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
-            damageInfo.position = base.characterBody.corePosition;
-            damageInfo.force = Vector3.zero;
-            damageInfo.damageColorIndex = DamageColorIndex.Default;
-            damageInfo.crit = false;
-            damageInfo.attacker = null;
-            damageInfo.inflictor = null;
-            damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-            damageInfo.procCoefficient = 0f;
-            damageInfo.procChainMask = default(ProcChainMask);
-            base.healthComponent.TakeDamage(damageInfo);
-
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+                damageInfo.position = base.characterBody.corePosition;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
 
             GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
         }

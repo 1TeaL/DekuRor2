@@ -15,7 +15,7 @@ namespace DekuMod.SkillStates
 	{
 
 		public static Vector3 CameraPosition = new Vector3(0f, -1.3f, -10f);
-		public static float pullForce = 200f;
+		public static float pullForce = 400f;
 		public static float pullRadius = 40f;
 		public GameObject blastEffectPrefab = Resources.Load<GameObject>("prefabs/effects/SonicBoomEffect");
 		public float duration;
@@ -23,11 +23,11 @@ namespace DekuMod.SkillStates
 		public Transform pullOrigin;
 		public AnimationCurve pullStrengthCurve;
 		protected Animator animator;
-		protected float baseDuration = 0.4f;
+		protected float baseDuration = 2f;
 		protected float damageCoefficient = 3f;
-		protected string hitboxName = "BodyHitbox";
+		protected string hitboxName = "Blackwhip";
 		protected NetworkSoundEventIndex impactSound;
-		protected float startUp = 0.4f;
+		protected float startUp;
 		protected float stopwatch;
 		private OverlapAttack attack;
 		private bool back;
@@ -39,7 +39,26 @@ namespace DekuMod.SkillStates
 
 		private List<CharacterBody> pullList = new List<CharacterBody>();
 		private Transform slamIndicatorInstance;
-
+		public override void OnEnter()
+		{
+			base.OnEnter();
+			base.characterBody.SetAimTimer(2f);
+			this.duration = this.baseDuration / this.attackSpeedStat;
+			this.startUp /= this.attackSpeedStat;
+			this.hasFired = false;
+			//this.pullOrigin = base.FindModelChild("Blackwhip");
+			
+			this.animator = base.GetModelAnimator();
+			base.PlayCrossfade("RightArm, Override", "Blackwhip", "Attack.playbackRate", this.startUp, 0.05f);
+			HitBoxGroup hitBoxGroup = Array.Find<HitBoxGroup>(base.GetModelTransform().GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == this.hitboxName);
+			this.pullStrengthCurve = AnimationCurve.EaseInOut(0.1f, 0f, 1f, 1f);
+			//Util.PlaySound(this.hitSoundString, base.gameObject);
+			AkSoundEngine.PostEvent(3709822086, this.gameObject);
+			AkSoundEngine.PostEvent(3062535197, this.gameObject);
+			//this.impactSound = Assets.swordHitSoundEvent.index;
+			this.attack = this.CreateAttack(hitBoxGroup);
+			this.CreateIndicator();
+		}
 		public override void FixedUpdate()
 	{
 		base.FixedUpdate();
@@ -47,26 +66,27 @@ namespace DekuMod.SkillStates
 		if (this.stopwatch >= this.startUp && !this.hasFired)
 		{
 			this.hasFired = true;
-				Util.PlaySound(EvisDash.beginSoundString, base.gameObject);
-				//Util.PlaySound("SettEVO", base.gameObject);
-				//string animationStateName = "";
-				//if (this.front && this.back)
-				//{
-				//	animationStateName = "Facebreaker_Both";
-				//}
-				//else if (this.back && !this.front)
-				//{
-				//	animationStateName = "Facebreaker_Back";
-				//}
-				//else if (this.front && !this.back)
-				//{
-				//	animationStateName = "Facebreaker_Front";
-				//}
-				//else if (!this.front && !this.back)
-				//{
-				//	animationStateName = "Facebreaker_Miss";
-				//}
-				base.PlayCrossfade("RightArm, Override", "SmashCharge", "Attack.playbackRate", this.duration, 0.05f);
+                //Util.PlaySound(EvisDash.beginSoundString, base.gameObject);
+                //Util.PlaySound("SettEVO", base.gameObject);
+                string animationStateName = "";
+                if (this.front && this.back)
+                {
+                    animationStateName = "Blackwhip";
+                }
+                else if (this.back && !this.front)
+                {
+                    animationStateName = "Blackwhip";
+                }
+                else if (this.front && !this.back)
+                {
+                    animationStateName = "Blackwhip";
+                }
+                else if (!this.front && !this.back)
+                {
+                    animationStateName = "Blackwhip";
+                }
+                //base.PlayCrossfade("RightArm, Override", "SmashCharge", "Attack.playbackRate", this.duration, 0.05f);
+				base.PlayCrossfade("RightArm, Override", animationStateName, "Attack.playbackRate", this.duration, 0.05f);
 			}
 		if (this.stopwatch <= this.duration)
 		{
@@ -90,22 +110,7 @@ namespace DekuMod.SkillStates
 	}
 
 	// Token: 0x0600001C RID: 28 RVA: 0x000028D4 File Offset: 0x00000AD4
-	public override void OnEnter()
-	{
-		base.OnEnter();
-		base.characterBody.SetAimTimer(2f);
-		this.duration = this.baseDuration / this.attackSpeedStat;
-		this.startUp /= this.attackSpeedStat;
-		this.hasFired = false;
-		this.animator = base.GetModelAnimator();
-		base.PlayCrossfade("RightArm, Override", "Blackwhip", "Attack.playbackRate", this.startUp, 0.05f);
-		HitBoxGroup hitBoxGroup = Array.Find<HitBoxGroup>(base.GetModelTransform().GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == this.hitboxName);
-		this.pullStrengthCurve = AnimationCurve.EaseInOut(0.1f, 0f, 1f, 1f);
-		Util.PlaySound(this.hitSoundString, base.gameObject);
-		//this.impactSound = Assets.swordHitSoundEvent.index;
-		this.attack = this.CreateAttack(hitBoxGroup);
-		this.CreateIndicator();
-	}
+
 
 	public override void OnExit()
 	{
@@ -131,7 +136,7 @@ namespace DekuMod.SkillStates
 	{
 		return new OverlapAttack
 		{
-			damageType = (DamageType.Freeze2s),
+			damageType = (DamageType.Stun1s),
 			attacker = base.gameObject,
 			inflictor = base.gameObject,
 			teamIndex = base.GetTeam(),
@@ -142,14 +147,16 @@ namespace DekuMod.SkillStates
 			pushAwayForce = 0f,
 			hitBoxGroup = hitBoxGroup,
 			isCrit = base.RollCrit(),
-			impactSound = this.impactSound
+			//impactSound = this.impactSound
+
 		};
 	}
 
-	// Token: 0x06000020 RID: 32 RVA: 0x00002AB0 File Offset: 0x00000CB0
 	protected virtual void OnHitEnemyAuthority()
 	{
 		Util.PlaySound("Hit", base.gameObject);
+		base.healthComponent.AddBarrierAuthority(this.damageCoefficient*this.damageStat*0.5f);		
+			
 	}
 
 	// Token: 0x06000021 RID: 33 RVA: 0x00002AC4 File Offset: 0x00000CC4
@@ -176,12 +183,14 @@ namespace DekuMod.SkillStates
 			this.slamIndicatorInstance.localScale = Vector3.one * BlackwhipQuick.pullRadius;
 			for (int i = 0; i <= 18; i++)
 			{
-				Vector3 vector = base.characterBody.footPosition + Random.insideUnitSphere * BlackwhipQuick.pullRadius;
+                Vector3 vector = base.characterBody.footPosition + Random.insideUnitSphere * BlackwhipQuick.pullRadius;
+                    //Vector3 vector = pullOrigin.position;
 				Vector3 normalized = (base.characterBody.footPosition - vector).normalized;
 				vector.y = base.characterBody.footPosition.y;
 				EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
 				{
-					origin = vector,
+                    origin = vector + Vector3.forward.normalized * 20f,
+                    //origin = vector,
 					scale = 1f * BlackwhipQuick.pullRadius,
 					rotation = Quaternion.LookRotation(normalized)
 				}, false);
@@ -248,7 +257,7 @@ namespace DekuMod.SkillStates
 						characterMotor.rootMotion.y = characterMotor.rootMotion.y - Physics.gravity.y * deltaTime * num;
 						if (Vector3.Dot(normalized, rhs) < 0f)
 						{
-							this.back = true;
+							this.back = true;						
 						}
 						else if (Vector3.Dot(normalized, rhs) > 0f)
 						{

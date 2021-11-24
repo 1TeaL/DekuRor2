@@ -21,25 +21,44 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration;
-            Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
+            AkSoundEngine.PostEvent(1074439307, this.gameObject);
+            AkSoundEngine.PostEvent(1356252224, this.gameObject);
             //Util.PlaySound(DiggerPlugin.Sounds.Backblast, base.gameObject);
             base.StartAimMode(0.6f, true);
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
-            DamageInfo damageInfo = new DamageInfo();
-            //damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-            damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
-            damageInfo.position = base.characterBody.corePosition;
-            damageInfo.force = Vector3.zero;
-            damageInfo.damageColorIndex = DamageColorIndex.Default;
-            damageInfo.crit = false;
-            damageInfo.attacker = null;
-            damageInfo.inflictor = null;
-            damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-            damageInfo.procCoefficient = 0f;
-            damageInfo.procChainMask = default(ProcChainMask);
-            base.healthComponent.TakeDamage(damageInfo);
+            //if (NetworkServer.active && base.healthComponent)
+            //{
+            //    DamageInfo damageInfo = new DamageInfo();
+            //    damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
+            //    damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
+            //    damageInfo.position = base.characterBody.corePosition;
+            //    damageInfo.force = Vector3.zero;
+            //    damageInfo.damageColorIndex = DamageColorIndex.Default;
+            //    damageInfo.crit = false;
+            //    damageInfo.attacker = null;
+            //    damageInfo.inflictor = null;
+            //    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+            //    damageInfo.procCoefficient = 0f;
+            //    damageInfo.procChainMask = default(ProcChainMask);
+            //    base.healthComponent.TakeDamage(damageInfo);
+            //}
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+                damageInfo.position = base.characterBody.corePosition;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
 
             float angle = Vector3.Angle(new Vector3(0, -1, 0), aimRay.direction);
             if (angle < 60)

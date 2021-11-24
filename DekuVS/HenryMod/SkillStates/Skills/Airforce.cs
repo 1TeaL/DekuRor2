@@ -7,7 +7,7 @@ namespace DekuMod.SkillStates
     public class Airforce : BaseSkillState
     {
         public static float damageCoefficient = Modules.StaticValues.airforceDamageCoefficient;
-        public static float procCoefficient = 1f;
+        public static float procCoefficient = 0.5f;
         public static float baseDuration = 0.5f;
         public static float force = 300f;
         public static float recoil = 1f;
@@ -45,7 +45,8 @@ namespace DekuMod.SkillStates
 
                 base.characterBody.AddSpreadBloom(1f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-                Util.PlaySound("HenryShootPistol", base.gameObject);
+                AkSoundEngine.PostEvent(1063047365, this.gameObject);
+                //AkSoundEngine.PostEvent(1215621278, this.gameObject);
 
                 if (base.isAuthority)
                 {

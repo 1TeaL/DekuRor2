@@ -74,6 +74,7 @@ namespace DekuMod
         {
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
+            On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
 
             //On.RoR2.HealthComponent.TakeDamage += BlackwhipPull;            
         }
@@ -108,7 +109,7 @@ namespace DekuMod
             if (flag2)
             {
                 self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
+                self.moveSpeed *= 2f;
                 self.attackSpeed *= 1.5f;
                 self.regen *= -8f;
                 self.damage *= 2f;
@@ -133,6 +134,16 @@ namespace DekuMod
 
 
         }
+        private void CharacterBody_OnDeathStart(On.RoR2.CharacterBody.orig_OnDeathStart orig, CharacterBody self)
+        {
+            orig(self);
+            if (self.baseNameToken == DekuPlugin.developerPrefix + "DEKU")
+            {
+                AkSoundEngine.PostEvent(779278001, this.gameObject);
+            }
+
+        }
+
 
     }
 }

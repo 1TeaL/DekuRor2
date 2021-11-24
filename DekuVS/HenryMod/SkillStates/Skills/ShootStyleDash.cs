@@ -33,8 +33,10 @@ namespace DekuMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			Util.PlaySound(EvisDash.beginSoundString, base.gameObject);
-            this.modelTransform = base.GetModelTransform();
+			//Util.PlaySound(EvisDash.beginSoundString, base.gameObject);
+			AkSoundEngine.PostEvent(687990298, this.gameObject);
+			AkSoundEngine.PostEvent(1918362945, this.gameObject);
+			this.modelTransform = base.GetModelTransform();
             if (base.cameraTargetParams)
 			{
 				this.aimRequest = base.cameraTargetParams.RequestAimType(CameraTargetParams.AimType.Aura);
@@ -56,19 +58,21 @@ namespace DekuMod.SkillStates
 			this.dashVector = base.inputBank.aimDirection;
 			base.characterDirection.forward = this.dashVector;
 
-			DamageInfo damageInfo = new DamageInfo();
-			//damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-			damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
-			damageInfo.position = base.characterBody.corePosition;
-			damageInfo.force = Vector3.zero;
-			damageInfo.damageColorIndex = DamageColorIndex.Default;
-			damageInfo.crit = false;
-			damageInfo.attacker = null;
-			damageInfo.inflictor = null;
-			damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-			damageInfo.procCoefficient = 0f;
-			damageInfo.procChainMask = default(ProcChainMask);
-			base.healthComponent.TakeDamage(damageInfo);
+			if (NetworkServer.active && base.healthComponent)
+			{
+				DamageInfo damageInfo = new DamageInfo();
+				damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+				damageInfo.position = base.characterBody.corePosition;
+				damageInfo.force = Vector3.zero;
+				damageInfo.damageColorIndex = DamageColorIndex.Default;
+				damageInfo.crit = false;
+				damageInfo.attacker = null;
+				damageInfo.inflictor = null;
+				damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+				damageInfo.procCoefficient = 0f;
+				damageInfo.procChainMask = default(ProcChainMask);
+				base.healthComponent.TakeDamage(damageInfo);
+			}
 		}
 		private void CreateBlinkEffect(Vector3 origin)
 		{
@@ -134,6 +138,7 @@ namespace DekuMod.SkillStates
 		}
 		public override void OnExit()
 		{
+			
 			Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 			base.characterMotor.velocity *= 0.1f;
 			base.SmallHop(base.characterMotor, smallHopVelocity);

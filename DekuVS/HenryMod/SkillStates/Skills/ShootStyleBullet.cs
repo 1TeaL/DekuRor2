@@ -13,12 +13,12 @@ using UnityEngine.Networking;
 
 namespace DekuMod.SkillStates
 {
-	// Token: 0x02000003 RID: 3
-	[R2APISubmoduleDependency(new string[]
-	{
-		"NetworkingAPI"
-	})]
-	public class ShootStyleBullet : BaseSkillState
+    // Token: 0x02000003 RID: 3
+    [R2APISubmoduleDependency(new string[]
+    {
+        "NetworkingAPI"
+    })]
+    public class ShootStyleBullet : BaseSkillState
     {
         public float baseDuration = 0.1f;
         public float damageCoefficient = 2f;
@@ -34,26 +34,32 @@ namespace DekuMod.SkillStates
         private Vector3 dashVelocity;
         private string muzzleString;
 
-        public static float duration = 0.4f;
-		public static float initialSpeedCoefficient = 10f;
-		public static float finalSpeedCoefficient = 0f;
-		public static string dodgeSoundString = "HenryRoll";
-		public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
-		private Animator animator;
+        public static float duration = 0.1f;
+        public static float initialSpeedCoefficient = 25f;
+        public static float finalSpeedCoefficient = 0f;
+        public static string dodgeSoundString = "HenryRoll";
+        public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
+        private Animator animator;
 
-		public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerMageLightningLaser");
-		private Transform modelTransform;
-		private CharacterModel characterModel;
-		private BulletAttack afterattack;
-		private Ray aimRay;
+        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerMageLightningLaser");
+        private Transform modelTransform;
+        private CharacterModel characterModel;
+        private BulletAttack afterattack;
+        private Ray aimRay;
         private bool hasteleported;
+        private float rollSpeed;
+        private Vector3 forwardDirection;
+        private Vector3 previousPosition;
 
-		public override void OnEnter()
-		{
 
-			base.OnEnter();
+        public override void OnEnter()
+        {
 
-			Util.PlaySound(EvisDash.beginSoundString, base.gameObject);
+            base.OnEnter();
+
+            //Util.PlaySound(EvisDash.beginSoundString, base.gameObject);
+            AkSoundEngine.PostEvent(3842300745, this.gameObject);
+            AkSoundEngine.PostEvent(573664262, this.gameObject);
             this.modelTransform = base.GetModelTransform();
             if (this.modelTransform)
             {
@@ -62,140 +68,140 @@ namespace DekuMod.SkillStates
             }
             base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", this.baseDuration);
             EffectManager.SimpleMuzzleFlash(BlinkState.blinkPrefab, base.gameObject, this.muzzleString, false);
-			EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-			EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-			EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, true);
+            EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
+            EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
+            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, true);
 
-            hasteleported = false;
+            //hasteleported = false;
 
             bool isAuthority = base.isAuthority;
-			bool active = NetworkServer.active;
+            bool active = NetworkServer.active;
 
-			if (active)
-			{
-				base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration + 0.3f);
-				
-
-				// ray used to shoot position after teleporting
-				aimRay = base.GetAimRay();
-				afterattack = new BulletAttack
-				{
-					bulletCount = 3U,
-					aimVector = aimRay.direction,
-					origin = aimRay.origin,
-					damage = this.damageCoefficient * this.damageStat,
-					damageColorIndex = DamageColorIndex.Default,
-					damageType = (DamageType.Stun1s),
-					falloffModel = BulletAttack.FalloffModel.None,
-					maxDistance = initialSpeedCoefficient*duration*this.moveSpeedStat,
-					force = 55f,
-					minSpread = 0f,
-					maxSpread = 0f,
-					isCrit = base.RollCrit(),
-					owner = base.gameObject,
-					hitMask = LayerIndex.CommonMasks.bullet,
-					muzzleName = this.muzzleString,
-					smartCollision = true,
-					procChainMask = default(ProcChainMask),
-					radius = 2f,
-					sniper = false,
-					stopperMask = LayerIndex.noCollision.mask,
-					tracerEffectPrefab = ShootStyleBullet.tracerEffectPrefab,
-					spreadPitchScale = 0f,
-					spreadYawScale = 0f,
-					queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-					hitEffectPrefab = Evis.hitEffectPrefab
-
-				};
-				EffectManager.SimpleMuzzleFlash(Evis.hitEffectPrefab, base.gameObject, this.muzzleString, false);
-				EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, true);
-				EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
-				EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
-				Util.PlaySound("HenryRoll", base.gameObject);
-				this.muzzleString = "LFoot";
-				this.sphereSearch = new SphereSearch();
-				this.sphereSearch.mask = LayerIndex.noCollision.mask;
-				this.sphereSearch.radius = this.attackRadius;
-				this.enemyHurtBoxHits = new List<HurtBox>();
-				this.dashDirection = base.GetAimRay().direction.normalized;
-				this.dashVelocity = this.dashDirection * 25f * this.speedCoefficient;
-				//base.characterMotor.useGravity = false;
-				//this.previousMass = base.characterMotor.mass;
-				//base.characterMotor.mass = 0f;
-			}
-
-            //this.RecalculateRollSpeed();
-
-            //if (base.characterMotor && base.characterDirection)
+            //if (active)
             //{
-            //	base.characterMotor.velocity = this.aimRay.direction * this.rollSpeed;
+                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration + 0.3f);
+
+
+                // ray used to shoot position after teleporting
+                aimRay = base.GetAimRay();
+                afterattack = new BulletAttack
+                {
+                    bulletCount = 2U,
+                    aimVector = aimRay.direction,
+                    origin = aimRay.origin,
+                    damage = this.damageCoefficient * this.damageStat,
+                    damageColorIndex = DamageColorIndex.Default,
+                    damageType = (DamageType.Generic),
+                    falloffModel = BulletAttack.FalloffModel.None,
+                    maxDistance = initialSpeedCoefficient * duration * (this.moveSpeedStat/7) * this.attackSpeedStat,
+                    force = 55f,
+                    minSpread = 0f,
+                    maxSpread = 0f,
+                    isCrit = base.RollCrit(),
+                    owner = base.gameObject,
+                    hitMask = LayerIndex.CommonMasks.bullet,
+                    muzzleName = this.muzzleString,
+                    smartCollision = true,
+                    procChainMask = default(ProcChainMask),
+                    radius = 2f,
+                    sniper = false,
+                    stopperMask = LayerIndex.noCollision.mask,
+                    tracerEffectPrefab = ShootStyleBullet.tracerEffectPrefab,
+                    spreadPitchScale = 0f,
+                    spreadYawScale = 0f,
+                    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
+                    hitEffectPrefab = Evis.hitEffectPrefab
+
+                };
+                EffectManager.SimpleMuzzleFlash(Evis.hitEffectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, true);
+                EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
+                this.muzzleString = "LFoot";
+                //this.sphereSearch = new SphereSearch();
+                //this.sphereSearch.mask = LayerIndex.noCollision.mask;
+                //this.sphereSearch.radius = this.attackRadius;
+                //this.enemyHurtBoxHits = new List<HurtBox>();
+                //this.dashDirection = base.GetAimRay().direction.normalized;
+                //this.dashVelocity = this.dashDirection * 25f * this.speedCoefficient;
+                base.characterMotor.useGravity = false;
+                this.previousMass = base.characterMotor.mass;
+                base.characterMotor.mass = 0f;
             //}
 
-            //Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
-            //this.previousPosition = base.transform.position - b;
+            this.RecalculateRollSpeed();
+
+            if (base.characterMotor && base.characterDirection)
+            {
+                base.characterMotor.velocity = this.aimRay.direction * this.rollSpeed;
+            }
+
+            Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
+            this.previousPosition = base.transform.position - b;
 
 
-            //         Util.PlaySound(Roll.dodgeSoundString, base.gameObject);
 
-            //     }
-            //     private void RecalculateRollSpeed()
-            //     {
-            //         this.rollSpeed = this.moveSpeedStat * ShootStyleBullet.initialSpeedCoefficient;
+        }
+        private void RecalculateRollSpeed()
+        {
+            this.rollSpeed = this.moveSpeedStat * ShootStyleBullet.initialSpeedCoefficient;
         }
         private void CreateBlinkEffect(Vector3 origin)
-		{
-			EffectData effectData = new EffectData();
-			effectData.rotation = Util.QuaternionSafeLookRotation(this.dashDirection);
-			effectData.origin = origin;
-			EffectManager.SpawnEffect(EvisDash.blinkPrefab, effectData, false);
-		}
+        {
+            EffectData effectData = new EffectData();
+            effectData.rotation = Util.QuaternionSafeLookRotation(this.dashDirection);
+            effectData.origin = origin;
+            EffectManager.SpawnEffect(EvisDash.blinkPrefab, effectData, false);
+        }
 
-		// Token: 0x06000006 RID: 6 RVA: 0x00002424 File Offset: 0x00000624
-		public override void OnExit()
-		{
+        public override void OnExit()
+        {
 
-            afterattack.Fire(); 
-			base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
-			Util.PlaySound(EvisDash.endSoundString, base.gameObject);
-            //base.characterMotor.mass = this.previousMass;
-            //base.characterMotor.useGravity = true;
-            //base.characterMotor.velocity = Vector3.zero;
+            if(afterattack != null)
+            {
+                afterattack.Fire();
+            }
+            base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
+            Util.PlaySound(EvisDash.endSoundString, base.gameObject);
+            base.characterMotor.mass = this.previousMass;
+            base.characterMotor.useGravity = true;
+            base.characterMotor.velocity = Vector3.zero;
             EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-			EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
+            EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
             if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
             base.characterMotor.disableAirControlUntilCollision = false;
             base.characterMotor.velocity.y = 0;
 
             base.OnExit();
-		}
+        }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            
 
+            this.RecalculateRollSpeed();
             this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
-            if (!hasteleported)
+            //if (!hasteleported)
+            //{
+            //    base.characterMotor.rootMotion += afterattack.maxDistance * aimRay.direction.normalized;
+            //    hasteleported = true;
+            //}
+
+            if (base.characterDirection) base.characterDirection.forward = this.forwardDirection;
+            if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(Roll.dodgeFOV, 60f, base.fixedAge / Roll.duration);
+
+            Vector3 normalized = (base.transform.position - this.previousPosition).normalized;
+            if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
             {
-                base.characterMotor.rootMotion += afterattack.maxDistance * aimRay.direction.normalized;
-                hasteleported = true;
+                Vector3 vector = normalized * this.rollSpeed;
+                float d = Mathf.Max(Vector3.Dot(vector, this.aimRay.direction), 0f);
+                vector = this.aimRay.direction * d;
+
+                base.characterMotor.velocity = vector;
             }
+            this.previousPosition = base.transform.position;
 
-            //if (base.characterDirection) base.characterDirection.forward = this.forwardDirection;
-            //if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(Roll.dodgeFOV, 60f, base.fixedAge / Roll.duration);
-
-                //Vector3 normalized = (base.transform.position - this.previousPosition).normalized;
-                //if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-                //{
-                //    Vector3 vector = normalized * this.rollSpeed;
-                //    float d = Mathf.Max(Vector3.Dot(vector, this.aimRay.direction), 0f);
-                //    vector = this.aimRay.direction * d;
-
-                //    base.characterMotor.velocity = vector;
-                //}
-                //this.previousPosition = base.transform.position;
-
-                if (this.modelTransform)
+            if (this.modelTransform)
             {
                 TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
                 temporaryOverlay.duration = 0.6f;
@@ -284,23 +290,23 @@ namespace DekuMod.SkillStates
         //        }
         //    }
         //}
-        //      public override void OnSerialize(NetworkWriter writer)
-        //{
-        //	base.OnSerialize(writer);
-        //	writer.Write(this.forwardDirection);
-        //}
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            base.OnSerialize(writer);
+            writer.Write(this.forwardDirection);
+        }
 
-        //public override void OnDeserialize(NetworkReader reader)
-        //{
-        //	base.OnDeserialize(reader);
-        //	this.forwardDirection = reader.ReadVector3();
-        //}
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            base.OnDeserialize(reader);
+            this.forwardDirection = reader.ReadVector3();
+        }
 
         public override InterruptPriority GetMinimumInterruptPriority()
-		{
-			return InterruptPriority.PrioritySkill;
-		}
+        {
+            return InterruptPriority.PrioritySkill;
+        }
 
 
-	}
+    }
 }
