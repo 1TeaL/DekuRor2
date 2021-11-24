@@ -9,8 +9,8 @@ namespace DekuMod.SkillStates
 {
     public class DelawareSmash : BaseSkillState
     {
-        public static float damageCoefficient = 6f;
-        public float baseDuration = 0.5f;
+        public static float damageCoefficient;
+        public float baseDuration = 1f;
         private float duration;
         public static event Action<int> Compacted;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerSmokeChase");
@@ -20,7 +20,7 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
             Ray aimRay = base.GetAimRay();
-            this.duration = this.baseDuration;
+            this.duration = this.baseDuration/this.attackSpeedStat;
             AkSoundEngine.PostEvent(1074439307, this.gameObject);
             AkSoundEngine.PostEvent(1356252224, this.gameObject);
             //Util.PlaySound(DiggerPlugin.Sounds.Backblast, base.gameObject);
@@ -87,7 +87,7 @@ namespace DekuMod.SkillStates
                 blastAttack.attacker = base.gameObject;
                 //blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
                 blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = this.damageStat * DelawareSmash.damageCoefficient;
+                blastAttack.baseDamage = this.damageStat * Modules.StaticValues.delawareDamageCoefficient;
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = 600f;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

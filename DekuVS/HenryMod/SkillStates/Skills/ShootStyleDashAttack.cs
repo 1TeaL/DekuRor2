@@ -2,8 +2,6 @@
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
-using RoR2.Audio;
-using System;
 using EntityStates.Merc;
 using System.Linq;
 
@@ -11,13 +9,11 @@ namespace DekuMod.SkillStates
 {
     public class ShootStyleDashAttack : BaseSkillState
     {
-		public static float damageCoefficient = Modules.StaticValues.ShootStyleDashAttackDamageCoeffcient;
 		private Transform modelTransform;
 		public static GameObject blinkPrefab;
-		public static float duration = 4f;
-		//public static float damageCoefficient;
-		public float damageFrequency = 0.1f;
-		public static float procCoefficient = 2f;
+		public static float duration = 3f;
+		public float damageFrequency = 0.5f;
+		public static float procCoefficient = 1f;
 		public static string beginSoundString;
 		public static string endSoundString;
 		public static float maxRadius = 8f;
@@ -27,7 +23,7 @@ namespace DekuMod.SkillStates
 		public static string dashSoundString;
 		public static float slashPitch;
 		public static float smallHopVelocity = 0.5f;
-		public static float lingeringInvincibilityDuration;
+		public static float lingeringInvincibilityDuration = 1f;
 		private Animator animator;
 		private CharacterModel characterModel;
 		private float stopwatch;
@@ -102,7 +98,7 @@ namespace DekuMod.SkillStates
 						{
 							DamageInfo damageInfo = new DamageInfo();
 							//damageInfo.damage = ShootStyleDash.damageCoefficient* this.damageStat;
-							damageInfo.damage = ShootStyleDashAttack.damageCoefficient * this.damageStat;
+							damageInfo.damage = Modules.StaticValues.shootattackDamageCoefficient * this.damageStat;
 							damageInfo.attacker = base.gameObject;
 							damageInfo.procCoefficient = procCoefficient;
 							damageInfo.position = hurtBox2.transform.position;

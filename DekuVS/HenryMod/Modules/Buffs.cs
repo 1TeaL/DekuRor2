@@ -13,10 +13,13 @@ namespace DekuMod.Modules
 
         internal static BuffDef ofaBuff;
 
+        internal static BuffDef floatBuff;
+
         internal static void RegisterBuffs()
         {
             armorBuff = AddNewBuff("DekuArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
             ofaBuff = AddNewBuff("DekuOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.green, false, true);
+            floatBuff = AddNewBuff("floatBuff", Resources.Load<Sprite>("Textures/BuffIcons/texMovespeedBufficon"), Color.blue, false, true);
         }
 
         // simple helper method
@@ -33,6 +36,19 @@ namespace DekuMod.Modules
             buffDefs.Add(buffDef);
 
             return buffDef;
+        }
+        internal static void HandleBuffs(CharacterBody body)
+        {
+            bool flag = body;
+            if (flag)
+            {
+                bool flag2 = body.HasBuff(Buffs.floatBuff);
+                if (flag2)
+                {
+                    body.moveSpeed *= 1.5f;
+                    body.acceleration *= 2f;
+                }
+            }
         }
     }
 }

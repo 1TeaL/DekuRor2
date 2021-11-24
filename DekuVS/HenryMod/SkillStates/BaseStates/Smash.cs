@@ -40,7 +40,6 @@ namespace DekuMod.SkillStates.BaseStates
         private float baseDistance = 2f;
         private RaycastHit raycastHit;
         private float hitDis;
-        private float baseDamageMult = 6f;
         private float damageMult;
         private float radius;
         private float baseRadius = 2f;
@@ -101,7 +100,7 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = this.baseDamageMult + 2f * (this.chargePercent * this.baseDamageMult);
+            this.damageMult = Modules.StaticValues.detroitDamageCoefficient + 2f * (this.chargePercent * Modules.StaticValues.detroitDamageCoefficient);
             this.radius = (this.baseRadius * this.damageMult + 20f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;

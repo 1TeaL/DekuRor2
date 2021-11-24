@@ -10,11 +10,14 @@ namespace DekuMod.Modules
             #region Deku
             string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 
-            string desc = "Deku is high risk survivor that hurts himself to power up his skills.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Delaware Smash  is a simple ranged attack; when powered up increases its AOE and piercing enemies." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Detroit smash is a chargeable punch that gains AOE as you charge; when powered up turns it into St. Louis Smash, increasing its AOE and piercing enemies." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Blackwhip allows him to move through the environment and grapple on to enemies; when powered up lets him pull multiple enemies towards him." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > One for All 100% enables Deku to use one powered up skill at the cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
+            string desc = "Deku is high risk survivor that can boost his stats and abilities but with a health cost.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Airforce  is a simple ranged attack " + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > ShootStyle is a dash, damaging enemies behind him. " + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Blackwhip pulls enemies to a point, granting barrier on hit. " + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > One for All 100% grants increased stats at a cost of health regen and self-damage with his skills." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > | Delaware Smash is an AOE, launching you backwards." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > | Detroit smash is a chargeable punch that gains AOE as you charge." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > | StLouis Smash is a dash with invincibility, htiting nearby enemies multiple times." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so he left, continuing his journey to become the greatest hero.";
             string outroFailure = "..goodbye..One For All.";
@@ -34,26 +37,34 @@ namespace DekuMod.Modules
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Deku passive");
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
-            #endregion
+             #endregion
 
             #region Primary
-            LanguageAPI.Add(prefix + "PRIMARY_NAME", "Delaware Smash Air Force");
-            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", Helpers.agilePrefix + $"Delaware Smash for <style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}%  damage</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_NAME", "Airforce");
+            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}% damage twice</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_NAME", "StLouis Smash");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_DESCRIPTION", $"Dash and disappear, hitting enemies in the vicinity for <style=cIsDamage>{100f * StaticValues.shootattackDamageCoefficient}% damage twice</style>");
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_NAME", "Detroit Smash");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}%-{3*100f * StaticValues.detroitDamageCoefficient}</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_NAME", "Blackwhip");
+            LanguageAPI.Add(prefix + "SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>, hitting them gains barrier.");
             #endregion
 
             #region Utility
-            LanguageAPI.Add(prefix + "UTILITY_ROLL_NAME", "Roll");
-            LanguageAPI.Add(prefix + "UTILITY_ROLL_DESCRIPTION", "Roll a short distance, gaining <style=cIsUtility>300 armor</style>. <style=cIsUtility>You cannot be hit during the roll.</style>");
+            LanguageAPI.Add(prefix + "UTILITY_NAME", "Shoot Style");
+            LanguageAPI.Add(prefix + "UTILITY_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Dash through enemies, stunning and dealing <style=cIsDamage>{100f * StaticValues.shootbulletDamageCoefficient}% damage twice</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY_NAME", "Delaware Smash");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Delaware Smash, dealing <style=cIsDamage>{100f * StaticValues.delawareDamageCoefficient}% damage in an AOE, sending yourself backwards</style>.");
             #endregion
 
             #region Special
-            LanguageAPI.Add(prefix + "SPECIAL_BOMB_NAME", "Bomb");
-            LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticValues.bombDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_NAME", "OFA 100%");
+            LanguageAPI.Add(prefix + "SPECIAL_DESCRIPTION", $"Push your body to its limits, boosting Armor, Movespeed, Damage, Attackspeed, <style=cIsDamage>gaining negative Regen and Self-Damage from every move</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_NAME", "OFA down");
+            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_DESCRIPTION", $"Return yourself back to your limits.");
             #endregion
 
             #region Achievements
@@ -62,6 +73,8 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", "Deku: Mastery");
             #endregion
             #endregion
+
+
         }
     }
 }

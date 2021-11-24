@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
+using EntityStates.Mage;
+using EntityStates;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -75,32 +77,11 @@ namespace DekuMod
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
             On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
-
+            On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
+            //On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
             //On.RoR2.HealthComponent.TakeDamage += BlackwhipPull;            
         }
 
-        //private void BlackwhipPull(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo damageInfo)
-        //{
-        //    if (damageInfo?.attacker)
-        //    {
-        //        var attackerBody = damageInfo.attacker.GetComponent<RoR2.CharacterBody>();
-        //        if (attackerBody)
-        //        {
-
-        //            {
-        //                //Thanks Chen for fixing this.
-        //                float mass;
-        //                if (self.body.characterMotor) mass = self.body.characterMotor.mass;
-        //                else if (self.body.rigidbody) mass = self.body.rigidbody.mass;
-        //                else mass = 1f;
-
-        //                var forceCalc = 3f;
-        //                damageInfo.force += Vector3.Normalize(attackerBody.corePosition - self.body.corePosition) * forceCalc * mass;
-        //            }
-        //        }
-        //    }
-        //    orig(self, damageInfo);
-        //}
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
             //regen 
@@ -118,6 +99,8 @@ namespace DekuMod
 
             if (self.baseNameToken == DekuPlugin.developerPrefix + "DEKU")                
             {
+
+
                 if (!flag2)
                 {
 
@@ -130,9 +113,6 @@ namespace DekuMod
                 
 
             }
-
-
-
         }
         private void CharacterBody_OnDeathStart(On.RoR2.CharacterBody.orig_OnDeathStart orig, CharacterBody self)
         {
@@ -144,6 +124,21 @@ namespace DekuMod
 
         }
 
+        private void CharacterModel_Awake(On.RoR2.CharacterModel.orig_Awake orig, CharacterModel self)
+        {
+            orig(self);
+            if (self.gameObject.name.Contains("DekuDisplay"))
+            {
+                AkSoundEngine.PostEvent(2656882895, this.gameObject);
+            }
+
+        }
+
+        //private void CharacterBody_FixedUpdate(On.RoR2.CharacterBody.orig_FixedUpdate orig, CharacterBody self)
+        //{
+
+
+        //}
 
     }
 }

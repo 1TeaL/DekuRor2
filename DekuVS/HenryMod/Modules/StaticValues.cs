@@ -10,19 +10,19 @@ namespace DekuMod.Modules
              + "< ! > Blackwhip allows him to move through the environment and grapple on to enemies; when powered up lets him pull multiple enemies towards him." + Environment.NewLine + Environment.NewLine
              + "< ! > One for All 100% enables Deku to use one powered up skill at cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
 
-        internal const float swordDamageCoefficient = 2.8f;
 
-        internal const float smashCoefficient = 8f;
 
-        internal const float airforceDamageCoefficient = 1.5f;
 
-        internal const float DelawareSmashDamageCoefficient = 15f;
+        internal const float airforceDamageCoefficient = 1f;
+        internal const float delawareDamageCoefficient = 6f;
 
-        internal const float bombDamageCoefficient = 16f;
+        internal const float shootbulletDamageCoefficient = 3f;
+        internal const float detroitDamageCoefficient = 6f;
 
-        internal const float BlackwhipDamageCoefficient = 1f;
+        internal const float blackwhipDamageCoefficient = 3f;
+        internal const float shootattackDamageCoefficient = 2f;
 
-        internal const float ShootStyleDashAttackDamageCoeffcient = 3f;
+
 
 
     }

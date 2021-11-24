@@ -58,21 +58,21 @@ namespace DekuMod.SkillStates
 			this.dashVector = base.inputBank.aimDirection;
 			base.characterDirection.forward = this.dashVector;
 
-			if (NetworkServer.active && base.healthComponent)
-			{
-				DamageInfo damageInfo = new DamageInfo();
-				damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-				damageInfo.position = base.characterBody.corePosition;
-				damageInfo.force = Vector3.zero;
-				damageInfo.damageColorIndex = DamageColorIndex.Default;
-				damageInfo.crit = false;
-				damageInfo.attacker = null;
-				damageInfo.inflictor = null;
-				damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-				damageInfo.procCoefficient = 0f;
-				damageInfo.procChainMask = default(ProcChainMask);
-				base.healthComponent.TakeDamage(damageInfo);
-			}
+			//if (NetworkServer.active && base.healthComponent)
+			//{
+			//	DamageInfo damageInfo = new DamageInfo();
+			//	damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+			//	damageInfo.position = base.characterBody.corePosition;
+			//	damageInfo.force = Vector3.zero;
+			//	damageInfo.damageColorIndex = DamageColorIndex.Default;
+			//	damageInfo.crit = false;
+			//	damageInfo.attacker = null;
+			//	damageInfo.inflictor = null;
+			//	damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+			//	damageInfo.procCoefficient = 0f;
+			//	damageInfo.procChainMask = default(ProcChainMask);
+			//	base.healthComponent.TakeDamage(damageInfo);
+			//}
 		}
 		private void CreateBlinkEffect(Vector3 origin)
 		{

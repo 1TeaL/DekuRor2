@@ -8,6 +8,8 @@ using EntityStates;
 
 namespace DekuMod.Modules.Survivors
 {
+    
+    
     internal class Deku : SurvivorBase
     {
         internal override string bodyName { get; set; } = "Deku";
@@ -109,7 +111,7 @@ namespace DekuMod.Modules.Survivors
         {
             Skills.CreateSkillFamilies(bodyPrefab);
 
-            string prefix = DekuPlugin.developerPrefix;
+            string prefix = DekuPlugin.developerPrefix +"_DEKU_BODY_";
 
 
             #region Primary
@@ -119,9 +121,9 @@ namespace DekuMod.Modules.Survivors
             SkillDef airforceSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
 
-                skillName = "Airforce",
-                skillNameToken = "Airforce",
-                skillDescriptionToken = "Shoot a bullet, dealing <style=cIsDamage>150% damage twice</style>.",
+                skillName = prefix + "PRIMARY_NAME",
+                skillNameToken = prefix + "PRIMARY_NAME",
+                skillDescriptionToken = prefix + "PRIMARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce)),
                 activationStateMachineName = "Weapon",
@@ -151,11 +153,11 @@ namespace DekuMod.Modules.Survivors
             #region Secondary
             SkillDef skillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "Shoot Style",
-                skillNameToken = "Shoot Style",
-                skillDescriptionToken = $"<style=cIsDamage>Stunning. Agile</style>. Dash through enemies, stunning and dealing <style=cIsDamage>2x200% damage</style>.",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("shootstyle"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleBullet)),
+                skillName = prefix + "SECONDARY_NAME",
+                skillNameToken = prefix + "SECONDARY_NAME",
+                skillDescriptionToken = prefix + "SECONDARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("blackwhip"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.BlackwhipFront)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 3f,
@@ -166,7 +168,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -213,11 +215,11 @@ namespace DekuMod.Modules.Survivors
             #region Utility
             SkillDef skillDef3 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "Blackwhip",
-                skillNameToken = "Blackwhip",
-                skillDescriptionToken = $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>200% damage</style>, hitting them gains barrier.",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("blackwhip"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.BlackwhipFront)),
+                skillName = prefix + "UTILITY_NAME",
+                skillNameToken = prefix + "UTILITY_NAME",
+                skillDescriptionToken = prefix + "UTILITY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("shootstyle"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleDash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 6f,
@@ -228,7 +230,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -272,9 +274,9 @@ namespace DekuMod.Modules.Survivors
             #region Special
             SkillDef skillDef5 = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "One For All 100%",
-                skillNameToken = "OFA 100%",
-                skillDescriptionToken = "Push your body to its limits, boosting Armor, Movespeed, Damage, Attackspeed, <style=cIsDamage>gaining negative Regen and Self-Damage from every move</style>.",
+                skillName = prefix + "SPECIAL_NAME",
+                skillNameToken = prefix + "SPECIAL_NAME",
+                skillDescriptionToken = prefix + "SPECIAL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.OFAstate)),
                 activationStateMachineName = "Weapon",
@@ -287,7 +289,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -329,14 +331,14 @@ namespace DekuMod.Modules.Survivors
 
             Deku.primaryboostSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "Delaware Smash",
-                skillNameToken = "Delaware Smash",
-                skillDescriptionToken = $"<style=cIsDamage>Stunning</style>. Delaware Smash, dealing <style=cIsDamage>600% damage</style> in an AOE, sending yourself backwards",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("delaware"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.DelawareSmash)),
+                skillName = prefix + "BOOSTEDPRIMARY_NAME",
+                skillNameToken = prefix + "BOOSTEDPRIMARY_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDPRIMARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("stlouis"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleBullet)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -355,12 +357,12 @@ namespace DekuMod.Modules.Survivors
 
             Deku.secondaryboostSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "Detroit Smash",
-                skillNameToken = "Detroit Smash",
-                skillDescriptionToken = $"<style=cIsDamage>Agile, Stunning</style>. Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>600%-1800% damage</style>",
+                skillName = prefix + "BOOSTEDSECONDARY_NAME",
+                skillNameToken = prefix + "BOOSTEDSECONDARY_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDSECONDARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = true,
@@ -370,7 +372,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -381,11 +383,11 @@ namespace DekuMod.Modules.Survivors
 
             Deku.utilityboostSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "St. Louis Smash",
-                skillNameToken = "St. Louis Smash",
-                skillDescriptionToken = "Dash and disappear, hitting enemies in the vicinity for <style=cIsDamage>300% damage multiple times</style>",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("stlouis"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleDash)),
+                skillName = prefix + "BOOSTEDUTILITY_NAME",
+                skillNameToken = prefix + "BOOSTEDUTILITY_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDUTILITY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("delaware"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.DelawareSmash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
@@ -396,7 +398,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -407,14 +409,14 @@ namespace DekuMod.Modules.Survivors
 
             Deku.ofadownSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "OFA off",
-                skillNameToken = "OFA off",
-                skillDescriptionToken = "Return yourself back to your limits",
+                skillName = prefix + "BOOSTEDSPECIAL_NAME",
+                skillNameToken = prefix + "BOOSTEDSPECIAL_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDSPECIAL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.OFAdown)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 0f,
+                baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -422,7 +424,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,

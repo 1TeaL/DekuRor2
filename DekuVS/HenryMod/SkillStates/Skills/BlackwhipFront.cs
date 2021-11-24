@@ -10,9 +10,8 @@ namespace DekuMod.SkillStates
 {
     public class BlackwhipFront : BaseSkillState
     {
-        public static float damageCoefficient = 2f;
         public float baseDuration = 0.5f;
-        public static float blastRadius = 20f;
+        public static float blastRadius = 10f;
         public static float succForce = 3f;
         private GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/ImpBossBlink");
 
@@ -43,18 +42,17 @@ namespace DekuMod.SkillStates
                 Vector3 theSpot = aimRay.origin + 15* aimRay.direction;
 
                 BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = BlackwhipFront.blastRadius;
+                blastAttack.radius = BlackwhipFront.blastRadius * this.attackSpeedStat;
                 blastAttack.procCoefficient = 1f;
                 blastAttack.position = theSpot;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-                blastAttack.baseDamage = base.characterBody.damage * BlackwhipFront.damageCoefficient;
+                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.blackwhipDamageCoefficient;
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = 0f;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                 blastAttack.damageType = DamageType.Stun1s;
                 blastAttack.attackerFiltering = AttackerFiltering.Default;
-                blastAttack.Fire();
 
 
                 EffectData effectData = new EffectData();
@@ -63,14 +61,17 @@ namespace DekuMod.SkillStates
 
                 EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
 
-                
+                if(blastAttack.Fire().hitCount > 0)
+                {
+                    this.OnHitEnemyAuthority();
+                }
+
                 //base.characterMotor.velocity = -80 * aimRay.direction;
 
 
                 //succ
                 if (NetworkServer.active)
                 {
-                    this.OnHitEnemyAuthority();
                     Collider[] array = Physics.OverlapSphere(theSpot, BlackwhipFront.blastRadius, LayerIndex.defaultLayer.mask);
                     for (int i = 0; i < array.Length; i++)
                     {
@@ -119,7 +120,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(BlackwhipFront.damageCoefficient * this.damageStat);
+            base.healthComponent.AddBarrierAuthority(Modules.StaticValues.blackwhipDamageCoefficient * this.damageStat * this.attackSpeedStat);
 
         }
 
@@ -184,147 +185,147 @@ namespace DekuMod.SkillStates
         }
     }
 
-    public class VaultState : BaseSkillState
-    {
-        public float baseDuration = 0.3f;
-        private float duration;
-        //public GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
-        public GameObject slashPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniImpactVFXSlash");
+    //public class VaultState : BaseSkillState
+    //{
+    //    public float baseDuration = 0.3f;
+    //    private float duration;
+    //    //public GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
+    //    public GameObject slashPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniImpactVFXSlash");
 
-        BlastAttack blastAttack;
-        List<CharacterBody> victimBodyList = new List<CharacterBody>();
-        Ray aimRay;
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            aimRay = base.GetAimRay();
-            this.duration = this.baseDuration;
-            if (base.isAuthority)
-            {
-                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+    //    BlastAttack blastAttack;
+    //    List<CharacterBody> victimBodyList = new List<CharacterBody>();
+    //    Ray aimRay;
+    //    public override void OnEnter()
+    //    {
+    //        base.OnEnter();
+    //        aimRay = base.GetAimRay();
+    //        this.duration = this.baseDuration;
+    //        if (base.isAuthority)
+    //        {
+    //            base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 
-                blastAttack = new BlastAttack();
-                blastAttack.radius = 25f;
-                blastAttack.procCoefficient = 1f;
-                blastAttack.position = aimRay.origin;
-                blastAttack.attacker = base.gameObject;
-                blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-                blastAttack.baseDamage = 0.1f;
-                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = 3f;
-                blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                blastAttack.damageType = DamageType.Stun1s;
-                blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
-                blastAttack.Fire();
+    //            blastAttack = new BlastAttack();
+    //            blastAttack.radius = 25f;
+    //            blastAttack.procCoefficient = 1f;
+    //            blastAttack.position = aimRay.origin;
+    //            blastAttack.attacker = base.gameObject;
+    //            blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+    //            blastAttack.baseDamage = 0.1f;
+    //            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+    //            blastAttack.baseForce = 3f;
+    //            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+    //            blastAttack.damageType = DamageType.Stun1s;
+    //            blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+    //            blastAttack.Fire();
 
-                EffectData effectData = new EffectData();
-                effectData.origin = aimRay.origin;
-                effectData.scale = 15;
+    //            EffectData effectData = new EffectData();
+    //            effectData.origin = aimRay.origin;
+    //            effectData.scale = 15;
 
-                EffectManager.SpawnEffect(slashPrefab, effectData, false);
+    //            EffectManager.SpawnEffect(slashPrefab, effectData, false);
 
-                //Util.PlaySound("Backblast", base.gameObject);
+    //            //Util.PlaySound("Backblast", base.gameObject);
 
-                getHitList(blastAttack);
-                victimBodyList.ForEach(Suck);
+    //            getHitList(blastAttack);
+    //            victimBodyList.ForEach(Suck);
 
-                base.characterMotor.velocity = -60 * aimRay.direction;
-            }
-        }
-        public override void OnExit()
-        {
-            base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
-            base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f * 0.5f);
+    //            base.characterMotor.velocity = -60 * aimRay.direction;
+    //        }
+    //    }
+    //    public override void OnExit()
+    //    {
+    //        base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+    //        base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f * 0.5f);
 
-            blastAttack.radius = 5f;
-            blastAttack.Fire();
+    //        blastAttack.radius = 5f;
+    //        blastAttack.Fire();
 
-            victimBodyList.Clear();
-            getHitList(blastAttack);
-            victimBodyList.ForEach(Stop);
+    //        victimBodyList.Clear();
+    //        getHitList(blastAttack);
+    //        victimBodyList.ForEach(Stop);
 
-            base.characterMotor.velocity.x *= 0.1f;
-            base.characterMotor.velocity.y *= 0.1f;
-            base.characterMotor.velocity.z *= 0.1f;
+    //        base.characterMotor.velocity.x *= 0.1f;
+    //        base.characterMotor.velocity.y *= 0.1f;
+    //        base.characterMotor.velocity.z *= 0.1f;
 
-            base.OnExit();
-        }
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            if ((base.fixedAge >= this.duration && base.isAuthority))
-            {
-                this.outer.SetNextStateToMain();
-                return;
-            }
-        }
+    //        base.OnExit();
+    //    }
+    //    public override void FixedUpdate()
+    //    {
+    //        base.FixedUpdate();
+    //        if ((base.fixedAge >= this.duration && base.isAuthority))
+    //        {
+    //            this.outer.SetNextStateToMain();
+    //            return;
+    //        }
+    //    }
 
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.PrioritySkill;
-        }
+    //    public override InterruptPriority GetMinimumInterruptPriority()
+    //    {
+    //        return InterruptPriority.PrioritySkill;
+    //    }
 
-        private void getHitList(BlastAttack ba)
-        {
-            Collider[] array = Physics.OverlapSphere(ba.position, ba.radius, LayerIndex.defaultLayer.mask);
-            int num = 0;
-            int num2 = 0;
-            while (num < array.Length && num2 < 12)
-            {
-                HealthComponent component = array[num].GetComponent<HealthComponent>();
-                if (component)
-                {
-                    TeamComponent component2 = component.GetComponent<TeamComponent>();
-                    if (component2.teamIndex != TeamIndex.Player)
-                    {
-                        this.AddToList(component.gameObject);
-                        num2++;
-                    }
-                }
-                num++;
-            }
-        }
+    //    private void getHitList(BlastAttack ba)
+    //    {
+    //        Collider[] array = Physics.OverlapSphere(ba.position, ba.radius, LayerIndex.defaultLayer.mask);
+    //        int num = 0;
+    //        int num2 = 0;
+    //        while (num < array.Length && num2 < 12)
+    //        {
+    //            HealthComponent component = array[num].GetComponent<HealthComponent>();
+    //            if (component)
+    //            {
+    //                TeamComponent component2 = component.GetComponent<TeamComponent>();
+    //                if (component2.teamIndex != TeamIndex.Player)
+    //                {
+    //                    this.AddToList(component.gameObject);
+    //                    num2++;
+    //                }
+    //            }
+    //            num++;
+    //        }
+    //    }
 
-        private void AddToList(GameObject affectedObject)
-        {
-            CharacterBody component = affectedObject.GetComponent<CharacterBody>();
-            if (!this.victimBodyList.Contains(component))
-            {
-                this.victimBodyList.Add(component);
-            }
-        }
+    //    private void AddToList(GameObject affectedObject)
+    //    {
+    //        CharacterBody component = affectedObject.GetComponent<CharacterBody>();
+    //        if (!this.victimBodyList.Contains(component))
+    //        {
+    //            this.victimBodyList.Add(component);
+    //        }
+    //    }
 
-        void Suck(CharacterBody charb)
-        {
-            if (charb.characterMotor)
-            {
-                charb.characterMotor.velocity += (aimRay.origin - charb.corePosition) * 3;
-            }
-            else
-            {
-                Rigidbody component2 = charb.GetComponent<Rigidbody>();
-                if (component2)
-                {
-                    component2.velocity += (aimRay.origin - charb.corePosition) * 3;
-                }
-            }
-        }
+    //    void Suck(CharacterBody charb)
+    //    {
+    //        if (charb.characterMotor)
+    //        {
+    //            charb.characterMotor.velocity += (aimRay.origin - charb.corePosition) * 3;
+    //        }
+    //        else
+    //        {
+    //            Rigidbody component2 = charb.GetComponent<Rigidbody>();
+    //            if (component2)
+    //            {
+    //                component2.velocity += (aimRay.origin - charb.corePosition) * 3;
+    //            }
+    //        }
+    //    }
 
-        void Stop(CharacterBody charb)
-        {
-            if (charb.characterMotor)
-            {
-                charb.characterMotor.velocity *= 0.1f;
-            }
-            else
-            {
-                Rigidbody component2 = charb.GetComponent<Rigidbody>();
-                if (component2)
-                {
-                    component2.velocity *= 0.1f;
-                }
-            }
+    //    void Stop(CharacterBody charb)
+    //    {
+    //        if (charb.characterMotor)
+    //        {
+    //            charb.characterMotor.velocity *= 0.1f;
+    //        }
+    //        else
+    //        {
+    //            Rigidbody component2 = charb.GetComponent<Rigidbody>();
+    //            if (component2)
+    //            {
+    //                component2.velocity *= 0.1f;
+    //            }
+    //        }
 
-        }
-    }
+    //    }
+    //}
 }

@@ -20,25 +20,26 @@ namespace DekuMod.SkillStates
     })]
     public class ShootStyleBullet : BaseSkillState
     {
-        public float baseDuration = 0.1f;
-        public float damageCoefficient = 2f;
-        public float attackRadius = 1f;
-        public float enemyStopRadius = 1f;
+        //public float baseDuration = 0.1f;
+        //public float damageCoefficient;
+        //public float attackRadius = 1f;
+        //public float enemyStopRadius = 1f;
         public float previousMass;
         private Vector3 dashDirection;
-        public float speedCoefficient = 10f;
-        public float dashSpeed = 60f;
-        protected NetworkSoundEventIndex impactSound;
-        private SphereSearch sphereSearch;
-        private List<HurtBox> enemyHurtBoxHits;
-        private Vector3 dashVelocity;
+        //public float speedCoefficient = 10f;
+        //public float dashSpeed = 60f;
+        //protected NetworkSoundEventIndex impactSound;
+        //private SphereSearch sphereSearch;
+        //private List<HurtBox> enemyHurtBoxHits;
+        //private Vector3 dashVelocity;
         private string muzzleString;
 
-        public static float duration = 0.1f;
-        public static float initialSpeedCoefficient = 25f;
+        public static float duration = 0.3f;
+        public static float initialSpeedCoefficient = 8f;
         public static float finalSpeedCoefficient = 0f;
         public static string dodgeSoundString = "HenryRoll";
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
+        public static float procCoefficient = 1f;
         private Animator animator;
 
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerMageLightningLaser");
@@ -46,7 +47,7 @@ namespace DekuMod.SkillStates
         private CharacterModel characterModel;
         private BulletAttack afterattack;
         private Ray aimRay;
-        private bool hasteleported;
+        //private bool hasteleported;
         private float rollSpeed;
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
@@ -66,7 +67,7 @@ namespace DekuMod.SkillStates
                 this.animator = this.modelTransform.GetComponent<Animator>();
                 this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
             }
-            base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", this.baseDuration);
+            base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
             EffectManager.SimpleMuzzleFlash(BlinkState.blinkPrefab, base.gameObject, this.muzzleString, false);
             EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
             EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
@@ -79,22 +80,23 @@ namespace DekuMod.SkillStates
 
             //if (active)
             //{
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration + 0.3f);
+                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
 
 
                 // ray used to shoot position after teleporting
                 aimRay = base.GetAimRay();
                 afterattack = new BulletAttack
                 {
-                    bulletCount = 2U,
+                    bulletCount = (uint)(1U *this.attackSpeedStat*1.5),
                     aimVector = aimRay.direction,
                     origin = aimRay.origin,
-                    damage = this.damageCoefficient * this.damageStat,
+                    damage = Modules.StaticValues.shootbulletDamageCoefficient * this.damageStat,
                     damageColorIndex = DamageColorIndex.Default,
                     damageType = (DamageType.Generic),
                     falloffModel = BulletAttack.FalloffModel.None,
-                    maxDistance = initialSpeedCoefficient * duration * (this.moveSpeedStat/7) * this.attackSpeedStat,
+                    maxDistance = initialSpeedCoefficient * duration * (this.moveSpeedStat/5) * (this.attackSpeedStat/5),
                     force = 55f,
+                    procCoefficient = procCoefficient,
                     minSpread = 0f,
                     maxSpread = 0f,
                     isCrit = base.RollCrit(),
@@ -127,6 +129,21 @@ namespace DekuMod.SkillStates
                 base.characterMotor.useGravity = false;
                 this.previousMass = base.characterMotor.mass;
                 base.characterMotor.mass = 0f;
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
+                damageInfo.position = base.characterBody.corePosition;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
             //}
 
             this.RecalculateRollSpeed();

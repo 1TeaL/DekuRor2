@@ -6,7 +6,6 @@ namespace DekuMod.SkillStates
 {
     public class Airforce : BaseSkillState
     {
-        public static float damageCoefficient = Modules.StaticValues.airforceDamageCoefficient;
         public static float procCoefficient = 0.5f;
         public static float baseDuration = 0.5f;
         public static float force = 300f;
@@ -58,7 +57,7 @@ namespace DekuMod.SkillStates
                         bulletCount = 2U,
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
-                        damage = Airforce.damageCoefficient * this.damageStat,
+                        damage = Modules.StaticValues.airforceDamageCoefficient * this.damageStat,
                         damageColorIndex = DamageColorIndex.Default,
                         damageType = DamageType.Generic,
                         falloffModel = BulletAttack.FalloffModel.DefaultBullet,

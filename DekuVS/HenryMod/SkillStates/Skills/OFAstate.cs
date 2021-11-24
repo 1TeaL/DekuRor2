@@ -27,10 +27,11 @@ namespace DekuMod.SkillStates
 			if (active)
 			{ 				
 				base.characterBody.AddBuff(Modules.Buffs.ofaBuff);
-			}
-            base.PlayAnimation("FullBody, Override", "OFA", "Atack.playbackRate", 0.05f;
+            }
+            base.PlayAnimation("FullBody, Override", "OFA", "Atack.playbackRate", 0.05f);
 
-			AkSoundEngine.PostEvent(3940341776, this.gameObject);
+
+            AkSoundEngine.PostEvent(3940341776, this.gameObject);
 			AkSoundEngine.PostEvent(2493696431, this.gameObject);
 			//Util.PlaySound("HenryBazookaEquip", base.gameObject);
 			base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAstate.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
