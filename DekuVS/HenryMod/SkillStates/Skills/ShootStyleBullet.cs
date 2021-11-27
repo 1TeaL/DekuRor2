@@ -34,7 +34,7 @@ namespace DekuMod.SkillStates
         //private Vector3 dashVelocity;
         private string muzzleString;
 
-        public static float duration = 0.3f;
+        public static float duration = 0.2f;
         public static float initialSpeedCoefficient = 8f;
         public static float finalSpeedCoefficient = 0f;
         public static string dodgeSoundString = "HenryRoll";
@@ -80,7 +80,7 @@ namespace DekuMod.SkillStates
 
             //if (active)
             //{
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
+            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration + 0.1f);
 
 
                 // ray used to shoot position after teleporting
@@ -92,9 +92,9 @@ namespace DekuMod.SkillStates
                     origin = aimRay.origin,
                     damage = Modules.StaticValues.shootbulletDamageCoefficient * this.damageStat,
                     damageColorIndex = DamageColorIndex.Default,
-                    damageType = (DamageType.Generic),
+                    damageType = (DamageType.AOE),
                     falloffModel = BulletAttack.FalloffModel.None,
-                    maxDistance = initialSpeedCoefficient * duration * (this.moveSpeedStat/5) * (this.attackSpeedStat/5),
+                    maxDistance = initialSpeedCoefficient * duration * this.moveSpeedStat,
                     force = 55f,
                     procCoefficient = procCoefficient,
                     minSpread = 0f,
@@ -105,7 +105,7 @@ namespace DekuMod.SkillStates
                     muzzleName = this.muzzleString,
                     smartCollision = true,
                     procChainMask = default(ProcChainMask),
-                    radius = 2f,
+                    radius = 3f,
                     sniper = false,
                     stopperMask = LayerIndex.noCollision.mask,
                     tracerEffectPrefab = ShootStyleBullet.tracerEffectPrefab,
@@ -129,21 +129,21 @@ namespace DekuMod.SkillStates
                 base.characterMotor.useGravity = false;
                 this.previousMass = base.characterMotor.mass;
                 base.characterMotor.mass = 0f;
-            if (NetworkServer.active && base.healthComponent)
-            {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
-                damageInfo.position = base.characterBody.corePosition;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.Default;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                base.healthComponent.TakeDamage(damageInfo);
-            }
+            //if (NetworkServer.active && base.healthComponent)
+            //{
+            //    DamageInfo damageInfo = new DamageInfo();
+            //    damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
+            //    damageInfo.position = base.characterBody.corePosition;
+            //    damageInfo.force = Vector3.zero;
+            //    damageInfo.damageColorIndex = DamageColorIndex.Default;
+            //    damageInfo.crit = false;
+            //    damageInfo.attacker = null;
+            //    damageInfo.inflictor = null;
+            //    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+            //    damageInfo.procCoefficient = 0f;
+            //    damageInfo.procChainMask = default(ProcChainMask);
+            //    base.healthComponent.TakeDamage(damageInfo);
+            //}
             //}
 
             this.RecalculateRollSpeed();

@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates
     {
         public float baseDuration = 0.5f;
         public static float blastRadius = 10f;
-        public static float succForce = 3f;
+        public static float succForce = 4f;
         private GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/ImpBossBlink");
 
         private float duration;
@@ -43,7 +43,7 @@ namespace DekuMod.SkillStates
 
                 BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = BlackwhipFront.blastRadius * this.attackSpeedStat;
-                blastAttack.procCoefficient = 1f;
+                blastAttack.procCoefficient = 1f * this.attackSpeedStat;
                 blastAttack.position = theSpot;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);

@@ -128,7 +128,8 @@ namespace DekuMod.SkillStates.BaseStates
 
 
             base.FixedUpdate();
-            bool flag = base.fixedAge < this.maxCharge && base.IsKeyDownAuthority();
+            //bool flag = base.fixedAge < this.maxCharge && base.IsKeyDownAuthority();
+            bool flag = base.IsKeyDownAuthority();
             if (flag)
             {
                 this.chargePercent = base.fixedAge / this.maxCharge;

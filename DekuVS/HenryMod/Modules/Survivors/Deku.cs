@@ -40,7 +40,7 @@ namespace DekuMod.Modules.Survivors
             healthRegen = 1f,
             jumpCount = 2,
             maxHealth = 150f,
-            moveSpeed = 6f,
+            moveSpeed = 7f,
             subtitleNameToken = DekuPlugin.developerPrefix + "_DEKU_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
@@ -168,7 +168,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -230,7 +230,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -281,7 +281,7 @@ namespace DekuMod.Modules.Survivors
                 activationState = new SerializableEntityStateType(typeof(SkillStates.OFAstate)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -351,7 +351,7 @@ namespace DekuMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_STUNNING" }
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
 
             });
 
@@ -362,7 +362,7 @@ namespace DekuMod.Modules.Survivors
                 skillDescriptionToken = prefix + "BOOSTEDSECONDARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.BaseStates.Smash)),
-                activationStateMachineName = "Body",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = true,

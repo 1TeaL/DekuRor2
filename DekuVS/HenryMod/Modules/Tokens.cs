@@ -48,7 +48,7 @@ namespace DekuMod.Modules
 
             #region Secondary
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_NAME", "Detroit Smash");
-            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}%-{3*100f * StaticValues.detroitDamageCoefficient}</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}% increasing infinitely</style>.");
             LanguageAPI.Add(prefix + "SECONDARY_NAME", "Blackwhip");
             LanguageAPI.Add(prefix + "SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>, hitting them gains barrier.");
             #endregion

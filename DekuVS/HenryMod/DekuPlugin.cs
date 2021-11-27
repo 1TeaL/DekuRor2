@@ -90,7 +90,7 @@ namespace DekuMod
             if (flag2)
             {
                 self.armor *= 5f;
-                self.moveSpeed *= 2f;
+                self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
                 self.regen *= -8f;
                 self.damage *= 2f;
