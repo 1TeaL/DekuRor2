@@ -6,6 +6,7 @@ Go beyond
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange losing health and taking damage from his stronger skills. 
 #### Multiplayer works (hopefully).
+#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571.
 
 <img src="https://user-images.githubusercontent.com/93917577/143686542-fefd5db9-a008-48c2-8a53-5bcee9c911a6.PNG">
 
