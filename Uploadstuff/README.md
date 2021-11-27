@@ -37,6 +37,7 @@ Send a blast forward, stunning and dealing 600% damage to enemies in front, whil
 These stats are prone to change.
 
 ## Changelog
+1.0.1 - removed r2modman from dependencies.
 1.0.0 - released
 
 ## Future plans
