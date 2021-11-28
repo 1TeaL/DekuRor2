@@ -50,7 +50,7 @@ These stats are prone to change.
 ## Future plans
 ##### Currently he's just using the effects from RoR2.
 ##### Better animations (I animated them myself and they are not great).
-##### Ancient Scepter support (not sure what to do yet- maybe just further increasing the effects of his special).
+##### Different Ancient Scepter support?
 ##### Alt skills (tried to use loader hook code for blackwhip and..yea, similarly might try to implement artificer's hover for float).
 ##### Code clean-up (lots of leftover code that I commented out).
 ##### Alt skins
