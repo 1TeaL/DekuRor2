@@ -43,7 +43,8 @@ Send a blast forward, stunning and dealing 600% damage to enemies in front, whil
 These stats are prone to change.
 
 ## Changelog
-<p> 1.1.0 - added Ancient Scepter support.
+<p> 1.1.1 - fixed model issues, code clean up.
+<br> 1.1.0 - added Ancient Scepter support.
 <br> 1.0.1 - removed r2modman from dependencies.
 <br> 1.0.0 - released
 
