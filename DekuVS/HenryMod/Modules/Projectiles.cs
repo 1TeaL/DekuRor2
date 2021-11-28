@@ -8,13 +8,7 @@ namespace DekuMod.Modules
 {
     public static class Projectiles
     {
-        public static GameObject airforce;
-        public static GameObject smash;
-        public static GameObject smashrelease;
-        public static GameObject smashrelease2;
-        public static GameObject blackwhip;
-        public static GameObject delaware;
-        public static GameObject shootstylebullet;
+
         internal static GameObject bombPrefab;
 
         internal static void RegisterProjectiles()

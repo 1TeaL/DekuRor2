@@ -35,7 +35,6 @@ namespace DekuMod.SkillStates
         {
 			base.OnEnter();
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
-			//Util.PlayAttackSpeedSound(Evis.beginSoundString, base.gameObject, 1.2f);
 			this.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
             this.modelTransform = base.GetModelTransform();
             if (this.modelTransform)
@@ -75,9 +74,7 @@ namespace DekuMod.SkillStates
 				HurtBox hurtBox = this.SearchForTarget();
 				if (hurtBox)
 				{
-					//Util.PlayAttackSpeedSound(Evis.slashSoundString, base.gameObject, Evis.slashPitch);
-					//Util.PlaySound(Evis.dashSoundString, base.gameObject);
-					//Util.PlaySound(Evis.impactSoundString, base.gameObject);
+
 					HurtBoxGroup hurtBoxGroup = hurtBox.hurtBoxGroup;
 					HurtBox hurtBox2 = hurtBoxGroup.hurtBoxes[UnityEngine.Random.Range(0, hurtBoxGroup.hurtBoxes.Length - 1)];
 					if (hurtBox2)

@@ -15,21 +15,13 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			this.duration = baseDuration;
-			//this.henryController.hasBazookaReady = false;
 			bool active = NetworkServer.active;
 			if (active)
 			{
 				base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.LifeSteal.buffIndex);
 			}
-			//base.PlayAnimation("FullBody, Override", "OFA", "Attack.playbackRate", this.duration);
-			//base.PlayAnimation("Bazooka, Override", "BazookaExit", "Bazooka.playbackRate", this.duration);
-			//Util.PlaySound("HenryBazookaUnequip", base.gameObject);
-			//bool flag = base.cameraTargetParams;
-			//if (flag)
-			//{
-			//	base.cameraTargetParams.aimMode = CameraTargetParams.AimType.Standard;
-			//}
+
 		}
 		public override void FixedUpdate()
 		{
@@ -47,8 +39,7 @@ namespace DekuMod.SkillStates
 			base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAstate.secondaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAstate.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, OFAstate.specialDef, GenericSkill.SkillOverridePriority.Contextual);
-			//bool flag = base.cameraTargetParams;
-			//this.henryController.UpdateCrosshair();
+
 		}
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{

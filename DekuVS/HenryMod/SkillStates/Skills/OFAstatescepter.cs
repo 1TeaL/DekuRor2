@@ -21,7 +21,6 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			this.duration = baseDuration;
-			//this.henryController.hasBazookaReady = true;
 
 			bool active = NetworkServer.active;
 			if (active)
@@ -34,17 +33,11 @@ namespace DekuMod.SkillStates
 
 			AkSoundEngine.PostEvent(3940341776, this.gameObject);
 			AkSoundEngine.PostEvent(2493696431, this.gameObject);
-			//Util.PlaySound("HenryBazookaEquip", base.gameObject);
 			base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAstate.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, OFAstate.secondaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAstate.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.special.SetSkillOverride(base.skillLocator.special, OFAstate.specialDef, GenericSkill.SkillOverridePriority.Contextual);
-            //bool flag = base.cameraTargetParams;
-            //if (flag)
-            //{
-            //    base.cameraTargetParams.aimMode = CameraTargetParams.AimType.OverTheShoulder;
-            //}
-            //this.DekuController.UpdateCrosshair();
+
         }
         public override void FixedUpdate()
 		{

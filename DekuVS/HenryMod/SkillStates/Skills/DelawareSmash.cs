@@ -22,27 +22,11 @@ namespace DekuMod.SkillStates
             this.duration = this.baseDuration/this.attackSpeedStat;
             AkSoundEngine.PostEvent(1074439307, this.gameObject);
             AkSoundEngine.PostEvent(1356252224, this.gameObject);
-            //Util.PlaySound(DiggerPlugin.Sounds.Backblast, base.gameObject);
             base.StartAimMode(0.6f, true);
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
-            //if (NetworkServer.active && base.healthComponent)
-            //{
-            //    DamageInfo damageInfo = new DamageInfo();
-            //    damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
-            //    damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
-            //    damageInfo.position = base.characterBody.corePosition;
-            //    damageInfo.force = Vector3.zero;
-            //    damageInfo.damageColorIndex = DamageColorIndex.Default;
-            //    damageInfo.crit = false;
-            //    damageInfo.attacker = null;
-            //    damageInfo.inflictor = null;
-            //    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-            //    damageInfo.procCoefficient = 0f;
-            //    damageInfo.procChainMask = default(ProcChainMask);
-            //    base.healthComponent.TakeDamage(damageInfo);
-            //}
+
             if (NetworkServer.active && base.healthComponent)
             {
                 DamageInfo damageInfo = new DamageInfo();
@@ -84,7 +68,6 @@ namespace DekuMod.SkillStates
                 blastAttack.procCoefficient = 2f;
                 blastAttack.position = theSpot;
                 blastAttack.attacker = base.gameObject;
-                //blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
                 blastAttack.crit = base.RollCrit();
                 blastAttack.baseDamage = this.damageStat * Modules.StaticValues.delawareDamageCoefficient;
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
@@ -94,9 +77,6 @@ namespace DekuMod.SkillStates
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
                 BlastAttack.Result result = blastAttack.Fire();
 
-                //EffectData effectData = new EffectData();
-                //effectData.origin = theSpot;
-                //effectData.scale = 15;
                 EffectData effectData = new EffectData();
                 {
                 effectData.scale = 15;

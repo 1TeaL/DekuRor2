@@ -13,7 +13,6 @@ using UnityEngine.Networking;
 
 namespace DekuMod.SkillStates
 {
-    // Token: 0x02000003 RID: 3
     [R2APISubmoduleDependency(new string[]
     {
         "NetworkingAPI"
@@ -57,10 +56,6 @@ namespace DekuMod.SkillStates
                 this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
             }
             base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
-            //EffectManager.SimpleMuzzleFlash(BlinkState.blinkPrefab, base.gameObject, this.muzzleString, false);
-            //EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-            //EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-            //EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, true);
 
             //hasteleported = false;
 
@@ -171,11 +166,7 @@ namespace DekuMod.SkillStates
 
             this.RecalculateRollSpeed();
             this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
-            //if (!hasteleported)
-            //{
-            //    base.characterMotor.rootMotion += afterattack.maxDistance * aimRay.direction.normalized;
-            //    hasteleported = true;
-            //}
+
 
             if (base.characterDirection) base.characterDirection.forward = this.forwardDirection;
             if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(ShootStyleBullet.dodgeFOV, 60f, base.fixedAge / ShootStyleBullet.duration);
