@@ -8,6 +8,7 @@ using System.Security.Permissions;
 using UnityEngine;
 using EntityStates.Mage;
 using EntityStates;
+using BepInEx.Bootstrap;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -15,6 +16,7 @@ using EntityStates;
 namespace DekuMod
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     [R2APISubmoduleDependency(new string[]
@@ -29,9 +31,12 @@ namespace DekuMod
         // if you don't change these you're giving permission to deprecate the mod-
         //  please change the names to your own stuff, thanks
         //   this shouldn't even have to be said
+
+        public static bool scepterInstalled = false;
+
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "1.0.0";
+        public const string MODVERSION = "1.1.0";
         public const float passiveRegenBonus = 0.025f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -45,6 +50,13 @@ namespace DekuMod
         private void Awake()
         {
             instance = this;
+
+            DekuPlugin.instance = this;
+            bool flag = Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
+            if (flag)
+            {
+                DekuPlugin.scepterInstalled = true;
+            }
 
             // load assets and read config
             Modules.Assets.Initialize();

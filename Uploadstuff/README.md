@@ -20,6 +20,7 @@ Pulls and stuns enemies in front for 300% damage. Gain barrier if an enemy is hi
 Dashes and hits enemies for 200% damage multiple times while having invincibility during the attack (Basically mercenary's eviscerate). 
 ## Special - One For All 100%
 Deku's key ability- 100% boosts his Attack speed (1.5x), Damage (2x), Movement speed(1.5x) and Armor(5x) as well as changing all his abilities. This comes at the cost of negative health regen(-8x) and self-damage on his skills.
+##### Ancient Scepter turns the skill into Infinite 100%, granting the same effects as well as lifesteal. 
 ### Boosted Primary - St. Louis Smash
 Dash and hit enemies passed through, dealing ? x 200% damage (Attack speed increases the number of attacks). Have invincibility during the duration. This doesn't cost health.
 ### Boosted Secondary - Detroit Smash
@@ -37,13 +38,14 @@ Send a blast forward, stunning and dealing 600% damage to enemies in front, whil
 These stats are prone to change.
 
 ## Changelog
-1.0.1 - removed r2modman from dependencies.
-1.0.0 - released
+<p> 1.1.0 - added Ancient Scepter support.
+<br> 1.0.1 - removed r2modman from dependencies.
+<br> 1.0.0 - released
 
 ## Future plans
 ##### Currently he's just using the effects from RoR2.
 ##### Better animations (I animated them myself and they are not great).
-##### Ancient Scepter support (not sure what to do yet- maybe just further increasing the effects of his special).
+##### Different Ancient Scepter support?
 ##### Alt skills (tried to use loader hook code for blackwhip and..yea, similarly might try to implement artificer's hover for float).
 ##### Code clean-up (lots of leftover code that I commented out).
 ##### Alt skins

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3759313840
+CRC: 1795205904
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6a7fc57e7c34e69d750203f6d7e7e34a
+    Hash: 901d6285953fff82e10940851da3fc4b
   TypeTreeHash:
     serializedVersion: 2
     Hash: 217daf01c0c27998a62bacdc76457262
@@ -52,6 +52,7 @@ Assets:
 - Assets/Deku/GUI/delaware.png
 - Assets/Deku/GUI/primary attack.png
 - Assets/Deku/Animations/maskDekuImpact.mask
+- Assets/Deku/GUI/ultimateupgrade.png
 - Assets/Deku/GUI/ultimate.png
 - Assets/Deku/DekuDisplay.prefab
 - Assets/Deku/Animations/EntranceLoop.anim

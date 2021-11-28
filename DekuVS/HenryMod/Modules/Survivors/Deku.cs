@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using EntityStates;
+using System.Runtime.CompilerServices;
+using AncientScepter;
 
 namespace DekuMod.Modules.Survivors
 {
@@ -12,6 +14,9 @@ namespace DekuMod.Modules.Survivors
     
     internal class Deku : SurvivorBase
     {
+
+        public static bool scepterInstalled = false;
+
         internal override string bodyName { get; set; } = "Deku";
 
         internal static SkillDef primaryboostSkillDef;
@@ -69,6 +74,11 @@ namespace DekuMod.Modules.Survivors
         internal override void InitializeCharacter()
         {
             base.InitializeCharacter();
+            bool scepterInstalled = DekuPlugin.scepterInstalled;
+            if (scepterInstalled)
+            {
+                Deku.CreateScepterSkills();
+            }
         }
 
         internal override void InitializeUnlockables()
@@ -433,7 +443,40 @@ namespace DekuMod.Modules.Survivors
 
             });
             #endregion
+
         }
+        #region ScepterSkills
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void CreateScepterSkills()
+        {
+            string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
+            SkillDef replacingDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "SCEPTERSPECIAL_NAME",
+                skillNameToken = prefix + "SCEPTERSPECIAL_NAME",
+                skillDescriptionToken = prefix + "SCEPTERSPECIAL_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.OFAstatescepter)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+            ItemBase<AncientScepterItem>.instance.RegisterScepterSkill(replacingDef, SurvivorBase.instance.fullBodyName, SkillSlot.Special, 0);
+        }
+
+            #endregion
 
         internal override void InitializeSkins()
         {

@@ -20,6 +20,7 @@ namespace DekuMod.SkillStates
 			if (active)
 			{
 				base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
+				base.characterBody.RemoveBuff(RoR2Content.Buffs.LifeSteal.buffIndex);
 			}
 			//base.PlayAnimation("FullBody, Override", "OFA", "Attack.playbackRate", this.duration);
 			//base.PlayAnimation("Bazooka, Override", "BazookaExit", "Bazooka.playbackRate", this.duration);
