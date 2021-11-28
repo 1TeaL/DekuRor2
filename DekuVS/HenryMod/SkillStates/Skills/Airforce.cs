@@ -27,8 +27,7 @@ namespace DekuMod.SkillStates
             this.muzzleString = "LFinger";
 
             base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.3f);
-            //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "ShootGun.playbackRate", this.duration, 0.05f);       
-            //base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
+
         }
 
         public override void OnExit()
@@ -45,7 +44,7 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddSpreadBloom(1f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
                 AkSoundEngine.PostEvent(1063047365, this.gameObject);
-                //AkSoundEngine.PostEvent(1215621278, this.gameObject);
+     
 
                 if (base.isAuthority)
                 {
@@ -75,7 +74,6 @@ namespace DekuMod.SkillStates
                         radius = 0.5f,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
-                        //stopperMask = LayerIndex.world.mask,
                         weapon = null,
                         tracerEffectPrefab = Airforce.tracerEffectPrefab,
                         spreadPitchScale = 0f,

@@ -13,7 +13,6 @@ namespace DekuMod.SkillStates
         public float baseDuration = 1f;
         private float duration;
         public static event Action<int> Compacted;
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerSmokeChase");
         public static GameObject explosionPrefab = Resources.Load<GameObject>("prefabs/effects/MageLightningBombExplosion");
 
         public override void OnEnter()

@@ -1,10 +1,7 @@
 ﻿using RoR2;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using EntityStates;
-using EntityStates.Huntress;
-using EntityStates.Merc;
 
 namespace DekuMod.SkillStates
 {
@@ -16,14 +13,12 @@ namespace DekuMod.SkillStates
         private GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/ImpBossBlink");
 
         private float duration;
-        private ChildLocator childLocator;
 
         public override void OnEnter()
         {
             base.OnEnter();
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration/attackSpeedStat;
-            this.childLocator = base.GetModelChildLocator();
 
             AkSoundEngine.PostEvent(3709822086, this.gameObject);
             AkSoundEngine.PostEvent(3062535197, this.gameObject);
@@ -31,11 +26,9 @@ namespace DekuMod.SkillStates
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
-            //base.PlayAnimation("FullBody, Override", "CaveIn");
 
             base.PlayAnimation("RightArm, Override", "Blackwhip");
 
-            //if (NetworkServer.active) base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 
             if (base.isAuthority)
             {
@@ -133,8 +126,7 @@ namespace DekuMod.SkillStates
             base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
             if (NetworkServer.active)
             {
-                //base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
-                //base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
+
 
                 //no succ
                 Ray aimRay = base.GetAimRay();

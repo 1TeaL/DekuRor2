@@ -6,17 +6,29 @@ using UnityEngine.Networking;
 
 namespace DekuMod.Modules
 {
-    internal static class Projectiles
+    public static class Projectiles
     {
+        public static GameObject airforce;
+        public static GameObject smash;
+        public static GameObject smashrelease;
+        public static GameObject smashrelease2;
+        public static GameObject blackwhip;
+        public static GameObject delaware;
+        public static GameObject shootstylebullet;
         internal static GameObject bombPrefab;
 
         internal static void RegisterProjectiles()
         {
-            // only separating into separate methods for my sanity
-            CreateBomb();
+            //only separating into separate methods for my sanity
 
+            CreateBomb();
             AddProjectile(bombPrefab);
+
+            
+
         }
+
+
 
         internal static void AddProjectile(GameObject projectileToAdd)
         {
