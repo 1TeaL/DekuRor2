@@ -12,6 +12,11 @@ namespace DekuMod.Modules
             return "\n<color=#d299ff>SCEPTER: " + desc + "</color>";
         }
 
+        internal static string Damage(string desc)
+        {
+            return "\n<color=#ED421E>" + desc + "</color>";
+        }
+
         public static T[] Append<T>(ref T[] array, List<T> list)
         {
             var orig = array.Length;

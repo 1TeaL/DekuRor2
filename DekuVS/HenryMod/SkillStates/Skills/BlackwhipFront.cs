@@ -7,9 +7,9 @@ namespace DekuMod.SkillStates
 {
     public class BlackwhipFront : BaseSkillState
     {
-        public float baseDuration = 0.5f;
-        public static float blastRadius = 10f;
-        public static float succForce = 4f;
+        public float baseDuration = 0.3f;
+        public static float blastRadius = 15f;
+        public static float succForce = 4.5f;
         private GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/ImpBossBlink");
 
         private float duration;
@@ -22,7 +22,7 @@ namespace DekuMod.SkillStates
 
             AkSoundEngine.PostEvent(3709822086, this.gameObject);
             AkSoundEngine.PostEvent(3062535197, this.gameObject);
-            base.StartAimMode(0.8f, true);
+            //base.StartAimMode(0.2f, true);
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
@@ -32,7 +32,7 @@ namespace DekuMod.SkillStates
 
             if (base.isAuthority)
             {
-                Vector3 theSpot = aimRay.origin + 15* aimRay.direction;
+                Vector3 theSpot = aimRay.origin + 20* aimRay.direction;
 
                 BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = BlackwhipFront.blastRadius * this.attackSpeedStat;

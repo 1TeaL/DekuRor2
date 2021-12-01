@@ -348,8 +348,8 @@ namespace DekuMod.Modules.Survivors
                 activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleBullet)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 0f,
-                beginSkillCooldownOnSkillEnd = false,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
@@ -442,6 +442,7 @@ namespace DekuMod.Modules.Survivors
                 
 
             });
+
             #endregion
 
         }

@@ -24,14 +24,17 @@ namespace DekuMod.SkillStates
         private Vector3 dashDirection;
         private string muzzleString;
 
-        public static float duration = 0.2f;
-        public static float initialSpeedCoefficient = 8f;
+        public static float speedattack;
+        public static float duration;
+        public static float baseDuration = 0.6f;
+        public static float initialSpeedCoefficient = 5f;
+        public static float SpeedCoefficient;
         public static float finalSpeedCoefficient = 0f;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
         public static float procCoefficient = 1f;
         private Animator animator;
 
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerLaserTurbine");
+        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerLaserTurbineReturn");
         private Transform modelTransform;
         private CharacterModel characterModel;
         private BulletAttack afterattack;
@@ -46,6 +49,18 @@ namespace DekuMod.SkillStates
 
             base.OnEnter();
 
+            duration = baseDuration / this.attackSpeedStat;
+            if (duration < 0.2f)
+            {
+                duration = 0.2f;
+            }
+            speedattack = this.attackSpeedStat/2;
+            if (speedattack < 1)
+            {
+                speedattack = 1;
+            }
+
+            SpeedCoefficient = initialSpeedCoefficient * speedattack;
  
             AkSoundEngine.PostEvent(3842300745, this.gameObject);
             AkSoundEngine.PostEvent(573664262, this.gameObject);
@@ -63,7 +78,7 @@ namespace DekuMod.SkillStates
             bool active = NetworkServer.active;
 
 
-            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration + 0.1f);
+            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration +0.1f);
 
 
             // ray used to shoot position after teleporting
@@ -82,7 +97,7 @@ namespace DekuMod.SkillStates
                 damageColorIndex = DamageColorIndex.Default,
                 damageType = (DamageType.Generic),
                 falloffModel = BulletAttack.FalloffModel.None,
-                maxDistance = initialSpeedCoefficient * duration * this.moveSpeedStat,
+                maxDistance = SpeedCoefficient * duration * this.moveSpeedStat,
                 force = 55f,
                 procCoefficient = procCoefficient,
                 minSpread = 0f,
@@ -103,9 +118,6 @@ namespace DekuMod.SkillStates
                 hitEffectPrefab = Evis.hitEffectPrefab
 
             };
-            EffectManager.SimpleMuzzleFlash(Evis.hitEffectPrefab, base.gameObject, this.muzzleString, false);
-            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, true);
-            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
             EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
             this.muzzleString = "LFoot";
 
@@ -129,7 +141,7 @@ namespace DekuMod.SkillStates
         }
         private void RecalculateRollSpeed()
         {
-            this.rollSpeed = this.moveSpeedStat * ShootStyleBullet.initialSpeedCoefficient;
+            this.rollSpeed = this.moveSpeedStat * ShootStyleBullet.SpeedCoefficient;
         }
         private void CreateBlinkEffect(Vector3 origin)
         {
@@ -151,8 +163,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;
             base.characterMotor.velocity = Vector3.zero;
-            EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-            EffectManager.SimpleMuzzleFlash(Bandit2FireShiv.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
             if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
             base.characterMotor.disableAirControlUntilCollision = false;
             base.characterMotor.velocity.y = 0;

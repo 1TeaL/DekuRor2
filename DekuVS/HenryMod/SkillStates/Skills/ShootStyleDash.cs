@@ -138,6 +138,10 @@ namespace DekuMod.SkillStates
 			}
 			base.OnExit();
 		}
+		public override InterruptPriority GetMinimumInterruptPriority()
+		{
+			return InterruptPriority.Frozen;
+		}
 	}
 
 }

@@ -37,7 +37,7 @@ namespace DekuMod
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
         public const string MODVERSION = "1.1.1";
-        public const float passiveRegenBonus = 0.025f;
+        public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string developerPrefix = "TEAL";
@@ -45,12 +45,12 @@ namespace DekuMod
         internal List<SurvivorBase> Survivors = new List<SurvivorBase>();
 
         public static DekuPlugin instance;
-        
+        public static CharacterBody DekuCharacterBody;
 
         private void Awake()
         {
             instance = this;
-
+            DekuCharacterBody = null;
             DekuPlugin.instance = this;
             bool flag = Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
             if (flag)
@@ -90,6 +90,7 @@ namespace DekuMod
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
             On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
+            GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
             //On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
             //On.RoR2.HealthComponent.TakeDamage += BlackwhipPull;            
         }
@@ -107,13 +108,23 @@ namespace DekuMod
                 self.regen *= -8f;
                 self.damage *= 2f;
             }
-            
 
-            if (self.baseNameToken == DekuPlugin.developerPrefix + "DEKU")                
+            bool flag3 = self.HasBuff(Modules.Buffs.supaofaBuff);
+            if (flag3)
+            {
+                self.armor *= 5f;
+                self.moveSpeed *= 1.5f;
+                self.attackSpeed *= 1.5f;
+                self.regen *= -8f;
+                self.damage *= 2f;
+            }
+
+
+            if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")                
             {
 
 
-                if (!flag2)
+                if (!flag2 && !flag3)
                 {
 
                     HealthComponent hp = self.healthComponent;
@@ -129,12 +140,40 @@ namespace DekuMod
         private void CharacterBody_OnDeathStart(On.RoR2.CharacterBody.orig_OnDeathStart orig, CharacterBody self)
         {
             orig(self);
-            if (self.baseNameToken == DekuPlugin.developerPrefix + "DEKU")
+            if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
             {
                 AkSoundEngine.PostEvent(779278001, this.gameObject);
             }
 
         }
+        //lifesteal
+        private void GlobalEventManager_OnDamageDealt(DamageReport report)
+        {
+            //orig(self, damageinfo, victim);
+       
+            //if(damageinfo.attacker.name.Contains("Deku"))
+            //{
+            //    if(DekuCharacterBody == null)
+            //    {
+            //        DekuCharacterBody = damageinfo.attacker.GetComponent<CharacterBody>();
+            //    }
+            //    if (DekuCharacterBody.HasBuff(Modules.Buffs.supaofaBuff))
+            //    {
+            //        HealthComponent hp = DekuCharacterBody.healthComponent;
+            //        hp.health += damageinfo.damage * 0.1f;
+            //    }
+
+            //}
+            bool flag = !report.attacker || !report.attackerBody;
+            if (!flag && report.attackerBody.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && report.attackerBody.HasBuff(Modules.Buffs.supaofaBuff))
+            {
+                CharacterBody attackerBody = report.attackerBody;
+                attackerBody.healthComponent.Heal(report.damageDealt * 0.1f, default(ProcChainMask), true);
+
+            }
+
+        }
+
 
         private void CharacterModel_Awake(On.RoR2.CharacterModel.orig_Awake orig, CharacterModel self)
         {

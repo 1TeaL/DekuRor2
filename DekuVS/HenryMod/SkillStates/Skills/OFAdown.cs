@@ -18,8 +18,14 @@ namespace DekuMod.SkillStates
 			bool active = NetworkServer.active;
 			if (active)
 			{
-				base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
-				base.characterBody.RemoveBuff(RoR2Content.Buffs.LifeSteal.buffIndex);
+				if(base.characterBody.HasBuff(Modules.Buffs.ofaBuff))
+                {
+					base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
+				}
+                if (base.characterBody.HasBuff(Modules.Buffs.supaofaBuff))
+                {
+					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff);
+                }
 			}
 
 		}
