@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using EntityStates;
-using EntityStates.Bandit2.Weapon;
-using EntityStates.Huntress;
-using EntityStates.LemurianBruiserMonster;
+﻿using EntityStates;
 using EntityStates.Merc;
 using R2API.Utils;
 using RoR2;
-using RoR2.Audio;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -27,13 +21,14 @@ namespace DekuMod.SkillStates
         public static float speedattack;
         public static float duration;
         public static float baseDuration = 0.6f;
-        public static float initialSpeedCoefficient = 5f;
+        public static float initialSpeedCoefficient = 2f;
         public static float SpeedCoefficient;
         public static float finalSpeedCoefficient = 0f;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
         public static float procCoefficient = 1f;
         private Animator animator;
 
+        private GameObject muzzlePrefab = Resources.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerLaserTurbineReturn");
         private Transform modelTransform;
         private CharacterModel characterModel;
@@ -54,13 +49,13 @@ namespace DekuMod.SkillStates
             {
                 duration = 0.2f;
             }
-            speedattack = this.attackSpeedStat/2;
-            if (speedattack < 1)
-            {
-                speedattack = 1;
-            }
+            //speedattack = this.attackSpeedStat/2;
+            //if (speedattack < 1)
+            //{
+            //    speedattack = 1;
+            //}
 
-            SpeedCoefficient = initialSpeedCoefficient * speedattack;
+            SpeedCoefficient = initialSpeedCoefficient;
  
             AkSoundEngine.PostEvent(3842300745, this.gameObject);
             AkSoundEngine.PostEvent(573664262, this.gameObject);
@@ -78,8 +73,23 @@ namespace DekuMod.SkillStates
             bool active = NetworkServer.active;
 
 
-            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration +0.1f);
+            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
+                damageInfo.position = base.characterBody.corePosition;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
 
             // ray used to shoot position after teleporting
             uint bulletamount = (uint)(1U * this.attackSpeedStat);
@@ -118,8 +128,9 @@ namespace DekuMod.SkillStates
                 hitEffectPrefab = Evis.hitEffectPrefab
 
             };
-            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
             this.muzzleString = "LFoot";
+            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
+            EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
 
             base.characterMotor.useGravity = false;
             this.previousMass = base.characterMotor.mass;

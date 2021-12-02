@@ -185,8 +185,6 @@ namespace DekuMod.Modules.Survivors
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_STUNNING" }
 
-
-
             });
 
             //SkillDef skillDef2 = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -245,39 +243,39 @@ namespace DekuMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_STUNNING" }
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
 
             });
 
-            //SkillDef skillDef4 = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            //{
-            //    skillName = "Shoot Style",
-            //    skillNameToken = "Shoot Style",
-            //    skillDescriptionToken = "Deku dashes up to 3 times, hitting enemies",
-            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("utility skill"),
-            //    activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleDash)),
-            //    activationStateMachineName = "Body",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 6f,
-            //    beginSkillCooldownOnSkillEnd = true,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = false,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = EntityStates.InterruptPriority.Skill,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = false,
-            //    mustKeyPress = false,
-            //    cancelSprintingOnActivation = false,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1,
+            SkillDef skillDef4 = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "UTILITY2_NAME",
+                skillNameToken = prefix + "UTILITY2_NAME",
+                skillDescriptionToken = prefix + "UTILITY2_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("shootstylefullcowling"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleBulletStun)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
 
-            //});
+            });
 
             Skills.AddUtilitySkills(this.bodyPrefab, new SkillDef[]
             {
                 skillDef3,
-                //skillDef4
+                skillDef4
             });
             #endregion
 
@@ -348,7 +346,7 @@ namespace DekuMod.Modules.Survivors
                 activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleBullet)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -356,7 +354,7 @@ namespace DekuMod.Modules.Survivors
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,

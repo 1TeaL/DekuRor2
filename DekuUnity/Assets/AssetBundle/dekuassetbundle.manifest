@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1146562104
+CRC: 2754138850
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e13ef7a2eae7f3d130a05a2f3dba472b
+    Hash: 4853cb723a16a95860940dc5171febb6
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 217daf01c0c27998a62bacdc76457262
+    Hash: 6df0a8599ff25f96bdf88010d0b9233e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,6 +25,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
 - Class: 90
@@ -34,12 +36,22 @@ ClassTypes:
 - Class: 95
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: 9a68da65c907acb4eb4dbcd042f172e7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 751bd37d2e55f5f448dbb0d97812d9ba, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 135
   Script: {instanceID: 0}
 - Class: 136
   Script: {instanceID: 0}
 - Class: 137
+  Script: {instanceID: 0}
+- Class: 144
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -84,6 +96,7 @@ Assets:
 - Assets/Deku/Animations/LegSmashCharge.anim
 - Assets/Deku/Animations/OFA.anim
 - Assets/Deku/Animations/SmashCharge.anim
+- Assets/Deku/GUI/shootstylefullcowling.png
 - Assets/Deku/Animations/Running.anim
 - Assets/Deku/GUI/detroit.png
 - Assets/Deku/GUI/texDekuIcon.png

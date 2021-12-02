@@ -14,7 +14,7 @@ namespace DekuMod.Modules
 
         internal static string Damage(string desc)
         {
-            return "\n<color=#ED421E>" + desc + "</color>";
+            return "<color=#ED421E>" + desc + "</color>";
         }
 
         public static T[] Append<T>(ref T[] array, List<T> list)

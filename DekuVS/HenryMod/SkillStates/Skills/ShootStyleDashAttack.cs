@@ -100,7 +100,7 @@ namespace DekuMod.SkillStates
 							damageInfo.procCoefficient = procCoefficient;
 							damageInfo.position = hurtBox2.transform.position;
 							damageInfo.crit = this.crit;
-							damageInfo.damageType = DamageType.AOE;
+							damageInfo.damageType = DamageType.Generic;
 							hurtBox2.healthComponent.TakeDamage(damageInfo);
 							GlobalEventManager.instance.OnHitEnemy(damageInfo, hurtBox2.healthComponent.gameObject);
 							GlobalEventManager.instance.OnHitAll(damageInfo, hurtBox2.healthComponent.gameObject);
