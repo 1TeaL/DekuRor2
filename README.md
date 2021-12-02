@@ -2,7 +2,6 @@
 Deku mod for Ror2
 Go beyond
 
-![characterselect](https://user-images.githubusercontent.com/93917577/143686542-fefd5db9-a008-48c2-8a53-5bcee9c911a6.PNG)
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange losing health and taking damage from his stronger skills. 
 #### Multiplayer works (hopefully).
@@ -63,3 +62,19 @@ These stats are prone to change.
 ##### EggSkills for the alternate artificer utility, used for detroit smash.
 ##### MinerUnearthed for utility/alt utility code for blackwhip and delaware smash.
 ##### Ninja for partial utility code for st louis smash.
+  
+## Pictures
+![characterselect](https://user-images.githubusercontent.com/93917577/143686542-fefd5db9-a008-48c2-8a53-5bcee9c911a6.PNG)
+![airforce](https://user-images.githubusercontent.com/93917577/144508155-96faa81f-a22b-4719-8680-e5382e0bc59d.png)
+![blackwhip](https://user-images.githubusercontent.com/93917577/144508171-f67f0493-5ed4-4125-b5e7-56b7b32dfa1a.png)
+![delaware](https://user-images.githubusercontent.com/93917577/144508192-f0969ea2-2e50-4c33-93ae-1b5f27114889.png)
+![shootstyle](https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png)
+![stlouis](https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png)
+![ultimate](https://user-images.githubusercontent.com/93917577/144508368-f2baed32-895e-495a-88f3-9d15c0a1863e.png)
+![ultimateupgrade](https://user-images.githubusercontent.com/93917577/144508393-fac634ad-5dad-4f73-9773-b0c9d24b36f6.png)
+![primary attack](https://user-images.githubusercontent.com/93917577/144508227-c2a48e68-a646-4da7-9806-89fa85c5ecec.png)
+![detroit](https://user-images.githubusercontent.com/93917577/144508215-3ebf65c6-ef1c-43cd-b41d-0b3255842191.png)
+
+
+
+
