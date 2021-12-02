@@ -63,7 +63,7 @@ These stats are prone to change.
 ##### MinerUnearthed for utility/alt utility code for blackwhip and delaware smash.
 ##### Ninja for partial utility code for st louis smash.
   
-## Pictures
+## OG Pictures
 ![characterselect](https://user-images.githubusercontent.com/93917577/143686542-fefd5db9-a008-48c2-8a53-5bcee9c911a6.PNG)
 ![airforce](https://user-images.githubusercontent.com/93917577/144508155-96faa81f-a22b-4719-8680-e5382e0bc59d.png)
 ![blackwhip](https://user-images.githubusercontent.com/93917577/144508171-f67f0493-5ed4-4125-b5e7-56b7b32dfa1a.png)
@@ -74,6 +74,7 @@ These stats are prone to change.
 ![ultimateupgrade](https://user-images.githubusercontent.com/93917577/144508393-fac634ad-5dad-4f73-9773-b0c9d24b36f6.png)
 ![primary attack](https://user-images.githubusercontent.com/93917577/144508227-c2a48e68-a646-4da7-9806-89fa85c5ecec.png)
 ![detroit](https://user-images.githubusercontent.com/93917577/144508215-3ebf65c6-ef1c-43cd-b41d-0b3255842191.png)
+![shootstylefullcowling](https://user-images.githubusercontent.com/93917577/144509040-5999395c-19e7-40bb-9246-d2eec5d52257.png)
 
 
 
