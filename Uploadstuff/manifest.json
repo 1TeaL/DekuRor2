@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "1.1.1",
+    "version_number": "1.2.0",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "Adds Deku from My Hero Academia, a high risk survivor that can boost his stats and skills, losing health and taking damage from his skills",
+    "description": "1.2 Update, added proper standalone ancient scepter support, alt skill, balance changes, ragdoll",
     "dependencies": [
          "tristanmcpherson-R2API-3.0.59"
     ]

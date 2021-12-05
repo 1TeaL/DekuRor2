@@ -20,8 +20,8 @@ namespace DekuMod.SkillStates
 
         public static float speedattack;
         public static float duration;
-        public static float baseDuration = 0.6f;
-        public static float initialSpeedCoefficient = 2f;
+        public static float baseDuration = 0.4f;
+        public static float initialSpeedCoefficient = 3f;
         public static float SpeedCoefficient;
         public static float finalSpeedCoefficient = 0f;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
@@ -49,11 +49,11 @@ namespace DekuMod.SkillStates
             {
                 duration = 0.2f;
             }
-            //speedattack = this.attackSpeedStat/2;
-            //if (speedattack < 1)
-            //{
-            //    speedattack = 1;
-            //}
+            speedattack = this.attackSpeedStat / 3;
+            if (speedattack < 1)
+            {
+                speedattack = 1;
+            }
 
             SpeedCoefficient = initialSpeedCoefficient;
  
@@ -73,7 +73,7 @@ namespace DekuMod.SkillStates
             bool active = NetworkServer.active;
 
 
-            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
+            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
 
             if (NetworkServer.active && base.healthComponent)
             {
@@ -107,7 +107,7 @@ namespace DekuMod.SkillStates
                 damageColorIndex = DamageColorIndex.Default,
                 damageType = (DamageType.Generic),
                 falloffModel = BulletAttack.FalloffModel.None,
-                maxDistance = SpeedCoefficient * duration * this.moveSpeedStat,
+                maxDistance = SpeedCoefficient * duration * this.moveSpeedStat * speedattack,
                 force = 55f,
                 procCoefficient = procCoefficient,
                 minSpread = 0f,
@@ -152,7 +152,7 @@ namespace DekuMod.SkillStates
         }
         private void RecalculateRollSpeed()
         {
-            this.rollSpeed = this.moveSpeedStat * ShootStyleBullet.SpeedCoefficient;
+            this.rollSpeed = this.moveSpeedStat * ShootStyleBullet.SpeedCoefficient * speedattack;
         }
         private void CreateBlinkEffect(Vector3 origin)
         {
