@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/dekuscene.unity
+- path: Assets/VFX/Scenes/Lab_Complete.unity
   isLoaded: 1
   isActive: 1

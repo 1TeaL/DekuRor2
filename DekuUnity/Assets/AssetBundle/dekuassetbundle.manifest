@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2754138850
+CRC: 1745259289
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4853cb723a16a95860940dc5171febb6
+    Hash: 2facc37ac62d4b1c8ed5d871b8af93d9
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6df0a8599ff25f96bdf88010d0b9233e
@@ -61,11 +61,16 @@ Assets:
 - Assets/Deku/Animations/DelawareSmashUp.anim
 - Assets/Deku/Animations/SmashRelease.anim
 - Assets/Deku/Animations/Jump.anim
+- Assets/Deku/Animations/ManchesterSmash.anim
 - Assets/Deku/GUI/delaware.png
 - Assets/Deku/GUI/primary attack.png
+- Assets/Deku/GUI/ultimateupgrade45.png
+- Assets/Deku/GUI/manchester.png
 - Assets/Deku/Animations/maskDekuImpact.mask
 - Assets/Deku/GUI/ultimateupgrade.png
 - Assets/Deku/GUI/ultimate.png
+- Assets/Deku/Animations/ShootStyleKick.anim
+- Assets/Deku/Animations/ShootStyleKickExit.anim
 - Assets/Deku/DekuDisplay.prefab
 - Assets/Deku/Animations/EntranceLoop.anim
 - Assets/Deku/Animations/ShootStyleDashExit.anim
@@ -73,17 +78,23 @@ Assets:
 - Assets/Deku/Animations/LegSmashExit.anim
 - Assets/Deku/Animations/Blackwhip.anim
 - Assets/Deku/GUI/blackwhip.png
+- Assets/Deku/GUI/blackwhipsuper.png
+- Assets/Deku/Animations/ManchesterBegin.anim
 - Assets/Deku/Animations/maskDekuBody.mask
 - Assets/Deku/Animations/SmashFullCharge.anim
 - Assets/Deku/Animations/maskDekuGesture.mask
 - Assets/Deku/Animations/DelawareSmashDown.anim
 - Assets/Deku/Animations/Landing.anim
+- Assets/Deku/Animations/ShootStyleKickAuto.anim
 - Assets/Deku/Animations/AIIdle.anim
+- Assets/Deku/GUI/45 blank.png
 - Assets/Deku/dekuror2.fbx
 - Assets/Deku/Animations/ShootStyleDash.anim
 - Assets/Deku/Animations/Fall.anim
+- Assets/Deku/GUI/shootstylekick2.png
 - Assets/Deku/mdlDeku.prefab
 - Assets/Deku/Animations/SmashCharging.anim
+- Assets/Deku/GUI/ultimate45.png
 - Assets/Deku/GUI/deku portrait.png
 - Assets/Deku/Mesh.mesh
 - Assets/Deku/Animations/Entrance.anim
@@ -93,6 +104,7 @@ Assets:
 - Assets/Deku/Animations/LegSmash.anim
 - Assets/Deku/Animations/maskDekuRightArm.mask
 - Assets/Deku/GUI/stlouis.png
+- Assets/Deku/GUI/shootstylekick.png
 - Assets/Deku/Animations/LegSmashCharge.anim
 - Assets/Deku/Animations/OFA.anim
 - Assets/Deku/Animations/SmashCharge.anim
@@ -104,10 +116,14 @@ Assets:
 - Assets/Deku/Animations/anim.controller
 - Assets/Deku/matDeku.mat
 - Assets/Deku/Animations/maskDekuLeftArm.mask
+- Assets/Deku/GUI/airforce45.png
+- Assets/Deku/GUI/detroitweak.png
 - Assets/Deku/Animations/Impact.anim
 - Assets/Deku/Deku all mats 3584x2049.png
 - Assets/Deku/Animations/DelawareSmash.anim
+- Assets/Deku/GUI/stlouis45.PNG
 - Assets/Deku/Animations/SmashChargeAttack.anim
+- Assets/Deku/Animations/ManchesterSmashExit.anim
 - Assets/Deku/Animations/animDisplay.controller
 Dependencies:
 - F:/Theodore 3/Risk of Rain 2 modding/Mods/DekuRor2/DekuUnity/Assets/AssetBundle/myassetbundle

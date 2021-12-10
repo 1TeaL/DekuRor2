@@ -20,8 +20,8 @@ namespace DekuMod.SkillStates
 
         public static float speedattack;
         public static float duration;
-        public static float baseDuration = 0.1f;
-        public static float initialSpeedCoefficient = 8f;
+        public static float baseDuration = 0.2f;
+        public static float initialSpeedCoefficient = 10f;
         public static float SpeedCoefficient;
         public static float finalSpeedCoefficient = 0f;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
@@ -65,7 +65,8 @@ namespace DekuMod.SkillStates
                 this.animator = this.modelTransform.GetComponent<Animator>();
                 this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
             }
-            base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
+            //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
+            base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
 
             //hasteleported = false;
 
@@ -154,7 +155,8 @@ namespace DekuMod.SkillStates
             {
                 afterattack.Fire();
             }
-            base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
+            //base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
+            base.PlayCrossfade("FullBody, Override", "ShootStyleDashExit", 0.2f);
             Util.PlaySound(EvisDash.endSoundString, base.gameObject);
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;

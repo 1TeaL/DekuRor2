@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Bootstrap;
 using DekuMod.Modules.Survivors;
 using R2API.Utils;
 using RoR2;
@@ -6,9 +7,6 @@ using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
-using EntityStates.Mage;
-using EntityStates;
-using BepInEx.Bootstrap;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -99,32 +97,77 @@ namespace DekuMod
         {
             //regen 
             orig.Invoke(self);
-            bool flag2 = self.HasBuff(Modules.Buffs.ofaBuff);
-            if (flag2)
+            bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
+
+            Debug.Log("health" + "self.healthComponent.health");
+            
+            //bool one = self.healthComponent > 1f;
+            if (ofa && self.healthComponent.health > 1)
+            {
+
+                self.armor *= 5f;
+                self.moveSpeed *= 1.5f;
+                self.attackSpeed *= 1.5f;
+                self.regen = (1 + (self.levelRegen * (self.level-1))) * -6f;
+                self.damage *= 2f;
+                
+            }
+
+            if (ofa && self.healthComponent.health < 2)
+            {
+
+                self.armor *= 5f;
+                self.moveSpeed *= 1.5f;
+                self.attackSpeed *= 1.5f;
+                self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
+                self.damage *= 2f;
+
+            }
+
+            bool supaofa = self.HasBuff(Modules.Buffs.supaofaBuff);
+            if (supaofa && self.healthComponent.health > 1)
             {
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen *= -8f;
+                self.regen = (1 + (self.levelRegen * (self.level-1))) * -6f;
                 self.damage *= 2f;
             }
 
-            bool flag3 = self.HasBuff(Modules.Buffs.supaofaBuff);
-            if (flag3)
+            if (supaofa && self.healthComponent.health < 2)
             {
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen *= -8f;
+                self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
                 self.damage *= 2f;
             }
 
+            bool ofa45 = self.HasBuff(Modules.Buffs.ofaBuff45);
+            if (ofa45)
+            {
+                self.armor *= 2.5f;
+                self.moveSpeed *= 1.2f;
+                self.attackSpeed *= 1.2f;
+                self.regen *= 0f;
+                self.damage *= 1.5f;
+            }
+
+            bool supaofa45 = self.HasBuff(Modules.Buffs.supaofaBuff45);
+            if (supaofa45)
+            {
+                self.armor *= 2.5f;
+                self.moveSpeed *= 1.25f;
+                self.attackSpeed *= 1.25f;
+                self.regen *= 0f;
+                self.damage *= 1.5f;
+            }
 
             if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")                
             {
 
 
-                if (!flag2 && !flag3)
+                if (!ofa && !ofa45 && !supaofa45 && !supaofa)
                 {
 
                     HealthComponent hp = self.healthComponent;
@@ -135,6 +178,14 @@ namespace DekuMod
                 }
                 
 
+            }
+
+            if (self)
+            {
+                if (self.HasBuff(Modules.Buffs.armorBuff))
+                {
+                    self.armor += 300f;
+                }
             }
         }
         private void CharacterBody_OnDeathStart(On.RoR2.CharacterBody.orig_OnDeathStart orig, CharacterBody self)
@@ -169,6 +220,13 @@ namespace DekuMod
             {
                 CharacterBody attackerBody = report.attackerBody;
                 attackerBody.healthComponent.Heal(report.damageDealt * 0.1f, default(ProcChainMask), true);
+
+            }
+            bool flag2 = !report.attacker || !report.attackerBody;
+            if (!flag2 && report.attackerBody.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && report.attackerBody.HasBuff(Modules.Buffs.supaofaBuff45))
+            {
+                CharacterBody attackerBody = report.attackerBody;
+                attackerBody.healthComponent.Heal(report.damageDealt * 0.05f, default(ProcChainMask), true);
 
             }
 

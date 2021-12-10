@@ -38,12 +38,15 @@ namespace DekuMod.SkillStates
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
 
+        private Vector3 aimRayDir;
+
 
         public override void OnEnter()
         {
 
             base.OnEnter();
 
+            this.aimRayDir = aimRay.direction;
             duration = baseDuration / this.attackSpeedStat;
             if (duration < 0.2f)
             {
@@ -65,7 +68,8 @@ namespace DekuMod.SkillStates
                 this.animator = this.modelTransform.GetComponent<Animator>();
                 this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
             }
-            base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
+            //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
+            base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
 
             //hasteleported = false;
 
@@ -78,7 +82,7 @@ namespace DekuMod.SkillStates
             if (NetworkServer.active && base.healthComponent)
             {
                 DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.combinedHealth * 0.1f;
+                damageInfo.damage = base.healthComponent.combinedHealth * 0.05f;
                 damageInfo.position = base.characterBody.corePosition;
                 damageInfo.force = Vector3.zero;
                 damageInfo.damageColorIndex = DamageColorIndex.Default;
@@ -157,7 +161,7 @@ namespace DekuMod.SkillStates
         private void CreateBlinkEffect(Vector3 origin)
         {
             EffectData effectData = new EffectData();
-            effectData.rotation = Util.QuaternionSafeLookRotation(this.dashDirection);
+            effectData.rotation = Util.QuaternionSafeLookRotation(this.aimRayDir);
             effectData.origin = origin;
             EffectManager.SpawnEffect(EvisDash.blinkPrefab, effectData, false);
         }
@@ -169,7 +173,8 @@ namespace DekuMod.SkillStates
             {
                 afterattack.Fire();
             }
-            base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
+            //base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
+            base.PlayCrossfade("FullBody, Override", "ShootStyleDashExit", 0.2f);
             Util.PlaySound(EvisDash.endSoundString, base.gameObject);
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;
@@ -189,7 +194,7 @@ namespace DekuMod.SkillStates
             this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
 
-            if (base.characterDirection) base.characterDirection.forward = this.forwardDirection;
+            if (base.characterDirection) base.characterDirection.forward = this.aimRayDir;
             if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(ShootStyleBullet.dodgeFOV, 60f, base.fixedAge / ShootStyleBullet.duration);
 
             Vector3 normalized = (base.transform.position - this.previousPosition).normalized;

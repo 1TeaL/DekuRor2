@@ -36,7 +36,7 @@ namespace DekuMod.SkillStates
 
                 BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = BlackwhipFront.blastRadius * this.attackSpeedStat;
-                blastAttack.procCoefficient = 1f * this.attackSpeedStat;
+                blastAttack.procCoefficient = 1f;
                 blastAttack.position = theSpot;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
@@ -50,7 +50,7 @@ namespace DekuMod.SkillStates
 
                 EffectData effectData = new EffectData();
                 effectData.origin = theSpot;
-                effectData.scale = 3;
+                effectData.scale = blastRadius/5;
 
                 EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
 
@@ -113,7 +113,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(Modules.StaticValues.blackwhipDamageCoefficient * this.damageStat * this.attackSpeedStat);
+            base.healthComponent.AddBarrierAuthority(this.damageStat * this.attackSpeedStat);
 
         }
 

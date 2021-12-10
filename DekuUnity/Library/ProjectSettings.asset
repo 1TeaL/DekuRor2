@@ -532,15 +532,15 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
-    1: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
-    7: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
-    13: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
-    19: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
-    21: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
-    25: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
-    26: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
-    27: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
-    28: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod
+    1: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
+    7: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
+    13: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
+    19: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
+    21: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
+    25: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
+    26: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
+    27: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
+    28: thunderkit;riskofrain2;bbepis-bepinexpack;riskofthunder-hookgenpatcher;tristanmcpherson-r2api;rob-henrymod;UNITY_POST_PROCESSING_STACK_V2
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

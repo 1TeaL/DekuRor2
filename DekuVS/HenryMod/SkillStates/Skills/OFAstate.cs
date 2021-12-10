@@ -3,6 +3,7 @@ using EntityStates;
 using RoR2.Skills;
 using RoR2;
 using UnityEngine.Networking;
+using UnityEngine;
 
 namespace DekuMod.SkillStates
 {
@@ -28,7 +29,7 @@ namespace DekuMod.SkillStates
 			{ 				
 				base.characterBody.AddBuff(Modules.Buffs.ofaBuff);
 			}
-            base.PlayAnimation("FullBody, Override", "OFA", "Atack.playbackRate", 0.05f);
+            base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 0.05f);
 
 
 			AkSoundEngine.PostEvent(3940341776, this.gameObject);
@@ -38,7 +39,22 @@ namespace DekuMod.SkillStates
 			base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAstate.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.special.SetSkillOverride(base.skillLocator.special, OFAstate.specialDef, GenericSkill.SkillOverridePriority.Contextual);
 
-        }
+			if (NetworkServer.active && base.healthComponent)
+			{
+				DamageInfo damageInfo = new DamageInfo();
+				damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+				damageInfo.position = base.characterBody.corePosition;
+				damageInfo.force = Vector3.zero;
+				damageInfo.damageColorIndex = DamageColorIndex.Default;
+				damageInfo.crit = false;
+				damageInfo.attacker = null;
+				damageInfo.inflictor = null;
+				damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+				damageInfo.procCoefficient = 0f;
+				damageInfo.procChainMask = default(ProcChainMask);
+				base.healthComponent.TakeDamage(damageInfo);
+			}
+		}
         public override void FixedUpdate()
 		{
 			base.FixedUpdate();

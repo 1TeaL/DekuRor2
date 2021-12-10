@@ -138,6 +138,7 @@ ModelImporter:
     100264: Tongue_B
     100266: U_Lip
     100268: U_Teeth
+    100270: Plane
     400000: 001
     400002: 002
     400004: 003
@@ -273,8 +274,13 @@ ModelImporter:
     400264: Tongue_B
     400266: U_Lip
     400268: U_Teeth
+    400270: Plane
     2100000: Dekuall
+    2100002: No Name
+    2300000: Plane
+    3300000: Plane
     4300000: Body.001
+    4300002: Plane
     7400000: Armature|Entrance
     7400002: Armature|Entrance loop
     7400004: Armature|Fall
@@ -297,6 +303,12 @@ ModelImporter:
     7400038: Armature|OFA
     7400040: Armature|Delaware Smash aerial
     7400042: Armature|DelawareSmash
+    7400044: Armature|ManchesterBegin
+    7400046: Armature|ManchesterSmash
+    7400048: Armature|ManchesterSmashExit
+    7400050: Armature|ShootStyleKick
+    7400052: Armature|ShootStyleKickExit
+    7400054: Armature|ShootStyleKickAuto
     9500000: //RootNode
     11100000: //RootNode
     13700000: Body.001
