@@ -26,7 +26,7 @@ namespace DekuMod.SkillStates
 			bool active = NetworkServer.active;
 			if (active)
 			{ 				
-				base.characterBody.AddBuff(Modules.Buffs.supaofaBuff);
+				base.characterBody.AddBuff(Modules.Buffs.supaofaBuffweak);
 				
 				
 			}

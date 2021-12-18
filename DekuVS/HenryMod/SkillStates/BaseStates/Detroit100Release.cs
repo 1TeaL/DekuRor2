@@ -40,7 +40,7 @@ namespace DekuMod.SkillStates.BaseStates
 		public override void OnExit()
 		{
 			
-			base.OnExit();
+
 			EffectData effectData = new EffectData
 			{
 				scale = this.radius * 2f,
@@ -68,6 +68,8 @@ namespace DekuMod.SkillStates.BaseStates
 					attackerFiltering = AttackerFiltering.Default
 				}.Fire();
 			}
+			base.OnExit();
+
 		}
 		public override void FixedUpdate()
 		{

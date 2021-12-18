@@ -21,6 +21,7 @@ namespace DekuMod.SkillStates.BaseStates
         ////private float earlyExitTime;
         public float smashage;
         public float duration = 1f;
+        public float speedattack;
         //private bool hasFired;
         //private float hitPauseTimer;
         //private OverlapAttack attack;
@@ -54,7 +55,12 @@ namespace DekuMod.SkillStates.BaseStates
 
         public override void OnEnter()
         {
-            base.OnEnter();            
+            base.OnEnter();
+            speedattack = attackSpeedStat / 2;
+            if(speedattack < 1)
+            {
+                speedattack = 1;
+            }
             float[] source = new float[]
             {
                 this.attackSpeedStat,
@@ -92,7 +98,7 @@ namespace DekuMod.SkillStates.BaseStates
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
             aimRay.origin = base.characterBody.corePosition;
-            this.maxDistance = this.baseDistance * (this.moveSpeedStat / 7f);
+            this.maxDistance = this.baseDistance * (this.moveSpeedStat/2) * speedattack;
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
             bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;

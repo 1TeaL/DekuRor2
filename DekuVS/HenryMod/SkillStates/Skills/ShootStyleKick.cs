@@ -35,7 +35,8 @@ namespace DekuMod.SkillStates
 		private float stopwatch;
 		private OverlapAttack detector;
 		private OverlapAttack attack;
-		protected string hitboxName = "BodyHitbox";
+		protected string hitboxName = "ModelHitbox";
+		protected string hitboxName2 = "BigBodyHitbox";
 		protected DamageType damageType = DamageType.ResetCooldownsOnKill |DamageType.Generic;
 		protected float procCoefficient = 1f;
 		protected float pushForce = 400f;
@@ -102,8 +103,8 @@ namespace DekuMod.SkillStates
 			bool flag2 = modelTransform;
 			if (flag2)
 			{
-				hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == "BodyHitbox");
-				hitBoxGroup2 = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == "BodyHitbox");
+				hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == hitboxName);
+				hitBoxGroup2 = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == hitboxName2);
 			}
 			ChargeSonicBoom chargeSonicBoom = new ChargeSonicBoom();
 			Util.PlaySound(chargeSonicBoom.sound, base.gameObject);
@@ -147,6 +148,7 @@ namespace DekuMod.SkillStates
 			AkSoundEngine.PostEvent(3842300745, this.gameObject);
 			AkSoundEngine.PostEvent(573664262, this.gameObject);
 
+			GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
 
 		}
 
@@ -325,7 +327,7 @@ namespace DekuMod.SkillStates
 				{
 					base.characterMotor.velocity = Vector3.zero;
 					this.bounceVector = base.GetAimRay().direction * -1f;
-					this.bounceVector.y = 0.3f;
+					this.bounceVector.y = 0.2f;
 					this.bounceVector *= ShootStyleKick.bounceForce;
 				}
 				bool flag4 = !this.inHitPause && this.hitStopDuration > 0f;

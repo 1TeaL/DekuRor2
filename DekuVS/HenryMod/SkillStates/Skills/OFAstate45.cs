@@ -26,8 +26,10 @@ namespace DekuMod.SkillStates
 
 			bool active = NetworkServer.active;
 			if (active)
-			{ 				
+			{
+
 				base.characterBody.AddBuff(Modules.Buffs.ofaBuff45);
+
 			}
             base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 0.05f);
 
@@ -58,11 +60,8 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			bool flag = base.fixedAge >= this.duration && base.isAuthority;
-			if (flag)
-			{
-				this.outer.SetNextStateToMain();
-			}
+			this.outer.SetNextStateToMain();
+			
 		}
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{

@@ -12,7 +12,8 @@ namespace DekuMod.Modules
 
             string desc = "Deku is high risk survivor that can boost his stats and abilities but with detrimental health regen and health costs.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > He scales with attack speed and movespeed on multiple of his skills" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > OFA 100%'s negative health regen can be mitigated with regen items while OFA 45%'s can't." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > He can also sprint in any direction, enabled by using either of his primary skills once or detroit smashes" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > OFA 100%'s negative health regen can be mitigated with regen items and it stops at 1-2Hp while OFA 45%'s can't." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Ancient Scepter will give 10% Lifesteal for OFA 100% and 5% Lifesteal for OFA 45%" + Environment.NewLine + Environment.NewLine;
 
 
@@ -44,7 +45,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill.");
             
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_NAME", "StLouis Smash 100%");
-            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_DESCRIPTION", $"Dash through enemies, hitting enemies behind for <style=cIsDamage>{100f * StaticValues.shootbulletDamageCoefficient}% damage scaling by attack speed</style>. " + Helpers.Damage("Costs 10% of current Health") + ".");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_DESCRIPTION", $"Dash through enemies, hitting enemies behind for <style=cIsDamage>{100f * StaticValues.shootbulletDamageCoefficient}% damage scaling by attack speed</style>." );
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY2_NAME", "Airforce 45%");
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot 4 bullets with all your fingers, dealing <style=cIsDamage>{100f * StaticValues.airforce45DamageCoefficient}% damage each</style>.");
             #endregion
@@ -67,7 +68,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "UTILITY2_NAME", "Shoot Style Full Cowling");
             LanguageAPI.Add(prefix + "UTILITY2_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Dash through enemies, stunning enemies and dealing <style=cIsDamage>{100f * StaticValues.shootbulletstunDamageCoefficient}% damage scaling by attack speed</style>.");
             LanguageAPI.Add(prefix + "UTILITY3_NAME", "Detroit Smash");
-            LanguageAPI.Add(prefix + "UTILITY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}%</style>, charging increases the dash range.");
+            LanguageAPI.Add(prefix + "UTILITY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}%</style>, range scales based on attack speed and movespeed.");
 
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY_NAME", "Delaware Smash 100%");
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Delaware Smash, dealing <style=cIsDamage>{100f * StaticValues.delawareDamageCoefficient}% damage in an AOE, sending yourself backwards</style>. " + Helpers.Damage("Costs 10% of max Health")+".");
@@ -84,7 +85,9 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_NAME", "OFA down");
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_DESCRIPTION", $"Return yourself back to your limits.");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL_NAME", $"Infinite 100%");
-            LanguageAPI.Add(prefix + "SCEPTERSPECIAL_DESCRIPTION", $"Unlock the true power of One For All, gaining the same boosts as well as lifesteal.");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL_DESCRIPTION", $"Unlock the true power of One For All, gaining the same effects as well as 10% lifesteal.");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_NAME", $"Infinite 45%");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_DESCRIPTION", $"Master OFA 45%, gaining the same effects as well as 5% lifesteal.");
             #endregion
 
             #region Achievements

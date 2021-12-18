@@ -28,6 +28,8 @@ namespace DekuMod.SkillStates
 
             base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.3f);
 
+            GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
+
         }
 
         public override void OnExit()

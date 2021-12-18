@@ -34,7 +34,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "1.2.0";
+        public const string MODVERSION = "1.3.2";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -98,8 +98,6 @@ namespace DekuMod
             //regen 
             orig.Invoke(self);
             bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
-
-            Debug.Log("health" + "self.healthComponent.health");
             
             //bool one = self.healthComponent > 1f;
             if (ofa && self.healthComponent.health > 1)
@@ -108,8 +106,8 @@ namespace DekuMod
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level-1))) * -6f;
-                self.damage *= 2f;
+                self.regen = (1 + (self.levelRegen * (self.level-1))) * -7f;
+                self.damage *= 2.5f;
                 
             }
 
@@ -120,7 +118,32 @@ namespace DekuMod
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
                 self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
-                self.damage *= 2f;
+                self.damage *= 2.5f;
+
+            }
+
+            bool ofaweak = self.HasBuff(Modules.Buffs.ofaBuffweak);
+
+            //bool one = self.healthComponent > 1f;
+            if (ofaweak && self.healthComponent.health > 1)
+            {
+
+                self.armor *= 5f;
+                self.moveSpeed *= 1.5f;
+                self.attackSpeed *= 1.5f;
+                self.regen = (1 + (self.levelRegen * (self.level - 1))) * -7f;
+                self.damage *= 2.5f;
+
+            }
+
+            if (ofaweak && self.healthComponent.health < 2)
+            {
+
+                self.armor *= 5f;
+                self.moveSpeed *= 1.5f;
+                self.attackSpeed *= 1.5f;
+                self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
+                self.damage *= 2.5f;
 
             }
 
@@ -130,11 +153,30 @@ namespace DekuMod
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level-1))) * -6f;
+                self.regen = (1 + (self.levelRegen * (self.level-1))) * -7f;
                 self.damage *= 2f;
             }
 
             if (supaofa && self.healthComponent.health < 2)
+            {
+                self.armor *= 5f;
+                self.moveSpeed *= 1.5f;
+                self.attackSpeed *= 1.5f;
+                self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
+                self.damage *= 2f;
+            }
+
+            bool supaofaweak = self.HasBuff(Modules.Buffs.supaofaBuffweak);
+            if (supaofaweak && self.healthComponent.health > 1)
+            {
+                self.armor *= 5f;
+                self.moveSpeed *= 1.5f;
+                self.attackSpeed *= 1.5f;
+                self.regen = (1 + (self.levelRegen * (self.level - 1))) * -7f;
+                self.damage *= 2f;
+            }
+
+            if (supaofaweak && self.healthComponent.health < 2)
             {
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;

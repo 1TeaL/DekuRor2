@@ -13,6 +13,9 @@ namespace DekuMod.Modules
 
         internal static BuffDef ofaBuff;
 
+        internal static BuffDef ofaBuffweak;
+        internal static BuffDef supaofaBuffweak;
+
         internal static BuffDef floatBuff;
 
         internal static BuffDef supaofaBuff;
@@ -24,10 +27,12 @@ namespace DekuMod.Modules
         internal static void RegisterBuffs()
         {
             armorBuff = AddNewBuff("DekuArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
-            ofaBuff = AddNewBuff("DekuOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.green, false, true);
-            supaofaBuff = AddNewBuff("DekuInfiniteOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.white, false, true);
-            ofaBuff45 = AddNewBuff("DekuOFA45Buff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.blue, false, true);
-            supaofaBuff45 = AddNewBuff("DekuInfiniteOFA45Buff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.grey, false, true);
+            ofaBuff = AddNewBuff("DekuOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.green, false, false);
+            supaofaBuff = AddNewBuff("DekuInfiniteOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.white, false, false);
+            ofaBuffweak = AddNewBuff("DekuOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.blue, false, false);
+            supaofaBuffweak = AddNewBuff("DekuInfiniteOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.grey, false, false);
+            ofaBuff45 = AddNewBuff("DekuOFA45Buff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.blue, false, false);
+            supaofaBuff45 = AddNewBuff("DekuInfiniteOFA45Buff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.grey, false, false);
             floatBuff = AddNewBuff("floatBuff", Resources.Load<Sprite>("Textures/BuffIcons/texMovespeedBufficon"), Color.blue, false, true);
         }
 

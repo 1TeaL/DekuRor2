@@ -34,21 +34,28 @@ namespace DekuMod.SkillStates
 				{
 					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff45);
 				}
+
+				if (base.characterBody.HasBuff(Modules.Buffs.ofaBuffweak))
+				{
+					base.characterBody.RemoveBuff(Modules.Buffs.ofaBuffweak);
+				}
+				if (base.characterBody.HasBuff(Modules.Buffs.supaofaBuffweak))
+				{
+					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuffweak);
+				}
 			}
 
 		}
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			bool flag = base.fixedAge >= this.duration && base.isAuthority;
-			if (flag)
-			{
-				this.outer.SetNextStateToMain();
-			}
+
+			this.outer.SetNextStateToMain();
+
 		}
 		public override void OnExit()
 		{
-			base.OnExit();
+
 			base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, OFAstate.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAstate.secondaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAstate.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
@@ -57,7 +64,7 @@ namespace DekuMod.SkillStates
 			base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAstate45.secondaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAstate45.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, OFAstate45.specialDef, GenericSkill.SkillOverridePriority.Contextual);
-
+			base.OnExit();
 		}
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{

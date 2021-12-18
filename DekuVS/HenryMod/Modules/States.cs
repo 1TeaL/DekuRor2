@@ -13,10 +13,18 @@ namespace DekuMod.Modules
         {
             entityStates.Add(typeof(StLouis45));
             entityStates.Add(typeof(DetroitRelease));
+            entityStates.Add(typeof(Detroit));
+            entityStates.Add(typeof(Detroit100));
+            entityStates.Add(typeof(Detroit100Release));
             entityStates.Add(typeof(ShootStyleBullet));
             entityStates.Add(typeof(ShootStyleDash));
             entityStates.Add(typeof(ShootStyleDashAttack));
             entityStates.Add(typeof(DelawareSmash));
+            entityStates.Add(typeof(Manchester));
+            entityStates.Add(typeof(OFAstate45));
+            entityStates.Add(typeof(OFAstatescepter45));
+            entityStates.Add(typeof(Blackwhip45));
+
 
             entityStates.Add(typeof(Airforce));
             entityStates.Add(typeof(OFAstate));

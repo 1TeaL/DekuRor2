@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "1.3.1",
+    "version_number": "1.3.2",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "1.3 Update, added alt skills for primary, secondary, utility and special (with more skills) and more!. 1.3.1- buff to alt primary and bug fixes.",
+    "description": "1.3 Update, added alt skills for primary, secondary, utility and special (with more skills) and more!. 1.3.2 - lots of balances and functionality changes, some fixes as well.",
     "dependencies": [
          "tristanmcpherson-R2API-3.0.59"
     ]

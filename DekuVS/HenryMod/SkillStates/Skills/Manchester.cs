@@ -22,7 +22,7 @@ namespace DekuMod.SkillStates
         private Transform slamIndicatorInstance;
         private Transform slamCenterIndicatorInstance;
         private Ray downRay;
-        private bool hasFired;
+
 
         //private NemforcerGrabController grabController;
 
@@ -33,7 +33,7 @@ namespace DekuMod.SkillStates
             this.flyVector = Vector3.up;
             this.hasDropped = false;
             //jumpDuration = basejumpDuration /(this.attackSpeedStat/2);
-            hasFired = false;
+
 
             base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", Manchester.jumpDuration);
             AkSoundEngine.PostEvent(687990298, this.gameObject);
@@ -43,9 +43,11 @@ namespace DekuMod.SkillStates
             base.characterMotor.velocity = Vector3.zero;
 
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
+            
 
-            base.gameObject.layer = LayerIndex.fakeActor.intVal;
+            //base.gameObject.layer = LayerIndex.fakeActor.intVal;
             base.characterMotor.Motor.RebuildCollidableLayers();
+
         }
 
         public override void Update()
@@ -93,8 +95,12 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = true;
             base.characterMotor.velocity.y = -Manchester.dropForce;
 
-            base.PlayAnimation("Fullbody, Override", "ManchesterSmash", "Attack.playbackRate", jumpDuration/2);
-
+            base.PlayAnimation("Fullbody, Override", "ManchesterSmash", "Attack.playbackRate", jumpDuration/3);
+            bool active = NetworkServer.active;
+            if (active)
+            {
+                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+            }
             //this.AttemptGrab(10f);
         }
 
@@ -121,44 +127,43 @@ namespace DekuMod.SkillStates
             //if (this.grabController) this.grabController.Release();
 
             //base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", 0.1f);
-
-            base.characterMotor.velocity *= 0.1f;
-
-            BlastAttack blastAttack = new BlastAttack();
-            blastAttack.radius = Manchester.slamRadius;
-            blastAttack.procCoefficient = Manchester.slamProcCoefficient;
-            blastAttack.position = base.characterBody.footPosition;
-            blastAttack.attacker = base.gameObject;
-            blastAttack.crit = base.RollCrit();
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat/7);
-            blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
-            blastAttack.baseForce = Manchester.slamForce;
-            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = DamageType.Stun1s;
-            blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
-
-            
-            if(!hasFired && base.isAuthority)
+            if (base.isAuthority)
             {
-                hasFired = true;
+
+                base.characterMotor.velocity *= 0.1f;
+
+                BlastAttack blastAttack = new BlastAttack();
+                blastAttack.radius = Manchester.slamRadius;
+                blastAttack.procCoefficient = Manchester.slamProcCoefficient;
+                blastAttack.position = base.characterBody.footPosition;
+                blastAttack.attacker = base.gameObject;
+                blastAttack.crit = base.RollCrit();
+                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat/7);
+                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                blastAttack.baseForce = Manchester.slamForce;
+                blastAttack.teamIndex = base.teamComponent.teamIndex; 
+                blastAttack.damageType = DamageType.Stun1s;
+                blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
                 }
-            }
 
-            //AkSoundEngine.SetRTPCValue("M2_Charge", 100f);
-            //Util.PlaySound(EnforcerPlugin.Sounds.NemesisSmash, base.gameObject);
 
-            for (int i = 0; i <= 8; i += 1)
-            {
-                Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * 8f);
-                effectPosition.y = base.characterBody.footPosition.y;
-                EffectManager.SpawnEffect(EntityStates.LemurianBruiserMonster.SpawnState.spawnEffectPrefab, new EffectData
+                //AkSoundEngine.SetRTPCValue("M2_Charge", 100f);
+                //Util.PlaySound(EnforcerPlugin.Sounds.NemesisSmash, base.gameObject);
+
+                for (int i = 0; i <= 8; i += 1)
                 {
-                    origin = effectPosition,
-                    scale = slamRadius/6,
-                }, true);
+                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * 8f);
+                    effectPosition.y = base.characterBody.footPosition.y;
+                    EffectManager.SpawnEffect(EntityStates.LemurianBruiserMonster.SpawnState.spawnEffectPrefab, new EffectData
+                    {
+                        origin = effectPosition,
+                        scale = slamRadius/6,
+                    }, true);
+                }
             }
         }
 
@@ -188,7 +193,6 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            base.OnExit();
 
             //if (this.grabController) this.grabController.Release();
 
@@ -197,12 +201,15 @@ namespace DekuMod.SkillStates
 
             base.PlayAnimation("FullBody, Override", "BufferEmpty");
 
+
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
+
 
             if (NetworkServer.active && base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility)) base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 
             base.gameObject.layer = LayerIndex.defaultLayer.intVal;
             base.characterMotor.Motor.RebuildCollidableLayers();
+            base.OnExit();
         }
 
         //private void AttemptGrab(float grabRadius)
