@@ -14,7 +14,8 @@ namespace DekuMod.SkillStates
 		public static Vector3 CameraPosition = new Vector3(1.8f, -2.4f, -8f);
 		public static float StLouis45Force = 3000f;
 		public static float StLouis45ProcCoefficient = 1f;
-		public static float StLouis45Radius = 15f;
+		public static float StLouis45baseRadius = 12f;
+		public static float StLouis45Radius;
         public GameObject blastEffectPrefab = Resources.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         //public GameObject blastEffectPrefab = Resources.Load<GameObject>("Prefabs/effects/GrandparentPreSpawnEffect");
         public float duration;
@@ -82,6 +83,7 @@ namespace DekuMod.SkillStates
 			this.hasFired = false;
 			this.duration = this.baseDuration;
 			base.characterMotor.velocity = Vector3.zero;
+			StLouis45Radius = StLouis45baseRadius * this.attackSpeedStat;
 
 			base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
 

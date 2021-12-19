@@ -40,7 +40,7 @@ namespace DekuMod.Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_NAME", "Airforce");
-            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}% damage twice</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x</style><style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}%</style>.");
             LanguageAPI.Add(prefix + "PRIMARY2_NAME", "Shoot Style Kick");
             LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill.");
             

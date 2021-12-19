@@ -15,10 +15,11 @@ namespace DekuMod.Modules
         internal static AssetBundle mainAssetBundle;
 
         // particle effects
-        internal static GameObject swordSwingEffect;
-        internal static GameObject swordHitImpactEffect;
+        //internal static GameObject swordSwingEffect;
+        //internal static GameObject swordHitImpactEffect;
 
-        internal static GameObject bombExplosionEffect;
+        internal static GameObject airforceEffect;
+        internal static GameObject airforce45Effect;
 
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
@@ -79,31 +80,8 @@ namespace DekuMod.Modules
                 return;
             }
 
-            // feel free to delete everything in here and load in your own assets instead
-            // it should work fine even if left as is- even if the assets aren't in the bundle
-
-            //swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
-
-            //bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
-
-            //if (bombExplosionEffect)
-            //{
-            //    ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
-            //    shakeEmitter.amplitudeTimeDecay = true;
-            //    shakeEmitter.duration = 0.5f;
-            //    shakeEmitter.radius = 200f;
-            //    shakeEmitter.scaleShakeRadiusWithLocalScale = false;
-
-            //    shakeEmitter.wave = new Wave
-            //    {
-            //        amplitude = 1f,
-            //        frequency = 40f,
-            //        cycleOffset = 0f
-            //    };
-            //}
-
-            //swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
-            //swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
+            airforceEffect = LoadEffect("windbullet");
+            airforce45Effect = LoadEffect("windbullet45");
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

@@ -28,7 +28,6 @@ namespace DekuMod.SkillStates
 
             base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.3f);
 
-            GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
 
         }
 
@@ -46,13 +45,20 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddSpreadBloom(1f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
                 AkSoundEngine.PostEvent(1063047365, this.gameObject);
-     
+
+
 
                 if (base.isAuthority)
                 {
                     Ray aimRay = base.GetAimRay();
                     base.AddRecoil(-1f * Airforce.recoil, -2f * Airforce.recoil, -0.5f * Airforce.recoil, 0.5f * Airforce.recoil);
+                    EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                    {
+                        origin = FindModelChild(muzzleString).position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z))
 
+                    }, false);
                     new BulletAttack
                     {
                         bulletCount = 2U,
@@ -77,11 +83,12 @@ namespace DekuMod.SkillStates
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
                         weapon = null,
-                        tracerEffectPrefab = Airforce.tracerEffectPrefab,
+                        //tracerEffectPrefab = Modules.Projectiles.bulletTracer,
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                         hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
+
                     }.Fire();
                 }
             }

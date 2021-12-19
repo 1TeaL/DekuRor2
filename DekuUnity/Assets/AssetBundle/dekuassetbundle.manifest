@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 85696199
+CRC: 1911537227
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a674f506509de810865eb0da71d7ac7f
+    Hash: 116d8f73cf99901b92043b224511d0ba
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 6df0a8599ff25f96bdf88010d0b9233e
+    Hash: dfd86b86601cae722646fb8979684b7f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -53,6 +53,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 144
   Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
 - Class: 319
@@ -95,6 +99,7 @@ Assets:
 - Assets/Deku/DekuAllMats.mat
 - Assets/Deku/GUI/45 blank.png
 - Assets/Deku/dekuror2.fbx
+- Assets/Deku/VFX/windbullet45.prefab
 - Assets/Deku/Animations/Old/ShootStyleDash.anim
 - Assets/Deku/Animations/Old/Fall.anim
 - Assets/Deku/GUI/shootstylekick2.png
@@ -119,6 +124,7 @@ Assets:
 - Assets/Deku/Animations/Idle.anim
 - Assets/Deku/Animations/maskDekuLeftArmNew.mask
 - Assets/Deku/GUI/shootstylefullcowling.png
+- Assets/Deku/VFX/windbullet.prefab
 - Assets/Deku/Animations/Old/Running.anim
 - Assets/Deku/GUI/detroit.png
 - Assets/Deku/GUI/texDekuIcon.png
@@ -141,5 +147,4 @@ Assets:
 - Assets/Deku/Animations/maskDekuBodyNew.mask
 - Assets/Deku/Animations/Old/ManchesterSmashExit.anim
 - Assets/Deku/Animations/Old/animDisplay.controller
-Dependencies:
-- F:/Theodore 3/Risk of Rain 2 modding/Mods/DekuRor2/DekuUnity/Assets/AssetBundle/myassetbundle
+Dependencies: []

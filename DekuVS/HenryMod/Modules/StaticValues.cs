@@ -34,6 +34,8 @@ namespace DekuMod.Modules
 
         internal const float shootbulletstunDamageCoefficient = 1f;
 
+        internal const float blackwhipPull = 12f;
+
 
 
 

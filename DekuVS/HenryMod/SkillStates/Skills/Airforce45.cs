@@ -11,9 +11,9 @@ namespace DekuMod.SkillStates
         public static float procCoefficient = 0.25f;
         public float baseDuration = 0.7f; // the base skill duration. i.e. attack speed
         public static int bulletCount = 3;
-        public static float bulletSpread = 5f;
+        public static float bulletSpread = 1f;
         public static float bulletRecoil = 1f;
-        public static float bulletRange = 50;
+        public static float bulletRange = 100;
         public static float bulletwidth = 0.7f;
 
 
@@ -28,7 +28,7 @@ namespace DekuMod.SkillStates
         protected bool hasFired;
         private Animator animator;
         protected string muzzleString;
-
+        private Quaternion baserotation;
 
         public override void OnEnter()
         {
@@ -63,38 +63,69 @@ namespace DekuMod.SkillStates
                 float recoilAmplitude = bulletRecoil / this.attackSpeedStat;
 
                 base.AddRecoil(-0.4f * recoilAmplitude, -0.8f * recoilAmplitude, -0.3f * recoilAmplitude, 0.3f * recoilAmplitude);
-                characterBody.AddSpreadBloom(4f);
+                //characterBody.AddSpreadBloom(4f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireBarrage.effectPrefab, gameObject, muzzleString, false);
 
                 if (isAuthority)
                 {
                     float damage = Modules.StaticValues.airforce45DamageCoefficient * damageStat;
 
-                    GameObject tracerEffect = tracerEffectPrefab;
+                    //GameObject tracerEffect = tracerEffectPrefab;
 
-                    if (levelHasChanged)
-                    {
-                        levelHasChanged = false;
+                    //if (levelHasChanged)
+                    //{
+                    //    levelHasChanged = false;
 
-                        enlargeTracer(ref tracerEffect);
-                    }
+                    //    enlargeTracer(ref tracerEffect);
+                    //}
 
 
                     Ray aimRay = GetAimRay();
 
                     float spread = bulletSpread;
                     float width = bulletwidth;
-                    float force = 100; 
+                    float force = 100;
+                    baserotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
 
+                    EffectManager.SpawnEffect(Modules.Projectiles.airforce45Tracer, new EffectData
+                    {
+                        origin = FindModelChild(muzzleString).position,
+                        scale = 1f,
+                        rotation = baserotation
 
+                    }, false);
+                    EffectManager.SpawnEffect(Modules.Projectiles.airforce45Tracer, new EffectData
+                    {
+                        origin = FindModelChild(muzzleString).position,
+                        scale = 1f,
+                        rotation = baserotation,
+
+                    }, false);
+                    EffectManager.SpawnEffect(Modules.Projectiles.airforce45Tracer, new EffectData
+                    {
+                        origin = FindModelChild(muzzleString).position,
+                        scale = 1f,
+                        rotation = baserotation
+
+                    }, false);
+                    EffectManager.SpawnEffect(Modules.Projectiles.airforce45Tracer, new EffectData
+                    {
+                        origin = FindModelChild(muzzleString).position,
+                        scale = 1f,
+                        rotation = baserotation
+
+                    }, false);
                     BulletAttack bulletAttack = new BulletAttack
                     {
+                        minSpread = 0,
+                        maxSpread = 0,
+                        bulletCount = 1,
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
                         damage = damage,
                         damageColorIndex = DamageColorIndex.Default,
                         damageType = DamageType.Generic,
-                        falloffModel = BulletAttack.FalloffModel.None,
+                        falloffModel = BulletAttack.FalloffModel.Buckshot,
                         maxDistance = bulletRange,
                         force = force,// RiotShotgun.bulletForce,
                         hitMask = LayerIndex.CommonMasks.bullet,
@@ -108,7 +139,7 @@ namespace DekuMod.SkillStates
                         sniper = false,
                         stopperMask = LayerIndex.world.collisionMask,
                         weapon = null,
-                        tracerEffectPrefab = tracerEffect,
+                        tracerEffectPrefab = Modules.Projectiles.airforce45Tracer,
                         spreadPitchScale = 1f,
                         spreadYawScale = 1f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
@@ -116,41 +147,47 @@ namespace DekuMod.SkillStates
                         HitEffectNormal = false
                     };
 
-                    bulletAttack.minSpread = 0;
-                    bulletAttack.maxSpread = 0;
-                    bulletAttack.bulletCount = 1;
+                    bulletAttack.aimVector = aimRay.direction;
                     bulletAttack.Fire();
 
-                    uint secondShot = (uint)Mathf.CeilToInt(bulletCount / 2f) - 1;
-                    bulletAttack.minSpread = 0;
-                    bulletAttack.maxSpread = spread / 1.45f;
-                    bulletAttack.bulletCount = secondShot;
+                    bulletAttack.aimVector = aimRay.direction +0.2f * Vector3.right;
                     bulletAttack.Fire();
 
-                    bulletAttack.minSpread = spread / 1.45f;
-                    bulletAttack.maxSpread = spread;
-                    bulletAttack.bulletCount = (uint)Mathf.FloorToInt(bulletCount / 2f);
+                    bulletAttack.aimVector = aimRay.direction + 0.2f * Vector3.left;
                     bulletAttack.Fire();
+                    bulletAttack.aimVector = aimRay.direction + 0.4f * Vector3.right;
+                    bulletAttack.Fire();
+
+                    //uint secondShot = (uint)Mathf.CeilToInt(bulletCount / 2f) - 1;
+                    //bulletAttack.minSpread = 0;
+                    //bulletAttack.maxSpread = spread / 1.45f;
+                    //bulletAttack.bulletCount = secondShot;
+                    //bulletAttack.Fire();
+
+                    //bulletAttack.minSpread = spread / 1.45f;
+                    //bulletAttack.maxSpread = spread;
+                    //bulletAttack.bulletCount = (uint)Mathf.FloorToInt(bulletCount / 2f);
+                    //bulletAttack.Fire();
                 }
             }
         }
 
-        private void enlargeTracer(ref GameObject tracerEffect)
-        {
+        //private void enlargeTracer(ref GameObject tracerEffect)
+        //{
 
-            // getcomponents in foreach forgive my insolence
-            foreach (LineRenderer i in tracerEffect.GetComponentsInChildren<LineRenderer>())
-            {
-                if (i)
-                {
+        //    // getcomponents in foreach forgive my insolence
+        //    foreach (LineRenderer i in tracerEffect.GetComponentsInChildren<LineRenderer>())
+        //    {
+        //        if (i)
+        //        {
 
-                    i.startColor = new Color(0.68f, 0.58f, 0.05f);
-                    i.endColor = new Color(0.68f, 0.58f, 0.05f);
-                    float addedBulletwidth = bulletwidth - originalBulletwidth;
-                    i.widthMultiplier = (1 + addedBulletwidth) * 0.5f;
-                }
-            }
-        }
+        //            i.startColor = new Color(0.68f, 0.58f, 0.05f);
+        //            i.endColor = new Color(0.68f, 0.58f, 0.05f);
+        //            float addedBulletwidth = bulletwidth - originalBulletwidth;
+        //            i.widthMultiplier = (1 + addedBulletwidth) * 0.5f;
+        //        }
+        //    }
+        //}
 
         public override void FixedUpdate()
         {

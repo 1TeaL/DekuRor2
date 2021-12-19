@@ -2,17 +2,20 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using EntityStates;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DekuMod.SkillStates
 {
     public class Blackwhip45 : BaseSkillState
     {
         public float baseDuration = 0.5f;
-        public static float blastRadius = 25f;
+        public static float blastRadius = 20f;
         public static float succForce = 4f;
         private GameObject effectPrefab = Resources.Load<GameObject>("prefabs/effects/ImpBossBlink");
 
         private float duration;
+        private float maxWeight;
 
         public override void OnEnter()
         {
@@ -41,8 +44,8 @@ namespace DekuMod.SkillStates
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
                 blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.blackwhip45DamageCoefficient;
-                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = 0f;
+                blastAttack.falloffModel = BlastAttack.FalloffModel.SweetSpot;
+                blastAttack.baseForce = -maxWeight*2;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                 blastAttack.damageType = DamageType.Stun1s;
                 blastAttack.attackerFiltering = AttackerFiltering.Default;
@@ -50,7 +53,7 @@ namespace DekuMod.SkillStates
 
                 EffectData effectData = new EffectData();
                 effectData.origin = theSpot;
-                effectData.scale = blastRadius/5;
+                effectData.scale = (blastRadius/5)*this.attackSpeedStat;
 
                 EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
 
@@ -63,48 +66,95 @@ namespace DekuMod.SkillStates
 
 
                 //succ
-                if (NetworkServer.active)
+                //if (NetworkServer.active)
+                //{
+                //    Collider[] array = Physics.OverlapSphere(theSpot, BlackwhipFront.blastRadius, LayerIndex.defaultLayer.mask);
+                //    for (int i = 0; i < array.Length; i++)
+                //    {
+                //        HealthComponent healthComponent = array[i].GetComponent<HealthComponent>();
+                //        if (healthComponent)
+                //        {
+                //            TeamComponent component2 = healthComponent.GetComponent<TeamComponent>();
+                //            if (component2.teamIndex != TeamIndex.Player)
+                //            {
+                //                var charb = healthComponent.body;
+                //                if (charb)
+                //                {
+                //                    Vector3 pushForce = (theSpot - charb.corePosition) * BlackwhipFront.succForce * this.attackSpeedStat;
+                //                    var motor = charb.GetComponent<CharacterMotor>();
+                //                    var rb = charb.GetComponent<Rigidbody>();
+
+                //                    float mass = 1;
+                //                    if (motor) mass = motor.mass;
+                //                    else if (rb) mass = rb.mass;
+                //                    if (mass < 100) mass = 100;
+
+                //                    pushForce *= mass;
+
+                //                    DamageInfo info = new DamageInfo
+                //                    {
+                //                        attacker = base.gameObject,
+                //                        inflictor = base.gameObject,
+                //                        damage = 0,
+                //                        damageColorIndex = DamageColorIndex.Default,
+                //                        damageType = DamageType.Generic,
+                //                        crit = false,
+                //                        dotIndex = DotController.DotIndex.None,
+                //                        force = pushForce,
+                //                        position = base.transform.position,
+                //                        procChainMask = default(ProcChainMask),
+                //                        procCoefficient = 0
+                //                    };
+
+                //                    charb.healthComponent.TakeDamageForce(info, true, true);
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+            }
+        }
+        public void GetMaxWeight()
+        {
+            Ray aimRay = base.GetAimRay();
+            Vector3 theSpot = aimRay.origin + 20 * aimRay.direction;
+            BullseyeSearch search = new BullseyeSearch
+            {
+
+                teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
+                filterByLoS = false,
+                searchOrigin = theSpot,
+                searchDirection = UnityEngine.Random.onUnitSphere,
+                sortMode = BullseyeSearch.SortMode.Distance,
+                maxDistanceFilter = blastRadius * attackSpeedStat,
+                maxAngleFilter = 360f
+            };
+
+            search.RefreshCandidates();
+            search.FilterOutGameObject(base.gameObject);
+            maxWeight = Modules.StaticValues.blackwhipPull;
+
+
+            List<HurtBox> target = search.GetResults().ToList<HurtBox>();
+            for (int i = 0; i < target.Count; i++)
+            {
+                HurtBox singularTarget = target[i];
+                if (singularTarget)
                 {
-                    Collider[] array = Physics.OverlapSphere(theSpot, BlackwhipFront.blastRadius, LayerIndex.defaultLayer.mask);
-                    for (int i = 0; i < array.Length; i++)
+                    if (singularTarget.healthComponent && singularTarget.healthComponent.body)
                     {
-                        HealthComponent healthComponent = array[i].GetComponent<HealthComponent>();
-                        if (healthComponent)
+                        if (singularTarget.healthComponent.body.characterMotor)
                         {
-                            TeamComponent component2 = healthComponent.GetComponent<TeamComponent>();
-                            if (component2.teamIndex != TeamIndex.Player)
+                            if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
                             {
-                                var charb = healthComponent.body;
-                                if (charb)
-                                {
-                                    Vector3 pushForce = (theSpot - charb.corePosition) * BlackwhipFront.succForce * this.attackSpeedStat;
-                                    var motor = charb.GetComponent<CharacterMotor>();
-                                    var rb = charb.GetComponent<Rigidbody>();
-
-                                    float mass = 1;
-                                    if (motor) mass = motor.mass;
-                                    else if (rb) mass = rb.mass;
-                                    if (mass < 100) mass = 100;
-
-                                    pushForce *= mass;
-
-                                    DamageInfo info = new DamageInfo
-                                    {
-                                        attacker = base.gameObject,
-                                        inflictor = base.gameObject,
-                                        damage = 0,
-                                        damageColorIndex = DamageColorIndex.Default,
-                                        damageType = DamageType.Generic,
-                                        crit = false,
-                                        dotIndex = DotController.DotIndex.None,
-                                        force = pushForce,
-                                        position = base.transform.position,
-                                        procChainMask = default(ProcChainMask),
-                                        procCoefficient = 0
-                                    };
-
-                                    charb.healthComponent.TakeDamageForce(info, true, true);
-                                }
+                                maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
+                            }
+                        }
+                        else if (singularTarget.healthComponent.body.rigidbody)
+                        {
+                            if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
+                            {
+                                maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
                             }
                         }
                     }

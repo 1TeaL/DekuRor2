@@ -10,15 +10,56 @@ namespace DekuMod.Modules
     {
 
         internal static GameObject bombPrefab;
-
+        public static GameObject airforceTracer;
+        public static GameObject airforce45Tracer;
         internal static void RegisterProjectiles()
         {
             //only separating into separate methods for my sanity
 
-            CreateBomb();
-            AddProjectile(bombPrefab);
+            //CreateBomb();
+            //AddProjectile(bombPrefab);
 
-            
+            //bullet tracers
+            airforceTracer = Modules.Assets.airforceEffect;
+
+            if (!airforceTracer.GetComponent<EffectComponent>()) airforceTracer.AddComponent<EffectComponent>();
+            if (!airforceTracer.GetComponent<VFXAttributes>()) airforceTracer.AddComponent<VFXAttributes>();
+            if (!airforceTracer.GetComponent<NetworkIdentity>()) airforceTracer.AddComponent<NetworkIdentity>();
+
+            Material bulletMat = null;
+
+            foreach (LineRenderer i in airforceTracer.GetComponentsInChildren<LineRenderer>())
+            {
+                if (i)
+                {
+                    bulletMat = UnityEngine.Object.Instantiate<Material>(i.material);
+                    bulletMat.SetColor("_TintColor", new Color(0.68f, 0.58f, 0.05f));
+                    i.material = bulletMat;
+                    i.startColor = new Color(0.68f, 0.58f, 0.05f);
+                    i.endColor = new Color(0.68f, 0.58f, 0.05f);
+
+                }
+            }
+            Modules.Effects.AddEffect(airforceTracer);
+            airforce45Tracer = Modules.Assets.airforce45Effect;
+
+            if (!airforce45Tracer.GetComponent<EffectComponent>()) airforce45Tracer.AddComponent<EffectComponent>();
+            if (!airforce45Tracer.GetComponent<VFXAttributes>()) airforce45Tracer.AddComponent<VFXAttributes>();
+            if (!airforce45Tracer.GetComponent<NetworkIdentity>()) airforce45Tracer.AddComponent<NetworkIdentity>();
+
+            foreach (LineRenderer i in airforce45Tracer.GetComponentsInChildren<LineRenderer>())
+            {
+                if (i)
+                {
+                    bulletMat = UnityEngine.Object.Instantiate<Material>(i.material);
+                    bulletMat.SetColor("_TintColor", new Color(0.68f, 0.58f, 0.05f));
+                    i.material = bulletMat;
+                    i.startColor = new Color(0.68f, 0.58f, 0.05f);
+                    i.endColor = new Color(0.68f, 0.58f, 0.05f);
+
+                }
+            }
+            Modules.Effects.AddEffect(airforce45Tracer);
 
         }
 
@@ -29,50 +70,50 @@ namespace DekuMod.Modules
             Modules.Prefabs.projectilePrefabs.Add(projectileToAdd);
         }
 
-        private static void CreateBomb()
-        {
-            bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "HenryBombProjectile");
+        //private static void CreateBomb()
+        //{
+        //    bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "HenryBombProjectile");
 
-            ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
-            InitializeImpactExplosion(bombImpactExplosion);
+        //    ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
+        //    InitializeImpactExplosion(bombImpactExplosion);
 
-            bombImpactExplosion.blastRadius = 16f;
-            bombImpactExplosion.destroyOnEnemy = true;
-            bombImpactExplosion.lifetime = 12f;
-            bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
-            bombImpactExplosion.timerAfterImpact = true;
-            bombImpactExplosion.lifetimeAfterImpact = 0.1f;
+        //    bombImpactExplosion.blastRadius = 16f;
+        //    bombImpactExplosion.destroyOnEnemy = true;
+        //    bombImpactExplosion.lifetime = 12f;
+        //    bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+        //    //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
+        //    bombImpactExplosion.timerAfterImpact = true;
+        //    bombImpactExplosion.lifetimeAfterImpact = 0.1f;
 
-            ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
-            bombController.startSound = "";
-        }
+        //    ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
+        //    if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
+        //    bombController.startSound = "";
+        //}
 
-        private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
-        {
-            projectileImpactExplosion.blastDamageCoefficient = 1f;
-            projectileImpactExplosion.blastProcCoefficient = 1f;
-            projectileImpactExplosion.blastRadius = 1f;
-            projectileImpactExplosion.bonusBlastForce = Vector3.zero;
-            projectileImpactExplosion.childrenCount = 0;
-            projectileImpactExplosion.childrenDamageCoefficient = 0f;
-            projectileImpactExplosion.childrenProjectilePrefab = null;
-            projectileImpactExplosion.destroyOnEnemy = false;
-            projectileImpactExplosion.destroyOnWorld = false;
-            projectileImpactExplosion.explosionSoundString = "";
-            projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
-            projectileImpactExplosion.fireChildren = false;
-            projectileImpactExplosion.impactEffect = null;
-            projectileImpactExplosion.lifetime = 0f;
-            projectileImpactExplosion.lifetimeAfterImpact = 0f;
-            projectileImpactExplosion.lifetimeExpiredSoundString = "";
-            projectileImpactExplosion.lifetimeRandomOffset = 0f;
-            projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
-            projectileImpactExplosion.timerAfterImpact = false;
+        //private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
+        //{
+        //    projectileImpactExplosion.blastDamageCoefficient = 1f;
+        //    projectileImpactExplosion.blastProcCoefficient = 1f;
+        //    projectileImpactExplosion.blastRadius = 1f;
+        //    projectileImpactExplosion.bonusBlastForce = Vector3.zero;
+        //    projectileImpactExplosion.childrenCount = 0;
+        //    projectileImpactExplosion.childrenDamageCoefficient = 0f;
+        //    projectileImpactExplosion.childrenProjectilePrefab = null;
+        //    projectileImpactExplosion.destroyOnEnemy = false;
+        //    projectileImpactExplosion.destroyOnWorld = false;
+        //    projectileImpactExplosion.explosionSoundString = "";
+        //    projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
+        //    projectileImpactExplosion.fireChildren = false;
+        //    projectileImpactExplosion.impactEffect = null;
+        //    projectileImpactExplosion.lifetime = 0f;
+        //    projectileImpactExplosion.lifetimeAfterImpact = 0f;
+        //    projectileImpactExplosion.lifetimeExpiredSoundString = "";
+        //    projectileImpactExplosion.lifetimeRandomOffset = 0f;
+        //    projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
+        //    projectileImpactExplosion.timerAfterImpact = false;
 
-            projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
-        }
+        //    projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+        //}
 
         private static GameObject CreateGhostPrefab(string ghostName)
         {
