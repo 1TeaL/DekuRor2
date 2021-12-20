@@ -121,6 +121,7 @@ namespace DekuMod.SkillStates
 			this.attack.hitBoxGroup = hitBoxGroup;
 			this.attack.isCrit = base.RollCrit();
 
+
 			this.detector = new OverlapAttack();
 			this.detector.damageType = this.damageType;
 			this.detector.attacker = base.gameObject;

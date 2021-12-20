@@ -13,7 +13,8 @@ namespace DekuMod.SkillStates
         public float baseDuration = 1f;
         private float duration;
         public static event Action<int> Compacted;
-        public static GameObject explosionPrefab = Resources.Load<GameObject>("prefabs/effects/MageLightningBombExplosion");
+        //public static GameObject explosionPrefab = Resources.Load<GameObject>("prefabs/effects/MageLightningBombExplosion");
+        public static GameObject explosionPrefab = Modules.Projectiles.delawareTracer;
 
         public override void OnEnter()
         {
@@ -62,6 +63,7 @@ namespace DekuMod.SkillStates
             if (base.isAuthority)
             {
                 Vector3 theSpot = aimRay.origin + 8 * aimRay.direction;
+                Vector3 theSpot2 = aimRay.origin + 2 * aimRay.direction;
 
                 BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = 15f;
@@ -80,7 +82,8 @@ namespace DekuMod.SkillStates
                 EffectData effectData = new EffectData();
                 {
                 effectData.scale = 15;
-                effectData.origin = theSpot;
+                effectData.origin = theSpot2;
+                effectData.rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
                 };
 
                 EffectManager.SpawnEffect(explosionPrefab, effectData, true);

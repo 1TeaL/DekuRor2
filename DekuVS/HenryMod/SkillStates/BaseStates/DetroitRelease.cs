@@ -14,10 +14,12 @@ namespace DekuMod.SkillStates.BaseStates
         //private string lMuzzleString = "LFinger";
         private string rMuzzleString = "RShoulder";
         internal Vector3 moveVec;
-		private GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
+		//private GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
+		private GameObject explosionPrefab = Modules.Projectiles.detroitweakTracer;
 		private float baseForce = 600f;
-		
-		
+
+		public GameObject blastEffectPrefab = Resources.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
+
 
 		public override void OnEnter()
         {
@@ -38,15 +40,33 @@ namespace DekuMod.SkillStates.BaseStates
 			return InterruptPriority.Frozen;
 		}
 		public override void OnExit()
-		{
-			
+        {
+
+            Ray aimRay = base.GetAimRay();
 
 			EffectData effectData = new EffectData
 			{
 				scale = this.radius * 2f,
-				origin = base.characterBody.corePosition
+				origin = base.characterBody.corePosition,
+				rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z)),
 			};
 			EffectManager.SpawnEffect(this.explosionPrefab, effectData, true);
+
+			for (int i = 0; i <= 20; i++)
+			{
+				float num = 60f;
+				Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+				float num2 = 0.01f;
+				rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+				rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+				EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
+				{
+					origin = base.characterBody.corePosition,
+					scale = this.radius * 2,
+					rotation = rotation
+				}, false);
+			}
+
 			bool isAuthority = base.isAuthority;
 			if (isAuthority)
 			{
@@ -66,6 +86,8 @@ namespace DekuMod.SkillStates.BaseStates
 					damageColorIndex = DamageColorIndex.Default,
 					damageType = DamageType.Stun1s,
 					attackerFiltering = AttackerFiltering.Default
+					
+
 				}.Fire();
 			}
 			base.OnExit();

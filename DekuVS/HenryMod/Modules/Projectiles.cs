@@ -11,6 +11,9 @@ namespace DekuMod.Modules
 
         internal static GameObject bombPrefab;
         public static GameObject airforceTracer;
+        public static GameObject delawareTracer;
+        public static GameObject detroitTracer;
+        public static GameObject detroitweakTracer;
         public static GameObject airforce45Tracer;
         internal static void RegisterProjectiles()
         {
@@ -60,6 +63,13 @@ namespace DekuMod.Modules
                 }
             }
             Modules.Effects.AddEffect(airforce45Tracer);
+
+            delawareTracer = Modules.Assets.delawareEffect;
+            Modules.Effects.AddEffect(delawareTracer);
+            detroitTracer = Modules.Assets.detroitEffect;
+            Modules.Effects.AddEffect(detroitTracer);
+            detroitweakTracer = Modules.Assets.detroitweakEffect;
+            Modules.Effects.AddEffect(detroitweakTracer);
 
         }
 

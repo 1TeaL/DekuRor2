@@ -398,8 +398,8 @@ namespace DekuMod.Modules.Survivors
 
             Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
             {
-                skillDef7,
-                skillDef6
+                skillDef6,
+                skillDef7
             });
             #endregion
             #region Boosted Skills

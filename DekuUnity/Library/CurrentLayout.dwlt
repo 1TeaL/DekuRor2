@@ -45,10 +45,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 508, y: 498}
+  m_MinSize: {x: 683, y: 498}
   m_MaxSize: {x: 14004, y: 14048}
   vertical: 0
-  controlID: 60
+  controlID: 114
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,16 +68,16 @@ MonoBehaviour:
     y: 0
     width: 730
     height: 947
-  m_MinSize: {x: 102, y: 124}
+  m_MinSize: {x: 277, y: 74}
   m_MaxSize: {x: 4002, y: 4024}
-  m_ActualView: {fileID: 12}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
   - {fileID: 13}
   - {fileID: 14}
   - {fileID: 12}
-  m_Selected: 3
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 3
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -97,8 +97,8 @@ MonoBehaviour:
     y: 0
     width: 351
     height: 570
-  m_MinSize: {x: 202, y: 224}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 498}
   m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 61
+  controlID: 16
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 62
+  controlID: 17
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -698,7 +698,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 247400
+  m_LastSelectedObjectID: -204732
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -763,20 +763,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Deku
+    - Assets/Deku/VFX
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Deku
+  - Assets/Deku/VFX
   m_LastFoldersGridSize: 16
   m_LastProjectPath: F:\Theodore 3\Risk of Rain 2 modding\Mods\DekuRor2\DekuUnity
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 3e880000
-    m_LastClickedID: 34878
-    m_ExpandedIDs: 00000000cc4e0000d04e00000a7100005871000098710000b871000076720000d472000052730000c47300006a7500008a780000947a0000087b0000367b0000b07c0000b87c0000c27d0000d47e000084820000c6820000bc84000082850000e6850000a48600003e880000f68800004e8a0000fa8b0000048c00005a9a00005c9a00005e9a000000ca9a3b
+    scrollPos: {x: 0, y: 111}
+    m_SelectedIDs: ae670000
+    m_LastClickedID: 26542
+    m_ExpandedIDs: 00000000200f0000240f000080500000ce5000000e5100002e510000ec5100004a520000c85200003a530000e0540000a6570000025800000a5a00007e5a0000ac5a0000245c00002c5c0000365d00003c5e0000485e00002a61000054620000966200008c640000506500008c650000b665000074660000a6660000b0660000ae67000010680000c8680000206a0000ce6b0000d86b000004970000069700000897000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -792,7 +792,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 5}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -804,7 +804,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000cc4e0000d04e00000a7100005871000098710000b871000076720000d472000052730000c47300006a7500008a780000947a0000087b0000367b0000b07c0000b87c0000c27d0000d47e000084820000c6820000bc84000082850000e6850000a48600003e880000f68800004e8a0000fa8b0000048c00005a9a00005c9a00005e9a0000
+    m_ExpandedIDs: 00000000200f0000240f000080500000ce5000000e5100002e510000ec5100004a520000c85200003a530000e0540000025800000a5a00007e5a0000ac5a0000245c00002c5c0000365d0000485e000054620000966200008c64000050650000b66500007466000010680000c8680000206a0000ce6b0000d86b0000049700000697000008970000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -832,23 +832,23 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300008ea0010072580000f06f0000c67c0000a431010096590100a06201001a4f00002e5e0100385f0000245a0000d068000092560000026c00009e5c0000bc5a00004c740000
+    m_ExpandedInstanceIDs: c62300008ea0010072580000f06f0000c67c0000a431010096590100a06201001a4f00002e5e0100385f0000245a0000d068000092560000026c00009e5c0000bc5a00004c740000ee680000545f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: windbullet
-      m_OriginalName: windbullet
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 40590
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 5}
+      m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -922,10 +922,10 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 60}
-      m_SelectedIDs: f6c60300
-      m_LastClickedID: 247542
-      m_ExpandedIDs: 00c6030002c6030010c603001ac6030020c6030024c6030026c6030028c603002ac603002cc6030030c603004ec6030050c6030054c6030060c6030062c6030064c6030068c603006ac603006ec6030070c6030082c6030092c603009cc60300a0c60300a2c60300a4c60300a6c60300d4c60300d8c60300dac60300e8c60300ecc60300eec60300f0c60300f2c60300f6c60300fac6030014c7030016c7030018c7030048c80300
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 7000f9ff
+      m_LastClickedID: -458640
+      m_ExpandedIDs: c0240200c2240200d0240200da240200e0240200e4240200e6240200e8240200ea240200ec240200f02402000e2502001025020014250200202502002225020024250200282502002a2502002e2502003025020042250200522502005c2502006025020062250200642502006625020094250200982502009a250200a8250200ac250200ae250200b0250200b2250200b6250200ba250200d4250200d6250200d825020008270200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1014,15 +1014,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.0010404624, y: -0.99103063, z: 0.1334079, w: 0.0077186134}
   m_Size:
-    m_Target: 10.971132
+    m_Target: 14.692545
     speed: 2
-    m_Value: 10.971132
+    m_Value: 14.692545
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_LastSceneViewRotation: {x: 0.20050882, y: 0.6446157, z: -0.18070607, w: 0.71527076}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 

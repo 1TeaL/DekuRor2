@@ -18,6 +18,9 @@ namespace DekuMod.Modules
         //internal static GameObject swordSwingEffect;
         //internal static GameObject swordHitImpactEffect;
 
+        internal static GameObject detroitEffect;
+        internal static GameObject detroitweakEffect;
+        internal static GameObject delawareEffect;
         internal static GameObject airforceEffect;
         internal static GameObject airforce45Effect;
 
@@ -82,6 +85,9 @@ namespace DekuMod.Modules
 
             airforceEffect = LoadEffect("windbullet");
             airforce45Effect = LoadEffect("windbullet45");
+            delawareEffect = LoadEffect("delaware");
+            detroitEffect = LoadEffect("detroit");
+            detroitweakEffect = LoadEffect("detroitweak");
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

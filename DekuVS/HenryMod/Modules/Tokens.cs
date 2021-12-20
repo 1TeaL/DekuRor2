@@ -34,8 +34,8 @@ namespace DekuMod.Modules
             #endregion
 
             #region Passive
-            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Deku passive");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Ninth One For All User");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Deku has innate increased health regen the lower his health is. He has a double jump. He can sprint in any direction.");
              #endregion
 
             #region Primary
