@@ -85,7 +85,7 @@ namespace DekuMod.SkillStates
                     float spread = bulletSpread;
                     float width = bulletwidth;
                     float force = 100;
-                    baserotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
+                    baserotation = Quaternion.LookRotation(aimRay.direction);
 
                     EffectManager.SpawnEffect(Modules.Projectiles.airforce45Tracer, new EffectData
                     {

@@ -57,6 +57,7 @@ namespace DekuMod.SkillStates
             {
                 speedattack = 1;
             }
+            base.StartAimMode(duration, true);
 
             SpeedCoefficient = initialSpeedCoefficient;
  

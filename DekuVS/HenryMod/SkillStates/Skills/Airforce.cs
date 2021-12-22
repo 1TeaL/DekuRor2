@@ -56,7 +56,7 @@ namespace DekuMod.SkillStates
                     {
                         origin = FindModelChild(muzzleString).position,
                         scale = 1f,
-                        rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z))
+                        rotation = Quaternion.LookRotation(aimRay.direction)
 
                     }, false);
                     new BulletAttack

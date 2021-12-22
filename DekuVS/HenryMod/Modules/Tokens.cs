@@ -12,9 +12,9 @@ namespace DekuMod.Modules
 
             string desc = "Deku is high risk survivor that can boost his stats and abilities but with detrimental health regen and health costs.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > He scales with attack speed and movespeed on multiple of his skills" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > He can also sprint in any direction, enabled by using either of his primary skills once or detroit smashes" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > OFA 100% focuses on close range but greater mobility while OFA 45% focuses on mid-range attacks." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > OFA 100%'s negative health regen can be mitigated with regen items and it stops at 1-2Hp while OFA 45%'s can't." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Ancient Scepter will give 10% Lifesteal for OFA 100% and 5% Lifesteal for OFA 45%" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Ancient Scepter will give 10% Lifesteal for OFA 100% and 5% Lifesteal for OFA 45%." + Environment.NewLine + Environment.NewLine;
 
 
 
@@ -40,7 +40,7 @@ namespace DekuMod.Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_NAME", "Airforce");
-            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x</style><style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}%</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}%</style>.");
             LanguageAPI.Add(prefix + "PRIMARY2_NAME", "Shoot Style Kick");
             LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill.");
             
@@ -52,14 +52,14 @@ namespace DekuMod.Modules
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_NAME", "Blackwhip");
-            LanguageAPI.Add(prefix + "SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>, gaining barrier on hit, scaling with attack speed.");
+            LanguageAPI.Add(prefix + "SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhipDamageCoefficient}%</style>, gaining barrier on hit, scaling with attack speed.");
             LanguageAPI.Add(prefix + "SECONDARY2_NAME", "Manchester Smash");
             LanguageAPI.Add(prefix + "SECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Jump in the air and slam down, dealing <style=cIsDamage>{100f * StaticValues.manchesterDamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed.");
 
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_NAME", "Detroit Smash 100%");
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroit100DamageCoefficient}% increasing infinitely</style>. " + Helpers.Damage("Costs 10% of max Health")+".");
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY2_NAME", "Blackwhip 45%");
-            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling them right in front of you, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip45DamageCoefficient}%</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>.");
             #endregion
 
             #region Utility
@@ -73,7 +73,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY_NAME", "Delaware Smash 100%");
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Delaware Smash, dealing <style=cIsDamage>{100f * StaticValues.delawareDamageCoefficient}% damage in an AOE, sending yourself backwards</style>. " + Helpers.Damage("Costs 10% of max Health")+".");
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY2_NAME", "St Louis Smash 45%");
-            LanguageAPI.Add(prefix + "BOOSTEDUTILITY2_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> St Louis Smash, stunning enemies in front, dealing <style=cIsDamage>{100f * StaticValues.StLouis45DamageCoefficient}% damage in an AOE </style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY2_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> St Louis Smash, stunning enemies in front, dealing <style=cIsDamage>{100f * StaticValues.StLouis45DamageCoefficient}% damage</style>.");
             #endregion
 
             #region Special

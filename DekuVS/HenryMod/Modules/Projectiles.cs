@@ -10,6 +10,7 @@ namespace DekuMod.Modules
     {
 
         internal static GameObject bombPrefab;
+        public static GameObject blackwhipTracer;
         public static GameObject airforceTracer;
         public static GameObject delawareTracer;
         public static GameObject detroitTracer;
@@ -63,6 +64,26 @@ namespace DekuMod.Modules
                 }
             }
             Modules.Effects.AddEffect(airforce45Tracer);
+
+            blackwhipTracer = Modules.Assets.blackwhip;
+
+            if (!blackwhipTracer.GetComponent<EffectComponent>()) blackwhipTracer.AddComponent<EffectComponent>();
+            if (!blackwhipTracer.GetComponent<VFXAttributes>()) blackwhipTracer.AddComponent<VFXAttributes>();
+            if (!blackwhipTracer.GetComponent<NetworkIdentity>()) blackwhipTracer.AddComponent<NetworkIdentity>();
+
+            foreach (LineRenderer i in blackwhipTracer.GetComponentsInChildren<LineRenderer>())
+            {
+                if (i)
+                {
+                    bulletMat = UnityEngine.Object.Instantiate<Material>(i.material);
+                    bulletMat.SetColor("_TintColor", new Color(0.68f, 0.58f, 0.05f));
+                    i.material = bulletMat;
+                    i.startColor = new Color(0.68f, 0.58f, 0.05f);
+                    i.endColor = new Color(0.68f, 0.58f, 0.05f);
+
+                }
+            }
+            Modules.Effects.AddEffect(blackwhipTracer);
 
             delawareTracer = Modules.Assets.delawareEffect;
             Modules.Effects.AddEffect(delawareTracer);

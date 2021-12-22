@@ -290,14 +290,14 @@ namespace DekuMod.SkillStates
 				bool flag = this.detector.Fire(list);
 				if (flag)
 				{
-                    //foreach (HurtBox hurtBox in list)
-                    //{
-                    //    bool flag2 = hurtBox.healthComponent && hurtBox.healthComponent.body;
-                    //    if (flag2)
-                    //    {
-                    //        this.ForceFlinch(hurtBox.healthComponent.body);
-                    //    }
-                    //}
+                    foreach (HurtBox hurtBox in list)
+                    {
+                        bool flag2 = hurtBox.healthComponent && hurtBox.healthComponent.body;
+                        if (flag2)
+                        {
+                            this.ForceFlinch(hurtBox.healthComponent.body);
+                        }
+                    }
                     this.OnHitEnemyAuthority();
 				}
 			}
@@ -353,25 +353,25 @@ namespace DekuMod.SkillStates
 		{
 			return InterruptPriority.PrioritySkill;
 		}
-		//protected virtual void ForceFlinch(CharacterBody body)
-		//{
-		//	SetStateOnHurt component = body.healthComponent.GetComponent<SetStateOnHurt>();
-		//	bool flag = component == null;
-		//	if (!flag)
-		//	{
-		//		bool canBeHitStunned = component.canBeHitStunned;
-		//		if (canBeHitStunned)
-		//		{
-		//			component.SetPain();
-		//			bool flag2 = body.characterMotor;
-		//			if (flag2)
-		//			{
-		//				body.characterMotor.velocity = Vector3.zero;
-		//			}
-		//		}
-		//	}
-		//}
+        protected virtual void ForceFlinch(CharacterBody body)
+        {
+            SetStateOnHurt component = body.healthComponent.GetComponent<SetStateOnHurt>();
+            bool flag = component == null;
+            if (!flag)
+            {
+                bool canBeHitStunned = component.canBeHitStunned;
+                if (canBeHitStunned)
+                {
+                    component.SetPain();
+                    bool flag2 = body.characterMotor;
+                    if (flag2)
+                    {
+                        body.characterMotor.velocity = Vector3.zero;
+                    }
+                }
+            }
+        }
 
 
-	}
+    }
 }

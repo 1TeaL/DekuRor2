@@ -10,10 +10,15 @@ namespace DekuMod.SkillStates
 
     {
 		public static float baseDuration = 0.05f;
+		public DekuController dekucon;
+
+
 		private float duration;
 		public override void OnEnter()
 		{
 			base.OnEnter();
+			dekucon = base.GetComponent<DekuController>();
+			dekucon.OFA.Stop();
 			this.duration = baseDuration;
 			bool active = NetworkServer.active;
 			if (active)

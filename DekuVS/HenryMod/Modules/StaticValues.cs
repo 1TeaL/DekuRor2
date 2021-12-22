@@ -15,12 +15,12 @@ namespace DekuMod.Modules
 
         internal const float airforceDamageCoefficient = 1f;
         internal const float shootkickDamageCoefficient = 3f;
-        internal const float airforce45DamageCoefficient = 1.5f;
+        internal const float airforce45DamageCoefficient = 1.25f;
         internal const float shootbulletDamageCoefficient = 2f;
 
-        internal const float blackwhipDamageCoefficient = 3f;
+        internal const float blackwhipDamageCoefficient = 0.5f;
         internal const float manchesterDamageCoefficient = 3f;
-        internal const float blackwhip45DamageCoefficient = 4f;
+        internal const float blackwhip45DamageCoefficient = 0.8f;
 
 
         internal const float detroit100DamageCoefficient = 6f;
@@ -34,7 +34,7 @@ namespace DekuMod.Modules
 
         internal const float shootbulletstunDamageCoefficient = 1f;
 
-        internal const float blackwhipPull = 12f;
+        internal const float blackwhipPull = 8f;
 
 
 

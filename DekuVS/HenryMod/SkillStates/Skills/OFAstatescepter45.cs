@@ -15,6 +15,7 @@ namespace DekuMod.SkillStates
 		public static SkillDef secondaryDef = Deku.secondaryboost45SkillDef;
 		public static SkillDef utilityDef = Deku.utilityboost45SkillDef;
 		public static SkillDef specialDef = Deku.ofadownSkillDef;
+		public DekuController dekucon;
 
 
 		private float duration;
@@ -22,6 +23,8 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			this.duration = baseDuration;
+			dekucon = base.GetComponent<DekuController>();
+			dekucon.OFA.Play();
 
 			bool active = NetworkServer.active;
 			if (active)

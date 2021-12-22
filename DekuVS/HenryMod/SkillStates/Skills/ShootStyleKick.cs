@@ -78,6 +78,7 @@ namespace DekuMod.SkillStates
 			duration = baseduration / speedattack;
 			SpeedCoefficient = initialSpeedCoefficient;
 
+
 			base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration/2);
 			this.animator = base.GetModelAnimator();
 			this.animator.SetBool("attacking", true);

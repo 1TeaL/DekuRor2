@@ -56,6 +56,8 @@ namespace DekuMod.SkillStates
 			base.PlayAnimation("FullBody, Override", "LegSmashFollow", "Attack.playbackRate", dashPrepDuration);
 			this.dashVector = base.inputBank.aimDirection;
 			base.characterDirection.forward = this.dashVector;
+			base.StartAimMode(dashPrepDuration, true);
+
 
 		}
 		private void CreateBlinkEffect(Vector3 origin)

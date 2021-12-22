@@ -43,16 +43,6 @@ namespace DekuMod.SkillStates.BaseStates
 		public override void OnExit()
 		{
 
-
-			Ray aimRay = base.GetAimRay();
-			EffectData effectData = new EffectData
-			{
-				scale = this.radius * 2f,
-				origin = base.characterBody.corePosition,
-				rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z)),
-			};
-			EffectManager.SpawnEffect(this.explosionPrefab, effectData, true);
-
 			for (int i = 0; i <= 20; i++)
 			{
 				float num = 60f;
@@ -71,23 +61,27 @@ namespace DekuMod.SkillStates.BaseStates
 			bool isAuthority = base.isAuthority;
 			if (isAuthority)
 			{
-				new BlastAttack
+				BlastAttack blastAttack = new BlastAttack();
+
+				blastAttack.position = base.characterBody.corePosition;
+				blastAttack.baseDamage = this.damageStat * this.damageMult;
+				blastAttack.baseForce = this.baseForce * this.damageMult;
+				blastAttack.radius = this.radius;
+				blastAttack.attacker = base.gameObject;
+				blastAttack.inflictor = base.gameObject;
+				blastAttack.teamIndex = base.teamComponent.teamIndex;
+				blastAttack.crit = base.RollCrit();
+				blastAttack.procChainMask = default(ProcChainMask);
+				blastAttack.procCoefficient = 3f;
+				blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+				blastAttack.damageColorIndex = DamageColorIndex.Default;
+				blastAttack.damageType = DamageType.Stun1s;
+				blastAttack.attackerFiltering = AttackerFiltering.Default;
+
+				if (blastAttack.Fire().hitCount > 0)
 				{
-					position = base.characterBody.corePosition,
-					baseDamage = this.damageStat * this.damageMult,
-					baseForce = this.baseForce * this.damageMult,
-					radius = this.radius,
-					attacker = base.gameObject,
-					inflictor = base.gameObject,
-					teamIndex = base.teamComponent.teamIndex,
-					crit = base.RollCrit(),
-					procChainMask = default(ProcChainMask),
-					procCoefficient = 3f,
-					falloffModel = BlastAttack.FalloffModel.None,
-					damageColorIndex = DamageColorIndex.Default,
-					damageType = DamageType.Stun1s,
-					attackerFiltering = AttackerFiltering.Default
-				}.Fire();
+					this.OnHitEnemyAuthority();
+				}
 			}
 			base.OnExit();
 
@@ -100,6 +94,18 @@ namespace DekuMod.SkillStates.BaseStates
 			{
 				this.outer.SetNextStateToMain();
 			}
+		}
+		protected virtual void OnHitEnemyAuthority()
+		{
+			Ray aimRay = base.GetAimRay();
+
+			EffectData effectData = new EffectData
+			{
+				scale = this.radius * 2f,
+				origin = base.characterBody.corePosition,
+				rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z)),
+			};
+			EffectManager.SpawnEffect(this.explosionPrefab, effectData, true);
 		}
 	}
 

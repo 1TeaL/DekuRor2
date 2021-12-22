@@ -56,7 +56,8 @@ namespace DekuMod.SkillStates
             //}
 
             SpeedCoefficient = initialSpeedCoefficient;
- 
+            base.StartAimMode(duration, true);
+
             AkSoundEngine.PostEvent(3842300745, this.gameObject);
             AkSoundEngine.PostEvent(573664262, this.gameObject);
             this.modelTransform = base.GetModelTransform();

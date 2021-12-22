@@ -83,6 +83,7 @@ namespace DekuMod.Modules.Survivors
             {
                 Deku.CreateScepterSkills();
             }
+            bodyPrefab.AddComponent<DekuController>();
         }
 
         internal override void InitializeUnlockables()
@@ -236,7 +237,7 @@ namespace DekuMod.Modules.Survivors
                 activationState = new SerializableEntityStateType(typeof(SkillStates.Manchester)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 5f,
+                baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,
@@ -515,7 +516,7 @@ namespace DekuMod.Modules.Survivors
                 skillDescriptionToken = prefix + "BOOSTEDSECONDARY2_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("blackwhipsuper"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.Blackwhip45)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = true,
