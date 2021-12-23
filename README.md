@@ -3,7 +3,7 @@ Deku mod for Ror2
 Go beyond
 
 ## Deku
-Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange losing health and taking damage from his stronger skills. 
+Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571.
 
@@ -85,6 +85,9 @@ St Louis Smash, stunning and pushing away enemies in front, dealing 600% damage.
 These stats are prone to change.
 
 ## Changelog
+- 1.3.4
+        - Accidentally increased damage multiplier for OFA 100%(2-2.5x)- was testing ways to maybe buff OFA 100% but not set yet.
+        - Lowered the volume of Deku's voice and lowered their chance of playing as well so he doesn't speak everytime.
 - 1.3.3 
         - Lowered CD of manchester to 4 seconds (thought 5 was too long).
         - Networked manchester smash so no more self-damage if you were not the host. 
