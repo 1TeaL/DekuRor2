@@ -20,7 +20,7 @@
 [Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
-DekuVS.vs/
+.vs/
 
 # Gradle cache directory
 .gradle/
