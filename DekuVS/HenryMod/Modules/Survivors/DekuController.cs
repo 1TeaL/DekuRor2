@@ -15,7 +15,16 @@ namespace DekuMod.Modules.Survivors
         public ChildLocator child;
         public CharacterBody body;
         public ParticleSystem OFA;
-        
+        private int buffCountToApply;
+        private static bool scepterActive;
+        public GenericSkill specialSkillSlot;
+        string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
+        public bool fajinon;
+        public Animator anim;
+        public float stopwatch;
+        public float fajinrate = 10f;
+
+
 
         public void Awake()
         {
@@ -26,7 +35,56 @@ namespace DekuMod.Modules.Survivors
                 OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
             }
             OFA.Stop();
+
+            anim = GetComponentInChildren<Animator>();
+            stopwatch = 0f;
         }
+
+        public void IncrementBuffCount()
+        {
+            buffCountToApply++;
+            if (buffCountToApply >= Modules.StaticValues.fajinMaxStack)
+            {
+                buffCountToApply = Modules.StaticValues.fajinMaxStack;
+            }
+        }
+
+        public void AddToBuffCount(int numbertoadd)
+        {
+            buffCountToApply += numbertoadd;
+            if (buffCountToApply >= Modules.StaticValues.fajinMaxStack)
+            {
+                buffCountToApply = Modules.StaticValues.fajinMaxStack;
+            }
+        }
+
+        public int GetBuffCount()
+        {
+            if (buffCountToApply > Modules.StaticValues.fajinMaxStack)
+            {
+                return Modules.StaticValues.fajinMaxStack;
+            }
+            return buffCountToApply;
+        }
+
+        
+
+        public void FixedUpdate()
+        {
+            if (fajinon)
+            {
+                
+                if (anim.GetBool("isMoving") && stopwatch >= fajinrate/body.moveSpeed)
+                {
+                    IncrementBuffCount();
+                    stopwatch = 0f;
+                }
+            }
+
+            stopwatch += Time.fixedDeltaTime;
+            
+        }
+
     }
 }
 

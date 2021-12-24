@@ -36,6 +36,8 @@ namespace DekuMod.Modules
 
         internal const float blackwhipPull = 8f;
 
+        internal const int fajinMaxStack = 100;
+        internal const float fajinMaxMultiplier = 2f;
 
 
 

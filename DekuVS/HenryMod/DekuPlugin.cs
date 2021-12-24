@@ -89,7 +89,7 @@ namespace DekuMod
             On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
-            //On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
+            On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
             //On.RoR2.HealthComponent.TakeDamage += BlackwhipPull;            
         }
 
@@ -97,6 +97,14 @@ namespace DekuMod
         {
             //regen 
             orig.Invoke(self);
+
+            bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
+            if (fajin)
+            {
+                self.damage *= Mathf.Lerp(1f, Modules.StaticValues.fajinMaxMultiplier, (float)self.GetComponent<DekuController>().GetBuffCount() / (float)(Modules.StaticValues.fajinMaxStack/2));
+
+            }
+
             bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
             
             //bool one = self.healthComponent > 1f;
@@ -284,12 +292,23 @@ namespace DekuMod
             }
 
         }
+        
+        private void CharacterBody_FixedUpdate(On.RoR2.CharacterBody.orig_FixedUpdate orig, CharacterBody self)
+        {
+            orig(self);
 
-        //private void CharacterBody_FixedUpdate(On.RoR2.CharacterBody.orig_FixedUpdate orig, CharacterBody self)
-        //{
+            //Update fajin
+            if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
+            {
+                DekuController dekucon = self.GetComponent<DekuController>();
+                if (dekucon.fajinon)
+                {
+                    self.SetBuffCount(Modules.Buffs.fajinBuff.buffIndex, dekucon.GetBuffCount());
+                }
 
+            }
 
-        //}
+        }
 
     }
 }
