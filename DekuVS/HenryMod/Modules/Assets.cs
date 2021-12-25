@@ -19,6 +19,7 @@ namespace DekuMod.Modules
         //internal static GameObject swordHitImpactEffect;
 
         internal static GameObject blackwhip;
+        //internal static GameObject blackwhipbullet;
         internal static GameObject blackwhipforward;
         internal static GameObject detroitEffect;
         internal static GameObject detroitweakEffect;
@@ -92,6 +93,24 @@ namespace DekuMod.Modules
             detroitweakEffect = LoadEffect("detroitweak");
             blackwhipforward = LoadEffect("blackwhipforward");
             blackwhip = LoadEffect("blackwhipeffect");
+
+            //blackwhipbullet = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
+
+            //if (bombExplosionEffect)
+            //{
+            //    ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
+            //    shakeEmitter.amplitudeTimeDecay = true;
+            //    shakeEmitter.duration = 0.5f;
+            //    shakeEmitter.radius = 200f;
+            //    shakeEmitter.scaleShakeRadiusWithLocalScale = false;
+
+            //    shakeEmitter.wave = new Wave
+            //    {
+            //        amplitude = 1f,
+            //        frequency = 40f,
+            //        cycleOffset = 0f
+            //    };
+            //}
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

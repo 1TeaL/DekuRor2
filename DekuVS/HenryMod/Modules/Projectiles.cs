@@ -9,7 +9,7 @@ namespace DekuMod.Modules
     public static class Projectiles
     {
 
-        internal static GameObject bombPrefab;
+        internal static GameObject blackwhipPrefab;
         public static GameObject blackwhipTracer;
         public static GameObject airforceTracer;
         public static GameObject delawareTracer;
@@ -20,8 +20,8 @@ namespace DekuMod.Modules
         {
             //only separating into separate methods for my sanity
 
-            //CreateBomb();
-            //AddProjectile(bombPrefab);
+            CreateBlackwhip();
+            AddProjectile(blackwhipPrefab);
 
             //bullet tracers
             airforceTracer = Modules.Assets.airforceEffect;
@@ -101,50 +101,51 @@ namespace DekuMod.Modules
             Modules.Prefabs.projectilePrefabs.Add(projectileToAdd);
         }
 
-        //private static void CreateBomb()
-        //{
-        //    bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "HenryBombProjectile");
+        private static void CreateBlackwhip()
+        {
+            blackwhipPrefab = CloneProjectilePrefab("magefirebolt", "HenryBombProjectile");
 
-        //    ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
-        //    InitializeImpactExplosion(bombImpactExplosion);
+            ProjectileImpactExplosion bombImpactExplosion = blackwhipPrefab.GetComponent<ProjectileImpactExplosion>();
+            InitializeImpactExplosion(bombImpactExplosion);
 
-        //    bombImpactExplosion.blastRadius = 16f;
-        //    bombImpactExplosion.destroyOnEnemy = true;
-        //    bombImpactExplosion.lifetime = 12f;
-        //    bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-        //    //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
-        //    bombImpactExplosion.timerAfterImpact = true;
-        //    bombImpactExplosion.lifetimeAfterImpact = 0.1f;
+            bombImpactExplosion.blastRadius = 8f;
+            bombImpactExplosion.destroyOnEnemy = true;
+            bombImpactExplosion.lifetime = 6f;
+            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
+            bombImpactExplosion.timerAfterImpact = false;
+            bombImpactExplosion.lifetimeAfterImpact = 0f;
+            bombImpactExplosion.destroyOnWorld = true;
 
-        //    ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-        //    if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
-        //    bombController.startSound = "";
-        //}
+            ProjectileController bombController = blackwhipPrefab.GetComponent<ProjectileController>();
+            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("blackwhipshootGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("blackwhipshootGhost");
+            bombController.startSound = "";
+        }
 
-        //private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
-        //{
-        //    projectileImpactExplosion.blastDamageCoefficient = 1f;
-        //    projectileImpactExplosion.blastProcCoefficient = 1f;
-        //    projectileImpactExplosion.blastRadius = 1f;
-        //    projectileImpactExplosion.bonusBlastForce = Vector3.zero;
-        //    projectileImpactExplosion.childrenCount = 0;
-        //    projectileImpactExplosion.childrenDamageCoefficient = 0f;
-        //    projectileImpactExplosion.childrenProjectilePrefab = null;
-        //    projectileImpactExplosion.destroyOnEnemy = false;
-        //    projectileImpactExplosion.destroyOnWorld = false;
-        //    projectileImpactExplosion.explosionSoundString = "";
-        //    projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
-        //    projectileImpactExplosion.fireChildren = false;
-        //    projectileImpactExplosion.impactEffect = null;
-        //    projectileImpactExplosion.lifetime = 0f;
-        //    projectileImpactExplosion.lifetimeAfterImpact = 0f;
-        //    projectileImpactExplosion.lifetimeExpiredSoundString = "";
-        //    projectileImpactExplosion.lifetimeRandomOffset = 0f;
-        //    projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
-        //    projectileImpactExplosion.timerAfterImpact = false;
+        private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
+        {
+            projectileImpactExplosion.blastDamageCoefficient = 1f;
+            projectileImpactExplosion.blastProcCoefficient = 1f;
+            projectileImpactExplosion.blastRadius = 1f;
+            projectileImpactExplosion.bonusBlastForce = Vector3.zero;
+            projectileImpactExplosion.childrenCount = 0;
+            projectileImpactExplosion.childrenDamageCoefficient = 0f;
+            projectileImpactExplosion.childrenProjectilePrefab = null;
+            projectileImpactExplosion.destroyOnEnemy = false;
+            projectileImpactExplosion.destroyOnWorld = false;
+            projectileImpactExplosion.explosionSoundString = "";
+            projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
+            projectileImpactExplosion.fireChildren = false;
+            projectileImpactExplosion.impactEffect = null;
+            projectileImpactExplosion.lifetime = 0f;
+            projectileImpactExplosion.lifetimeAfterImpact = 0f;
+            projectileImpactExplosion.lifetimeExpiredSoundString = "";
+            projectileImpactExplosion.lifetimeRandomOffset = 0f;
+            projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
+            projectileImpactExplosion.timerAfterImpact = false;
 
-        //    projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
-        //}
+            projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+        }
 
         private static GameObject CreateGhostPrefab(string ghostName)
         {

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 324696969
+CRC: 2692623233
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ae3f9f4504e126726ec88f9863d1f759
+    Hash: d04fcaa3f487e0e5d56c8d14fa6a9816
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6de4e0a73c2605a57ae0fd9f559969c2
@@ -102,6 +102,7 @@ Assets:
 - Assets/Deku/Animations/Old/maskDekuBody.mask
 - Assets/Deku/Animations/Old/SmashFullCharge.anim
 - Assets/Deku/Animations/Old/maskDekuGesture.mask
+- Assets/Deku/VFX/funkytrail.prefab
 - Assets/Deku/Animations/maskDekuRightArmNew.mask
 - Assets/Deku/Animations/Old/DelawareSmashDown.anim
 - Assets/Deku/VFX/blackwhipline.prefab
@@ -114,6 +115,7 @@ Assets:
 - Assets/Deku/GUI/45 blank.png
 - Assets/Deku/dekuror2.fbx
 - Assets/Deku/Animations/Old/ShootStyleDash.anim
+- Assets/Deku/VFX/Material/blackwhipbullet.mat
 - Assets/Deku/Animations/Old/Fall.anim
 - Assets/Deku/GUI/shootstylekick2.png
 - Assets/Deku/VFX/detroitweak.prefab
@@ -150,6 +152,7 @@ Assets:
 - Assets/Deku/Animations/Old/Running.anim
 - Assets/Deku/VFX/Material/white.mat
 - Assets/Deku/GUI/detroit.png
+- Assets/Deku/VFX/blackwhipshootGhost.prefab
 - Assets/Deku/GUI/texDekuIcon.png
 - Assets/Deku/GUI/shootstyle.png
 - Assets/Deku/dekuidle.fbx
