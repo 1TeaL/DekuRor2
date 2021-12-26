@@ -1,4 +1,5 @@
 ﻿using System;
+using DekuMod.Modules.Survivors;
 using EntityStates;
 using EntityStates.VagrantMonster;
 using RoR2;
@@ -19,7 +20,9 @@ namespace DekuMod.SkillStates.BaseStates
 		private float baseForce = 600f;
 
 		public GameObject blastEffectPrefab = Resources.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
-
+		public float fajin;
+		protected DamageType damageType;
+		public DekuController dekucon;
 
 		public override void OnEnter()
         {
@@ -32,9 +35,19 @@ namespace DekuMod.SkillStates.BaseStates
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
             base.characterMotor.rootMotion += this.moveVec;
-            //base.characterMotor.velocity += this.moveVec * 2;
+			//base.characterMotor.velocity += this.moveVec * 2;
+			dekucon = base.GetComponent<DekuController>();
+			if (dekucon.isMaxPower)
+			{
+				fajin = 2f;
+			}
+			else
+			{
+				fajin = 1f;
+			}
 
-        }
+
+		}
         public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Frozen;
@@ -42,8 +55,22 @@ namespace DekuMod.SkillStates.BaseStates
 		public override void OnExit()
         {
 
-
-
+			dekucon.RemoveBuffCount(50);
+			Ray aimRay = base.GetAimRay();
+			if (dekucon.isMaxPower)
+			{
+				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+				{
+					origin = base.transform.position,
+					scale = 1f,
+					rotation = Quaternion.LookRotation(aimRay.direction)
+				}, false);
+				damageType = DamageType.BypassArmor | DamageType.Stun1s;
+			}
+            else
+            {
+				damageType = DamageType.Stun1s;
+            }
 			for (int i = 0; i <= 20; i++)
 			{
 				float num = 60f;
@@ -73,10 +100,10 @@ namespace DekuMod.SkillStates.BaseStates
 				blastAttack.teamIndex = base.teamComponent.teamIndex;
 				blastAttack.crit = base.RollCrit();
 				blastAttack.procChainMask = default(ProcChainMask);
-				blastAttack.procCoefficient = 3f;
+				blastAttack.procCoefficient = 2f;
 				blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 				blastAttack.damageColorIndex = DamageColorIndex.Default;
-				blastAttack.damageType = DamageType.Stun1s;
+				blastAttack.damageType = damageType;
 				blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 				if (blastAttack.Fire().hitCount > 0)

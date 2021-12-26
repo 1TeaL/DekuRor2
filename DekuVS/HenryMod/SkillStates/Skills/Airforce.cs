@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using DekuMod.Modules.Survivors;
+using EntityStates;
 using RoR2;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ namespace DekuMod.SkillStates
         private bool hasFired;
         private string muzzleString;
 
+        public float fajin;
+        protected DamageType damageType;
+        public DekuController dekucon;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -28,11 +33,20 @@ namespace DekuMod.SkillStates
 
             base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.3f);
 
-
+            dekucon = base.GetComponent<DekuController>();
+            if (dekucon.isMaxPower)
+            {
+                fajin = 2f;
+            }
+            else
+            {
+                fajin = 1f;
+            }
         }
 
         public override void OnExit()
         {
+            dekucon.RemoveBuffCount(50);
             base.OnExit();
         }
 
@@ -52,21 +66,45 @@ namespace DekuMod.SkillStates
                 {
                     Ray aimRay = base.GetAimRay();
                     base.AddRecoil(-1f * Airforce.recoil, -2f * Airforce.recoil, -0.5f * Airforce.recoil, 0.5f * Airforce.recoil);
-                    EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                    {
-                        origin = FindModelChild(muzzleString).position,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(aimRay.direction)
 
-                    }, false);
+
+                    if (dekucon.isMaxPower)
+                    {
+                        EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                        {
+                            origin = FindModelChild(this.muzzleString).position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(aimRay.direction)
+                        }, false);
+                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                        {
+                            origin = base.transform.position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(aimRay.direction)
+
+                        }, false);
+                        damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                    }
+                    else
+                    {
+                        damageType = DamageType.Generic;
+                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                        {
+                            origin = FindModelChild(this.muzzleString).position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(aimRay.direction)
+
+                        }, false);
+                    }
+
                     new BulletAttack
                     {
-                        bulletCount = 2U,
+                        bulletCount = (uint)(2U * fajin),
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
                         damage = Modules.StaticValues.airforceDamageCoefficient * this.damageStat,
                         damageColorIndex = DamageColorIndex.Default,
-                        damageType = DamageType.Generic,
+                        damageType = damageType,
                         falloffModel = BulletAttack.FalloffModel.DefaultBullet,
                         maxDistance = Airforce.range,
                         force = Airforce.force,
@@ -79,7 +117,7 @@ namespace DekuMod.SkillStates
                         smartCollision = false,
                         procChainMask = default(ProcChainMask),
                         procCoefficient = procCoefficient,
-                        radius = 0.5f,
+                        radius = 0.5f * fajin,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
                         weapon = null,

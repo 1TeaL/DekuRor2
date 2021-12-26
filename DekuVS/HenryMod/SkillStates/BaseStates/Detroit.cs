@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using DekuMod.Modules.Survivors;
+using EntityStates;
 using EntityStates.Huntress;
 using EntityStates.VagrantMonster;
 using RoR2;
@@ -51,7 +52,9 @@ namespace DekuMod.SkillStates.BaseStates
         private GameObject effectPrefab = Resources.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
         public static float healthCostFraction;
-
+        public float fajin;
+        protected DamageType damageType;
+        public DekuController dekucon;
 
         public override void OnEnter()
         {
@@ -66,6 +69,15 @@ namespace DekuMod.SkillStates.BaseStates
                 this.attackSpeedStat,
                 4f
             };
+            dekucon = base.GetComponent<DekuController>();
+            if (dekucon.isMaxPower)
+            {
+                fajin = 2f;
+            }
+            else
+            {
+                fajin = 1f;
+            }
             this.maxCharge = (float)this.baseMaxCharge / source.Min();
             this.areaIndicator = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
@@ -98,7 +110,7 @@ namespace DekuMod.SkillStates.BaseStates
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
             aimRay.origin = base.characterBody.corePosition;
-            this.maxDistance = this.baseDistance * (this.moveSpeedStat/2) * speedattack;
+            this.maxDistance = fajin * this.baseDistance * (this.moveSpeedStat/2) * speedattack;
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
             bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;
@@ -106,8 +118,8 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = Modules.StaticValues.detroitDamageCoefficient + 0f * (this.chargePercent * Modules.StaticValues.detroitDamageCoefficient);
-            this.radius = (this.baseRadius * this.damageMult + 20f) / 4f;
+            this.damageMult = fajin * Modules.StaticValues.detroitDamageCoefficient + 0f * (this.chargePercent * Modules.StaticValues.detroitDamageCoefficient);
+            this.radius = fajin *(this.baseRadius * this.damageMult + 20f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;
             this.areaIndicator.transform.localPosition = aimRay.origin + this.maxMoveVec;

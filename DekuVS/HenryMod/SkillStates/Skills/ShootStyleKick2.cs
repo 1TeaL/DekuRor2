@@ -37,7 +37,6 @@ namespace DekuMod.SkillStates
 		private OverlapAttack attack;
 		protected string hitboxName = "ModelHitbox";
 		protected string hitboxName2 = "BigBodyHitbox";
-		protected DamageType damageType = DamageType.ResetCooldownsOnKill | DamageType.Generic;
 		protected float procCoefficient = 1f;
 		protected float pushForce = 400f;
 		protected Vector3 bonusForce = new Vector3(100f, 400f, 0f);
@@ -66,7 +65,11 @@ namespace DekuMod.SkillStates
 		private bool hasHopped;
         private float speedattack;
 
-        public override void OnEnter()
+
+		public float fajin;
+		protected DamageType damageType;
+		public DekuController dekucon;
+		public override void OnEnter()
 		{
 			base.OnEnter();
 			this.aimRayDir = aimRay.direction;
@@ -76,9 +79,33 @@ namespace DekuMod.SkillStates
 				speedattack = 1;
 			}
 			duration = baseduration / speedattack;
-			SpeedCoefficient = initialSpeedCoefficient * speedattack;
+			SpeedCoefficient = initialSpeedCoefficient;
+			dekucon = base.GetComponent<DekuController>();
+			if (dekucon.isMaxPower)
+			{
+				fajin = 2f;
+			}
+			else
+			{
+				fajin = 1f;
+			}
 
-			base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
+			if (dekucon.isMaxPower)
+			{
+				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+				{
+					origin = base.transform.position,
+					scale = 1f,
+					rotation = Quaternion.LookRotation(aimRay.direction)
+				}, false);
+				damageType = DamageType.ResetCooldownsOnKill | DamageType.Freeze2s;
+			}
+			else
+			{
+				damageType = DamageType.ResetCooldownsOnKill | DamageType.Generic;
+			}
+
+			base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration / 2);
 			this.animator = base.GetModelAnimator();
 			this.animator.SetBool("attacking", true);
 			base.characterBody.SetAimTimer(2f);
@@ -113,13 +140,14 @@ namespace DekuMod.SkillStates
 			this.attack.attacker = base.gameObject;
 			this.attack.inflictor = base.gameObject;
 			this.attack.teamIndex = base.GetTeam();
-			this.attack.damage = Modules.StaticValues.shootkickDamageCoefficient * this.damageStat * (moveSpeedStat/7);
+			this.attack.damage = Modules.StaticValues.shootkickDamageCoefficient * this.damageStat;
 			this.attack.procCoefficient = this.procCoefficient;
-			this.attack.hitEffectPrefab = this.hitEffectPrefab;
+			this.attack.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FireBarrage.hitEffectPrefab;
 			this.attack.forceVector = this.bonusForce;
 			this.attack.pushAwayForce = this.pushForce;
 			this.attack.hitBoxGroup = hitBoxGroup;
 			this.attack.isCrit = base.RollCrit();
+
 
 			this.detector = new OverlapAttack();
 			this.detector.damageType = this.damageType;
@@ -142,12 +170,13 @@ namespace DekuMod.SkillStates
 				num /= base.characterBody.sprintingSpeedMultiplier;
 			}
 			float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
-			this.extraDuration = Math.Max(ShootStyleKick2.hitExtraDuration / (num2 + 1f), ShootStyleKick2.minExtraDuration);
-			base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", ShootStyleKick2.duration * 1f);
-			
+			this.extraDuration = Math.Max(ShootStyleKick.hitExtraDuration / (num2 + 1f), ShootStyleKick.minExtraDuration);
+			base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", ShootStyleKick.duration * 1f);
+
 			AkSoundEngine.PostEvent(3842300745, this.gameObject);
 			AkSoundEngine.PostEvent(573664262, this.gameObject);
 
+			GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
 
 		}
 
@@ -163,7 +192,7 @@ namespace DekuMod.SkillStates
 			{
 				num /= base.characterBody.sprintingSpeedMultiplier;
 			}
-			this.rollSpeed = num * Mathf.Lerp(ShootStyleKick2.SpeedCoefficient, ShootStyleKick2.finalSpeedCoefficient, base.fixedAge / ShootStyleKick2.duration);
+			this.rollSpeed = fajin * num * Mathf.Lerp(ShootStyleKick.SpeedCoefficient, ShootStyleKick.finalSpeedCoefficient, base.fixedAge / ShootStyleKick.duration);
 		}
 
 		//private void CreateBlinkEffect(Vector3 origin)
@@ -251,7 +280,7 @@ namespace DekuMod.SkillStates
 
 		public override void OnExit()
 		{
-
+			dekucon.RemoveBuffCount(50);
 			Transform modelTransform = base.GetModelTransform();
 			bool flag = modelTransform.gameObject.GetComponent<AimAnimator>();
 			if (flag)

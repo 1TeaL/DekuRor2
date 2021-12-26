@@ -29,12 +29,13 @@ namespace DekuMod.Modules
         internal const float delawareDamageCoefficient = 6f;
         internal const float shootattackDamageCoefficient = 2f;
         internal const float shootbulletstunDamageCoefficient = 1f;
-
+        internal const float smokescreenDamageCoefficient = 1f;
 
 
         internal const float blackwhipPull = 8f;
 
         internal const int fajinMaxStack = 100;
+        internal const int fajinMaxPower = 50;
         internal const float fajinMaxMultiplier = 2f;
 
 

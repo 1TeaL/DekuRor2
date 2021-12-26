@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2692623233
+CRC: 3631468057
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d04fcaa3f487e0e5d56c8d14fa6a9816
+    Hash: 15e8ac1f43b5be181d91a6e1357d41bc
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6de4e0a73c2605a57ae0fd9f559969c2
@@ -129,6 +129,7 @@ Assets:
 - Assets/Deku/VFX/OFA lightning.prefab
 - Assets/Deku/Animations/Old/Sprinting.anim
 - Assets/Deku/Animations/Old/FingerFlick.anim
+- Assets/Deku/VFX/blackwhipexplosion.prefab
 - Assets/Deku/Animations/Old/LegSmash.anim
 - Assets/Deku/Animations/Old/maskDekuRightArm.mask
 - Assets/Deku/VFX/Material/windtrail.mat
@@ -158,6 +159,7 @@ Assets:
 - Assets/Deku/dekuidle.fbx
 - Assets/Deku/VFX/Textures/SparkParticleblackwhip.tif
 - Assets/Deku/Animations/Old/anim.controller
+- Assets/Deku/VFX/fajinaura.prefab
 - Assets/Deku/mdlDekuNew.prefab
 - Assets/Deku/VFX/blackwhip.prefab
 - Assets/Deku/matDeku.mat
@@ -173,6 +175,7 @@ Assets:
 - Assets/Deku/GUI/stlouis45.PNG
 - Assets/Deku/Animations/Old/SmashChargeAttack.anim
 - Assets/Deku/VFX/blackwhipeffect.prefab
+- Assets/Deku/VFX/windringbig.prefab
 - Assets/Deku/VFX/impact.prefab
 - Assets/Deku/mdlDeku original copy.prefab
 - Assets/Deku/Animations/maskDekuBodyNew.mask

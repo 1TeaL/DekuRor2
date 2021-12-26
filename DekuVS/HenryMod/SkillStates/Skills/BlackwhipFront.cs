@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using EntityStates;
 using System.Collections.Generic;
 using System.Linq;
+using DekuMod.Modules.Survivors;
 
 namespace DekuMod.SkillStates
 {
@@ -22,7 +23,9 @@ namespace DekuMod.SkillStates
         public float whipage;
         public float speedattack;
 
-
+        public float fajin;
+        protected DamageType damageType;
+        public DekuController dekucon;
         public override void OnEnter()
         {
             base.OnEnter();
@@ -33,6 +36,25 @@ namespace DekuMod.SkillStates
             {
                 speedattack = 1;
             }
+            dekucon = base.GetComponent<DekuController>();
+            if (dekucon.isMaxPower)
+            {
+                fajin = 2f;
+            }
+            else
+            {
+                fajin = 1f;
+            }
+            if (dekucon.isMaxPower)
+            {
+                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                {
+                    origin = base.transform.position,
+                    scale = 1f,
+                    rotation = Quaternion.LookRotation(aimRay.direction)
+                }, false);
+            }
+
 
             //hasFired = false;
             GetMaxWeight();
@@ -55,16 +77,16 @@ namespace DekuMod.SkillStates
 
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = BlackwhipFront.blastRadius * speedattack;
+            blastAttack.radius = BlackwhipFront.blastRadius * speedattack * fajin;
             blastAttack.procCoefficient = 0.2f;
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
             blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.blackwhipDamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.baseForce = -maxWeight * Modules.StaticValues.blackwhipPull;
+            blastAttack.baseForce = -maxWeight * Modules.StaticValues.blackwhipPull * fajin;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = DamageType.Stun1s;
+            blastAttack.damageType = damageType;
             blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 
@@ -125,7 +147,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat * Modules.StaticValues.blackwhipDamageCoefficient* speedattack);
+            base.healthComponent.AddBarrierAuthority(this.damageStat * Modules.StaticValues.blackwhipDamageCoefficient* speedattack * fajin);
 
         }
 
@@ -134,7 +156,7 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-
+            dekucon.RemoveBuffCount(50);
             base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
             base.OnExit();
         }
@@ -148,6 +170,15 @@ namespace DekuMod.SkillStates
             if ((base.fixedAge >= this.duration / 2) && base.isAuthority && whipage >= this.duration/10)
             {
                 //hasFired = true;
+                if (dekucon.isMaxPower)
+                {
+
+                    blastAttack.damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                }
+                else
+                {
+                    blastAttack.damageType = DamageType.Stun1s;
+                }
                 blastAttack.position = theSpot;
                 whipage = 0f;
                 if (blastAttack.Fire().hitCount > 0)

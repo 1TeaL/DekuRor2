@@ -3,6 +3,7 @@ using BepInEx.Bootstrap;
 using DekuMod.Modules.Survivors;
 using R2API.Utils;
 using RoR2;
+using RoR2.Projectile;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
@@ -90,9 +91,24 @@ namespace DekuMod
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
             On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
+            On.RoR2.Projectile.ProjectileSingleTargetImpact.OnProjectileImpact += ProjectileSingleTargetImpact_OnProjectileImpact;
+
             //On.RoR2.HealthComponent.TakeDamage += BlackwhipPull;            
         }
 
+        private void ProjectileSingleTargetImpact_OnProjectileImpact(On.RoR2.Projectile.ProjectileSingleTargetImpact.orig_OnProjectileImpact orig, ProjectileSingleTargetImpact self, ProjectileImpactInfo impactInfo)
+        {
+            orig(self, impactInfo);
+            Chat.AddMessage("hit: " + self.gameObject.name);
+            if (self.gameObject.name.Contains("blackwhipProjectile") && impactInfo.collider)
+            {
+                var hurtbox = impactInfo.collider.gameObject.GetComponent<HurtBox>();
+                if (hurtbox && hurtbox.healthComponent && hurtbox.healthComponent.body)
+                {
+                    Debug.Log("impact");
+                }
+            }
+        }
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
             //regen 

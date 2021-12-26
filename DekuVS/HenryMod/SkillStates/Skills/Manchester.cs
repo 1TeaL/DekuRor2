@@ -3,13 +3,14 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Networking;
 using EntityStates;
+using DekuMod.Modules.Survivors;
 
 namespace DekuMod.SkillStates
 {
     public class Manchester : BaseSkillState
     {
-        //public static float basejumpDuration = 1f;
-        public static float jumpDuration= 1f;
+        public static float basejumpDuration = 1f;
+        public static float jumpDuration;
         public static float dropForce = 80f;
 
         public static float slamRadius = 15f;
@@ -23,6 +24,9 @@ namespace DekuMod.SkillStates
         private Transform slamCenterIndicatorInstance;
         private Ray downRay;
 
+        public float fajin;
+        protected DamageType damageType;
+        public DekuController dekucon;
 
         //private NemforcerGrabController grabController;
 
@@ -32,7 +36,16 @@ namespace DekuMod.SkillStates
             this.modelTransform = base.GetModelTransform();
             this.flyVector = Vector3.up;
             this.hasDropped = false;
-            //jumpDuration = basejumpDuration /(this.attackSpeedStat/2);
+            dekucon = base.GetComponent<DekuController>();
+            if (dekucon.isMaxPower)
+            {
+                fajin = 2f;
+            }
+            else
+            {
+                fajin = 1f;
+            }
+            jumpDuration = basejumpDuration / fajin;
 
 
             base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", Manchester.jumpDuration);
@@ -48,6 +61,7 @@ namespace DekuMod.SkillStates
             //base.gameObject.layer = LayerIndex.fakeActor.intVal;
             base.characterMotor.Motor.RebuildCollidableLayers();
 
+
         }
 
         public override void Update()
@@ -58,7 +72,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(Modules.StaticValues.manchesterDamageCoefficient * this.damageStat * (this.moveSpeedStat/14));
+            base.healthComponent.AddBarrierAuthority(Modules.StaticValues.manchesterDamageCoefficient * this.damageStat * (this.moveSpeedStat/14) * fajin);
 
         }
         public override void FixedUpdate()
@@ -67,7 +81,7 @@ namespace DekuMod.SkillStates
 
             if (!this.hasDropped)
             {
-                base.characterMotor.rootMotion += this.flyVector * ((0.6f * this.moveSpeedStat) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / Manchester.jumpDuration) * Time.fixedDeltaTime);
+                base.characterMotor.rootMotion += this.flyVector * ((0.6f * this.moveSpeedStat * fajin) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / Manchester.jumpDuration) * Time.fixedDeltaTime);
                 base.characterMotor.velocity.y = 0f;
             }
 
@@ -129,11 +143,25 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", 0.1f);
             if (base.isAuthority)
             {
-
+                Ray aimRay = base.GetAimRay();
+                if (dekucon.isMaxPower)
+                {
+                    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                    {
+                        origin = base.transform.position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(aimRay.direction)
+                    }, false);
+                    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                }
+                else
+                {
+                    damageType = DamageType.Stun1s;
+                }
                 base.characterMotor.velocity *= 0.1f;
 
                 BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = Manchester.slamRadius;
+                blastAttack.radius = Manchester.slamRadius * fajin;
                 blastAttack.procCoefficient = Manchester.slamProcCoefficient;
                 blastAttack.position = base.characterBody.footPosition;
                 blastAttack.attacker = base.gameObject;
@@ -142,12 +170,18 @@ namespace DekuMod.SkillStates
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = Manchester.slamForce;
                 blastAttack.teamIndex = base.teamComponent.teamIndex; 
-                blastAttack.damageType = DamageType.Stun1s;
+                blastAttack.damageType = damageType;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+
+                if(dekucon.isMaxPower)
+                {
+                    blastAttack.Fire();
+                }
 
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
+
                 }
 
 
@@ -193,7 +227,7 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-
+            dekucon.RemoveBuffCount(50);
             //if (this.grabController) this.grabController.Release();
 
             if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);

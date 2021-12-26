@@ -6,6 +6,7 @@ using RoR2.Audio;
 using System;
 using EntityStates.Merc;
 using System.Linq;
+using DekuMod.Modules.Survivors;
 
 namespace DekuMod.SkillStates
 {
@@ -29,7 +30,9 @@ namespace DekuMod.SkillStates
 		private bool isDashing;
 		private CameraTargetParams.AimRequest aimRequest;
 
-
+		public float fajin;
+		protected DamageType damageType;
+		public DekuController dekucon;
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -57,6 +60,15 @@ namespace DekuMod.SkillStates
 			this.dashVector = base.inputBank.aimDirection;
 			base.characterDirection.forward = this.dashVector;
 			base.StartAimMode(dashPrepDuration, true);
+			dekucon = base.GetComponent<DekuController>();
+			if (dekucon.isMaxPower)
+			{
+				fajin = 2f;
+			}
+			else
+			{
+				fajin = 1f;
+			}
 
 
 		}
@@ -100,7 +112,7 @@ namespace DekuMod.SkillStates
 			{
 				if (base.characterMotor && base.characterDirection)
 				{
-					base.characterMotor.rootMotion += this.dashVector * (this.moveSpeedStat *  speedCoefficient * Time.fixedDeltaTime);
+					base.characterMotor.rootMotion += this.dashVector * (this.moveSpeedStat *  speedCoefficient * Time.fixedDeltaTime * fajin);
 				}
 				if (base.isAuthority)
 				{
@@ -124,7 +136,17 @@ namespace DekuMod.SkillStates
 		}
 		public override void OnExit()
 		{
-			
+			Ray aimRay = base.GetAimRay();
+			if (dekucon.isMaxPower)
+			{
+				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+				{
+					origin = base.transform.position,
+					scale = 1f,
+					rotation = Quaternion.LookRotation(aimRay.direction)
+				}, false);
+			}
+			dekucon.RemoveBuffCount(50);
 			Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 			base.characterMotor.velocity *= 0.1f;
 			base.SmallHop(base.characterMotor, smallHopVelocity);

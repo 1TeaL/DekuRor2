@@ -103,23 +103,25 @@ namespace DekuMod.Modules
 
         private static void CreateBlackwhip()
         {
-            blackwhipPrefab = CloneProjectilePrefab("magefirebolt", "HenryBombProjectile");
+            blackwhipPrefab = CloneProjectilePrefab("magefirebolt", "blackwhipProjectile");
 
-            ProjectileImpactExplosion bombImpactExplosion = blackwhipPrefab.GetComponent<ProjectileImpactExplosion>();
-            InitializeImpactExplosion(bombImpactExplosion);
+            ProjectileImpactExplosion blackwhip = blackwhipPrefab.GetComponent<ProjectileImpactExplosion>();
+            InitializeImpactExplosion(blackwhip);
 
-            bombImpactExplosion.blastRadius = 8f;
-            bombImpactExplosion.destroyOnEnemy = true;
-            bombImpactExplosion.lifetime = 6f;
+            blackwhip.blastRadius = 8f;
+            blackwhip.destroyOnEnemy = true;
+            blackwhip.lifetime = 6f;
             //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
             //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
-            bombImpactExplosion.timerAfterImpact = false;
-            bombImpactExplosion.lifetimeAfterImpact = 0f;
-            bombImpactExplosion.destroyOnWorld = true;
+            blackwhip.timerAfterImpact = false;
+            blackwhip.lifetimeAfterImpact = 0f;
+            blackwhip.destroyOnWorld = true;
 
             ProjectileController bombController = blackwhipPrefab.GetComponent<ProjectileController>();
             if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("blackwhipshootGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("blackwhipshootGhost");
             bombController.startSound = "";
+
+            blackwhipPrefab.AddComponent<ProjectileImpactEventCaller>();
         }
 
         private static void InitializeImpactExplosion(ProjectileImpactExplosion projectileImpactExplosion)
@@ -137,6 +139,7 @@ namespace DekuMod.Modules
             projectileImpactExplosion.falloffModel = RoR2.BlastAttack.FalloffModel.None;
             projectileImpactExplosion.fireChildren = false;
             projectileImpactExplosion.impactEffect = null;
+            projectileImpactExplosion.hasImpact = true;
             projectileImpactExplosion.lifetime = 0f;
             projectileImpactExplosion.lifetimeAfterImpact = 0f;
             projectileImpactExplosion.lifetimeExpiredSoundString = "";
@@ -144,7 +147,7 @@ namespace DekuMod.Modules
             projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
             projectileImpactExplosion.timerAfterImpact = false;
 
-            projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Stun1s;
         }
 
         private static GameObject CreateGhostPrefab(string ghostName)

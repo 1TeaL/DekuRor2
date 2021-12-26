@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using EntityStates.Merc;
 using System.Linq;
+using DekuMod.Modules.Survivors;
 
 namespace DekuMod.SkillStates
 {
@@ -31,6 +32,10 @@ namespace DekuMod.SkillStates
 		private bool crit;
         public static float minimumDuration = 0.5f;
         private CameraTargetParams.AimRequest aimRequest;
+
+		public float fajin;
+		protected DamageType damageType;
+		public DekuController dekucon;
 		public override void OnEnter()
         {
 			base.OnEnter();
@@ -54,6 +59,30 @@ namespace DekuMod.SkillStates
 			{
 				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 			}
+			dekucon = base.GetComponent<DekuController>();
+			if (dekucon.isMaxPower)
+			{
+				fajin = 2f;
+			}
+			else
+			{
+				fajin = 1f;
+			}
+			Ray aimRay = base.GetAimRay();
+			if (dekucon.isMaxPower)
+			{
+				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+				{
+					origin = base.transform.position,
+					scale = 1f,
+					rotation = Quaternion.LookRotation(aimRay.direction)
+				}, false);
+				damageType = DamageType.BypassArmor | DamageType.Stun1s;
+			}
+			else
+			{
+				damageType = DamageType.Generic;
+			}
 		}
 		private void CreateBlinkEffect(Vector3 origin)
 		{
@@ -67,7 +96,7 @@ namespace DekuMod.SkillStates
 			base.FixedUpdate();
 			this.stopwatch += Time.fixedDeltaTime;
 			this.attackStopwatch += Time.fixedDeltaTime;
-			float num = 1f / damageFrequency / this.attackSpeedStat;
+			float num = 1f / (damageFrequency / (this.attackSpeedStat * fajin));
 			if (this.attackStopwatch >= num)
 			{
 				this.attackStopwatch -= num;
@@ -100,7 +129,7 @@ namespace DekuMod.SkillStates
 							damageInfo.procCoefficient = procCoefficient;
 							damageInfo.position = hurtBox2.transform.position;
 							damageInfo.crit = this.crit;
-							damageInfo.damageType = DamageType.Generic;
+							damageInfo.damageType = damageType;
 							hurtBox2.healthComponent.TakeDamage(damageInfo);
 							GlobalEventManager.instance.OnHitEnemy(damageInfo, hurtBox2.healthComponent.gameObject);
 							GlobalEventManager.instance.OnHitAll(damageInfo, hurtBox2.healthComponent.gameObject);
@@ -116,7 +145,7 @@ namespace DekuMod.SkillStates
 			{
 				base.characterMotor.velocity = Vector3.zero;
 			}
-			if (this.stopwatch >= duration && base.isAuthority)
+			if (this.stopwatch >= duration*fajin && base.isAuthority)
 			{
 				this.outer.SetNextStateToMain();
 			}
@@ -126,7 +155,7 @@ namespace DekuMod.SkillStates
 			BullseyeSearch bullseyeSearch = new BullseyeSearch();
 			bullseyeSearch.searchOrigin = base.transform.position;
 			bullseyeSearch.searchDirection = UnityEngine.Random.onUnitSphere;
-			bullseyeSearch.maxDistanceFilter = maxRadius;
+			bullseyeSearch.maxDistanceFilter = maxRadius * fajin;
 			bullseyeSearch.teamMaskFilter = TeamMask.GetUnprotectedTeams(base.GetTeam());
 			bullseyeSearch.sortMode = BullseyeSearch.SortMode.Distance;
 			bullseyeSearch.RefreshCandidates();
@@ -139,6 +168,8 @@ namespace DekuMod.SkillStates
 		}
 		public override void OnExit()
 		{
+
+			dekucon.RemoveBuffCount(50); 
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
             this.modelTransform = base.GetModelTransform();

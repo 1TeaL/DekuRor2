@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿using DekuMod.Modules.Survivors;
+using EntityStates;
 using EntityStates.Merc;
 using R2API.Utils;
 using RoR2;
@@ -38,6 +39,9 @@ namespace DekuMod.SkillStates
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
 
+        public float fajin;
+        protected DamageType damageType;
+        public DekuController dekucon;
 
         public override void OnEnter()
         {
@@ -54,8 +58,16 @@ namespace DekuMod.SkillStates
             //{
             //    speedattack = 1;
             //}
-
-            SpeedCoefficient = initialSpeedCoefficient;
+            dekucon = base.GetComponent<DekuController>();
+            if (dekucon.isMaxPower)
+            {
+                fajin = 2f;
+            }
+            else
+            {
+                fajin = 1f;
+            }
+            SpeedCoefficient = initialSpeedCoefficient * fajin;
             base.StartAimMode(duration, true);
 
             AkSoundEngine.PostEvent(3842300745, this.gameObject);
@@ -77,9 +89,16 @@ namespace DekuMod.SkillStates
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
-
+            if (dekucon.isMaxPower)
+            {
+                damageType = DamageType.BypassArmor | DamageType.Stun1s;
+            }
+            else
+            {
+                damageType = DamageType.Stun1s;
+            }
             // ray used to shoot position after teleporting
-            uint bulletamount = (uint)(1U * this.attackSpeedStat);
+            uint bulletamount = (uint)(1U * this.attackSpeedStat * fajin);
             if (bulletamount > 20)
             {
                 bulletamount = 20;
@@ -92,7 +111,7 @@ namespace DekuMod.SkillStates
                 origin = aimRay.origin,
                 damage = Modules.StaticValues.shootbulletstunDamageCoefficient * this.damageStat,
                 damageColorIndex = DamageColorIndex.Default,
-                damageType = (DamageType.Stun1s),
+                damageType = damageType,
                 falloffModel = BulletAttack.FalloffModel.None,
                 maxDistance = SpeedCoefficient * duration * this.moveSpeedStat,
                 force = 55f,
@@ -151,10 +170,19 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-
-            if(afterattack != null)
+            Ray aimRay = base.GetAimRay();
+            if (dekucon.isMaxPower)
+            {
+                damageType = DamageType.BypassArmor | DamageType.Stun1s;
+            }
+            else
+            {
+                damageType = DamageType.Stun1s;
+            }
+            if (afterattack != null)
             {
                 afterattack.Fire();
+                dekucon.RemoveBuffCount(50);
             }
             //base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
             base.PlayCrossfade("FullBody, Override", "ShootStyleDashExit", 0.2f);
