@@ -150,6 +150,11 @@ namespace DekuMod.Modules
             projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Stun1s;
         }
 
+        //private static void InitializeHookProjectileImpact (HookProjectileImpact hookProjectileImpact)
+        //{
+        //    hookProjectileImpact.
+        //}
+
         private static GameObject CreateGhostPrefab(string ghostName)
         {
             GameObject ghostPrefab = Modules.Assets.mainAssetBundle.LoadAsset<GameObject>(ghostName);

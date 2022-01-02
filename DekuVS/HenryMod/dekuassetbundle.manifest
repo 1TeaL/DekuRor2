@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3631468057
+CRC: 1972778888
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 15e8ac1f43b5be181d91a6e1357d41bc
+    Hash: 4918bd4fb41d1ae91d5fe0f9dea18cd6
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6de4e0a73c2605a57ae0fd9f559969c2
@@ -128,6 +128,7 @@ Assets:
 - Assets/Deku/GUI/Airforceskin.png
 - Assets/Deku/VFX/OFA lightning.prefab
 - Assets/Deku/Animations/Old/Sprinting.anim
+- Assets/Deku/VFX/smokebig.prefab
 - Assets/Deku/Animations/Old/FingerFlick.anim
 - Assets/Deku/VFX/blackwhipexplosion.prefab
 - Assets/Deku/Animations/Old/LegSmash.anim
@@ -138,7 +139,7 @@ Assets:
 - Assets/Deku/GUI/shootstylekick.png
 - Assets/Deku/Animations/Old/LegSmashCharge.anim
 - Assets/Deku/VFX/windring.prefab
-- Assets/Deku/VFX/speedLines (5).prefab
+- Assets/Deku/VFX/smoke.prefab
 - Assets/Deku/Animations/animNew.controller
 - Assets/Deku/Animations/Old/OFA.anim
 - Assets/Deku/VFX/Material/windlineblack.mat
