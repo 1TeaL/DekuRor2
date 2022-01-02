@@ -11,19 +11,15 @@
         "dependencies": {
           "NETStandard.Library": "2.0.3",
           "0Harmony": "2.0.0.0",
-          "0Harmony20": "2.0.0.0",
           "AncientScepter": "1.0.0.0",
           "Assembly-CSharp": "0.0.0.0",
           "BepInEx": "5.3.0.0",
           "BepInEx.Harmony": "2.0.0.0",
-          "BepInEx.MonoMod.HookGenPatcher": "1.1.0.0",
           "BepInEx.MonoMod.Loader": "1.0.0.0",
           "BepInEx.Preloader": "5.3.0.0",
           "Facepunch.Steamworks": "0.0.0.0",
-          "HarmonyXInterop": "1.0.0.0",
           "HGCSharpUtils": "0.0.0.0",
           "HGUnityUtils": "0.0.0.0",
-          "LighterPatcher": "1.0.5.0",
           "MMHOOK_Assembly-CSharp": "0.0.0.0",
           "Mono.Cecil": "0.10.4.0",
           "Mono.Cecil.Mdb": "0.10.4.0",
@@ -66,14 +62,6 @@
           }
         }
       },
-      "0Harmony20/2.0.0.0": {
-        "runtime": {
-          "0Harmony20.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.0.0"
-          }
-        }
-      },
       "AncientScepter/1.0.0.0": {
         "runtime": {
           "AncientScepter.dll": {
@@ -106,14 +94,6 @@
           }
         }
       },
-      "BepInEx.MonoMod.HookGenPatcher/1.1.0.0": {
-        "runtime": {
-          "BepInEx.MonoMod.HookGenPatcher.dll": {
-            "assemblyVersion": "1.1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        }
-      },
       "BepInEx.MonoMod.Loader/1.0.0.0": {
         "runtime": {
           "BepInEx.MonoMod.Loader.dll": {
@@ -138,14 +118,6 @@
           }
         }
       },
-      "HarmonyXInterop/1.0.0.0": {
-        "runtime": {
-          "HarmonyXInterop.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "HGCSharpUtils/0.0.0.0": {
         "runtime": {
           "HGCSharpUtils.dll": {
@@ -159,14 +131,6 @@
           "HGUnityUtils.dll": {
             "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "LighterPatcher/1.0.5.0": {
-        "runtime": {
-          "LighterPatcher.dll": {
-            "assemblyVersion": "1.0.5.0",
-            "fileVersion": "1.0.5.0"
           }
         }
       },
@@ -353,14 +317,6 @@
             "fileVersion": "0.7.3.0"
           }
         }
-      },
-      "MonoMod.RuntimeDetour.HookGen/20.5.21.5": {
-        "runtime": {
-          "MonoMod.RuntimeDetour.HookGen.exe": {
-            "assemblyVersion": "20.5.21.5",
-            "fileVersion": "20.5.21.5"
-          }
-        }
       }
     }
   },
@@ -389,11 +345,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "0Harmony20/2.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
     "AncientScepter/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -414,11 +365,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "BepInEx.MonoMod.HookGenPatcher/1.1.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
     "BepInEx.MonoMod.Loader/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -434,22 +380,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "HarmonyXInterop/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
     "HGCSharpUtils/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
     "HGUnityUtils/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "LighterPatcher/1.0.5.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -565,11 +501,6 @@
       "sha512": ""
     },
     "Zio/0.7.3.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "MonoMod.RuntimeDetour.HookGen/20.5.21.5": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

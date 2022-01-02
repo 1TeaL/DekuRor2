@@ -35,7 +35,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "1.3.4";
+        public const string MODVERSION = "1.4.0";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -130,7 +130,7 @@ namespace DekuMod
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level-1))) * -7f;
+                self.regen = (1 + (self.levelRegen * (self.level-1))) * -2f;
                 self.damage *= 2f;
                 
             }
@@ -177,7 +177,7 @@ namespace DekuMod
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level-1))) * -7f;
+                self.regen = (1 + (self.levelRegen * (self.level-1))) * -2f;
                 self.damage *= 2f;
             }
 
@@ -233,7 +233,7 @@ namespace DekuMod
             {
 
 
-                if (!ofa && !ofa45 && !supaofa45 && !supaofa)
+                if (!ofa45 && !supaofa45)
                 {
 
                     HealthComponent hp = self.healthComponent;

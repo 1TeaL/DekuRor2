@@ -17,15 +17,15 @@ namespace DekuMod.Modules.Survivors
         public ParticleSystem OFA;
         public ParticleSystem FAJIN;
         private int buffCountToApply;
-        private static bool scepterActive;
         public GenericSkill specialSkillSlot;
         string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
         public bool fajinon;
+        public bool fajinscepteron;
         public Animator anim;
         public float stopwatch;
-        public float fajinrate = 10f;
+        public static float fajinscepterrate = 2.5f;
+        public float fajinrate = 5f;
         public bool isMaxPower;
-        public bool wardTrue;
 
         public void Awake()
         {
@@ -40,7 +40,8 @@ namespace DekuMod.Modules.Survivors
             FAJIN.Stop();
             anim = GetComponentInChildren<Animator>();
             stopwatch = 0f;
-            wardTrue = false;
+
+
         }
 
 
@@ -108,12 +109,23 @@ namespace DekuMod.Modules.Survivors
                 {
                     FAJIN.Stop();
                 }
-                
-                if (anim.GetBool("isMoving") && stopwatch >= fajinrate/body.moveSpeed)
+                if (fajinscepteron)
                 {
-                    IncrementBuffCount();
-                    stopwatch = 0f;
+                    if (anim.GetBool("isMoving") && stopwatch >= fajinscepterrate / body.moveSpeed)
+                    {
+                        IncrementBuffCount();
+                        stopwatch = 0f;
+                    }
                 }
+                else
+                {
+                    if (anim.GetBool("isMoving") && stopwatch >= fajinrate / body.moveSpeed)
+                    {
+                        IncrementBuffCount();
+                        stopwatch = 0f;
+                    }
+                }
+
             }
 
             stopwatch += Time.fixedDeltaTime;

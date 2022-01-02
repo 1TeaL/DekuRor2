@@ -28,6 +28,7 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef utilityboost45SkillDef;
         internal static SkillDef ofadownSkillDef;
         internal static SkillDef primaryfajinSkillDef;
+        internal static SkillDef primaryfajinscepterSkillDef;
         internal static SkillDef secondaryfajinSkillDef;
         internal static SkillDef utilityfajinSkillDef;
 
@@ -442,7 +443,7 @@ namespace DekuMod.Modules.Survivors
                 activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleBullet)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 0f,
+                baseRechargeInterval = 0.5f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,
@@ -466,6 +467,32 @@ namespace DekuMod.Modules.Survivors
                 skillDescriptionToken = prefix + "BOOSTEDPRIMARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("stlouis"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.Fajin)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = true,
+                interruptPriority = InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+
+            });
+
+            Deku.primaryfajinscepterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "BOOSTEDPRIMARY_NAME",
+                skillNameToken = prefix + "BOOSTEDPRIMARY_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDPRIMARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("stlouis"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Fajinscepter)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -776,6 +803,31 @@ namespace DekuMod.Modules.Survivors
                 stockToConsume = 1,
             });
             ItemBase<AncientScepterItem>.instance.RegisterScepterSkill(replacingDef2, SurvivorBase.instance.fullBodyName, SkillSlot.Special, 1);
+
+            SkillDef replacingDef3 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "SCEPTERSPECIAL2_NAME",
+                skillNameToken = prefix + "SCEPTERSPECIAL2_NAME",
+                skillDescriptionToken = prefix + "SCEPTERSPECIAL2_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade45"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Fajinstatescepter)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = true,
+                interruptPriority = InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+            ItemBase<AncientScepterItem>.instance.RegisterScepterSkill(replacingDef3, SurvivorBase.instance.fullBodyName, SkillSlot.Special, 2);
         }
 
             #endregion
