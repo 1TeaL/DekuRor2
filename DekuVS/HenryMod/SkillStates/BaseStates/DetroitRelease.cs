@@ -64,7 +64,7 @@ namespace DekuMod.SkillStates.BaseStates
 					origin = base.transform.position,
 					scale = 1f,
 					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, false);
+				}, true);
 				damageType = DamageType.BypassArmor | DamageType.Stun1s;
 			}
             else
@@ -83,7 +83,7 @@ namespace DekuMod.SkillStates.BaseStates
 					origin = base.characterBody.corePosition,
 					scale = this.radius * 2,
 					rotation = rotation
-				}, false);
+				}, true);
 			}
 
 			bool isAuthority = base.isAuthority;

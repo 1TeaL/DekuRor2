@@ -75,14 +75,14 @@ namespace DekuMod.SkillStates
                             origin = FindModelChild(this.muzzleString).position,
                             scale = 1f,
                             rotation = Quaternion.LookRotation(aimRay.direction)
-                        }, false);
+                        }, true);
                         EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
                         {
                             origin = base.transform.position,
                             scale = 1f,
                             rotation = Quaternion.LookRotation(aimRay.direction)
 
-                        }, false);
+                        }, true);
                         damageType = DamageType.BypassArmor | DamageType.Stun1s;
                     }
                     else
@@ -94,7 +94,7 @@ namespace DekuMod.SkillStates
                             scale = 1f,
                             rotation = Quaternion.LookRotation(aimRay.direction)
 
-                        }, false);
+                        }, true);
                     }
 
                     new BulletAttack

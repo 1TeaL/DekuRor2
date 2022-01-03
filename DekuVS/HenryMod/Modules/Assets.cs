@@ -19,7 +19,7 @@ namespace DekuMod.Modules
         //internal static GameObject swordHitImpactEffect;
 
         internal static GameObject blackwhip;
-        //internal static GameObject blackwhipbullet;
+        internal static GameObject blackwhipbullet;
         internal static GameObject blackwhipforward;
         internal static GameObject detroitEffect;
         internal static GameObject detroitweakEffect;
@@ -27,6 +27,8 @@ namespace DekuMod.Modules
         internal static GameObject airforceEffect;
         internal static GameObject airforce45Effect;
         internal static GameObject impactEffect;
+        internal static GameObject smokeEffect;
+        internal static GameObject smokebigEffect;
 
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
@@ -95,7 +97,9 @@ namespace DekuMod.Modules
             blackwhipforward = LoadEffect("blackwhipforward");
             blackwhip = LoadEffect("blackwhipeffect");
             impactEffect = LoadEffect("impact");
-
+            blackwhipbullet = LoadEffect("blackwhipshootGhost");
+            smokeEffect = LoadEffect("smoke");
+            smokebigEffect = LoadEffect("smokebig");
             //blackwhipbullet = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
 
             //if (bombExplosionEffect)

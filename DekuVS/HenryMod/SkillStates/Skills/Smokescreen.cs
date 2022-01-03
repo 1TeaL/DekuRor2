@@ -18,15 +18,16 @@ namespace DekuMod.SkillStates
 		public DekuController dekucon;
 
 		public Vector3 theSpot;
-		private GameObject affixHauntedWard;
 		public CharacterBody body;
 		public float fajin;
 		private float duration;
 		public bool hasFired;
 		private BlastAttack blastAttack;
-        private GameObject explosionPrefab = Resources.Load<GameObject>("prefabs/effects/jellyfishnova");
+		private GameObject smokeprefab = Modules.Assets.smokeEffect;
+		private GameObject smokebigprefab = Modules.Assets.smokebigEffect;
 
-        public override void OnEnter()
+
+		public override void OnEnter()
 		{
 			base.OnEnter();
 			this.duration = baseDuration;
@@ -34,11 +35,12 @@ namespace DekuMod.SkillStates
 			dekucon = base.GetComponent<DekuController>();
 			Ray aimRay = base.GetAimRay();
 			theSpot = aimRay.origin + 0 * aimRay.direction;
-            bool active = NetworkServer.active;
-            if (active)
-            {
+            //bool active = NetworkServer.active;
+            //if (active)
+            //{
                 base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-            }
+			base.characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
+            //}
 
 			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
 			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
@@ -46,11 +48,35 @@ namespace DekuMod.SkillStates
 			if (dekucon.isMaxPower)
             {
 				fajin = 2f;
-            }
+				if (base.isAuthority)
+				{
+					Vector3 effectPosition = base.characterBody.corePosition;
+					effectPosition.y = base.characterBody.corePosition.y;
+					EffectManager.SpawnEffect(this.smokebigprefab, new EffectData
+					{
+						origin = effectPosition,
+						scale = radius * fajin,
+						rotation = Quaternion.LookRotation(Vector3.up)
+					}, true);
+
+				}
+			}
             else
             {
 				fajin = 1f;
-            }
+				if (base.isAuthority)
+				{
+					Vector3 effectPosition = base.characterBody.corePosition;
+					effectPosition.y = base.characterBody.corePosition.y;
+					EffectManager.SpawnEffect(this.smokeprefab, new EffectData
+					{
+						origin = effectPosition,
+						scale = radius * fajin,
+						rotation = Quaternion.LookRotation(Vector3.up)
+					}, true);
+
+				}
+			}
 
 			if (dekucon.isMaxPower)
 			{
@@ -86,19 +112,7 @@ namespace DekuMod.SkillStates
 			blastAttack.damageColorIndex = DamageColorIndex.Default;
 			blastAttack.attackerFiltering = AttackerFiltering.Default;
 
-            if (base.isAuthority)
-            {
-				for (int i = 0; i <= 8; i += 1)
-				{
-					Vector3 effectPosition = base.characterBody.corePosition + (UnityEngine.Random.insideUnitSphere * radius * fajin);
-					effectPosition.y = base.characterBody.corePosition.y;
-					EffectManager.SpawnEffect(this.explosionPrefab, new EffectData
-					{
-						origin = effectPosition,
-						scale = radius * fajin,
-					}, true);
-				}
-            }
+
 
 
 		}
@@ -191,7 +205,12 @@ namespace DekuMod.SkillStates
 				{
 					if (singularTarget.healthComponent && singularTarget.healthComponent.body)
 					{
-						singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
+                        if (NetworkServer.active)
+                        {
+							singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
+
+							singularTarget.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
+						}
 					}
 				}
 			}

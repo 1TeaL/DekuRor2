@@ -26,6 +26,7 @@ namespace DekuMod.Modules.Survivors
         public static float fajinscepterrate = 2.5f;
         public float fajinrate = 5f;
         public bool isMaxPower;
+        public bool canPull;
 
         public void Awake()
         {
@@ -40,7 +41,7 @@ namespace DekuMod.Modules.Survivors
             FAJIN.Stop();
             anim = GetComponentInChildren<Animator>();
             stopwatch = 0f;
-
+            canPull = false;
 
         }
 

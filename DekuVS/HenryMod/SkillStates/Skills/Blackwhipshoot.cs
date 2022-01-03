@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates
     public class BlackwhipShoot : BaseSkillState
     {
         public static float procCoefficient = 1f;
-        public static float baseDuration = 1f;
+        public static float baseDuration = 0.7f;
         public static float throwForce = 150f;
         public static float radius = 5f;
 
@@ -28,7 +28,7 @@ namespace DekuMod.SkillStates
         public float fajin;
         public DekuController dekucon;
         private float rollSpeed;
-        public static float baseSpeedCoefficient = 20f;
+        public static float baseSpeedCoefficient = 15f;
         public static float SpeedCoefficient;
         private float waitReturnTimer;
         public static float waitReturnDuration = 0.3f;
@@ -41,6 +41,10 @@ namespace DekuMod.SkillStates
         private OverlapAttack attack;
         protected string hitboxName;
         public DamageType damageType;
+        private BulletAttack bulletAttack;
+        public float pullForce;
+        public float hopUpFraction;
+        public float blackwhipage;
 
         public override void OnEnter()
         {
@@ -54,6 +58,8 @@ namespace DekuMod.SkillStates
             this.previousMass = base.characterMotor.mass;
             base.characterMotor.mass = 0f;
             hasActivated = false;
+            this.hasFired = false;
+            dekucon.canPull = true;
 
             Ray aimRay = base.GetAimRay();
 
@@ -61,7 +67,7 @@ namespace DekuMod.SkillStates
             {
                 hitboxName = "BigModelHitbox";
                 fajin = 2f;
-                SpeedCoefficient = baseSpeedCoefficient * 2;
+                SpeedCoefficient = baseSpeedCoefficient * 1.5f;
                 damageType = DamageType.Stun1s | DamageType.BypassArmor;
             }
             else
@@ -81,7 +87,7 @@ namespace DekuMod.SkillStates
                     origin = FindModelChild(this.muzzleString).position,
                     scale = 1f,
                     rotation = Quaternion.LookRotation(aimRay.direction)
-                }, false);
+                }, true);
             }
             //if (NetworkServer.active)
             //{                
@@ -98,6 +104,7 @@ namespace DekuMod.SkillStates
 
             HitBoxGroup hitBoxGroup = Array.Find<HitBoxGroup>(base.GetModelTransform().GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == this.hitboxName);
             this.attack = this.CreateAttack(hitBoxGroup);
+
         }
 
         private void RecalculateRollSpeed()
@@ -122,11 +129,16 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
+            if (dekucon.isMaxPower)
+            {
+                base.characterMotor.velocity *= 0.1f;
+            }            
             dekucon.RemoveBuffCount(50);
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;
             //base.characterMotor.velocity = Vector3.zero;
             base.PlayCrossfade("RightArm, Override", "BufferEmpty", 0f);
+            dekucon.canPull = false;
             base.OnExit();
         }
         protected OverlapAttack CreateAttack(HitBoxGroup hitBoxGroup)
@@ -147,48 +159,98 @@ namespace DekuMod.SkillStates
                 impactSound = this.impactSound
             };
         }
-        //private void Fire()
-        //{
-        //    if (!this.hasFired)
-        //    {
-        //        this.hasFired = true;
 
-        //        if (base.isAuthority)
-        //        {
-        //            Ray aimRay = base.GetAimRay();
-        //            if(base.age < holdTime)
-        //            {
-        //                ProjectileManager.instance.FireProjectile(Modules.Projectiles.blackwhipPrefab,
-        //                aimRay.origin,
-        //                Util.QuaternionSafeLookRotation(aimRay.direction),
-        //                base.gameObject,
-        //                Modules.StaticValues.blackwhipshootDamageCoefficient * this.damageStat,
-        //                0f,
-        //                base.RollCrit(),
-        //                DamageColorIndex.Default,
-        //                null,
-        //                BlackwhipShoot.throwForce);
-        //            }                    
-        //            ProjectileManager.instance.FireProjectile(Modules.Projectiles.blackwhipPrefab,
-        //            aimRay.origin,
-        //            Util.QuaternionSafeLookRotation(aimRay.direction),
-        //            base.gameObject,
-        //            Modules.StaticValues.blackwhipshootDamageCoefficient * this.damageStat,
-        //            -4000f,
-        //            base.RollCrit(),
-        //            DamageColorIndex.WeakPoint,
-        //            null,
-        //            BlackwhipShoot.throwForce);              
+        private void Fire()
+        {
+            //if (!this.hasFired)
+            //{
+            //    this.hasFired = true;
+            //}
+            Ray aimRay = base.GetAimRay();
+            bulletAttack = new BulletAttack();
 
-        //        }
+            bulletAttack.bulletCount = 1;
+            bulletAttack.aimVector = aimRay.direction;
+            bulletAttack.origin = aimRay.origin;
+            bulletAttack.damage = 0f;
+            bulletAttack.damageColorIndex = DamageColorIndex.Default;
+            bulletAttack.damageType = damageType;
+            bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
+            bulletAttack.maxDistance = 200f;
+            bulletAttack.force = -2000f;
+            bulletAttack.hitMask = LayerIndex.CommonMasks.bullet;
+            bulletAttack.minSpread = 0f;
+            bulletAttack.maxSpread = 0f;
+            bulletAttack.isCrit = base.RollCrit();
+            bulletAttack.owner = base.gameObject;
+            bulletAttack.muzzleName = muzzleString;
+            bulletAttack.smartCollision = false;
+            bulletAttack.procChainMask = default(ProcChainMask);
+            bulletAttack.procCoefficient = procCoefficient;
+            bulletAttack.radius = 2f * fajin;
+            bulletAttack.sniper = false;
+            bulletAttack.stopperMask = LayerIndex.noCollision.mask;
+            bulletAttack.weapon = null;
+            bulletAttack.tracerEffectPrefab = Modules.Projectiles.blackwhipTracer;
+            bulletAttack.spreadPitchScale = 0f;
+            bulletAttack.spreadYawScale = 0f;
+            bulletAttack.queryTriggerInteraction = QueryTriggerInteraction.UseGlobal;
+            bulletAttack.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab;
+            bulletAttack.hitCallback = ApplyPullOnHit;
+
+            bulletAttack.Fire();
+        }
+
+
+        private bool ApplyPullOnHit(ref BulletAttack.BulletHit hitInfo)
+        {
+            bool result = bulletAttack.hitCallback(ref hitInfo);
+            if (hitInfo.entityObject)
+            {
+                CharacterMotor motor = hitInfo.entityObject.GetComponent<CharacterMotor>();
+                if (motor)
+                {
+                    float forceCoefficient = 5f;
+                    Vector3 direction = base.transform.position - hitInfo.entityObject.transform.position;
+                    direction.Normalize();
+                    Vector3 force = direction * this.pullForce * motor.mass * forceCoefficient;
+                    hitInfo.entityObject.GetComponent<HealthComponent>().TakeDamageForce(force, true, false);
+                }
+                Rigidbody rigidbody = hitInfo.entityObject.GetComponent<Rigidbody>();
+                if (rigidbody)
+                {
+                    float forceCoefficient = 5f;
+                    Vector3 direction = base.transform.position - hitInfo.entityObject.transform.position;
+                    direction.Normalize();
+                    Vector3 force = direction * this.pullForce * rigidbody.mass * forceCoefficient;
+                    hitInfo.entityObject.GetComponent<HealthComponent>().TakeDamageForce(force, true, false);
+                }
+            }
+            return result;
+        }
 
         //    }
+        //    return result;
+        //    //var hurtbox = hitInfo.hitHurtBox;
+        //    //if (hurtbox)
+        //    //{
+        //    //    var healthComponent = hurtbox.healthComponent;
+        //    //    if (healthComponent)
+        //    //    {
+        //    //        var body = healthComponent.body;
+        //    //        if (body)
+        //    //        {
+        //    //            CharacterMotor motor = hitInfo.entityObject.GetComponent<>
+        //    //        }
+        //    //    }
+        //    //}
+        //    //return false;
         //}
 
         public override void FixedUpdate()
         {
-            //this.attack.Fire();
             base.FixedUpdate();
+            this.attack.Fire();
             //RecalculateRollSpeed();       
             bool flag = base.fixedAge >= this.duration && base.isAuthority;
             if (flag)
@@ -197,12 +259,23 @@ namespace DekuMod.SkillStates
             }
             else
             {
-                bool flag2 = base.fixedAge >= this.duration / 2 && !this.hasActivated;
+                bool flag2 = base.fixedAge >= this.duration / 3 && !this.hasActivated;
+
                 if (flag2)
                 {
                     if (dekucon.isMaxPower)
                     {
-                        this.hasActivated = false;
+                        if(blackwhipage >= this.duration / 3)
+                        {
+                            this.hasActivated = false;
+                            blackwhipage = 0f;
+                        }
+                        else
+                        {
+                            this.blackwhipage += Time.fixedDeltaTime;
+                        }
+
+
                     }
                     else
                     {
@@ -217,22 +290,22 @@ namespace DekuMod.SkillStates
                             bool isAuthority2 = base.isAuthority;
                             if (isAuthority2)
                             {
+                                Fire();
                                 Ray aimRay = base.GetAimRay();
                                 ProjectileManager.instance.FireProjectile(Modules.Projectiles.blackwhipPrefab,
                                 aimRay.origin,
                                 Quaternion.LookRotation(aimRay.direction),
                                 base.gameObject,
                                 Modules.StaticValues.blackwhipshootDamageCoefficient * this.damageStat,
-                                0f,
+                                -1000f,
                                 base.RollCrit(),
                                 DamageColorIndex.Default,
-                                null,                                
-                                -1);
+                                null,
+                                -1f);
                             }
                         }
                         else
                         {
-
                             RecalculateRollSpeed();
                             Ray aimRay = base.GetAimRay();
                             if (base.characterMotor && base.characterDirection)
@@ -256,6 +329,7 @@ namespace DekuMod.SkillStates
                         }
                     }
                 }
+
             }
         }
 

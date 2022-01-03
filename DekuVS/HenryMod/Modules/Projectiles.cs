@@ -65,7 +65,7 @@ namespace DekuMod.Modules
             }
             Modules.Effects.AddEffect(airforce45Tracer);
 
-            blackwhipTracer = Modules.Assets.blackwhip;
+            blackwhipTracer = Modules.Assets.blackwhipbullet;
 
             if (!blackwhipTracer.GetComponent<EffectComponent>()) blackwhipTracer.AddComponent<EffectComponent>();
             if (!blackwhipTracer.GetComponent<VFXAttributes>()) blackwhipTracer.AddComponent<VFXAttributes>();
@@ -103,19 +103,19 @@ namespace DekuMod.Modules
 
         private static void CreateBlackwhip()
         {
-            blackwhipPrefab = CloneProjectilePrefab("magefirebolt", "blackwhipProjectile");
+            blackwhipPrefab = CloneProjectilePrefab("lunarshardprojectile", "blackwhipProjectile");
 
-            ProjectileImpactExplosion blackwhip = blackwhipPrefab.GetComponent<ProjectileImpactExplosion>();
-            InitializeImpactExplosion(blackwhip);
+            //ProjectileImpactExplosion blackwhip = blackwhipPrefab.GetComponent<ProjectileImpactExplosion>();
+            //InitializeImpactExplosion(blackwhip);
 
-            blackwhip.blastRadius = 8f;
-            blackwhip.destroyOnEnemy = true;
-            blackwhip.lifetime = 6f;
-            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
-            blackwhip.timerAfterImpact = false;
-            blackwhip.lifetimeAfterImpact = 0f;
-            blackwhip.destroyOnWorld = true;
+            //blackwhip.blastRadius = 8f;
+            //blackwhip.destroyOnEnemy = true;
+            //blackwhip.lifetime = 6f;
+            ////bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+            ////bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
+            //blackwhip.timerAfterImpact = false;
+            //blackwhip.lifetimeAfterImpact = 0f;
+            //blackwhip.destroyOnWorld = true;
 
             ProjectileController bombController = blackwhipPrefab.GetComponent<ProjectileController>();
             if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("blackwhipshootGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("blackwhipshootGhost");
@@ -150,9 +150,12 @@ namespace DekuMod.Modules
             projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Stun1s;
         }
 
-        //private static void InitializeHookProjectileImpact (HookProjectileImpact hookProjectileImpact)
+        //private static void InitializeHookProjectileImpact(HookProjectileImpact hookProjectileImpact)
         //{
-        //    hookProjectileImpact.
+        //    hookProjectileImpact.flyTimer = 1f;
+        //    hookProjectileImpact.liveTimer = 1f;
+        //    hookProjectileImpact.Reel
+
         //}
 
         private static GameObject CreateGhostPrefab(string ghostName)

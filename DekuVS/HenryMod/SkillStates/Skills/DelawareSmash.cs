@@ -102,7 +102,7 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
             }
 
-            base.characterMotor.velocity *= 0.1f;
+            //base.characterMotor.velocity *= 0.1f;
 
             base.OnExit();
         }

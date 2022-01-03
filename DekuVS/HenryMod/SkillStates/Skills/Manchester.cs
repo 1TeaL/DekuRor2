@@ -39,10 +39,32 @@ namespace DekuMod.SkillStates
             dekucon = base.GetComponent<DekuController>();
             if (dekucon.isMaxPower)
             {
+                damageType = DamageType.BypassArmor | DamageType.Stun1s;
                 fajin = 2f;
+                BlastAttack blastAttack = new BlastAttack();
+                blastAttack.radius = Manchester.slamRadius * fajin;
+                blastAttack.procCoefficient = Manchester.slamProcCoefficient;
+                blastAttack.position = base.characterBody.footPosition;
+                blastAttack.attacker = base.gameObject;
+                blastAttack.crit = base.RollCrit();
+                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat / 7);
+                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                blastAttack.baseForce = -Manchester.slamForce;
+                blastAttack.teamIndex = base.teamComponent.teamIndex;
+                blastAttack.damageType = damageType;
+                blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+
+
+
+                if (blastAttack.Fire().hitCount > 0)
+                {
+                    this.OnHitEnemyAuthority();
+
+                }
             }
             else
             {
+                damageType = DamageType.Stun1s;
                 fajin = 1f;
             }
             jumpDuration = basejumpDuration / fajin;
@@ -151,7 +173,7 @@ namespace DekuMod.SkillStates
                         origin = base.transform.position,
                         scale = 1f,
                         rotation = Quaternion.LookRotation(aimRay.direction)
-                    }, false);
+                    }, true);
                     damageType = DamageType.BypassArmor | DamageType.Stun1s;
                 }
                 else
@@ -173,10 +195,7 @@ namespace DekuMod.SkillStates
                 blastAttack.damageType = damageType;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
 
-                if(dekucon.isMaxPower)
-                {
-                    blastAttack.Fire();
-                }
+
 
                 if (blastAttack.Fire().hitCount > 0)
                 {

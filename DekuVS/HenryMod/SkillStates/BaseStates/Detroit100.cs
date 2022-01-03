@@ -100,8 +100,8 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = Modules.StaticValues.detroit100DamageCoefficient + 2f * (this.chargePercent * Modules.StaticValues.detroit100DamageCoefficient);
-            this.radius = (this.baseRadius * this.damageMult + 20f) / 4f;
+            this.damageMult = Modules.StaticValues.detroit100DamageCoefficient + 1f * (this.chargePercent * Modules.StaticValues.detroit100DamageCoefficient);
+            this.radius = (this.baseRadius * this.damageMult + 10f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;
             this.areaIndicator.transform.localPosition = aimRay.origin + this.maxMoveVec;
