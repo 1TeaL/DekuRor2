@@ -2,6 +2,9 @@
 using EntityStates;
 using RoR2;
 using UnityEngine;
+using DekuMod.SkillStates.Orbs;
+using System.Collections.Generic;
+using RoR2.Orbs;
 
 namespace DekuMod.SkillStates
 {
@@ -13,7 +16,7 @@ namespace DekuMod.SkillStates
         public static float recoil = 1f;
         public static float range = 200f;
 
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerSmokeChase"); 
+        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/tracerhuntresssnipe"); 
         private float duration;
         private float fireTime;
         private bool hasFired;
@@ -22,6 +25,8 @@ namespace DekuMod.SkillStates
         public float fajin;
         protected DamageType damageType;
         public DekuController dekucon;
+        public static int maxRicochetCount = 8;
+        public static bool resetBouncedObjects = true;
 
         public override void OnEnter()
         {
@@ -96,10 +101,13 @@ namespace DekuMod.SkillStates
 
                         }, true);
                     }
+                    Vector3 hitPoint = Vector3.zero;
+                    float hitDistance = 0f;
+                    HealthComponent hitHealthComponent = null;
 
-                    new BulletAttack
+                    var bulletAttack = new BulletAttack
                     {
-                        bulletCount = (uint)(2U * fajin),
+                        bulletCount = (uint)(2U),
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
                         damage = Modules.StaticValues.airforceDamageCoefficient * this.damageStat,
@@ -127,7 +135,53 @@ namespace DekuMod.SkillStates
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                         hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
 
-                    }.Fire();
+                    };
+                    if (maxRicochetCount > 0 && dekucon.isMaxPower)
+                    {
+                        bulletAttack.hitCallback = delegate (ref BulletAttack.BulletHit hitInfo)
+                        {
+                            var result = bulletAttack.DefaultHitCallback(ref hitInfo);
+                            if (hitInfo.hitHurtBox)
+                            {
+                                hitPoint = hitInfo.point;
+                                hitDistance = hitInfo.distance;
+                                hitHealthComponent = hitInfo.hitHurtBox.healthComponent;
+                            }
+                            return result;
+                        };
+                    }
+                    bulletAttack.filterCallback = delegate (ref BulletAttack.BulletHit info)
+                    {
+                        return (!info.entityObject || info.entityObject != bulletAttack.owner) && bulletAttack.DefaultFilterCallback(ref info);
+                    };
+                    bulletAttack.Fire();
+                    if (hitHealthComponent != null)
+                    {
+                        CritRicochetOrb critRicochetOrb = new CritRicochetOrb();
+                        critRicochetOrb.bouncesRemaining = maxRicochetCount - 1;
+                        critRicochetOrb.resetBouncedObjects = resetBouncedObjects;
+                        critRicochetOrb.damageValue = bulletAttack.damage;
+                        critRicochetOrb.isCrit = base.RollCrit();
+                        critRicochetOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                        critRicochetOrb.damageType = bulletAttack.damageType;
+                        critRicochetOrb.attacker = base.gameObject;
+                        critRicochetOrb.attackerBody = base.characterBody;
+                        critRicochetOrb.procCoefficient = bulletAttack.procCoefficient;
+                        critRicochetOrb.duration = 0.2f;
+                        critRicochetOrb.bouncedObjects = new List<HealthComponent>();
+                        critRicochetOrb.range = Mathf.Max(30f, hitDistance);
+                        critRicochetOrb.tracerEffectPrefab = tracerEffectPrefab;
+                        critRicochetOrb.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FireBarrage.hitEffectPrefab;
+                        //critRicochetOrb.hitSoundString = "TTGLTokoRifleCrit";
+                        critRicochetOrb.origin = hitPoint;
+                        critRicochetOrb.bouncedObjects.Add(hitHealthComponent);
+                        var nextTarget = critRicochetOrb.PickNextTarget(hitPoint);
+                        if (nextTarget)
+                        {
+                            critRicochetOrb.target = nextTarget;
+                            OrbManager.instance.AddOrb(critRicochetOrb);
+                        }
+                    }
                 }
             }
         }

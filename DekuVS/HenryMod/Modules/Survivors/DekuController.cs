@@ -7,6 +7,8 @@ using UnityEngine;
 using EntityStates;
 using System.Runtime.CompilerServices;
 using AncientScepter;
+using EntityStates.Mage;
+using System.Diagnostics;
 
 namespace DekuMod.Modules.Survivors
 {
@@ -23,10 +25,14 @@ namespace DekuMod.Modules.Survivors
         public bool fajinscepteron;
         public Animator anim;
         public float stopwatch;
-        public static float fajinscepterrate = 2.5f;
-        public float fajinrate = 5f;
+        public static float fajinscepterrate = 2f;
+        public float fajinrate = 4f;
         public bool isMaxPower;
-        public bool canPull;
+
+        internal bool endFloat;
+        internal bool hasFloatBuff;
+        private Stopwatch floatStopwatch;
+        private CharacterBody characterBody;
 
         public void Awake()
         {
@@ -41,10 +47,8 @@ namespace DekuMod.Modules.Survivors
             FAJIN.Stop();
             anim = GetComponentInChildren<Animator>();
             stopwatch = 0f;
-            canPull = false;
 
         }
-
 
 
         public void IncrementBuffCount()
@@ -128,11 +132,26 @@ namespace DekuMod.Modules.Survivors
                 }
 
             }
-
             stopwatch += Time.fixedDeltaTime;
-            
-        }
 
+            //if (this.hasFloatBuff)
+            //{
+            //    this.floatStopwatch.Start();
+            //    bool flag2 = this.floatStopwatch.Elapsed.TotalSeconds >= (double)StaticValues.floatDuration;
+            //    if (flag2)
+            //    {
+            //        this.endFloat = true;
+            //    }
+            //}
+            //else
+            //{
+            //    bool isGrounded = this.characterBody.characterMotor.isGrounded;
+            //    if (isGrounded)
+            //    {
+            //        this.floatStopwatch.Reset();
+            //    }
+            //}
+        }        
     }
 }
 

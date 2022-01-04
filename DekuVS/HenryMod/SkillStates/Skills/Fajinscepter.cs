@@ -14,9 +14,8 @@ namespace DekuMod.SkillStates
 		public float stopwatch;
 		public DekuController dekucon;
 		public bool hasFired;
-
-
-		private float duration;
+        private BlastAttack blastAttack;
+        private float duration;
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -25,6 +24,23 @@ namespace DekuMod.SkillStates
 			base.PlayAnimation("Rightarm, Override", "Blackwhip", "attack.playbackRate", duration);
 			dekucon = base.GetComponent<DekuController>();
 			hasFired = false;
+
+			blastAttack = new BlastAttack();
+
+			blastAttack.position = base.transform.position;
+			blastAttack.baseDamage = this.damageStat * Modules.StaticValues.fajinDamageCoefficient;
+			blastAttack.baseForce = 400f;
+			blastAttack.radius = 3f;
+			blastAttack.attacker = base.gameObject;
+			blastAttack.inflictor = base.gameObject;
+			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+			blastAttack.crit = base.RollCrit();
+			blastAttack.procChainMask = default(ProcChainMask);
+			blastAttack.procCoefficient = 1f;
+			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+			blastAttack.damageColorIndex = DamageColorIndex.Default;
+			blastAttack.attackerFiltering = AttackerFiltering.Default;
+			blastAttack.Fire();
 		}
 
         public override void FixedUpdate()
@@ -32,7 +48,7 @@ namespace DekuMod.SkillStates
             base.FixedUpdate();
 			if (base.fixedAge >= duration && !hasFired)
             {
-				dekucon.AddToBuffCount(10);
+				dekucon.AddToBuffCount(20);
 				hasFired = true;
 
 				this.outer.SetNextStateToMain();

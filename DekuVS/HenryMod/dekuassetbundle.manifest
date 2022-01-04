@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2821314028
+CRC: 883011068
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8fdb4a80f01a8765430eeb5fe3e62451
+    Hash: 898a3e1f8e3a54dcb4011bf42da830ee
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6de4e0a73c2605a57ae0fd9f559969c2
@@ -71,6 +71,7 @@ Assets:
 - Assets/Deku/mdlDeku test animations.prefab
 - Assets/Deku/Animations/Old/Jump.anim
 - Assets/Deku/VFX/Material/windline.mat
+- Assets/Deku/GUI/Quirks.png
 - Assets/Deku/Animations/Old/ManchesterSmash.anim
 - Assets/Deku/GUI/delaware.png
 - Assets/Deku/GUI/primary attack.png
@@ -103,6 +104,7 @@ Assets:
 - Assets/Deku/Animations/Old/SmashFullCharge.anim
 - Assets/Deku/Animations/Old/maskDekuGesture.mask
 - Assets/Deku/VFX/funkytrail.prefab
+- Assets/Deku/GUI/blackwhipshoot.jpg
 - Assets/Deku/Animations/maskDekuRightArmNew.mask
 - Assets/Deku/Animations/Old/DelawareSmashDown.anim
 - Assets/Deku/VFX/blackwhipline.prefab
@@ -110,10 +112,12 @@ Assets:
 - Assets/Deku/DekuNew.fbx
 - Assets/Deku/Animations/Old/Landing.anim
 - Assets/Deku/Animations/Old/ShootStyleKickAuto.anim
+- Assets/Deku/GUI/fajinboost.png
 - Assets/Deku/Animations/Old/AIIdle.anim
 - Assets/Deku/DekuAllMats.mat
 - Assets/Deku/GUI/45 blank.png
 - Assets/Deku/dekuror2.fbx
+- Assets/Deku/GUI/smokescreen.jpg
 - Assets/Deku/Animations/Old/ShootStyleDash.anim
 - Assets/Deku/VFX/Material/blackwhipbullet.mat
 - Assets/Deku/Animations/Old/Fall.anim
@@ -151,6 +155,7 @@ Assets:
 - Assets/Deku/VFX/Material/blackwhipblack.mat
 - Assets/Deku/VFX/windbullet.prefab
 - Assets/Deku/VFX/blackwhipforward.prefab
+- Assets/Deku/GUI/fajin.png
 - Assets/Deku/Animations/Old/Running.anim
 - Assets/Deku/VFX/Material/white.mat
 - Assets/Deku/GUI/detroit.png
@@ -180,6 +185,7 @@ Assets:
 - Assets/Deku/VFX/impact.prefab
 - Assets/Deku/mdlDeku original copy.prefab
 - Assets/Deku/Animations/maskDekuBodyNew.mask
+- Assets/Deku/GUI/quirksprevious.png
 - Assets/Deku/Animations/Old/ManchesterSmashExit.anim
 - Assets/Deku/Animations/Old/animDisplay.controller
 Dependencies: []

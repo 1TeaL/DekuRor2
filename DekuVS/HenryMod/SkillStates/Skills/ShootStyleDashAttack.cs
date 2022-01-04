@@ -12,8 +12,10 @@ namespace DekuMod.SkillStates
     {
 		private Transform modelTransform;
 		public static GameObject blinkPrefab;
-		public static float duration = 3f;
-		public float damageFrequency = 0.5f;
+		public static float baseduration = 3f;
+		public static float duration;
+		public float basedamageFrequency = 0.5f;
+		public float damageFrequency;
 		public static float procCoefficient = 1f;
 		public static string beginSoundString;
 		public static string endSoundString;
@@ -83,6 +85,8 @@ namespace DekuMod.SkillStates
 			{
 				damageType = DamageType.Generic;
 			}
+			damageFrequency = basedamageFrequency * this.attackSpeedStat * fajin;
+			duration = baseduration * fajin;
 		}
 		private void CreateBlinkEffect(Vector3 origin)
 		{
@@ -96,7 +100,7 @@ namespace DekuMod.SkillStates
 			base.FixedUpdate();
 			this.stopwatch += Time.fixedDeltaTime;
 			this.attackStopwatch += Time.fixedDeltaTime;
-			float num = 1f / (damageFrequency / (this.attackSpeedStat * fajin));
+			float num = 1f / (damageFrequency);
 			if (this.attackStopwatch >= num)
 			{
 				this.attackStopwatch -= num;
@@ -145,7 +149,7 @@ namespace DekuMod.SkillStates
 			{
 				base.characterMotor.velocity = Vector3.zero;
 			}
-			if (this.stopwatch >= duration*fajin && base.isAuthority)
+			if (this.stopwatch >= duration && base.isAuthority)
 			{
 				this.outer.SetNextStateToMain();
 			}

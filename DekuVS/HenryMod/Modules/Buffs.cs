@@ -55,18 +55,6 @@ namespace DekuMod.Modules
 
             return buffDef;
         }
-        internal static void HandleBuffs(CharacterBody body)
-        {
-            bool flag = body;
-            if (flag)
-            {
-                bool flag2 = body.HasBuff(Buffs.floatBuff);
-                if (flag2)
-                {
-                    body.moveSpeed *= 1.5f;
-                    body.acceleration *= 2f;
-                }
-            }
-        }
+
     }
 }

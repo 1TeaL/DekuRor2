@@ -103,19 +103,19 @@ namespace DekuMod.Modules
 
         private static void CreateBlackwhip()
         {
-            blackwhipPrefab = CloneProjectilePrefab("lunarshardprojectile", "blackwhipProjectile");
+            blackwhipPrefab = CloneProjectilePrefab("magefirebolt", "blackwhipProjectile");
 
-            //ProjectileImpactExplosion blackwhip = blackwhipPrefab.GetComponent<ProjectileImpactExplosion>();
-            //InitializeImpactExplosion(blackwhip);
+            ProjectileImpactExplosion blackwhip = blackwhipPrefab.GetComponent<ProjectileImpactExplosion>();
+            InitializeImpactExplosion(blackwhip);
 
-            //blackwhip.blastRadius = 8f;
-            //blackwhip.destroyOnEnemy = true;
-            //blackwhip.lifetime = 6f;
-            ////bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-            ////bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
-            //blackwhip.timerAfterImpact = false;
-            //blackwhip.lifetimeAfterImpact = 0f;
-            //blackwhip.destroyOnWorld = true;
+            blackwhip.blastRadius = 3f;
+            blackwhip.destroyOnEnemy = true;
+            blackwhip.lifetime = 6f;
+            //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
+            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
+            blackwhip.timerAfterImpact = false;
+            blackwhip.lifetimeAfterImpact = 0f;
+            blackwhip.destroyOnWorld = true;
 
             ProjectileController bombController = blackwhipPrefab.GetComponent<ProjectileController>();
             if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("blackwhipshootGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("blackwhipshootGhost");
@@ -147,7 +147,7 @@ namespace DekuMod.Modules
             projectileImpactExplosion.offsetForLifetimeExpiredSound = 0f;
             projectileImpactExplosion.timerAfterImpact = false;
 
-            projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Stun1s;
+            projectileImpactExplosion.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
         }
 
         //private static void InitializeHookProjectileImpact(HookProjectileImpact hookProjectileImpact)

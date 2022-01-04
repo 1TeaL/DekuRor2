@@ -76,7 +76,7 @@ MonoBehaviour:
   - {fileID: 14}
   - {fileID: 12}
   m_Selected: 2
-  m_LastSelected: 0
+  m_LastSelected: 1
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -780,20 +780,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Deku/VFX
+    - Assets/Deku/GUI
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Deku/VFX
+  - Assets/Deku/GUI
   m_LastFoldersGridSize: 16
   m_LastProjectPath: F:\Theodore 3\Risk of Rain 2 modding\Mods\DekuRor2\DekuUnity
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: 08680000
-    m_LastClickedID: 26632
-    m_ExpandedIDs: 00000000d84e0000dc4e0000aa500000f850000038510000585100001852000076520000f65200006a53000014550000e05700003c580000465a0000ba5a0000e85a0000645c00006c5c0000765d0000805e00008c5e000078610000a6620000e8620000de640000a4650000e06500000c660000ca660000fc66000006670000086800006c68000026690000826a0000386c0000426c0000d0980000d2980000d498000000ca9a3b
+    m_SelectedIDs: a85d0000
+    m_LastClickedID: 23976
+    m_ExpandedIDs: 00000000200f0000240f0000aa500000f850000038510000585100001852000076520000f65200006a53000014550000e05700003c580000465a0000ba5a0000e85a0000645c00006c5c0000765d0000805e00008c5e000078610000a6620000e8620000de640000a4650000e06500000c660000ca660000fc66000006670000086800006c68000026690000826a0000386c0000426c0000d0980000d2980000d498000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -821,7 +821,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d84e0000dc4e0000aa500000f850000038510000585100001852000076520000f65200006a53000014550000e05700003c580000465a0000ba5a0000e85a0000645c00006c5c0000765d0000805e00008c5e000078610000a6620000e8620000de640000a4650000e06500000c660000ca660000fc66000006670000086800006c68000026690000826a0000386c0000426c0000d0980000d2980000d4980000
+    m_ExpandedIDs: 00000000200f0000240f0000aa500000f850000038510000585100001852000076520000f65200006a53000014550000e05700003c580000465a0000ba5a0000e85a0000645c00006c5c0000765d0000805e00008c5e000078610000a6620000e8620000de640000a4650000e06500000c660000ca660000fc66000006670000086800006c68000026690000826a0000386c0000426c0000d0980000d2980000d4980000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300008ea0010072580000f06f0000c67c0000a431010096590100a06201001a4f00002e5e0100385f0000245a0000d068000092560000026c00009e5c0000bc5a00004c740000ee680000545f0000425e0000505e000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -873,7 +873,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 64}
+    m_ScrollPosition: {x: 0, y: 144}
     m_GridSize: 16
   m_DirectoriesAreaWidth: 203
 --- !u!114 &17
@@ -940,9 +940,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 56990000
-      m_LastClickedID: 39254
-      m_ExpandedIDs: 8a990000
+      m_SelectedIDs: d4c60000
+      m_LastClickedID: 0
+      m_ExpandedIDs: b2fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -992,14 +992,14 @@ MonoBehaviour:
     height: 550
   m_PersistentViewDataDictionary: {fileID: 0}
   m_WindowGUID: 559af383f617c59409991233e464be66
-  m_SceneLighting: 0
+  m_SceneLighting: 1
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -91.618164, y: -79.07082, z: -94.52113}
+    m_Target: {x: 0.52451897, y: -0.6765404, z: 1.2018247}
     speed: 2
-    m_Value: {x: -91.618164, y: -79.07082, z: -94.52113}
+    m_Value: {x: 0.52451897, y: -0.6765404, z: 1.2018247}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_SceneViewState:
     showFog: 1
     showMaterialUpdate: 0
-    showSkybox: 0
+    showSkybox: 1
     showFlares: 1
     showImageEffects: 1
     showParticleSystems: 1
@@ -1027,13 +1027,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.10583136, y: 0.8887913, z: -0.25925234, w: -0.3628196}
+    m_Target: {x: 0.1795914, y: -0.6373784, z: 0.15619007, w: 0.73287135}
     speed: 2
-    m_Value: {x: -0.10583136, y: 0.8887913, z: -0.25925234, w: -0.3628196}
+    m_Value: {x: 0.1795914, y: -0.6373784, z: 0.15619007, w: 0.73287135}
   m_Size:
-    m_Target: 274.6724
+    m_Target: 29.782795
     speed: 2
-    m_Value: 274.6724
+    m_Value: 29.782795
   m_Ortho:
     m_Target: 0
     speed: 2

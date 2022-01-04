@@ -3,73 +3,118 @@ Adds Deku from My Hero Academia, a high risk survivor which can boost his stats 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571.
 
-<img src="https://user-images.githubusercontent.com/93917577/145319427-ea88a7f6-7c86-4e5e-a6f5-27a477a55a03.PNG">
+<img src="https://user-images.githubusercontent.com/93917577/148071168-a6fa03bc-a8b4-41af-bd42-ff7522a0ed0b.PNG">
 
 ## Known Issues
-<p> Pulling of enemies is based on heaviest enemy so lighter enemies will be sent flying.
+</p> Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
+<br> Pulling enemies with blackwhip combo is fixed so some enemies will be pulled more than others.
+<br> Player who are not the host won't make others invisible with Fa Jin boosted smokescreen.
 
 ## Overview
-</p> Deku's general game plan is that his base form is safe with range and crowd control but with low damage. 
-<br> Then, when needed, he can use his specials (OFA 100% and 45%) to increase his damage and/or mobility. 
-<br> OFA 100% focuses on close range but greater mobility while OFA 45% focuses on mid-range attacks.
-<br> When at low health he can rely on his passive increased regen in base form to heal up.
-<br>Attack speed and Movespeed scales fairly well with him as most skills do scale with it.
-<br> - Aiming to mitigate the health drain costs in OFA 100% mode can also make him very powerful.
-<br> OFA 45% instead only allows direct healing effects rather than health regen but in turn doesn't drain health.
+    Deku's general game plan is that his base form is safe with range and crowd control but with low damage. 
+    Then, when needed, he can use his specials (OFA 100% and 45%) to increase his damage and/or mobility. 
+    OFA 100% focuses on close range but greater mobility while OFA 45% focuses on mid-range attacks.
+    When at low health he can rely on his passive increased regen in base form to heal up.
+    Attack speed and Movespeed scales fairly well with him as most skills do scale with it.
+    Aiming to mitigate the health drain costs in OFA 100% mode can also make him very powerful.
+    OFA 45% instead only allows direct healing effects rather than health regen but in turn doesn't drain health.
+    OFA Quirks grants Deku new functionality for all his base skills with the new Fa Jin Buff.
 
 ## Skills
 ### Passive
 Deku has innate increased health regen the lower his health is. He has a double jump. He can sprint in any direction.
 ### Primary - Airforce
 ##### <img src="https://user-images.githubusercontent.com/93917577/144508155-96faa81f-a22b-4719-8680-e5382e0bc59d.png" width="100" height="100">
-Shoots a bullet dealing 2 x 100% damage. Proc coefficient = 0.5.
+    Shoots a bullet dealing 2 x 100% damage. 
+    Fa Jin buff makes the bullets ricochet. Proc coefficient = 0.5. 
 ### Primary2 - Shoot Style Kick
 ##### <img src="https://user-images.githubusercontent.com/93917577/145331809-b57a4f5b-5f5b-43e1-b0af-175776969f05.png" width="100" height="100">
 ##### <img src="https://user-images.githubusercontent.com/93917577/145331823-67001074-4bd6-4fe2-89e7-28d519cd6928.png" width="100" height="100">
-Dash and kick, dealing 300% damage scaling based on movespeed, resetting the cooldown on hit and resetting all cooldowns on kill. Proc coefficient = 1.
+    Dash and kick, dealing 300% damage scaling based on movespeed, resetting the cooldown on hit and resetting all cooldowns on kill. 
+    Fa Jin buff freezes enemies. Proc coefficient = 1.
 ### Secondary - Blackwhip
 ##### <img src="https://user-images.githubusercontent.com/93917577/144508171-f67f0493-5ed4-4125-b5e7-56b7b32dfa1a.png" width="100" height="100">
-Pulls and stuns enemies in front for 5x50% damage. Gain barrier on hit. Attack speed increases the pull radius and barrier gain as well. Proc coefficient = 0.2.
+    Pulls and stuns enemies in front for 5x50% damage. Gain barrier on hit. Attack speed increases the pull radius and barrier gain as well. 
+    Fa Jin buff doubles barrier gain. Proc coefficient = 0.2.
 ### Secondary2 - Manchester Smash
 ##### <img src="https://user-images.githubusercontent.com/93917577/145331951-692a57ef-3ed0-4ea9-8742-4bfca1a196de.png" width="100" height="100">
-Jump in the air and slam down, dealing 300% damage and gaining barrier on hit, both scaling with movespeed. Proc coefficient = 1.
+    Jump in the air and slam down, dealing 300% damage and gaining barrier on hit, both scaling with movespeed. 
+    Fa Jin buff does an extra initial hit and doubles barrier gain. Proc coefficient = 1.
 ### Utility - Shoot Style
 ##### <img src="https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png" width="100" height="100">
-Dashes and hits enemies for 200% damage multiple times while having invincibility during the attack (Basically mercenary's eviscerate). Proc coefficient = 1.
+    Dashes and hits enemies for 200% damage multiple times while having invincibility during the attack (Basically mercenary's eviscerate). 
+    Fa Jin buff doubles the number of hits. Proc coefficient = 1.
 ### Utility2 - Shoot Style Full Cowling
 ##### <img src="https://user-images.githubusercontent.com/93917577/144509040-5999395c-19e7-40bb-9246-d2eec5d52257.png" width="100" height="100">
-Dash and stun enemies passed through, dealing ? x 100% damage (Attack speed increases the number of attacks). Have invincibility during the duration. Has 2 stocks. Proc coefficient = 1.
+    Dash and stun enemies passed through, dealing ? x 100% damage (Attack speed increases the number of attacks). 
+    Fa Jin buff doubles the number of hits. Has 2 stocks. Proc coefficient = 1.
 ### Utility3 - Detroit Smash
 ##### <img src="https://user-images.githubusercontent.com/93917577/145331993-9097cd3e-77de-4078-873a-7dff3ea45dd2.png" width="100" height="100">
-Charge up a punch that teleports you and does damage and stun on release, dealing 400% damage. Distance scales on movespeed and attack speed.  Proc coefficient = 1.
+    Charge up a punch that teleports you and stuns enemies, dealing 400% damage. Distance is based on movespeed/attackspeed. 
+    Fa Jin buff doubles everything. Proc coefficient = 1.
 ## Special - One For All 100%
 ##### <img src="https://user-images.githubusercontent.com/93917577/144508368-f2baed32-895e-495a-88f3-9d15c0a1863e.png" width="100" height="100">
-Go Beyond your limits, boosting Attack speed (1.5x), Damage (2x), Movement speed(1.5x) and Armor(5x) as well as changing all your abilities. This comes at the cost of negative health regen(-7x) and self-damage on his skills. Health regen items can mitigate this.
+    Go Beyond your limits, boosting Attack speed(1.5x), Damage(2x), Movespeed(1.5x) and Armor(5x) as well as changing all your abilities. 
+    This comes at the cost of negative health regen(-4x) and self-damage on his skills. 
+    Health regen items can mitigate this and Deku's passive still works.
 ##### <img src="https://user-images.githubusercontent.com/93917577/144508393-fac634ad-5dad-4f73-9773-b0c9d24b36f6.png" width="100" height="100">
 ##### Ancient Scepter turns the skill into Infinite 100%, granting the same effects as well as 10% lifesteal. 
 ### Boosted Primary - St. Louis Smash 100%
 ##### <img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" width="100" height="100">
-Dash and hit enemies passed through, dealing ? x 200% damage (Attack speed increases the number of attacks). Have invincibility during the duration. Attack speed also decreases duration. No health cost. Proc coefficient = 1.
+    Dash and hit enemies passed through, dealing ? x 200% damage (Attack speed increases the number of attacks). 
+    Have invincibility during the duration. Attack speed also decreases duration. 
+    No health cost. Proc coefficient = 1.
 ### Boosted Secondary - Detroit Smash 100%
 ##### <img src="https://user-images.githubusercontent.com/93917577/144508215-3ebf65c6-ef1c-43cd-b41d-0b3255842191.png" width="100" height="100">
-Charge up a punch that teleports you and does damage and stun on release, dealing a minimum of 600% damage, charging infinitely. Costs 10% of your max health to use. Proc coefficient = 2.
+    Charge up a punch that teleports you and does stuns enemies, dealing a minimum of 600% damage, charging infinitely. 
+    Costs 10% of your max health to use. Proc coefficient = 2.
 ### Boosted Utility - Delaware Smash 100%
 ##### <img src="https://user-images.githubusercontent.com/93917577/144508192-f0969ea2-2e50-4c33-93ae-1b5f27114889.png" width="100" height="100">
-Send a blast forward, stunning and dealing 600% damage to enemies in front, while sending Deku backwards as well. Costs 10% of your max health to use. Proc coefficient = 2.
-## Special - One For All 45%
+    Send a blast forward, stunning and dealing 600% damage to enemies in front, while sending Deku backwards as well.
+    Costs 10% of your max health to use. Proc coefficient = 2.
+## Special2 - One For All 45%
 ##### <img src="https://user-images.githubusercontent.com/93917577/145332728-e5089c43-f789-4d8b-a963-7e87e2ff1a58.png" width="100" height="100">
-Push yourself to your limits, boosting Attack speed (1.2x), Damage (1.5x), Movement speed(1.2x) and Armor(2.5x) as well as changing all your abilities. This comes at the cost of disabling Health Regen. Health regen items cannot mitigate this.
+    Push your limits, boosting Attack speed(1.2x), Damage(1.5x), Movespeed(1.2x) and Armor(2.5x) as well as changing all your abilities. 
+    This comes at the cost of disabling Health Regen. Health regen items cannot mitigate this.
 ##### <img src="https://user-images.githubusercontent.com/93917577/145332711-e86e5c90-1f6c-4a66-8be4-349ce4b19f36.png" width="100" height="100">
 ##### Ancient Scepter turns the skill into Infinite 45%, granting the same effects as well as 5% lifesteal. 
 ### Boosted Primary2 - Airforce 45%
 ##### <img src="https://user-images.githubusercontent.com/93917577/145331910-0a4b1fb1-6223-4ea4-83f5-c84d9684e820.png" width="100" height="100">
-Shoot 4 bullets with all your fingers, dealing 100% damage each. Proc coefficient = 0.25.
+    Shoot 4 bullets with all your fingers, dealing 100% damage each. 
+    Proc coefficient = 0.25.
 ### Boosted Secondary2 - Blackwhip 45%
 ##### <img src="https://user-images.githubusercontent.com/93917577/145331966-38c60bc5-872a-4a0d-a30e-7238feeec167.png" width="100" height="100">
-Blackwhip enemies, pulling them right in front of you, stunning and dealing 5x80% damage. Attack speed increases pull radius. Proc coefficient = 0.5.
+    Blackwhip enemies, pulling them right in front of you, stunning and dealing 5x80% damage. Attack speed increases pull radius. 
+    Proc coefficient = 0.5.
 ### Boosted Utility2 - St Louis Smash 45%
 ##### <img src="https://user-images.githubusercontent.com/93917577/145332001-e18ba69f-5491-499f-838f-cc26303e1aab.PNG" width="100" height="100">
-St Louis Smash, stunning and pushing away enemies in front, dealing 600% damage. Proc coefficient = 1.
+    St Louis Smash, stunning and pushing away enemies in front, dealing 600% damage. 
+    Proc coefficient = 1.
+## Special3 - One For All Quirks
+##### <img src="https://user-images.githubusercontent.com/93917577/148047101-479424f8-b913-4e32-bc82-7efbcb63394e.png" width="100" height="100">
+    Unlock your additional quirks. This skill grants the Fa Jin buff. 
+    Moving increases the buff up to 100 stacks. Gain up to 2x damage at 50 stacks. 
+    Every move consumes 50 stacks. However, if a move uses 50 stacks it has additional effects. 
+    In general all moves will stun and bypass armor, have double the movement, double the radius and range.
+##### <img src="https://user-images.githubusercontent.com/93917577/148047107-cfedc80a-ae75-4122-894b-4b69a76c838b.png" width="100" height="100">
+##### Ancient Scepter turns the skill into One For All Quirks Mastered, doubling Fa Jin buff gain as well as upgrading the Fa Jin primary skill. 
+### Boosted Primary3 - Fa Jin
+##### <img src="https://user-images.githubusercontent.com/93917577/148047009-774ef354-e1ab-4f3b-8f19-6bed4a9a7297.png" width="100" height="100">
+    Charge up kinetic energy, dealing 50% damage, granting 10 stacks of Fa Jin. 
+    Does not consume Fa Jin. Proc coefficient = 1.
+### Ancient Scepter Boosted Primary3 - Fa Jin Mastered
+##### <img src="https://user-images.githubusercontent.com/93917577/148047023-2ff7dfdf-b710-4246-a9f1-c51f4e439569.png" width="100" height="100">
+    Charge up kinetic energy, dealing 50% damage, granting 20 stacks of Fa Jin. 
+    Does not consume Fa Jin. Proc coefficient = 1.
+### Boosted Secondary3 - Blackwhip Combo
+##### <img src="https://user-images.githubusercontent.com/93917577/148047047-eb93efe7-078c-42be-bf80-64ffdaa03f8b.jpg" width="100" height="100">
+    Hit enemies in front of you and shoot blackwhip, dealing 200% damage each. 
+    Tapping pulls you forward while Holding pulls enemies towards you. 
+    Fa Jin buff makes blackwhip to shoot 3 times and increases the size of the melee hitbox. Proc coefficient = 1.
+### Boosted Utility3 - Smokescreen
+##### <img src="https://user-images.githubusercontent.com/93917577/148047077-f947c473-01f6-4cb2-b0af-a68ef744dcfa.jpg" width="100" height="100">
+    Release a smokescreen, going invisible and dealing 100% damage to enemies around you. 
+    Fa Jin buff makes nearby allies invisible as well. Proc coefficient = 1.
 
 ## Numbers
 ##### Armor = 15 +0.5 per level
@@ -81,6 +126,11 @@ St Louis Smash, stunning and pushing away enemies in front, dealing 600% damage.
 These stats are prone to change.
 
 ## Changelog
+- 1.4.0
+
+    -  Added another new alt special - Deku's extra quirks. This comes with new functionality for all skills.
+    -  Rebalanced of OFA 100%- regen is now only -4x, and passive regen works, this means that at some point your HP will actually regen back.
+    -  Nerfed Detroit Smash 100% charging damage since its easier to charge for a longer time, but the initial damage is still the same.
 - 1.3.4
 
     -  Accidentally increased damage multiplier for OFA 100%(2 to 2.5x): was testing ways to maybe buff OFA 100% but not set yet.
@@ -152,3 +202,4 @@ These stats are prone to change.
 ##### Ninja for partial utility code for st louis smash.
 ##### Daredevil for bounce code for shoot style kick.
 ##### Sett for haymaker code for st louis smash 45%.
+##### TTGL for crit ricochet orb code for airforce fa jin buff.

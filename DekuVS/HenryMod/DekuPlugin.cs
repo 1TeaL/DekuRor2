@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
+using DekuMod.Modules;
 using DekuMod.Modules.Survivors;
 using R2API.Utils;
 using RoR2;
@@ -90,50 +91,23 @@ namespace DekuMod
             On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
-            On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
-            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
-            //On.RoR2.Projectile.ProjectileSingleTargetImpact.OnProjectileImpact += ProjectileSingleTargetImpact_OnProjectileImpact;
-            
-            //On.RoR2.HealthComponent.TakeDamage += BlackwhipPull;            
+            On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;        
         }
 
-        //private void ProjectileSingleTargetImpact_OnProjectileImpact(On.RoR2.Projectile.ProjectileSingleTargetImpact.orig_OnProjectileImpact orig, ProjectileSingleTargetImpact self, ProjectileImpactInfo impactInfo)
-        //{
-        //    orig(self, impactInfo);
-        //    Chat.AddMessage("hit: " + self.gameObject.name);
-        //    if (self.gameObject.name.Contains("blackwhipProjectile") && impactInfo.collider)
-        //    {
-        //        var hurtbox = impactInfo.collider.gameObject.GetComponent<HurtBox>();
-        //        if (hurtbox && hurtbox.healthComponent && hurtbox.healthComponent.body)
-        //        {
-        //            Debug.Log("impact");
-        //        }
-        //    }
-        //}
-        //private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo damageInfo)
-        //{
-        //    var body = damageInfo.attacker.GetComponent<CharacterBody>();
-        //    if(body.baseNameToken == developerPrefix + "_DEKU_BODY_NAME" && damageInfo?.attacker)
-        //    {
-        //        DekuController dekucon = GetComponent<DekuController>();
-        //        if (dekucon.canPull)
-        //        {
-        //            float mass;
-        //            if (self.body.characterMotor) mass = self.body.characterMotor.mass;
-        //            else if (self.body.rigidbody) mass = self.body.rigidbody.mass;
-        //            else mass = 1f;
-
-        //            damageInfo.force += Vector3.Normalize(body.corePosition - self.body.corePosition) * 3f * mass;
-        //        }
-        //    }
-        //    orig(self, damageInfo);
-
-        //}
+       
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
             //regen 
             orig.Invoke(self);
+
+            bool floatbuff = self.HasBuff(Buffs.floatBuff);
+            if (floatbuff)
+            {
+                self.moveSpeed *= 1.5f;
+                self.acceleration *= 2f;
+
+            }
 
             bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
             if (fajin)
@@ -315,25 +289,6 @@ namespace DekuMod
                 attackerBody.healthComponent.Heal(report.damageDealt * 0.05f, default(ProcChainMask), true);
 
             }
-
-
-            //if (!flag && report.attackerBody.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
-            //{
-            //    DekuController dekucon = GetComponent<DekuController>();
-            //    if (dekucon.canPull)
-            //    {
-            //        CharacterBody attackerBody = report.attacker.GetComponent<RoR2.CharacterBody>();
-            //        if (attackerBody)
-            //        {
-            //            float mass;
-            //            if (report.victimBody.characterMotor) mass = report.victimBody.characterMotor.mass;
-            //            else if (report.victimBody.rigidbody) mass = report.victimBody.rigidbody.mass;
-            //            else mass = 1f;
-            //            damageInfo.force += Vector3.Normalize(attackerBody.corePosition - report.victimBody.corePosition) * 3 * mass;
-            //        }
-            //    }
-
-            //}
         }
 
 

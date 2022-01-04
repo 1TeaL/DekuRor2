@@ -13,7 +13,7 @@ namespace DekuMod.SkillStates
 
 	public class Smokescreen : BaseSkillState
 	{
-		public static float baseDuration = 5f;
+		public static float baseDuration = 4f;
 		public static float radius = 15f;
 		public DekuController dekucon;
 
@@ -35,14 +35,15 @@ namespace DekuMod.SkillStates
 			dekucon = base.GetComponent<DekuController>();
 			Ray aimRay = base.GetAimRay();
 			theSpot = aimRay.origin + 0 * aimRay.direction;
-            //bool active = NetworkServer.active;
-            //if (active)
-            //{
+            bool active = NetworkServer.active;
+            if (active)
+            {
                 base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-			base.characterBody.AddTimedBuff(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
-            //}
+                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
 
-			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
+            }
+
+            Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
 			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
 
 			if (dekucon.isMaxPower)
@@ -56,7 +57,7 @@ namespace DekuMod.SkillStates
 					{
 						origin = effectPosition,
 						scale = radius * fajin,
-						rotation = Quaternion.LookRotation(Vector3.up)
+						rotation = Quaternion.LookRotation(Vector3.down)
 					}, true);
 
 				}
@@ -133,13 +134,13 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
 		{
 			
-			if (dekucon.CheckIfMaxPowerStacks())
+			if (dekucon.isMaxPower)
 			{
                 if (base.isAuthority)
                 {
-					SmokescreenSearch();
+                    SmokescreenSearch();
                 }
-			}
+            }
 			if (!hasFired)
             {
 				hasFired = true;
@@ -156,28 +157,7 @@ namespace DekuMod.SkillStates
 		{
 			return InterruptPriority.Frozen;
 		}
-		
-		//public void OnHitEnemyAuthority()
-  //      {
-		//	base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-		//}
 
-		//public void ApplySmokeScreen()
-		//{
-		//	if (!NetworkServer.active)
-		//	{
-		//		return;
-		//	}
-		//	if (!dekucon.wardTrue)
-		//	{
-		//		dekucon.wardTrue = true;
-
-		//		this.affixHauntedWard = UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/NetworkedObjects/AffixHauntedWard"));
-		//		this.affixHauntedWard.GetComponent<TeamFilter>().teamIndex = this.body.teamComponent.teamIndex;
-		//		this.affixHauntedWard.GetComponent<BuffWard>().Networkradius = Smokescreen.radius * fajin;
-		//		this.affixHauntedWard.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(this.gameObject);
-		//	}
-		//}
 		public void SmokescreenSearch()
 		{
 			Ray aimRay = base.GetAimRay();
@@ -205,14 +185,14 @@ namespace DekuMod.SkillStates
 				{
 					if (singularTarget.healthComponent && singularTarget.healthComponent.body)
 					{
-                        if (NetworkServer.active)
-                        {
+						//bool active = NetworkServer.active;
+						//if (active)
+						//{
 							singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-
-							singularTarget.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
-						}
-					}
-				}
+							singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
+                        //}
+                    }
+                }
 			}
 		}
 	}

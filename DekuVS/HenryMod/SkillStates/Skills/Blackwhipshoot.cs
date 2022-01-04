@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using System;
 using DekuMod.Modules.Survivors;
 using RoR2.Audio;
+using System.Collections.Generic;
 
 namespace DekuMod.SkillStates
 {
@@ -46,6 +47,16 @@ namespace DekuMod.SkillStates
         public float hopUpFraction;
         public float blackwhipage;
 
+        private List<HealthComponent> hitHealthComponents;
+        private Vector3 pullPoint;
+        private enum SubState
+        {
+            Skewer,
+            SkewerHit,
+            Pull,
+            Exit
+        }
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -59,10 +70,10 @@ namespace DekuMod.SkillStates
             base.characterMotor.mass = 0f;
             hasActivated = false;
             this.hasFired = false;
-            dekucon.canPull = true;
+            base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
             Ray aimRay = base.GetAimRay();
-
+            base.StartAimMode(duration, true);
             if (dekucon.isMaxPower)
             {
                 hitboxName = "BigModelHitbox";
@@ -129,16 +140,16 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
+            base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
             if (dekucon.isMaxPower)
             {
-                base.characterMotor.velocity *= 0.1f;
+                base.characterMotor.velocity *= 0.5f;
             }            
             dekucon.RemoveBuffCount(50);
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;
             //base.characterMotor.velocity = Vector3.zero;
             base.PlayCrossfade("RightArm, Override", "BufferEmpty", 0f);
-            dekucon.canPull = false;
             base.OnExit();
         }
         protected OverlapAttack CreateAttack(HitBoxGroup hitBoxGroup)
@@ -167,90 +178,144 @@ namespace DekuMod.SkillStates
             //    this.hasFired = true;
             //}
             Ray aimRay = base.GetAimRay();
-            bulletAttack = new BulletAttack();
+            //this.pullPoint = aimRay.GetPoint(3f);
+            //this.pullPoint.y = base.transform.position.y + 1f;
 
-            bulletAttack.bulletCount = 1;
-            bulletAttack.aimVector = aimRay.direction;
-            bulletAttack.origin = aimRay.origin;
-            bulletAttack.damage = 0f;
-            bulletAttack.damageColorIndex = DamageColorIndex.Default;
-            bulletAttack.damageType = damageType;
-            bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
-            bulletAttack.maxDistance = 200f;
-            bulletAttack.force = -2000f;
-            bulletAttack.hitMask = LayerIndex.CommonMasks.bullet;
-            bulletAttack.minSpread = 0f;
-            bulletAttack.maxSpread = 0f;
-            bulletAttack.isCrit = base.RollCrit();
-            bulletAttack.owner = base.gameObject;
-            bulletAttack.muzzleName = muzzleString;
-            bulletAttack.smartCollision = false;
-            bulletAttack.procChainMask = default(ProcChainMask);
-            bulletAttack.procCoefficient = procCoefficient;
-            bulletAttack.radius = 2f * fajin;
-            bulletAttack.sniper = false;
-            bulletAttack.stopperMask = LayerIndex.noCollision.mask;
-            bulletAttack.weapon = null;
-            bulletAttack.tracerEffectPrefab = Modules.Projectiles.blackwhipTracer;
-            bulletAttack.spreadPitchScale = 0f;
-            bulletAttack.spreadYawScale = 0f;
-            bulletAttack.queryTriggerInteraction = QueryTriggerInteraction.UseGlobal;
-            bulletAttack.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab;
-            bulletAttack.hitCallback = ApplyPullOnHit;
-
-            bulletAttack.Fire();
-        }
-
-
-        private bool ApplyPullOnHit(ref BulletAttack.BulletHit hitInfo)
-        {
-            bool result = bulletAttack.hitCallback(ref hitInfo);
-            if (hitInfo.entityObject)
+            bool flag = Util.HasEffectiveAuthority(base.gameObject);
+            if (flag)
             {
-                CharacterMotor motor = hitInfo.entityObject.GetComponent<CharacterMotor>();
-                if (motor)
+                BulletAttack bulletAttack = new BulletAttack
                 {
-                    float forceCoefficient = 5f;
-                    Vector3 direction = base.transform.position - hitInfo.entityObject.transform.position;
-                    direction.Normalize();
-                    Vector3 force = direction * this.pullForce * motor.mass * forceCoefficient;
-                    hitInfo.entityObject.GetComponent<HealthComponent>().TakeDamageForce(force, true, false);
-                }
-                Rigidbody rigidbody = hitInfo.entityObject.GetComponent<Rigidbody>();
-                if (rigidbody)
-                {
-                    float forceCoefficient = 5f;
-                    Vector3 direction = base.transform.position - hitInfo.entityObject.transform.position;
-                    direction.Normalize();
-                    Vector3 force = direction * this.pullForce * rigidbody.mass * forceCoefficient;
-                    hitInfo.entityObject.GetComponent<HealthComponent>().TakeDamageForce(force, true, false);
-                }
+                    bulletCount = 1,
+                    aimVector = aimRay.direction,
+                    origin = aimRay.origin,
+                    damage = 0f,
+                    damageColorIndex = DamageColorIndex.Default,
+                    damageType = damageType,
+                    falloffModel = BulletAttack.FalloffModel.DefaultBullet,
+                    maxDistance = 200f,
+                    force = -5000f * fajin,
+                    hitMask = LayerIndex.CommonMasks.bullet,
+                    minSpread = 0f,
+                    maxSpread = 0f,
+                    isCrit = base.RollCrit(),
+                    owner = base.gameObject,
+                    muzzleName = muzzleString,
+                    smartCollision = false,
+                    procChainMask = default(ProcChainMask),
+                    procCoefficient = 0f,
+                    radius = 3f * fajin,
+                    sniper = false,
+                    stopperMask = LayerIndex.noCollision.mask,
+                    weapon = null,
+                    tracerEffectPrefab = Modules.Projectiles.blackwhipTracer,
+                    spreadPitchScale = 0f,
+                    spreadYawScale = 0f,
+                    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
+                    hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
+
+                };bulletAttack.Fire();
+            //    bulletAttack.hitCallback = delegate (ref BulletAttack.BulletHit hitInfo)
+            //    {
+            //        bool result = bulletAttack.DefaultHitCallback(ref hitInfo);
+            //        bool flag13 = hitInfo.hitHurtBox;
+            //        if (flag13)
+            //        {
+            //            this.OnHitEnemyAuthority();
+            //        }
+            //        return result;
+            //    };
+            //}
+            //bool active = NetworkServer.active;
+            //if (active)
+            //{
+            //    RaycastHit[] array = Physics.SphereCastAll(aimRay.origin, 2f, aimRay.direction, 100f, LayerIndex.CommonMasks.bullet, QueryTriggerInteraction.UseGlobal);
+            //    for (int i = 0; i < array.Length; i++)
+            //    {
+            //        bool flag3 = array[i].collider;
+            //        if (flag3)
+            //        {
+            //            Collider collider = array[i].collider;
+            //            bool flag4 = collider;
+            //            if (flag4)
+            //            {
+            //                HurtBox component = collider.GetComponent<HurtBox>();
+            //                bool flag5 = component;
+            //                if (flag5)
+            //                {
+            //                    HealthComponent healthComponent = component.healthComponent;
+            //                    bool flag6 = healthComponent;
+            //                    if (flag6)
+            //                    {
+            //                        TeamComponent component2 = healthComponent.GetComponent<TeamComponent>();
+            //                        bool flag7 = component2.teamIndex != base.teamComponent.teamIndex;
+            //                        bool flag8 = flag7;
+            //                        if (flag8)
+            //                        {
+            //                            bool flag9 = !this.hitHealthComponents.Contains(healthComponent);
+            //                            if (flag9)
+            //                            {
+            //                                this.hitHealthComponents.Add(healthComponent);
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    foreach (HealthComponent healthComponent2 in this.hitHealthComponents)
+            //    {
+            //        bool flag10 = healthComponent2 && healthComponent2.body;
+            //        if (flag10)
+            //        {
+            //            EntityStateMachine component3 = healthComponent2.body.GetComponent<EntityStateMachine>();
+            //            bool flag11 = healthComponent2.body.GetComponent<SetStateOnHurt>() && healthComponent2.body.GetComponent<SetStateOnHurt>().canBeFrozen && component3;
+            //            if (flag11)
+            //            {
+            //                SkeweredState newNextState = new SkeweredState
+            //                {
+            //                    skewerDuration = this.skewerTime,
+            //                    pullDuration = this.pullTime,
+            //                    destination = this.pullPoint
+            //                };
+            //                component3.SetInterruptState(newNextState, InterruptPriority.Death);
+            //            }
+            //        }
+            //    }
+            //    bool flag12 = this.hitHealthComponents.Count > 0;
+            //    if (flag12)
+            //    {
+            //        this.subState = Skewer.SubState.SkewerHit;
+            //        this.stopwatch = 0f;
+            //    }
+            //    else
+            //    {
+            //        Util.PlaySound("DSpecialSwing", base.gameObject);
+            //        this.subState = Skewer.SubState.Exit;
+            //        this.stopwatch = 0f;
+            //    }
             }
-            return result;
         }
 
-        //    }
-        //    return result;
-        //    //var hurtbox = hitInfo.hitHurtBox;
-        //    //if (hurtbox)
-        //    //{
-        //    //    var healthComponent = hurtbox.healthComponent;
-        //    //    if (healthComponent)
-        //    //    {
-        //    //        var body = healthComponent.body;
-        //    //        if (body)
-        //    //        {
-        //    //            CharacterMotor motor = hitInfo.entityObject.GetComponent<>
-        //    //        }
-        //    //    }
-        //    //}
-        //    //return false;
+        //private void OnHitEnemyAuthority()
+        //{
+        //    base.PlayAnimation("FullBody, Override", "DownSpecialHit", "Slash.playbackrate", this.duration * 0.5f);
+        //    Util.PlaySound("DSpecialHit", base.gameObject);
+        //    this.subState = Skewer.SubState.SkewerHit;
+        //    this.stopwatch = 0f;
+        //    base.characterMotor.velocity = Vector3.zero;
+        //    base.AddRecoil(-1f * this.attackRecoil / 2f, -2f * this.attackRecoil / 2f, -0.5f * this.attackRecoil / 2f, 0.5f * this.attackRecoil / 2f);
         //}
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            this.attack.Fire();
+            if (base.isAuthority && blackwhipage >= this.duration / 5)
+            {
+                this.attack.Fire();
+                blackwhipage = 0;
+            }
+            else this.blackwhipage += Time.fixedDeltaTime; 
             //RecalculateRollSpeed();       
             bool flag = base.fixedAge >= this.duration && base.isAuthority;
             if (flag)
@@ -265,7 +330,7 @@ namespace DekuMod.SkillStates
                 {
                     if (dekucon.isMaxPower)
                     {
-                        if(blackwhipage >= this.duration / 3)
+                        if(blackwhipage >= this.duration / 6)
                         {
                             this.hasActivated = false;
                             blackwhipage = 0f;
@@ -273,6 +338,7 @@ namespace DekuMod.SkillStates
                         else
                         {
                             this.blackwhipage += Time.fixedDeltaTime;
+                            this.hasActivated = true;
                         }
 
 
@@ -301,7 +367,7 @@ namespace DekuMod.SkillStates
                                 base.RollCrit(),
                                 DamageColorIndex.Default,
                                 null,
-                                -1f);
+                                BlackwhipShoot.throwForce);
                             }
                         }
                         else

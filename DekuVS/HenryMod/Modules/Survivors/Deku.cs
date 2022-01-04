@@ -406,7 +406,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SPECIAL3_NAME",
                 skillNameToken = prefix + "SPECIAL3_NAME",
                 skillDescriptionToken = prefix + "SPECIAL3_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("quirksprevious"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.Fajinstate)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -447,60 +447,8 @@ namespace DekuMod.Modules.Survivors
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
-
-            });
-
-            Deku.primaryfajinSkillDef = Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "BOOSTEDPRIMARY_NAME",
-                skillNameToken = prefix + "BOOSTEDPRIMARY_NAME",
-                skillDescriptionToken = prefix + "BOOSTEDPRIMARY_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("stlouis"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.Fajin)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 0f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
-                interruptPriority = InterruptPriority.Any,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
-
-            });
-
-            Deku.primaryfajinscepterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "BOOSTEDPRIMARY_NAME",
-                skillNameToken = prefix + "BOOSTEDPRIMARY_NAME",
-                skillDescriptionToken = prefix + "BOOSTEDPRIMARY_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("stlouis"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.Fajinscepter)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 0f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
-                interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
@@ -525,7 +473,7 @@ namespace DekuMod.Modules.Survivors
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -564,6 +512,58 @@ namespace DekuMod.Modules.Survivors
 
             });
 
+            Deku.primaryfajinSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "BOOSTEDPRIMARY3_NAME",
+                skillNameToken = prefix + "BOOSTEDPRIMARY3_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDPRIMARY3_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("fajin"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Fajin)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+
+            });
+
+            Deku.primaryfajinscepterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "BOOSTEDPRIMARY4_NAME",
+                skillNameToken = prefix + "BOOSTEDPRIMARY4_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDPRIMARY4_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("fajinboost"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Fajinscepter)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+
+            });
+
             Deku.secondaryboostSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "BOOSTEDSECONDARY_NAME",
@@ -577,33 +577,7 @@ namespace DekuMod.Modules.Survivors
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,
-                fullRestockOnAssign = true,
-                interruptPriority = InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_STUNNING" }
-
-            });
-
-            Deku.secondaryfajinSkillDef = Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "BOOSTEDSECONDARY_NAME",
-                skillNameToken = prefix + "BOOSTEDSECONDARY_NAME",
-                skillDescriptionToken = prefix + "BOOSTEDSECONDARY_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.BlackwhipShoot)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 4f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -629,7 +603,33 @@ namespace DekuMod.Modules.Survivors
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_STUNNING" }
+
+            });
+
+            Deku.secondaryfajinSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "BOOSTEDSECONDARY3_NAME",
+                skillNameToken = prefix + "BOOSTEDSECONDARY3_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDSECONDARY3_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("blackwhipshoot"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.BlackwhipShoot)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = false,
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -655,7 +655,7 @@ namespace DekuMod.Modules.Survivors
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = true,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -665,32 +665,6 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1,
                 keywordTokens = new string[] {"KEYWORD_STUNNING"}
-
-            });
-
-            Deku.utilityfajinSkillDef = Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "BOOSTEDUTILITY_NAME",
-                skillNameToken = prefix + "BOOSTEDUTILITY_NAME",
-                skillDescriptionToken = prefix + "BOOSTEDUTILITY_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("delaware"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.Smokescreen)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 4f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
-                interruptPriority = InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_STUNNING" }
 
             });
 
@@ -707,7 +681,33 @@ namespace DekuMod.Modules.Survivors
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_STUNNING" }
+
+            });
+
+            Deku.utilityfajinSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "BOOSTEDUTILITY3_NAME",
+                skillNameToken = prefix + "BOOSTEDUTILITY3_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDUTILITY3_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("smokescreen"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Smokescreen)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 8f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = false,
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
@@ -809,7 +809,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SCEPTERSPECIAL2_NAME",
                 skillNameToken = prefix + "SCEPTERSPECIAL2_NAME",
                 skillDescriptionToken = prefix + "SCEPTERSPECIAL2_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade45"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Quirks"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.Fajinstatescepter)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,

@@ -32,6 +32,12 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(BlackwhipFront));
             entityStates.Add(typeof(OFAdown));
 
+            entityStates.Add(typeof(Fajinstate));
+            entityStates.Add(typeof(Fajinstatescepter));
+            entityStates.Add(typeof(Fajin));
+            entityStates.Add(typeof(Fajinscepter));
+            entityStates.Add(typeof(BlackwhipShoot));
+            entityStates.Add(typeof(Smokescreen));
         }
     }
 }

@@ -75,7 +75,7 @@ namespace DekuMod.SkillStates
                 origin = aimRay.origin,
                 damage = BlackwhipRicochet.damageCoefficient * this.damageStat,
                 damageColorIndex = DamageColorIndex.Default,
-                damageType = DamageType.Generic,
+                damageType = DamageType.Stun1s | DamageType.BypassArmor,
                 falloffModel = BulletAttack.FalloffModel.DefaultBullet,
                 maxDistance = BlackwhipRicochet.range,
                 force = BlackwhipRicochet.force,

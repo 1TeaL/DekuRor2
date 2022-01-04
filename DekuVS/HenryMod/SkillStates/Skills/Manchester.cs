@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine.Networking;
 using EntityStates;
 using DekuMod.Modules.Survivors;
+using System.Collections.Generic;
 
 namespace DekuMod.SkillStates
 {
@@ -27,6 +28,7 @@ namespace DekuMod.SkillStates
         public float fajin;
         protected DamageType damageType;
         public DekuController dekucon;
+        private float maxWeight;
 
         //private NemforcerGrabController grabController;
 
@@ -49,7 +51,7 @@ namespace DekuMod.SkillStates
                 blastAttack.crit = base.RollCrit();
                 blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat / 7);
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = -Manchester.slamForce;
+                blastAttack.baseForce = -1000f;
                 blastAttack.teamIndex = base.teamComponent.teamIndex;
                 blastAttack.damageType = damageType;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
@@ -86,6 +88,7 @@ namespace DekuMod.SkillStates
 
         }
 
+
         public override void Update()
         {
             base.Update();
@@ -94,7 +97,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(Modules.StaticValues.manchesterDamageCoefficient * this.damageStat * (this.moveSpeedStat/14) * fajin);
+            base.healthComponent.AddBarrierAuthority(Modules.StaticValues.manchesterDamageCoefficient * this.damageStat * (this.moveSpeedStat/14));
 
         }
         public override void FixedUpdate()
@@ -137,7 +140,6 @@ namespace DekuMod.SkillStates
             {
                 base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
             }
-            //this.AttemptGrab(10f);
         }
 
         private void CreateIndicator()
@@ -160,9 +162,7 @@ namespace DekuMod.SkillStates
 
         private void LandingImpact()
         {
-            //if (this.grabController) this.grabController.Release();
 
-            //base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", 0.1f);
             if (base.isAuthority)
             {
                 Ray aimRay = base.GetAimRay();
@@ -195,8 +195,6 @@ namespace DekuMod.SkillStates
                 blastAttack.damageType = damageType;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
 
-
-
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
@@ -204,8 +202,6 @@ namespace DekuMod.SkillStates
                 }
 
 
-                //AkSoundEngine.SetRTPCValue("M2_Charge", 100f);
-                //Util.PlaySound(EnforcerPlugin.Sounds.NemesisSmash, base.gameObject);
 
                 for (int i = 0; i <= 8; i += 1)
                 {
@@ -247,7 +243,6 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             dekucon.RemoveBuffCount(50);
-            //if (this.grabController) this.grabController.Release();
 
             if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);
             if (this.slamCenterIndicatorInstance) EntityState.Destroy(this.slamCenterIndicatorInstance.gameObject);
@@ -265,53 +260,7 @@ namespace DekuMod.SkillStates
             base.OnExit();
         }
 
-        //private void AttemptGrab(float grabRadius)
-        //{
-        //    if (this.grabController) return;
-
-        //    Ray aimRay = base.GetAimRay();
-
-        //    BullseyeSearch search = new BullseyeSearch
-        //    {
-        //        teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-        //        filterByLoS = false,
-        //        searchOrigin = base.transform.position,
-        //        searchDirection = Random.onUnitSphere,
-        //        sortMode = BullseyeSearch.SortMode.Distance,
-        //        maxDistanceFilter = grabRadius,
-        //        maxAngleFilter = 360f
-        //    };
-
-        //    search.RefreshCandidates();
-        //    search.FilterOutGameObject(base.gameObject);
-
-        //    HurtBox target = search.GetResults().FirstOrDefault<HurtBox>();
-        //    if (target)
-        //    {
-        //        if (target.healthComponent && target.healthComponent.body)
-        //        {
-        //            if (BodyMeetsGrabConditions(target.healthComponent.body))
-        //            {
-        //                this.grabController = target.healthComponent.body.gameObject.AddComponent<NemforcerGrabController>();
-        //                this.grabController.pivotTransform = this.FindModelChild("HandL");
-        //            }
-
-        //            if (NetworkServer.active)
-        //            {
-        //                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private bool BodyMeetsGrabConditions(CharacterBody targetBody)
-        //{
-        //    bool meetsConditions = true;
-
-        //    //if (targetBody.hullClassification == HullClassification.BeetleQueen) meetsConditions = false;
-
-        //    return meetsConditions;
-        //}
+       
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
