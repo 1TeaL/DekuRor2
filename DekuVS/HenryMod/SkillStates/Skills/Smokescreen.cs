@@ -25,6 +25,8 @@ namespace DekuMod.SkillStates
 		private BlastAttack blastAttack;
 		private GameObject smokeprefab = Modules.Assets.smokeEffect;
 		private GameObject smokebigprefab = Modules.Assets.smokebigEffect;
+		public BuffDef buffdef = RoR2Content.Buffs.Cloak;
+		public BuffDef buffdef2 = RoR2Content.Buffs.CloakSpeed;
 
 
 		public override void OnEnter()
@@ -40,10 +42,9 @@ namespace DekuMod.SkillStates
             {
                 base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
                 base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
+			}
 
-            }
-
-            Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
+			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
 			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
 
 			if (dekucon.isMaxPower)
@@ -87,6 +88,15 @@ namespace DekuMod.SkillStates
 					scale = 1f,
 					rotation = Quaternion.LookRotation(aimRay.direction)
 				}, false);
+
+
+				float radiusSqr = radius * radius;
+				Vector3 position = base.transform.position;
+
+				if (NetworkServer.active)
+				{
+					this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
+				}
 			}
 
 			blastAttack = new BlastAttack();
@@ -113,14 +123,33 @@ namespace DekuMod.SkillStates
 			blastAttack.damageColorIndex = DamageColorIndex.Default;
 			blastAttack.attackerFiltering = AttackerFiltering.Default;
 
-
-
-
 		}
 
 
+		private void BuffTeam(IEnumerable<TeamComponent> recipients, float radiusSqr, Vector3 currentPosition)
+		{
+			bool flag = !NetworkServer.active;
+			if (!flag)
+			{
+				foreach (TeamComponent teamComponent in recipients)
+				{
+					bool flag2 = (teamComponent.transform.position - currentPosition).sqrMagnitude <= radiusSqr;
+					if (flag2)
+					{
+						CharacterBody body = teamComponent.body;
+						bool flag3 = body;
+						if (flag3)
+						{
+							body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
+							body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
 
-        public override void OnExit()
+						}
+					}
+				}
+			}
+		}
+
+		public override void OnExit()
         {
 			//dekucon.wardTrue = false;
 			dekucon.RemoveBuffCount(50);
@@ -133,15 +162,13 @@ namespace DekuMod.SkillStates
 		}
         public override void FixedUpdate()
 		{
-			
-			if (dekucon.isMaxPower)
-			{
-                if (base.isAuthority)
-                {
-                    SmokescreenSearch();
-                }
-            }
-			if (!hasFired)
+
+            //if (dekucon.isMaxPower)
+            //{
+            //    SmokescreenSearch();
+
+            //}
+            if (!hasFired)
             {
 				hasFired = true;
 				blastAttack.position = base.transform.position;
@@ -158,42 +185,42 @@ namespace DekuMod.SkillStates
 			return InterruptPriority.Frozen;
 		}
 
-		public void SmokescreenSearch()
-		{
-			Ray aimRay = base.GetAimRay();
-			BullseyeSearch search = new BullseyeSearch
-			{
+		//public void SmokescreenSearch()
+		//{
+		//	Ray aimRay = base.GetAimRay();
+		//	BullseyeSearch search = new BullseyeSearch
+		//	{
 
-				teamMaskFilter = TeamMask.AllExcept(TeamIndex.Monster),
-				filterByLoS = false,
-				searchOrigin = base.transform.position,
-				searchDirection = UnityEngine.Random.onUnitSphere,
-				sortMode = BullseyeSearch.SortMode.Distance,
-				maxDistanceFilter = radius * fajin,
-				maxAngleFilter = 360f
-			};
+		//		teamMaskFilter = TeamMask.AllExcept(TeamIndex.Monster),
+		//		filterByLoS = false,
+		//		searchOrigin = base.transform.position,
+		//		searchDirection = UnityEngine.Random.onUnitSphere,
+		//		sortMode = BullseyeSearch.SortMode.Distance,
+		//		maxDistanceFilter = radius * fajin,
+		//		maxAngleFilter = 360f
+		//	};
 
-			search.RefreshCandidates();
-			search.FilterOutGameObject(base.gameObject);
+		//	search.RefreshCandidates();
+		//	search.FilterOutGameObject(base.gameObject);
 
 
-
-			List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-			foreach (HurtBox singularTarget in target)
-			{
-				if (singularTarget)
-				{
-					if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-					{
-						//bool active = NetworkServer.active;
-						//if (active)
-						//{
-							singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-							singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
-                        //}
-                    }
-                }
-			}
-		}
+		//	, 
+		//	List<HurtBox> target = search.GetResults().ToList<HurtBox>();
+		//	foreach (HurtBox singularTarget in target)
+		//	{
+		//		if (singularTarget)
+		//		{
+		//			if (singularTarget.healthComponent && singularTarget.healthComponent.body)
+		//			{
+		//				//bool active = NetworkServer.active;
+		//				//if (active)
+		//				//{
+		//					singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
+		//					singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
+  //                      //}
+  //                  }
+  //              }
+		//	}
+		//}
 	}
 }

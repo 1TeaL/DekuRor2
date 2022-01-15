@@ -17,6 +17,11 @@ namespace DekuMod.Modules
             return "<color=#ED421E>" + desc + "</color>";
         }
 
+        internal static string Passive(string desc)
+        {
+            return "<color=#00ff00>" + desc + "</color>";
+        }
+
         public static T[] Append<T>(ref T[] array, List<T> list)
         {
             var orig = array.Length;
