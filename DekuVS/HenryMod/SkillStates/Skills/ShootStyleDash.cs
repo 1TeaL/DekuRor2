@@ -122,7 +122,7 @@ namespace DekuMod.SkillStates
 						HurtBox component = array[i].GetComponent<HurtBox>();
 						if (component && component.healthComponent != base.healthComponent)
 						{
-							Evis nextState = new Evis();
+							ShootStyleDashAttack nextState = new ShootStyleDashAttack();
 							this.outer.SetNextState(nextState);
 							return;
 						}

@@ -12,9 +12,9 @@ namespace DekuMod.SkillStates
     {
 		private Transform modelTransform;
 		public static GameObject blinkPrefab;
-		public static float baseduration = 3f;
+		public static float baseduration = 2f;
 		public static float duration;
-		public float basedamageFrequency = 0.5f;
+		public float basedamageFrequency = 5f;
 		public float damageFrequency;
 		public static float procCoefficient = 1f;
 		public static string beginSoundString;
@@ -79,13 +79,13 @@ namespace DekuMod.SkillStates
 					scale = 1f,
 					rotation = Quaternion.LookRotation(aimRay.direction)
 				}, false);
-				damageType = DamageType.BypassArmor | DamageType.Stun1s;
+				damageType = DamageType.BypassArmor | DamageType.Stun1s | DamageType.ResetCooldownsOnKill;
 			}
 			else
 			{
 				damageType = DamageType.Generic;
 			}
-			damageFrequency = basedamageFrequency * this.attackSpeedStat * fajin;
+			damageFrequency = 1 / (basedamageFrequency * this.attackSpeedStat * fajin);
 			duration = baseduration * fajin;
 		}
 		private void CreateBlinkEffect(Vector3 origin)
@@ -99,8 +99,9 @@ namespace DekuMod.SkillStates
 		{
 			base.FixedUpdate();
 			this.stopwatch += Time.fixedDeltaTime;
+
 			this.attackStopwatch += Time.fixedDeltaTime;
-			float num = 1f / (damageFrequency);
+			float num = damageFrequency;
 			if (this.attackStopwatch >= num)
 			{
 				this.attackStopwatch -= num;
@@ -153,6 +154,7 @@ namespace DekuMod.SkillStates
 			{
 				this.outer.SetNextStateToMain();
 			}
+
 		}
 		private HurtBox SearchForTarget()
 		{
@@ -210,7 +212,7 @@ namespace DekuMod.SkillStates
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 				base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, Evis.lingeringInvincibilityDuration);
 			}
-			base.PlayAnimation("Fullbody, Override", "LegSmashExit", "Attack.playbackRate", 0.1f);
+			base.PlayAnimation("Fullbody, Override", "BufferEmpty", "Attack.playbackRate", 0.1f);
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			base.SmallHop(base.characterMotor, smallHopVelocity);
 			base.OnExit();
