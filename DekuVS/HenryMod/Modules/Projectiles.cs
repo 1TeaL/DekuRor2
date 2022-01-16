@@ -12,6 +12,7 @@ namespace DekuMod.Modules
         internal static GameObject blackwhipPrefab;
         public static GameObject blackwhipTracer;
         public static GameObject airforceTracer;
+        public static GameObject airforce100Tracer;
         public static GameObject delawareTracer;
         public static GameObject detroitTracer;
         public static GameObject detroitweakTracer;
@@ -45,6 +46,28 @@ namespace DekuMod.Modules
                 }
             }
             Modules.Effects.AddEffect(airforceTracer);
+
+            airforce100Tracer = Modules.Assets.airforce100Effect;
+
+            if (!airforce100Tracer.GetComponent<EffectComponent>()) airforce100Tracer.AddComponent<EffectComponent>();
+            if (!airforce100Tracer.GetComponent<VFXAttributes>()) airforce100Tracer.AddComponent<VFXAttributes>();
+            if (!airforce100Tracer.GetComponent<NetworkIdentity>()) airforce100Tracer.AddComponent<NetworkIdentity>();
+
+
+            foreach (LineRenderer i in airforce100Tracer.GetComponentsInChildren<LineRenderer>())
+            {
+                if (i)
+                {
+                    bulletMat = UnityEngine.Object.Instantiate<Material>(i.material);
+                    bulletMat.SetColor("_TintColor", new Color(0.68f, 0.58f, 0.05f));
+                    i.material = bulletMat;
+                    i.startColor = new Color(0.68f, 0.58f, 0.05f);
+                    i.endColor = new Color(0.68f, 0.58f, 0.05f);
+
+                }
+            }
+            Modules.Effects.AddEffect(airforce100Tracer);
+
             airforce45Tracer = Modules.Assets.airforce45Effect;
 
             if (!airforce45Tracer.GetComponent<EffectComponent>()) airforce45Tracer.AddComponent<EffectComponent>();

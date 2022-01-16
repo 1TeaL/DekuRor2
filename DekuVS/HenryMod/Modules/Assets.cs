@@ -29,6 +29,8 @@ namespace DekuMod.Modules
         internal static GameObject impactEffect;
         internal static GameObject smokeEffect;
         internal static GameObject smokebigEffect;
+        internal static GameObject airforce100Effect;
+        internal static GameObject airforce100impactEffect;
 
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
@@ -100,6 +102,8 @@ namespace DekuMod.Modules
             blackwhipbullet = LoadEffect("blackwhipshootGhost");
             smokeEffect = LoadEffect("smoke");
             smokebigEffect = LoadEffect("smokebig");
+            airforce100Effect = LoadEffect("airforce100trail");
+            airforce100impactEffect= LoadEffect("airforce100impact");
             //blackwhipbullet = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
 
             //if (bombExplosionEffect)

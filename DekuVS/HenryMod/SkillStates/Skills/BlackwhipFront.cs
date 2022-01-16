@@ -82,7 +82,7 @@ namespace DekuMod.SkillStates
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.blackwhipDamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.blackwhipDamageCoefficient * fajin;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = -maxWeight * Modules.StaticValues.blackwhipPull * fajin;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

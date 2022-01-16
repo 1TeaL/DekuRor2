@@ -2029,6 +2029,8 @@ MonoBehaviour:
     transform: {fileID: 3545170376265678478}
   - name: FAJINaura
     transform: {fileID: 1222376479696760401}
+  - name: RFinger
+    transform: {fileID: 4377348067431844812}
 --- !u!114 &8256034772961732861
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,6 +31,7 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef primaryfajinscepterSkillDef;
         internal static SkillDef secondaryfajinSkillDef;
         internal static SkillDef utilityfajinSkillDef;
+        internal static SkillDef primaryboost100SkillDef;
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
@@ -154,7 +155,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "PRIMARY_NAME",
                 skillDescriptionToken = prefix + "PRIMARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce100L)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -425,11 +426,36 @@ namespace DekuMod.Modules.Survivors
                 stockToConsume = 1
             });
 
+            SkillDef skillDef9 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "SPECIAL4_NAME",
+                skillNameToken = prefix + "SPECIAL4_NAME",
+                skillDescriptionToken = prefix + "SPECIAL4_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.OFAcycle1)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
             Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
             {
                 skillDef6,
                 skillDef7,
-                skillDef8
+                skillDef8,
+                skillDef9
             });
             #endregion
             #region Boosted Skills
@@ -467,6 +493,32 @@ namespace DekuMod.Modules.Survivors
                 skillDescriptionToken = prefix + "BOOSTEDPRIMARY2_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce45"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce45)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+
+            });
+
+            Deku.primaryboost100SkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "BOOSTEDPRIMARY2_NAME",
+                skillNameToken = prefix + "BOOSTEDPRIMARY2_NAME",
+                skillDescriptionToken = prefix + "BOOSTEDPRIMARY2_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce45"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce100L)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,

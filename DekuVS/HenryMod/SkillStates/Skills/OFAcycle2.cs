@@ -8,7 +8,7 @@ using UnityEngine;
 namespace DekuMod.SkillStates
 {
 
-	public class OFAcycle : BaseSkillState
+	public class OFAcycle2 : BaseSkillState
 	{
 		public static float baseDuration = 0.05f;
 		public static SkillDef primaryDef = Deku.primaryboostSkillDef;

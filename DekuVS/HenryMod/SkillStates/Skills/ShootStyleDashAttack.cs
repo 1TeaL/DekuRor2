@@ -14,12 +14,12 @@ namespace DekuMod.SkillStates
 		public static GameObject blinkPrefab;
 		public static float baseduration = 2f;
 		public static float duration;
-		public float basedamageFrequency = 5f;
+		public float basedamageFrequency = 8f;
 		public float damageFrequency;
 		public static float procCoefficient = 1f;
 		public static string beginSoundString;
 		public static string endSoundString;
-		public static float maxRadius = 8f;
+		public static float maxRadius = 20f;
 		public static GameObject hitEffectPrefab;
 		public static string slashSoundString;
 		public static string impactSoundString;

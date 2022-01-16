@@ -465,6 +465,9 @@ ModelImporter:
     7400070: Armature|ShootStyleKick
     7400072: Armature|ShootStyleKickExit
     7400074: Armature|ShootStyleKickAuto
+    7400076: Armature|DekurapidpunchL
+    7400078: Armature|DekurapidpunchR
+    7400080: Armature|DekurapidpunchR.001
     9500000: //RootNode
     13700000: Body.001
   externalObjects: {}

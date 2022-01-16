@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 883011068
+CRC: 3100523969
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 898a3e1f8e3a54dcb4011bf42da830ee
+    Hash: 10623afc204dcf147eb430599929cda9
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6de4e0a73c2605a57ae0fd9f559969c2
@@ -68,6 +68,7 @@ Assets:
 - Assets/Deku/newRun.anim
 - Assets/Deku/VFX/delaware.prefab
 - Assets/Deku/Animations/Old/SmashRelease.anim
+- Assets/Deku/VFX/airforce100impact.prefab
 - Assets/Deku/mdlDeku test animations.prefab
 - Assets/Deku/Animations/Old/Jump.anim
 - Assets/Deku/VFX/Material/windline.mat
@@ -90,6 +91,7 @@ Assets:
 - Assets/Deku/Animations/Old/ShootStyleDashExit.anim
 - Assets/Deku/GUI/airforce.png
 - Assets/Deku/VFX/blackwhipeffect 1.prefab
+- Assets/Deku/VFX/airforce100trail.prefab
 - Assets/Deku/mdlDekuNew Variant.prefab
 - Assets/Deku/Animations/Old/LegSmashExit.anim
 - Assets/Deku/Animations/Old/Blackwhip.anim
@@ -119,6 +121,7 @@ Assets:
 - Assets/Deku/dekuror2.fbx
 - Assets/Deku/GUI/smokescreen.jpg
 - Assets/Deku/Animations/Old/ShootStyleDash.anim
+- Assets/Deku/VFX/impact.prefab
 - Assets/Deku/VFX/Material/blackwhipbullet.mat
 - Assets/Deku/Animations/Old/Fall.anim
 - Assets/Deku/GUI/shootstylekick2.png
@@ -145,6 +148,7 @@ Assets:
 - Assets/Deku/VFX/windring.prefab
 - Assets/Deku/VFX/smoke.prefab
 - Assets/Deku/Animations/animNew.controller
+- Assets/Deku/Animations/Old/DekurapidpunchL.anim
 - Assets/Deku/Animations/Old/OFA.anim
 - Assets/Deku/VFX/Material/windlineblack.mat
 - Assets/Deku/Animations/Old/SmashCharge.anim
@@ -158,6 +162,7 @@ Assets:
 - Assets/Deku/GUI/fajin.png
 - Assets/Deku/Animations/Old/Running.anim
 - Assets/Deku/VFX/Material/white.mat
+- Assets/Deku/Animations/Old/DekurapidpunchR.anim
 - Assets/Deku/GUI/detroit.png
 - Assets/Deku/VFX/blackwhipshootGhost.prefab
 - Assets/Deku/GUI/texDekuIcon.png
@@ -182,7 +187,6 @@ Assets:
 - Assets/Deku/Animations/Old/SmashChargeAttack.anim
 - Assets/Deku/VFX/blackwhipeffect.prefab
 - Assets/Deku/VFX/windringbig.prefab
-- Assets/Deku/VFX/impact.prefab
 - Assets/Deku/mdlDeku original copy.prefab
 - Assets/Deku/Animations/maskDekuBodyNew.mask
 - Assets/Deku/GUI/quirksprevious.png

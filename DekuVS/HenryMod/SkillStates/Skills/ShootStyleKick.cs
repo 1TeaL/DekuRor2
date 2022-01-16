@@ -64,11 +64,15 @@ namespace DekuMod.SkillStates
 		private Vector3 direction;
 		private bool hasHopped;
         private float speedattack;
+		public float radius = 15f;
+        private GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
 
-		public float fajin;
+        public float fajin;
 		protected DamageType damageType;
 		public DekuController dekucon;
-		public override void OnEnter()
+        private BlastAttack blastAttack;
+
+        public override void OnEnter()
 		{
 			base.OnEnter();
 			this.aimRayDir = aimRay.direction;
@@ -175,7 +179,18 @@ namespace DekuMod.SkillStates
 			AkSoundEngine.PostEvent(3842300745, this.gameObject);
 			AkSoundEngine.PostEvent(573664262, this.gameObject);
 
-			GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
+			blastAttack = new BlastAttack();
+			blastAttack.radius = 10f;
+			blastAttack.procCoefficient = 1f;
+			blastAttack.position = base.transform.position;
+			blastAttack.attacker = base.gameObject;
+			blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+			blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.shootkickDamageCoefficient * fajin;
+			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+			blastAttack.baseForce = 0f;
+			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+			blastAttack.damageType = damageType;
+			blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 		}
 
@@ -327,12 +342,22 @@ namespace DekuMod.SkillStates
                         }
                     }
                     this.OnHitEnemyAuthority();
+					if (dekucon.isMaxPower)
+					{
+						blastAttack.Fire();
+						EffectManager.SpawnEffect(this.explosionPrefab, new EffectData
+						{
+							origin = base.characterBody.corePosition,
+							scale = this.radius,
+						}, false);
+					}
 				}
 			}
 		}
 
 		protected virtual void OnHitEnemyAuthority()
 		{
+
 			//base.PlayAnimation("FullBody, Override", "Backflip", "Roll.playbackRate", RollBounce.duration * 0.9f);
 			base.characterBody.SetAimTimer(2f);
 			base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, ShootStyleKick.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
