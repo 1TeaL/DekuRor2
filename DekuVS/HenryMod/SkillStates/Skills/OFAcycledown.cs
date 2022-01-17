@@ -1,0 +1,83 @@
+﻿using DekuMod.Modules.Survivors;
+using EntityStates;
+using RoR2.Skills;
+using RoR2;
+using UnityEngine.Networking;
+using UnityEngine;
+
+namespace DekuMod.SkillStates
+{
+
+	public class OFAcycledown : BaseSkillState
+	{
+		public static float baseDuration = 0.05f;
+		public DekuController dekucon;
+		const string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
+
+		private float duration;
+		public override void OnEnter()
+		{
+			base.OnEnter();
+			this.duration = baseDuration;
+			dekucon = base.GetComponent<DekuController>();
+			dekucon.OFAeye.Stop();
+			dekucon.OFA.Stop();
+
+			bool active = NetworkServer.active;
+			if (active)
+			{
+				base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
+			}
+			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, OFAcycle2.specialDef, GenericSkill.SkillOverridePriority.Contextual);
+
+			switch (base.skillLocator.primary.skillNameToken)
+			{
+				case prefix + "BOOSTEDPRIMARY5_NAME":
+                    base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, OFAcycle2.airforceDef, GenericSkill.SkillOverridePriority.Contextual);
+                    //base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAcycle2.airforceDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
+				case prefix + "BOOSTEDPRIMARY7_NAME":
+					base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, OFAcycle2.shootstylekickDef, GenericSkill.SkillOverridePriority.Contextual);
+					//base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAcycle2.shootstylekickDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
+			}
+			switch (base.skillLocator.secondary.skillNameToken)
+			{
+				case prefix + "BOOSTEDSECONDARY4_NAME":
+					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAcycle2.blackwhipDef, GenericSkill.SkillOverridePriority.Contextual);
+					//base.skillLocator.secondary.SetSkillOverride(base.skillLocator.primary, OFAcycle2.blackwhipDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
+				case prefix + "BOOSTEDSECONDARY6_NAME":
+					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAcycle2.manchesterDef, GenericSkill.SkillOverridePriority.Contextual);
+					//base.skillLocator.secondary.SetSkillOverride(base.skillLocator.primary, OFAcycle2.manchesterDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
+			}
+			switch (base.skillLocator.utility.skillNameToken)
+			{
+				case prefix + "BOOSTEDUTILITY5_NAME":
+					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle2.shootstyleDef, GenericSkill.SkillOverridePriority.Contextual);
+					//base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle2.shootstyleDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
+				case prefix + "BOOSTEDUTILITY7_NAME":
+					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle2.shootstylefullcowlingDef, GenericSkill.SkillOverridePriority.Contextual);
+					//base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle2.shootstylefullcowlingDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
+				case prefix + "BOOSTEDSECONDARY_NAME":
+					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle2.detroitDef, GenericSkill.SkillOverridePriority.Contextual);
+					//base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle2.detroitDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
+			}
+
+		}
+		public override void FixedUpdate()
+		{
+			base.FixedUpdate();
+			this.outer.SetNextStateToMain();
+
+		}
+		public override InterruptPriority GetMinimumInterruptPriority()
+		{
+			return InterruptPriority.Frozen;
+		}
+	}
+}

@@ -25,6 +25,7 @@ namespace DekuMod.SkillStates
 			this.duration = baseDuration;
 			dekucon = base.GetComponent<DekuController>();
 			dekucon.OFA.Play();
+			dekucon.OFAeye.Play();
 
 			bool active = NetworkServer.active;
 			if (active)

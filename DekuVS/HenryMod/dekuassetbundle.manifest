@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3100523969
+CRC: 1536209611
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 10623afc204dcf147eb430599929cda9
+    Hash: f5eebc7ef1c9b8eba0a6fb90edf3a978
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6de4e0a73c2605a57ae0fd9f559969c2
@@ -144,11 +144,13 @@ Assets:
 - Assets/Deku/VFX/circle.prefab
 - Assets/Deku/GUI/stlouis.png
 - Assets/Deku/GUI/shootstylekick.png
+- Assets/Deku/Animations/Old/Armature_AIdle.anim
 - Assets/Deku/Animations/Old/LegSmashCharge.anim
 - Assets/Deku/VFX/windring.prefab
 - Assets/Deku/VFX/smoke.prefab
 - Assets/Deku/Animations/animNew.controller
 - Assets/Deku/Animations/Old/DekurapidpunchL.anim
+- Assets/Deku/GUI/ultimate100.png
 - Assets/Deku/Animations/Old/OFA.anim
 - Assets/Deku/VFX/Material/windlineblack.mat
 - Assets/Deku/Animations/Old/SmashCharge.anim
@@ -160,6 +162,7 @@ Assets:
 - Assets/Deku/VFX/windbullet.prefab
 - Assets/Deku/VFX/blackwhipforward.prefab
 - Assets/Deku/GUI/fajin.png
+- Assets/Deku/VFX/OFA lightning eye.prefab
 - Assets/Deku/Animations/Old/Running.anim
 - Assets/Deku/VFX/Material/white.mat
 - Assets/Deku/Animations/Old/DekurapidpunchR.anim

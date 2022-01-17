@@ -32,7 +32,7 @@ namespace DekuMod.SkillStates
             {
                 DamageInfo damageInfo = new DamageInfo();
                 damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-                damageInfo.position = base.characterBody.corePosition;
+                damageInfo.position = base.transform.position;
                 damageInfo.force = Vector3.zero;
                 damageInfo.damageColorIndex = DamageColorIndex.Default;
                 damageInfo.crit = false;

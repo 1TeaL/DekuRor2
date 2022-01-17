@@ -1,5 +1,4 @@
 ﻿using DekuMod.SkillStates;
-using DekuMod.SkillStates.BaseStates;
 using System.Collections.Generic;
 using System;
 
@@ -11,25 +10,27 @@ namespace DekuMod.Modules
 
         internal static void RegisterStates()
         {
-            entityStates.Add(typeof(StLouis45));
-            entityStates.Add(typeof(DetroitRelease));
-            entityStates.Add(typeof(Detroit));
-            entityStates.Add(typeof(Detroit100));
-            entityStates.Add(typeof(Detroit100Release));
+            entityStates.Add(typeof(Airforce));
+            entityStates.Add(typeof(ShootStyleKick));
+            entityStates.Add(typeof(ShootStyleKick2));
             entityStates.Add(typeof(ShootStyleBullet));
+            entityStates.Add(typeof(BlackwhipFront));
+            entityStates.Add(typeof(Manchester));
+            entityStates.Add(typeof(Blackwhip45));
             entityStates.Add(typeof(ShootStyleDash));
             entityStates.Add(typeof(ShootStyleDashAttack));
+            entityStates.Add(typeof(ShootStyleBulletStun));
+            entityStates.Add(typeof(Detroit));
+            entityStates.Add(typeof(DetroitRelease));
+            entityStates.Add(typeof(Detroit100));
+            entityStates.Add(typeof(Detroit100Release));
             entityStates.Add(typeof(DelawareSmash));
-            entityStates.Add(typeof(Manchester));
-            entityStates.Add(typeof(OFAstate45));
-            entityStates.Add(typeof(OFAstatescepter45));
-            entityStates.Add(typeof(Blackwhip45));
+            entityStates.Add(typeof(StLouis45));
 
-
-            entityStates.Add(typeof(Airforce));
             entityStates.Add(typeof(OFAstate));
             entityStates.Add(typeof(OFAstatescepter));
-            entityStates.Add(typeof(BlackwhipFront));
+            entityStates.Add(typeof(OFAstate45));
+            entityStates.Add(typeof(OFAstatescepter45));
             entityStates.Add(typeof(OFAdown));
 
             entityStates.Add(typeof(Fajinstate));

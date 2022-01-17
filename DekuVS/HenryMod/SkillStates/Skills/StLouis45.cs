@@ -98,8 +98,9 @@ namespace DekuMod.SkillStates
 
 		public override void OnExit()
 		{
-
 			base.PlayCrossfade("Fullbody, Override", "LegSmashExit", 0.1f);
+            //base.PlayAnimation("Fullbody, Override", "LegSmashExit", "Attack.playbackRate", 0.1f);
+            //base.PlayAnimation("Body, Override", "IdleIn", "Attack.playbackRate", 0.01f);
 
 			if (this.slamIndicatorInstance)
 			{

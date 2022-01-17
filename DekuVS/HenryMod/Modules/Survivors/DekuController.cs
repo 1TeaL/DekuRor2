@@ -17,6 +17,7 @@ namespace DekuMod.Modules.Survivors
         public ChildLocator child;
         public CharacterBody body;
         public ParticleSystem OFA;
+        public ParticleSystem OFAeye;
         public ParticleSystem FAJIN;
         private int buffCountToApply;
         public GenericSkill specialSkillSlot;
@@ -41,8 +42,10 @@ namespace DekuMod.Modules.Survivors
             if (child)
             {
                 OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
+                OFAeye = child.FindChild("OFAlightningeye").GetComponent<ParticleSystem>();
                 FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
             }
+            OFAeye.Stop();
             OFA.Stop();
             FAJIN.Stop();
             anim = GetComponentInChildren<Animator>();

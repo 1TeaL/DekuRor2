@@ -5,13 +5,14 @@ using UnityEngine;
 using DekuMod.SkillStates.Orbs;
 using System.Collections.Generic;
 using RoR2.Orbs;
+using UnityEngine.Networking;
 
 namespace DekuMod.SkillStates
 {
-    public class Airforce100L : BaseSkillState
+    public class Airforce100 : BaseSkillState
     {
         public static float procCoefficient = 1f;
-        public static float baseDuration = 0.5f;
+        public static float baseDuration = 0.4f;
         public static float force = 300f;
         public static float recoil = 0.5f;
         public static float range = 200f;
@@ -24,17 +25,44 @@ namespace DekuMod.SkillStates
         private BulletAttack bulletAttack;
         private BlastAttack blastAttack;
         public float blastRadius = 5f;
+        public int punchIndex;
+        public int actualshotsFired;
+        public int shotsFired = 1;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = Airforce100L.baseDuration / this.attackSpeedStat;
+            if(shotsFired > 10)
+            {
+                shotsFired = 10;
+            }
+            this.duration = Airforce100.baseDuration / (this.attackSpeedStat * ((float)shotsFired/5));
             this.fireTime = 0.5f * this.duration;
-            base.characterBody.SetAimTimer(2f);
-            this.muzzleString = "LFinger";
+            base.characterBody.SetAimTimer(duration);
+            this.muzzleString = punchIndex % 2 == 0 ? "LFinger" : "RFinger";
 
-            base.PlayCrossfade("Gesture, Override", "DekurapidpunchL", "Attack.playbackRate",this.fireTime, 0.1f);
+            base.PlayAnimation("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration);
+            base.PlayAnimation("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration);
 
+            //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate",this.duration, this.fireTime/3);
+            //base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime / 3);
+
+
+            if (NetworkServer.active && base.healthComponent && base.isAuthority)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.01f;
+                damageInfo.position = base.transform.position;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
 
         }
 
@@ -66,7 +94,7 @@ namespace DekuMod.SkillStates
                         blastAttack.crit = base.RollCrit();
                         blastAttack.baseDamage = Modules.StaticValues.airforce100DamageCoefficient * this.damageStat;
                         blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                        blastAttack.baseForce = Airforce100L.force;
+                        blastAttack.baseForce = Airforce100.force;
                         blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                         blastAttack.damageType = damageType;
                         blastAttack.attackerFiltering = AttackerFiltering.Default;
@@ -80,8 +108,7 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-
-            base.PlayCrossfade("Gesture, Override", "BufferEmpty", "Attack.playbackRate", this.duration, 0.1f);
+            //base.PlayAnimation("Fullbody, Override", "Armature_AIdle", "Attack.playbackRate", 0.1f);
             base.OnExit();
         }
 
@@ -100,7 +127,7 @@ namespace DekuMod.SkillStates
                 if (base.isAuthority)
                 {
                     Ray aimRay = base.GetAimRay();
-                    base.AddRecoil(-1f * Airforce100L.recoil, -2f * Airforce100L.recoil, -0.5f * Airforce100L.recoil, 0.5f * Airforce100L.recoil);
+                    base.AddRecoil(-1f * Airforce100.recoil, -2f * Airforce100.recoil, -0.5f * Airforce100.recoil, 0.5f * Airforce100.recoil);
 
                     EffectManager.SpawnEffect(Modules.Projectiles.airforce100Tracer, new EffectData
                     {
@@ -117,9 +144,9 @@ namespace DekuMod.SkillStates
                     bulletAttack.damage = Modules.StaticValues.airforce100DamageCoefficient * this.damageStat;
                     bulletAttack.damageColorIndex = DamageColorIndex.Default;
                     bulletAttack.damageType = damageType;
-                    bulletAttack.falloffModel = BulletAttack.FalloffModel.DefaultBullet;
-                    bulletAttack.maxDistance = Airforce100L.range;
-                    bulletAttack.force = Airforce100L.force;
+                    bulletAttack.falloffModel = BulletAttack.FalloffModel.None;
+                    bulletAttack.maxDistance = Airforce100.range;
+                    bulletAttack.force = Airforce100.force;
                     bulletAttack.hitMask = LayerIndex.CommonMasks.bullet;
                     bulletAttack.minSpread = 0f;
                     bulletAttack.maxSpread = 0f;
@@ -147,6 +174,21 @@ namespace DekuMod.SkillStates
             }
         }
 
+        protected void SetNextState()
+        {
+            int index = this.punchIndex;
+            if (index == 0) index = 1;
+            else index = 0;
+            int actualshotsFired = shotsFired + 1;
+
+            this.outer.SetNextState(new Airforce100
+            {
+                punchIndex = index,
+                shotsFired = actualshotsFired,
+            });
+
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -160,8 +202,16 @@ namespace DekuMod.SkillStates
 
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
-                this.outer.SetNextStateToMain();
-                return;
+                if (inputBank.skill1.down)
+                {
+                    this.SetNextState();
+                    return;
+                }
+                else
+                {
+                    this.outer.SetNextStateToMain();
+                    return;
+                }
             }
         }
 

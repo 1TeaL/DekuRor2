@@ -73,7 +73,7 @@ namespace DekuMod.SkillStates
                 origin = theSpot,
                 scale = 1f,       
 
-            }, false);
+            }, true);
 
 
             blastAttack = new BlastAttack();
@@ -147,7 +147,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat * Modules.StaticValues.blackwhipDamageCoefficient* speedattack * fajin);
+            base.healthComponent.AddBarrierAuthority(this.damageStat *speedattack * fajin);
 
         }
 
@@ -190,7 +190,7 @@ namespace DekuMod.SkillStates
                     origin = theSpot,
                     scale = 1f,
 
-                }, false);
+                }, true);
             }
             else this.whipage += Time.fixedDeltaTime;
 

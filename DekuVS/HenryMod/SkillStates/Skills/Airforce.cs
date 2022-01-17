@@ -36,6 +36,8 @@ namespace DekuMod.SkillStates
             base.characterBody.SetAimTimer(2f);
             this.muzzleString = "LFinger";
 
+            hasFired = false;
+
             base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.3f);
 
             dekucon = base.GetComponent<DekuController>();
@@ -57,143 +59,151 @@ namespace DekuMod.SkillStates
 
         private void Fire()
         {
-            if (!this.hasFired)
+            base.characterBody.AddSpreadBloom(1f);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
+            AkSoundEngine.PostEvent(1063047365, this.gameObject);
+
+
+
+            if (base.isAuthority)
             {
-                this.hasFired = true;
-
-                base.characterBody.AddSpreadBloom(1f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-                AkSoundEngine.PostEvent(1063047365, this.gameObject);
+                Ray aimRay = base.GetAimRay();
+                base.AddRecoil(-1f * Airforce.recoil, -2f * Airforce.recoil, -0.5f * Airforce.recoil, 0.5f * Airforce.recoil);
 
 
-
-                if (base.isAuthority)
+                if (dekucon.isMaxPower)
                 {
-                    Ray aimRay = base.GetAimRay();
-                    base.AddRecoil(-1f * Airforce.recoil, -2f * Airforce.recoil, -0.5f * Airforce.recoil, 0.5f * Airforce.recoil);
-
-
-                    if (dekucon.isMaxPower)
+                    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
                     {
-                        EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                        origin = FindModelChild(this.muzzleString).position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(aimRay.direction)
+                    }, true);
+                    EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                    {
+                        origin = base.transform.position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(aimRay.direction)
+
+                    }, true);
+                    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                }
+                else
+                {
+                    damageType = DamageType.Generic;
+                    EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                    {
+                        origin = FindModelChild(this.muzzleString).position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(aimRay.direction)
+
+                    }, true);
+                }
+                Vector3 hitPoint = Vector3.zero;
+                float hitDistance = 0f;
+                HealthComponent hitHealthComponent = null;
+
+                var bulletAttack = new BulletAttack
+                {
+                    bulletCount = (uint)(2U),
+                    aimVector = aimRay.direction,
+                    origin = aimRay.origin,
+                    damage = Modules.StaticValues.airforceDamageCoefficient * this.damageStat,
+                    damageColorIndex = DamageColorIndex.Default,
+                    damageType = damageType,
+                    falloffModel = BulletAttack.FalloffModel.DefaultBullet,
+                    maxDistance = Airforce.range,
+                    force = Airforce.force,
+                    hitMask = LayerIndex.CommonMasks.bullet,
+                    minSpread = 0f,
+                    maxSpread = 0f,
+                    isCrit = base.RollCrit(),
+                    owner = base.gameObject,
+                    muzzleName = muzzleString,
+                    smartCollision = false,
+                    procChainMask = default(ProcChainMask),
+                    procCoefficient = procCoefficient,
+                    radius = 0.5f * fajin,
+                    sniper = false,
+                    stopperMask = LayerIndex.CommonMasks.bullet,
+                    weapon = null,
+                    //tracerEffectPrefab = Modules.Projectiles.bulletTracer,
+                    spreadPitchScale = 0f,
+                    spreadYawScale = 0f,
+                    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
+                    hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
+
+                };
+                if (maxRicochetCount > 0 && dekucon.isMaxPower)
+                {
+                    bulletAttack.hitCallback = delegate (ref BulletAttack.BulletHit hitInfo)
+                    {
+                        var result = bulletAttack.DefaultHitCallback(ref hitInfo);
+                        if (hitInfo.hitHurtBox)
                         {
-                            origin = FindModelChild(this.muzzleString).position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(aimRay.direction)
-                        }, true);
-                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                        {
-                            origin = base.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(aimRay.direction)
-
-                        }, true);
-                        damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                    }
-                    else
-                    {
-                        damageType = DamageType.Generic;
-                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                        {
-                            origin = FindModelChild(this.muzzleString).position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(aimRay.direction)
-
-                        }, true);
-                    }
-                    Vector3 hitPoint = Vector3.zero;
-                    float hitDistance = 0f;
-                    HealthComponent hitHealthComponent = null;
-
-                    var bulletAttack = new BulletAttack
-                    {
-                        bulletCount = (uint)(2U),
-                        aimVector = aimRay.direction,
-                        origin = aimRay.origin,
-                        damage = Modules.StaticValues.airforceDamageCoefficient * this.damageStat,
-                        damageColorIndex = DamageColorIndex.Default,
-                        damageType = damageType,
-                        falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                        maxDistance = Airforce.range,
-                        force = Airforce.force,
-                        hitMask = LayerIndex.CommonMasks.bullet,
-                        minSpread = 0f,
-                        maxSpread = 0f,
-                        isCrit = base.RollCrit(),
-                        owner = base.gameObject,
-                        muzzleName = muzzleString,
-                        smartCollision = false,
-                        procChainMask = default(ProcChainMask),
-                        procCoefficient = procCoefficient,
-                        radius = 0.5f * fajin,
-                        sniper = false,
-                        stopperMask = LayerIndex.CommonMasks.bullet,
-                        weapon = null,
-                        //tracerEffectPrefab = Modules.Projectiles.bulletTracer,
-                        spreadPitchScale = 0f,
-                        spreadYawScale = 0f,
-                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
-
-                    };
-                    if (maxRicochetCount > 0 && dekucon.isMaxPower)
-                    {
-                        bulletAttack.hitCallback = delegate (ref BulletAttack.BulletHit hitInfo)
-                        {
-                            var result = bulletAttack.DefaultHitCallback(ref hitInfo);
-                            if (hitInfo.hitHurtBox)
-                            {
-                                hitPoint = hitInfo.point;
-                                hitDistance = hitInfo.distance;
-                                hitHealthComponent = hitInfo.hitHurtBox.healthComponent;
-                            }
-                            return result;
-                        };
-                    }
-                    bulletAttack.filterCallback = delegate (ref BulletAttack.BulletHit info)
-                    {
-                        return (!info.entityObject || info.entityObject != bulletAttack.owner) && bulletAttack.DefaultFilterCallback(ref info);
-                    };
-                    bulletAttack.Fire();
-                    if (hitHealthComponent != null)
-                    {
-                        CritRicochetOrb critRicochetOrb = new CritRicochetOrb();
-                        critRicochetOrb.bouncesRemaining = maxRicochetCount - 1;
-                        critRicochetOrb.resetBouncedObjects = resetBouncedObjects;
-                        critRicochetOrb.damageValue = bulletAttack.damage;
-                        critRicochetOrb.isCrit = base.RollCrit();
-                        critRicochetOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
-                        critRicochetOrb.damageType = bulletAttack.damageType;
-                        critRicochetOrb.attacker = base.gameObject;
-                        critRicochetOrb.attackerBody = base.characterBody;
-                        critRicochetOrb.procCoefficient = bulletAttack.procCoefficient;
-                        critRicochetOrb.duration = 0.2f;
-                        critRicochetOrb.bouncedObjects = new List<HealthComponent>();
-                        critRicochetOrb.range = Mathf.Max(30f, hitDistance);
-                        critRicochetOrb.tracerEffectPrefab = tracerEffectPrefab;
-                        critRicochetOrb.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FireBarrage.hitEffectPrefab;
-                        //critRicochetOrb.hitSoundString = "TTGLTokoRifleCrit";
-                        critRicochetOrb.origin = hitPoint;
-                        critRicochetOrb.bouncedObjects.Add(hitHealthComponent);
-                        var nextTarget = critRicochetOrb.PickNextTarget(hitPoint);
-                        if (nextTarget)
-                        {
-                            critRicochetOrb.target = nextTarget;
-                            OrbManager.instance.AddOrb(critRicochetOrb);
+                            hitPoint = hitInfo.point;
+                            hitDistance = hitInfo.distance;
+                            hitHealthComponent = hitInfo.hitHurtBox.healthComponent;
                         }
+                        return result;
+                    };
+                }
+                bulletAttack.filterCallback = delegate (ref BulletAttack.BulletHit info)
+                {
+                    return (!info.entityObject || info.entityObject != bulletAttack.owner) && bulletAttack.DefaultFilterCallback(ref info);
+                };
+                bulletAttack.Fire();
+                if (hitHealthComponent != null)
+                {
+                    CritRicochetOrb critRicochetOrb = new CritRicochetOrb();
+                    critRicochetOrb.bouncesRemaining = maxRicochetCount - 1;
+                    critRicochetOrb.resetBouncedObjects = resetBouncedObjects;
+                    critRicochetOrb.damageValue = bulletAttack.damage;
+                    critRicochetOrb.isCrit = base.RollCrit();
+                    critRicochetOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                    critRicochetOrb.damageType = bulletAttack.damageType;
+                    critRicochetOrb.attacker = base.gameObject;
+                    critRicochetOrb.attackerBody = base.characterBody;
+                    critRicochetOrb.procCoefficient = bulletAttack.procCoefficient;
+                    critRicochetOrb.duration = 0.2f;
+                    critRicochetOrb.bouncedObjects = new List<HealthComponent>();
+                    critRicochetOrb.range = Mathf.Max(30f, hitDistance);
+                    critRicochetOrb.tracerEffectPrefab = tracerEffectPrefab;
+                    critRicochetOrb.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FireBarrage.hitEffectPrefab;
+                    //critRicochetOrb.hitSoundString = "TTGLTokoRifleCrit";
+                    critRicochetOrb.origin = hitPoint;
+                    critRicochetOrb.bouncedObjects.Add(hitHealthComponent);
+                    var nextTarget = critRicochetOrb.PickNextTarget(hitPoint);
+                    if (nextTarget)
+                    {
+                        critRicochetOrb.target = nextTarget;
+                        OrbManager.instance.AddOrb(critRicochetOrb);
                     }
                 }
             }
+            
         }
 
         public override void FixedUpdate()
         {
-            base.FixedUpdate();
+            base.FixedUpdate(); 
 
-            if (base.fixedAge >= this.fireTime)
+            if (base.fixedAge >= this.fireTime && !this.hasFired)
             {
-                this.Fire();
+                if (dekucon.isMaxPower)
+                {
+                    hasFired = true;
+                    this.Fire();
+                    this.Fire();
+                    this.Fire();
+                }
+                else
+                {
+                    hasFired = true;
+                    this.Fire();
+                }
             }
+
 
             if (base.fixedAge >= this.duration && base.isAuthority)
             {

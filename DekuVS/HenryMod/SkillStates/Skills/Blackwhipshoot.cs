@@ -18,8 +18,6 @@ namespace DekuMod.SkillStates
         public static float radius = 5f;
 
         private float duration;
-        private float fireTime;
-        private bool hasFired;
         private Animator animator;
         //private ProjectileImpactEventCaller impactEventCaller;
 
@@ -31,7 +29,6 @@ namespace DekuMod.SkillStates
         private float rollSpeed;
         public static float baseSpeedCoefficient = 15f;
         public static float SpeedCoefficient;
-        private float waitReturnTimer;
         public static float waitReturnDuration = 0.3f;
         public static float holdTime = 0.3f;
         private float previousMass;
@@ -40,6 +37,7 @@ namespace DekuMod.SkillStates
 
         protected NetworkSoundEventIndex impactSound;
         private OverlapAttack attack;
+        private OverlapAttack attack2;
         protected string hitboxName;
         public DamageType damageType;
         private BulletAttack bulletAttack;
@@ -61,7 +59,6 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
             this.duration = BlackwhipShoot.baseDuration / this.attackSpeedStat;
-            this.fireTime = 0.35f * this.duration;
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
             dekucon = base.GetComponent<DekuController>();
@@ -69,7 +66,6 @@ namespace DekuMod.SkillStates
             this.previousMass = base.characterMotor.mass;
             base.characterMotor.mass = 0f;
             hasActivated = false;
-            this.hasFired = false;
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
             Ray aimRay = base.GetAimRay();
@@ -115,6 +111,10 @@ namespace DekuMod.SkillStates
 
             HitBoxGroup hitBoxGroup = Array.Find<HitBoxGroup>(base.GetModelTransform().GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == this.hitboxName);
             this.attack = this.CreateAttack(hitBoxGroup);
+            if (dekucon.isMaxPower)
+            {
+                this.attack2 = this.CreateAttack2(hitBoxGroup);
+            }
 
         }
 
@@ -160,6 +160,26 @@ namespace DekuMod.SkillStates
                 attacker = base.gameObject,
                 inflictor = base.gameObject,
                 teamIndex = base.GetTeam(),
+                damage = Modules.StaticValues.blackwhipshootDamageCoefficient * this.damageStat * fajin,
+                procCoefficient = 1f,
+                hitEffectPrefab = Modules.Assets.detroitweakEffect,
+                forceVector = Vector3.zero,
+                pushAwayForce = 1000f,
+                hitBoxGroup = hitBoxGroup,
+                isCrit = base.RollCrit(),
+                impactSound = this.impactSound,                
+                
+            };
+        }
+
+        protected OverlapAttack CreateAttack2(HitBoxGroup hitBoxGroup)
+        {
+            return new OverlapAttack
+            {
+                damageType = damageType,
+                attacker = base.gameObject,
+                inflictor = base.gameObject,
+                teamIndex = base.GetTeam(),
                 damage = Modules.StaticValues.blackwhipshootDamageCoefficient * this.damageStat,
                 procCoefficient = 1f,
                 hitEffectPrefab = Modules.Assets.detroitweakEffect,
@@ -167,7 +187,8 @@ namespace DekuMod.SkillStates
                 pushAwayForce = 1000f,
                 hitBoxGroup = hitBoxGroup,
                 isCrit = base.RollCrit(),
-                impactSound = this.impactSound
+                impactSound = this.impactSound,
+
             };
         }
 
@@ -314,6 +335,10 @@ namespace DekuMod.SkillStates
             {
                 this.attack.Fire();
                 blackwhipage = 0;
+                if (dekucon.isMaxPower)
+                {
+                    this.attack2.Fire();
+                }
             }
             else this.blackwhipage += Time.fixedDeltaTime; 
             //RecalculateRollSpeed();       

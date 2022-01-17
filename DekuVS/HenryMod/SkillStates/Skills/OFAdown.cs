@@ -11,6 +11,7 @@ namespace DekuMod.SkillStates
     {
 		public static float baseDuration = 0.05f;
 		public DekuController dekucon;
+		string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 
 
 		private float duration;
@@ -19,6 +20,7 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
 			dekucon = base.GetComponent<DekuController>();
 			dekucon.OFA.Stop();
+			dekucon.OFAeye.Stop();
 			this.duration = baseDuration;
 			bool active = NetworkServer.active;
 			if (active)
@@ -73,7 +75,6 @@ namespace DekuMod.SkillStates
 			base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Fajinstate.secondaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Fajinstate.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
 			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Fajinstate.specialDef, GenericSkill.SkillOverridePriority.Contextual);
-
 
 			base.OnExit();
 		}
