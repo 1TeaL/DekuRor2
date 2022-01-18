@@ -41,15 +41,6 @@ namespace DekuMod.SkillStates
 				{
 					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff45);
 				}
-
-				if (base.characterBody.HasBuff(Modules.Buffs.ofaBuffweak))
-				{
-					base.characterBody.RemoveBuff(Modules.Buffs.ofaBuffweak);
-				}
-				if (base.characterBody.HasBuff(Modules.Buffs.supaofaBuffweak))
-				{
-					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuffweak);
-				}
 			}
 
 		}

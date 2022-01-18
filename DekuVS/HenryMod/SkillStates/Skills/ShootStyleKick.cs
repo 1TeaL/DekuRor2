@@ -15,7 +15,6 @@ namespace DekuMod.SkillStates
 	public class ShootStyleKick : BaseSkillState
 
 	{
-		public static SkillDef primaryDef = Deku.primaryaltSkillDef;
 		public float previousMass;
 		private Ray aimRay;
 		private Vector3 aimRayDir;
@@ -23,11 +22,11 @@ namespace DekuMod.SkillStates
 		private Transform modelTransform;
 		private CharacterModel characterModel;
 
-		public static float baseduration = 0.5f;
+		public static float baseduration = 0.3f;
 		public static float duration;
 		public static float hitExtraDuration = 0.44f;
 		public static float minExtraDuration = 0.2f;
-		public static float initialSpeedCoefficient = 8f;
+		public static float initialSpeedCoefficient = 16f;
 		public static float SpeedCoefficient;
 		public static float finalSpeedCoefficient = 0f;
 		public static float bounceForce = 2000f;
@@ -76,13 +75,9 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			this.aimRayDir = aimRay.direction;
-			speedattack = this.attackSpeedStat / 3;
-			if (speedattack < 1)
-			{
-				speedattack = 1;
-			}
-			duration = baseduration / speedattack;
-			SpeedCoefficient = initialSpeedCoefficient;
+
+			duration = baseduration / ((this.attackSpeedStat/2));
+			SpeedCoefficient = initialSpeedCoefficient * (this.attackSpeedStat / 2);
 			dekucon = base.GetComponent<DekuController>();
 			if (dekucon.isMaxPower)
 			{
@@ -100,7 +95,7 @@ namespace DekuMod.SkillStates
 					origin = base.transform.position,
 					scale = 1f,
 					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, false);
+				}, true);
 				damageType = DamageType.ResetCooldownsOnKill | DamageType.Freeze2s;
 			}
 			else
@@ -111,7 +106,7 @@ namespace DekuMod.SkillStates
 			base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration/2);
 			this.animator = base.GetModelAnimator();
 			this.animator.SetBool("attacking", true);
-			base.characterBody.SetAimTimer(2f);
+			base.characterBody.SetAimTimer(duration);
 			HitBoxGroup hitBoxGroup = null;
 			HitBoxGroup hitBoxGroup2 = null;
 			Transform modelTransform = base.GetModelTransform();
@@ -143,7 +138,7 @@ namespace DekuMod.SkillStates
 			this.attack.attacker = base.gameObject;
 			this.attack.inflictor = base.gameObject;
 			this.attack.teamIndex = base.GetTeam();
-			this.attack.damage = Modules.StaticValues.shootkickDamageCoefficient * this.damageStat;
+			this.attack.damage = base.characterBody.damage * Modules.StaticValues.shootkickDamageCoefficient * this.moveSpeedStat / 7;
 			this.attack.procCoefficient = this.procCoefficient;
 			this.attack.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FireBarrage.hitEffectPrefab;
 			this.attack.forceVector = this.bonusForce;
@@ -185,7 +180,7 @@ namespace DekuMod.SkillStates
 			blastAttack.position = base.transform.position;
 			blastAttack.attacker = base.gameObject;
 			blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-			blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.shootkickDamageCoefficient * fajin;
+			blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.shootkickDamageCoefficient * this.moveSpeedStat/7;
 			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 			blastAttack.baseForce = 0f;
 			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
@@ -342,15 +337,6 @@ namespace DekuMod.SkillStates
                         }
                     }
                     this.OnHitEnemyAuthority();
-					if (dekucon.isMaxPower)
-					{
-						blastAttack.Fire();
-						EffectManager.SpawnEffect(this.explosionPrefab, new EffectData
-						{
-							origin = base.characterBody.corePosition,
-							scale = this.radius,
-						}, false);
-					}
 				}
 			}
 		}
@@ -360,11 +346,21 @@ namespace DekuMod.SkillStates
 
 			//base.PlayAnimation("FullBody, Override", "Backflip", "Roll.playbackRate", RollBounce.duration * 0.9f);
 			base.characterBody.SetAimTimer(2f);
-			base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, ShootStyleKick.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, ShootStyleKick.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
+			base.skillLocator.primary.AddOneStock();
 			bool flag = !this.hasHopped;
 			if (flag)
 			{
-
+				if (base.isAuthority && dekucon.isMaxPower)
+				{
+					blastAttack.Fire();
+					EffectManager.SpawnEffect(this.explosionPrefab, new EffectData
+					{
+						origin = base.characterBody.corePosition,
+						scale = this.radius,
+						rotation = Quaternion.identity
+					}, true);
+				}
 				base.PlayAnimation("FullBody, Override", "ShootStyleKickExit", "Attack.playbackRate", ShootStyleKick.duration * 0.9f);
 				this.stopwatch = ShootStyleKick.duration - this.extraDuration;
 				bool flag2 = base.cameraTargetParams;

@@ -116,10 +116,25 @@ namespace DekuMod
 
             }
 
-            bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
+            bool ofadebuff = self.HasBuff(Modules.Buffs.ofaDebuff);
+
+            if (ofadebuff && (self.healthComponent.health - self.healthComponent.barrier) > 1)
+            {
+
+                self.regen += (1 + (self.levelRegen * (self.level - 1))) * -5f;
             
-            //bool one = self.healthComponent > 1f;
-            if (ofa && self.healthComponent.health > 1)
+            }
+
+            if (ofadebuff && (self.healthComponent.health - self.healthComponent.barrier) < 2)
+            {
+
+                self.regen += (1 + (self.levelRegen * (self.level - 1))) * 0f;
+
+            }
+
+            bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
+
+            if (ofa && (self.healthComponent.health - self.healthComponent.barrier) > 1 )
             {
 
                 self.armor *= 5f;
@@ -130,7 +145,7 @@ namespace DekuMod
                 
             }
 
-            if (ofa && self.healthComponent.health < 2)
+            if (ofa && (self.healthComponent.health - self.healthComponent.barrier) <2)
             {
 
                 self.armor *= 5f;
@@ -141,33 +156,8 @@ namespace DekuMod
 
             }
 
-            bool ofaweak = self.HasBuff(Modules.Buffs.ofaBuffweak);
-
-            //bool one = self.healthComponent > 1f;
-            if (ofaweak && self.healthComponent.health > 1)
-            {
-
-                self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
-                self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level - 1))) * -7f;
-                self.damage *= 2.5f;
-
-            }
-
-            if (ofaweak && self.healthComponent.health < 2)
-            {
-
-                self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
-                self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
-                self.damage *= 2.5f;
-
-            }
-
             bool supaofa = self.HasBuff(Modules.Buffs.supaofaBuff);
-            if (supaofa && self.healthComponent.health > 1)
+            if (supaofa && (self.healthComponent.health - self.healthComponent.barrier) > 1)
             {
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
@@ -176,33 +166,14 @@ namespace DekuMod
                 self.damage *= 2f;
             }
 
-            if (supaofa && self.healthComponent.health < 2)
+            if (supaofa && (self.healthComponent.health - self.healthComponent.barrier) < 1)
             {
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
                 self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
                 self.damage *= 2f;
-            }
-
-            bool supaofaweak = self.HasBuff(Modules.Buffs.supaofaBuffweak);
-            if (supaofaweak && self.healthComponent.health > 1)
-            {
-                self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
-                self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level - 1))) * -7f;
-                self.damage *= 2f;
-            }
-
-            if (supaofaweak && self.healthComponent.health < 2)
-            {
-                self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
-                self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
-                self.damage *= 2f;
-            }
+            }                           
 
             bool ofa45 = self.HasBuff(Modules.Buffs.ofaBuff45);
             if (ofa45)

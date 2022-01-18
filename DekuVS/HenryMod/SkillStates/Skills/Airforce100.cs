@@ -48,7 +48,7 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime / 3);
 
 
-            if (NetworkServer.active && base.healthComponent && base.isAuthority)
+            if (NetworkServer.active && base.healthComponent)
             {
                 DamageInfo damageInfo = new DamageInfo();
                 damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.01f;

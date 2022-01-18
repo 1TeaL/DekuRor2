@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates
 	{
 		public static float baseDuration = 0.05f;
 		public static SkillDef airforceDef = Deku.primaryboost45SkillDef;
-		public static SkillDef shootstylekickDef = Deku.shootstyle45SkillDef;
+		public static SkillDef shootstylekickDef = Deku.shootstylekick45SkillDef;
 		public static SkillDef blackwhipDef = Deku.secondaryboost45SkillDef;
 		public static SkillDef manchesterDef = Deku.manchester45SkillDef;
 		public static SkillDef shootstyleDef = Deku.shootstyle45SkillDef;
@@ -49,7 +49,7 @@ namespace DekuMod.SkillStates
 					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAcycle1.airforceDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 				case prefix + "PRIMARY2_NAME":
-					base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.primaryaltSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					//base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.primaryaltSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAcycle1.shootstylekickDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 			}

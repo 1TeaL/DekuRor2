@@ -21,7 +21,7 @@ namespace DekuMod.SkillStates
 
 		public GameObject blastEffectPrefab = Resources.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 		public float fajin;
-		protected DamageType damageType;
+		protected DamageType damageType = DamageType.Stun1s;
 		public DekuController dekucon;
 
 		public override void OnEnter()
@@ -55,22 +55,8 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
         {
 
-			dekucon.RemoveBuffCount(50);
 			Ray aimRay = base.GetAimRay();
-			if (dekucon.isMaxPower)
-			{
-				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-				{
-					origin = base.transform.position,
-					scale = 1f,
-					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, true);
-				damageType = DamageType.BypassArmor | DamageType.Stun1s;
-			}
-            else
-            {
-				damageType = DamageType.Stun1s;
-            }
+
 			for (int i = 0; i <= 20; i++)
 			{
 				float num = 60f;

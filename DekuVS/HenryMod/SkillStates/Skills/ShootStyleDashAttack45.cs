@@ -8,18 +8,18 @@ using DekuMod.Modules.Survivors;
 
 namespace DekuMod.SkillStates
 {
-    public class ShootStyleDashAttack45 : BaseSkillState
-    {
+	public class ShootStyleDashAttack45 : BaseSkillState
+	{
 		private Transform modelTransform;
 		public static GameObject blinkPrefab;
 		public static float baseduration = 2f;
 		public static float duration;
-		public float basedamageFrequency = 8f;
+		public float basedamageFrequency = 4f;
 		public float damageFrequency;
-		public static float procCoefficient = 1f;
+		public static float procCoefficient = 0.5f;
 		public static string beginSoundString;
 		public static string endSoundString;
-		public static float maxRadius = 20f;
+		public static float maxRadius = 8f;
 		public static GameObject hitEffectPrefab;
 		public static string slashSoundString;
 		public static string impactSoundString;
@@ -32,24 +32,23 @@ namespace DekuMod.SkillStates
 		private float stopwatch;
 		private float attackStopwatch;
 		private bool crit;
-        public static float minimumDuration = 0.5f;
-        private CameraTargetParams.AimRequest aimRequest;
+		public static float minimumDuration = 0.5f;
+		private CameraTargetParams.AimRequest aimRequest;
 
-		public float fajin;
-		protected DamageType damageType;
-		public DekuController dekucon;
+		protected DamageType damageType = DamageType.Generic;
+
 		public override void OnEnter()
-        {
+		{
 			base.OnEnter();
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 			this.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
-            this.modelTransform = base.GetModelTransform();
-            if (this.modelTransform)
-            {
-                this.animator = this.modelTransform.GetComponent<Animator>();
-                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
-            }
-            if (this.characterModel)
+			this.modelTransform = base.GetModelTransform();
+			if (this.modelTransform)
+			{
+				this.animator = this.modelTransform.GetComponent<Animator>();
+				this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+			}
+			if (this.characterModel)
 			{
 				this.characterModel.invisibilityCount++;
 			}
@@ -61,32 +60,10 @@ namespace DekuMod.SkillStates
 			{
 				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 			}
-			dekucon = base.GetComponent<DekuController>();
-			if (dekucon.isMaxPower)
-			{
-				fajin = 2f;
-			}
-			else
-			{
-				fajin = 1f;
-			}
-			Ray aimRay = base.GetAimRay();
-			if (dekucon.isMaxPower)
-			{
-				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-				{
-					origin = base.transform.position,
-					scale = 1f,
-					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, false);
-				damageType = DamageType.BypassArmor | DamageType.Stun1s | DamageType.ResetCooldownsOnKill;
-			}
-			else
-			{
-				damageType = DamageType.Generic;
-			}
-			damageFrequency = 1 / (basedamageFrequency * this.attackSpeedStat * fajin);
-			duration = baseduration * fajin;
+
+
+			damageFrequency = 1 / (basedamageFrequency * this.attackSpeedStat);
+			duration = baseduration;
 		}
 		private void CreateBlinkEffect(Vector3 origin)
 		{
@@ -99,8 +76,8 @@ namespace DekuMod.SkillStates
 		{
 			base.FixedUpdate();
 			this.stopwatch += Time.fixedDeltaTime;
-
 			this.attackStopwatch += Time.fixedDeltaTime;
+
 			float num = damageFrequency;
 			if (this.attackStopwatch >= num)
 			{
@@ -129,7 +106,7 @@ namespace DekuMod.SkillStates
 						{
 							DamageInfo damageInfo = new DamageInfo();
 							//damageInfo.damage = ShootStyleDash.damageCoefficient* this.damageStat;
-							damageInfo.damage = Modules.StaticValues.shootattackDamageCoefficient * this.damageStat;
+							damageInfo.damage = Modules.StaticValues.shootattack45DamageCoefficient * this.damageStat;
 							damageInfo.attacker = base.gameObject;
 							damageInfo.procCoefficient = procCoefficient;
 							damageInfo.position = hurtBox2.transform.position;
@@ -161,7 +138,7 @@ namespace DekuMod.SkillStates
 			BullseyeSearch bullseyeSearch = new BullseyeSearch();
 			bullseyeSearch.searchOrigin = base.transform.position;
 			bullseyeSearch.searchDirection = UnityEngine.Random.onUnitSphere;
-			bullseyeSearch.maxDistanceFilter = maxRadius * fajin;
+			bullseyeSearch.maxDistanceFilter = maxRadius;
 			bullseyeSearch.teamMaskFilter = TeamMask.GetUnprotectedTeams(base.GetTeam());
 			bullseyeSearch.sortMode = BullseyeSearch.SortMode.Distance;
 			bullseyeSearch.RefreshCandidates();
@@ -174,11 +151,9 @@ namespace DekuMod.SkillStates
 		}
 		public override void OnExit()
 		{
-
-			dekucon.RemoveBuffCount(50); 
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
-            this.modelTransform = base.GetModelTransform();
+			this.modelTransform = base.GetModelTransform();
 			if (this.modelTransform)
 			{
 

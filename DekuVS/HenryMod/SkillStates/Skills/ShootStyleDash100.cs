@@ -24,9 +24,9 @@ namespace DekuMod.SkillStates
 		public static string endSoundString;
 		public static float overlapSphereRadius = 5f;
 		public static float lollypopFactor = 1f;
-        private Animator animator;
-        private CharacterModel characterModel;
-        private HurtBoxGroup hurtboxGroup;
+		private Animator animator;
+		private CharacterModel characterModel;
+		private HurtBoxGroup hurtboxGroup;
 		private bool isDashing;
 		private CameraTargetParams.AimRequest aimRequest;
 
@@ -39,16 +39,16 @@ namespace DekuMod.SkillStates
 			AkSoundEngine.PostEvent(687990298, this.gameObject);
 			AkSoundEngine.PostEvent(1918362945, this.gameObject);
 			this.modelTransform = base.GetModelTransform();
-            if (base.cameraTargetParams)
+			if (base.cameraTargetParams)
 			{
 				this.aimRequest = base.cameraTargetParams.RequestAimType(CameraTargetParams.AimType.Aura);
 			}
-            if (this.modelTransform)
-            {
-                this.animator = this.modelTransform.GetComponent<Animator>();
-                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
-            }
-            if (base.isAuthority)
+			if (this.modelTransform)
+			{
+				this.animator = this.modelTransform.GetComponent<Animator>();
+				this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+			}
+			if (base.isAuthority)
 			{
 				base.SmallHop(base.characterMotor, smallHopVelocity);
 			}
@@ -88,7 +88,6 @@ namespace DekuMod.SkillStates
 				this.isDashing = true;
 				this.dashVector = base.inputBank.aimDirection;
 				this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
-				base.PlayCrossfade("FullBody, Override", "EvisLoop", 0.1f);
 				if (this.modelTransform)
 				{
 					TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
@@ -112,7 +111,7 @@ namespace DekuMod.SkillStates
 			{
 				if (base.characterMotor && base.characterDirection)
 				{
-					base.characterMotor.rootMotion += this.dashVector * (this.moveSpeedStat *  speedCoefficient * Time.fixedDeltaTime * fajin);
+					base.characterMotor.rootMotion += this.dashVector * (this.moveSpeedStat * speedCoefficient * Time.fixedDeltaTime * fajin);
 				}
 				if (base.isAuthority)
 				{
@@ -137,16 +136,15 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
 		{
 			Ray aimRay = base.GetAimRay();
-			if (dekucon.isMaxPower)
+			if (base.isAuthority)
 			{
 				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
 				{
 					origin = base.transform.position,
 					scale = 1f,
 					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, false);
+				}, true);
 			}
-			dekucon.RemoveBuffCount(50);
 			Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 			base.characterMotor.velocity *= 0.1f;
 			base.SmallHop(base.characterMotor, smallHopVelocity);

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1536209611
+CRC: 942007790
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f5eebc7ef1c9b8eba0a6fb90edf3a978
+    Hash: 95e98996eb0a7c8ce7b1ec4f51b97828
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6de4e0a73c2605a57ae0fd9f559969c2
@@ -134,6 +134,7 @@ Assets:
 - Assets/Deku/Animations/Old/Entrance.anim
 - Assets/Deku/GUI/Airforceskin.png
 - Assets/Deku/VFX/OFA lightning.prefab
+- Assets/Deku/GUI/ultimateupgrade100.png
 - Assets/Deku/Animations/Old/Sprinting.anim
 - Assets/Deku/VFX/smokebig.prefab
 - Assets/Deku/Animations/Old/FingerFlick.anim

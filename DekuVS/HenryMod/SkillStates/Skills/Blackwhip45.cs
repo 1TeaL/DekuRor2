@@ -128,7 +128,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            //base.healthComponent.AddBarrierAuthority(Modules.StaticValues.blackwhipDamageCoefficient * this.damageStat * this.attackSpeedStat);
+            base.healthComponent.AddBarrierAuthority(this.damageStat * this.attackSpeedStat);
 
         }
 

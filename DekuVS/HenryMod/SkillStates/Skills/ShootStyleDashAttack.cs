@@ -12,14 +12,14 @@ namespace DekuMod.SkillStates
     {
 		private Transform modelTransform;
 		public static GameObject blinkPrefab;
-		public static float baseduration = 2f;
+		public static float baseduration = 1f;
 		public static float duration;
-		public float basedamageFrequency = 8f;
+		public float basedamageFrequency = 5f;
 		public float damageFrequency;
 		public static float procCoefficient = 1f;
 		public static string beginSoundString;
 		public static string endSoundString;
-		public static float maxRadius = 20f;
+		public static float maxRadius = 8f;
 		public static GameObject hitEffectPrefab;
 		public static string slashSoundString;
 		public static string impactSoundString;
@@ -30,6 +30,8 @@ namespace DekuMod.SkillStates
 		private Animator animator;
 		private CharacterModel characterModel;
 		private float stopwatch;
+		private float actualstopwatch;
+		private float totalstopwatch;
 		private float attackStopwatch;
 		private bool crit;
         public static float minimumDuration = 0.5f;
@@ -41,6 +43,9 @@ namespace DekuMod.SkillStates
 		public override void OnEnter()
         {
 			base.OnEnter();
+			this.stopwatch = 0;
+			actualstopwatch = 0;
+			totalstopwatch = 0;
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 			this.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
             this.modelTransform = base.GetModelTransform();
@@ -79,7 +84,7 @@ namespace DekuMod.SkillStates
 					scale = 1f,
 					rotation = Quaternion.LookRotation(aimRay.direction)
 				}, false);
-				damageType = DamageType.BypassArmor | DamageType.Stun1s | DamageType.ResetCooldownsOnKill;
+				damageType = DamageType.BypassArmor | DamageType.Stun1s;
 			}
 			else
 			{
@@ -99,6 +104,31 @@ namespace DekuMod.SkillStates
 		{
 			base.FixedUpdate();
 			this.stopwatch += Time.fixedDeltaTime;
+			actualstopwatch += Time.fixedDeltaTime;
+			totalstopwatch += Time.fixedDeltaTime;
+			if (totalstopwatch >= duration * 5)
+			{
+				this.outer.SetNextStateToMain();
+			}
+			if (dekucon.isMaxPower)
+            {
+				if (inputBank.skill3.down)
+				{
+					stopwatch = 0;
+
+				}
+				if (actualstopwatch >= duration/2)
+				{
+					if (NetworkServer.active)
+					{
+						base.characterBody.AddBuff(Modules.Buffs.ofaDebuff);
+					}
+					actualstopwatch = 0;
+					
+				}
+
+
+			}
 
 			this.attackStopwatch += Time.fixedDeltaTime;
 			float num = damageFrequency;
@@ -174,7 +204,10 @@ namespace DekuMod.SkillStates
 		}
 		public override void OnExit()
 		{
-
+			if (base.characterBody.HasBuff(Modules.Buffs.ofaDebuff))
+			{
+				base.characterBody.RemoveBuff(Modules.Buffs.ofaDebuff);
+			}
 			dekucon.RemoveBuffCount(50); 
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));

@@ -12,7 +12,6 @@ namespace DekuMod.Modules
         {
             entityStates.Add(typeof(Airforce));
             entityStates.Add(typeof(ShootStyleKick));
-            entityStates.Add(typeof(ShootStyleKick2));
             entityStates.Add(typeof(ShootStyleBullet));
             entityStates.Add(typeof(BlackwhipFront));
             entityStates.Add(typeof(Manchester));
@@ -39,6 +38,26 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(Fajinscepter));
             entityStates.Add(typeof(BlackwhipShoot));
             entityStates.Add(typeof(Smokescreen));
+
+
+            entityStates.Add(typeof(Airforce100));
+            entityStates.Add(typeof(Blackwhip100));
+            entityStates.Add(typeof(Detroit45));
+            entityStates.Add(typeof(Manchester45));
+            entityStates.Add(typeof(Manchester100));
+            entityStates.Add(typeof(OFAcycle1));
+            entityStates.Add(typeof(OFAcycle1scepter));
+            entityStates.Add(typeof(OFAcycle2));
+            entityStates.Add(typeof(OFAcycle2scepter));
+            entityStates.Add(typeof(OFAcycledown));
+            entityStates.Add(typeof(ShootStyleBulletStun45));
+            entityStates.Add(typeof(ShootStyleBulletStun100));
+            entityStates.Add(typeof(ShootStyleDash45));
+            entityStates.Add(typeof(ShootStyleDashAttack45));
+            entityStates.Add(typeof(ShootStyleDash100));
+            entityStates.Add(typeof(ShootStyleDashAttack100));
+            entityStates.Add(typeof(ShootStyleKick45));
+            entityStates.Add(typeof(ShootStyleKick100));
         }
     }
 }

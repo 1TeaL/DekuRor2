@@ -29,8 +29,7 @@ namespace DekuMod.SkillStates
 			bool active = NetworkServer.active;
 			if (active)
 			{ 				
-				base.characterBody.AddBuff(Modules.Buffs.supaofaBuffweak);
-				
+				base.characterBody.AddBuff(Modules.Buffs.supaofaBuff);		
 				
 			}
 			base.PlayAnimation("FullBody, Override", "OFA", "Attack.playbackRate", 0.05f);

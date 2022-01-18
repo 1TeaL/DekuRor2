@@ -88,7 +88,6 @@ namespace DekuMod.SkillStates
 				this.isDashing = true;
 				this.dashVector = base.inputBank.aimDirection;
 				this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
-				base.PlayCrossfade("FullBody, Override", "EvisLoop", 0.1f);
 				if (this.modelTransform)
 				{
 					TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
@@ -144,7 +143,7 @@ namespace DekuMod.SkillStates
 					origin = base.transform.position,
 					scale = 1f,
 					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, false);
+				}, true);
 			}
 			dekucon.RemoveBuffCount(50);
 			Util.PlaySound(EvisDash.endSoundString, base.gameObject);

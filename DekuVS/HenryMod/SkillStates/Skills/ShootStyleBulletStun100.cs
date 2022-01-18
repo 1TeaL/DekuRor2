@@ -21,8 +21,8 @@ namespace DekuMod.SkillStates
 
         public static float speedattack;
         public static float duration;
-        public static float baseDuration = 0.2f;
-        public static float initialSpeedCoefficient = 10f;
+        public static float baseDuration = 0.4f;
+        public static float initialSpeedCoefficient = 8f;
         public static float SpeedCoefficient;
         public static float finalSpeedCoefficient = 0f;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
@@ -39,9 +39,10 @@ namespace DekuMod.SkillStates
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
 
-        public float fajin;
-        protected DamageType damageType;
+        protected DamageType damageType = DamageType.Stun1s;
         public DekuController dekucon;
+        private BlastAttack blastAttack;
+        public float blastRadius = 10f;
 
         public override void OnEnter()
         {
@@ -53,21 +54,9 @@ namespace DekuMod.SkillStates
             {
                 duration = 0.1f;
             }
-            //speedattack = this.attackSpeedStat/2;
-            //if (speedattack < 1)
-            //{
-            //    speedattack = 1;
-            //}
-            dekucon = base.GetComponent<DekuController>();
-            if (dekucon.isMaxPower)
-            {
-                fajin = 2f;
-            }
-            else
-            {
-                fajin = 1f;
-            }
-            SpeedCoefficient = initialSpeedCoefficient * fajin;
+
+
+            SpeedCoefficient = initialSpeedCoefficient;
             base.StartAimMode(duration, true);
 
             AkSoundEngine.PostEvent(3842300745, this.gameObject);
@@ -89,16 +78,8 @@ namespace DekuMod.SkillStates
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
-            if (dekucon.isMaxPower)
-            {
-                damageType = DamageType.BypassArmor | DamageType.Stun1s;
-            }
-            else
-            {
-                damageType = DamageType.Stun1s;
-            }
             // ray used to shoot position after teleporting
-            uint bulletamount = (uint)(1U * this.attackSpeedStat * fajin);
+            uint bulletamount = (uint)(1U * this.attackSpeedStat);
             if (bulletamount > 20)
             {
                 bulletamount = 20;
@@ -109,7 +90,7 @@ namespace DekuMod.SkillStates
                 bulletCount = bulletamount,
                 aimVector = aimRay.direction,
                 origin = aimRay.origin,
-                damage = Modules.StaticValues.shootbulletstunDamageCoefficient * this.damageStat,
+                damage = Modules.StaticValues.shootbulletstun100DamageCoefficient * this.damageStat,
                 damageColorIndex = DamageColorIndex.Default,
                 damageType = damageType,
                 falloffModel = BulletAttack.FalloffModel.None,
@@ -131,9 +112,12 @@ namespace DekuMod.SkillStates
                 spreadPitchScale = 0f,
                 spreadYawScale = 0f,
                 queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                hitEffectPrefab = Evis.hitEffectPrefab
+                hitEffectPrefab = Evis.hitEffectPrefab,
+                hitCallback = ApplyBlastAttackOnHit,
 
             };
+
+
             this.muzzleString = "LFoot";
             EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
             EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
@@ -153,9 +137,63 @@ namespace DekuMod.SkillStates
             Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
             this.previousPosition = base.transform.position - b;
 
-
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+                damageInfo.position = base.transform.position;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
 
         }
+        private bool ApplyBlastAttackOnHit(ref BulletAttack.BulletHit hitInfo)
+        {
+            var hurtbox = hitInfo.hitHurtBox;
+            if (hurtbox)
+            {
+                var healthComponent = hurtbox.healthComponent;
+                if (healthComponent)
+                {
+                    var body = healthComponent.body;
+                    if (body)
+                    {
+                        Ray aimRay = base.GetAimRay();
+                        EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
+                        {
+                            origin = healthComponent.body.corePosition,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(aimRay.direction)
+
+                        }, true);
+
+                        blastAttack = new BlastAttack();
+                        blastAttack.radius = blastRadius;
+                        blastAttack.procCoefficient = procCoefficient;
+                        blastAttack.position = healthComponent.body.corePosition;
+                        blastAttack.attacker = base.gameObject;
+                        blastAttack.crit = base.RollCrit();
+                        blastAttack.baseDamage = Modules.StaticValues.shootbulletstun100DamageCoefficient * this.damageStat;
+                        blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                        blastAttack.baseForce = 55f;
+                        blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                        blastAttack.damageType = damageType;
+                        blastAttack.attackerFiltering = AttackerFiltering.Default;
+
+                        blastAttack.Fire();
+                    }
+                }
+            }
+            return false;
+        }
+
         private void RecalculateRollSpeed()
         {
             this.rollSpeed = this.moveSpeedStat * ShootStyleBulletStun100.SpeedCoefficient;
@@ -171,18 +209,10 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             Ray aimRay = base.GetAimRay();
-            if (dekucon.isMaxPower)
-            {
-                damageType = DamageType.BypassArmor | DamageType.Stun1s;
-            }
-            else
-            {
-                damageType = DamageType.Stun1s;
-            }
+
             if (afterattack != null)
             {
                 afterattack.Fire();
-                dekucon.RemoveBuffCount(50);
             }
             //base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
             base.PlayCrossfade("FullBody, Override", "ShootStyleDashExit", 0.2f);

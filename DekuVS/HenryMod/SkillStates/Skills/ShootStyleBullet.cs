@@ -80,21 +80,21 @@ namespace DekuMod.SkillStates
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration/2);
 
-            //if (NetworkServer.active && base.healthComponent)
-            //{
-            //    DamageInfo damageInfo = new DamageInfo();
-            //    damageInfo.damage = base.healthComponent.combinedHealth * 0.01f;
-            //    damageInfo.position = base.characterBody.corePosition;
-            //    damageInfo.force = Vector3.zero;
-            //    damageInfo.damageColorIndex = DamageColorIndex.Default;
-            //    damageInfo.crit = false;
-            //    damageInfo.attacker = null;
-            //    damageInfo.inflictor = null;
-            //    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-            //    damageInfo.procCoefficient = 0f;
-            //    damageInfo.procChainMask = default(ProcChainMask);
-            //    base.healthComponent.TakeDamage(damageInfo);
-            //}
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.01f;
+                damageInfo.position = base.transform.position;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
 
             // ray used to shoot position after teleporting
             uint bulletamount = (uint)(1U * this.attackSpeedStat);

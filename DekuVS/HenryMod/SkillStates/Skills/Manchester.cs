@@ -97,7 +97,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(Modules.StaticValues.manchesterDamageCoefficient * this.damageStat * (this.moveSpeedStat/14));
+            base.healthComponent.AddBarrierAuthority(this.damageStat * (this.moveSpeedStat/7));
 
         }
         public override void FixedUpdate()
