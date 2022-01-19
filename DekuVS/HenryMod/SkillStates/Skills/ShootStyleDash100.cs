@@ -30,7 +30,6 @@ namespace DekuMod.SkillStates
 		private bool isDashing;
 		private CameraTargetParams.AimRequest aimRequest;
 
-		public float fajin;
 		protected DamageType damageType;
 		public DekuController dekucon;
 		public override void OnEnter()
@@ -60,16 +59,23 @@ namespace DekuMod.SkillStates
 			this.dashVector = base.inputBank.aimDirection;
 			base.characterDirection.forward = this.dashVector;
 			base.StartAimMode(dashPrepDuration, true);
-			dekucon = base.GetComponent<DekuController>();
-			if (dekucon.isMaxPower)
-			{
-				fajin = 2f;
-			}
-			else
-			{
-				fajin = 1f;
-			}
 
+
+			if (NetworkServer.active && base.healthComponent)
+			{
+				DamageInfo damageInfo = new DamageInfo();
+				damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+				damageInfo.position = base.transform.position;
+				damageInfo.force = Vector3.zero;
+				damageInfo.damageColorIndex = DamageColorIndex.Default;
+				damageInfo.crit = false;
+				damageInfo.attacker = null;
+				damageInfo.inflictor = null;
+				damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+				damageInfo.procCoefficient = 0f;
+				damageInfo.procChainMask = default(ProcChainMask);
+				base.healthComponent.TakeDamage(damageInfo);
+			}
 
 		}
 		private void CreateBlinkEffect(Vector3 origin)
@@ -111,7 +117,7 @@ namespace DekuMod.SkillStates
 			{
 				if (base.characterMotor && base.characterDirection)
 				{
-					base.characterMotor.rootMotion += this.dashVector * (this.moveSpeedStat * speedCoefficient * Time.fixedDeltaTime * fajin);
+					base.characterMotor.rootMotion += this.dashVector * (this.moveSpeedStat * speedCoefficient * Time.fixedDeltaTime);
 				}
 				if (base.isAuthority)
 				{

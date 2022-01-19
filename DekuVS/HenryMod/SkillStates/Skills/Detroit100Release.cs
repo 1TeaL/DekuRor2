@@ -17,6 +17,7 @@ namespace DekuMod.SkillStates
 		//private GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
 		private GameObject explosionPrefab = Modules.Projectiles.detroitTracer;
 		private float baseForce = 600f;
+		public float procCoefficient = 3f;
 
 		public GameObject blastEffectPrefab = Resources.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 
@@ -72,7 +73,7 @@ namespace DekuMod.SkillStates
 				blastAttack.teamIndex = base.teamComponent.teamIndex;
 				blastAttack.crit = base.RollCrit();
 				blastAttack.procChainMask = default(ProcChainMask);
-				blastAttack.procCoefficient = 3f;
+				blastAttack.procCoefficient = procCoefficient;
 				blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 				blastAttack.damageColorIndex = DamageColorIndex.Default;
 				blastAttack.damageType = DamageType.Stun1s;

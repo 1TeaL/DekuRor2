@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "1.4.0",
+    "version_number": "2.0.0",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "1.4 Update, Quirks update, adding a new special skill (with new skills associated), adding new functionality to all skills. OFA 100% buff.",
+    "description": "2.0.0 Update, new special- One For All! Cycle between %s with upgraded skills for every single base skill! Balance changes and more!",
     "dependencies": [
          "tristanmcpherson-R2API-3.0.59"
     ]

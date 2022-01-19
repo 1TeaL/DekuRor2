@@ -16,7 +16,7 @@ namespace DekuMod.SkillStates
 		public static float duration;
 		public float basedamageFrequency = 5f;
 		public float damageFrequency;
-		public static float procCoefficient = 1f;
+		public static float procCoefficient = 0.5f;
 		public static string beginSoundString;
 		public static string endSoundString;
 		public static float maxRadius = 8f;
@@ -119,11 +119,6 @@ namespace DekuMod.SkillStates
 				}
 				if (actualstopwatch >= duration/2)
 				{
-					if (NetworkServer.active)
-					{
-						base.characterBody.AddBuff(Modules.Buffs.ofaDebuff);
-					}
-					actualstopwatch = 0;
 					
 				}
 

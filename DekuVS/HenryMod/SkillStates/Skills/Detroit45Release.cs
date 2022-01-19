@@ -1,5 +1,4 @@
 ﻿using System;
-using DekuMod.Modules.Survivors;
 using EntityStates;
 using EntityStates.VagrantMonster;
 using RoR2;
@@ -16,13 +15,13 @@ namespace DekuMod.SkillStates
         private string rMuzzleString = "RShoulder";
         internal Vector3 moveVec;
 		//private GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
-		private GameObject explosionPrefab = Modules.Projectiles.detroitweakTracer;
+		private GameObject explosionPrefab = Modules.Projectiles.detroitTracer;
 		private float baseForce = 600f;
+		public float procCoefficient = 2f;
 
 		public GameObject blastEffectPrefab = Resources.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
-		public float fajin;
-		protected DamageType damageType = DamageType.Stun1s;
-		public DekuController dekucon;
+
+
 
 		public override void OnEnter()
         {
@@ -35,27 +34,15 @@ namespace DekuMod.SkillStates
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
             base.characterMotor.rootMotion += this.moveVec;
-			//base.characterMotor.velocity += this.moveVec * 2;
-			dekucon = base.GetComponent<DekuController>();
-			if (dekucon.isMaxPower)
-			{
-				fajin = 2f;
-			}
-			else
-			{
-				fajin = 1f;
-			}
+            //base.characterMotor.velocity += this.moveVec * 2;
 
-
-		}
+        }
         public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Frozen;
 		}
 		public override void OnExit()
-        {
-
-			Ray aimRay = base.GetAimRay();
+		{
 
 			for (int i = 0; i <= 20; i++)
 			{
@@ -69,9 +56,9 @@ namespace DekuMod.SkillStates
 					origin = base.characterBody.corePosition,
 					scale = this.radius * 2,
 					rotation = rotation
-				}, true);
+				}, false);
 			}
-
+				
 			bool isAuthority = base.isAuthority;
 			if (isAuthority)
 			{
@@ -86,10 +73,10 @@ namespace DekuMod.SkillStates
 				blastAttack.teamIndex = base.teamComponent.teamIndex;
 				blastAttack.crit = base.RollCrit();
 				blastAttack.procChainMask = default(ProcChainMask);
-				blastAttack.procCoefficient = 2f;
+				blastAttack.procCoefficient = procCoefficient;
 				blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 				blastAttack.damageColorIndex = DamageColorIndex.Default;
-				blastAttack.damageType = damageType;
+				blastAttack.damageType = DamageType.Stun1s;
 				blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 				if (blastAttack.Fire().hitCount > 0)
@@ -98,6 +85,7 @@ namespace DekuMod.SkillStates
 				}
 			}
 			base.OnExit();
+
 		}
 		public override void FixedUpdate()
 		{

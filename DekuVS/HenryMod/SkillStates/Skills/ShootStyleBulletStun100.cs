@@ -39,7 +39,7 @@ namespace DekuMod.SkillStates
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
 
-        protected DamageType damageType = DamageType.Stun1s;
+        protected DamageType damageType = DamageType.Stun1s | DamageType.Freeze2s;
         public DekuController dekucon;
         private BlastAttack blastAttack;
         public float blastRadius = 10f;
@@ -140,7 +140,7 @@ namespace DekuMod.SkillStates
             if (NetworkServer.active && base.healthComponent)
             {
                 DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
                 damageInfo.position = base.transform.position;
                 damageInfo.force = Vector3.zero;
                 damageInfo.damageColorIndex = DamageColorIndex.Default;
@@ -173,21 +173,25 @@ namespace DekuMod.SkillStates
                             rotation = Quaternion.LookRotation(aimRay.direction)
 
                         }, true);
+                        if (base.isAuthority)
+                        {
+                            blastAttack = new BlastAttack();
+                            blastAttack.radius = blastRadius;
+                            blastAttack.procCoefficient = procCoefficient;
+                            blastAttack.position = healthComponent.body.corePosition;
+                            blastAttack.attacker = base.gameObject;
+                            blastAttack.crit = base.RollCrit();
+                            blastAttack.baseDamage = Modules.StaticValues.shootbulletstun100DamageCoefficient * this.damageStat;
+                            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                            blastAttack.baseForce = 55f;
+                            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                            blastAttack.damageType = damageType;
+                            blastAttack.attackerFiltering = AttackerFiltering.Default;
 
-                        blastAttack = new BlastAttack();
-                        blastAttack.radius = blastRadius;
-                        blastAttack.procCoefficient = procCoefficient;
-                        blastAttack.position = healthComponent.body.corePosition;
-                        blastAttack.attacker = base.gameObject;
-                        blastAttack.crit = base.RollCrit();
-                        blastAttack.baseDamage = Modules.StaticValues.shootbulletstun100DamageCoefficient * this.damageStat;
-                        blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                        blastAttack.baseForce = 55f;
-                        blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                        blastAttack.damageType = damageType;
-                        blastAttack.attackerFiltering = AttackerFiltering.Default;
+                            blastAttack.Fire();
+                        }
 
-                        blastAttack.Fire();
+                        base.skillLocator.utility.AddOneStock();
                     }
                 }
             }

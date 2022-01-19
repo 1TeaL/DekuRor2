@@ -11,7 +11,7 @@ namespace DekuMod.Modules
             string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 
             string desc = "Deku is high risk survivor that can boost his stats and abilities but with detrimental health regen and health costs.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > He scales with attack speed and movespeed on multiple of his skills" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > He scales with attackspeed and movespeed on multiple of his skills" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > OFA 100% focuses on close range but greater mobility while OFA 45% focuses on mid-range attacks." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > OFA 100%'s negative health regen can be mitigated with regen items and it stops at 1-2Hp while OFA 45%'s can't." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Ancient Scepter will give 10% Lifesteal for OFA 100% and 5% Lifesteal for OFA 45%." + Environment.NewLine + Environment.NewLine;
@@ -40,66 +40,96 @@ namespace DekuMod.Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_NAME", "Airforce");
-            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}%</style>.<style=cIsUtility> Fa Jin buff makes the bullets ricochet</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}%</style>." + Helpers.Passive(" Fa Jin buff makes the bullets ricochet") + ".");
             LanguageAPI.Add(prefix + "PRIMARY2_NAME", "Shoot Style Kick");
-            LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill. <style=cIsUtility>Fa Jin buff makes shoot style kick freeze enemies</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill</style>." + Helpers.Passive(" Fa Jin buff makes shoot style kick freeze enemies and deal an extra hit") + ".");
             
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_NAME", "Shoot Style Full Cowling 100%");
-            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_DESCRIPTION", $"Dash through enemies, hitting enemies behind for <style=cIsDamage>{100f * StaticValues.shootbulletDamageCoefficient}% damage scaling by attack speed</style>." );
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_DESCRIPTION", $"Dash through enemies, hitting enemies behind for <style=cIsDamage>{100f * StaticValues.shootbulletDamageCoefficient}% damage scaling by attackspeed</style>." + Helpers.Damage(" Costs 1% of max Health") + ".");
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY2_NAME", "Airforce 45%");
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot 4 bullets with all your fingers, dealing <style=cIsDamage>{100f * StaticValues.airforce45DamageCoefficient}% damage each</style>.");
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY3_NAME", "Fa Jin");
-            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY3_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Charge up kinetic energy, dealing <style=cIsDamage>{100f* StaticValues.fajinDamageCoefficient}% damage</style>, granting 10 stacks of Fa Jin. Does not consume Fa Jin.");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY3_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Charge up kinetic energy, dealing <style=cIsDamage>{100f* StaticValues.fajinDamageCoefficient}% damage</style>." + Helpers.Passive(" Grants 10 stacks of Fa Jin. Does not consume Fa Jin") + ".");
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY4_NAME", "Fa Jin Mastered");
-            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY4_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Charge up kinetic energy, dealing <style=cIsDamage>{100f * StaticValues.fajinDamageCoefficient}% damage</style>, granting 20 stacks of Fa Jin. Does not consume Fa Jin.");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY4_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Charge up kinetic energy, dealing <style=cIsDamage>{100f * StaticValues.fajinDamageCoefficient}% damage</style>." + Helpers.Passive(" Grants 10 stacks of Fa Jin. Does not consume Fa Jin") + ".");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY5_NAME", "Airforce 100%");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY5_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Shoot beams with your fists, stunning and dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage</style>, initially having 20% attackspeed, ramping up to 200%." + Helpers.Damage(" Costs 1% of max Health") + ".");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY6_NAME", "Shoot Style Kick 45%");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY6_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill.");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY7_NAME", "Shoot Style Kick 100%");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY7_DESCRIPTION", $"<style=cIsDamage>Freezing. Agile.</style> Dash and kick, freezing and dealing <style=cIsDamage>{100f * StaticValues.shootkick100DamageCoefficient}% damage twice, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill." + Helpers.Damage(" Costs 1% of max Health") + ".");
             #endregion
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_NAME", "Blackwhip");
-            LanguageAPI.Add(prefix + "SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhipDamageCoefficient}%</style>, gaining barrier on hit, scaling with attack speed. <style=cIsUtility>Fa Jin buff makes blackwhip double the barrier gain</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhipDamageCoefficient}%</style>, gaining barrier on hit, scaling with attackspeed</style>." + Helpers.Passive(" Fa Jin buff makes blackwhip double the barrier gain") + ".");
             LanguageAPI.Add(prefix + "SECONDARY2_NAME", "Manchester Smash");
-            LanguageAPI.Add(prefix + "SECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Jump in the air and slam down, dealing <style=cIsDamage>{100f * StaticValues.manchesterDamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed. <style=cIsUtility>Fa Jin buff hits and pulls enemies when you jump as well as doubling barrier gain</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Jump in the air and slam down, dealing <style=cIsDamage>{100f * StaticValues.manchesterDamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed</style>." + Helpers.Passive(" Fa Jin buff hits and pulls enemies when you jump as well as doubling barrier gain") + ".");
 
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_NAME", "Detroit Smash 100%");
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroit100DamageCoefficient}% increasing infinitely</style>. " + Helpers.Damage("Costs 10% of max Health")+".");
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY2_NAME", "Blackwhip 45%");
-            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning</style>. Blackwhip enemies, pulling them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning. </style> Blackwhip enemies, pulling them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style> and gaining barrier on hit, scaling with attackspeed.");
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY3_NAME", "Blackwhip Combo");
-            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY3_DESCRIPTION", $"Hit enemies in front of you and shoot blackwhip, dealing <style=cIsDamage>{100f * StaticValues.blackwhipshootDamageCoefficient}%</style>. Tapping pulls you forward while Holding pulls enemies towards you. <style=cIsUtility>Fa Jin buff makes blackwhip to shoot multiple times and have a larger melee hitbox</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Hit enemies in front of you and shoot blackwhip, dealing <style=cIsDamage>{100f * StaticValues.blackwhipshootDamageCoefficient}%</style>. Tapping pulls you forward while Holding pulls enemies towards you</style>." + Helpers.Passive(" Fa Jin buff makes blackwhip stuns, shoot multiple times and have a larger melee hitbox") + ".");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY4_NAME", "Blackwhip 100%");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY4_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Blackwhip enemies, pulling them right in front of you, stunning and dealing <style=cIsDamage>3x{100f * StaticValues.blackwhip100DamageCoefficient}%</style> and gaining barrier on hit, scaling with attackspeed.");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY5_NAME", "Manchester Smash 45%");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY5_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Jump in the air and slam down, dealing <style=cIsDamage>{100f * StaticValues.manchester45DamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed. Radius scales with movespeed.");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY6_NAME", "Manchester Smash 100%");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY6_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Jump in the air and slam down, dealing <style=cIsDamage>2x{100f * StaticValues.manchester100DamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed. Hits and pulls enemies when you jump as well. Radius scales with movespeed.");
             #endregion
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_NAME", "Shoot Style");
-            LanguageAPI.Add(prefix + "UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and go invincible, hitting enemies multiple times for <style=cIsDamage>{100f * StaticValues.shootattackDamageCoefficient}% damage</style>. <style=cIsUtility>Fa Jin buff doubles the number of hits</style>.");
+            LanguageAPI.Add(prefix + "UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and go invincible, hitting enemies multiple times for <style=cIsDamage>{100f * StaticValues.shootattackDamageCoefficient}% damage</style>." + Helpers.Passive(" Fa Jin buff lets you hold the button, extending the duration") + ".");
             LanguageAPI.Add(prefix + "UTILITY2_NAME", "Shoot Style Full Cowling");
-            LanguageAPI.Add(prefix + "UTILITY2_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Dash through enemies, stunning enemies and dealing <style=cIsDamage>{100f * StaticValues.shootbulletstunDamageCoefficient}% damage scaling by attack speed</style>. <style=cIsUtility>Fa Jin buff doubles the number of hits</style>.");
+            LanguageAPI.Add(prefix + "UTILITY2_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Dash through enemies, stunning enemies and dealing <style=cIsDamage>{100f * StaticValues.shootbulletstunDamageCoefficient}% damage scaling by attackspeed</style>." + Helpers.Passive(" Fa Jin buff doubles the number of hits") + ".");
             LanguageAPI.Add(prefix + "UTILITY3_NAME", "Detroit Smash");
-            LanguageAPI.Add(prefix + "UTILITY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}%</style>, range scales based on attack speed and movespeed. <style=cIsUtility>Fa Jin buff doubles everything</style>.");
+            LanguageAPI.Add(prefix + "UTILITY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}%</style>, range scales based on attackspeed and movespeed</style>." + Helpers.Passive(" Fa Jin buff doubles everything") + ".");
 
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY_NAME", "Delaware Smash 100%");
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Delaware Smash, dealing <style=cIsDamage>{100f * StaticValues.delawareDamageCoefficient}% damage in an AOE, sending yourself backwards</style>. " + Helpers.Damage("Costs 10% of max Health")+".");
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY2_NAME", "St Louis Smash 45%");
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY2_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> St Louis Smash, stunning enemies in front, dealing <style=cIsDamage>{100f * StaticValues.StLouis45DamageCoefficient}% damage</style>.");
             LanguageAPI.Add(prefix + "BOOSTEDUTILITY3_NAME", "Smokescreen");
-            LanguageAPI.Add(prefix + "BOOSTEDUTILITY3_DESCRIPTION", $"<style=cIsDamage>Slowing.</style> Release a smokescreen, going invisible for 4 seconds and dealing <style=cIsDamage>{100f * StaticValues.smokescreenDamageCoefficient}% damage</style> around you. <style=cIsUtility>Fa Jin buff makes nearby allies invisible as well</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY3_DESCRIPTION", $"<style=cIsDamage>Slowing.</style> Release a smokescreen, going invisible for 4 seconds and dealing <style=cIsDamage>{100f * StaticValues.smokescreenDamageCoefficient}% damage</style> around you</style>." + Helpers.Passive(" Fa Jin buff makes nearby allies invisible as well."));
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY4_NAME", "Shoot Style 45%");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY4_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and go invincible, hitting enemies multiple times for <style=cIsDamage>{100f * StaticValues.shootattack45DamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY5_NAME", "Shoot Style 100%");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY5_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Dash and go invincible, hitting enemies multiple times for <style=cIsDamage>{100f * StaticValues.shootattack100DamageCoefficient}% damage</style>. Holding down the button extends the duration but causes</style>" + Helpers.Damage("further negative regen.")+".");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY6_NAME", "Shoot Style Full Cowling 45%");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY6_DESCRIPTION", $"Dash through enemies, hitting enemies behind for <style=cIsDamage>{100f * StaticValues.shootbulletstun45DamageCoefficient}% damage scaling by attackspeed</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY7_NAME", "Shoot Style Full Cowling 100%");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY7_DESCRIPTION", $"Dash through enemies, hitting enemies behind for <style=cIsDamage>{100f * StaticValues.shootbulletstun100DamageCoefficient}% damage scaling by attackspeed</style>.");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY8_NAME", "Detroit Smash");
+            LanguageAPI.Add(prefix + "BOOSTEDUTILITY8_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroit45DamageCoefficient} to {300f * StaticValues.detroit45DamageCoefficient}% damage</style>, range scales based on attackspeed and movespeed</style>.");
             #endregion
 
             #region Special
-            LanguageAPI.Add(prefix + "SPECIAL_NAME", "OFA 100%");
-            LanguageAPI.Add(prefix + "SPECIAL_DESCRIPTION", $"Go beyond your limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 100% moves, " + Helpers.Damage("gaining negative Regen and Self-Damage from every move")+".");
+            LanguageAPI.Add(prefix + "SPECIAL_NAME", "One For All");
+            LanguageAPI.Add(prefix + "SPECIAL_DESCRIPTION", $"Cycle between One For All 45% and 100%, upgrading your skills and stats. This skill activates 45%.");
             LanguageAPI.Add(prefix + "SPECIAL2_NAME", "OFA 45%");
             LanguageAPI.Add(prefix + "SPECIAL2_DESCRIPTION", $"Push your body to its limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 45% moves, " + Helpers.Damage("disabling Health Regen") + ".");
-            LanguageAPI.Add(prefix + "SPECIAL3_NAME", "OFA Quirks");
-            LanguageAPI.Add(prefix + "SPECIAL3_DESCRIPTION", $"Unlock your additional quirks. This skill grants the Fa Jin buff. Moving increases the buff up to 100 stacks. Gain up to 2x damage at 50 stacks. Every move consumes 50 stacks. However, if a move uses 50 stacks it has additional effects. <style=cIsUtility>In general all moves will stun and bypass armor, have double the movement, double the radius and range</style>.");
-
+            LanguageAPI.Add(prefix + "SPECIAL3_NAME", "OFA 100%");
+            LanguageAPI.Add(prefix + "SPECIAL3_DESCRIPTION", $"Go beyond your limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 100% moves, " + Helpers.Damage("gaining negative Regen and Self-Damage from every move") + ".");
+            LanguageAPI.Add(prefix + "SPECIAL4_NAME", "OFA Quirks");
+            LanguageAPI.Add(prefix + "SPECIAL4_DESCRIPTION", $"Unlock your additional quirks. This skill grants the Fa Jin buff. Moving increases the buff up to 100 stacks. Gain up to 2x damage at 50 stacks. Every move consumes 50 stacks. However, if a move uses 50 stacks it has additional effects. <style=cIsUtility>In general all moves will stun and bypass armor, have double the movement, double the radius and range</style>.");
+           
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_NAME", "OFA down");
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_DESCRIPTION", $"Return yourself back to your limits.");
-            LanguageAPI.Add(prefix + "SCEPTERSPECIAL_NAME", $"Infinite 100%");
-            LanguageAPI.Add(prefix + "SCEPTERSPECIAL_DESCRIPTION", $"Unlock the true power of One For All, gaining the same effects as well as 10% lifesteal.");
+            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL2_NAME", "OFA 45%");
+            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL2_DESCRIPTION", $"Push your body to its limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 45% moves, " + Helpers.Damage("disabling Health Regen") + ". This skill goes to 100%.");
+            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL3_NAME", "OFA 100%");
+            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL3_DESCRIPTION", $"Go beyond your limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 100% moves, " + Helpers.Damage("gaining negative Regen and Self-Damage from every move") + ". This skill returns yourself back to your limits.");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL_NAME", "One For All Mastered");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL_DESCRIPTION", $"Cycle between Mastered One For All 45% and 100%, upgrading your skills and stats as well as granting lifesteal. This skill goes to 45%.");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_NAME", $"Infinite 45%");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_DESCRIPTION", $"Master OFA 45%, gaining the same effects as well as 5% lifesteal.");
-            LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_NAME", $"OFA Quirks Mastered");
-            LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_DESCRIPTION", $"Fa Jin Buff stacks are granted at double the rate.");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL3_NAME", $"Infinite 100%");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL3_DESCRIPTION", $"Unlock the true power of One For All, gaining the same effects as well as 10% lifesteal.");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL4_NAME", $"OFA Quirks Mastered");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL4_DESCRIPTION", $"Fa Jin Buff stacks are granted at double the rate.");
             #endregion
 
             #region Achievements

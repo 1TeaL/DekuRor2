@@ -23,6 +23,7 @@ namespace DekuMod.SkillStates
 		public float fajin;
 		protected DamageType damageType;
 		public DekuController dekucon;
+		public float procCoefficient = 2f;
 
 		public override void OnEnter()
         {
@@ -100,7 +101,7 @@ namespace DekuMod.SkillStates
 				blastAttack.teamIndex = base.teamComponent.teamIndex;
 				blastAttack.crit = base.RollCrit();
 				blastAttack.procChainMask = default(ProcChainMask);
-				blastAttack.procCoefficient = 2f;
+				blastAttack.procCoefficient = procCoefficient;
 				blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 				blastAttack.damageColorIndex = DamageColorIndex.Default;
 				blastAttack.damageType = damageType;

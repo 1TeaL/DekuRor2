@@ -132,7 +132,7 @@ namespace DekuMod.SkillStates
             {
                 this.chargePercent = base.fixedAge / this.maxCharge;
                 this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                this.randFreq = Random.Range(50, this.baseMaxCharge * 100) / 100;
+                this.randFreq = Random.Range(baseMaxCharge * 50, this.baseMaxCharge * 100) / 100;
                 bool flag2 = this.reducerFlipFlop;
                 if (flag2)
                 {

@@ -19,7 +19,6 @@ namespace DekuMod.SkillStates
 		public float previousMass;
 		private Ray aimRay;
 		private Vector3 aimRayDir;
-		private Vector3 previousPosition;
 		private Transform modelTransform;
 		private CharacterModel characterModel;
 
@@ -63,7 +62,6 @@ namespace DekuMod.SkillStates
 		private Animator animator;
 		private Vector3 direction;
 		private bool hasHopped;
-        private float speedattack;
 		public float radius = 15f;
         private GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
 

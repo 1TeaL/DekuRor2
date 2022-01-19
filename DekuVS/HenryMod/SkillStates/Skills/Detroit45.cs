@@ -1,5 +1,4 @@
-﻿using DekuMod.Modules.Survivors;
-using EntityStates;
+﻿using EntityStates;
 using EntityStates.Huntress;
 using EntityStates.VagrantMonster;
 using RoR2;
@@ -22,7 +21,6 @@ namespace DekuMod.SkillStates
         ////private float earlyExitTime;
         public float smashage;
         public float duration = 1f;
-        public float speedattack;
         //private bool hasFired;
         //private float hitPauseTimer;
         //private OverlapAttack attack;
@@ -36,15 +34,15 @@ namespace DekuMod.SkillStates
         protected Animator animator;
         private GameObject areaIndicator;
         private float maxCharge;
-        private int baseMaxCharge = 2;
+        private int baseMaxCharge = 3;
         private float maxDistance;
         private float chargePercent;
-        private float baseDistance = 5f;
+        private float baseDistance = 2f;
         private RaycastHit raycastHit;
         private float hitDis;
         private float damageMult;
         private float radius;
-        private float baseRadius = 3f;
+        private float baseRadius = 2f;
         private Vector3 maxMoveVec;
         private Vector3 randRelPos;
         private int randFreq;
@@ -52,24 +50,16 @@ namespace DekuMod.SkillStates
         private GameObject effectPrefab = Resources.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
         public static float healthCostFraction;
-        protected DamageType damageType;
-        public DekuController dekucon;
+
 
         public override void OnEnter()
         {
-            base.OnEnter();
-            speedattack = attackSpeedStat / 2;
-            if(speedattack < 1)
-            {
-                speedattack = 1;
-            }
+            base.OnEnter();            
             float[] source = new float[]
             {
                 this.attackSpeedStat,
                 4f
             };
-            dekucon = base.GetComponent<DekuController>();
-
             this.maxCharge = (float)this.baseMaxCharge / source.Min();
             this.areaIndicator = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
@@ -78,23 +68,7 @@ namespace DekuMod.SkillStates
             //Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
             AkSoundEngine.PostEvent(3806074874, this.gameObject);
 
-            //if (NetworkServer.active && base.healthComponent)
-            //{
-            //    DamageInfo damageInfo = new DamageInfo();
-            //    damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-            //    damageInfo.position = base.characterBody.corePosition;
-            //    damageInfo.force = Vector3.zero;
-            //    damageInfo.damageColorIndex = DamageColorIndex.Default;
-            //    damageInfo.crit = false;
-            //    damageInfo.attacker = null;
-            //    damageInfo.inflictor = null;
-            //    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-            //    damageInfo.procCoefficient = 0f;
-            //    damageInfo.procChainMask = default(ProcChainMask);
-            //    base.healthComponent.TakeDamage(damageInfo);
-            //}
 
-            GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
         }
 
         public void IndicatorUpdator()
@@ -102,7 +76,7 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
             aimRay.origin = base.characterBody.corePosition;
-            this.maxDistance = this.baseDistance * (this.moveSpeedStat/2) * speedattack;
+            this.maxDistance = (1f + 4f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
             bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;
@@ -110,8 +84,8 @@ namespace DekuMod.SkillStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult =  Modules.StaticValues.detroitDamageCoefficient + 2f * (this.chargePercent * Modules.StaticValues.detroitDamageCoefficient);
-            this.radius = (this.baseRadius * this.damageMult + 20f) / 6f;
+            this.damageMult = Modules.StaticValues.detroit100DamageCoefficient + 2f * (this.chargePercent * Modules.StaticValues.detroit100DamageCoefficient);
+            this.radius = (this.baseRadius * this.damageMult + 10f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;
             this.areaIndicator.transform.localPosition = aimRay.origin + this.maxMoveVec;
@@ -144,7 +118,7 @@ namespace DekuMod.SkillStates
             {
                 this.chargePercent = base.fixedAge / this.maxCharge;
                 //this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                //this.randFreq = Random.Range(1, this.baseMaxCharge * 100) / 100;
+                //this.randFreq = Random.Range(50, this.baseMaxCharge * 100) / 100;
                 //bool flag2 = this.reducerFlipFlop;
                 //if (flag2)
                 //{
@@ -164,7 +138,7 @@ namespace DekuMod.SkillStates
                 //{
                 //    this.reducerFlipFlop = true;
                 //}
-                //base.characterMotor.walkSpeedPenaltyCoefficient = 1f - this.chargePercent / 3f;
+                base.characterMotor.walkSpeedPenaltyCoefficient = 1f - this.chargePercent / 3f;
                 this.IndicatorUpdator();
             }
 

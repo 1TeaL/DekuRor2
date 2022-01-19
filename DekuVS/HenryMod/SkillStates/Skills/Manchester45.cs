@@ -45,7 +45,7 @@ namespace DekuMod.SkillStates
             jumpDuration = basejumpDuration;
 
 
-            base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", Manchester.jumpDuration);
+            base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", Manchester45.jumpDuration);
             AkSoundEngine.PostEvent(687990298, this.gameObject);
             AkSoundEngine.PostEvent(1918362945, this.gameObject);
 

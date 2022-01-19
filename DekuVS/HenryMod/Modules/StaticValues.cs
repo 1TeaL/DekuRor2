@@ -32,6 +32,7 @@ namespace DekuMod.Modules
 
         internal const float detroit100DamageCoefficient = 6f;
         internal const float detroitDamageCoefficient = 6f;
+        internal const float detroit45DamageCoefficient = 6f;
         internal const float StLouis45DamageCoefficient = 6f;
         internal const float delawareDamageCoefficient = 6f;
         internal const float shootattackDamageCoefficient = 1f;
