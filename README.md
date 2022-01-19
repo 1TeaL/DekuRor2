@@ -7,7 +7,7 @@ Adds Deku from My Hero Academia, a high risk survivor which can boost his stats 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571.
 
-<img src="https://user-images.githubusercontent.com/93917577/148071168-a6fa03bc-a8b4-41af-bd42-ff7522a0ed0b.PNG">
+<img src="https://user-images.githubusercontent.com/93917577/150066735-ab70b226-2564-4006-ae9f-3b24c1d0c70c.PNG">
 
 ## Known Issues
 </p> Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
@@ -469,7 +469,7 @@ These stats are prone to change.
 
   
 ## OG Pictures
-![characterselect](https://user-images.githubusercontent.com/93917577/148071168-a6fa03bc-a8b4-41af-bd42-ff7522a0ed0b.PNG)
+![characterselect](https://user-images.githubusercontent.com/93917577/150066735-ab70b226-2564-4006-ae9f-3b24c1d0c70c.PNG)
 ![airforce](https://user-images.githubusercontent.com/93917577/144508155-96faa81f-a22b-4719-8680-e5382e0bc59d.png)
 ![shootstylekick](https://user-images.githubusercontent.com/93917577/145331809-b57a4f5b-5f5b-43e1-b0af-175776969f05.png)
 ![shootstylekick2](https://user-images.githubusercontent.com/93917577/145331823-67001074-4bd6-4fe2-89e7-28d519cd6928.png)
