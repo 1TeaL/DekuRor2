@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "2.0.0",
+    "version_number": "2.1.0",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "2.0.0 Update, new special- One For All! Cycle between %s with upgraded skills for every single base skill! Balance changes and more!",
+    "description": "2.0.0 Update, new special- One For All! Cycle between %s with upgraded skills for every single base skill! 2.1.0- Balance change to shoot style kick.",
     "dependencies": [
          "tristanmcpherson-R2API-3.0.59"
     ]

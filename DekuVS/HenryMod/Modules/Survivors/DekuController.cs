@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using AncientScepter;
 using EntityStates.Mage;
 using System.Diagnostics;
+using UnityEngine.Networking;
 
 namespace DekuMod.Modules.Survivors
 {
@@ -29,6 +30,9 @@ namespace DekuMod.Modules.Survivors
         public static float fajinscepterrate = 2f;
         public float fajinrate = 4f;
         public bool isMaxPower;
+
+        public bool kickBuff;
+        public bool kickon;
 
         internal bool endFloat;
         internal bool hasFloatBuff;
@@ -102,10 +106,51 @@ namespace DekuMod.Modules.Survivors
             return buffCountToApply;
         }
 
-        
+        public bool CheckIfMaxKickPowerStacks()
+        {
+            if (buffCountToApply >= Modules.StaticValues.kickMaxStack)
+            {
+                kickBuff = true;
+            }
+            else
+            {
+                kickBuff = false;
+            }
+            return kickBuff;
+        }
+
+        public void IncrementKickBuffCount()
+        {
+            buffCountToApply++;
+            if (buffCountToApply >= Modules.StaticValues.kickMaxStack)
+            {
+                buffCountToApply = Modules.StaticValues.kickMaxStack;
+            }
+        }
+
+        public void RemoveKickBuffCount(int numbertominus)
+        {
+            buffCountToApply -= numbertominus;
+            if (buffCountToApply < 0)
+            {
+                buffCountToApply = 0;
+            }
+        }
+
+        public int GetKickBuffCount()
+        {
+            if (buffCountToApply > Modules.StaticValues.kickMaxStack)
+            {
+                return Modules.StaticValues.kickMaxStack;
+            }
+            return buffCountToApply;
+        }
 
         public void FixedUpdate()
         {
+
+            CheckIfMaxKickPowerStacks();
+
             if (fajinon)
             {
                 CheckIfMaxPowerStacks();

@@ -16,7 +16,7 @@ namespace DekuMod.Modules
         internal const float airforceDamageCoefficient = 1f;
         internal const float shootkickDamageCoefficient = 3f;
         internal const float shootkick45DamageCoefficient = 3f;
-        internal const float shootkick100DamageCoefficient = 1.5f;
+        internal const float shootkick100DamageCoefficient = 1f;
         internal const float airforce45DamageCoefficient = 1.25f;
         internal const float shootbulletDamageCoefficient = 2f;
         internal const float fajinDamageCoefficient = 0.5f;
@@ -47,6 +47,7 @@ namespace DekuMod.Modules
         internal const float blackwhipPull = 8f;
 
         internal const int fajinMaxStack = 100;
+        internal const int kickMaxStack= 4;
         internal const int fajinMaxPower = 50;
         internal const float fajinMaxMultiplier = 2f;
         internal const float floatDuration = 10f;

@@ -173,7 +173,7 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>Shoot Style<br>Kick 100%<br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/145331823-67001074-4bd6-4fe2-89e7-28d519cd6928.png" alt="Image" width="100" height="100"></td>
-    <td>Dash and kick, freezing and dealing 2x300% damage scaling based on movespeed.<br>Resets CD on hit and resetting all cooldowns on kill.<br>Costs 1% of max Health.</td>
+    <td>Dash and kick, dealing 2x100% damage scaling based on movespeed.<br> Freezes every 4th hit.<br>Resets CD on hit and resetting all cooldowns on kill.<br>Costs 1% of max Health.</td>
     <td>Proc: 1.<br>CD: 6s.</td>
   </tr>
   <tr>
@@ -349,6 +349,14 @@ Deku has innate increased health regen the lower his health is. He has a double 
 These stats are prone to change.
 
 ## Changelog
+
+- 2.1.0
+
+    -  Balanced Shoot Style Kick 100%
+          -  I inadvertently buffed shoot style kick last patch, it was because I forgot to actually make the damage fo the move scale by movespeed. 
+          -  This resulted in the current patch move to be a lot stronger, and with 100% freezing and hitting twice (basically double damage), it was nuts. 
+          -  Also, freezing constantly is nuts and makes mithrix a free win, so instead I'm gonna make it such that every 4 hits, (3 if you hit on that 4th one) it will freeze. 
+          -  I've also lowered the damage from 2x300% to 2x100%- it's still strong but less so.
 - 2.0.0
 
     -  Added another new alt special - One For All, this skill cycles Deku between OFA base, 45% and 100%. Depending on what base skills you choose, they will be upgraded accordingly. (This was my initial plan with Deku but had no idea, well now I do, and I'll still keep OFA 45% and OFA 100% as alternate skill options.)

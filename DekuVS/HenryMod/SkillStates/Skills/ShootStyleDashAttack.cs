@@ -199,10 +199,7 @@ namespace DekuMod.SkillStates
 		}
 		public override void OnExit()
 		{
-			if (base.characterBody.HasBuff(Modules.Buffs.ofaDebuff))
-			{
-				base.characterBody.RemoveBuff(Modules.Buffs.ofaDebuff);
-			}
+
 			dekucon.RemoveBuffCount(50); 
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));

@@ -36,7 +36,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "2.0.0";
+        public const string MODVERSION = "2.1.0";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -113,22 +113,6 @@ namespace DekuMod
             if (fajin)
             {
                 self.damage *= Mathf.Lerp(1f, Modules.StaticValues.fajinMaxMultiplier, (float)self.GetComponent<DekuController>().GetBuffCount() / (float)(Modules.StaticValues.fajinMaxStack/2));
-
-            }
-
-            bool ofadebuff = self.HasBuff(Modules.Buffs.ofaDebuff);
-
-            if (ofadebuff && (self.healthComponent.health - self.healthComponent.barrier) > 1)
-            {
-
-                self.regen -= ((1 + (self.levelRegen * (self.level - 1))) * 8f);
-            
-            }
-
-            if (ofadebuff && (self.healthComponent.health - self.healthComponent.barrier) < 2)
-            {
-
-                self.regen += (1 + (self.levelRegen * (self.level - 1))) * 0f;
 
             }
 
@@ -284,6 +268,10 @@ namespace DekuMod
                 if (dekucon.fajinon)
                 {
                     self.SetBuffCount(Modules.Buffs.fajinBuff.buffIndex, dekucon.GetBuffCount());
+                }
+                if (dekucon.kickon)
+                {
+                    self.SetBuffCount(Modules.Buffs.kickBuff.buffIndex, dekucon.GetKickBuffCount());
                 }
 
             }

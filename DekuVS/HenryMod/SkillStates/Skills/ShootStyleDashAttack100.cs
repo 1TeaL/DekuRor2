@@ -110,10 +110,6 @@ namespace DekuMod.SkillStates
 				stopwatch = 0;
 				if (actualstopwatch >= duration / 2)
 				{
-					if (NetworkServer.active)
-					{
-						base.characterBody.AddBuff(Modules.Buffs.ofaDebuff);
-					}
 					actualstopwatch = 0;
 				}
 			}
@@ -191,10 +187,7 @@ namespace DekuMod.SkillStates
 		}
 		public override void OnExit()
 		{
-			if (base.characterBody.HasBuff(Modules.Buffs.ofaDebuff))
-			{
-				base.characterBody.RemoveBuff(Modules.Buffs.ofaDebuff);
-			}
+
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
             this.modelTransform = base.GetModelTransform();

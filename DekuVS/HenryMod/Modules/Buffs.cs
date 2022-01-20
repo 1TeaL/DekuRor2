@@ -13,7 +13,7 @@ namespace DekuMod.Modules
 
         internal static BuffDef ofaBuff;
 
-        internal static BuffDef ofaDebuff;
+        internal static BuffDef kickBuff;
 
         internal static BuffDef floatBuff;
 
@@ -30,7 +30,7 @@ namespace DekuMod.Modules
             armorBuff = AddNewBuff("DekuArmorBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
             ofaBuff = AddNewBuff("DekuOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.green, false, false);
             supaofaBuff = AddNewBuff("DekuInfiniteOFABuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.white, false, false);
-            ofaDebuff = AddNewBuff("DekuOFADebuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.red, false, true);
+            kickBuff = AddNewBuff("DekuKickBuff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.cyan, true, false);
             ofaBuff45 = AddNewBuff("DekuOFA45Buff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.blue, false, false);
             supaofaBuff45 = AddNewBuff("DekuInfiniteOFA45Buff", Resources.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.grey, false, false);
 

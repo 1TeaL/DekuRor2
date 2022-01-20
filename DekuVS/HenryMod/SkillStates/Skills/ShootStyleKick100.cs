@@ -26,7 +26,7 @@ namespace DekuMod.SkillStates
 		public static float duration;
 		public static float hitExtraDuration = 0.44f;
 		public static float minExtraDuration = 0.2f;
-		public static float initialSpeedCoefficient = 10f;
+		public static float initialSpeedCoefficient = 12f;
 		public static float SpeedCoefficient;
 		public static float finalSpeedCoefficient = 0f;
 		public static float bounceForce = 2000f;
@@ -66,7 +66,7 @@ namespace DekuMod.SkillStates
 		private GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 
 		public float fajin;
-		protected DamageType damageType = DamageType.ResetCooldownsOnKill | DamageType.Freeze2s;
+		protected DamageType damageType;
 		public DekuController dekucon;
 		private BlastAttack blastAttack;
 
@@ -74,6 +74,18 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			this.aimRayDir = aimRay.direction;
+			dekucon = base.GetComponent<DekuController>();
+			dekucon.kickon = true;
+
+			if (dekucon.kickBuff)
+			{
+				damageType = DamageType.Freeze2s | DamageType.ResetCooldownsOnKill;
+				dekucon.RemoveKickBuffCount(4);
+			}
+			else
+			{
+				damageType = DamageType.ResetCooldownsOnKill;
+			}
 
 			duration = baseduration / ((this.attackSpeedStat) / 2);
 			SpeedCoefficient = initialSpeedCoefficient * (this.attackSpeedStat / 2);
@@ -167,8 +179,8 @@ namespace DekuMod.SkillStates
 			blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.shootkick100DamageCoefficient * this.moveSpeedStat/7;
 			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 			blastAttack.baseForce = 0f;
-			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 			blastAttack.damageType = damageType;
+			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 			blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 			if (NetworkServer.active && base.healthComponent)
@@ -343,7 +355,9 @@ namespace DekuMod.SkillStates
 			{
 				if (base.isAuthority)
 				{
+					dekucon.IncrementKickBuffCount();
 					blastAttack.Fire();
+
 					EffectManager.SpawnEffect(this.explosionPrefab, new EffectData
 					{
 						origin = base.characterBody.corePosition,
