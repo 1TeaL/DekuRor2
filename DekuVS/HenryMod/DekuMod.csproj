@@ -22,7 +22,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Deku.bnk" />
     <EmbeddedResource Include="DekuAssetBundle" />
-    <EmbeddedResource Include="HenryBank.bnk" />
   </ItemGroup>
 
   <ItemGroup>
