@@ -1,2 +1,2 @@
-F:\Theodore 3\Risk of Rain 2 modding\Mods\DekuRor2\DekuUnity\Assets\VFX\PostProcessing-2
-F:\Theodore 3\Risk of Rain 2 modding\Mods\DekuRor2\DekuUnity\Packages\com.unity.postprocessing
+F:\Theodore 3\GameDev\Mods\DekuRor2\DekuUnity\Assets\VFX\PostProcessing-2
+F:\Theodore 3\GameDev\Mods\DekuRor2\DekuUnity\Packages\com.unity.postprocessing
