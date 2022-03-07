@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}" SchemaVersion="89">
+<WwiseDocument Type="WorkUnit" ID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}" SchemaVersion="97">
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}" PersistMode="Standalone">
 			<ChildrenList>
@@ -129,9 +129,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="fullcowlchargequick" ID="{1C2CE991-5BB9-473C-966C-0CD2CE709DA4}" ShortID="956066236">
+																		<AudioFileSource Name="fullcowlchargequick" ID="{1C2CE991-5BB9-473C-966C-0CD2CE709DA4}">
 																			<Language>SFX</Language>
 																			<AudioFile>stlouis\sfx\fullcowlchargequick.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="956066236"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -155,9 +158,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="ofajump" ID="{5C961087-185F-4401-A907-1ECA208A9245}" ShortID="1047346623">
+																		<AudioFileSource Name="ofajump" ID="{5C961087-185F-4401-A907-1ECA208A9245}">
 																			<Language>SFX</Language>
 																			<AudioFile>stlouis\sfx\ofajump.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="1047346623"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -174,9 +180,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_0000000E" ID="{AB8E3302-405A-4E38-9005-B09BD78D6E88}" ShortID="25413997">
+																		<AudioFileSource Name="SePl01_0000000E" ID="{AB8E3302-405A-4E38-9005-B09BD78D6E88}">
 																			<Language>SFX</Language>
 																			<AudioFile>stlouis\sfx\SePl01_0000000E.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="25413997"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -193,9 +202,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_0000000F" ID="{E87907B6-400D-4B72-AAFA-00A8184765D8}" ShortID="161241194">
+																		<AudioFileSource Name="SePl01_0000000F" ID="{E87907B6-400D-4B72-AAFA-00A8184765D8}">
 																			<Language>SFX</Language>
 																			<AudioFile>stlouis\sfx\SePl01_0000000F.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="161241194"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -234,9 +246,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000004A" ID="{A3743484-FF26-4376-99A3-83326AA965A1}" ShortID="834891393">
+																<AudioFileSource Name="VoPl01_0000004A" ID="{A3743484-FF26-4376-99A3-83326AA965A1}">
 																	<Language>SFX</Language>
 																	<AudioFile>stlouis\VoPl01_0000004A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="834891393"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -253,9 +268,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000004B" ID="{8CA0B5AA-D907-450C-980E-6DE3C9FA86CA}" ShortID="1027557244">
+																<AudioFileSource Name="VoPl01_0000004B" ID="{8CA0B5AA-D907-450C-980E-6DE3C9FA86CA}">
 																	<Language>SFX</Language>
 																	<AudioFile>stlouis\VoPl01_0000004B.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1027557244"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -272,9 +290,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000004C" ID="{0438B08C-F343-4DEB-87CD-A5253D7713EC}" ShortID="485064595">
+																<AudioFileSource Name="VoPl01_0000004C" ID="{0438B08C-F343-4DEB-87CD-A5253D7713EC}">
 																	<Language>SFX</Language>
 																	<AudioFile>stlouis\VoPl01_0000004C.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="485064595"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -291,9 +312,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000004D" ID="{50BEC0B5-5A8B-43BA-A0AC-985A1C8A74D8}" ShortID="940294545">
+																<AudioFileSource Name="VoPl01_0000004D" ID="{50BEC0B5-5A8B-43BA-A0AC-985A1C8A74D8}">
 																	<Language>SFX</Language>
 																	<AudioFile>stlouis\VoPl01_0000004D.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="940294545"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -310,9 +334,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000004E" ID="{FFCD79A6-D820-489B-B9DA-B4A2BE898533}" ShortID="982687313">
+																<AudioFileSource Name="VoPl01_0000004E" ID="{FFCD79A6-D820-489B-B9DA-B4A2BE898533}">
 																	<Language>SFX</Language>
 																	<AudioFile>stlouis\VoPl01_0000004E.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="982687313"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -329,9 +356,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000004F" ID="{AC66CF2B-E9A0-4BDD-97FA-229D9816A1F2}" ShortID="604310980">
+																<AudioFileSource Name="VoPl01_0000004F" ID="{AC66CF2B-E9A0-4BDD-97FA-229D9816A1F2}">
 																	<Language>SFX</Language>
 																	<AudioFile>stlouis\VoPl01_0000004F.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="604310980"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -355,9 +385,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000007D" ID="{78D96F3F-9C08-4188-B2E5-F60466DC04CC}" ShortID="524330261">
+																<AudioFileSource Name="VoPl01_0000007D" ID="{78D96F3F-9C08-4188-B2E5-F60466DC04CC}">
 																	<Language>SFX</Language>
 																	<AudioFile>stlouis\VoPl01_0000007D.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="524330261"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -505,9 +538,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000A1" ID="{07CBE416-1103-4093-B474-229635FC0390}" ShortID="484186578">
+																<AudioFileSource Name="VoPl01_000000A1" ID="{07CBE416-1103-4093-B474-229635FC0390}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_000000A1.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="484186578"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -524,9 +560,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000A2" ID="{8C7D4CAF-628F-4160-8867-6300FEC04449}" ShortID="133485999">
+																<AudioFileSource Name="VoPl01_000000A2" ID="{8C7D4CAF-628F-4160-8867-6300FEC04449}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_000000A2.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="133485999"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -543,9 +582,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000A5" ID="{BDC94C89-8575-4830-AE36-754646F773BA}" ShortID="962771432">
+																<AudioFileSource Name="VoPl01_000000A5" ID="{BDC94C89-8575-4830-AE36-754646F773BA}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_000000A5.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="962771432"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -562,9 +604,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000A7" ID="{794EF2E8-B32E-47FE-806C-B6C0BEFAE044}" ShortID="793806329">
+																<AudioFileSource Name="VoPl01_000000A7" ID="{794EF2E8-B32E-47FE-806C-B6C0BEFAE044}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_000000A7.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="793806329"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -581,9 +626,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000AC" ID="{F4104884-D8B2-478E-9C30-85A9E57FD33B}" ShortID="186206304">
+																<AudioFileSource Name="VoPl01_000000AC" ID="{F4104884-D8B2-478E-9C30-85A9E57FD33B}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_000000AC.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="186206304"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -600,9 +648,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000AE" ID="{F8A9D81C-4BA9-4460-9269-5421D638BC86}" ShortID="246103165">
+																<AudioFileSource Name="VoPl01_000000AE" ID="{F8A9D81C-4BA9-4460-9269-5421D638BC86}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_000000AE.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="246103165"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -619,9 +670,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000F2" ID="{58EFB2CB-385D-41A9-BD2D-00F17B952DA4}" ShortID="487561111">
+																<AudioFileSource Name="VoPl01_000000F2" ID="{58EFB2CB-385D-41A9-BD2D-00F17B952DA4}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_000000F2.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="487561111"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -638,9 +692,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000009A" ID="{BEB56022-960F-4F83-A7D7-D2B6A4B62B09}" ShortID="1005886961">
+																<AudioFileSource Name="VoPl01_0000009A" ID="{BEB56022-960F-4F83-A7D7-D2B6A4B62B09}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_0000009A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1005886961"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -657,9 +714,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000099" ID="{E8510727-347F-42AB-A502-AB302BCD2506}" ShortID="78216023">
+																<AudioFileSource Name="VoPl01_00000099" ID="{E8510727-347F-42AB-A502-AB302BCD2506}">
 																	<Language>SFX</Language>
 																	<AudioFile>Death\VoPl01_00000099.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="78216023"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -715,9 +775,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="airforcesfx" ID="{A453963E-22BB-4EAD-ADA2-7AEB2A975A44}" ShortID="766344765">
+																		<AudioFileSource Name="airforcesfx" ID="{A453963E-22BB-4EAD-ADA2-7AEB2A975A44}">
 																			<Language>SFX</Language>
 																			<AudioFile>airforce\sfx\airforcesfx.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="766344765"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -741,9 +804,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="ofasoundfinger" ID="{619639AD-4E0B-4A0D-A23F-96B780E0ED04}" ShortID="84332198">
+																		<AudioFileSource Name="ofasoundfinger" ID="{619639AD-4E0B-4A0D-A23F-96B780E0ED04}">
 																			<Language>SFX</Language>
 																			<AudioFile>airforce\sfx\ofasoundfinger.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="84332198"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -767,7 +833,7 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="airforceshot" ID="{ACDAC1F1-E334-4544-93A1-D36F91641282}" ShortID="128544243">
+																		<AudioFileSource Name="airforceshot" ID="{ACDAC1F1-E334-4544-93A1-D36F91641282}">
 																			<PropertyList>
 																				<Property Name="VolumeOffset" Type="Real64">
 																					<ValueList>
@@ -777,6 +843,9 @@
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>airforceshot.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="128544243"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -800,9 +869,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="airforceshotlong" ID="{A7637E01-7DCC-44DF-80A6-691546DDD871}" ShortID="615323603">
+																		<AudioFileSource Name="airforceshotlong" ID="{A7637E01-7DCC-44DF-80A6-691546DDD871}">
 																			<Language>SFX</Language>
 																			<AudioFile>airforceshotlong.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="615323603"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -848,9 +920,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000008A" ID="{67CBC86E-AAD1-4C4A-9BCE-BA9B14C0017B}" ShortID="519379338">
+																<AudioFileSource Name="VoPl01_0000008A" ID="{67CBC86E-AAD1-4C4A-9BCE-BA9B14C0017B}">
 																	<Language>SFX</Language>
 																	<AudioFile>airforce\VoPl01_0000008A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="519379338"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -879,9 +954,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000056" ID="{3E6F7CEA-02AF-4852-8267-CFD26C4465CD}" ShortID="134648371">
+																<AudioFileSource Name="VoPl01_00000056" ID="{3E6F7CEA-02AF-4852-8267-CFD26C4465CD}">
 																	<Language>SFX</Language>
 																	<AudioFile>airforce\VoPl01_00000056.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="134648371"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -941,9 +1019,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_0000000D" ID="{A51EF45F-F0A6-4B16-A779-671937BA41D3}" ShortID="891875724">
+																		<AudioFileSource Name="SePl01_0000000D" ID="{A51EF45F-F0A6-4B16-A779-671937BA41D3}">
 																			<Language>SFX</Language>
 																			<AudioFile>delaware\sfx\SePl01_0000000D.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="891875724"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -960,9 +1041,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_00000010" ID="{6D9372F5-54CA-4723-B132-717F8630E617}" ShortID="754389255">
+																		<AudioFileSource Name="SePl01_00000010" ID="{6D9372F5-54CA-4723-B132-717F8630E617}">
 																			<Language>SFX</Language>
 																			<AudioFile>delaware\sfx\SePl01_00000010.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="754389255"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1000,9 +1084,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="delawarevoice" ID="{EDBA0957-4307-45DE-B407-497050A12735}" ShortID="830531229">
+																<AudioFileSource Name="delawarevoice" ID="{EDBA0957-4307-45DE-B407-497050A12735}">
 																	<Language>SFX</Language>
 																	<AudioFile>delaware\delawarevoice.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="830531229"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1026,9 +1113,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="smashvoice" ID="{67B8159E-9CDC-4176-89B2-FFC4B6FF9D70}" ShortID="24956156">
+																<AudioFileSource Name="smashvoice" ID="{67B8159E-9CDC-4176-89B2-FFC4B6FF9D70}">
 																	<Language>SFX</Language>
 																	<AudioFile>delaware\smashvoice.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="24956156"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1045,9 +1135,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000C0" ID="{A2D551DF-04ED-4312-A7F6-100D635F795D}" ShortID="655583295">
+																<AudioFileSource Name="VoPl01_000000C0" ID="{A2D551DF-04ED-4312-A7F6-100D635F795D}">
 																	<Language>SFX</Language>
 																	<AudioFile>delaware\VoPl01_000000C0.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="655583295"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1071,9 +1164,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000007D" ID="{448AEA94-9E7B-4C4E-87D2-F0F97FB04782}" ShortID="528051330">
+																<AudioFileSource Name="VoPl01_0000007D" ID="{448AEA94-9E7B-4C4E-87D2-F0F97FB04782}">
 																	<Language>SFX</Language>
 																	<AudioFile>delaware\VoPl01_0000007D.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="528051330"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1090,9 +1186,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000050" ID="{7951F339-0CED-45AB-891A-75B325528E2E}" ShortID="152619868">
+																<AudioFileSource Name="VoPl01_00000050" ID="{7951F339-0CED-45AB-891A-75B325528E2E}">
 																	<Language>SFX</Language>
 																	<AudioFile>delaware\VoPl01_00000050.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="152619868"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1109,9 +1208,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000051" ID="{4948308A-12AB-47A1-A4C7-043672175C45}" ShortID="140991218">
+																<AudioFileSource Name="VoPl01_00000051" ID="{4948308A-12AB-47A1-A4C7-043672175C45}">
 																	<Language>SFX</Language>
 																	<AudioFile>delaware\VoPl01_00000051.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="140991218"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1128,9 +1230,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000052" ID="{47F9486D-AF7F-40F7-96C7-D5A4C6DDF221}" ShortID="398014809">
+																<AudioFileSource Name="VoPl01_00000052" ID="{47F9486D-AF7F-40F7-96C7-D5A4C6DDF221}">
 																	<Language>SFX</Language>
 																	<AudioFile>delaware\VoPl01_00000052.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="398014809"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1185,9 +1290,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="fullcowlchargequick" ID="{B9314CFE-8647-4466-8578-3382884E2694}" ShortID="645213426">
+																		<AudioFileSource Name="fullcowlchargequick" ID="{B9314CFE-8647-4466-8578-3382884E2694}">
 																			<Language>SFX</Language>
 																			<AudioFile>shootstylebullet\sfx\fullcowlchargequick.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="645213426"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1211,9 +1319,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="ofadash" ID="{1B2264BE-69BD-4C7D-AF93-81FA9B8DC36D}" ShortID="644011312">
+																		<AudioFileSource Name="ofadash" ID="{1B2264BE-69BD-4C7D-AF93-81FA9B8DC36D}">
 																			<Language>SFX</Language>
 																			<AudioFile>shootstylebullet\sfx\ofadash.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="644011312"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1230,9 +1341,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_00000001" ID="{3FFAAD47-2A28-4077-9CFD-464DCDD9F75A}" ShortID="189355726">
+																		<AudioFileSource Name="SePl01_00000001" ID="{3FFAAD47-2A28-4077-9CFD-464DCDD9F75A}">
 																			<Language>SFX</Language>
 																			<AudioFile>shootstylebullet\sfx\SePl01_00000001.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="189355726"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1249,9 +1363,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_00000002" ID="{C63A35DB-0BB3-4801-A392-3F82E790281C}" ShortID="922481399">
+																		<AudioFileSource Name="SePl01_00000002" ID="{C63A35DB-0BB3-4801-A392-3F82E790281C}">
 																			<Language>SFX</Language>
 																			<AudioFile>shootstylebullet\sfx\SePl01_00000002.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="922481399"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1268,9 +1385,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_00000003" ID="{9ABDA8FE-922C-4CEB-B619-5E4D5AD46E7B}" ShortID="789997502">
+																		<AudioFileSource Name="SePl01_00000003" ID="{9ABDA8FE-922C-4CEB-B619-5E4D5AD46E7B}">
 																			<Language>SFX</Language>
 																			<AudioFile>shootstylebullet\sfx\SePl01_00000003.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="789997502"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1316,9 +1436,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="shootstylewithrocks" ID="{0EC915E8-2303-493C-B739-9A5C5F6D6DCF}" ShortID="570338746">
+																<AudioFileSource Name="shootstylewithrocks" ID="{0EC915E8-2303-493C-B739-9A5C5F6D6DCF}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\shootstylewithrocks.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="570338746"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1335,9 +1458,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000015" ID="{67E2B7F7-B449-40FB-9842-19226D18B7C4}" ShortID="1014234507">
+																<AudioFileSource Name="VoPl01_00000015" ID="{67E2B7F7-B449-40FB-9842-19226D18B7C4}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000015.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1014234507"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1354,9 +1480,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000016" ID="{EBEA95E5-4D0E-4674-B8CD-0BB9A18BEF97}" ShortID="368417381">
+																<AudioFileSource Name="VoPl01_00000016" ID="{EBEA95E5-4D0E-4674-B8CD-0BB9A18BEF97}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000016.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="368417381"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1373,9 +1502,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000080" ID="{0E98E9F7-92BE-49C9-A2B7-9EE1488B39AD}" ShortID="492780473">
+																<AudioFileSource Name="VoPl01_00000080" ID="{0E98E9F7-92BE-49C9-A2B7-9EE1488B39AD}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000080.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="492780473"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1392,9 +1524,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000081" ID="{A4BAC736-A83B-40C1-98A8-1AD3F7220E2B}" ShortID="706237824">
+																<AudioFileSource Name="VoPl01_00000081" ID="{A4BAC736-A83B-40C1-98A8-1AD3F7220E2B}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000081.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="706237824"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1411,9 +1546,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000082" ID="{C3D24530-B09C-48B5-A277-D20E69582E6C}" ShortID="14386378">
+																<AudioFileSource Name="VoPl01_00000082" ID="{C3D24530-B09C-48B5-A277-D20E69582E6C}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000082.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="14386378"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1430,9 +1568,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000083" ID="{85C3332E-C6F6-4D46-B048-E1A672123526}" ShortID="230797769">
+																<AudioFileSource Name="VoPl01_00000083" ID="{85C3332E-C6F6-4D46-B048-E1A672123526}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000083.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="230797769"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1449,9 +1590,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000084" ID="{BFC5DFC3-6E28-4FDC-B121-313F58A50D70}" ShortID="676652089">
+																<AudioFileSource Name="VoPl01_00000084" ID="{BFC5DFC3-6E28-4FDC-B121-313F58A50D70}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000084.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="676652089"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1468,9 +1612,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000085" ID="{5C3033B3-CEFA-4559-B02D-EAE8BBB43BF9}" ShortID="569156007">
+																<AudioFileSource Name="VoPl01_00000085" ID="{5C3033B3-CEFA-4559-B02D-EAE8BBB43BF9}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000085.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="569156007"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1487,9 +1634,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000086" ID="{A9FF8F78-6753-4801-AAA3-02F318642344}" ShortID="759147328">
+																<AudioFileSource Name="VoPl01_00000086" ID="{A9FF8F78-6753-4801-AAA3-02F318642344}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000086.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="759147328"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1506,9 +1656,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000087" ID="{5B657605-4C21-43C1-A46E-6E5CF70ED4C0}" ShortID="427314784">
+																<AudioFileSource Name="VoPl01_00000087" ID="{5B657605-4C21-43C1-A46E-6E5CF70ED4C0}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000087.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="427314784"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1525,9 +1678,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000088" ID="{D5CA756C-6E2A-4761-850A-3DC0BF4A5B6D}" ShortID="670907558">
+																<AudioFileSource Name="VoPl01_00000088" ID="{D5CA756C-6E2A-4761-850A-3DC0BF4A5B6D}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000088.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="670907558"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1544,9 +1700,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000089" ID="{2157C898-1A35-42ED-B859-A1F668AF9F18}" ShortID="153943766">
+																<AudioFileSource Name="VoPl01_00000089" ID="{2157C898-1A35-42ED-B859-A1F668AF9F18}">
 																	<Language>SFX</Language>
 																	<AudioFile>shootstylebullet\VoPl01_00000089.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="153943766"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1798,9 +1957,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="fullcowlcharge" ID="{C37A8B78-4A3B-4EA6-9928-88FC6E6F7E74}" ShortID="524893754">
+																		<AudioFileSource Name="fullcowlcharge" ID="{C37A8B78-4A3B-4EA6-9928-88FC6E6F7E74}">
 																			<Language>SFX</Language>
 																			<AudioFile>ofa\sfx\fullcowlcharge.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="524893754"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1824,9 +1986,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_00000004" ID="{FF8D9F1A-A9E0-4F8A-9975-F6C636FD1EEC}" ShortID="1035619698">
+																		<AudioFileSource Name="SePl01_00000004" ID="{FF8D9F1A-A9E0-4F8A-9975-F6C636FD1EEC}">
 																			<Language>SFX</Language>
 																			<AudioFile>ofa\sfx\SePl01_00000004.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="1035619698"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1843,9 +2008,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_00000006" ID="{A18B6B7B-CB5F-44F7-ACAD-382BA3CFBEC9}" ShortID="729564121">
+																		<AudioFileSource Name="SePl01_00000006" ID="{A18B6B7B-CB5F-44F7-ACAD-382BA3CFBEC9}">
 																			<Language>SFX</Language>
 																			<AudioFile>ofa\sfx\SePl01_00000006.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="729564121"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1874,9 +2042,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_00000009" ID="{85732D9D-3733-44ED-B758-6E3B70AC24AD}" ShortID="844570524">
+																		<AudioFileSource Name="SePl01_00000009" ID="{85732D9D-3733-44ED-B758-6E3B70AC24AD}">
 																			<Language>SFX</Language>
 																			<AudioFile>ofa\sfx\SePl01_00000009.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="844570524"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -1915,9 +2086,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000005" ID="{5FB71AE4-0A57-4D15-BFDD-1AD35FE49047}" ShortID="877183228">
+																<AudioFileSource Name="VoPl01_00000005" ID="{5FB71AE4-0A57-4D15-BFDD-1AD35FE49047}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000005.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="877183228"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1934,9 +2108,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000005A" ID="{6716173C-F905-43D8-96D1-6A57F003B131}" ShortID="879383538">
+																<AudioFileSource Name="VoPl01_0000005A" ID="{6716173C-F905-43D8-96D1-6A57F003B131}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_0000005A.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="879383538"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1953,9 +2130,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000005C" ID="{F149D24A-D587-4F94-892B-ABC0DF1FC509}" ShortID="1010762699">
+																<AudioFileSource Name="VoPl01_0000005C" ID="{F149D24A-D587-4F94-892B-ABC0DF1FC509}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_0000005C.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1010762699"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1972,9 +2152,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000005D" ID="{70607A61-EE54-4FA3-A649-F6DE1D1C3B14}" ShortID="45353454">
+																<AudioFileSource Name="VoPl01_0000005D" ID="{70607A61-EE54-4FA3-A649-F6DE1D1C3B14}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_0000005D.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="45353454"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -1991,9 +2174,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000005E" ID="{856320E6-57FF-49EC-BA03-BDF244D15BE9}" ShortID="811877985">
+																<AudioFileSource Name="VoPl01_0000005E" ID="{856320E6-57FF-49EC-BA03-BDF244D15BE9}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_0000005E.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="811877985"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2010,9 +2196,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000005F" ID="{883D93AE-F99D-4547-A3AB-C4D7CA3052E1}" ShortID="89094593">
+																<AudioFileSource Name="VoPl01_0000005F" ID="{883D93AE-F99D-4547-A3AB-C4D7CA3052E1}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_0000005F.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="89094593"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2029,9 +2218,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000022" ID="{A6398BDB-DFC6-49DB-9DA2-A20CDF074823}" ShortID="227151916">
+																<AudioFileSource Name="VoPl01_00000022" ID="{A6398BDB-DFC6-49DB-9DA2-A20CDF074823}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000022.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="227151916"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2048,9 +2240,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000023" ID="{B6CCC3E2-8E75-48E7-9DE6-313E277E78CD}" ShortID="45278170">
+																<AudioFileSource Name="VoPl01_00000023" ID="{B6CCC3E2-8E75-48E7-9DE6-313E277E78CD}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000023.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="45278170"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2067,9 +2262,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000024" ID="{0332059E-B9CE-423A-852A-3476B354804F}" ShortID="794485280">
+																<AudioFileSource Name="VoPl01_00000024" ID="{0332059E-B9CE-423A-852A-3476B354804F}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000024.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="794485280"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2086,9 +2284,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000025" ID="{CEA5AA0B-3795-4DD1-89B2-58870C759F96}" ShortID="679376315">
+																<AudioFileSource Name="VoPl01_00000025" ID="{CEA5AA0B-3795-4DD1-89B2-58870C759F96}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000025.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="679376315"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2105,9 +2306,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000026" ID="{CFE62D5C-1CC6-4967-AA3D-181FA4A70A95}" ShortID="784193560">
+																<AudioFileSource Name="VoPl01_00000026" ID="{CFE62D5C-1CC6-4967-AA3D-181FA4A70A95}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000026.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="784193560"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2124,9 +2328,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000027" ID="{6DB5862A-AAAC-4FD0-9992-E46B820B5436}" ShortID="697834283">
+																<AudioFileSource Name="VoPl01_00000027" ID="{6DB5862A-AAAC-4FD0-9992-E46B820B5436}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000027.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="697834283"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2143,9 +2350,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000053" ID="{8AE985B6-97EC-44E3-AB01-43E0F0C44900}" ShortID="957060177">
+																<AudioFileSource Name="VoPl01_00000053" ID="{8AE985B6-97EC-44E3-AB01-43E0F0C44900}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000053.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="957060177"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2162,9 +2372,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000054" ID="{18CE03D7-B15D-46B2-8349-94B71B6CDD7E}" ShortID="483243679">
+																<AudioFileSource Name="VoPl01_00000054" ID="{18CE03D7-B15D-46B2-8349-94B71B6CDD7E}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000054.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="483243679"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2181,9 +2394,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000055" ID="{29B09BD9-2742-4E7C-B248-87E76BED6B69}" ShortID="572307406">
+																<AudioFileSource Name="VoPl01_00000055" ID="{29B09BD9-2742-4E7C-B248-87E76BED6B69}">
 																	<Language>SFX</Language>
 																	<AudioFile>ofa\VoPl01_00000055.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="572307406"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2258,9 +2474,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="detroitwithcharge" ID="{B95CF143-833F-4479-B2EA-D31C52CF2D56}" ShortID="33232957">
+																		<AudioFileSource Name="detroitwithcharge" ID="{B95CF143-833F-4479-B2EA-D31C52CF2D56}">
 																			<Language>SFX</Language>
 																			<AudioFile>detroit\charge\detroitwithcharge.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="33232957"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -2284,9 +2503,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="gomenasaiwithcharge" ID="{C9DB0FFD-1952-4DDD-9BAC-3B20DE77EE6C}" ShortID="133882509">
+																		<AudioFileSource Name="gomenasaiwithcharge" ID="{C9DB0FFD-1952-4DDD-9BAC-3B20DE77EE6C}">
 																			<Language>SFX</Language>
 																			<AudioFile>detroit\charge\gomenasaiwithcharge.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="133882509"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -2334,9 +2556,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="smashvoice" ID="{01937C49-3845-40A6-9156-0523590F043B}" ShortID="579125949">
+																		<AudioFileSource Name="smashvoice" ID="{01937C49-3845-40A6-9156-0523590F043B}">
 																			<Language>SFX</Language>
 																			<AudioFile>detroit\exit\smashvoice.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="579125949"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -2360,9 +2585,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="VoPl01_0000007D" ID="{2468D7EA-33B4-48D4-B387-2EC96F3416AE}" ShortID="794352150">
+																		<AudioFileSource Name="VoPl01_0000007D" ID="{2468D7EA-33B4-48D4-B387-2EC96F3416AE}">
 																			<Language>SFX</Language>
 																			<AudioFile>detroit\exit\VoPl01_0000007D.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="794352150"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -2383,9 +2611,12 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="VoPl01_0000002B" ID="{21A64560-AF10-4A47-A05D-5799B8D368C6}" ShortID="451907033">
+														<AudioFileSource Name="VoPl01_0000002B" ID="{21A64560-AF10-4A47-A05D-5799B8D368C6}">
 															<Language>SFX</Language>
 															<AudioFile>detroit\VoPl01_0000002B.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="451907033"/>
+															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ActiveSourceList>
@@ -2423,9 +2654,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="dekudesu" ID="{C6BDB7C1-B318-4D0A-96BC-34399488D87C}" ShortID="810254431">
+																<AudioFileSource Name="dekudesu" ID="{C6BDB7C1-B318-4D0A-96BC-34399488D87C}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\dekudesu.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="810254431"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2442,9 +2676,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000E6" ID="{06965EF8-0E61-4370-9F11-4406F0A9DFED}" ShortID="487520420">
+																<AudioFileSource Name="VoPl01_000000E6" ID="{06965EF8-0E61-4370-9F11-4406F0A9DFED}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\VoPl01_000000E6.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="487520420"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2461,9 +2698,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000E7" ID="{18074194-3558-47F6-86B9-B83848AC6BF2}" ShortID="66608882">
+																<AudioFileSource Name="VoPl01_000000E7" ID="{18074194-3558-47F6-86B9-B83848AC6BF2}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\VoPl01_000000E7.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="66608882"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2480,9 +2720,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000E8" ID="{D64C09D1-534A-4619-B058-4CFEEFC0039D}" ShortID="1004362541">
+																<AudioFileSource Name="VoPl01_000000E8" ID="{D64C09D1-534A-4619-B058-4CFEEFC0039D}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\VoPl01_000000E8.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="1004362541"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2499,9 +2742,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000EF" ID="{0E3A1247-015F-4F31-9CE6-647DEF4A23D0}" ShortID="911964384">
+																<AudioFileSource Name="VoPl01_000000EF" ID="{0E3A1247-015F-4F31-9CE6-647DEF4A23D0}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\VoPl01_000000EF.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="911964384"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2518,9 +2764,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000F5" ID="{4DD4B034-A7F4-4FA2-8C51-93B371BEDF78}" ShortID="355347321">
+																<AudioFileSource Name="VoPl01_000000F5" ID="{4DD4B034-A7F4-4FA2-8C51-93B371BEDF78}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\VoPl01_000000F5.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="355347321"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2537,9 +2786,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_000000FD" ID="{7B34B414-FA79-42F8-B853-B226BBBF2633}" ShortID="612985191">
+																<AudioFileSource Name="VoPl01_000000FD" ID="{7B34B414-FA79-42F8-B853-B226BBBF2633}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\VoPl01_000000FD.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="612985191"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2556,9 +2808,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000010F" ID="{FEE630F8-8CC0-4978-B932-FB8B5694291A}" ShortID="310105775">
+																<AudioFileSource Name="VoPl01_0000010F" ID="{FEE630F8-8CC0-4978-B932-FB8B5694291A}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\VoPl01_0000010F.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="310105775"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2575,9 +2830,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_AgencyEvent_00000000" ID="{CD5BA030-B5FC-49AD-9F4B-04508338AAC9}" ShortID="906836170">
+																<AudioFileSource Name="VoPl01_AgencyEvent_00000000" ID="{CD5BA030-B5FC-49AD-9F4B-04508338AAC9}">
 																	<Language>SFX</Language>
 																	<AudioFile>Entrance\VoPl01_AgencyEvent_00000000.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="906836170"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2632,9 +2890,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="blackwhipsfx" ID="{2B87D9EA-A18F-4273-BDF6-82747BDD4F7B}" ShortID="740940922">
+																		<AudioFileSource Name="blackwhipsfx" ID="{2B87D9EA-A18F-4273-BDF6-82747BDD4F7B}">
 																			<Language>SFX</Language>
 																			<AudioFile>blackwhip\sfx\blackwhipsfx.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="740940922"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -2658,9 +2919,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="blackwhipsfx2" ID="{C0386BE4-64ED-4E81-A8A5-77E891918FDD}" ShortID="757473651">
+																		<AudioFileSource Name="blackwhipsfx2" ID="{C0386BE4-64ED-4E81-A8A5-77E891918FDD}">
 																			<Language>SFX</Language>
 																			<AudioFile>blackwhip\sfx\blackwhipsfx2.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="757473651"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -2677,9 +2941,12 @@
 																		</Reference>
 																	</ReferenceList>
 																	<ChildrenList>
-																		<AudioFileSource Name="SePl01_00000011" ID="{5CE181C0-2F1D-4AF5-906E-912C9B65A354}" ShortID="1007881140">
+																		<AudioFileSource Name="SePl01_00000011" ID="{5CE181C0-2F1D-4AF5-906E-912C9B65A354}">
 																			<Language>SFX</Language>
 																			<AudioFile>blackwhip\sfx\SePl01_00000011.wav</AudioFile>
+																			<MediaIDList>
+																				<MediaID ID="1007881140"/>
+																			</MediaIDList>
 																		</AudioFileSource>
 																	</ChildrenList>
 																	<ActiveSourceList>
@@ -2725,9 +2992,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_0000003E" ID="{B590743E-7F1D-4A03-9C95-DB0595D7153D}" ShortID="398723116">
+																<AudioFileSource Name="VoPl01_0000003E" ID="{B590743E-7F1D-4A03-9C95-DB0595D7153D}">
 																	<Language>SFX</Language>
 																	<AudioFile>blackwhip\VoPl01_0000003E.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="398723116"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2751,9 +3021,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000044" ID="{B740EF38-74AB-4CC5-BEEA-1AA59EAC7797}" ShortID="18708744">
+																<AudioFileSource Name="VoPl01_00000044" ID="{B740EF38-74AB-4CC5-BEEA-1AA59EAC7797}">
 																	<Language>SFX</Language>
 																	<AudioFile>blackwhip\VoPl01_00000044.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="18708744"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2777,9 +3050,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000045" ID="{220542A5-73AC-4AE8-B079-EE10AFF9C339}" ShortID="13923596">
+																<AudioFileSource Name="VoPl01_00000045" ID="{220542A5-73AC-4AE8-B079-EE10AFF9C339}">
 																	<Language>SFX</Language>
 																	<AudioFile>blackwhip\VoPl01_00000045.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="13923596"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2803,9 +3079,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000046" ID="{B7E48AEA-6303-4B42-89AA-103E8896FFAE}" ShortID="352397840">
+																<AudioFileSource Name="VoPl01_00000046" ID="{B7E48AEA-6303-4B42-89AA-103E8896FFAE}">
 																	<Language>SFX</Language>
 																	<AudioFile>blackwhip\VoPl01_00000046.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="352397840"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2829,9 +3108,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000047" ID="{5CBF3F48-853F-421C-9575-855A6757CA6A}" ShortID="657530836">
+																<AudioFileSource Name="VoPl01_00000047" ID="{5CBF3F48-853F-421C-9575-855A6757CA6A}">
 																	<Language>SFX</Language>
 																	<AudioFile>blackwhip\VoPl01_00000047.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="657530836"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>
@@ -2855,9 +3137,12 @@
 																</Reference>
 															</ReferenceList>
 															<ChildrenList>
-																<AudioFileSource Name="VoPl01_00000048" ID="{06145E38-1D62-47DA-B700-07331C56438B}" ShortID="199866267">
+																<AudioFileSource Name="VoPl01_00000048" ID="{06145E38-1D62-47DA-B700-07331C56438B}">
 																	<Language>SFX</Language>
 																	<AudioFile>blackwhip\VoPl01_00000048.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="199866267"/>
+																	</MediaIDList>
 																</AudioFileSource>
 															</ChildrenList>
 															<ActiveSourceList>

@@ -2,8 +2,15 @@
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571.
+## Latest Changelog, Next update(s)
 
-<img src="https://user-images.githubusercontent.com/93917577/150066735-ab70b226-2564-4006-ae9f-3b24c1d0c70c.PNG">
+- 2.2.0
+
+    -  updated to void patch
+- Next update(s)
+    -  Update to new model, add new primary and secondary, rework skills
+
+<img src="https://user-images.githubusercontent.com/93917577/157029633-0196dd84-4e06-46af-a6fb-1c2f4ae125f0.PNG">
 
 ## Known Issues
 </p> Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
