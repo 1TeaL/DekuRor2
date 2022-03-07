@@ -1,410 +1,499 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="132">
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="135">
 	<RootPaths>
-		<ProjectRoot>F:\Theodore 3\Risk of Rain 2 modding\Deku\Final sfx\Wwise\DekuMod\</ProjectRoot>
-		<SourceFilesRoot>F:\Theodore 3\Risk of Rain 2 modding\Deku\Final sfx\Wwise\DekuMod\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>F:\Theodore 3\Risk of Rain 2 modding\Deku\Final sfx\Wwise\DekuMod\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ProjectRoot>F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\</ProjectRoot>
+		<SourceFilesRoot>F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\GeneratedSoundBanks\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>F:\Theodore 3\Risk of Rain 2 modding\Deku\Final sfx\Wwise\DekuMod\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX">
+		<SoundBank Id="1355168291" Language="SFX" Hash="3217144124">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="1943384016" Language="SFX">
+		<SoundBank Id="1943384016" Language="SFX" Hash="3176846526">
 			<ObjectPath>\SoundBanks\Default Work Unit\Deku</ObjectPath>
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
 			<IncludedEvents>
-				<Event Id="1063047365" Name="airforcesfx" ObjectPath="\Events\Default Work Unit\airforcesfx"/>
-				<Event Id="1215621278" Name="airforcevoice" ObjectPath="\Events\Default Work Unit\airforcevoice"/>
-				<Event Id="3062535197" Name="blackwhipsfx" ObjectPath="\Events\Default Work Unit\blackwhipsfx"/>
-				<Event Id="3709822086" Name="blackwhipvoice" ObjectPath="\Events\Default Work Unit\blackwhipvoice"/>
-				<Event Id="779278001" Name="death" ObjectPath="\Events\Default Work Unit\death"/>
-				<Event Id="1074439307" Name="delawaresfx" ObjectPath="\Events\Default Work Unit\delawaresfx"/>
-				<Event Id="1356252224" Name="delawarevoice" ObjectPath="\Events\Default Work Unit\delawarevoice"/>
-				<Event Id="3806074874" Name="detroitcharge" ObjectPath="\Events\Default Work Unit\detroitcharge"/>
-				<Event Id="3289116818" Name="detroitexit" ObjectPath="\Events\Default Work Unit\detroitexit"/>
-				<Event Id="2656882895" Name="Entrance" ObjectPath="\Events\Default Work Unit\Entrance"/>
-				<Event Id="3161415855" Name="event" ObjectPath="\Events\Default Work Unit\event"/>
-				<Event Id="3940341776" Name="ofasfx" ObjectPath="\Events\Default Work Unit\ofasfx"/>
-				<Event Id="2493696431" Name="ofavoice" ObjectPath="\Events\Default Work Unit\ofavoice"/>
-				<Event Id="573664262" Name="shootstylebulletsfx" ObjectPath="\Events\Default Work Unit\shootstylebulletsfx"/>
-				<Event Id="3842300745" Name="shootstylebulletvoice" ObjectPath="\Events\Default Work Unit\shootstylebulletvoice"/>
-				<Event Id="1918362945" Name="stlouissfx" ObjectPath="\Events\Default Work Unit\stlouissfx"/>
-				<Event Id="687990298" Name="stlouisvoice" ObjectPath="\Events\Default Work Unit\stlouisvoice"/>
+				<Event Id="1063047365" Name="airforcesfx" ObjectPath="\Events\Default Work Unit\airforcesfx">
+					<IncludedMemoryFiles>
+						<File Id="128544243" Language="SFX">
+							<ShortName>airforceshot.wav</ShortName>
+							<Path>SFX\airforceshot_0D5756A9.wem</Path>
+						</File>
+						<File Id="615323603" Language="SFX">
+							<ShortName>airforceshotlong.wav</ShortName>
+							<Path>SFX\airforceshotlong_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1215621278" Name="airforcevoice" ObjectPath="\Events\Default Work Unit\airforcevoice">
+					<IncludedMemoryFiles>
+						<File Id="134648371" Language="SFX">
+							<ShortName>airforce\VoPl01_00000056.wav</ShortName>
+							<Path>SFX\airforce\VoPl01_00000056_0D5756A9.wem</Path>
+						</File>
+						<File Id="519379338" Language="SFX">
+							<ShortName>airforce\VoPl01_0000008A.wav</ShortName>
+							<Path>SFX\airforce\VoPl01_0000008A_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3062535197" Name="blackwhipsfx" ObjectPath="\Events\Default Work Unit\blackwhipsfx">
+					<IncludedMemoryFiles>
+						<File Id="740940922" Language="SFX">
+							<ShortName>blackwhip\sfx\blackwhipsfx.wav</ShortName>
+							<Path>SFX\blackwhip\sfx\blackwhipsfx_0D5756A9.wem</Path>
+						</File>
+						<File Id="757473651" Language="SFX">
+							<ShortName>blackwhip\sfx\blackwhipsfx2.wav</ShortName>
+							<Path>SFX\blackwhip\sfx\blackwhipsfx2_0D5756A9.wem</Path>
+						</File>
+						<File Id="1007881140" Language="SFX">
+							<ShortName>blackwhip\sfx\SePl01_00000011.wav</ShortName>
+							<Path>SFX\blackwhip\sfx\SePl01_00000011_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3709822086" Name="blackwhipvoice" ObjectPath="\Events\Default Work Unit\blackwhipvoice">
+					<IncludedMemoryFiles>
+						<File Id="13923596" Language="SFX">
+							<ShortName>blackwhip\VoPl01_00000045.wav</ShortName>
+							<Path>SFX\blackwhip\VoPl01_00000045_0D5756A9.wem</Path>
+						</File>
+						<File Id="18708744" Language="SFX">
+							<ShortName>blackwhip\VoPl01_00000044.wav</ShortName>
+							<Path>SFX\blackwhip\VoPl01_00000044_0D5756A9.wem</Path>
+						</File>
+						<File Id="199866267" Language="SFX">
+							<ShortName>blackwhip\VoPl01_00000048.wav</ShortName>
+							<Path>SFX\blackwhip\VoPl01_00000048_0D5756A9.wem</Path>
+						</File>
+						<File Id="352397840" Language="SFX">
+							<ShortName>blackwhip\VoPl01_00000046.wav</ShortName>
+							<Path>SFX\blackwhip\VoPl01_00000046_0D5756A9.wem</Path>
+						</File>
+						<File Id="398723116" Language="SFX">
+							<ShortName>blackwhip\VoPl01_0000003E.wav</ShortName>
+							<Path>SFX\blackwhip\VoPl01_0000003E_0D5756A9.wem</Path>
+						</File>
+						<File Id="657530836" Language="SFX">
+							<ShortName>blackwhip\VoPl01_00000047.wav</ShortName>
+							<Path>SFX\blackwhip\VoPl01_00000047_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="779278001" Name="death" ObjectPath="\Events\Default Work Unit\death">
+					<IncludedMemoryFiles>
+						<File Id="78216023" Language="SFX">
+							<ShortName>Death\VoPl01_00000099.wav</ShortName>
+							<Path>SFX\Death\VoPl01_00000099_0D5756A9.wem</Path>
+						</File>
+						<File Id="133485999" Language="SFX">
+							<ShortName>Death\VoPl01_000000A2.wav</ShortName>
+							<Path>SFX\Death\VoPl01_000000A2_0D5756A9.wem</Path>
+						</File>
+						<File Id="186206304" Language="SFX">
+							<ShortName>Death\VoPl01_000000AC.wav</ShortName>
+							<Path>SFX\Death\VoPl01_000000AC_0D5756A9.wem</Path>
+						</File>
+						<File Id="246103165" Language="SFX">
+							<ShortName>Death\VoPl01_000000AE.wav</ShortName>
+							<Path>SFX\Death\VoPl01_000000AE_0D5756A9.wem</Path>
+						</File>
+						<File Id="484186578" Language="SFX">
+							<ShortName>Death\VoPl01_000000A1.wav</ShortName>
+							<Path>SFX\Death\VoPl01_000000A1_0D5756A9.wem</Path>
+						</File>
+						<File Id="487561111" Language="SFX">
+							<ShortName>Death\VoPl01_000000F2.wav</ShortName>
+							<Path>SFX\Death\VoPl01_000000F2_0D5756A9.wem</Path>
+						</File>
+						<File Id="793806329" Language="SFX">
+							<ShortName>Death\VoPl01_000000A7.wav</ShortName>
+							<Path>SFX\Death\VoPl01_000000A7_0D5756A9.wem</Path>
+						</File>
+						<File Id="962771432" Language="SFX">
+							<ShortName>Death\VoPl01_000000A5.wav</ShortName>
+							<Path>SFX\Death\VoPl01_000000A5_0D5756A9.wem</Path>
+						</File>
+						<File Id="1005886961" Language="SFX">
+							<ShortName>Death\VoPl01_0000009A.wav</ShortName>
+							<Path>SFX\Death\VoPl01_0000009A_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1074439307" Name="delawaresfx" ObjectPath="\Events\Default Work Unit\delawaresfx">
+					<IncludedMemoryFiles>
+						<File Id="754389255" Language="SFX">
+							<ShortName>delaware\sfx\SePl01_00000010.wav</ShortName>
+							<Path>SFX\delaware\sfx\SePl01_00000010_0D5756A9.wem</Path>
+						</File>
+						<File Id="891875724" Language="SFX">
+							<ShortName>delaware\sfx\SePl01_0000000D.wav</ShortName>
+							<Path>SFX\delaware\sfx\SePl01_0000000D_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1356252224" Name="delawarevoice" ObjectPath="\Events\Default Work Unit\delawarevoice">
+					<IncludedMemoryFiles>
+						<File Id="24956156" Language="SFX">
+							<ShortName>delaware\smashvoice.wav</ShortName>
+							<Path>SFX\delaware\smashvoice_0D5756A9.wem</Path>
+						</File>
+						<File Id="140991218" Language="SFX">
+							<ShortName>delaware\VoPl01_00000051.wav</ShortName>
+							<Path>SFX\delaware\VoPl01_00000051_0D5756A9.wem</Path>
+						</File>
+						<File Id="152619868" Language="SFX">
+							<ShortName>delaware\VoPl01_00000050.wav</ShortName>
+							<Path>SFX\delaware\VoPl01_00000050_0D5756A9.wem</Path>
+						</File>
+						<File Id="398014809" Language="SFX">
+							<ShortName>delaware\VoPl01_00000052.wav</ShortName>
+							<Path>SFX\delaware\VoPl01_00000052_0D5756A9.wem</Path>
+						</File>
+						<File Id="528051330" Language="SFX">
+							<ShortName>delaware\VoPl01_0000007D.wav</ShortName>
+							<Path>SFX\delaware\VoPl01_0000007D_0D5756A9.wem</Path>
+						</File>
+						<File Id="655583295" Language="SFX">
+							<ShortName>delaware\VoPl01_000000C0.wav</ShortName>
+							<Path>SFX\delaware\VoPl01_000000C0_0D5756A9.wem</Path>
+						</File>
+						<File Id="830531229" Language="SFX">
+							<ShortName>delaware\delawarevoice.wav</ShortName>
+							<Path>SFX\delaware\delawarevoice_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3806074874" Name="detroitcharge" ObjectPath="\Events\Default Work Unit\detroitcharge">
+					<IncludedMemoryFiles>
+						<File Id="33232957" Language="SFX">
+							<ShortName>detroit\charge\detroitwithcharge.wav</ShortName>
+							<Path>SFX\detroit\charge\detroitwithcharge_0D5756A9.wem</Path>
+						</File>
+						<File Id="133882509" Language="SFX">
+							<ShortName>detroit\charge\gomenasaiwithcharge.wav</ShortName>
+							<Path>SFX\detroit\charge\gomenasaiwithcharge_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3289116818" Name="detroitexit" ObjectPath="\Events\Default Work Unit\detroitexit">
+					<IncludedMemoryFiles>
+						<File Id="579125949" Language="SFX">
+							<ShortName>detroit\exit\smashvoice.wav</ShortName>
+							<Path>SFX\detroit\exit\smashvoice_0D5756A9.wem</Path>
+						</File>
+						<File Id="794352150" Language="SFX">
+							<ShortName>detroit\exit\VoPl01_0000007D.wav</ShortName>
+							<Path>SFX\detroit\exit\VoPl01_0000007D_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2656882895" Name="Entrance" ObjectPath="\Events\Default Work Unit\Entrance">
+					<IncludedMemoryFiles>
+						<File Id="66608882" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E7.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E7_0D5756A9.wem</Path>
+						</File>
+						<File Id="310105775" Language="SFX">
+							<ShortName>Entrance\VoPl01_0000010F.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_0000010F_0D5756A9.wem</Path>
+						</File>
+						<File Id="355347321" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000F5.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000F5_0D5756A9.wem</Path>
+						</File>
+						<File Id="487520420" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E6.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E6_0D5756A9.wem</Path>
+						</File>
+						<File Id="612985191" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000FD.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000FD_0D5756A9.wem</Path>
+						</File>
+						<File Id="810254431" Language="SFX">
+							<ShortName>Entrance\dekudesu.wav</ShortName>
+							<Path>SFX\Entrance\dekudesu_0D5756A9.wem</Path>
+						</File>
+						<File Id="906836170" Language="SFX">
+							<ShortName>Entrance\VoPl01_AgencyEvent_00000000.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_AgencyEvent_00000000_0D5756A9.wem</Path>
+						</File>
+						<File Id="911964384" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000EF.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000EF_0D5756A9.wem</Path>
+						</File>
+						<File Id="1004362541" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E8.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E8_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3161415855" Name="event" ObjectPath="\Events\Default Work Unit\event">
+					<IncludedMemoryFiles>
+						<File Id="66608882" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E7.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E7_0D5756A9.wem</Path>
+						</File>
+						<File Id="310105775" Language="SFX">
+							<ShortName>Entrance\VoPl01_0000010F.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_0000010F_0D5756A9.wem</Path>
+						</File>
+						<File Id="355347321" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000F5.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000F5_0D5756A9.wem</Path>
+						</File>
+						<File Id="487520420" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E6.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E6_0D5756A9.wem</Path>
+						</File>
+						<File Id="612985191" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000FD.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000FD_0D5756A9.wem</Path>
+						</File>
+						<File Id="810254431" Language="SFX">
+							<ShortName>Entrance\dekudesu.wav</ShortName>
+							<Path>SFX\Entrance\dekudesu_0D5756A9.wem</Path>
+						</File>
+						<File Id="906836170" Language="SFX">
+							<ShortName>Entrance\VoPl01_AgencyEvent_00000000.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_AgencyEvent_00000000_0D5756A9.wem</Path>
+						</File>
+						<File Id="911964384" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000EF.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000EF_0D5756A9.wem</Path>
+						</File>
+						<File Id="1004362541" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E8.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E8_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3940341776" Name="ofasfx" ObjectPath="\Events\Default Work Unit\ofasfx">
+					<IncludedMemoryFiles>
+						<File Id="524893754" Language="SFX">
+							<ShortName>ofa\sfx\fullcowlcharge.wav</ShortName>
+							<Path>SFX\ofa\sfx\fullcowlcharge_0D5756A9.wem</Path>
+						</File>
+						<File Id="729564121" Language="SFX">
+							<ShortName>ofa\sfx\SePl01_00000006.wav</ShortName>
+							<Path>SFX\ofa\sfx\SePl01_00000006_0D5756A9.wem</Path>
+						</File>
+						<File Id="1035619698" Language="SFX">
+							<ShortName>ofa\sfx\SePl01_00000004.wav</ShortName>
+							<Path>SFX\ofa\sfx\SePl01_00000004_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2493696431" Name="ofavoice" ObjectPath="\Events\Default Work Unit\ofavoice">
+					<IncludedMemoryFiles>
+						<File Id="45278170" Language="SFX">
+							<ShortName>ofa\VoPl01_00000023.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000023_0D5756A9.wem</Path>
+						</File>
+						<File Id="45353454" Language="SFX">
+							<ShortName>ofa\VoPl01_0000005D.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_0000005D_0D5756A9.wem</Path>
+						</File>
+						<File Id="89094593" Language="SFX">
+							<ShortName>ofa\VoPl01_0000005F.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_0000005F_0D5756A9.wem</Path>
+						</File>
+						<File Id="227151916" Language="SFX">
+							<ShortName>ofa\VoPl01_00000022.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000022_0D5756A9.wem</Path>
+						</File>
+						<File Id="483243679" Language="SFX">
+							<ShortName>ofa\VoPl01_00000054.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000054_0D5756A9.wem</Path>
+						</File>
+						<File Id="572307406" Language="SFX">
+							<ShortName>ofa\VoPl01_00000055.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000055_0D5756A9.wem</Path>
+						</File>
+						<File Id="679376315" Language="SFX">
+							<ShortName>ofa\VoPl01_00000025.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000025_0D5756A9.wem</Path>
+						</File>
+						<File Id="697834283" Language="SFX">
+							<ShortName>ofa\VoPl01_00000027.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000027_0D5756A9.wem</Path>
+						</File>
+						<File Id="784193560" Language="SFX">
+							<ShortName>ofa\VoPl01_00000026.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000026_0D5756A9.wem</Path>
+						</File>
+						<File Id="794485280" Language="SFX">
+							<ShortName>ofa\VoPl01_00000024.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000024_0D5756A9.wem</Path>
+						</File>
+						<File Id="811877985" Language="SFX">
+							<ShortName>ofa\VoPl01_0000005E.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_0000005E_0D5756A9.wem</Path>
+						</File>
+						<File Id="877183228" Language="SFX">
+							<ShortName>ofa\VoPl01_00000005.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000005_0D5756A9.wem</Path>
+						</File>
+						<File Id="879383538" Language="SFX">
+							<ShortName>ofa\VoPl01_0000005A.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_0000005A_0D5756A9.wem</Path>
+						</File>
+						<File Id="957060177" Language="SFX">
+							<ShortName>ofa\VoPl01_00000053.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_00000053_0D5756A9.wem</Path>
+						</File>
+						<File Id="1010762699" Language="SFX">
+							<ShortName>ofa\VoPl01_0000005C.wav</ShortName>
+							<Path>SFX\ofa\VoPl01_0000005C_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="573664262" Name="shootstylebulletsfx" ObjectPath="\Events\Default Work Unit\shootstylebulletsfx">
+					<IncludedMemoryFiles>
+						<File Id="189355726" Language="SFX">
+							<ShortName>shootstylebullet\sfx\SePl01_00000001.wav</ShortName>
+							<Path>SFX\shootstylebullet\sfx\SePl01_00000001_0D5756A9.wem</Path>
+						</File>
+						<File Id="644011312" Language="SFX">
+							<ShortName>shootstylebullet\sfx\ofadash.wav</ShortName>
+							<Path>SFX\shootstylebullet\sfx\ofadash_0D5756A9.wem</Path>
+						</File>
+						<File Id="645213426" Language="SFX">
+							<ShortName>shootstylebullet\sfx\fullcowlchargequick.wav</ShortName>
+							<Path>SFX\shootstylebullet\sfx\fullcowlchargequick_0D5756A9.wem</Path>
+						</File>
+						<File Id="789997502" Language="SFX">
+							<ShortName>shootstylebullet\sfx\SePl01_00000003.wav</ShortName>
+							<Path>SFX\shootstylebullet\sfx\SePl01_00000003_0D5756A9.wem</Path>
+						</File>
+						<File Id="922481399" Language="SFX">
+							<ShortName>shootstylebullet\sfx\SePl01_00000002.wav</ShortName>
+							<Path>SFX\shootstylebullet\sfx\SePl01_00000002_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3842300745" Name="shootstylebulletvoice" ObjectPath="\Events\Default Work Unit\shootstylebulletvoice">
+					<IncludedMemoryFiles>
+						<File Id="14386378" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000082.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000082_0D5756A9.wem</Path>
+						</File>
+						<File Id="153943766" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000089.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000089_0D5756A9.wem</Path>
+						</File>
+						<File Id="230797769" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000083.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000083_0D5756A9.wem</Path>
+						</File>
+						<File Id="368417381" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000016.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000016_0D5756A9.wem</Path>
+						</File>
+						<File Id="427314784" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000087.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000087_0D5756A9.wem</Path>
+						</File>
+						<File Id="492780473" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000080.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000080_0D5756A9.wem</Path>
+						</File>
+						<File Id="569156007" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000085.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000085_0D5756A9.wem</Path>
+						</File>
+						<File Id="570338746" Language="SFX">
+							<ShortName>shootstylebullet\shootstylewithrocks.wav</ShortName>
+							<Path>SFX\shootstylebullet\shootstylewithrocks_0D5756A9.wem</Path>
+						</File>
+						<File Id="670907558" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000088.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000088_0D5756A9.wem</Path>
+						</File>
+						<File Id="676652089" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000084.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000084_0D5756A9.wem</Path>
+						</File>
+						<File Id="706237824" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000081.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000081_0D5756A9.wem</Path>
+						</File>
+						<File Id="759147328" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000086.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000086_0D5756A9.wem</Path>
+						</File>
+						<File Id="1014234507" Language="SFX">
+							<ShortName>shootstylebullet\VoPl01_00000015.wav</ShortName>
+							<Path>SFX\shootstylebullet\VoPl01_00000015_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1918362945" Name="stlouissfx" ObjectPath="\Events\Default Work Unit\stlouissfx">
+					<IncludedMemoryFiles>
+						<File Id="25413997" Language="SFX">
+							<ShortName>stlouis\sfx\SePl01_0000000E.wav</ShortName>
+							<Path>SFX\stlouis\sfx\SePl01_0000000E_0D5756A9.wem</Path>
+						</File>
+						<File Id="161241194" Language="SFX">
+							<ShortName>stlouis\sfx\SePl01_0000000F.wav</ShortName>
+							<Path>SFX\stlouis\sfx\SePl01_0000000F_0D5756A9.wem</Path>
+						</File>
+						<File Id="956066236" Language="SFX">
+							<ShortName>stlouis\sfx\fullcowlchargequick.wav</ShortName>
+							<Path>SFX\stlouis\sfx\fullcowlchargequick_0D5756A9.wem</Path>
+						</File>
+						<File Id="1047346623" Language="SFX">
+							<ShortName>stlouis\sfx\ofajump.wav</ShortName>
+							<Path>SFX\stlouis\sfx\ofajump_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="687990298" Name="stlouisvoice" ObjectPath="\Events\Default Work Unit\stlouisvoice">
+					<IncludedMemoryFiles>
+						<File Id="485064595" Language="SFX">
+							<ShortName>stlouis\VoPl01_0000004C.wav</ShortName>
+							<Path>SFX\stlouis\VoPl01_0000004C_0D5756A9.wem</Path>
+						</File>
+						<File Id="524330261" Language="SFX">
+							<ShortName>stlouis\VoPl01_0000007D.wav</ShortName>
+							<Path>SFX\stlouis\VoPl01_0000007D_0D5756A9.wem</Path>
+						</File>
+						<File Id="604310980" Language="SFX">
+							<ShortName>stlouis\VoPl01_0000004F.wav</ShortName>
+							<Path>SFX\stlouis\VoPl01_0000004F_0D5756A9.wem</Path>
+						</File>
+						<File Id="834891393" Language="SFX">
+							<ShortName>stlouis\VoPl01_0000004A.wav</ShortName>
+							<Path>SFX\stlouis\VoPl01_0000004A_0D5756A9.wem</Path>
+						</File>
+						<File Id="940294545" Language="SFX">
+							<ShortName>stlouis\VoPl01_0000004D.wav</ShortName>
+							<Path>SFX\stlouis\VoPl01_0000004D_0D5756A9.wem</Path>
+						</File>
+						<File Id="982687313" Language="SFX">
+							<ShortName>stlouis\VoPl01_0000004E.wav</ShortName>
+							<Path>SFX\stlouis\VoPl01_0000004E_0D5756A9.wem</Path>
+						</File>
+						<File Id="1027557244" Language="SFX">
+							<ShortName>stlouis\VoPl01_0000004B.wav</ShortName>
+							<Path>SFX\stlouis\VoPl01_0000004B_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 			</IncludedEvents>
-			<IncludedMemoryFiles>
-				<File Id="13923596" Language="SFX">
-					<ShortName>blackwhip\VoPl01_00000045.wav</ShortName>
-					<Path>SFX\blackwhip\VoPl01_00000045_A1793BE9.wem</Path>
-				</File>
-				<File Id="14386378" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000082.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000082_A1793BE9.wem</Path>
-				</File>
-				<File Id="18708744" Language="SFX">
-					<ShortName>blackwhip\VoPl01_00000044.wav</ShortName>
-					<Path>SFX\blackwhip\VoPl01_00000044_A1793BE9.wem</Path>
-				</File>
-				<File Id="24956156" Language="SFX">
-					<ShortName>delaware\smashvoice.wav</ShortName>
-					<Path>SFX\delaware\smashvoice_A1793BE9.wem</Path>
-				</File>
-				<File Id="25413997" Language="SFX">
-					<ShortName>stlouis\sfx\SePl01_0000000E.wav</ShortName>
-					<Path>SFX\stlouis\sfx\SePl01_0000000E_A1793BE9.wem</Path>
-				</File>
-				<File Id="33232957" Language="SFX">
-					<ShortName>detroit\charge\detroitwithcharge.wav</ShortName>
-					<Path>SFX\detroit\charge\detroitwithcharge_A1793BE9.wem</Path>
-				</File>
-				<File Id="45278170" Language="SFX">
-					<ShortName>ofa\VoPl01_00000023.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000023_A1793BE9.wem</Path>
-				</File>
-				<File Id="45353454" Language="SFX">
-					<ShortName>ofa\VoPl01_0000005D.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_0000005D_A1793BE9.wem</Path>
-				</File>
-				<File Id="66608882" Language="SFX">
-					<ShortName>Entrance\VoPl01_000000E7.wav</ShortName>
-					<Path>SFX\Entrance\VoPl01_000000E7_A1793BE9.wem</Path>
-				</File>
-				<File Id="78216023" Language="SFX">
-					<ShortName>Death\VoPl01_00000099.wav</ShortName>
-					<Path>SFX\Death\VoPl01_00000099_A1793BE9.wem</Path>
-				</File>
-				<File Id="89094593" Language="SFX">
-					<ShortName>ofa\VoPl01_0000005F.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_0000005F_A1793BE9.wem</Path>
-				</File>
-				<File Id="128544243" Language="SFX">
-					<ShortName>airforceshot.wav</ShortName>
-					<Path>SFX\airforceshot_A1793BE9.wem</Path>
-				</File>
-				<File Id="133485999" Language="SFX">
-					<ShortName>Death\VoPl01_000000A2.wav</ShortName>
-					<Path>SFX\Death\VoPl01_000000A2_A1793BE9.wem</Path>
-				</File>
-				<File Id="133882509" Language="SFX">
-					<ShortName>detroit\charge\gomenasaiwithcharge.wav</ShortName>
-					<Path>SFX\detroit\charge\gomenasaiwithcharge_A1793BE9.wem</Path>
-				</File>
-				<File Id="134648371" Language="SFX">
-					<ShortName>airforce\VoPl01_00000056.wav</ShortName>
-					<Path>SFX\airforce\VoPl01_00000056_A1793BE9.wem</Path>
-				</File>
-				<File Id="140991218" Language="SFX">
-					<ShortName>delaware\VoPl01_00000051.wav</ShortName>
-					<Path>SFX\delaware\VoPl01_00000051_A1793BE9.wem</Path>
-				</File>
-				<File Id="152619868" Language="SFX">
-					<ShortName>delaware\VoPl01_00000050.wav</ShortName>
-					<Path>SFX\delaware\VoPl01_00000050_A1793BE9.wem</Path>
-				</File>
-				<File Id="153943766" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000089.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000089_A1793BE9.wem</Path>
-				</File>
-				<File Id="161241194" Language="SFX">
-					<ShortName>stlouis\sfx\SePl01_0000000F.wav</ShortName>
-					<Path>SFX\stlouis\sfx\SePl01_0000000F_A1793BE9.wem</Path>
-				</File>
-				<File Id="186206304" Language="SFX">
-					<ShortName>Death\VoPl01_000000AC.wav</ShortName>
-					<Path>SFX\Death\VoPl01_000000AC_A1793BE9.wem</Path>
-				</File>
-				<File Id="189355726" Language="SFX">
-					<ShortName>shootstylebullet\sfx\SePl01_00000001.wav</ShortName>
-					<Path>SFX\shootstylebullet\sfx\SePl01_00000001_A1793BE9.wem</Path>
-				</File>
-				<File Id="199866267" Language="SFX">
-					<ShortName>blackwhip\VoPl01_00000048.wav</ShortName>
-					<Path>SFX\blackwhip\VoPl01_00000048_A1793BE9.wem</Path>
-				</File>
-				<File Id="227151916" Language="SFX">
-					<ShortName>ofa\VoPl01_00000022.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000022_A1793BE9.wem</Path>
-				</File>
-				<File Id="230797769" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000083.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000083_A1793BE9.wem</Path>
-				</File>
-				<File Id="246103165" Language="SFX">
-					<ShortName>Death\VoPl01_000000AE.wav</ShortName>
-					<Path>SFX\Death\VoPl01_000000AE_A1793BE9.wem</Path>
-				</File>
-				<File Id="310105775" Language="SFX">
-					<ShortName>Entrance\VoPl01_0000010F.wav</ShortName>
-					<Path>SFX\Entrance\VoPl01_0000010F_A1793BE9.wem</Path>
-				</File>
-				<File Id="352397840" Language="SFX">
-					<ShortName>blackwhip\VoPl01_00000046.wav</ShortName>
-					<Path>SFX\blackwhip\VoPl01_00000046_A1793BE9.wem</Path>
-				</File>
-				<File Id="355347321" Language="SFX">
-					<ShortName>Entrance\VoPl01_000000F5.wav</ShortName>
-					<Path>SFX\Entrance\VoPl01_000000F5_A1793BE9.wem</Path>
-				</File>
-				<File Id="368417381" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000016.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000016_A1793BE9.wem</Path>
-				</File>
-				<File Id="398014809" Language="SFX">
-					<ShortName>delaware\VoPl01_00000052.wav</ShortName>
-					<Path>SFX\delaware\VoPl01_00000052_A1793BE9.wem</Path>
-				</File>
-				<File Id="398723116" Language="SFX">
-					<ShortName>blackwhip\VoPl01_0000003E.wav</ShortName>
-					<Path>SFX\blackwhip\VoPl01_0000003E_A1793BE9.wem</Path>
-				</File>
-				<File Id="427314784" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000087.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000087_A1793BE9.wem</Path>
-				</File>
-				<File Id="483243679" Language="SFX">
-					<ShortName>ofa\VoPl01_00000054.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000054_A1793BE9.wem</Path>
-				</File>
-				<File Id="484186578" Language="SFX">
-					<ShortName>Death\VoPl01_000000A1.wav</ShortName>
-					<Path>SFX\Death\VoPl01_000000A1_A1793BE9.wem</Path>
-				</File>
-				<File Id="485064595" Language="SFX">
-					<ShortName>stlouis\VoPl01_0000004C.wav</ShortName>
-					<Path>SFX\stlouis\VoPl01_0000004C_A1793BE9.wem</Path>
-				</File>
-				<File Id="487520420" Language="SFX">
-					<ShortName>Entrance\VoPl01_000000E6.wav</ShortName>
-					<Path>SFX\Entrance\VoPl01_000000E6_A1793BE9.wem</Path>
-				</File>
-				<File Id="487561111" Language="SFX">
-					<ShortName>Death\VoPl01_000000F2.wav</ShortName>
-					<Path>SFX\Death\VoPl01_000000F2_A1793BE9.wem</Path>
-				</File>
-				<File Id="492780473" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000080.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000080_A1793BE9.wem</Path>
-				</File>
-				<File Id="519379338" Language="SFX">
-					<ShortName>airforce\VoPl01_0000008A.wav</ShortName>
-					<Path>SFX\airforce\VoPl01_0000008A_A1793BE9.wem</Path>
-				</File>
-				<File Id="524330261" Language="SFX">
-					<ShortName>stlouis\VoPl01_0000007D.wav</ShortName>
-					<Path>SFX\stlouis\VoPl01_0000007D_A1793BE9.wem</Path>
-				</File>
-				<File Id="524893754" Language="SFX">
-					<ShortName>ofa\sfx\fullcowlcharge.wav</ShortName>
-					<Path>SFX\ofa\sfx\fullcowlcharge_A1793BE9.wem</Path>
-				</File>
-				<File Id="528051330" Language="SFX">
-					<ShortName>delaware\VoPl01_0000007D.wav</ShortName>
-					<Path>SFX\delaware\VoPl01_0000007D_A1793BE9.wem</Path>
-				</File>
-				<File Id="569156007" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000085.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000085_A1793BE9.wem</Path>
-				</File>
-				<File Id="570338746" Language="SFX">
-					<ShortName>shootstylebullet\shootstylewithrocks.wav</ShortName>
-					<Path>SFX\shootstylebullet\shootstylewithrocks_A1793BE9.wem</Path>
-				</File>
-				<File Id="572307406" Language="SFX">
-					<ShortName>ofa\VoPl01_00000055.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000055_A1793BE9.wem</Path>
-				</File>
-				<File Id="579125949" Language="SFX">
-					<ShortName>detroit\exit\smashvoice.wav</ShortName>
-					<Path>SFX\detroit\exit\smashvoice_A1793BE9.wem</Path>
-				</File>
-				<File Id="604310980" Language="SFX">
-					<ShortName>stlouis\VoPl01_0000004F.wav</ShortName>
-					<Path>SFX\stlouis\VoPl01_0000004F_A1793BE9.wem</Path>
-				</File>
-				<File Id="612985191" Language="SFX">
-					<ShortName>Entrance\VoPl01_000000FD.wav</ShortName>
-					<Path>SFX\Entrance\VoPl01_000000FD_A1793BE9.wem</Path>
-				</File>
-				<File Id="615323603" Language="SFX">
-					<ShortName>airforceshotlong.wav</ShortName>
-					<Path>SFX\airforceshotlong_A1793BE9.wem</Path>
-				</File>
-				<File Id="644011312" Language="SFX">
-					<ShortName>shootstylebullet\sfx\ofadash.wav</ShortName>
-					<Path>SFX\shootstylebullet\sfx\ofadash_A1793BE9.wem</Path>
-				</File>
-				<File Id="645213426" Language="SFX">
-					<ShortName>shootstylebullet\sfx\fullcowlchargequick.wav</ShortName>
-					<Path>SFX\shootstylebullet\sfx\fullcowlchargequick_A1793BE9.wem</Path>
-				</File>
-				<File Id="655583295" Language="SFX">
-					<ShortName>delaware\VoPl01_000000C0.wav</ShortName>
-					<Path>SFX\delaware\VoPl01_000000C0_A1793BE9.wem</Path>
-				</File>
-				<File Id="657530836" Language="SFX">
-					<ShortName>blackwhip\VoPl01_00000047.wav</ShortName>
-					<Path>SFX\blackwhip\VoPl01_00000047_A1793BE9.wem</Path>
-				</File>
-				<File Id="670907558" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000088.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000088_A1793BE9.wem</Path>
-				</File>
-				<File Id="676652089" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000084.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000084_A1793BE9.wem</Path>
-				</File>
-				<File Id="679376315" Language="SFX">
-					<ShortName>ofa\VoPl01_00000025.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000025_A1793BE9.wem</Path>
-				</File>
-				<File Id="697834283" Language="SFX">
-					<ShortName>ofa\VoPl01_00000027.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000027_A1793BE9.wem</Path>
-				</File>
-				<File Id="706237824" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000081.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000081_A1793BE9.wem</Path>
-				</File>
-				<File Id="729564121" Language="SFX">
-					<ShortName>ofa\sfx\SePl01_00000006.wav</ShortName>
-					<Path>SFX\ofa\sfx\SePl01_00000006_A1793BE9.wem</Path>
-				</File>
-				<File Id="740940922" Language="SFX">
-					<ShortName>blackwhip\sfx\blackwhipsfx.wav</ShortName>
-					<Path>SFX\blackwhip\sfx\blackwhipsfx_A1793BE9.wem</Path>
-				</File>
-				<File Id="754389255" Language="SFX">
-					<ShortName>delaware\sfx\SePl01_00000010.wav</ShortName>
-					<Path>SFX\delaware\sfx\SePl01_00000010_A1793BE9.wem</Path>
-				</File>
-				<File Id="757473651" Language="SFX">
-					<ShortName>blackwhip\sfx\blackwhipsfx2.wav</ShortName>
-					<Path>SFX\blackwhip\sfx\blackwhipsfx2_A1793BE9.wem</Path>
-				</File>
-				<File Id="759147328" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000086.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000086_A1793BE9.wem</Path>
-				</File>
-				<File Id="784193560" Language="SFX">
-					<ShortName>ofa\VoPl01_00000026.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000026_A1793BE9.wem</Path>
-				</File>
-				<File Id="789997502" Language="SFX">
-					<ShortName>shootstylebullet\sfx\SePl01_00000003.wav</ShortName>
-					<Path>SFX\shootstylebullet\sfx\SePl01_00000003_A1793BE9.wem</Path>
-				</File>
-				<File Id="793806329" Language="SFX">
-					<ShortName>Death\VoPl01_000000A7.wav</ShortName>
-					<Path>SFX\Death\VoPl01_000000A7_A1793BE9.wem</Path>
-				</File>
-				<File Id="794352150" Language="SFX">
-					<ShortName>detroit\exit\VoPl01_0000007D.wav</ShortName>
-					<Path>SFX\detroit\exit\VoPl01_0000007D_A1793BE9.wem</Path>
-				</File>
-				<File Id="794485280" Language="SFX">
-					<ShortName>ofa\VoPl01_00000024.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000024_A1793BE9.wem</Path>
-				</File>
-				<File Id="810254431" Language="SFX">
-					<ShortName>Entrance\dekudesu.wav</ShortName>
-					<Path>SFX\Entrance\dekudesu_A1793BE9.wem</Path>
-				</File>
-				<File Id="811877985" Language="SFX">
-					<ShortName>ofa\VoPl01_0000005E.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_0000005E_A1793BE9.wem</Path>
-				</File>
-				<File Id="830531229" Language="SFX">
-					<ShortName>delaware\delawarevoice.wav</ShortName>
-					<Path>SFX\delaware\delawarevoice_A1793BE9.wem</Path>
-				</File>
-				<File Id="834891393" Language="SFX">
-					<ShortName>stlouis\VoPl01_0000004A.wav</ShortName>
-					<Path>SFX\stlouis\VoPl01_0000004A_A1793BE9.wem</Path>
-				</File>
-				<File Id="877183228" Language="SFX">
-					<ShortName>ofa\VoPl01_00000005.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000005_A1793BE9.wem</Path>
-				</File>
-				<File Id="879383538" Language="SFX">
-					<ShortName>ofa\VoPl01_0000005A.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_0000005A_A1793BE9.wem</Path>
-				</File>
-				<File Id="891875724" Language="SFX">
-					<ShortName>delaware\sfx\SePl01_0000000D.wav</ShortName>
-					<Path>SFX\delaware\sfx\SePl01_0000000D_A1793BE9.wem</Path>
-				</File>
-				<File Id="906836170" Language="SFX">
-					<ShortName>Entrance\VoPl01_AgencyEvent_00000000.wav</ShortName>
-					<Path>SFX\Entrance\VoPl01_AgencyEvent_00000000_A1793BE9.wem</Path>
-				</File>
-				<File Id="911964384" Language="SFX">
-					<ShortName>Entrance\VoPl01_000000EF.wav</ShortName>
-					<Path>SFX\Entrance\VoPl01_000000EF_A1793BE9.wem</Path>
-				</File>
-				<File Id="922481399" Language="SFX">
-					<ShortName>shootstylebullet\sfx\SePl01_00000002.wav</ShortName>
-					<Path>SFX\shootstylebullet\sfx\SePl01_00000002_A1793BE9.wem</Path>
-				</File>
-				<File Id="940294545" Language="SFX">
-					<ShortName>stlouis\VoPl01_0000004D.wav</ShortName>
-					<Path>SFX\stlouis\VoPl01_0000004D_A1793BE9.wem</Path>
-				</File>
-				<File Id="956066236" Language="SFX">
-					<ShortName>stlouis\sfx\fullcowlchargequick.wav</ShortName>
-					<Path>SFX\stlouis\sfx\fullcowlchargequick_A1793BE9.wem</Path>
-				</File>
-				<File Id="957060177" Language="SFX">
-					<ShortName>ofa\VoPl01_00000053.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_00000053_A1793BE9.wem</Path>
-				</File>
-				<File Id="962771432" Language="SFX">
-					<ShortName>Death\VoPl01_000000A5.wav</ShortName>
-					<Path>SFX\Death\VoPl01_000000A5_A1793BE9.wem</Path>
-				</File>
-				<File Id="982687313" Language="SFX">
-					<ShortName>stlouis\VoPl01_0000004E.wav</ShortName>
-					<Path>SFX\stlouis\VoPl01_0000004E_A1793BE9.wem</Path>
-				</File>
-				<File Id="1004362541" Language="SFX">
-					<ShortName>Entrance\VoPl01_000000E8.wav</ShortName>
-					<Path>SFX\Entrance\VoPl01_000000E8_A1793BE9.wem</Path>
-				</File>
-				<File Id="1005886961" Language="SFX">
-					<ShortName>Death\VoPl01_0000009A.wav</ShortName>
-					<Path>SFX\Death\VoPl01_0000009A_A1793BE9.wem</Path>
-				</File>
-				<File Id="1007881140" Language="SFX">
-					<ShortName>blackwhip\sfx\SePl01_00000011.wav</ShortName>
-					<Path>SFX\blackwhip\sfx\SePl01_00000011_A1793BE9.wem</Path>
-				</File>
-				<File Id="1010762699" Language="SFX">
-					<ShortName>ofa\VoPl01_0000005C.wav</ShortName>
-					<Path>SFX\ofa\VoPl01_0000005C_A1793BE9.wem</Path>
-				</File>
-				<File Id="1014234507" Language="SFX">
-					<ShortName>shootstylebullet\VoPl01_00000015.wav</ShortName>
-					<Path>SFX\shootstylebullet\VoPl01_00000015_A1793BE9.wem</Path>
-				</File>
-				<File Id="1027557244" Language="SFX">
-					<ShortName>stlouis\VoPl01_0000004B.wav</ShortName>
-					<Path>SFX\stlouis\VoPl01_0000004B_A1793BE9.wem</Path>
-				</File>
-				<File Id="1035619698" Language="SFX">
-					<ShortName>ofa\sfx\SePl01_00000004.wav</ShortName>
-					<Path>SFX\ofa\sfx\SePl01_00000004_A1793BE9.wem</Path>
-				</File>
-				<File Id="1047346623" Language="SFX">
-					<ShortName>stlouis\sfx\ofajump.wav</ShortName>
-					<Path>SFX\stlouis\sfx\ofajump_A1793BE9.wem</Path>
-				</File>
-			</IncludedMemoryFiles>
+			<GameParameters>
+				<GameParameter Id="3673881719" Name="Volume_SFX" ObjectPath="\Game Parameters\Default Work Unit\Volume_SFX"/>
+				<GameParameter Id="3695994288" Name="Volume_Master" ObjectPath="\Game Parameters\Default Work Unit\Volume_Master"/>
+			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>
