@@ -320,10 +320,10 @@
  <HintPath>F:/Theodore 3/Unity/2018.4.16f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Markdig.Signed">
- <HintPath>F:/Theodore 3/GameDev/Mods/DekuRor2/DekuUnity/Library/PackageCache/com.passivepicasso.thunderkit@4ceab97263a7f4054038c8f7c2c86b873acd4b0b/Editor/ThirdParty/Markdig/Markdig.Signed.dll</HintPath>
+ <HintPath>F:/Theodore 3/GameDev/Mods/DekuRor2/DekuUnity/Library/PackageCache/com.passivepicasso.thunderkit@26097cc7eef1255a04f96fd9cba23b03ba342cb5/Editor/ThirdParty/Markdig/Markdig.Signed.dll</HintPath>
  </Reference>
  <Reference Include="SharpCompress">
- <HintPath>F:/Theodore 3/GameDev/Mods/DekuRor2/DekuUnity/Library/PackageCache/com.passivepicasso.thunderkit@4ceab97263a7f4054038c8f7c2c86b873acd4b0b/Editor/ThirdParty/SharpCompress/SharpCompress.dll</HintPath>
+ <HintPath>F:/Theodore 3/GameDev/Mods/DekuRor2/DekuUnity/Library/PackageCache/com.passivepicasso.thunderkit@26097cc7eef1255a04f96fd9cba23b03ba342cb5/Editor/ThirdParty/SharpCompress/SharpCompress.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>F:/Theodore 3/GameDev/Mods/DekuRor2/DekuUnity/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
