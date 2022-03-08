@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 410465685
+CRC: 2759132160
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 75be5f0598c1cb914b8c127732fe1f62
+    Hash: bc8030c26a78660c2d2d3a7f12ad9c60
   TypeTreeHash:
     serializedVersion: 2
     Hash: fb98380650685d80d5a2c2187dc1369c
@@ -66,13 +66,11 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Deku/Animations/Old/DelawareSmashUp.anim
-- Assets/Deku/DekuV2/Running.anim
 - Assets/Deku/newRun.anim
 - Assets/Deku/VFX/delaware.prefab
 - Assets/Deku/Animations/Old/SmashRelease.anim
 - Assets/Deku/VFX/airforce100impact.prefab
 - Assets/Deku/mdlDeku test animations.prefab
-- Assets/Deku/DekuV2/Airforce.anim
 - Assets/Deku/Animations/Old/Jump.anim
 - Assets/Deku/VFX/Material/windline.mat
 - Assets/Deku/GUI/Quirks.png
@@ -86,10 +84,10 @@ Assets:
 - Assets/Deku/Animations/Old/maskDekuImpact.mask
 - Assets/Deku/VFX/Material/yellow.mat
 - Assets/Deku/GUI/ultimateupgrade.png
-- Assets/Deku/DekuV2/mdlDeku.prefab
-- Assets/Deku/DekuV2/Idle.anim
+- Assets/Deku/DekuV2/mdlDekubroken2.prefab
 - Assets/Deku/GUI/ultimate.png
 - Assets/Deku/Animations/Old/ShootStyleKick.anim
+- Assets/Deku/DekuV2/Animations/Armature_Jumping.anim
 - Assets/Deku/Animations/Old/ShootStyleKickExit.anim
 - Assets/Deku/DekuDisplayCurrent.prefab
 - Assets/Deku/Animations/Old/EntranceLoop.anim
@@ -101,32 +99,33 @@ Assets:
 - Assets/Deku/Animations/Old/LegSmashExit.anim
 - Assets/Deku/DekuV2/matDeku.mat
 - Assets/Deku/Animations/Old/Blackwhip.anim
-- Assets/Deku/DekuV2/DekuTestScaleInchZForwardAvatar.asset
 - Assets/Deku/VFX/Material/windspikering.mat
 - Assets/Deku/GUI/blackwhip.png
 - Assets/Deku/VFX/Material/windbullet.mat
 - Assets/Deku/VFX/windbullet45.prefab
 - Assets/Deku/VFX/Material/Spark2Particlewhip.mat
 - Assets/Deku/GUI/blackwhipsuper.png
-- Assets/Deku/DekuV2/Armature_Landing.anim
 - Assets/Deku/Animations/Old/ManchesterBegin.anim
 - Assets/Deku/Animations/Old/maskDekuBody.mask
 - Assets/Deku/Animations/Old/SmashFullCharge.anim
 - Assets/Deku/Animations/Old/maskDekuGesture.mask
 - Assets/Deku/VFX/funkytrail.prefab
 - Assets/Deku/GUI/blackwhipshoot.jpg
-- Assets/Deku/DekuV2/Armature_Jumping.anim
 - Assets/Deku/DekuV2/DekuDisplaybroken.prefab
+- Assets/Deku/DekuV2/Animations/Armature_Running.anim
 - Assets/Deku/Animations/maskDekuRightArmNew.mask
+- Assets/Deku/DekuV2/Animations/Armature_Idle.anim
 - Assets/Deku/Animations/Old/DelawareSmashDown.anim
 - Assets/Deku/VFX/blackwhipline.prefab
 - Assets/Deku/VFX/Material/blackwhip.mat
 - Assets/Deku/DekuNew.fbx
 - Assets/Deku/Animations/Old/Landing.anim
+- Assets/Deku/DekuV2/Animations/Armature_Falling.anim
 - Assets/Deku/Animations/Old/ShootStyleKickAuto.anim
 - Assets/Deku/GUI/fajinboost.png
 - Assets/Deku/Animations/Old/AIIdle.anim
 - Assets/Deku/DekuAllMats.mat
+- Assets/Deku/DekuV2/Animations/DekuNewAvatar.asset
 - Assets/Deku/GUI/45 blank.png
 - Assets/Deku/dekuror2.fbx
 - Assets/Deku/GUI/smokescreen.jpg
@@ -136,17 +135,20 @@ Assets:
 - Assets/Deku/Animations/Old/Fall.anim
 - Assets/Deku/GUI/shootstylekick2.png
 - Assets/Deku/VFX/detroitweak.prefab
+- Assets/Deku/DekuV2/Animations/Armature_Airforce.anim
 - Assets/Deku/mdlDekuCurrent.prefab
-- Assets/Deku/DekuV2/Armature_Running.anim
+- Assets/Deku/DekuV2/Animations/animDekuTest.controller
 - Assets/Deku/Animations/Old/SmashCharging.anim
 - Assets/Deku/GUI/ultimate45.png
 - Assets/Deku/GUI/deku portrait.png
 - Assets/Deku/Mesh.mesh
 - Assets/Deku/Animations/Old/Entrance.anim
 - Assets/Deku/GUI/Airforceskin.png
+- Assets/Deku/DekuV2/mdlDeku.prefab
 - Assets/Deku/VFX/OFA lightning.prefab
 - Assets/Deku/GUI/ultimateupgrade100.png
 - Assets/Deku/Animations/Old/Sprinting.anim
+- Assets/Deku/DekuV2/Animations/DekuGestureMask.mask
 - Assets/Deku/VFX/smokebig.prefab
 - Assets/Deku/Animations/Old/FingerFlick.anim
 - Assets/Deku/VFX/blackwhipexplosion.prefab
@@ -155,6 +157,7 @@ Assets:
 - Assets/Deku/VFX/Material/windtrail.mat
 - Assets/Deku/VFX/circle.prefab
 - Assets/Deku/GUI/stlouis.png
+- Assets/Deku/DekuV2/Animations/DekuRightArmMask.mask
 - Assets/Deku/GUI/shootstylekick.png
 - Assets/Deku/Animations/Old/Armature_AIdle.anim
 - Assets/Deku/Animations/Old/LegSmashCharge.anim
@@ -162,13 +165,14 @@ Assets:
 - Assets/Deku/VFX/smoke.prefab
 - Assets/Deku/Animations/animNew.controller
 - Assets/Deku/Animations/Old/DekurapidpunchL.anim
-- Assets/Deku/DekuV2/Jumping.anim
+- Assets/Deku/DekuV2/Animations/Jumping.anim
 - Assets/Deku/GUI/ultimate100.png
 - Assets/Deku/Animations/Old/OFA.anim
 - Assets/Deku/VFX/Material/windlineblack.mat
 - Assets/Deku/Animations/Old/SmashCharge.anim
 - Assets/Deku/Animations/maskDekuGestureNew.mask
 - Assets/Deku/Animations/Idle.anim
+- Assets/Deku/DekuV2/Animations/animDeku.controller
 - Assets/Deku/Animations/maskDekuLeftArmNew.mask
 - Assets/Deku/GUI/shootstylefullcowling.png
 - Assets/Deku/VFX/Material/blackwhipblack.mat
@@ -179,18 +183,14 @@ Assets:
 - Assets/Deku/Animations/Old/Running.anim
 - Assets/Deku/VFX/Material/white.mat
 - Assets/Deku/Animations/Old/DekurapidpunchR.anim
-- Assets/Deku/DekuV2/Armature_Falling.anim
 - Assets/Deku/GUI/detroit.png
-- Assets/Deku/DekuV2/Armature_Idle.anim
 - Assets/Deku/VFX/blackwhipshootGhost.prefab
 - Assets/Deku/GUI/texDekuIcon.png
 - Assets/Deku/GUI/shootstyle.png
 - Assets/Deku/dekuidle.fbx
 - Assets/Deku/VFX/Textures/SparkParticleblackwhip.tif
-- Assets/Deku/Animations/Old/anim.controller
 - Assets/Deku/VFX/fajinaura.prefab
 - Assets/Deku/mdlDekuNew.prefab
-- Assets/Deku/DekuV2/DekuTestScaleZForwardAvatar.asset
 - Assets/Deku/VFX/blackwhip.prefab
 - Assets/Deku/matDekuOld.mat
 - Assets/Deku/Animations/Run.anim
@@ -208,11 +208,11 @@ Assets:
 - Assets/Deku/Animations/Old/SmashChargeAttack.anim
 - Assets/Deku/VFX/blackwhipeffect.prefab
 - Assets/Deku/VFX/windringbig.prefab
-- Assets/Deku/DekuV2/Armature_Airforce.anim
-- Assets/Deku/DekuV2/Falling.anim
+- Assets/Deku/DekuV2/Animations/DekuLeftArmMask.mask
 - Assets/Deku/mdlDeku original copy.prefab
+- Assets/Deku/DekuV2/Animations/Armature_Landing.anim
 - Assets/Deku/Animations/maskDekuBodyNew.mask
 - Assets/Deku/GUI/quirksprevious.png
 - Assets/Deku/Animations/Old/ManchesterSmashExit.anim
-- Assets/Deku/Animations/Old/animDisplay.controller
+- Assets/Deku/DekuV2/Animations/animDisplay.controller
 Dependencies: []

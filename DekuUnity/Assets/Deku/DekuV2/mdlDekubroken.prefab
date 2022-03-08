@@ -1743,7 +1743,7 @@ GameObject:
   - component: {fileID: 5758823436412812413}
   - component: {fileID: 1862922640692431721}
   m_Layer: 0
-  m_Name: mdlDeku
+  m_Name: mdlDekubroken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
