@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2759132160
+CRC: 628143252
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bc8030c26a78660c2d2d3a7f12ad9c60
+    Hash: 0a3e0a1d17fb9ec34e4459946227c5d4
   TypeTreeHash:
     serializedVersion: 2
     Hash: fb98380650685d80d5a2c2187dc1369c
@@ -89,6 +89,7 @@ Assets:
 - Assets/Deku/Animations/Old/ShootStyleKick.anim
 - Assets/Deku/DekuV2/Animations/Armature_Jumping.anim
 - Assets/Deku/Animations/Old/ShootStyleKickExit.anim
+- Assets/Deku/DekuV2/DekuDisplay.prefab
 - Assets/Deku/DekuDisplayCurrent.prefab
 - Assets/Deku/Animations/Old/EntranceLoop.anim
 - Assets/Deku/Animations/Old/ShootStyleDashExit.anim
@@ -112,7 +113,6 @@ Assets:
 - Assets/Deku/VFX/funkytrail.prefab
 - Assets/Deku/GUI/blackwhipshoot.jpg
 - Assets/Deku/DekuV2/DekuDisplaybroken.prefab
-- Assets/Deku/DekuV2/Animations/Armature_Running.anim
 - Assets/Deku/Animations/maskDekuRightArmNew.mask
 - Assets/Deku/DekuV2/Animations/Armature_Idle.anim
 - Assets/Deku/Animations/Old/DelawareSmashDown.anim
@@ -144,7 +144,6 @@ Assets:
 - Assets/Deku/Mesh.mesh
 - Assets/Deku/Animations/Old/Entrance.anim
 - Assets/Deku/GUI/Airforceskin.png
-- Assets/Deku/DekuV2/mdlDeku.prefab
 - Assets/Deku/VFX/OFA lightning.prefab
 - Assets/Deku/GUI/ultimateupgrade100.png
 - Assets/Deku/Animations/Old/Sprinting.anim
@@ -170,6 +169,7 @@ Assets:
 - Assets/Deku/Animations/Old/OFA.anim
 - Assets/Deku/VFX/Material/windlineblack.mat
 - Assets/Deku/Animations/Old/SmashCharge.anim
+- Assets/Deku/DekuV2/Animations/Armature_Running.anim
 - Assets/Deku/Animations/maskDekuGestureNew.mask
 - Assets/Deku/Animations/Idle.anim
 - Assets/Deku/DekuV2/Animations/animDeku.controller
@@ -189,6 +189,7 @@ Assets:
 - Assets/Deku/GUI/shootstyle.png
 - Assets/Deku/dekuidle.fbx
 - Assets/Deku/VFX/Textures/SparkParticleblackwhip.tif
+- Assets/Deku/DekuV2/mdlDeku.prefab
 - Assets/Deku/VFX/fajinaura.prefab
 - Assets/Deku/mdlDekuNew.prefab
 - Assets/Deku/VFX/blackwhip.prefab
@@ -203,7 +204,6 @@ Assets:
 - Assets/Deku/Deku all mats 3584x2049.png
 - Assets/Deku/Animations/Old/DelawareSmash.anim
 - Assets/Deku/VFX/spin.prefab
-- Assets/Deku/DekuV2/DekuDisplay.prefab
 - Assets/Deku/GUI/stlouis45.PNG
 - Assets/Deku/Animations/Old/SmashChargeAttack.anim
 - Assets/Deku/VFX/blackwhipeffect.prefab
