@@ -39,7 +39,7 @@ namespace DekuMod.SkillStates
 
             hasFired = false;
 
-            base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.3f);
+            base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, this.fireTime);
 
             dekucon = base.GetComponent<DekuController>();
             if (dekucon.isMaxPower)
