@@ -102,7 +102,7 @@ namespace DekuMod.SkillStates
             //    base.healthComponent.TakeDamage(damageInfo);
             //}
 
-            GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
+            //GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
         }
 
         public void IndicatorUpdator()

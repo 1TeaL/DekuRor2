@@ -103,10 +103,10 @@ namespace DekuMod.Modules.Survivors
             bodyPrefab.AddComponent<DekuController>();
         }
 
-        internal override void InitializeUnlockables()
-        {
-            masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.MasteryAchievement>(true);
-        }
+        //internal override void InitializeUnlockables()
+        //{
+        //    masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.MasteryAchievement>(true);
+        //}
 
         internal override void InitializeDoppelganger()
         {
@@ -173,7 +173,7 @@ namespace DekuMod.Modules.Survivors
                 baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
@@ -343,7 +343,7 @@ namespace DekuMod.Modules.Survivors
                 baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
@@ -377,7 +377,7 @@ namespace DekuMod.Modules.Survivors
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
@@ -402,7 +402,7 @@ namespace DekuMod.Modules.Survivors
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
@@ -426,7 +426,7 @@ namespace DekuMod.Modules.Survivors
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
@@ -669,7 +669,7 @@ namespace DekuMod.Modules.Survivors
                 baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = false,
                 interruptPriority = InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
@@ -1316,7 +1316,7 @@ namespace DekuMod.Modules.Survivors
 
         internal override void SetItemDisplays()
         {
-            itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
+            //itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
 
             //            //add item displays here
             //            //  HIGHLY recommend using KingEnderBrine's ItemDisplayPlacementHelper mod for this
