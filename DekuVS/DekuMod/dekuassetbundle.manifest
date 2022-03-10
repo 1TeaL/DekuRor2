@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1529529035
+CRC: 853747758
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d0c5b21df8f23880cf88fcab7b5d725f
+    Hash: 62e604ea0f5f26553df8df1eea5bbb93
   TypeTreeHash:
     serializedVersion: 2
     Hash: d89435b9848a724bd2956ac181918224
@@ -55,12 +55,12 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Deku/DekuV2/VFX/delaware.prefab
 - Assets/Deku/DekuV2/VFX/airforce100impact.prefab
-- Assets/Deku/DekuV2/airforce.anim
 - Assets/Deku/DekuV2/VFX/Material/windline.mat
 - Assets/Deku/DekuV2/GUI/Quirks.png
 - Assets/Deku/DekuV2/GUI/delaware.png
 - Assets/Deku/DekuV2/GUI/primary attack.png
 - Assets/Deku/DekuV2/GUI/ultimateupgrade45.png
+- Assets/Deku/DekuV2/Animations/Armature_Idle.anim
 - Assets/Deku/DekuV2/VFX/Material/blackwhipspark.mat
 - Assets/Deku/DekuV2/VFX/detroit.prefab
 - Assets/Deku/DekuV2/GUI/manchester.png
@@ -72,9 +72,9 @@ Assets:
 - Assets/Deku/DekuV2/GUI/airforce.png
 - Assets/Deku/DekuV2/VFX/blackwhipeffect 1.prefab
 - Assets/Deku/DekuV2/VFX/airforce100trail.prefab
-- Assets/Deku/DekuV2/Animations/Armature_Idle.anim
 - Assets/Deku/DekuV2/Animations/DekuGestureMask.mask
 - Assets/Deku/DekuV2/matDeku.mat
+- Assets/Deku/DekuV2/Animations/Armature_Airforce.001.anim
 - Assets/Deku/DekuV2/VFX/Material/windspikering.mat
 - Assets/Deku/DekuV2/GUI/blackwhip.png
 - Assets/Deku/DekuV2/VFX/Material/windbullet.mat
@@ -106,6 +106,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/Material/windtrail.mat
 - Assets/Deku/DekuV2/VFX/circle.prefab
 - Assets/Deku/DekuV2/GUI/stlouis.png
+- Assets/Deku/DekuV2/Model.prefab
 - Assets/Deku/DekuV2/GUI/shootstylekick.png
 - Assets/Deku/DekuV2/VFX/windring.prefab
 - Assets/Deku/DekuV2/VFX/smoke.prefab
@@ -126,7 +127,6 @@ Assets:
 - Assets/Deku/DekuV2/VFX/blackwhipshootGhost.prefab
 - Assets/Deku/DekuV2/GUI/texDekuIcon.png
 - Assets/Deku/DekuV2/GUI/shootstyle.png
-- Assets/Deku/DekuV2/Animations/Armature_Airforce.anim
 - Assets/Deku/DekuV2/VFX/Textures/SparkParticleblackwhip.tif
 - Assets/Deku/DekuV2/mdlDeku.prefab
 - Assets/Deku/DekuV2/VFX/fajinaura.prefab
@@ -138,6 +138,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/spin.prefab
 - Assets/Deku/DekuV2/GUI/stlouis45.PNG
 - Assets/Deku/DekuV2/DekuDisplaycopyingmdlDeku.prefab
+- Assets/Deku/DekuV2/Animations/Armature_Airforce.anim
 - Assets/Deku/DekuV2/mdlDeku 1.prefab
 - Assets/Deku/DekuV2/VFX/blackwhipeffect.prefab
 - Assets/Deku/DekuV2/VFX/windringbig.prefab
