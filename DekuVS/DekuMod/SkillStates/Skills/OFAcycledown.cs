@@ -63,6 +63,9 @@ namespace DekuMod.SkillStates
 				case prefix + "BOOSTEDSECONDARY6_NAME":
 					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAcycle2.manchesterDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
+				case prefix + "BOOSTEDSECONDARY7_NAME":
+					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAcycle2.stlouisDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
 			}
 			switch (base.skillLocator.utility.skillNameToken)
 			{

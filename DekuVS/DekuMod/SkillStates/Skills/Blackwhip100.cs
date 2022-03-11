@@ -70,7 +70,7 @@ namespace DekuMod.SkillStates
             blastAttack.baseForce = -2f * maxWeight * Modules.StaticValues.blackwhipPull;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = DamageType.Stun1s;
-            blastAttack.attackerFiltering = AttackerFiltering.Default;
+            blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
             if (NetworkServer.active && base.healthComponent)
             {

@@ -9,6 +9,8 @@ namespace DekuMod.SkillStates
 {
     public class DelawareSmash : BaseSkillState
     {
+        public uint Distance = 40;
+
         public static float damageCoefficient;
         public float baseDuration = 1f;
         private float duration;
@@ -27,22 +29,6 @@ namespace DekuMod.SkillStates
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
-
-            if (NetworkServer.active && base.healthComponent)
-            {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-                damageInfo.position = base.transform.position;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.Default;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                base.healthComponent.TakeDamage(damageInfo);
-            }
 
             float angle = Vector3.Angle(new Vector3(0, -1, 0), aimRay.direction);
             if (angle < 60)
@@ -67,7 +53,7 @@ namespace DekuMod.SkillStates
 
                 BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = 15f;
-                blastAttack.procCoefficient = 2f;
+                blastAttack.procCoefficient = 1f;
                 blastAttack.position = theSpot;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
@@ -75,7 +61,7 @@ namespace DekuMod.SkillStates
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = 600f;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                blastAttack.damageType = DamageType.Stun1s;
+                blastAttack.damageType = DamageType.Generic;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
                 BlastAttack.Result result = blastAttack.Fire();
 
@@ -88,7 +74,7 @@ namespace DekuMod.SkillStates
 
                 EffectManager.SpawnEffect(explosionPrefab, effectData, true);
 
-                base.characterMotor.velocity = -70 * aimRay.direction;
+                base.characterMotor.velocity = -Distance * aimRay.direction * moveSpeedStat/7;
 
                 Compacted?.Invoke(result.hitCount);
             }
@@ -102,7 +88,7 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
             }
 
-            //base.characterMotor.velocity *= 0.1f;
+            base.characterMotor.velocity *= 0.5f;
 
             base.OnExit();
         }

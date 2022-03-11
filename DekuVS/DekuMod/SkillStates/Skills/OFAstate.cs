@@ -32,7 +32,6 @@ namespace DekuMod.SkillStates
 			{ 				
 				base.characterBody.AddBuff(Modules.Buffs.ofaBuff);
 			}
-            base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 0.05f);
 
 
 			AkSoundEngine.PostEvent(3940341776, this.gameObject);

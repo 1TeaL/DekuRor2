@@ -23,7 +23,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(DetroitRelease));
             entityStates.Add(typeof(Detroit100));
             entityStates.Add(typeof(Detroit100Release));
-            entityStates.Add(typeof(DelawareSmash));
+            entityStates.Add(typeof(DelawareSmash100));
             entityStates.Add(typeof(StLouis45));
 
             entityStates.Add(typeof(OFAstate));

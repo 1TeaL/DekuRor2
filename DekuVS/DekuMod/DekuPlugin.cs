@@ -93,10 +93,50 @@ namespace DekuMod
             On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
-            On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;        
+            On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
         }
 
-       
+        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        {
+            if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+            {   
+                damageInfo.damage = 0f;
+                self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+
+                var damageInfo2 = new DamageInfo();
+
+                damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
+                damageInfo2.position = damageInfo.attacker.transform.position;
+                damageInfo2.force = Vector3.zero;
+                damageInfo2.damageColorIndex = DamageColorIndex.Default;
+                damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                damageInfo2.attacker = self.gameObject;
+                damageInfo2.inflictor = null;
+                damageInfo2.damageType = DamageType.BypassArmor;
+                damageInfo2.procCoefficient = 2f;
+                damageInfo2.procChainMask = default(ProcChainMask);
+
+                damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+
+                EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                {
+                    origin = self.body.transform.position,
+                    scale = 1f,
+                    rotation = Quaternion.LookRotation(damageInfo.attacker.transform.position-self.body.transform.position)
+
+                }, true);
+
+
+                if (self.body.characterMotor && self.body.characterDirection)
+                {
+                    self.body.characterMotor.rootMotion += (self.body.transform.position-damageInfo.attacker.transform.position).normalized * self.body.moveSpeed; 
+                }
+
+                self.body.SetAimTimer(0.5f);
+            }
+            orig.Invoke(self, damageInfo);
+        }
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
@@ -110,6 +150,7 @@ namespace DekuMod
                 self.acceleration *= 2f;
 
             }
+
 
             bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
             if (fajin)
@@ -200,9 +241,9 @@ namespace DekuMod
 
             if (self)
             {
-                if (self.HasBuff(Modules.Buffs.armorBuff))
+                if (self.HasBuff(Modules.Buffs.oklahomaBuff))
                 {
-                    self.armor += 300f;
+                    self.armor *= 10f;
                 }
             }
         }

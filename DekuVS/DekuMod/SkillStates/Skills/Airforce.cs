@@ -34,7 +34,7 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             this.duration = Airforce.baseDuration / this.attackSpeedStat;
             this.fireTime = 0.2f * this.duration;
-            base.characterBody.SetAimTimer(2f);
+            base.characterBody.SetAimTimer(this.duration);
             this.muzzleString = "LFinger";
 
             hasFired = false;

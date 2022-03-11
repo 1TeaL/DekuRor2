@@ -15,7 +15,8 @@ namespace DekuMod.SkillStates
 		public static SkillDef shootstylekickDef = Deku.shootstylekick45SkillDef;
 		public static SkillDef blackwhipDef = Deku.secondaryboost45SkillDef;
 		public static SkillDef manchesterDef = Deku.manchester45SkillDef;
-		public static SkillDef shootstyleDef = Deku.shootstyle45SkillDef;
+		public static SkillDef stlouisDef = Deku.utilityboost45SkillDef;
+		public static SkillDef floatDef = Deku.float45SkillDef;
 		public static SkillDef shootstylefullcowlingDef = Deku.shootstylefullcowling45SkillDef;
 		public static SkillDef detroitDef = Deku.detroit45SkillDef;
 		public static SkillDef specialDef = Deku.ofacycle2SkillDef;
@@ -61,11 +62,14 @@ namespace DekuMod.SkillStates
 				case prefix + "SECONDARY2_NAME":
 					base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, OFAcycle1.manchesterDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
+				case prefix + "SECONDARY3_NAME":
+					base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, OFAcycle1.stlouisDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
 			}
 			switch (base.skillLocator.utility.skillNameToken)
 			{
 				case prefix + "UTILITY_NAME":
-					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle1.shootstyleDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle1.floatDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 				case prefix + "UTILITY2_NAME":
 					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle1.shootstylefullcowlingDef, GenericSkill.SkillOverridePriority.Contextual);

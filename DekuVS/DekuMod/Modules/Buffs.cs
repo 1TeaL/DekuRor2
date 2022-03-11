@@ -6,9 +6,6 @@ namespace DekuMod.Modules
 {
     public static class Buffs
     {
-        // armor buff gained during roll
-        internal static BuffDef armorBuff;
-
         internal static List<BuffDef> buffDefs = new List<BuffDef>();
 
         internal static BuffDef ofaBuff;
@@ -25,9 +22,15 @@ namespace DekuMod.Modules
 
         internal static BuffDef fajinBuff;
 
+        //armor buff for oklahoma
+        internal static BuffDef oklahomaBuff;
+
+
+        internal static BuffDef counterBuff;
+
         internal static void RegisterBuffs()
         {
-            armorBuff = AddNewBuff("DekuArmorBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            oklahomaBuff = AddNewBuff("DekuArmorBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.green, false, false);
             ofaBuff = AddNewBuff("DekuOFABuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.green, false, false);
             supaofaBuff = AddNewBuff("DekuInfiniteOFABuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.white, false, false);
             kickBuff = AddNewBuff("DekuKickBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.cyan, true, false);
@@ -35,7 +38,8 @@ namespace DekuMod.Modules
             supaofaBuff45 = AddNewBuff("DekuInfiniteOFA45Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.grey, false, false);
 
             fajinBuff = AddNewBuff("FaJinBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffBodyArmorIcon"), Color.green, true, false);
-            floatBuff = AddNewBuff("floatBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texMovespeedBufficon"), Color.blue, false, true);
+            floatBuff = AddNewBuff("DekuFloatBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texMovespeedBufficon"), Color.blue, false, false);
+            counterBuff = AddNewBuff("DekuCounterBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffNullifyStackIcon"), Color.green, false, false);
         }
 
         // simple helper method

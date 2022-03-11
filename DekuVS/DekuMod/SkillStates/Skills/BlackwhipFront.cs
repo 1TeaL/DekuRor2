@@ -87,7 +87,7 @@ namespace DekuMod.SkillStates
             blastAttack.baseForce = -maxWeight * Modules.StaticValues.blackwhipPull * fajin;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = damageType;
-            blastAttack.attackerFiltering = AttackerFiltering.Default;
+            blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
                 //EffectData effectData = new EffectData();
