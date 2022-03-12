@@ -10,6 +10,7 @@ namespace DekuMod.SkillStates
 {
     public class StLouis : BaseSkillState
     {
+        public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         public float baseDuration = 1f;
         public static float blastRadius = 10f;
         public static float succForce = 4.5f;
@@ -17,7 +18,7 @@ namespace DekuMod.SkillStates
 
         public float range = 5f;
         public float rangeaddition = 8f;
-        public float force = 500f;
+        public float force = 2000f;
         private float duration;
         private float maxWeight;
         private BlastAttack blastAttack;
@@ -40,8 +41,10 @@ namespace DekuMod.SkillStates
                 speedattack = 1;
             }
             dekucon = base.GetComponent<DekuController>();
+            dekucon.AddToBuffCount(10);
             if (dekucon.isMaxPower)
             {
+                dekucon.RemoveBuffCount(50);
                 fajin = 2f;
             }
             else
@@ -67,8 +70,9 @@ namespace DekuMod.SkillStates
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
-
-            base.PlayAnimation("RightArm, Override", "Blackwhip");
+            //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
+            //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
+            base.PlayCrossfade("Fullbody, Override", "LegSmash", duration / 2);
 
             //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
             //{
@@ -84,7 +88,7 @@ namespace DekuMod.SkillStates
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouisDamageCoefficient * fajin;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouisDamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
@@ -106,7 +110,6 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
             base.OnExit();
         }
 
@@ -116,7 +119,7 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             theSpot = aimRay.origin + range * aimRay.direction;
 
-            if ((base.fixedAge >= this.duration / 5) && base.isAuthority && whipage >= this.duration/5)
+            if ((base.fixedAge >= this.duration / 5 * fajin) && base.isAuthority && whipage >= this.duration/5 * fajin)
             {
                 //hasFired = true;
                 if (dekucon.isMaxPower)
@@ -132,12 +135,36 @@ namespace DekuMod.SkillStates
                 range += rangeaddition;
                 whipage = 0f;
                 blastAttack.Fire();
-                EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+                EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = 1f,
+                    scale = blastRadius,
+                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);
+                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                {
+                    origin = theSpot,
+                    scale = blastRadius,
+                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
+
+                }, true);
+                //for (int i = 0; i <= 5; i++)
+                //{
+                //    float num = 60f;
+                //    Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+                //    float num2 = 0.01f;
+                //    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                //    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+                //    EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
+                //    {
+                //        origin = base.transform.position,
+                //        scale = blastRadius,
+                //        rotation = rotation
+                //    }, false);
+
+                //}
+
             }
             else this.whipage += Time.fixedDeltaTime;
 

@@ -37,6 +37,8 @@ namespace DekuMod.SkillStates
             hasFired3 = false;
             speedattack = attackSpeedStat / 2;
 
+            base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
+            //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
 
             GetMaxWeight();
             theSpot = aimRay.origin + 20 * aimRay.direction;
@@ -47,8 +49,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = false;
 
 
-
-            base.PlayAnimation("RightArm, Override", "Blackwhip");
 
             EffectManager.SpawnEffect(Modules.Assets.blackwhipforward, new EffectData
             {
@@ -145,7 +145,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat * this.attackSpeedStat);
+            base.healthComponent.AddBarrierAuthority((healthComponent.health / 20) * this.attackSpeedStat);
 
         }
 
@@ -155,7 +155,7 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
 
-            base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
+            //base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
 
             base.OnExit();
         }

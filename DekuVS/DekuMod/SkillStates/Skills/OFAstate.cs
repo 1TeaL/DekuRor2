@@ -18,6 +18,7 @@ namespace DekuMod.SkillStates
 		public DekuController dekucon;
 
 
+
 		private float duration;
 		public override void OnEnter()
 		{

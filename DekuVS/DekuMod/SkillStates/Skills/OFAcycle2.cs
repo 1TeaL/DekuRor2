@@ -13,11 +13,12 @@ namespace DekuMod.SkillStates
 		public static float baseDuration = 0.05f;
 		public static SkillDef airforceDef = Deku.airforce100SkillDef;
 		public static SkillDef shootstylekickDef = Deku.shootstylekick100SkillDef;
+		public static SkillDef dangersenseDef = Deku.dangersense100SkillDef;
 		public static SkillDef blackwhipDef = Deku.blackwhip100SkillDef;
 		public static SkillDef manchesterDef = Deku.manchester100SkillDef;
 		public static SkillDef stlouisDef = Deku.stlouis100SkillDef;
 		public static SkillDef floatDef = Deku.float100SkillDef;
-		public static SkillDef shootstylefullcowlingDef = Deku.shootstylefullcowling100SkillDef;
+		public static SkillDef oklahomaDef = Deku.oklahoma100SkillDef;
 		public static SkillDef detroitDef = Deku.secondaryboostSkillDef;
 		public static SkillDef specialDef = Deku.ofacycledownSkillDef;
 		public DekuController dekucon;
@@ -57,6 +58,10 @@ namespace DekuMod.SkillStates
 					//base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, OFAcycle1.altshootstylekickDef, GenericSkill.SkillOverridePriority.Contextual);
 					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAcycle2.shootstylekickDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
+				case prefix + "BOOSTEDPRIMARY8_NAME":
+					base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, OFAcycle1.dangersenseDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAcycle2.dangersenseDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
 
 			}
 			switch (base.skillLocator.secondary.skillNameToken)
@@ -81,8 +86,8 @@ namespace DekuMod.SkillStates
 					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle2.floatDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 				case prefix + "BOOSTEDUTILITY6_NAME":
-					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle1.shootstylefullcowlingDef, GenericSkill.SkillOverridePriority.Contextual);
-					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle2.shootstylefullcowlingDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle1.oklahomaDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle2.oklahomaDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 				case prefix + "BOOSTEDUTILITY8_NAME":
 					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle1.detroitDef, GenericSkill.SkillOverridePriority.Contextual);

@@ -269,7 +269,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.8391318e+30, y: 7.1518297e+22, z: 927254.4, w: -8.39875}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -304,6 +304,36 @@ MonoBehaviour:
   m_Height: 0.47
   m_Direction: 1
   m_Bound: 0
+--- !u!1 &451332154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 3459574843040883897}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 451332155}
+  m_Layer: 0
+  m_Name: DekuDisplay (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &451332155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 3459574843040883897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451332154}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &505667324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8718,6 +8748,75 @@ Transform:
   m_Father: {fileID: 8315140140007442004}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8859310040346885872
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4748815548154428882, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_Name
+      value: mdlDeku
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734280308345317335, guid: 71b8bbe59718a7a40a5f990217edae63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71b8bbe59718a7a40a5f990217edae63, type: 3}
 --- !u!54 &8900918003641316991
 Rigidbody:
   m_ObjectHideFlags: 0

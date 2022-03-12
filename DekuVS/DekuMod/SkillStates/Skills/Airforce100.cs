@@ -41,11 +41,13 @@ namespace DekuMod.SkillStates
             base.characterBody.SetAimTimer(duration);
             this.muzzleString = punchIndex % 2 == 0 ? "LFinger" : "RFinger";
 
-            base.PlayAnimation("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration);
-            base.PlayAnimation("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration);
+            //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", this.duration);
+            //base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", this.duration);
 
-            //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate",this.duration, this.fireTime/3);
-            //base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime / 3);
+            //base.PlayCrossfade("Gesture, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime);
+
+            base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime/3);
+            base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime/3);
 
 
             if (NetworkServer.active && base.healthComponent)
@@ -109,7 +111,14 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
+            base.PlayCrossfade("RightArm, Override", "BufferEmpty", this.fireTime/3);
+            base.PlayCrossfade("LeftArm, Override", "BufferEmpty", this.fireTime / 3);
+            //base.PlayCrossfade("LeftArm, Override", "AirforceReset", 0.1f);
+            //base.PlayCrossfade("RightArm, Override", "AirforceReset", 0.1f);
+            //base.PlayCrossfade("Fullbody, Override", "AirforceReset", 0.1f);
+            //base.PlayCrossfade("Fullbody, Override", "BufferEmpty", 0.1f);
             //base.PlayAnimation("Fullbody, Override", "Armature_AIdle", "Attack.playbackRate", 0.1f);
+            //base.PlayAnimation("Body", "IdleIn");
             base.OnExit();
         }
 

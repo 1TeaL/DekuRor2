@@ -21,6 +21,7 @@ namespace DekuMod.SkillStates
         public float duration;
         public float speedattack;
         public static float blastRadius = 3f;
+        public float force = 3000f;
 
         protected Animator animator;
         private GameObject areaIndicator;
@@ -39,8 +40,10 @@ namespace DekuMod.SkillStates
             base.OnEnter();
 
             dekucon = base.GetComponent<DekuController>();
+            dekucon.AddToBuffCount(10);
             if (dekucon.isMaxPower)
             {
+                dekucon.RemoveBuffCount(50);
                 fajin = 2f;
             }
             else
@@ -56,18 +59,16 @@ namespace DekuMod.SkillStates
             blastAttack.position = base.characterBody.corePosition;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.oklahomaDamageCoefficient * fajin;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.oklahomaDamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.baseForce = 100f;
+            blastAttack.baseForce = force;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = DamageType.Generic;
             blastAttack.attackerFiltering = AttackerFiltering.Default;
 
             //base.PlayCrossfade("RightArm, Override", "SmashCharge", 0.2f);
-            base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", duration);
             //Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
-            AkSoundEngine.PostEvent(3842300745, this.gameObject);
-            AkSoundEngine.PostEvent(573664262, this.gameObject);
+            AkSoundEngine.PostEvent(3940341776, this.gameObject);
 
             //if (NetworkServer.active && base.healthComponent)
             //{
@@ -85,22 +86,25 @@ namespace DekuMod.SkillStates
             //    base.healthComponent.TakeDamage(damageInfo);
             //}
 
-            base.characterMotor.walkSpeedPenaltyCoefficient = 0.5f;
+            base.characterMotor.walkSpeedPenaltyCoefficient = 0.2f * fajin;
             bool active = NetworkServer.active;
             if (active)
             {
                 base.characterBody.AddBuff(Modules.Buffs.oklahomaBuff);
             }
+
+            dekucon.OKLAHOMA.Play();
         }
 
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Death;
+            return InterruptPriority.Frozen;
         }
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
+
+            dekucon.OKLAHOMA.Stop();
             base.characterMotor.walkSpeedPenaltyCoefficient = 1f;
             if (NetworkServer.active)
             {
@@ -119,7 +123,7 @@ namespace DekuMod.SkillStates
             {
                 Ray aimRay = base.GetAimRay();
 
-                if (base.isAuthority && spinage >= this.duration/4)
+                if (base.isAuthority && spinage >= this.duration/(4 * fajin))
                 {
                     blastAttack.position = base.characterBody.corePosition;
                     //hasFired = true;
@@ -134,14 +138,10 @@ namespace DekuMod.SkillStates
                     }
                     spinage = 0f;
                     blastAttack.Fire();
-                    
-                    EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
-                    {
-                        origin = base.characterBody.corePosition,
-                        scale = 1f,
+                    //base.PlayAnimation("Fullbody, Override", "Oklahoma", "Attack.playbackRate", duration/4);
+                    base.PlayCrossfade("Fullbody, Override", "Oklahoma", duration / 4);
 
-                    }, true);
-                 
+
                 }
                 else this.spinage += Time.fixedDeltaTime;
 

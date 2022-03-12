@@ -13,11 +13,12 @@ namespace DekuMod.SkillStates
 		public static float baseDuration = 0.05f;
 		public static SkillDef airforceDef = Deku.primaryboost45SkillDef;
 		public static SkillDef shootstylekickDef = Deku.shootstylekick45SkillDef;
+		public static SkillDef dangersenseDef = Deku.dangersense45SkillDef;
 		public static SkillDef blackwhipDef = Deku.secondaryboost45SkillDef;
 		public static SkillDef manchesterDef = Deku.manchester45SkillDef;
 		public static SkillDef stlouisDef = Deku.utilityboost45SkillDef;
 		public static SkillDef floatDef = Deku.float45SkillDef;
-		public static SkillDef shootstylefullcowlingDef = Deku.shootstylefullcowling45SkillDef;
+		public static SkillDef oklahomaDef = Deku.oklahoma45SkillDef;
 		public static SkillDef detroitDef = Deku.detroit45SkillDef;
 		public static SkillDef specialDef = Deku.ofacycle2SkillDef;
 		public DekuController dekucon;
@@ -52,6 +53,9 @@ namespace DekuMod.SkillStates
 					//base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.primaryaltSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAcycle1.shootstylekickDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
+				case prefix + "PRIMARY3_NAME":
+					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAcycle1.dangersenseDef, GenericSkill.SkillOverridePriority.Contextual);
+					break;
 			}
 			switch (base.skillLocator.secondary.skillNameToken)
 			{
@@ -71,7 +75,7 @@ namespace DekuMod.SkillStates
 					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle1.floatDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 				case prefix + "UTILITY2_NAME":
-					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle1.shootstylefullcowlingDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle1.oklahomaDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 				case prefix + "UTILITY3_NAME":
 					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAcycle1.detroitDef, GenericSkill.SkillOverridePriority.Contextual);

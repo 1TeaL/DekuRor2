@@ -39,22 +39,26 @@ namespace DekuMod.SkillStates
 
             hasFired = false;
 
-            base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, this.fireTime);
+            //base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, this.fireTime);
+            base.PlayAnimation("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration);
 
             dekucon = base.GetComponent<DekuController>();
             if (dekucon.isMaxPower)
             {
                 fajin = 2f;
+                dekucon.RemoveBuffCount(50);
             }
             else
             {
                 fajin = 1f;
             }
+
+            dekucon.AddToBuffCount(10);
+
         }
 
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
             base.OnExit();
         }
 
@@ -203,6 +207,7 @@ namespace DekuMod.SkillStates
                     this.Fire();
                     this.Fire();
                     this.Fire();
+
                 }
                 else
                 {

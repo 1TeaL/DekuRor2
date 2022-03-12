@@ -229,7 +229,7 @@ namespace DekuMod.SkillStates
                         scale = 1f,
                         rotation = Quaternion.LookRotation(aimRay.direction)
                     }, true);
-                    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                    damageType = DamageType.Stun1s;
                 }
                 else
                 {

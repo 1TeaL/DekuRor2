@@ -134,7 +134,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = true;
             base.characterMotor.velocity.y = -Manchester.dropForce;
 
-            base.PlayAnimation("Fullbody, Override", "ManchesterSmash", "Attack.playbackRate", jumpDuration/3);
+            base.PlayAnimation("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration/3);
             bool active = NetworkServer.active;
             if (active)
             {

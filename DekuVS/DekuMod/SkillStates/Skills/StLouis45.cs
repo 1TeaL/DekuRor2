@@ -68,6 +68,12 @@ namespace DekuMod.SkillStates
 				this.outer.SetNextStateToMain();
 				return;
 			}
+
+			
+
+
+
+
 		}
 
 
@@ -87,7 +93,9 @@ namespace DekuMod.SkillStates
 			base.characterMotor.velocity = Vector3.zero;
 			Radius = baseRadius * this.attackSpeedStat/2;
 
-			base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
+			//base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
+			//base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
+			base.PlayCrossfade("Fullbody, Override", "LegSmash", duration / 2);
 
 			AkSoundEngine.PostEvent(687990298, this.gameObject);
 			if (!this.slamIndicatorInstance)
@@ -98,7 +106,7 @@ namespace DekuMod.SkillStates
 
 		public override void OnExit()
 		{
-			base.PlayCrossfade("Fullbody, Override", "LegSmashExit", 0.1f);
+			//base.PlayCrossfade("Fullbody, Override", "LegSmashExit", 0.1f);
             //base.PlayAnimation("Fullbody, Override", "LegSmashExit", "Attack.playbackRate", 0.1f);
             //base.PlayAnimation("Body, Override", "IdleIn", "Attack.playbackRate", 0.01f);
 

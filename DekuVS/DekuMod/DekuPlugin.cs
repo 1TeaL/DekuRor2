@@ -26,6 +26,10 @@ namespace DekuMod
         "PrefabAPI",
         "LanguageAPI",
         "SoundAPI",
+        "NetworkingAPi",
+        "SkinAPI",
+        "LoadoutAPI",
+        "DamageAPI"
     })]
 
     public class DekuPlugin : BaseUnityPlugin
@@ -100,7 +104,7 @@ namespace DekuMod
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
-            {   
+            {
                 damageInfo.damage = 0f;
                 self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
 
@@ -113,7 +117,7 @@ namespace DekuMod
                 damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
                 damageInfo2.attacker = self.gameObject;
                 damageInfo2.inflictor = null;
-                damageInfo2.damageType = DamageType.BypassArmor;
+                damageInfo2.damageType = DamageType.BypassArmor | DamageType.WeakOnHit;
                 damageInfo2.procCoefficient = 2f;
                 damageInfo2.procChainMask = default(ProcChainMask);
 
@@ -133,7 +137,6 @@ namespace DekuMod
                     self.body.characterMotor.rootMotion += (self.body.transform.position-damageInfo.attacker.transform.position).normalized * self.body.moveSpeed; 
                 }
 
-                self.body.SetAimTimer(0.5f);
             }
             orig.Invoke(self, damageInfo);
         }
@@ -243,7 +246,7 @@ namespace DekuMod
             {
                 if (self.HasBuff(Modules.Buffs.oklahomaBuff))
                 {
-                    self.armor *= 10f;
+                    self.armor *= 3f;
                 }
             }
         }

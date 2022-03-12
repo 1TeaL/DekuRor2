@@ -10,14 +10,15 @@ namespace DekuMod.SkillStates
 {
     public class StLouis100 : BaseSkillState
     {
+        public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         public float baseDuration = 1f;
         public static float blastRadius = 20f;
         public static float succForce = 4.5f;
         //private GameObject effectPrefab = Modules.Assets.sEffect;
 
         public float range = 10f;
-        public float rangeaddition = 12f;
-        public float force = 500f;
+        public float rangeaddition = 15f;
+        public float force = 1000f;
         private float duration;
         private float maxWeight;
         private BlastAttack blastAttack;
@@ -68,7 +69,9 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = false;
 
 
-            base.PlayAnimation("RightArm, Override", "Blackwhip");
+            //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
+            //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
+            base.PlayCrossfade("Fullbody, Override", "LegSmash", duration / 2);
 
             //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
             //{
@@ -76,10 +79,24 @@ namespace DekuMod.SkillStates
             //    scale = 1f,       
 
             //}, true);
-
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
+                damageInfo.position = base.transform.position;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = StLouis100.blastRadius * speedattack * fajin;
+            blastAttack.radius = StLouis.blastRadius * speedattack * fajin;
             blastAttack.procCoefficient = 0.2f;
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;
@@ -92,12 +109,12 @@ namespace DekuMod.SkillStates
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
-                //EffectData effectData = new EffectData();
-                //effectData.origin = theSpot2;
-                //effectData.scale = (blastRadius / 5) * this.attackSpeedStat;
-                //effectData.rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
+            //EffectData effectData = new EffectData();
+            //effectData.origin = theSpot2;
+            //effectData.scale = (blastRadius / 5) * this.attackSpeedStat;
+            //effectData.rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
 
-                //EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
+            //EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
 
         }
 
@@ -116,7 +133,7 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             theSpot = aimRay.origin + range * aimRay.direction;
 
-            if ((base.fixedAge >= this.duration / 5) && base.isAuthority && whipage >= this.duration/5)
+            if ((base.fixedAge >= this.duration / 10) && base.isAuthority && whipage >= this.duration / 10)
             {
                 //hasFired = true;
                 if (dekucon.isMaxPower)
@@ -126,18 +143,41 @@ namespace DekuMod.SkillStates
                 }
                 else
                 {
-                    blastAttack.damageType = DamageType.Generic;
+                    blastAttack.damageType = DamageType.Stun1s;
                 }
                 blastAttack.position = theSpot;
                 range += rangeaddition;
                 whipage = 0f;
                 blastAttack.Fire();
-                EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+                EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = 1f,
+                    scale = blastRadius,
+                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);
+                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                {
+                    origin = theSpot,
+                    scale = blastRadius,
+                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
+
+                }, true);
+                //for (int i = 0; i <= 5; i++)
+                //{
+                //    float num = 60f;
+                //    Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+                //    float num2 = 0.01f;
+                //    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                //    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+                //    EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
+                //    {
+                //        origin = base.transform.position,
+                //        scale = blastRadius,
+                //        rotation = rotation
+                //    }, false);
+
+                //}
             }
             else this.whipage += Time.fixedDeltaTime;
 
@@ -148,7 +188,7 @@ namespace DekuMod.SkillStates
                 return;
             }
 
-            
+
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()

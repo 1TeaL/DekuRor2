@@ -46,9 +46,11 @@ namespace DekuMod.SkillStates
 
 			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
 			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
+			dekucon.AddToBuffCount(10);
 
 			if (dekucon.isMaxPower)
-            {
+			{
+				dekucon.RemoveBuffCount(50);
 				fajin = 2f;
 				if (base.isAuthority)
 				{
@@ -152,7 +154,6 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
         {
 			//dekucon.wardTrue = false;
-			dekucon.RemoveBuffCount(50);
 			//UnityEngine.Object.Destroy(this.affixHauntedWard);
 			//this.affixHauntedWard = null;
 			Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);

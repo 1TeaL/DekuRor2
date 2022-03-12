@@ -312,7 +312,7 @@ namespace DekuMod.SkillStates
 			if (flag)
 			{
 
-				base.PlayAnimation("FullBody, Override", "ShootStyleKickExit", "Attack.playbackRate", ShootStyleKick45.duration * 0.9f);
+				base.PlayAnimation("FullBody, Override", "ShootStyleKickExit", "Attack.playbackRate", ShootStyleKick.duration / 2);
 				this.stopwatch = ShootStyleKick45.duration - this.extraDuration;
 				bool flag2 = base.cameraTargetParams;
 				if (flag2)

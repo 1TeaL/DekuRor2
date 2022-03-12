@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates
         public static float jumpDuration;
         public static float dropForce = 80f;
 
-        public static float slamRadius = 15f;
+        public static float slamRadius = 5f;
         public static float slamProcCoefficient = 1f;
         public static float slamForce = 1000f;
 
@@ -46,8 +46,14 @@ namespace DekuMod.SkillStates
             this.flyVector = Vector3.up;
             this.hasFloated = false;
             dekucon = base.GetComponent<DekuController>();
+
+            base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Float.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Float.specialDef, GenericSkill.SkillOverridePriority.Contextual);
+
+            dekucon.AddToBuffCount(10);
             if (dekucon.isMaxPower)
             {
+                dekucon.RemoveBuffCount(50);
                 damageType = DamageType.BypassArmor | DamageType.Stun1s;
                 fajin = 2f;
                 BlastAttack blastAttack = new BlastAttack();
@@ -86,7 +92,7 @@ namespace DekuMod.SkillStates
                 rotation = Util.QuaternionSafeLookRotation(Vector3.down),
             }, false);
 
-            for (int i = 0; i <= 20; i++)
+            for (int i = 0; i <= 5; i++)
             {
                 float num = 60f;
                 Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
@@ -142,8 +148,6 @@ namespace DekuMod.SkillStates
 
             if (base.fixedAge >= Float.jumpDuration)
             {
-                base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Float.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
-                base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Float.specialDef, GenericSkill.SkillOverridePriority.Contextual);
 
                 this.outer.SetNextStateToMain();
             }

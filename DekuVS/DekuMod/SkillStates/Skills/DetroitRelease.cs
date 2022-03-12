@@ -13,7 +13,7 @@ namespace DekuMod.SkillStates
         internal float radius;
         private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
         //private string lMuzzleString = "LFinger";
-        private string rMuzzleString = "RShoulder";
+        private string rMuzzleString = "RHand";
         internal Vector3 moveVec;
 		//private GameObject explosionPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
 		private GameObject explosionPrefab = Modules.Projectiles.detroitweakTracer;
@@ -30,7 +30,7 @@ namespace DekuMod.SkillStates
 			
 			base.OnEnter();
             base.characterMotor.velocity = Vector3.zero;
-			base.PlayAnimation("FullBody, Override", "SmashChargeAttack", "Attack.playbackRate", 0.3f);
+			base.PlayAnimation("FullBody, Override", "SmashChargeAttack", "Attack.playbackRate", 1f);
 			//Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
 			AkSoundEngine.PostEvent(3289116818, this.gameObject);
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
@@ -41,11 +41,13 @@ namespace DekuMod.SkillStates
 			if (dekucon.isMaxPower)
 			{
 				fajin = 2f;
+				dekucon.RemoveBuffCount(50);
 			}
 			else
 			{
 				fajin = 1f;
 			}
+
 
 
 		}
@@ -56,7 +58,6 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
         {
 
-			dekucon.RemoveBuffCount(50);
 			Ray aimRay = base.GetAimRay();
 			if (dekucon.isMaxPower)
 			{

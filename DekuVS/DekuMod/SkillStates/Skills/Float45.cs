@@ -11,12 +11,14 @@ namespace DekuMod.SkillStates
 {
     public class Float45 : BaseSkillState
     {
+
         public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
+
         public static float basejumpDuration = 1f;
         public static float jumpDuration;
         public static float dropForce = 80f;
 
-        public static float slamRadius = 15f;
+        public static float slamRadius = 5f;
         public static float slamProcCoefficient = 1f;
         public static float slamForce = 1000f;
 
@@ -33,7 +35,7 @@ namespace DekuMod.SkillStates
         private float maxWeight;
 
         public static SkillDef utilityDef = Deku.floatcancelSkillDef;
-        public static SkillDef specialDef = Deku.floatdelaware45SkillDef;
+        public static SkillDef specialDef = Deku.floatdelawareSkillDef;
 
         //private NemforcerGrabController grabController;
 
@@ -45,19 +47,43 @@ namespace DekuMod.SkillStates
             this.hasFloated = false;
             dekucon = base.GetComponent<DekuController>();
 
-            base.PlayAnimation("FullBody, Override", "FloatBegin", "Attack.playbackRate", Float45.jumpDuration);
-            AkSoundEngine.PostEvent(687990298, this.gameObject);
-            AkSoundEngine.PostEvent(1918362945, this.gameObject);
+            base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Float.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Float.specialDef, GenericSkill.SkillOverridePriority.Contextual);
 
-            base.characterMotor.Motor.ForceUnground();
-            base.characterMotor.velocity = Vector3.zero;
+            dekucon.AddToBuffCount(10);
+            if (dekucon.isMaxPower)
+            {
+                dekucon.RemoveBuffCount(50);
+                damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                fajin = 2f;
+                BlastAttack blastAttack = new BlastAttack();
+                blastAttack.radius = Float.slamRadius * fajin;
+                blastAttack.procCoefficient = Float.slamProcCoefficient;
+                blastAttack.position = base.characterBody.footPosition;
+                blastAttack.attacker = base.gameObject;
+                blastAttack.crit = base.RollCrit();
+                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.floatDamageCoefficient * (moveSpeedStat / 7);
+                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                blastAttack.baseForce = -1000f;
+                blastAttack.teamIndex = base.teamComponent.teamIndex;
+                blastAttack.damageType = damageType;
+                blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-            base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
-            base.characterMotor.useGravity = false;
 
-            //base.gameObject.layer = LayerIndex.fakeActor.intVal;
-            base.characterMotor.Motor.RebuildCollidableLayers();
+                if (blastAttack.Fire().hitCount > 0)
+                {
+                    this.OnHitEnemyAuthority();
+
+                }
+
+            }
+            else
+            {
+                damageType = DamageType.Stun1s;
+                fajin = 1f;
+            }
+            jumpDuration = basejumpDuration / fajin;
 
             EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
             {
@@ -66,7 +92,7 @@ namespace DekuMod.SkillStates
                 rotation = Util.QuaternionSafeLookRotation(Vector3.down),
             }, false);
 
-            for (int i = 0; i <= 20; i++)
+            for (int i = 0; i <= 5; i++)
             {
                 float num = 60f;
                 Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
@@ -81,6 +107,21 @@ namespace DekuMod.SkillStates
                 }, true);
 
             }
+
+            base.PlayAnimation("FullBody, Override", "FloatBegin", "Attack.playbackRate", Float.jumpDuration);
+            AkSoundEngine.PostEvent(687990298, this.gameObject);
+            AkSoundEngine.PostEvent(1918362945, this.gameObject);
+
+            base.characterMotor.Motor.ForceUnground();
+            base.characterMotor.velocity = Vector3.zero;
+
+            base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
+
+            base.characterMotor.useGravity = false;
+
+            //base.gameObject.layer = LayerIndex.fakeActor.intVal;
+            base.characterMotor.Motor.RebuildCollidableLayers();
+
 
             bool active = NetworkServer.active;
             if (active)
@@ -105,10 +146,8 @@ namespace DekuMod.SkillStates
                 base.characterMotor.velocity.y = 0f;
             }
 
-            if (base.fixedAge >= Float45.jumpDuration)
+            if (base.fixedAge >= Float.jumpDuration)
             {
-                base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Float45.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
-                base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Float45.specialDef, GenericSkill.SkillOverridePriority.Contextual);
 
                 this.outer.SetNextStateToMain();
             }

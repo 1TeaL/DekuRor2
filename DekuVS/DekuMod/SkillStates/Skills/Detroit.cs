@@ -81,8 +81,11 @@ namespace DekuMod.SkillStates
             this.maxCharge = (float)this.baseMaxCharge / source.Min();
             this.areaIndicator = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
-            //base.PlayCrossfade("RightArm, Override", "SmashCharge", 0.2f);
-            base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 0.2f);
+            //base.PlayAnimation("FullBody, Override", "SmashCharge", "Attack.playbackRate", 1f);
+            base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 1f);
+            //base.PlayAnimation("RightArm, Override", "SmashCharge");
+            //base.PlayCrossfade("RightArm, Override", "SmashCharge", 1f);
+            //base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 0.2f);
             //Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
             AkSoundEngine.PostEvent(3806074874, this.gameObject);
 
@@ -103,6 +106,7 @@ namespace DekuMod.SkillStates
             //}
 
             //GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.SprintAnyDirection;
+            dekucon.AddToBuffCount(10);
         }
 
         public void IndicatorUpdator()
@@ -150,6 +154,7 @@ namespace DekuMod.SkillStates
             bool flag = base.IsKeyDownAuthority();
             if (flag)
             {
+                base.PlayAnimation("FullBody, Override", "SmashFullCharge", "Attack.playbackRate", 1f);
                 this.chargePercent = base.fixedAge / this.maxCharge;
                 //this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
                 //this.randFreq = Random.Range(1, this.baseMaxCharge * 100) / 100;

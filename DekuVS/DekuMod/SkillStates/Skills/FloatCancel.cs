@@ -56,6 +56,15 @@ namespace DekuMod.SkillStates
             {
                 base.characterBody.RemoveBuff(Modules.Buffs.floatBuff);
             }
+            if (base.isAuthority)
+            {
+                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                {
+                    origin = base.transform.position,
+                    scale = slamRadius,
+                    rotation = Util.QuaternionSafeLookRotation(Vector3.down),
+                }, false);
+            }
         }
 
         public override void FixedUpdate()
@@ -106,6 +115,7 @@ namespace DekuMod.SkillStates
             base.PlayAnimation("FullBody, Override", "BufferEmpty");
 
             base.characterMotor.useGravity = true;
+            base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
 
             if (NetworkServer.active && base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility)) base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 

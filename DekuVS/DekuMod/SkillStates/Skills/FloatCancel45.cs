@@ -49,14 +49,23 @@ namespace DekuMod.SkillStates
             //base.gameObject.layer = LayerIndex.fakeActor.intVal;
             base.characterMotor.Motor.RebuildCollidableLayers();
 
-            base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Float45.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.floatcancel45SkillDef, GenericSkill.SkillOverridePriority.Contextual);
             base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.float45SkillDef, GenericSkill.SkillOverridePriority.Contextual);
-            base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Float45.specialDef, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.floatdelaware45SkillDef, GenericSkill.SkillOverridePriority.Contextual);
             base.skillLocator.utility.SetSkillOverride(base.skillLocator.special, Deku.ofacycle2SkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
             if (NetworkServer.active)
             {
                 base.characterBody.RemoveBuff(Modules.Buffs.floatBuff);
+            }
+            if (base.isAuthority)
+            {
+                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                {
+                    origin = base.transform.position,
+                    scale = slamRadius,
+                    rotation = Util.QuaternionSafeLookRotation(Vector3.down),
+                }, false);
             }
         }
 
@@ -105,9 +114,11 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
 
+            base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.float45SkillDef, GenericSkill.SkillOverridePriority.Contextual);
             base.PlayAnimation("FullBody, Override", "BufferEmpty");
 
             base.characterMotor.useGravity = true;
+            base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
 
             if (NetworkServer.active && base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility)) base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 

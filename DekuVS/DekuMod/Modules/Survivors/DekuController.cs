@@ -20,6 +20,7 @@ namespace DekuMod.Modules.Survivors
         public ParticleSystem OFA;
         public ParticleSystem OFAeye;
         public ParticleSystem FAJIN;
+        public ParticleSystem OKLAHOMA;
         private int buffCountToApply;
         public GenericSkill specialSkillSlot;
         string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
@@ -48,10 +49,12 @@ namespace DekuMod.Modules.Survivors
                 OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
                 OFAeye = child.FindChild("OFAlightningeye").GetComponent<ParticleSystem>();
                 FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
+                OKLAHOMA = child.FindChild("Oklahoma").GetComponent<ParticleSystem>();
             }
             OFAeye.Stop();
             OFA.Stop();
             FAJIN.Stop();
+            OKLAHOMA.Stop();
             anim = GetComponentInChildren<Animator>();
             stopwatch = 0f;
 
