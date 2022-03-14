@@ -369,14 +369,14 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>Fa Jin</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/148047009-774ef354-e1ab-4f3b-8f19-6bed4a9a7297.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 10 stacks of Fa Jin.<br></td>
+    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 25 stacks of Fa Jin.<br></td>
     <td>Proc: 1.</td>
     <td>Doesn't <br>consume<br>Fa Jin.</td>
   </tr>
   <tr>
     <td>Fa Jin Mastered</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/148047023-2ff7dfdf-b710-4246-a9f1-c51f4e439569.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 20 stacks of Fa Jin.<br></td>
+    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 50 stacks of Fa Jin.<br></td>
     <td>Proc: 1.</td>
     <td>Doesn't <br>consume<br>Fa Jin.</td>
   </tr>
