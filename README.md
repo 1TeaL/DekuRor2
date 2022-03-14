@@ -7,7 +7,8 @@ Adds Deku from My Hero Academia, a high risk survivor which can boost his stats 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. https://ko-fi.com/tealpopcorn
 ## Latest Changelog, Next update(s)
-
+- 3.0.1 
+    - changed deku mod version in code
 - 3.0.0
 
     -  Updated to patch 1.2.2
