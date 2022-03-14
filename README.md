@@ -5,16 +5,34 @@ Go beyond!
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
-#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571.
+#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. https://ko-fi.com/tealpopcorn
 ## Latest Changelog, Next update(s)
 
-- 2.2.0
+- 3.0.0
 
-    -  updated to void patch
+    -  Updated to patch 1.2.2
+    -  Fixed logbook not showing, Fixed effects like barrier or opal having their center on his feet
+    -  Added buff icons with slightly different colours than before
+    -  New Model! (and some new animations!- idle, running, jumping, falling courtesy of TCoolDzn)
+    -  Skill Reworks/Balance changes!
+        - Adjusted barrier gain for manchester and blackwhip to % of max health instead of base damage. (This is an overall nerf)
+        - Slight Fa jin rework- I've found that running around to build up the Fa jin stacks is not the best, for now:
+             - Increased max buff count to 200 
+             - Fa Jin primary grants 25 stacks (ancient scepter gives 50)
+             - All skills grant 10 stacks
+             - Stacks are only consumed when there are 50 stacks
+
+    -  New Skills!
+        - Primary skill- Danger Sense. Activate danger sense, the next attack will be dodged and the attacker will take damage. If timed properly, hit enemies around you as well.
+        - Secondary skill- St louis smash airforce. Kick ranged blasts of air pressure in front of you (St louis 45% instead will be just in front of you, 100% has range again).
+        - Utility Skill changes- Shoot Style (utility 1) and Shoot Style Full Cowling (utility 2)
+             - Shoot Style has been changed to Float- a skill that sends you up, disabling gravity and changing your
+ special to Delaware Smash. Deactivate the skill by pressing the button again. 
+             - Shoot Style Full Cowling has been changed to Oklahoma Smash- while holding the skill, knockback enemies around you and have increased armor at the cost of slower movespeed.
 - Next update(s)
-    -  Update to new model, add new primary and secondary, rework skills
+    -  Further skill reworks
 
-<img src="https://user-images.githubusercontent.com/93917577/157029633-0196dd84-4e06-46af-a6fb-1c2f4ae125f0.PNG">
+<img src="https://user-images.githubusercontent.com/93917577/158124577-1fcbdcfb-8697-4dba-8e53-207ad1e6d4e8.PNG">
 
 ## Known Issues
 </p> Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
@@ -35,6 +53,7 @@ Adds Deku from My Hero Academia, a high risk survivor which can boost his stats 
 ## Base Skills
 ### Passive
 Deku has innate increased health regen the lower his health is. He has a double jump. He can sprint in any direction.
+
 <table>
 <thead>
   <tr>
@@ -61,6 +80,13 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Freezes enemies. <br>Hits an additional time.</td>
   </tr>
   <tr>
+    <td>Danger <br>Sense<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
+    <td>Activate Danger Sense, when timed properly, dodge.<br>Weakens and deals 600% damage to the attacker and stuns those around you.<br>Attackspeed increases active window.<br></td>
+    <td>Proc: 2.<br></td>
+    <td>Freezes enemies.<br>Larger active window.</td>
+  </tr>
+  <tr>
     <td>Blackwhip<br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/144508171-f67f0493-5ed4-4125-b5e7-56b7b32dfa1a.png" width="100" height="100"></td>
     <td>Pulls and stuns enemies in front for 5x100% damage. <br>Gain barrier on hit. <br>Attackspeed increases the pull radius and barrier gain.</td>
@@ -75,18 +101,25 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Extra initial hit.<br>Doubles barrier gain. </td>
   </tr>
   <tr>
-    <td>Shoot Style<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Dashes and hits enemies for 100% damage multiple times while having invincibility during the attack (Basically mercenary's eviscerate).</td>
-    <td>Proc: 0.5.<br>CD: 6s.</td>
-    <td>Hold for longer duration.</td>
+    <td>Float<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158124453-6c110889-72ca-41df-9801-50e924675ed1.PNG" width="100" height="100"></td>
+    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Press the button again to cancel Float.</td>
+    <td>CD: 10s.<br></td>
+    <td>Deal 400% damage <br>around you.</td>
   </tr>
   <tr>
-    <td>Shoot Style <br>Full Cowling<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144509040-5999395c-19e7-40bb-9246-d2eec5d52257.png" alt="Image" width="100" height="100"></td>
-    <td>Dash through enemies, hitting and stunning enemies behind, dealing 100% damage.<br>Attackspeed increases the number of attacks.</td>
-    <td>Proc: 1.<br>CD: 4s.<br>Stock: 2.</td>
-    <td>Doubles number of hits.</td>
+    <td>Delaware<br>Smash<br>100%<br>Special</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/144508192-f0969ea2-2e50-4c33-93ae-1b5f27114889.png" alt="Image" width="100" height="100"></td>
+    <td>Send a blast forward, stunning and dealing 600% damage to enemies in front, while sending you backwards as well.<br>Costs 10% of max Health.</td>
+    <td>Proc: 2.<br>CD: 4s.</td>
+    <td>Doubles distance travelled.</td>
+  </tr>
+  <tr>
+    <td>Oklahoma<br>Smash<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016505-965f388a-5b0d-48bb-9aeb-8cdf3177ad6b.png" width="100" height="100"></td>
+    <td>Hold the button to spin around, knocking back and dealing 100% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br></td>
+    <td>Proc: 1.<br>CD: 6s.<br></td>
+    <td>Doubles number of hits.<br>AOE is larger.<br>0.4x movespeed.</td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br>Utility</td>
@@ -97,6 +130,7 @@ Deku has innate increased health regen the lower his health is. He has a double 
   </tr>
 </tbody>
 </table>
+
 
 ## Special Skills
 <table>
@@ -187,6 +221,18 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Dash and kick, dealing 2x100% damage scaling based on movespeed.<br> Freezes every 4th hit.<br>Resets CD on hit and resetting all cooldowns on kill.<br>Costs 1% of max Health.</td>
     <td>Proc: 1.<br>CD: 6s.</td>
   </tr>
+<tr>
+    <td>Danger <br>Sense <br>45%<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
+    <td>Activate Danger Sense, when timed properly, dodge.<br>Weakens and deals 600% damage to the attacker and stuns those around you.<br>Attackspeed increases active window.<br></td>
+    <td>Proc: 2.<br></td>
+  </tr>
+  <tr>
+    <td>Danger <br>Sense <br>100%<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
+    <td>Activate Danger Sense, when timed properly, dodge.<br>Weakens and deals 600% damage to the attacker and freezes those around you.<br>Attackspeed increases active window.<br>Costs 5% of max health.<br></td>
+    <td>Proc: 2.<br></td>
+  </tr>
   <tr>
     <td>Blackwhip<br>45%<br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/145331966-38c60bc5-872a-4a0d-a30e-7238feeec167.png" alt="Image" width="100" height="100"></td>
@@ -212,28 +258,29 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Proc: 1.<br>CD: 5s.</td>
   </tr>
   <tr>
-    <td>Shoot Style<br>45%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Dashes and hits enemies for 150% damage multiple times while having invincibility during the attack.</td>
-    <td>Proc: 0.5.<br>CD: 6s.</td>
+    <tr>
+    <td>Float 45%<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158124453-6c110889-72ca-41df-9801-50e924675ed1.PNG" alt="Image" width="100" height="100"></td>
+    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Press the button again to cancel Float.</td>
+    <td>CD: 10s.<br></td>
   </tr>
   <tr>
-    <td>Shoot Style<br>100%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Dashes and hits enemies for 100% damage multiple times while having invincibility during the attack.<br>Hold the skill to increase the duration to up to 5 seconds, but causing increased negative regen during it.<br>Costs 10% of max Health.</td>
-    <td>Proc: 0.5.<br>CD: 6s.</td>
+    <td>Float 100%<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158124453-6c110889-72ca-41df-9801-50e924675ed1.PNG" alt="Image" width="100" height="100"></td>
+    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Deal 400% damage around you as you jump.<br>Press the button again to cancel Float.<br>Costs 10% of max health.</td>
+    <td>CD: 10s.<br></td>
   </tr>
   <tr>
-    <td>Shoot Style <br>Full Cowling<br>45%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
-    <td>Dash through enemies, hitting and stunning enemies behind, dealing 150% damage.<br>Attackspeed increases the number of attacks.</td>
-    <td>Proc: 1.<br>CD: 4s.<br>Stock: 2.</td>
+    <td>Oklahoma<br>Smash <br>45%<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016505-965f388a-5b0d-48bb-9aeb-8cdf3177ad6b.png" alt="Image" width="100" height="100"></td>
+    <td>Hold the button to spin around, knocking back and dealing 300% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br></td>
+    <td>Proc: 1.<br>CD: 6s.<br></td>
   </tr>
   <tr>
-    <td>Shoot Style <br>Full Cowling<br>100%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
-    <td>Dash through enemies, hitting and stunning enemies behind, dealing 100% damage.<br>On hit, resets the CD.<br>Attackspeed increases the number of attacks.<br>Costs 5% of max Health.</td>
-    <td>Proc: 1.<br>CD: 4s.<br>Stock: 2.</td>
+    <td>Oklahoma<br>Smash<br>100%<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016505-965f388a-5b0d-48bb-9aeb-8cdf3177ad6b.png" alt="Image" width="100" height="100"></td>
+    <td>Hold the button to spin around, knocking back and dealing 200% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br>Costs 10% of max health<br></td>
+    <td>Proc: 1.<br>CD: 6s.<br></td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br>45%<br>Utility</td>
@@ -361,6 +408,9 @@ These stats are prone to change.
 
 ## Changelog
 
+- 2.2.0
+
+    -  updated to void patch
 - 2.1.0
 
     -  Balanced Shoot Style Kick 100%
@@ -491,6 +541,8 @@ These stats are prone to change.
 ![stlouis](https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png)
 ![fajin](https://user-images.githubusercontent.com/93917577/148047009-774ef354-e1ab-4f3b-8f19-6bed4a9a7297.png)
 ![fajinboost](https://user-images.githubusercontent.com/93917577/148047023-2ff7dfdf-b710-4246-a9f1-c51f4e439569.png)
+![DangerSense](https://user-images.githubusercontent.com/93917577/158124527-cdea65ad-fd74-411c-8af2-4e3f2cf05ce6.PNG)
+![characterselect](https://user-images.githubusercontent.com/93917577/158124577-1fcbdcfb-8697-4dba-8e53-207ad1e6d4e8.PNG)
 
 
 ![blackwhip](https://user-images.githubusercontent.com/93917577/144508171-f67f0493-5ed4-4125-b5e7-56b7b32dfa1a.png)
@@ -505,6 +557,11 @@ These stats are prone to change.
 ![delaware](https://user-images.githubusercontent.com/93917577/144508192-f0969ea2-2e50-4c33-93ae-1b5f27114889.png)
 ![stlouis45](https://user-images.githubusercontent.com/93917577/145332001-e18ba69f-5491-499f-838f-cc26303e1aab.PNG)
 ![smokescreen](https://user-images.githubusercontent.com/93917577/148047077-f947c473-01f6-4cb2-b0af-a68ef744dcfa.jpg)
+![Floatactivate](https://user-images.githubusercontent.com/93917577/158124453-6c110889-72ca-41df-9801-50e924675ed1.PNG)
+![Floatcancel](https://user-images.githubusercontent.com/93917577/158124461-a5a236c6-c6d9-489f-b9d6-d845049ad83d.PNG)
+![oklahoma](https://user-images.githubusercontent.com/93917577/158124512-2c06017b-1121-4abd-910d-88f3891532af.png)
+
+
 
 ![ultimate](https://user-images.githubusercontent.com/93917577/144508368-f2baed32-895e-495a-88f3-9d15c0a1863e.png)
 ![ultimate45](https://user-images.githubusercontent.com/93917577/145332728-e5089c43-f789-4d8b-a963-7e87e2ff1a58.png)
