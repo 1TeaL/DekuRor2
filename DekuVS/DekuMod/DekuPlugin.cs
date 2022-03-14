@@ -2,6 +2,7 @@
 using BepInEx.Bootstrap;
 using DekuMod.Modules;
 using DekuMod.Modules.Survivors;
+using DekuMod.SkillStates;
 using R2API.Utils;
 using RoR2;
 using RoR2.Projectile;
@@ -52,6 +53,7 @@ namespace DekuMod
 
         public static DekuPlugin instance;
         public static CharacterBody DekuCharacterBody;
+        public DekuController dekucon;
 
         private void Awake()
         {
@@ -123,18 +125,35 @@ namespace DekuMod
 
                 damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
 
+                Vector3 enemyPos = damageInfo.attacker.transform.position;
                 EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
                 {
                     origin = self.body.transform.position,
                     scale = 1f,
-                    rotation = Quaternion.LookRotation(damageInfo.attacker.transform.position-self.body.transform.position)
+                    rotation = Quaternion.LookRotation(enemyPos-self.body.transform.position)
 
                 }, true);
 
 
-                if (self.body.characterMotor && self.body.characterDirection)
+                //if (self.body.characterMotor && self.body.characterDirection)
+                //{
+                //    self.body.characterMotor.rootMotion += (self.body.transform.position-damageInfo.attacker.transform.position).normalized * self.body.moveSpeed; 
+                //}
+
+                EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
+                foreach (EntityStateMachine stateMachine in stateMachines)
                 {
-                    self.body.characterMotor.rootMotion += (self.body.transform.position-damageInfo.attacker.transform.position).normalized * self.body.moveSpeed; 
+                    if (stateMachine.customName == "Body")
+                    {                   
+
+                        self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
+                        {
+                            enemyPosition = enemyPos
+                        });
+
+
+                    }
+
                 }
 
             }

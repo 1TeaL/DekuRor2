@@ -41,6 +41,7 @@ namespace DekuMod.SkillStates
             dekucon = base.GetComponent<DekuController>();
             if (dekucon.isMaxPower)
             {
+                dekucon.RemoveBuffCount(50);
                 damageType = DamageType.BypassArmor | DamageType.Stun1s;
                 fajin = 2f;
                 BlastAttack blastAttack = new BlastAttack();
@@ -80,12 +81,12 @@ namespace DekuMod.SkillStates
             base.characterMotor.velocity = Vector3.zero;
 
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
-            
-
-            //base.gameObject.layer = LayerIndex.fakeActor.intVal;
-            base.characterMotor.Motor.RebuildCollidableLayers();
 
 
+            base.gameObject.layer = LayerIndex.fakeActor.intVal;
+            //base.characterMotor.Motor.RebuildCollidableLayers();
+            dekucon.AddToBuffCount(10);
+;
         }
 
 
@@ -97,7 +98,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat * (this.moveSpeedStat/7));
+            base.healthComponent.AddBarrierAuthority((healthComponent.health / 10) * (this.moveSpeedStat/7));
 
         }
         public override void FixedUpdate()
@@ -134,7 +135,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = true;
             base.characterMotor.velocity.y = -Manchester.dropForce;
 
-            base.PlayAnimation("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration/3);
+            base.PlayAnimation("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration/3f);
             bool active = NetworkServer.active;
             if (active)
             {
@@ -242,7 +243,6 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
 
             if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);
             if (this.slamCenterIndicatorInstance) EntityState.Destroy(this.slamCenterIndicatorInstance.gameObject);
@@ -256,7 +256,7 @@ namespace DekuMod.SkillStates
             if (NetworkServer.active && base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility)) base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 
             base.gameObject.layer = LayerIndex.defaultLayer.intVal;
-            base.characterMotor.Motor.RebuildCollidableLayers();
+            //base.characterMotor.Motor.RebuildCollidableLayers();
             base.OnExit();
         }
 

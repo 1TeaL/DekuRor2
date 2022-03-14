@@ -158,7 +158,6 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
 
             if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);
             if (this.slamCenterIndicatorInstance) EntityState.Destroy(this.slamCenterIndicatorInstance.gameObject);

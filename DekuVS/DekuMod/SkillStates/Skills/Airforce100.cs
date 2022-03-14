@@ -46,8 +46,9 @@ namespace DekuMod.SkillStates
 
             //base.PlayCrossfade("Gesture, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime);
 
-            base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime/3);
-            base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration, this.fireTime/3);
+            base.PlayCrossfade("FullBody, Override", punchIndex % 2 == 0 ? "BlackwhipLeft" : "Blackwhip", "Attack.playbackRate", duration, this.fireTime/3);
+            //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "BlackwipLeft" : "BufferEmpty", "Attack.playbackRate", this.duration, this.fireTime / 3);
+            //base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "BufferEmpty" : "Blackwhip", "Attack.playbackRate", this.duration, this.fireTime / 3);
 
 
             if (NetworkServer.active && base.healthComponent)
@@ -113,6 +114,7 @@ namespace DekuMod.SkillStates
         {
             base.PlayCrossfade("RightArm, Override", "BufferEmpty", this.fireTime/3);
             base.PlayCrossfade("LeftArm, Override", "BufferEmpty", this.fireTime / 3);
+            //base.PlayCrossfade("Gesture, Override", "BufferEmpty", this.fireTime / 3);
             //base.PlayCrossfade("LeftArm, Override", "AirforceReset", 0.1f);
             //base.PlayCrossfade("RightArm, Override", "AirforceReset", 0.1f);
             //base.PlayCrossfade("Fullbody, Override", "AirforceReset", 0.1f);

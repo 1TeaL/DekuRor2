@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1933542782
+CRC: 2507012304
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9885bd876f977db6b3654c93d7d23ea5
+    Hash: aeb2ee70b1788cfd8189d05cd673eeb3
   TypeTreeHash:
     serializedVersion: 2
     Hash: fb98380650685d80d5a2c2187dc1369c
@@ -89,10 +89,13 @@ Assets:
 - Assets/Deku/DekuV2/VFX/Material/yellow.mat
 - Assets/Deku/DekuV2/GUI/ultimateupgrade.png
 - Assets/Deku/DekuV2/GUI/ultimate.png
+- Assets/Deku/DekuV2/VFX/Material/dangersense.mat
 - Assets/Deku/DekuV2/Animations/Armature_ShootStyleDash.anim
 - Assets/Deku/DekuV2/GUI/airforce.png
+- Assets/Deku/DekuV2/Animations/Armature_BlackwhipLeft.anim
 - Assets/Deku/DekuV2/VFX/blackwhipeffect 1.prefab
 - Assets/Deku/DekuV2/VFX/airforce100trail.prefab
+- Assets/Deku/DekuV2/VFX/DangerSenseParticle.prefab
 - Assets/Deku/DekuV2/Animations/Armature_DelawareSmashLookUp.anim
 - Assets/Deku/DekuV2/matDeku.mat
 - Assets/Deku/DekuV2/Animations/Armature_Airforce.001.anim
@@ -103,7 +106,6 @@ Assets:
 - Assets/Deku/DekuV2/VFX/Material/Spark2Particlewhip.mat
 - Assets/Deku/DekuV2/GUI/blackwhipsuper.png
 - Assets/Deku/DekuV2/Animations/Armature_Falling.anim
-- Assets/Deku/DekuV2/GUI/Floatactivate.jpg
 - Assets/Deku/DekuV2/Animations/Armature_Tornado .anim
 - Assets/Deku/DekuV2/VFX/funkytrail.prefab
 - Assets/Deku/DekuV2/Animations/DekuTestAvatar.asset
@@ -112,7 +114,6 @@ Assets:
 - Assets/Deku/DekuV2/VFX/blackwhipline.prefab
 - Assets/Deku/DekuV2/VFX/Material/blackwhip.mat
 - Assets/Deku/DekuV2/GUI/KickCount.tif
-- Assets/Deku/DekuV2/GUI/Floatcancel.jpg
 - Assets/Deku/DekuV2/GUI/lightninggreen.tif
 - Assets/Deku/DekuV2/GUI/armorgreen.tif
 - Assets/Deku/DekuV2/GUI/lightningblue.tif
@@ -128,6 +129,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/detroitweak.prefab
 - Assets/Deku/DekuV2/Animations/DekuGestureMask.mask
 - Assets/Deku/DekuV2/Animations/animDekuTest.controller
+- Assets/Deku/DekuV2/GUI/Floatactivate.PNG
 - Assets/Deku/DekuV2/Animations/Armature_ShootStyleDashAuto.anim
 - Assets/Deku/DekuV2/GUI/ultimate45.png
 - Assets/Deku/DekuV2/GUI/deku portrait.png
@@ -149,6 +151,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/windring.prefab
 - Assets/Deku/DekuV2/Animations/DekuTestVideoAvatar.asset
 - Assets/Deku/DekuV2/VFX/smoke.prefab
+- Assets/Deku/DekuV2/GUI/Floatcancel.PNG
 - Assets/Deku/DekuV2/Animations/Armature_Jumping.anim
 - Assets/Deku/DekuV2/Animations/Jumping.anim
 - Assets/Deku/DekuV2/GUI/ultimate100.png
@@ -185,6 +188,7 @@ Assets:
 - Assets/Deku/DekuV2/DekuDisplaycopyingmdlDeku.prefab
 - Assets/Deku/DekuV2/Animations/Armature_RightLegVerticalSweep.anim
 - Assets/Deku/DekuV2/Animations/Armature_Airforce.anim
+- Assets/Deku/DekuV2/VFX/Textures/dangersenseparticle.tif
 - Assets/Deku/DekuV2/VFX/blackwhipeffect.prefab
 - Assets/Deku/DekuV2/VFX/windringbig.prefab
 - Assets/Deku/DekuV2/Animations/DekuLeftArmMask.mask

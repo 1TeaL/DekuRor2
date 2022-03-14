@@ -21,7 +21,7 @@ namespace DekuMod.Modules
         internal const float shootbulletDamageCoefficient = 2f;
         internal const float fajinDamageCoefficient = 0.5f;
         internal const float airforce100DamageCoefficient = 2f;
-        internal const float counterDamageCoefficient = 5f;
+        internal const float counterDamageCoefficient = 6f;
 
         internal const float blackwhipDamageCoefficient = 1f;
         internal const float manchesterDamageCoefficient = 3f;

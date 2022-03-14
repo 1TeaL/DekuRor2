@@ -7061,6 +7061,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19e218d16d09cdf44be0acf6d97e4710, type: 3}
+--- !u!1001 &7593554974139700784
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.579
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.206
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.43661547
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 335224406270443460, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 446593611410977131, guid: 822320638da527347bde2b108df991a4,
+        type: 3}
+      propertyPath: m_Name
+      value: DangerSenseParticle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 822320638da527347bde2b108df991a4, type: 3}
 --- !u!114 &8026021456413006304
 MonoBehaviour:
   m_ObjectHideFlags: 0

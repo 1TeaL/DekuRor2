@@ -65,6 +65,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(DangerSense));
             entityStates.Add(typeof(DangerSense45));
             entityStates.Add(typeof(DangerSense100));
+            entityStates.Add(typeof(DangerSenseCounter));
             entityStates.Add(typeof(Float));
             entityStates.Add(typeof(Float45));
             entityStates.Add(typeof(Float100));

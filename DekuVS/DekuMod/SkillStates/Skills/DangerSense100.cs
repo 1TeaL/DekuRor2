@@ -22,7 +22,7 @@ namespace DekuMod.SkillStates
 
 
         private GameObject smokeprefab = Modules.Assets.smokeEffect;
-        public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/tracerhuntresssnipe"); 
+        public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/tracerhuntresssnipe");
         private float duration;
         private float fireTime;
         private bool hasFired;
@@ -47,9 +47,13 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
             this.duration = baseDuration;
-            this.fireTime = duration / (4 * attackSpeedStat * fajin);
-            base.characterBody.SetAimTimer(duration);
-            this.muzzleString = "LFinger";
+            this.fireTime = duration / (4f * attackSpeedStat * fajin);
+            if (this.fireTime < 0.1f)
+            {
+                fireTime = 0.1f;
+            }
+            //base.characterBody.SetAimTimer(duration);
+            //this.muzzleString = "LFinger";
 
             counteron = false;
             hasFired = false;
@@ -57,46 +61,32 @@ namespace DekuMod.SkillStates
 
 
             dekucon = base.GetComponent<DekuController>();
+            dekucon.dangersensefreeze = true;
             if (dekucon.isMaxPower)
             {
+                dekucon.RemoveBuffCount(50);
                 fajin = 2f;
             }
             else
             {
                 fajin = 1f;
             }
-
-            if (NetworkServer.active && base.healthComponent)
-            {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
-                damageInfo.position = base.transform.position;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.Default;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                base.healthComponent.TakeDamage(damageInfo);
-            }
+            dekucon.AddToBuffCount(10);
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = blastRadius *  fajin;
+            blastAttack.radius = blastRadius * fajin;
             blastAttack.procCoefficient = procCoefficient;
             blastAttack.position = base.characterBody.corePosition;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
             blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient * fajin;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.baseForce =  force;
+            blastAttack.baseForce = force;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = DamageType.Freeze2s;
+            blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attackerFiltering = AttackerFiltering.Default;
 
-            base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
-            //base.PlayCrossfade("Fullbody, Override", "CounterStart", "Attack.playbackRate", this.duration, this.fireTime);
+            //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
             //base.PlayCrossfade("Fullbody, Override", "CounterStart", "Attack.playbackRate", this.duration, this.fireTime);
             //base.PlayCrossfade("Gesture, Override", "CounterStart", "Attack.playbackRate", this.duration / (2 * attackSpeedStat * fajin), this.duration / (4 * attackSpeedStat * fajin));
         }
@@ -108,15 +98,15 @@ namespace DekuMod.SkillStates
             {
                 base.characterBody.RemoveBuff(Modules.Buffs.counterBuff);
             }
-            dekucon.RemoveBuffCount(50);
             base.OnExit();
         }
 
         public override void FixedUpdate()
         {
-            base.FixedUpdate(); 
-            if(base.fixedAge >= duration / (4 * attackSpeedStat * fajin) && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex) && !counteron)
+            base.FixedUpdate();
+            if (base.fixedAge >= duration / (fireTime) && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex) && !counteron)
             {
+                dekucon.DANGERSENSE.Play();
                 counteron = true;
                 bool active = NetworkServer.active;
                 if (active)
@@ -126,63 +116,62 @@ namespace DekuMod.SkillStates
 
                 AkSoundEngine.PostEvent(573664262, this.gameObject);
             }
-            
-
-            if (base.fixedAge >= ((duration / (4 * attackSpeedStat))) && base.fixedAge <(baseDuration - (duration / 4 * this.attackSpeedStat * fajin)) && !hasFired && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
-            {
-                
-                hasFired = true;
-                //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
-                if (base.isAuthority)
-                {
-                    blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient * fajin;
-                    blastAttack.position = base.characterBody.corePosition;
-                    blastAttack.Fire();
-                    Ray aimRay = base.GetAimRay();
-
-                    base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", duration / 2);
-
-                    //base.PlayCrossfade("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", this.duration, this.fireTime);
-                    //base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", this.duration / (4 * attackSpeedStat * fajin));
-                    //EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
-                    //{
-                    //    origin = aimRay.origin + 5 * aimRay.direction,
-                    //    scale = 1f,
-                    //    rotation = Quaternion.LookRotation(aimRay.direction)
-
-                    //}, true);
 
 
-                    for (int i = 0; i <= 5; i++)
-                    {
-                        this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                        float num = 60f;
-                        Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
-                        float num2 = 0.01f;
-                        rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                        rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+            //if (base.fixedAge >= ((duration / (4 * attackSpeedStat))) && base.fixedAge < (baseDuration - (duration / 4 * this.attackSpeedStat * fajin)) && !hasFired && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+            //{
 
-                        EffectData effectData = new EffectData
-                        {
-                            scale = 1f,
-                            origin = base.characterBody.corePosition + this.randRelPos,
-                            rotation = rotation
+            //    hasFired = true;
+            //    //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
+            //    if (base.isAuthority)
+            //    {
+            //        blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient * fajin;
+            //        blastAttack.position = base.characterBody.corePosition;
+            //        blastAttack.Fire();
+            //        base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", duration / 2);
+            //        Ray aimRay = base.GetAimRay();
 
-                        };
-                        EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+            //        //EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
+            //        //{
+            //        //    origin = aimRay.origin + 5 * aimRay.direction,
+            //        //    scale = 1f,
+            //        //    rotation = Quaternion.LookRotation(aimRay.direction)
 
-                    }
-   
+            //        //}, true);
 
-                }
 
-              
+            //        for (int i = 0; i <= 5; i++)
+            //        {
+            //            this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+            //            float num = 60f;
+            //            Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+            //            float num2 = 0.01f;
+            //            rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+            //            rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
 
-            }
+            //            EffectData effectData = new EffectData
+            //            {
+            //                scale = 1f,
+            //                origin = base.characterBody.corePosition + this.randRelPos,
+            //                rotation = rotation
+
+            //            };
+            //            EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+
+            //        }
+
+
+            //    }
+
+
+
+            //}
 
             {
-                if (base.fixedAge >= (baseDuration - (duration / 4 * this.attackSpeedStat * fajin)))
+                if (base.fixedAge >= (baseDuration - (duration / fireTime)))
                 {
+
+                    dekucon.DANGERSENSE.Stop();
                     bool active = NetworkServer.active;
                     if (active && base.characterBody.HasBuff(Modules.Buffs.counterBuff))
                     {

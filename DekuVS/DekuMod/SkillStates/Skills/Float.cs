@@ -37,6 +37,7 @@ namespace DekuMod.SkillStates
         public static SkillDef utilityDef = Deku.floatcancelSkillDef;
         public static SkillDef specialDef = Deku.floatdelawareSkillDef;
 
+
         //private NemforcerGrabController grabController;
 
         public override void OnEnter()
@@ -107,7 +108,7 @@ namespace DekuMod.SkillStates
                 }, true);
 
             }
-
+            
             base.PlayAnimation("FullBody, Override", "FloatBegin", "Attack.playbackRate", Float.jumpDuration);
             AkSoundEngine.PostEvent(687990298, this.gameObject);
             AkSoundEngine.PostEvent(1918362945, this.gameObject);
@@ -158,7 +159,6 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
 
             if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);
             if (this.slamCenterIndicatorInstance) EntityState.Destroy(this.slamCenterIndicatorInstance.gameObject);
