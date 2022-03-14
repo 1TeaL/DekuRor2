@@ -37,6 +37,8 @@ Adds Deku from My Hero Academia, a high risk survivor which can boost his stats 
 ## Known Issues
 </p> Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
 <br> Pulling enemies with blackwhip combo is fixed so some enemies will be pulled more than others.
+<br> While using float there may be some crashes when using another skill? not sure.
+
 
 ## Overview
     Deku's general game plan is that his base form is safe with range and crowd control but with low damage. 
