@@ -117,14 +117,14 @@ namespace DekuMod.SkillStates
             }
 
 
-            if (base.fixedAge >= (duration /fireTime) && base.fixedAge < (baseDuration - (fireTime)) && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
-            {
-                bool isAuthority = base.isAuthority;
-                if (isAuthority)
-                {
-                    DangerSenseCounter dangersenseCounter= new DangerSenseCounter();;
-                    this.outer.SetNextState(dangersenseCounter);
-                }
+            //if (base.fixedAge >= (duration /fireTime) && base.fixedAge < (baseDuration - (fireTime)) && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+            //{
+                //bool isAuthority = base.isAuthority;
+                //if (isAuthority)
+                //{
+                //    DangerSenseCounter dangersenseCounter= new DangerSenseCounter();
+                //    this.outer.SetNextState(dangersenseCounter);
+                //}
                 //hasFired = true;
                 ////base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
                 //if (base.isAuthority)
@@ -165,7 +165,7 @@ namespace DekuMod.SkillStates
                 //    }
 
 
-            }
+            //}
 
 
             {

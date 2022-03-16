@@ -58,7 +58,21 @@ namespace DekuMod.SkillStates
             counteron = false;
             hasFired = false;
 
-
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
+                damageInfo.position = base.transform.position;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
 
             dekucon = base.GetComponent<DekuController>();
             dekucon.dangersensefreeze = true;
@@ -118,55 +132,55 @@ namespace DekuMod.SkillStates
             }
 
 
-            if (base.fixedAge >= (duration / fireTime) && base.fixedAge < (baseDuration - (fireTime)) && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
-            {
-                bool isAuthority = base.isAuthority;
-                if (isAuthority)
-                {
-                    DangerSenseCounter dangersenseCounter = new DangerSenseCounter(); ;
-                    this.outer.SetNextState(dangersenseCounter);
-                }
-                //hasFired = true;
-                ////base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
-                //if (base.isAuthority)
-                //{
-                //    blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient * fajin;
-                //    blastAttack.position = base.characterBody.corePosition;
-                //    blastAttack.Fire();
-                //    base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", duration / 2);
-                //    Ray aimRay = base.GetAimRay();
+            //if (base.fixedAge >= (duration / fireTime) && base.fixedAge < (baseDuration - (fireTime)) && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+            //{
+            //    bool isAuthority = base.isAuthority;
+            //    if (isAuthority)
+            //    {
+            //        DangerSenseCounter dangersenseCounter = new DangerSenseCounter(); ;
+            //        this.outer.SetNextState(dangersenseCounter);
+            //    }
+            //    //hasFired = true;
+            //    ////base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
+            //    //if (base.isAuthority)
+            //    //{
+            //    //    blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient * fajin;
+            //    //    blastAttack.position = base.characterBody.corePosition;
+            //    //    blastAttack.Fire();
+            //    //    base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", duration / 2);
+            //    //    Ray aimRay = base.GetAimRay();
 
-                //    //EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
-                //    //{
-                //    //    origin = aimRay.origin + 5 * aimRay.direction,
-                //    //    scale = 1f,
-                //    //    rotation = Quaternion.LookRotation(aimRay.direction)
+            //    //    //EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
+            //    //    //{
+            //    //    //    origin = aimRay.origin + 5 * aimRay.direction,
+            //    //    //    scale = 1f,
+            //    //    //    rotation = Quaternion.LookRotation(aimRay.direction)
 
-                //    //}, true);
-
-
-                //    for (int i = 0; i <= 5; i++)
-                //    {
-                //        this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                //        float num = 60f;
-                //        Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
-                //        float num2 = 0.01f;
-                //        rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                //        rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-
-                //        EffectData effectData = new EffectData
-                //        {
-                //            scale = 1f,
-                //            origin = base.characterBody.corePosition + this.randRelPos,
-                //            rotation = rotation
-
-                //        };
-                //        EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
-
-                //    }
+            //    //    //}, true);
 
 
-            }
+            //    //    for (int i = 0; i <= 5; i++)
+            //    //    {
+            //    //        this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+            //    //        float num = 60f;
+            //    //        Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+            //    //        float num2 = 0.01f;
+            //    //        rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+            //    //        rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+
+            //    //        EffectData effectData = new EffectData
+            //    //        {
+            //    //            scale = 1f,
+            //    //            origin = base.characterBody.corePosition + this.randRelPos,
+            //    //            rotation = rotation
+
+            //    //        };
+            //    //        EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+
+            //    //    }
+
+
+            //}
 
             {
                 if (base.fixedAge >= (baseDuration - (duration / fireTime)))

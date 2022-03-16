@@ -119,7 +119,7 @@ namespace DekuMod
                 damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
                 damageInfo2.attacker = self.gameObject;
                 damageInfo2.inflictor = null;
-                damageInfo2.damageType = DamageType.BypassArmor | DamageType.WeakOnHit;
+                damageInfo2.damageType = DamageType.BypassArmor | DamageType.Stun1s;
                 damageInfo2.procCoefficient = 2f;
                 damageInfo2.procChainMask = default(ProcChainMask);
 
@@ -133,6 +133,12 @@ namespace DekuMod
                     rotation = Quaternion.LookRotation(enemyPos-self.body.transform.position)
 
                 }, true);
+
+                
+                DangerSenseCounter dangersenseCounter = new DangerSenseCounter();
+                dangersenseCounter.enemyPosition = enemyPos;
+                self.body.gameObject.GetComponent<EntityStateMachine>().SetState(dangersenseCounter);
+                
 
 
                 //if (self.body.characterMotor && self.body.characterDirection)

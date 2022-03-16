@@ -24,6 +24,8 @@ namespace DekuMod.SkillStates
         private Vector3 randRelPos;
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
+        public float initialspeedCoefficient = 2f;
+        public Vector3 enemyPosition;
         public float rollSpeed;
 
         public override void OnEnter()
@@ -99,7 +101,8 @@ namespace DekuMod.SkillStates
             Ray aimray = base.GetAimRay();
             if (base.characterMotor && base.characterDirection)
             {
-                base.characterMotor.rootMotion += -(aimray.direction).normalized * this.rollSpeed;
+                //base.characterMotor.rootMotion += -(aimray.direction).normalized * this.rollSpeed;
+                base.characterMotor.rootMotion += (characterBody.transform.position-enemyPosition).normalized * this.rollSpeed;
             }
         }
         private void RecalculateRollSpeed()
@@ -110,7 +113,7 @@ namespace DekuMod.SkillStates
             {
                 num /= base.characterBody.sprintingSpeedMultiplier;
             }
-            this.rollSpeed = num * Mathf.Lerp(6, 0, base.fixedAge / fireTime);
+            this.rollSpeed = num * Mathf.Lerp(initialspeedCoefficient, 0, base.fixedAge / fireTime);
         }
 
         public override void OnExit()
@@ -125,7 +128,7 @@ namespace DekuMod.SkillStates
 
             Ray aimray = base.GetAimRay();
             base.characterMotor.velocity = Vector3.zero;
-            base.characterMotor.rootMotion += -aimray.direction * this.rollSpeed * Time.fixedDeltaTime;
+            base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed * Time.fixedDeltaTime;
 
             //Increment timer
             stopwatch += Time.fixedDeltaTime;

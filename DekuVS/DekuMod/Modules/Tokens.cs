@@ -44,7 +44,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "PRIMARY2_NAME", "Shoot Style Kick");
             LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill</style>." + Helpers.Passive(" Fa Jin buff makes shoot style kick freeze enemies and deal an extra hit") + ".");
             LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
-            LanguageAPI.Add(prefix + "PRIMARY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge and deal <style=cIsDamage>{100f * StaticValues.counterDamageCoefficient}% damage</style>, to the attacker, weakening them, also deal damage to enemies around Deku. Timing window scales with attackspeed</style>." + Helpers.Passive(" Fa Jin buff freezes and increases the timing window") + ".");
+            LanguageAPI.Add(prefix + "PRIMARY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, stun and deal <style=cIsDamage>{100f * StaticValues.counterDamageCoefficient}% damage</style>, to the attacker and enemies around Deku. Timing window scales with attackspeed</style>." + Helpers.Passive(" Fa Jin buff freezes and increases the timing window") + ".");
 
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_NAME", "Shoot Style Full Cowling 100%");
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_DESCRIPTION", $"Dash through enemies, hitting enemies behind for <style=cIsDamage>{100f * StaticValues.shootbulletDamageCoefficient}% damage scaling by attackspeed</style>." + Helpers.Damage(" Costs 1% of max Health") + ".");
@@ -61,9 +61,9 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY7_NAME", "Shoot Style Kick 100%");
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY7_DESCRIPTION", $"<style=cIsDamage>Freezing. Agile.</style> Dash and kick, freezing and dealing <style=cIsDamage>{100f * StaticValues.shootkick100DamageCoefficient}% damage twice, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill." + Helpers.Damage(" Costs 1% of max Health") + ".");
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY8_NAME", "Danger Sense 45%");
-            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY8_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge and deal <style=cIsDamage>{100f * StaticValues.counterDamageCoefficient}% damage</style>, to the attacker, weakening them, also deal damage to enemies around Deku. Timing window scales with attackspeed</style>." );
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY8_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, stun and deal <style=cIsDamage>{100f * StaticValues.counterDamageCoefficient}% damage</style> to the attacker and enemies around Deku. Timing window scales with attackspeed</style>." );
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY9_NAME", "Danger Sense 100%");
-            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY9_DESCRIPTION", $"<style=cIsDamage>Freezing. Agile.</style> Activate Danger Sense, when timed properly, dodge and deal <style=cIsDamage>{100f * StaticValues.counterDamageCoefficient}% damage</style>, to the attacker, weakening them, also deal damage to enemies around Deku. Timing window scales with attackspeed</style>." + Helpers.Damage(" Costs 5% of max Health") + ".");
+            LanguageAPI.Add(prefix + "BOOSTEDPRIMARY9_DESCRIPTION", $"<style=cIsDamage>Freezing. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, freeze and deal <style=cIsDamage>{100f * StaticValues.counterDamageCoefficient}% damage</style>, to the attacker and enemies around Deku. Timing window scales with attackspeed</style>." + Helpers.Damage(" Costs 5% of max Health") + ".");
             #endregion
 
             #region Secondary
