@@ -20,6 +20,8 @@ namespace DekuMod.Modules.Survivors
         public ParticleSystem OFA;
         public ParticleSystem OFAeye;
         public ParticleSystem FAJIN;
+        public ParticleSystem OKLAHOMA;
+        public ParticleSystem DANGERSENSE;
         private int buffCountToApply;
         public GenericSkill specialSkillSlot;
         string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
@@ -33,6 +35,9 @@ namespace DekuMod.Modules.Survivors
 
         public bool kickBuff;
         public bool kickon;
+
+        public bool counteron;
+        public bool dangersensefreeze;
 
         internal bool endFloat;
         internal bool hasFloatBuff;
@@ -48,10 +53,14 @@ namespace DekuMod.Modules.Survivors
                 OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
                 OFAeye = child.FindChild("OFAlightningeye").GetComponent<ParticleSystem>();
                 FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
+                OKLAHOMA = child.FindChild("Oklahoma").GetComponent<ParticleSystem>();
+                DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
             }
             OFAeye.Stop();
             OFA.Stop();
             FAJIN.Stop();
+            OKLAHOMA.Stop();
+            DANGERSENSE.Stop();
             anim = GetComponentInChildren<Animator>();
             stopwatch = 0f;
 
@@ -182,6 +191,22 @@ namespace DekuMod.Modules.Survivors
             }
             stopwatch += Time.fixedDeltaTime;
 
+            if(counteron)
+            {
+                DANGERSENSE.Play();
+            }
+            if (!counteron)
+            {
+                DANGERSENSE.Stop();
+            }
+            if (body.HasBuff(Modules.Buffs.counterBuff))
+            {
+                DANGERSENSE.Play();
+            }
+            if (!body.HasBuff(Modules.Buffs.counterBuff))
+            {
+                DANGERSENSE.Stop();
+            }
             //if (this.hasFloatBuff)
             //{
             //    this.floatStopwatch.Start();

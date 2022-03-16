@@ -76,15 +76,19 @@ namespace DekuMod.SkillStates
                 fajin = 2f;
                 SpeedCoefficient = baseSpeedCoefficient * 1.5f;
                 damageType = DamageType.Stun1s | DamageType.BypassArmor;
+                dekucon.RemoveBuffCount(50);
             }
             else
             {
+                dekucon.AddToBuffCount(10);
                 hitboxName = "BodyHitbox";
                 fajin = 1f;
                 SpeedCoefficient = baseSpeedCoefficient;
                 damageType = DamageType.SlowOnHit;
             }
-            base.PlayAnimation("RightArm, Override", "Blackwhip", "attack.playbackRate", duration);
+            //base.PlayAnimation("RightArm, Override", "Blackwhip", "attack.playbackRate", duration);
+
+            base.PlayCrossfade("RightArm, Override", "Blackwhip", "Attack.playbackRate", this.duration, this.duration / 2);
 
             this.muzzleString = "RHand";
             if (dekucon.isMaxPower)
@@ -149,7 +153,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;
             //base.characterMotor.velocity = Vector3.zero;
-            base.PlayCrossfade("RightArm, Override", "BufferEmpty", 0f);
+            //base.PlayCrossfade("RightArm, Override", "BufferEmpty", 0f);
             base.OnExit();
         }
         protected OverlapAttack CreateAttack(HitBoxGroup hitBoxGroup)

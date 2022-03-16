@@ -13,11 +13,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  -
+  - 
   - Water
   - UI
-  -
-  -
+  - 
+  - 
   - FakeActor
   - NoCollision
   - Pickups
@@ -25,23 +25,23 @@ TagManager:
   - EntityPrecise
   - Debris
   - Projectile
-  - CollideWithCharacterHullOnly
+  - Background
   - ManualRender
   - Ragdoll
   - NoDraw
   - PrefabBrush
   - PostProcess
   - UI, WorldSpace
-  - PlayerBody
-  - EnemyBody
-  - TriggerZone
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

@@ -12,10 +12,10 @@ namespace DekuMod.SkillStates
 	{
 
 		public static Vector3 CameraPosition = new Vector3(1.8f, -2.4f, -8f);
-		public static float StLouis45Force = 3000f;
-		public static float StLouis45ProcCoefficient = 1f;
-		public static float StLouis45baseRadius = 24f;
-		public static float StLouis45Radius;
+		public static float Force = 3000f;
+		public static float ProcCoefficient = 1f;
+		public static float baseRadius = 24f;
+		public static float Radius;
         public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         //public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/GrandparentPreSpawnEffect");
         public float duration;
@@ -57,7 +57,7 @@ namespace DekuMod.SkillStates
                 EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
                 {
                     origin = base.transform.position,
-                    scale = StLouis45Radius * 2,
+                    scale = Radius * 2,
                     rotation = rotation
                 }, false);
 
@@ -68,6 +68,12 @@ namespace DekuMod.SkillStates
 				this.outer.SetNextStateToMain();
 				return;
 			}
+
+			
+
+
+
+
 		}
 
 
@@ -85,9 +91,11 @@ namespace DekuMod.SkillStates
 			this.hasFired = false;
 			this.duration = this.baseDuration;
 			base.characterMotor.velocity = Vector3.zero;
-			StLouis45Radius = StLouis45baseRadius * this.attackSpeedStat/2;
+			Radius = baseRadius * this.attackSpeedStat/2;
 
-			base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
+			//base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
+			//base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
+			base.PlayCrossfade("Fullbody, Override", "LegSmash", duration / 2);
 
 			AkSoundEngine.PostEvent(687990298, this.gameObject);
 			if (!this.slamIndicatorInstance)
@@ -98,7 +106,7 @@ namespace DekuMod.SkillStates
 
 		public override void OnExit()
 		{
-			base.PlayCrossfade("Fullbody, Override", "LegSmashExit", 0.1f);
+			//base.PlayCrossfade("Fullbody, Override", "LegSmashExit", 0.1f);
             //base.PlayAnimation("Fullbody, Override", "LegSmashExit", "Attack.playbackRate", 0.1f);
             //base.PlayAnimation("Body, Override", "IdleIn", "Attack.playbackRate", 0.01f);
 
@@ -118,10 +126,10 @@ namespace DekuMod.SkillStates
 		{
 			if (ArrowRain.areaIndicatorPrefab)
 			{
-				Vector3 position = base.transform.position + base.characterDirection.forward * (StLouis45Radius - 2);
+				Vector3 position = base.transform.position + base.characterDirection.forward * (Radius - 2);
 				this.slamIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab).transform;
 				this.slamIndicatorInstance.transform.position = position;
-				this.slamIndicatorInstance.localScale = Vector3.one * StLouis45Radius;
+				this.slamIndicatorInstance.localScale = Vector3.one * Radius;
 			}
 		}
 
@@ -129,7 +137,7 @@ namespace DekuMod.SkillStates
 		{
 
             //base.GetAimRay();
-            Collider[] array = Physics.OverlapSphere(base.transform.position + base.characterDirection.forward * StLouis45Radius, (StLouis45Radius + 2));
+            Collider[] array = Physics.OverlapSphere(base.transform.position + base.characterDirection.forward * Radius, (Radius + 2));
 			int num = 0;
 			int num2 = 0;
 			while (num < array.Length && (float)num2 < 1000000f)
@@ -147,12 +155,12 @@ namespace DekuMod.SkillStates
 					{
 						
 						DamageInfo damageInfo = new DamageInfo();
-						damageInfo.damage = this.damageStat * Modules.StaticValues.StLouis45DamageCoefficient;
+						damageInfo.damage = this.damageStat * Modules.StaticValues.stlouis45DamageCoefficient;
 						damageInfo.attacker = base.gameObject;
 						damageInfo.inflictor = base.gameObject;
-						damageInfo.force = base.GetAimRay().direction.normalized * StLouis45Force;
+						damageInfo.force = base.GetAimRay().direction.normalized * Force;
 						damageInfo.crit = base.RollCrit();
-						damageInfo.procCoefficient = StLouis45ProcCoefficient;
+						damageInfo.procCoefficient = ProcCoefficient;
 						damageInfo.position = component.transform.position;
 						damageInfo.damageType = DamageType.Stun1s;
 						component.TakeDamage(damageInfo);
@@ -169,7 +177,7 @@ namespace DekuMod.SkillStates
 		{
 			if (this.slamIndicatorInstance)
 			{
-				Vector3 position = base.transform.position + base.characterDirection.forward * StLouis45Radius;
+				Vector3 position = base.transform.position + base.characterDirection.forward * Radius;
 				this.slamIndicatorInstance.transform.position = position;
 			}
 		}

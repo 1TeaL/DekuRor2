@@ -20,7 +20,7 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			this.duration = baseDuration/this.attackSpeedStat;
-			base.GetModelAnimator().SetFloat("attack.playbackRate", 0.1f);
+			//base.GetModelAnimator().SetFloat("attack.playbackRate", 0.1f);
 			base.PlayAnimation("Rightarm, Override", "Blackwhip", "attack.playbackRate", duration);
 			dekucon = base.GetComponent<DekuController>();
 			hasFired = false;
@@ -48,7 +48,7 @@ namespace DekuMod.SkillStates
             base.FixedUpdate();
 			if (base.fixedAge >= duration && !hasFired)
             {
-				dekucon.AddToBuffCount(20);
+				dekucon.AddToBuffCount(50);
 				hasFired = true;
 
 				this.outer.SetNextStateToMain();
@@ -59,9 +59,9 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-            base.PlayCrossfade("RightArm, Override", "BufferEmpty", duration / 2);
+            //base.PlayCrossfade("RightArm, Override", "BufferEmpty", duration / 2);
 
-			base.GetModelAnimator().SetFloat("attack.playbackRate", 1f);
+			//base.GetModelAnimator().SetFloat("attack.playbackRate", 1f);
 		}
         public override InterruptPriority GetMinimumInterruptPriority()
 		{

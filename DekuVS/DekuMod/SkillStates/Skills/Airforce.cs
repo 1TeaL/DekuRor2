@@ -34,27 +34,31 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             this.duration = Airforce.baseDuration / this.attackSpeedStat;
             this.fireTime = 0.2f * this.duration;
-            base.characterBody.SetAimTimer(2f);
+            base.characterBody.SetAimTimer(this.duration);
             this.muzzleString = "LFinger";
 
             hasFired = false;
 
-            base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, 0.3f);
+            //base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, this.fireTime);
+            base.PlayAnimation("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration);
 
             dekucon = base.GetComponent<DekuController>();
             if (dekucon.isMaxPower)
             {
                 fajin = 2f;
+                dekucon.RemoveBuffCount(50);
             }
             else
             {
                 fajin = 1f;
             }
+
+            dekucon.AddToBuffCount(10);
+
         }
 
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
             base.OnExit();
         }
 
@@ -203,6 +207,7 @@ namespace DekuMod.SkillStates
                     this.Fire();
                     this.Fire();
                     this.Fire();
+
                 }
                 else
                 {

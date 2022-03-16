@@ -70,7 +70,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat * (this.moveSpeedStat / 7));
+            base.healthComponent.AddBarrierAuthority((healthComponent.health / 10) * (this.moveSpeedStat / 7));
 
         }
         public override void FixedUpdate()
@@ -107,7 +107,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = true;
             base.characterMotor.velocity.y = -Manchester45.dropForce;
 
-            base.PlayAnimation("Fullbody, Override", "ManchesterSmash", "Attack.playbackRate", jumpDuration/3);
+            base.PlayAnimation("Fullbody, Override", "ManchesterSmash", "Attack.playbackRate", jumpDuration/3f);
             bool active = NetworkServer.active;
             if (active)
             {

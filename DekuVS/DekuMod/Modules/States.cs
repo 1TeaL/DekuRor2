@@ -23,7 +23,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(DetroitRelease));
             entityStates.Add(typeof(Detroit100));
             entityStates.Add(typeof(Detroit100Release));
-            entityStates.Add(typeof(DelawareSmash));
+            entityStates.Add(typeof(DelawareSmash100));
             entityStates.Add(typeof(StLouis45));
 
             entityStates.Add(typeof(OFAstate));
@@ -58,6 +58,25 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(ShootStyleDashAttack100));
             entityStates.Add(typeof(ShootStyleKick45));
             entityStates.Add(typeof(ShootStyleKick100));
+
+
+            entityStates.Add(typeof(DelawareSmash));
+            entityStates.Add(typeof(DelawareSmash45));
+            entityStates.Add(typeof(DangerSense));
+            entityStates.Add(typeof(DangerSense45));
+            entityStates.Add(typeof(DangerSense100));
+            entityStates.Add(typeof(DangerSenseCounter));
+            entityStates.Add(typeof(Float));
+            entityStates.Add(typeof(Float45));
+            entityStates.Add(typeof(Float100));
+            entityStates.Add(typeof(FloatCancel));
+            entityStates.Add(typeof(FloatCancel45));
+            entityStates.Add(typeof(FloatCancel100));
+            entityStates.Add(typeof(StLouis));
+            entityStates.Add(typeof(StLouis100));
+            entityStates.Add(typeof(Oklahoma));
+            entityStates.Add(typeof(Oklahoma45));
+            entityStates.Add(typeof(Oklahoma100));
         }
     }
 }

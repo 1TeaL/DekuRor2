@@ -30,6 +30,8 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
 
+            base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
+            //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
             speedattack = attackSpeedStat / 2;
             if (speedattack < 1)
             {
@@ -45,8 +47,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = false;
 
 
-
-            base.PlayAnimation("RightArm, Override", "Blackwhip");
+            //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
 
             EffectManager.SpawnEffect(Modules.Assets.blackwhipforward, new EffectData
             {
@@ -68,7 +69,7 @@ namespace DekuMod.SkillStates
             blastAttack.baseForce = -1.5f * maxWeight * Modules.StaticValues.blackwhipPull;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = DamageType.Stun1s;
-            blastAttack.attackerFiltering = AttackerFiltering.Default;
+            blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
             //EffectData effectData = new EffectData();
@@ -128,7 +129,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat * this.attackSpeedStat);
+            base.healthComponent.AddBarrierAuthority((healthComponent.health / 20) * this.attackSpeedStat);
 
         }
 
@@ -138,7 +139,7 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
 
-            base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
+            //base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
 
             base.OnExit();
         }

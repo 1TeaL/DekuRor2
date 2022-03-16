@@ -32,6 +32,11 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
             speedattack = attackSpeedStat / 2;
+
+            base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
+            //base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", duration);
+            //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
+
             if (speedattack < 1)
             {
                 speedattack = 1;
@@ -40,6 +45,7 @@ namespace DekuMod.SkillStates
             if (dekucon.isMaxPower)
             {
                 fajin = 2f;
+                dekucon.RemoveBuffCount(50);
             }
             else
             {
@@ -66,7 +72,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = false;
 
 
-            base.PlayAnimation("RightArm, Override", "Blackwhip");
 
             EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
             {
@@ -87,16 +92,17 @@ namespace DekuMod.SkillStates
             blastAttack.baseForce = -maxWeight * Modules.StaticValues.blackwhipPull * fajin;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = damageType;
-            blastAttack.attackerFiltering = AttackerFiltering.Default;
+            blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
-                //EffectData effectData = new EffectData();
-                //effectData.origin = theSpot2;
-                //effectData.scale = (blastRadius / 5) * this.attackSpeedStat;
-                //effectData.rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
+            //EffectData effectData = new EffectData();
+            //effectData.origin = theSpot2;
+            //effectData.scale = (blastRadius / 5) * this.attackSpeedStat;
+            //effectData.rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
 
-                //EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
+            //EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
 
+            dekucon.AddToBuffCount(10);
         }
 
         public void GetMaxWeight()
@@ -147,7 +153,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat *speedattack * fajin);
+            base.healthComponent.AddBarrierAuthority((healthComponent.health/20) *speedattack * fajin);
 
         }
 
@@ -156,8 +162,7 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
-            base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
+            //base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
             base.OnExit();
         }
 

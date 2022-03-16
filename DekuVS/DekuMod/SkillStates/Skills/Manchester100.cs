@@ -152,7 +152,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat * (this.moveSpeedStat/7));
+            base.healthComponent.AddBarrierAuthority((healthComponent.health / 20) * (this.moveSpeedStat/7));
 
         }
         public override void FixedUpdate()
@@ -189,7 +189,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = true;
             base.characterMotor.velocity.y = -Manchester100.dropForce;
 
-            base.PlayAnimation("Fullbody, Override", "ManchesterSmash", "Attack.playbackRate", jumpDuration/3);
+            base.PlayAnimation("Fullbody, Override", "ManchesterSmash", "Attack.playbackRate", jumpDuration/3f);
             bool active = NetworkServer.active;
             if (active)
             {
@@ -229,7 +229,7 @@ namespace DekuMod.SkillStates
                         scale = 1f,
                         rotation = Quaternion.LookRotation(aimRay.direction)
                     }, true);
-                    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                    damageType = DamageType.Stun1s;
                 }
                 else
                 {
@@ -243,7 +243,7 @@ namespace DekuMod.SkillStates
                 blastAttack.position = base.characterBody.footPosition;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat/7);
+                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat/7f);
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = Manchester100.slamForce;
                 blastAttack.teamIndex = base.teamComponent.teamIndex; 

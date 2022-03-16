@@ -2,6 +2,7 @@
 using BepInEx.Bootstrap;
 using DekuMod.Modules;
 using DekuMod.Modules.Survivors;
+using DekuMod.SkillStates;
 using R2API.Utils;
 using RoR2;
 using RoR2.Projectile;
@@ -26,6 +27,10 @@ namespace DekuMod
         "PrefabAPI",
         "LanguageAPI",
         "SoundAPI",
+        "NetworkingAPi",
+        "SkinAPI",
+        "LoadoutAPI",
+        "DamageAPI"
     })]
 
     public class DekuPlugin : BaseUnityPlugin
@@ -38,7 +43,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "2.2.0";
+        public const string MODVERSION = "3.0.1";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -48,6 +53,7 @@ namespace DekuMod
 
         public static DekuPlugin instance;
         public static CharacterBody DekuCharacterBody;
+        public DekuController dekucon;
 
         private void Awake()
         {
@@ -93,10 +99,66 @@ namespace DekuMod
             On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
-            On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;        
+            On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
         }
 
-       
+        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        {
+            if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+            {
+                damageInfo.damage = 0f;
+                self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+
+                var damageInfo2 = new DamageInfo();
+
+                damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
+                damageInfo2.position = damageInfo.attacker.transform.position;
+                damageInfo2.force = Vector3.zero;
+                damageInfo2.damageColorIndex = DamageColorIndex.Default;
+                damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                damageInfo2.attacker = self.gameObject;
+                damageInfo2.inflictor = null;
+                damageInfo2.damageType = DamageType.BypassArmor | DamageType.WeakOnHit;
+                damageInfo2.procCoefficient = 2f;
+                damageInfo2.procChainMask = default(ProcChainMask);
+
+                damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+
+                Vector3 enemyPos = damageInfo.attacker.transform.position;
+                EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                {
+                    origin = self.body.transform.position,
+                    scale = 1f,
+                    rotation = Quaternion.LookRotation(enemyPos-self.body.transform.position)
+
+                }, true);
+
+
+                //if (self.body.characterMotor && self.body.characterDirection)
+                //{
+                //    self.body.characterMotor.rootMotion += (self.body.transform.position-damageInfo.attacker.transform.position).normalized * self.body.moveSpeed; 
+                //}
+
+                EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
+                foreach (EntityStateMachine stateMachine in stateMachines)
+                {
+                    if (stateMachine.customName == "Body")
+                    {                   
+
+                        self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
+                        {
+                            enemyPosition = enemyPos
+                        });
+
+
+                    }
+
+                }
+
+            }
+            orig.Invoke(self, damageInfo);
+        }
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
@@ -110,6 +172,7 @@ namespace DekuMod
                 self.acceleration *= 2f;
 
             }
+
 
             bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
             if (fajin)
@@ -200,9 +263,9 @@ namespace DekuMod
 
             if (self)
             {
-                if (self.HasBuff(Modules.Buffs.armorBuff))
+                if (self.HasBuff(Modules.Buffs.oklahomaBuff))
                 {
-                    self.armor += 300f;
+                    self.armor *= 3f;
                 }
             }
         }

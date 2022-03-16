@@ -21,6 +21,7 @@ namespace DekuMod.Modules
         internal const float shootbulletDamageCoefficient = 2f;
         internal const float fajinDamageCoefficient = 0.5f;
         internal const float airforce100DamageCoefficient = 2f;
+        internal const float counterDamageCoefficient = 6f;
 
         internal const float blackwhipDamageCoefficient = 1f;
         internal const float manchesterDamageCoefficient = 3f;
@@ -29,12 +30,16 @@ namespace DekuMod.Modules
         internal const float blackwhip45DamageCoefficient = 1f;
         internal const float blackwhip100DamageCoefficient = 2f;
         internal const float blackwhipshootDamageCoefficient = 4f;
+        internal const float stlouisDamageCoefficient = 3f;
+        internal const float stlouis100DamageCoefficient = 6f;
 
         internal const float detroit100DamageCoefficient = 6f;
         internal const float detroitDamageCoefficient = 6f;
         internal const float detroit45DamageCoefficient = 6f;
-        internal const float StLouis45DamageCoefficient = 6f;
+        internal const float stlouis45DamageCoefficient = 6f;
         internal const float delawareDamageCoefficient = 6f;
+        internal const float delaware45DamageCoefficient = 6f;
+        internal const float delaware100DamageCoefficient = 6f;
         internal const float shootattackDamageCoefficient = 1f;
         internal const float shootattack45DamageCoefficient = 1.5f;
         internal const float shootattack100DamageCoefficient = 1f;
@@ -42,11 +47,16 @@ namespace DekuMod.Modules
         internal const float shootbulletstun45DamageCoefficient = 3f;
         internal const float shootbulletstun100DamageCoefficient = 1f;
         internal const float smokescreenDamageCoefficient = 1f;
+        internal const float floatDamageCoefficient = 4f;
+        internal const float oklahomaDamageCoefficient = 1f;
+        internal const float oklahoma45DamageCoefficient = 3f;
+        internal const float oklahoma100DamageCoefficient = 2f;
+
 
 
         internal const float blackwhipPull = 8f;
 
-        internal const int fajinMaxStack = 100;
+        internal const int fajinMaxStack = 200;
         internal const int kickMaxStack= 4;
         internal const int fajinMaxPower = 50;
         internal const float fajinMaxMultiplier = 2f;

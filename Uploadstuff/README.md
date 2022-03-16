@@ -1,20 +1,45 @@
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
-#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571.
+#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. https://ko-fi.com/tealpopcorn
 ## Latest Changelog, Next update(s)
+- 3.0.1 
+    - changed deku mod version in code
+- 3.0.0
 
-- 2.2.0
+    -  Updated to patch 1.2.2
+    -  Fixed logbook not showing, Fixed effects like barrier or opal having their center on his feet
+    -  Added buff icons with slightly different colours than before
+    -  New Model! (and some new animations!- idle, running, jumping, falling courtesy of TCoolDzn)
+    -  Skill Reworks/Balance changes!
+        - Adjusted barrier gain for manchester and blackwhip to % of max health instead of base damage. (This is an overall nerf)
+        - Slight Fa jin rework- I've found that running around to build up the Fa jin stacks is not the best, for now:
+             - Increased max buff count to 200 
+             - Fa Jin primary grants 25 stacks (ancient scepter gives 50)
+             - All skills grant 10 stacks
+             - Stacks are only consumed when there are 50 stacks
 
-    -  updated to void patch
+    -  New Skills!
+        - Primary skill- Danger Sense. Activate danger sense, the next attack will be dodged and the attacker will take damage. If timed properly, hit enemies around you as well.
+        - Secondary skill- St louis smash airforce. Kick ranged blasts of air pressure in front of you (St louis 45% instead will be just in front of you, 100% has range again).
+        - Utility Skill changes- Shoot Style (utility 1) and Shoot Style Full Cowling (utility 2)
+             - Shoot Style has been changed to Float- a skill that sends you up, disabling gravity and changing your
+ special to Delaware Smash. Deactivate the skill by pressing the button again. 
+             - Shoot Style Full Cowling has been changed to Oklahoma Smash- while holding the skill, knockback enemies around you and have increased armor at the cost of slower movespeed.
 - Next update(s)
-    -  Update to new model, add new primary and secondary, rework skills
+    -  Further skill reworks
 
-<img src="https://user-images.githubusercontent.com/93917577/157029633-0196dd84-4e06-46af-a6fb-1c2f4ae125f0.PNG">
+<img src="https://user-images.githubusercontent.com/93917577/158124577-1fcbdcfb-8697-4dba-8e53-207ad1e6d4e8.PNG">
 
 ## Known Issues
-</p> Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
-<br> Pulling enemies with blackwhip combo is fixed so some enemies will be pulled more than others.
+Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
+
+Pulling enemies with blackwhip combo is fixed so some enemies will be pulled more than others.
+
+There may be crashes when using float or manchester? can't replicate it consistently.
+
+Dangersense may not be networked properly as of now.
+
 
 ## Overview
     Deku's general game plan is that his base form is safe with range and crowd control but with low damage. 
@@ -31,6 +56,7 @@ Adds Deku from My Hero Academia, a high risk survivor which can boost his stats 
 ## Base Skills
 ### Passive
 Deku has innate increased health regen the lower his health is. He has a double jump. He can sprint in any direction.
+
 <table>
 <thead>
   <tr>
@@ -57,6 +83,13 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Freezes enemies. <br>Hits an additional time.</td>
   </tr>
   <tr>
+    <td>Danger <br>Sense<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
+    <td>Activate Danger Sense, when timed properly, dodge and reset the CD.<br>Weakens and deals 600% damage to the attacker and stuns those around you.<br>Attackspeed increases active window.<br></td>
+    <td>CD: 5s.<br>Proc: 2.<br></td>
+    <td>Freezes enemies.<br>Larger active window.</td>
+  </tr>
+  <tr>
     <td>Blackwhip<br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/144508171-f67f0493-5ed4-4125-b5e7-56b7b32dfa1a.png" width="100" height="100"></td>
     <td>Pulls and stuns enemies in front for 5x100% damage. <br>Gain barrier on hit. <br>Attackspeed increases the pull radius and barrier gain.</td>
@@ -71,18 +104,25 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Extra initial hit.<br>Doubles barrier gain. </td>
   </tr>
   <tr>
-    <td>Shoot Style<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Dashes and hits enemies for 100% damage multiple times while having invincibility during the attack (Basically mercenary's eviscerate).</td>
-    <td>Proc: 0.5.<br>CD: 6s.</td>
-    <td>Hold for longer duration.</td>
+    <td>Float<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158124453-6c110889-72ca-41df-9801-50e924675ed1.PNG" width="100" height="100"></td>
+    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Press the button again to cancel Float.</td>
+    <td>CD: 10s.<br></td>
+    <td>Deal 400% damage <br>around you.</td>
   </tr>
   <tr>
-    <td>Shoot Style <br>Full Cowling<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144509040-5999395c-19e7-40bb-9246-d2eec5d52257.png" alt="Image" width="100" height="100"></td>
-    <td>Dash through enemies, hitting and stunning enemies behind, dealing 100% damage.<br>Attackspeed increases the number of attacks.</td>
-    <td>Proc: 1.<br>CD: 4s.<br>Stock: 2.</td>
-    <td>Doubles number of hits.</td>
+    <td>Delaware<br>Smash<br>100%<br>Special</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/144508192-f0969ea2-2e50-4c33-93ae-1b5f27114889.png" alt="Image" width="100" height="100"></td>
+    <td>Send a blast forward, stunning and dealing 600% damage to enemies in front, while sending you backwards as well.<br>Costs 10% of max Health.</td>
+    <td>Proc: 2.<br>CD: 4s.</td>
+    <td>Doubles distance travelled.</td>
+  </tr>
+  <tr>
+    <td>Oklahoma<br>Smash<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016505-965f388a-5b0d-48bb-9aeb-8cdf3177ad6b.png" width="100" height="100"></td>
+    <td>Hold the button to spin around, knocking back and dealing 100% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br></td>
+    <td>Proc: 1.<br>CD: 6s.<br></td>
+    <td>Doubles number of hits.<br>AOE is larger.<br>0.4x movespeed.</td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br>Utility</td>
@@ -93,6 +133,7 @@ Deku has innate increased health regen the lower his health is. He has a double 
   </tr>
 </tbody>
 </table>
+
 
 ## Special Skills
 <table>
@@ -183,6 +224,19 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Dash and kick, dealing 2x100% damage scaling based on movespeed.<br> Freezes every 4th hit.<br>Resets CD on hit and resetting all cooldowns on kill.<br>Costs 1% of max Health.</td>
     <td>Proc: 1.<br>CD: 6s.</td>
   </tr>
+<tr>
+ <tr>
+    <td>Danger <br>Sense <br>45%<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
+    <td>Activate Danger Sense, when timed properly, dodge and reset the CD.<br>Deal 600% damage to the attacker and stun those around you.<br>Attackspeed increases active window.<br><br></td>
+    <td>CD: 5s<br>Proc: 2.<br></td>
+  </tr>
+  <tr>
+    <td>Danger <br>Sense <br>100%<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
+    <td>Activate Danger Sense, when timed properly, dodge and reset the CD<br>Deal 600% damage to the attacker and freeze those around you.<br>Attackspeed increases active window.<br>Costs 5% of max health.<br></td>
+    <td>CD: 5s<br>Proc: 2.<br></td>
+  </tr>
   <tr>
     <td>Blackwhip<br>45%<br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/145331966-38c60bc5-872a-4a0d-a30e-7238feeec167.png" alt="Image" width="100" height="100"></td>
@@ -208,28 +262,29 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Proc: 1.<br>CD: 5s.</td>
   </tr>
   <tr>
-    <td>Shoot Style<br>45%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Dashes and hits enemies for 150% damage multiple times while having invincibility during the attack.</td>
-    <td>Proc: 0.5.<br>CD: 6s.</td>
+    <tr>
+    <td>Float 45%<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158124453-6c110889-72ca-41df-9801-50e924675ed1.PNG" alt="Image" width="100" height="100"></td>
+    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Press the button again to cancel Float.</td>
+    <td>CD: 10s.<br></td>
   </tr>
   <tr>
-    <td>Shoot Style<br>100%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Dashes and hits enemies for 100% damage multiple times while having invincibility during the attack.<br>Hold the skill to increase the duration to up to 5 seconds, but causing increased negative regen during it.<br>Costs 10% of max Health.</td>
-    <td>Proc: 0.5.<br>CD: 6s.</td>
+    <td>Float 100%<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158124453-6c110889-72ca-41df-9801-50e924675ed1.PNG" alt="Image" width="100" height="100"></td>
+    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Deal 400% damage around you as you jump.<br>Press the button again to cancel Float.<br>Costs 10% of max health.</td>
+    <td>CD: 10s.<br></td>
   </tr>
   <tr>
-    <td>Shoot Style <br>Full Cowling<br>45%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
-    <td>Dash through enemies, hitting and stunning enemies behind, dealing 150% damage.<br>Attackspeed increases the number of attacks.</td>
-    <td>Proc: 1.<br>CD: 4s.<br>Stock: 2.</td>
+    <td>Oklahoma<br>Smash <br>45%<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016505-965f388a-5b0d-48bb-9aeb-8cdf3177ad6b.png" alt="Image" width="100" height="100"></td>
+    <td>Hold the button to spin around, knocking back and dealing 300% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br></td>
+    <td>Proc: 1.<br>CD: 6s.<br></td>
   </tr>
   <tr>
-    <td>Shoot Style <br>Full Cowling<br>100%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
-    <td>Dash through enemies, hitting and stunning enemies behind, dealing 100% damage.<br>On hit, resets the CD.<br>Attackspeed increases the number of attacks.<br>Costs 5% of max Health.</td>
-    <td>Proc: 1.<br>CD: 4s.<br>Stock: 2.</td>
+    <td>Oklahoma<br>Smash<br>100%<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/158016505-965f388a-5b0d-48bb-9aeb-8cdf3177ad6b.png" alt="Image" width="100" height="100"></td>
+    <td>Hold the button to spin around, knocking back and dealing 200% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br>Costs 10% of max health<br></td>
+    <td>Proc: 1.<br>CD: 6s.<br></td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br>45%<br>Utility</td>
@@ -318,14 +373,14 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>Fa Jin</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/148047009-774ef354-e1ab-4f3b-8f19-6bed4a9a7297.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 10 stacks of Fa Jin.<br></td>
+    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 25 stacks of Fa Jin.<br></td>
     <td>Proc: 1.</td>
     <td>Doesn't <br>consume<br>Fa Jin.</td>
   </tr>
   <tr>
     <td>Fa Jin Mastered</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/148047023-2ff7dfdf-b710-4246-a9f1-c51f4e439569.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 20 stacks of Fa Jin.<br></td>
+    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 50 stacks of Fa Jin.<br></td>
     <td>Proc: 1.</td>
     <td>Doesn't <br>consume<br>Fa Jin.</td>
   </tr>
@@ -357,105 +412,11 @@ These stats are prone to change.
 
 ## Changelog
 
-- 2.1.0
+- 2.2.0
 
-    -  Balanced Shoot Style Kick 100%
-          -  I inadvertently buffed shoot style kick last patch, it was because I forgot to actually make the damage fo the move scale by movespeed. 
-          -  This resulted in the current patch move to be a lot stronger, and with 100% freezing and hitting twice (basically double damage), it was nuts. 
-          -  Also, freezing constantly is nuts and makes mithrix a free win, so instead I'm gonna make it such that every 4 hits, (3 if you hit on that 4th one) it will freeze. 
-          -  I've also lowered the damage from 2x300% to 2x100%- it's still strong but less so.
-- 2.0.0
+    -  updated to void patch
+- rest of changelog on github
 
-    -  Added another new alt special - One For All, this skill cycles Deku between OFA base, 45% and 100%. Depending on what base skills you choose, they will be upgraded accordingly. (This was my initial plan with Deku but had no idea, well now I do, and I'll still keep OFA 45% and OFA 100% as alternate skill options.)
-    -  Added lightning effects to Deku's eyes when using OFA 100% to differentiate it from the 45% lightning.
-    -  Updated Character select font colours.
-    -  Renamed skills because of this update.
-          -  The boosted 100% primary st louis smash 100% -> shoot style full cowling 100%. Should have happened a long time ago, the moves are exactly the same mechanically, and st louis smash 45% is also a different move. Although, the 100% version of shoot style full cowling through OFA Cycle will be different as the same values for a primary on a utility won't work. 
-    -  Cleaned up code with skills.
-          -  Fixed blackwhip 45% to properly use its numbers, it was using base blackwhips.
-          -  Smokescreen now properly makes allies invisible if you're not the host.
-          -  Fixed shoot style utility to use its numbers as well instead of using mercenary's eviscerate numbers.
-          -  Made OFA 100% buffs take into account barrier now, so you won't die due to negative regen if you have barrier but low HP.
-    -  Balanced skills.
-          -  Adjusted skill cooldowns.
-          -  Buffed blackwhip combo to 400% damage, added extra attacks when its Fajin Boosted too.
-          -  Changed Shoot Style to now deal 100% per hit (not that it was hitting for the damage I set before), the duration has been adjust to 1 second, and the fajin buffed version has been buffed.
-          -  Buffed blackwhip (and fajin buffed version) and blackwhip 45% damage, 45% also grants barrier now.
-          -  The boosted 100% primary (shoot style full cowling 100%) now has deku take 1% of his health when using it, as the regen buffs are more lenient.
-    -  Improved Fa Jin Buffed skills.
-          -  Blackwhip and blackwhip combo buff as mentioned.
-          -  Shoot style utility allows you to hold the button down to increase the duration, up to (10 seconds), now properly doubles duration and hits as well.
-          -  Shoot style kick primary causes an extra AOE attack with the same damage properties, this should help with having the skill kill any frozen enemies instead of using a different skill.  
-    -  Skills Added.
-          -  Airforce 100%
-          -  Shoot style kick 45%
-          -  Shoot style kick 100%
-          -  Blackwhip 100%
-          -  Manchester 45%
-          -  Manchester 100%
-          -  Shoot Style 45%
-          -  Shoot Style 100%
-          -  Shoot Style Full Cowling 45%
-          -  Shoot Style Full Cowling 100%
-          -  Detroit Smash 45%
-
-- 1.4.0
-
-    -  Added another new alt special - Deku's extra quirks. This comes with new functionality for all skills.
-    -  Rebalanced of OFA 100%- regen is now only -4x, and passive regen works, this means that at some point your HP will actually regen back.
-    -  Nerfed Detroit Smash 100% charging damage since its easier to charge for a longer time, but the initial damage is still the same.
-- 1.3.4
-
-    -  Accidentally increased damage multiplier for OFA 100%(2 to 2.5x): was testing ways to maybe buff OFA 100% but not set yet.
-    -  Lowered the volume of Deku's voice and lowered their chance of playing as well so he doesn't speak everytime.
-
-- 1.3.3 
-
-     - Lowered CD of manchester to 4 seconds (thought 5 was too long).
-     - Networked manchester smash so no more self-damage if you were not the host. 
-	- networked OFA 45% so you can get the buff (don't know how I fixed these). 
-	- Fixed ragdoll by adding a bunch of exclusions to the dynamic bone script. 
-	- Improved suck code for blackwhip and now works in multiplayer if you are not the host. 
-                 - blackwhip and blackwhip 45% rework and rebalance- they now hit multiple times (5x).
-	- Rebalanced Airforce 45% to have greater damage to 150% per bullet but harsher fall-off to further push 45%'s lower range and mobility.
-    - Added Passive to be seen in the loadout now! Also made the sprinting in all directions in built into Deku passively without using a skill. 
-    - ALSO new particles for airforce(s), blackwhip(s), detroit(s), delaware! LMK any thoughts about them.
-- 1.3.2 
-	- Properly credited model maker. 
-	- Made most of his skills to make Deku enter sprinting- since most moves scale of movespeed this buffs them by default and rather than sprinting beforehand. 
-	- Fixed descriptions for skills. 
-	- Fixed regen code for OFA 45% so that it is always 0. 
-	- Buffed OFA 100% so that at the negative regen won't kill you (also- this was previously in but the health costs of his moves could never kill Deku in the first place either) and lowered the negative regen multiplier to x-7. 
-	- Buffed boosted 100% primary by removing the health cost as that was too debilitating. 
-	- Halved duration of invincibility with Shoot Style Kick primary and OFA 100% St Louis primary (since it doesnt cost health). 
-		- Made the damage hitbox of shoot style kick larger to fix the occasions where the hitbox didn't hurt enemies. 
-		- Also adjusted the bouncing of shoot style kick, it was not consistent before. 
-	- Buffed shoot style dash to have greater range. 
-	- Improved code for shoot style so that it doesn't get cancelled by other attacks. 
-	- Set the range of detroit smash (weak version)to be static so that it doesn't grant crazy range but now scales better with movespeed and also scales with attackspeed. 
-	- Nerfed Airforce 45% to be more in line with other 45% skills (made the damage by 80% as when taken into account the damage multiplier for 45% it will be 120% per bullet, before it was 150% per bullet basically and with 5 bullets it was nuts) and also properly made it have 4 bullets instead of 5. 
-	- Updated Overview page. 
-	- Improved code for St Louis 45% so that it puts you in the spot when using it and decreased the duration as well. Improved the radius and made position range of Blackwhip 45% further. Improved ragdoll by having the camera follow Deku as he dies. Also forgot to update the mod version in the code.
-- 1.3.1 
-	- Buffed alternate primary (damage scales by movespeed, gain invincibility during use as well), fixed some naming issues and fixed secondary blackwhip not being the right skill. 
-- 1.3.0 
-	- Changed formula for OFA 100% special such that getting regen items won't negatively affect the skills. 
-	- Added alt primary shoot style kick, alt secondary manchester smash, alt utility detroit smash, alt special OFA 45%. 
-	- renamed boosted 100% skills by adding 100% to them to separate the differences between the detroit smashes. 
-	- Corrected some readme errors- boosted primary invincibility duration should scale down, not remain the same. 
-	- Removed walking animation and used sprinting animation for it as well- just thought it didn't look right. 
-	- Some balance changes such as making the cooldown of 100% boosted primary st louis smash none again.
-- 1.2.0 
-	- Fixed ancient scepter support with proper 10% lifesteal. 
-	- Adjusted boosted primary (added self-damage and changed the speed and duration scaling). Buffed regen passive to accommodate the higher self-damage. Added new Alt skill (Similar to boosted primary, weaker but with stun). Fixed descriptions for skills. Changed colours to descriptions. Added ragdoll. Updated Readme.
-- 1.1.1 
-	- fixed model issues, code clean up. (Forgot to mention previously) Changed effect of boosted primary as it may have been causing memory leaks. Changed menu colour to green. Lowered volume of voice and sfx, changed sfx of primary.
-- 1.1.0 
-	- added Ancient Scepter support.
-- 1.0.1 
-	- removed r2modman from dependencies.
-- 1.0.0 
-	- released
 
 ## Future plans
 ##### Better animations (I animated them myself and they are not great- TCoolDzn is helping me big thanks to him!).
