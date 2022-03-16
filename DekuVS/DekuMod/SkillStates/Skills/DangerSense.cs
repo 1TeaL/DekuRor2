@@ -117,54 +117,56 @@ namespace DekuMod.SkillStates
             }
 
 
-            //if (base.fixedAge >= ((duration / (4 * attackSpeedStat))) && base.fixedAge < (baseDuration - (duration / 4 * this.attackSpeedStat * fajin)) && !hasFired && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
-            //{
+            if (base.fixedAge >= (duration /fireTime) && base.fixedAge < (baseDuration - (fireTime)) && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+            {
+                bool isAuthority = base.isAuthority;
+                if (isAuthority)
+                {
+                    DangerSenseCounter dangersenseCounter= new DangerSenseCounter();;
+                    this.outer.SetNextState(dangersenseCounter);
+                }
+                //hasFired = true;
+                ////base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
+                //if (base.isAuthority)
+                //{
+                //    blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient * fajin;
+                //    blastAttack.position = base.characterBody.corePosition;
+                //    blastAttack.Fire();
+                //    base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", duration / 2);
+                //    Ray aimRay = base.GetAimRay();
 
-            //    hasFired = true;
-            //    //base.PlayCrossfade("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration, this.fireTime);
-            //    if (base.isAuthority)
-            //    {
-            //        blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient * fajin;
-            //        blastAttack.position = base.characterBody.corePosition;
-            //        blastAttack.Fire();
-            //        base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", duration / 2);
-            //        Ray aimRay = base.GetAimRay();
+                //    //EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
+                //    //{
+                //    //    origin = aimRay.origin + 5 * aimRay.direction,
+                //    //    scale = 1f,
+                //    //    rotation = Quaternion.LookRotation(aimRay.direction)
 
-            //        //EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
-            //        //{
-            //        //    origin = aimRay.origin + 5 * aimRay.direction,
-            //        //    scale = 1f,
-            //        //    rotation = Quaternion.LookRotation(aimRay.direction)
-
-            //        //}, true);
-
-
-            //        for (int i = 0; i <= 5; i++)
-            //        {
-            //            this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-            //            float num = 60f;
-            //            Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
-            //            float num2 = 0.01f;
-            //            rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-            //            rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-
-            //            EffectData effectData = new EffectData
-            //            {
-            //                scale = 1f,
-            //                origin = base.characterBody.corePosition + this.randRelPos,
-            //                rotation = rotation
-
-            //            };
-            //            EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
-
-            //        }
+                //    //}, true);
 
 
-            //    }
+                //    for (int i = 0; i <= 5; i++)
+                //    {
+                //        this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+                //        float num = 60f;
+                //        Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+                //        float num2 = 0.01f;
+                //        rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                //        rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+
+                //        EffectData effectData = new EffectData
+                //        {
+                //            scale = 1f,
+                //            origin = base.characterBody.corePosition + this.randRelPos,
+                //            rotation = rotation
+
+                //        };
+                //        EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+
+                //    }
 
 
+            }
 
-            //}
 
             {
                 if (base.fixedAge >= (baseDuration - (duration / fireTime)))

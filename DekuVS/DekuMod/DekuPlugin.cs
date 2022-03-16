@@ -43,7 +43,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "3.0.1";
+        public const string MODVERSION = "3.1.0";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -140,21 +140,21 @@ namespace DekuMod
                 //    self.body.characterMotor.rootMotion += (self.body.transform.position-damageInfo.attacker.transform.position).normalized * self.body.moveSpeed; 
                 //}
 
-                EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
-                foreach (EntityStateMachine stateMachine in stateMachines)
-                {
-                    if (stateMachine.customName == "Body")
-                    {                   
+                //EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
+                //foreach (EntityStateMachine stateMachine in stateMachines)
+                //{
+                //    if (stateMachine.customName == "Body")
+                //    {                   
 
-                        self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
-                        {
-                            enemyPosition = enemyPos
-                        });
+                //        self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
+                //        {
+                //            enemyPosition = enemyPos
+                //        });
 
 
-                    }
+                //    }
 
-                }
+                //}
 
             }
             orig.Invoke(self, damageInfo);
