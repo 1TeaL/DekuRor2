@@ -53,7 +53,6 @@ namespace DekuMod
 
         public static DekuPlugin instance;
         public static CharacterBody DekuCharacterBody;
-        public DekuController dekucon;
 
         private void Awake()
         {
@@ -101,6 +100,22 @@ namespace DekuMod
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
             On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            On.RoR2.HealthComponent.Awake += HealthComponent_Awake;
+        }
+
+        private void HealthComponent_Awake(On.RoR2.HealthComponent.orig_Awake orig, HealthComponent healthComponent)
+        {
+            //if (healthComponent)
+            //{
+            //    if (!healthComponent.gameObject.GetComponent<DangerSenseComponent>())
+            //    {
+            //        healthComponent.gameObject.AddComponent<DangerSenseComponent>();
+            //    }
+                    
+            //}
+
+
+            //orig.Invoke(healthComponent);
         }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
@@ -109,6 +124,10 @@ namespace DekuMod
             {
                 damageInfo.damage = 0f;
                 self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+                Debug.Log(self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
+
+                var dekucon = self.body.gameObject.GetComponent<DekuController>();
+                dekucon.countershouldflip = true;
 
                 var damageInfo2 = new DamageInfo();
 
@@ -123,44 +142,48 @@ namespace DekuMod
                 damageInfo2.procCoefficient = 2f;
                 damageInfo2.procChainMask = default(ProcChainMask);
 
-                damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+                if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
+                    != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+                {
+                    damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+                }
 
                 Vector3 enemyPos = damageInfo.attacker.transform.position;
                 EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
                 {
                     origin = self.body.transform.position,
                     scale = 1f,
-                    rotation = Quaternion.LookRotation(enemyPos-self.body.transform.position)
+                    rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
 
                 }, true);
 
-                
+
                 DangerSenseCounter dangersenseCounter = new DangerSenseCounter();
                 dangersenseCounter.enemyPosition = enemyPos;
                 self.body.gameObject.GetComponent<EntityStateMachine>().SetState(dangersenseCounter);
-                
 
 
-                //if (self.body.characterMotor && self.body.characterDirection)
-                //{
-                //    self.body.characterMotor.rootMotion += (self.body.transform.position-damageInfo.attacker.transform.position).normalized * self.body.moveSpeed; 
-                //}
 
-                //EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
-                //foreach (EntityStateMachine stateMachine in stateMachines)
-                //{
-                //    if (stateMachine.customName == "Body")
-                //    {                   
+                if (self.body.characterMotor && self.body.characterDirection)
+                {
+                    self.body.characterMotor.rootMotion += (self.body.transform.position - damageInfo.attacker.transform.position).normalized * self.body.moveSpeed;
+                }
 
-                //        self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
-                //        {
-                //            enemyPosition = enemyPos
-                //        });
+                EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
+                foreach (EntityStateMachine stateMachine in stateMachines)
+                {
+                    if (stateMachine.customName == "Body")
+                    {
+
+                        self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
+                        {
+                            enemyPosition = enemyPos
+                        });
 
 
-                //    }
+                    }
 
-                //}
+                }
 
             }
             orig.Invoke(self, damageInfo);

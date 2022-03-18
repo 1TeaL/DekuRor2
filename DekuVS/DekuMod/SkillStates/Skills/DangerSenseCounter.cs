@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -25,6 +26,8 @@ namespace DekuMod.SkillStates
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
         public float initialspeedCoefficient = 2f;
+
+        
         public Vector3 enemyPosition;
         public float rollSpeed;
 
@@ -102,7 +105,7 @@ namespace DekuMod.SkillStates
             if (base.characterMotor && base.characterDirection)
             {
                 //base.characterMotor.rootMotion += -(aimray.direction).normalized * this.rollSpeed;
-                base.characterMotor.rootMotion += (characterBody.transform.position-enemyPosition).normalized * this.rollSpeed;
+                base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
             }
         }
         private void RecalculateRollSpeed()
@@ -116,6 +119,18 @@ namespace DekuMod.SkillStates
             this.rollSpeed = num * Mathf.Lerp(initialspeedCoefficient, 0, base.fixedAge / fireTime);
         }
 
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            writer.Write(enemyPosition);
+            base.OnSerialize(writer);
+        }
+
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            enemyPosition = reader.ReadVector3();
+            base.OnDeserialize(reader);
+        }
+
         public override void OnExit()
         {
             base.OnExit();
@@ -124,12 +139,12 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            RecalculateRollSpeed();
+            RecalculateRollSpeed(); 
 
             Ray aimray = base.GetAimRay();
             base.characterMotor.velocity = Vector3.zero;
             base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed * Time.fixedDeltaTime;
-
+            //base.characterMotor.rootMotion += -(aimray.direction).normalized * this.rollSpeed * Time.fixedDeltaTime;
             //Increment timer
             stopwatch += Time.fixedDeltaTime;
 
