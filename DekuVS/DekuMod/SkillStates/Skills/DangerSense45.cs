@@ -47,7 +47,6 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
             this.duration = baseDuration;
-            this.fireTime = duration / (4f * attackSpeedStat * fajin);
             if (this.fireTime < 0.1f)
             {
                 fireTime = 0.1f;
@@ -71,6 +70,8 @@ namespace DekuMod.SkillStates
                 fajin = 1f;
             }
             dekucon.AddToBuffCount(10);
+
+            this.fireTime = duration / (4f * attackSpeedStat * fajin);
 
             blastAttack = new BlastAttack();
             blastAttack.radius = blastRadius * fajin;

@@ -45,7 +45,7 @@
       <HintPath>C:\Users\theod\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\test\BepInEx\plugins\MMHOOK\MMHOOK_RoR2.dll</HintPath>
     </Reference>
     <Reference Include="R2API">
-      <HintPath>C:\Users\theod\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\test\BepInEx\plugins\tristanmcpherson-R2API\R2API\R2API.dll</HintPath>
+      <HintPath>C:\Users\theod\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\the-popcorn-reckoning\BepInEx\plugins\tristanmcpherson-R2API\R2API\R2API.dll</HintPath>
     </Reference>
   </ItemGroup>
 
