@@ -1,5 +1,7 @@
-﻿using DekuMod.Modules.Survivors;
+﻿using DekuMod.Modules.Networking;
+using DekuMod.Modules.Survivors;
 using EntityStates;
+using R2API.Networking.Interfaces;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,14 +13,13 @@ namespace DekuMod.SkillStates
     {
 
         public static float procCoefficient = 2f;
-        public static float baseDuration = 1f;
+        public static float baseDuration = 2f;
         public static float force = 300f;
 
         private float duration;
         private float fireTime;
 
         public float fajin;
-        protected DamageType damageType;
         public DekuController dekucon;
 
         public bool counteron;
@@ -34,7 +35,8 @@ namespace DekuMod.SkillStates
         public DangerSenseComponent dangercon;
 
         public enum DangerState {STARTBUFF, CHECKFLIP, END };
-        public DangerState state; 
+        public DangerState state;
+        public DamageType damageType;
 
         public override void OnEnter()
         {
@@ -54,10 +56,12 @@ namespace DekuMod.SkillStates
             {
                 dekucon.RemoveBuffCount(50);
                 fajin = 2f;
+                damageType = DamageType.Freeze2s;
             }
             else
             {
                 fajin = 1f;
+                damageType = DamageType.SlowOnHit;
             }
             dekucon.AddToBuffCount(10);
 
@@ -76,10 +80,11 @@ namespace DekuMod.SkillStates
             {
                 damageInfo.rejected = true;
 
-                Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
+                
+                //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
 
                 var dekucon = self.body.gameObject.GetComponent<DekuController>();
-                dekucon.countershouldflip = true;
+                //dekucon.countershouldflip = true;
 
                 var damageInfo2 = new DamageInfo();
 
@@ -90,7 +95,7 @@ namespace DekuMod.SkillStates
                 damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
                 damageInfo2.attacker = self.gameObject;
                 damageInfo2.inflictor = null;
-                damageInfo2.damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                damageInfo2.damageType = DamageType.BypassArmor | DamageType.WeakOnHit;
                 damageInfo2.procCoefficient = 2f;
                 damageInfo2.procChainMask = default(ProcChainMask);
 
@@ -109,6 +114,7 @@ namespace DekuMod.SkillStates
 
                 }, true);
 
+                new ForceCounterState(self.body.masterObjectId, enemyPos).Send(R2API.Networking.NetworkDestination.Clients);
                 //if (self.body.characterMotor && self.body.characterDirection)
                 //{
                 //    Debug.Log("pluginmove");
@@ -136,7 +142,7 @@ namespace DekuMod.SkillStates
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = force;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                blastAttack.damageType = DamageType.Stun1s;
+                blastAttack.damageType = damageType;
                 blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 
@@ -162,7 +168,7 @@ namespace DekuMod.SkillStates
                 }
 
 
-                //self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+                self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
 
                 //self.body.gameObject.GetComponent<EntityStateMachine>().SetInterruptState(new FrozenState(), InterruptPriority.Frozen);
 
@@ -202,7 +208,7 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            Debug.Log(state +" "+ base.fixedAge);
+            //Debug.Log(state +" "+ base.fixedAge);
 
             switch (state)
             {
@@ -210,8 +216,8 @@ namespace DekuMod.SkillStates
                     if (base.fixedAge >= fireTime && base.fixedAge < (duration - fireTime)
                 && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
                     {
-                        Debug.Log(fireTime);
-                        Debug.Log("counterstart");
+                        //Debug.Log(fireTime);
+                        //Debug.Log("counterstart");
                         dekucon.DANGERSENSE.Play();
                         bool active = NetworkServer.active;
                         if (active)
@@ -223,26 +229,7 @@ namespace DekuMod.SkillStates
                         state = DangerState.CHECKFLIP;
                     }
                     break;
-                case DangerState.CHECKFLIP:
-                    if (base.fixedAge > fireTime && base.fixedAge < (duration - fireTime))
-                    {
-
-                        Debug.Log("buffmiddle" + base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex));
-                        
-
-                        if (dekucon.countershouldflip)
-                           
-                        {
-                            On.RoR2.HealthComponent.TakeDamage -= HealthComponent_TakeDamage;
-                            Debug.Log("counter");
-
-
-                            DangerSenseCounter dangersenseCounter = new DangerSenseCounter();
-                            this.outer.SetState(dangersenseCounter);
-                        }
-                        
-
-                    }
+                case DangerState.CHECKFLIP:                    
                     if(base.fixedAge > duration - fireTime)
                     {
                         state = DangerState.END;
@@ -252,8 +239,8 @@ namespace DekuMod.SkillStates
                     if (base.fixedAge >= (duration - (fireTime)) && !counteron)
                     {
                         counteron = true;
-                        Debug.Log(duration - fireTime);
-                        Debug.Log("counterend");
+                        //Debug.Log(duration - fireTime);
+                        //Debug.Log("counterend");
                         dekucon.DANGERSENSE.Stop();
                         bool active = NetworkServer.active;
                         if (active && base.characterBody.HasBuff(Modules.Buffs.counterBuff))

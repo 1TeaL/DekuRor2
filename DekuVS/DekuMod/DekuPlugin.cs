@@ -1,8 +1,10 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
 using DekuMod.Modules;
+using DekuMod.Modules.Networking;
 using DekuMod.Modules.Survivors;
 using DekuMod.SkillStates;
+using R2API.Networking;
 using R2API.Utils;
 using RoR2;
 using RoR2.Projectile;
@@ -27,7 +29,7 @@ namespace DekuMod
         "PrefabAPI",
         "LanguageAPI",
         "SoundAPI",
-        "NetworkingAPi",
+        "NetworkingAPI",
         "SkinAPI",
         "LoadoutAPI",
         "DamageAPI"
@@ -76,6 +78,9 @@ namespace DekuMod
 
             // survivor initialization
             new Deku().Initialize();
+
+            //networking
+            NetworkingAPI.RegisterMessageType<ForceCounterState>();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();

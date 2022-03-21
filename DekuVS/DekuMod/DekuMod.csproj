@@ -41,6 +41,9 @@
     <Reference Include="KinematicCharacterController">
       <HintPath>C:\Theodore 1\Steam\SteamApps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\KinematicCharacterController.dll</HintPath>
     </Reference>
+    <Reference Include="MiniRpcLib">
+      <HintPath>C:\Users\theod\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\the-popcorn-reckoning\BepInEx\plugins\wildbook-MiniRpcLib\MiniRpcLib.dll</HintPath>
+    </Reference>
     <Reference Include="MMHOOK_RoR2">
       <HintPath>C:\Users\theod\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\test\BepInEx\plugins\MMHOOK\MMHOOK_RoR2.dll</HintPath>
     </Reference>

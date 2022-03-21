@@ -64,9 +64,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 676
+    y: 476
     width: 1329
-    height: 271
+    height: 471
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 16}
@@ -146,7 +146,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 378
-    height: 676
+    height: 476
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
@@ -266,7 +266,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1329
-    height: 676
+    height: 476
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
     x: 378
     y: 0
     width: 951
-    height: 676
+    height: 476
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 19}
@@ -1016,9 +1016,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 749
+    y: 549
     width: 1328
-    height: 250
+    height: 450
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -1033,19 +1033,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Deku/DekuV2
+    - Assets/Deku/DekuV2/GUI
   m_ViewMode: 1
-  m_StartGridSize: 16
+  m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Deku/DekuV2
-  m_LastFoldersGridSize: 16
+  - Assets/Deku/DekuV2/GUI
+  m_LastFoldersGridSize: 96
   m_LastProjectPath: F:\Theodore 3\GameDev\Mods\DekuRor2\DekuUnity
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c4500000
-    m_LastClickedID: 20676
+    scrollPos: {x: 0, y: 120}
+    m_SelectedIDs: f8500000
+    m_LastClickedID: 20728
     m_ExpandedIDs: 000000007e50000080500000825000008450000086500000885000008a5000008c5000008e50000090500000925000009450000096500000985000009a5000009c5000009e500000a0500000a2500000a4500000a6500000a8500000aa500000ac500000ae500000b0500000b2500000b4500000b6500000b8500000ba500000bc500000be500000c0500000c2500000c4500000c6500000c8500000ca50000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1126,8 +1126,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
-    m_GridSize: 16
+    m_ScrollPosition: {x: 0, y: 243}
+    m_GridSize: 96
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 216
 --- !u!114 &17
@@ -1192,14 +1192,14 @@ MonoBehaviour:
     x: 0
     y: 73
     width: 377
-    height: 655
+    height: 455
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: faebffff
-      m_LastClickedID: -5126
-      m_ExpandedIDs: 86ecffff2252000046520000505200005252000058520000645200007c520000825200008a5200008c5200009c5200009e520000a6520000b8520000c8520000ca520000d0520000d8520000f6520000f85200003453000042530000485300004c53000064530000705300007c5300009e530000a8530000b6530000ba530000ca530000d2530000e2530000ea530000f8530000fe530000125400001a5400001e5400002254000028540000345400003a5400003c5400003e540000445400004e54000052540000625400006e54000072540000845400008654000090540000be540000c4540000ca540000ce540000d0540000f2540000
+      m_SelectedIDs: 72550000
+      m_LastClickedID: 0
+      m_ExpandedIDs: bcf3ffff7c510000a0510000aa510000ac510000b2510000be510000d6510000dc510000e4510000e6510000f6510000f8510000005200001252000022520000245200002a52000050520000525200008e5200009c520000a2520000a6520000be520000ca520000d6520000f8520000025300001053000014530000245300002c5300003c5300004453000052530000585300006c53000074530000785300007c530000825300008e5300009453000096530000985300009e530000a8530000ac530000bc530000c8530000cc530000de530000e0530000ea530000185400001e54000024540000285400002a5400004c540000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1244,10 +1244,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -31622
-    y: -31970
+    x: 378
+    y: 73
     width: 949
-    height: 655
+    height: 455
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
@@ -1259,9 +1259,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.1989957, y: 2.1428232, z: 0.31118464}
+    m_Target: {x: 0.18883157, y: 1.4481285, z: 0.20950794}
     speed: 2
-    m_Value: {x: -0.1989957, y: 2.1428232, z: 0.31118464}
+    m_Value: {x: 0.18883157, y: 1.4481285, z: 0.20950794}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1309,11 +1309,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.07193775, y: 0.0012103452, z: -0.00008774425, w: 0.9974114}
     speed: 2
-    m_Value: {x: 0.21143118, y: 0.12422791, z: -0.02710343, w: 0.96908706}
+    m_Value: {x: 0.21975991, y: -0.0789249, z: 0.0178407, w: 0.97219247}
   m_Size:
-    m_Target: 0.90001744
+    m_Target: 1.5000174
     speed: 2
-    m_Value: 1.2000175
+    m_Value: 1.5000174
   m_Ortho:
     m_Target: 0
     speed: 2

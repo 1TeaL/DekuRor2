@@ -39,7 +39,7 @@ namespace DekuMod.SkillStates
             this.fireTime = duration / (4 * attackSpeedStat);
 
 
-            characterBody.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+            //characterBody.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
 
             dekucon = base.GetComponent<DekuController>();
             base.skillLocator.primary.AddOneStock();
