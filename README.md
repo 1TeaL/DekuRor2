@@ -7,38 +7,33 @@ Adds Deku from My Hero Academia, a high risk survivor which can boost his stats 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. https://ko-fi.com/tealpopcorn
 ## Latest Changelog, Next update(s)
-- 3.0.1 
-    - changed deku mod version in code
-- 3.0.0
+## Deku
+Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
+#### Multiplayer works (hopefully). Standalone Ancient Scepter support BUT DO NOT USE UNTIL IT HAS UPDATED.
+#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. https://ko-fi.com/tealpopcorn
+## Latest Changelog, Next update(s)
+- 3.1.0 
+    - Updated readme to include St louis smash skill (oops)
+    - Fixed networking for DangerSense, it now works for non-hosts too!
+    - Fa Jin Aura appears properly now
+    - Balance Changes
+         - DangerSense CD changes, base- 3s, 45%- 2s, 100%- 1s. DangerSense total duration changes, 2s, 45%- 1.5s, 100%- 1s. These changes aim to differentiate the different versions of DangerSense and to buff it as the CD was too long before.
+         - St Louis Smash secondary now heals based on a portion of your max hp, scaling with attack speed, to give it a niche of its own compared to the other secondary
 
-    -  Updated to patch 1.2.2
-    -  Fixed logbook not showing, Fixed effects like barrier or opal having their center on his feet
-    -  Added buff icons with slightly different colours than before
-    -  New Model! (and some new animations!- idle, running, jumping, falling courtesy of TCoolDzn)
-    -  Skill Reworks/Balance changes!
-        - Adjusted barrier gain for manchester and blackwhip to % of max health instead of base damage. (This is an overall nerf)
-        - Slight Fa jin rework- I've found that running around to build up the Fa jin stacks is not the best, for now:
-             - Increased max buff count to 200 
-             - Fa Jin primary grants 25 stacks (ancient scepter gives 50)
-             - All skills grant 10 stacks
-             - Stacks are only consumed when there are 50 stacks
-
-    -  New Skills!
-        - Primary skill- Danger Sense. Activate danger sense, the next attack will be dodged and the attacker will take damage. If timed properly, hit enemies around you as well.
-        - Secondary skill- St louis smash airforce. Kick ranged blasts of air pressure in front of you (St louis 45% instead will be just in front of you, 100% has range again).
-        - Utility Skill changes- Shoot Style (utility 1) and Shoot Style Full Cowling (utility 2)
-             - Shoot Style has been changed to Float- a skill that sends you up, disabling gravity and changing your
- special to Delaware Smash. Deactivate the skill by pressing the button again. 
-             - Shoot Style Full Cowling has been changed to Oklahoma Smash- while holding the skill, knockback enemies around you and have increased armor at the cost of slower movespeed.
 - Next update(s)
-    -  Further skill reworks
+    -  Further skill reworks, balance changes
 
 <img src="https://user-images.githubusercontent.com/93917577/158124577-1fcbdcfb-8697-4dba-8e53-207ad1e6d4e8.PNG">
 
 ## Known Issues
-</p> Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
-<br> Pulling enemies with blackwhip combo is fixed so some enemies will be pulled more than others.
-<br> While using float there may be some crashes when using another skill? not sure.
+Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
+
+Pulling enemies with blackwhip combo is fixed so some enemies will be pulled more than others.
+
+There may be crashes when using float or manchester? can't replicate it consistently.
+
+Body effects like invisibility don't show up.
+
 
 
 ## Overview
@@ -85,9 +80,9 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>Danger <br>Sense<br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
-    <td>Activate Danger Sense, when timed properly, dodge.<br>Weakens and deals 600% damage to the attacker and stuns those around you.<br>Attackspeed increases active window.<br></td>
-    <td>Proc: 2.<br></td>
-    <td>Freezes enemies.<br>Larger active window.</td>
+    <td>Activate Danger Sense, when timed properly, dodge and reset the CD.<br>Deal 600% damage to the attacker and stun those around you.<br>Attackspeed increases active window.<br>Total duration of 2 seconds.<br></td>
+    <td>CD: 3s<br>Proc: 2.<br></td>
+    <td>Freezes enemies.<br>Increases active window.</td>
   </tr>
   <tr>
     <td>Blackwhip<br>Secondary</td>
@@ -102,6 +97,13 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Jump in the air and slam down, dealing 300% damage and gaining barrier on hit, <br>Scales with movespeed.</td>
     <td>Proc: 1.<br>CD: 4s.</td>
     <td>Extra initial hit.<br>Doubles barrier gain. </td>
+  </tr>
+  <tr>
+    <td>St Louis <br>Smash<br>Airforce<br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 300% damage.<br>Heal on hit, scaling with attackspeed.</td>
+    <td>Proc: 0.2.<br>CD: 4s.<br></td>
+    <td>Doubles range.<br>Doubles healing.</td>
   </tr>
   <tr>
     <td>Float<br>Utility</td>
@@ -225,16 +227,17 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td>Proc: 1.<br>CD: 6s.</td>
   </tr>
 <tr>
+  <tr>
     <td>Danger <br>Sense <br>45%<br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
-    <td>Activate Danger Sense, when timed properly, dodge.<br>Weakens and deals 600% damage to the attacker and stuns those around you.<br>Attackspeed increases active window.<br></td>
-    <td>Proc: 2.<br></td>
+    <td>Activate Danger Sense, when timed properly, dodge and reset the CD<br>Deal 600% damage to the attacker and stun those around you.<br>Attackspeed increases active window.<br>Total duration of 1.5 second.<br>Costs 5% of max health.<br></td>
+    <td>CD: 1s<br>Proc: 2.<br></td>
   </tr>
   <tr>
     <td>Danger <br>Sense <br>100%<br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/158016012-dea38b44-78d5-407b-9218-f8c427e132a7.PNG" alt="Image" width="100" height="100"></td>
-    <td>Activate Danger Sense, when timed properly, dodge.<br>Weakens and deals 600% damage to the attacker and freezes those around you.<br>Attackspeed increases active window.<br>Costs 5% of max health.<br></td>
-    <td>Proc: 2.<br></td>
+    <td>Activate Danger Sense, when timed properly, dodge and reset the CD<br>Deal 600% damage to the attacker and freeze those around you.<br>Attackspeed increases active window.<br>Total duration of 1 second.<br>Costs 5% of max health.<br></td>
+    <td>CD: 1s<br>Proc: 2.<br></td>
   </tr>
   <tr>
     <td>Blackwhip<br>45%<br>Secondary</td>
@@ -259,6 +262,20 @@ Deku has innate increased health regen the lower his health is. He has a double 
     <td><img src="https://user-images.githubusercontent.com/93917577/145331951-692a57ef-3ed0-4ea9-8742-4bfca1a196de.png" alt="Image" width="100" height="100"></td>
     <td>Jump in the air, dealing 300% and slam down, dealing 300% damage. <br>Gain barrier on each hit.<br>Movespeed increases damage and barrier gain.<br>Costs 10% of max Health.</td>
     <td>Proc: 1.<br>CD: 5s.</td>
+  </tr>
+  <tr>
+    <td>St Louis <br>Smash<br>Airforce<br>45%<br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/145332001-e18ba69f-5491-499f-838f-cc26303e1aab.PNG" alt="Image" width="100" height="100"></td>
+    <td>Hit enemies in front of you, stunning and pushing them, dealing 600% damage.</td>
+    <td>Proc: 1.<br>CD: 5s.</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>St Louis <br>Smash<br>Airforce<br>100%<br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 600% damage.<br>Heal on hit, scaling with attackspeed.</td>
+    <td>Proc: 0.2.<br>CD: 6s.<br></td>
+    <td></td>
   </tr>
   <tr>
     <tr>
@@ -411,6 +428,29 @@ These stats are prone to change.
 
 ## Changelog
 
+- 3.0.1 
+    - changed deku mod version in code
+- 3.0.0
+
+    -  Updated to patch 1.2.2
+    -  Fixed logbook not showing, Fixed effects like barrier or opal having their center on his feet
+    -  Added buff icons with slightly different colours than before
+    -  New Model! (and some new animations!- idle, running, jumping, falling courtesy of TCoolDzn)
+    -  Skill Reworks/Balance changes!
+        - Adjusted barrier gain for manchester and blackwhip to % of max health instead of base damage. (This is an overall nerf)
+        - Slight Fa jin rework- I've found that running around to build up the Fa jin stacks is not the best, for now:
+             - Increased max buff count to 200 
+             - Fa Jin primary grants 25 stacks (ancient scepter gives 50)
+             - All skills grant 10 stacks
+             - Stacks are only consumed when there are 50 stacks
+
+    -  New Skills!
+        - Primary skill- Danger Sense. Activate danger sense, the next attack will be dodged and the attacker will take damage. If timed properly, hit enemies around you as well.
+        - Secondary skill- St louis smash airforce. Kick ranged blasts of air pressure in front of you (St louis 45% instead will be just in front of you, 100% has range again).
+        - Utility Skill changes- Shoot Style (utility 1) and Shoot Style Full Cowling (utility 2)
+             - Shoot Style has been changed to Float- a skill that sends you up, disabling gravity and changing your
+ special to Delaware Smash. Deactivate the skill by pressing the button again. 
+             - Shoot Style Full Cowling has been changed to Oklahoma Smash- while holding the skill, knockback enemies around you and have increased armor at the cost of slower movespeed.
 - 2.2.0
 
     -  updated to void patch
