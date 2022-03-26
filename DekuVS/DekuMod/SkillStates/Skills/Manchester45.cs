@@ -70,7 +70,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority((healthComponent.health / 10) * (this.moveSpeedStat / 7));
+            base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 10) * (this.moveSpeedStat / 7));
 
         }
         public override void FixedUpdate()

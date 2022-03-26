@@ -26,13 +26,18 @@ namespace DekuMod.SkillStates
 		protected float stopwatch;
 		private bool hasFired;
 		private Transform slamIndicatorInstance;
+		public float speedattack;
 
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
 			this.stopwatch += Time.fixedDeltaTime;
-			
-			
+			speedattack = attackSpeedStat / 2;
+			if (speedattack < 1)
+			{
+				speedattack = 1;
+			}
+
 			if (!this.slamIndicatorInstance)
 			{
 				this.CreateIndicator();
@@ -120,6 +125,7 @@ namespace DekuMod.SkillStates
 
 		protected virtual void OnHitEnemyAuthority()
 		{
+			base.healthComponent.Heal(((healthComponent.health / 20) * speedattack), default(ProcChainMask), true);
 		}
 
 		private void CreateIndicator()

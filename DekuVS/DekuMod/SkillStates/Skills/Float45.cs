@@ -22,7 +22,6 @@ namespace DekuMod.SkillStates
         public static float slamProcCoefficient = 1f;
         public static float slamForce = 1000f;
 
-        private bool hasFloated;
         private Vector3 flyVector = Vector3.zero;
         private Transform modelTransform;
         private Transform slamIndicatorInstance;
@@ -33,9 +32,12 @@ namespace DekuMod.SkillStates
         protected DamageType damageType;
         public DekuController dekucon;
         private float maxWeight;
+        public float rollSpeed;
+        public float initialspeedCoefficient = 10f;
 
         public static SkillDef utilityDef = Deku.floatcancelSkillDef;
         public static SkillDef specialDef = Deku.floatdelawareSkillDef;
+
 
         //private NemforcerGrabController grabController;
 
@@ -44,10 +46,9 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             this.modelTransform = base.GetModelTransform();
             this.flyVector = Vector3.up;
-            this.hasFloated = false;
             dekucon = base.GetComponent<DekuController>();
 
-            
+
             dekucon.AddToBuffCount(10);
             if (dekucon.isMaxPower)
             {
@@ -110,8 +111,8 @@ namespace DekuMod.SkillStates
             AkSoundEngine.PostEvent(687990298, this.gameObject);
             AkSoundEngine.PostEvent(1918362945, this.gameObject);
 
-            base.characterMotor.Motor.ForceUnground();
-            base.characterMotor.velocity = Vector3.zero;
+            //base.characterMotor.Motor.ForceUnground();
+            //base.characterMotor.velocity = Vector3.zero;
 
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
@@ -127,22 +128,45 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddBuff(Modules.Buffs.floatBuff);
             }
 
-        }
+            RecalculateRollSpeed();
+            //Ray aimray = base.GetAimRay();
 
+            if (base.characterMotor && base.characterDirection)
+            {
+                base.characterMotor.velocity.y = rollSpeed;
+                //base.characterMotor.velocity = (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
+            }
+
+        }
+        private void RecalculateRollSpeed()
+        {
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            this.rollSpeed = num * Mathf.Lerp(initialspeedCoefficient, 0, base.fixedAge / jumpDuration);
+        }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority(this.damageStat * (this.moveSpeedStat / 7));
+            base.healthComponent.AddBarrierAuthority((healthComponent.health / 10) * (this.moveSpeedStat / 7));
 
         }
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if (!this.hasFloated)
+            RecalculateRollSpeed();
+
+            //base.characterMotor.rootMotion += this.flyVector * ((0.6f * this.moveSpeedStat * fajin) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / Float.jumpDuration) * Time.fixedDeltaTime);
+            //base.characterMotor.velocity.y = 0f;
+            if (base.characterMotor && base.characterDirection)
             {
-                base.characterMotor.rootMotion += this.flyVector * ((0.6f * this.moveSpeedStat * fajin) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / Float.jumpDuration) * Time.fixedDeltaTime);
-                base.characterMotor.velocity.y = 0f;
+                base.characterMotor.velocity.y = rollSpeed;
+                //base.characterMotor.velocity = (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
             }
+
 
             if (base.fixedAge >= Float.jumpDuration)
             {
@@ -156,9 +180,9 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
+            base.characterMotor.velocity.y = 0f;
             base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Float.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
             base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Float.specialDef, GenericSkill.SkillOverridePriority.Contextual);
-
 
             if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);
             if (this.slamCenterIndicatorInstance) EntityState.Destroy(this.slamCenterIndicatorInstance.gameObject);
