@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -24,6 +25,9 @@ namespace DekuMod.SkillStates
         private Vector3 randRelPos;
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
+        public float initialspeedCoefficient = 6f;
+
+        
         public Vector3 enemyPosition;
         public float rollSpeed;
 
@@ -34,9 +38,13 @@ namespace DekuMod.SkillStates
             AkSoundEngine.PostEvent(2548270042, this.gameObject);
             this.fireTime = duration / (4 * attackSpeedStat);
 
+
+            //characterBody.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+
             dekucon = base.GetComponent<DekuController>();
             base.skillLocator.primary.AddOneStock();
 
+            dekucon.countershouldflip = false;
             dekucon.DANGERSENSE.Stop();
             if (dekucon.isMaxPower)
             {
@@ -57,49 +65,60 @@ namespace DekuMod.SkillStates
             }
 
 
-            blastAttack = new BlastAttack();
-            blastAttack.radius = blastRadius;
-            blastAttack.procCoefficient = procCoefficient;
-            blastAttack.position = base.characterBody.corePosition;
-            blastAttack.attacker = base.gameObject;
-            blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient;
-            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.baseForce = force;
-            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = damageType;
-            blastAttack.attackerFiltering = AttackerFiltering.Default;
+            //blastAttack = new BlastAttack();
+            //blastAttack.radius = blastRadius;
+            //blastAttack.procCoefficient = procCoefficient;
+            //blastAttack.position = base.characterBody.corePosition;
+            //blastAttack.attacker = base.gameObject;
+            //blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+            //blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient;
+            //blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+            //blastAttack.baseForce = force;
+            //blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+            //blastAttack.damageType = damageType;
+            //blastAttack.attackerFiltering = AttackerFiltering.Default;
 
-            if (base.isAuthority)
-            {
-                blastAttack.Fire();
+            //if (base.isAuthority)
+            //{
+            //    blastAttack.Fire();
 
-                for (int i = 0; i <= 5; i++)
-                {
-                    this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                    float num = 60f;
-                    Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
-                    float num2 = 0.01f;
-                    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+            //    for (int i = 0; i <= 5; i++)
+            //    {
+            //        this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+            //        float num = 60f;
+            //        Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+            //        float num2 = 0.01f;
+            //        rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+            //        rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
 
-                    EffectData effectData = new EffectData
-                    {
-                        scale = 1f,
-                        origin = base.characterBody.corePosition + this.randRelPos,
-                        rotation = rotation
+            //        EffectData effectData = new EffectData
+            //        {
+            //            scale = 1f,
+            //            origin = base.characterBody.corePosition + this.randRelPos,
+            //            rotation = rotation
 
-                    };
-                    EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+            //        };
+            //        EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
 
-                }
-            }
+            //    }
+            //}
             base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip");
+
+            RecalculateRollSpeed();
+            Ray aimray = base.GetAimRay();
 
             if (base.characterMotor && base.characterDirection)
             {
-                base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * moveSpeedStat;
+                base.characterMotor.velocity = -(aimray.direction).normalized * this.rollSpeed;
+                //base.characterMotor.velocity = (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
             }
+
+            //if (base.characterMotor && base.characterDirection)
+            //{
+            //    Debug.Log("statemove");
+            //    //base.characterMotor.rootMotion += -(aimray.direction).normalized * this.rollSpeed;
+            //    base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
+            //}
         }
         private void RecalculateRollSpeed()
         {
@@ -109,7 +128,19 @@ namespace DekuMod.SkillStates
             {
                 num /= base.characterBody.sprintingSpeedMultiplier;
             }
-            this.rollSpeed = num * Mathf.Lerp(6, 0, base.fixedAge / fireTime);
+            this.rollSpeed = num * Mathf.Lerp(initialspeedCoefficient, 0, base.fixedAge / fireTime);
+        }
+
+        public override void OnSerialize(NetworkWriter writer)
+        {
+            writer.Write(enemyPosition);
+            base.OnSerialize(writer);
+        }
+
+        public override void OnDeserialize(NetworkReader reader)
+        {
+            enemyPosition = reader.ReadVector3();
+            base.OnDeserialize(reader);
         }
 
         public override void OnExit()
@@ -120,11 +151,17 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            RecalculateRollSpeed();
+            RecalculateRollSpeed(); 
 
-            base.characterMotor.velocity = Vector3.zero;
-            base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed * Time.fixedDeltaTime;
-
+            Ray aimray = base.GetAimRay();
+            //base.characterMotor.velocity = Vector3.zero;
+            if (base.characterMotor && base.characterDirection)
+            {
+                base.characterMotor.velocity = -(aimray.direction).normalized * this.rollSpeed;
+                //base.characterMotor.velocity = (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
+            }
+            //base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed * Time.fixedDeltaTime;
+            //base.characterMotor.rootMotion += -(aimray.direction).normalized * this.rollSpeed * Time.fixedDeltaTime;
             //Increment timer
             stopwatch += Time.fixedDeltaTime;
 

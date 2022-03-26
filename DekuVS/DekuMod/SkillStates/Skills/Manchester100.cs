@@ -63,7 +63,7 @@ namespace DekuMod.SkillStates
                 }
             }
 
-            if (NetworkServer.active && base.healthComponent && base.isAuthority)
+            if (NetworkServer.active && base.healthComponent)
             {
                 DamageInfo damageInfo = new DamageInfo();
                 damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;

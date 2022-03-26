@@ -47,9 +47,7 @@ namespace DekuMod.SkillStates
             this.hasFloated = false;
             dekucon = base.GetComponent<DekuController>();
 
-            base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Float.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
-            base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Float.specialDef, GenericSkill.SkillOverridePriority.Contextual);
-
+            
             dekucon.AddToBuffCount(10);
             if (dekucon.isMaxPower)
             {
@@ -108,7 +106,7 @@ namespace DekuMod.SkillStates
 
             }
 
-            base.PlayAnimation("FullBody, Override", "FloatBegin", "Attack.playbackRate", Float.jumpDuration);
+            base.PlayAnimation("FullBody, Override", "FloatBegin", "Attack.playbackRate", 1f);
             AkSoundEngine.PostEvent(687990298, this.gameObject);
             AkSoundEngine.PostEvent(1918362945, this.gameObject);
 
@@ -158,6 +156,9 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
+            base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Float.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Float.specialDef, GenericSkill.SkillOverridePriority.Contextual);
+
 
             if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);
             if (this.slamCenterIndicatorInstance) EntityState.Destroy(this.slamCenterIndicatorInstance.gameObject);

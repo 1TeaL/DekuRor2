@@ -36,7 +36,7 @@ namespace DekuMod.Modules.Survivors
         public bool kickBuff;
         public bool kickon;
 
-        public bool counteron;
+        public bool countershouldflip;
         public bool dangersensefreeze;
 
         internal bool endFloat;
@@ -191,22 +191,15 @@ namespace DekuMod.Modules.Survivors
             }
             stopwatch += Time.fixedDeltaTime;
 
-            if(counteron)
-            {
-                DANGERSENSE.Play();
-            }
-            if (!counteron)
-            {
-                DANGERSENSE.Stop();
-            }
-            if (body.HasBuff(Modules.Buffs.counterBuff))
-            {
-                DANGERSENSE.Play();
-            }
-            if (!body.HasBuff(Modules.Buffs.counterBuff))
-            {
-                DANGERSENSE.Stop();
-            }
+            
+            //if (body.HasBuff(Modules.Buffs.counterBuff))
+            //{
+            //    DANGERSENSE.Play();
+            //}
+            //if (!body.HasBuff(Modules.Buffs.counterBuff))
+            //{
+            //    DANGERSENSE.Stop();
+            //}
             //if (this.hasFloatBuff)
             //{
             //    this.floatStopwatch.Start();

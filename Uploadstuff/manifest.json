@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "3.0.1",
+    "version_number": "3.1.0",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "3.0.0 update. New Model! Skills Rework! New Skills! Ror2 1.2.2 update.",
+    "description": "3.1.0 balance changes, danger sense networked, bug fixes. Ror2 1.2.2 update.",
     "dependencies": [
          "tristanmcpherson-R2API-4.0.11"
     ]

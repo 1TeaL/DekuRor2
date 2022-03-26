@@ -1,8 +1,10 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
 using DekuMod.Modules;
+using DekuMod.Modules.Networking;
 using DekuMod.Modules.Survivors;
 using DekuMod.SkillStates;
+using R2API.Networking;
 using R2API.Utils;
 using RoR2;
 using RoR2.Projectile;
@@ -27,7 +29,7 @@ namespace DekuMod
         "PrefabAPI",
         "LanguageAPI",
         "SoundAPI",
-        "NetworkingAPi",
+        "NetworkingAPI",
         "SkinAPI",
         "LoadoutAPI",
         "DamageAPI"
@@ -43,7 +45,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "3.0.1";
+        public const string MODVERSION = "3.1.0";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -53,7 +55,6 @@ namespace DekuMod
 
         public static DekuPlugin instance;
         public static CharacterBody DekuCharacterBody;
-        public DekuController dekucon;
 
         private void Awake()
         {
@@ -78,6 +79,9 @@ namespace DekuMod
             // survivor initialization
             new Deku().Initialize();
 
+            //networking
+            NetworkingAPI.RegisterMessageType<ForceCounterState>();
+
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
 
@@ -100,65 +104,95 @@ namespace DekuMod
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
             On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
-            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            //On.RoR2.HealthComponent.Awake += HealthComponent_Awake;
         }
 
-        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
-        {
-            if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
-            {
-                damageInfo.damage = 0f;
-                self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
-
-                var damageInfo2 = new DamageInfo();
-
-                damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
-                damageInfo2.position = damageInfo.attacker.transform.position;
-                damageInfo2.force = Vector3.zero;
-                damageInfo2.damageColorIndex = DamageColorIndex.Default;
-                damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                damageInfo2.attacker = self.gameObject;
-                damageInfo2.inflictor = null;
-                damageInfo2.damageType = DamageType.BypassArmor | DamageType.WeakOnHit;
-                damageInfo2.procCoefficient = 2f;
-                damageInfo2.procChainMask = default(ProcChainMask);
-
-                damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
-
-                Vector3 enemyPos = damageInfo.attacker.transform.position;
-                EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                {
-                    origin = self.body.transform.position,
-                    scale = 1f,
-                    rotation = Quaternion.LookRotation(enemyPos-self.body.transform.position)
-
-                }, true);
+        //private void HealthComponent_Awake(On.RoR2.HealthComponent.orig_Awake orig, HealthComponent healthComponent)
+        //{
+        //    //if (healthComponent)
+        //    //{
+        //    //    if (!healthComponent.gameObject.GetComponent<DangerSenseComponent>())
+        //    //    {
+        //    //        healthComponent.gameObject.AddComponent<DangerSenseComponent>();
+        //    //    }
+                    
+        //    //}
 
 
-                //if (self.body.characterMotor && self.body.characterDirection)
-                //{
-                //    self.body.characterMotor.rootMotion += (self.body.transform.position-damageInfo.attacker.transform.position).normalized * self.body.moveSpeed; 
-                //}
+        //    //orig.Invoke(healthComponent);
+        //}
 
-                EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
-                foreach (EntityStateMachine stateMachine in stateMachines)
-                {
-                    if (stateMachine.customName == "Body")
-                    {                   
+        //private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        //{
+        //    if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+        //    {
+        //        damageInfo.damage = 0f;
+        //        self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+        //        Debug.Log(self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
 
-                        self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
-                        {
-                            enemyPosition = enemyPos
-                        });
+        //        var dekucon = self.body.gameObject.GetComponent<DekuController>();
+        //        dekucon.countershouldflip = true;
+
+        //        var damageInfo2 = new DamageInfo();
+
+        //        damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
+        //        damageInfo2.position = damageInfo.attacker.transform.position;
+        //        damageInfo2.force = Vector3.zero;
+        //        damageInfo2.damageColorIndex = DamageColorIndex.Default;
+        //        damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+        //        damageInfo2.attacker = self.gameObject;
+        //        damageInfo2.inflictor = null;
+        //        damageInfo2.damageType = DamageType.BypassArmor | DamageType.Stun1s;
+        //        damageInfo2.procCoefficient = 2f;
+        //        damageInfo2.procChainMask = default(ProcChainMask);
+
+        //        if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
+        //            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+        //        {
+        //            damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+        //        }
+
+        //        Vector3 enemyPos = damageInfo.attacker.transform.position;
+        //        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+        //        {
+        //            origin = self.body.transform.position,
+        //            scale = 1f,
+        //            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
+
+        //        }, true);
 
 
-                    }
+        //        DangerSenseCounter dangersenseCounter = new DangerSenseCounter();
+        //        dangersenseCounter.enemyPosition = enemyPos;
+        //        self.body.gameObject.GetComponent<EntityStateMachine>().SetState(dangersenseCounter);
 
-                }
 
-            }
-            orig.Invoke(self, damageInfo);
-        }
+
+        //        if (self.body.characterMotor && self.body.characterDirection)
+        //        {
+        //            self.body.characterMotor.rootMotion += (self.body.transform.position - damageInfo.attacker.transform.position).normalized * self.body.moveSpeed;
+        //        }
+
+        //        EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
+        //        foreach (EntityStateMachine stateMachine in stateMachines)
+        //        {
+        //            if (stateMachine.customName == "Body")
+        //            {
+
+        //                self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
+        //                {
+        //                    enemyPosition = enemyPos
+        //                });
+
+
+        //            }
+
+        //        }
+
+        //    }
+        //    orig.Invoke(self, damageInfo);
+        //}
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {

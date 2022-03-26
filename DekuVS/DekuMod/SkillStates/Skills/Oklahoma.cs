@@ -99,7 +99,7 @@ namespace DekuMod.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Frozen;
+            return InterruptPriority.Death;
         }
         public override void OnExit()
         {

@@ -10,6 +10,7 @@ namespace DekuMod.SkillStates
 {
     public class StLouis100 : BaseSkillState
     {
+        private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
         public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         public float baseDuration = 1f;
         public static float blastRadius = 20f;
@@ -118,7 +119,11 @@ namespace DekuMod.SkillStates
 
         }
 
+        protected virtual void OnHitEnemyAuthority()
+        {
+            base.healthComponent.health += ((healthComponent.health / 20) * speedattack * fajin);
 
+        }
 
 
         public override void OnExit()
@@ -148,7 +153,10 @@ namespace DekuMod.SkillStates
                 blastAttack.position = theSpot;
                 range += rangeaddition;
                 whipage = 0f;
-                blastAttack.Fire();
+                if (blastAttack.Fire().hitCount > 0)
+                {
+                    this.OnHitEnemyAuthority();
+                }
                 EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
                 {
                     origin = theSpot,
@@ -156,7 +164,7 @@ namespace DekuMod.SkillStates
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);
-                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                EffectManager.SpawnEffect(effectPrefab, new EffectData
                 {
                     origin = theSpot,
                     scale = blastRadius,

@@ -81,6 +81,13 @@ namespace DekuMod.SkillStates
                 this.LandingImpact();
                 this.outer.SetNextStateToMain();
             }
+
+            if (this.hasDropped && base.isAuthority && base.fixedAge > basejumpDuration)
+            {
+                this.LandingImpact();
+                this.outer.SetNextStateToMain();
+            }
+
         }
 
         private void StartDrop()
@@ -95,6 +102,9 @@ namespace DekuMod.SkillStates
             {
                 base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
             }
+            
+
+
         }
 
 
