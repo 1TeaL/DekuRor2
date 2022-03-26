@@ -1,15 +1,16 @@
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support BUT DO NOT USE UNTIL IT HAS UPDATED.
-#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. https://ko-fi.com/tealpopcorn
+#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. 
+#### <img src="https://user-images.githubusercontent.com/93917577/160220529-efed5020-90ac-467e-98f2-27b5c162d744.png">
+If you enjoy my work, support me on Ko-fi! https://ko-fi.com/tealpopcorn
 ## Latest Changelog, Next update(s)
-- 3.1.0 
-    - Updated readme to include St louis smash skill (oops)
-    - Fixed networking for DangerSense, it now works for non-hosts too!
-    - Fa Jin Aura appears properly now
+- 3.1.1 
+    - Hopefully fixed Float from causing crashes
+    - Made the healing of St louis smash airforce base and St louis smash airforce 100% properly 'heal', so healing effects should synergise with it.
     - Balance Changes
-         - DangerSense CD changes, base- 3s, 45%- 2s, 100%- 1s. DangerSense total duration changes, 2s, 45%- 1.5s, 100%- 1s. These changes aim to differentiate the different versions of DangerSense and to buff it as the CD was too long before.
-         - St Louis Smash secondary now heals based on a portion of your max hp, scaling with attack speed, to give it a niche of its own compared to the other secondary
+         - Fixed health scaling with all barrier gaining and healing abilities (it was based off current health previously).
+         - Adjusted st louis smash airforce base and st louis smash airforce base to 400% damage for both.
 
 - Next update(s)
     -  Further skill reworks, balance changes
@@ -92,7 +93,7 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>St Louis <br>Smash<br>Airforce<br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 300% damage.<br>Heal on hit, scaling with attackspeed.</td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 400% damage.<br>Heal on hit, scaling with attackspeed.</td>
     <td>Proc: 0.2.<br>CD: 4s.<br></td>
     <td>Doubles range.<br>Doubles healing.</td>
   </tr>
@@ -264,7 +265,7 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>St Louis <br>Smash<br>Airforce<br>100%<br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 600% damage.<br>Heal on hit, scaling with attackspeed.</td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 400% damage.<br>Heal on hit, scaling with attackspeed.</td>
     <td>Proc: 0.2.<br>CD: 6s.<br></td>
     <td></td>
   </tr>
@@ -418,30 +419,15 @@ Deku has innate increased health regen the lower his health is. He has a double 
 These stats are prone to change.
 
 ## Changelog
-
+- 3.1.0 
+    - Updated readme to include St louis smash skill (oops)
+    - Fixed networking for DangerSense, it now works for non-hosts too!
+    - Fa Jin Aura appears properly now
+    - Balance Changes
+         - DangerSense CD changes, base- 3s, 45%- 2s, 100%- 1s. DangerSense total duration changes, 2s, 45%- 1.5s, 100%- 1s. These changes aim to differentiate the different versions of DangerSense and to buff it as the CD was too long before.
+         - St Louis Smash secondary now heals based on a portion of your max hp, scaling with attack speed, to give it a niche of its own compared to the other secondary
 - 3.0.1 
     - changed deku mod version in code
-- 3.0.0
-
-    -  Updated to patch 1.2.2
-    -  Fixed logbook not showing, Fixed effects like barrier or opal having their center on his feet
-    -  Added buff icons with slightly different colours than before
-    -  New Model! (and some new animations!- idle, running, jumping, falling courtesy of TCoolDzn)
-    -  Skill Reworks/Balance changes!
-        - Adjusted barrier gain for manchester and blackwhip to % of max health instead of base damage. (This is an overall nerf)
-        - Slight Fa jin rework- I've found that running around to build up the Fa jin stacks is not the best, for now:
-             - Increased max buff count to 200 
-             - Fa Jin primary grants 25 stacks (ancient scepter gives 50)
-             - All skills grant 10 stacks
-             - Stacks are only consumed when there are 50 stacks
-
-    -  New Skills!
-        - Primary skill- Danger Sense. Activate danger sense, the next attack will be dodged and the attacker will take damage. If timed properly, hit enemies around you as well.
-        - Secondary skill- St louis smash airforce. Kick ranged blasts of air pressure in front of you (St louis 45% instead will be just in front of you, 100% has range again).
-        - Utility Skill changes- Shoot Style (utility 1) and Shoot Style Full Cowling (utility 2)
-             - Shoot Style has been changed to Float- a skill that sends you up, disabling gravity and changing your
- special to Delaware Smash. Deactivate the skill by pressing the button again. 
-             - Shoot Style Full Cowling has been changed to Oklahoma Smash- while holding the skill, knockback enemies around you and have increased armor at the cost of slower movespeed.
 
 - rest of changelog on github
 

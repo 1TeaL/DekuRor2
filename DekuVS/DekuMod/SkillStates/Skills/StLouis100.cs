@@ -5,15 +5,17 @@ using EntityStates;
 using System.Collections.Generic;
 using System.Linq;
 using DekuMod.Modules.Survivors;
+using static RoR2.BlastAttack;
 
 namespace DekuMod.SkillStates
 {
     public class StLouis100 : BaseSkillState
     {
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
+        private GameObject effectPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
         public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         public float baseDuration = 1f;
-        public static float blastRadius = 20f;
+        public static float blastRadius = 15f;
         public static float succForce = 4.5f;
         //private GameObject effectPrefab = Modules.Assets.sEffect;
 
@@ -29,8 +31,10 @@ namespace DekuMod.SkillStates
         public float speedattack;
 
         public float fajin;
-        protected DamageType damageType;
+        protected DamageType damageType = DamageType.Stun1s;
         public DekuController dekucon;
+        private BlastAttack blastAttack2;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -97,7 +101,7 @@ namespace DekuMod.SkillStates
             }
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = StLouis.blastRadius * speedattack * fajin;
+            blastAttack.radius = blastRadius * speedattack * fajin;
             blastAttack.procCoefficient = 0.2f;
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;
@@ -119,12 +123,43 @@ namespace DekuMod.SkillStates
 
         }
 
+        public void HandleHits(HitPoint[] hitPoints)
+        {
+        }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.health += ((healthComponent.health / 20) * speedattack * fajin);
+            base.healthComponent.Heal(((healthComponent.fullCombinedHealth / 20) * speedattack * fajin), default(ProcChainMask), true);
 
+            //var hurtbox = blastAttack.inflictor;
+            //if (hurtbox)
+            //{
+
+            //    Ray aimRay = base.GetAimRay();
+            //    EffectManager.SpawnEffect(this.effectPrefab2, new EffectData
+            //    {
+            //        origin = hurtbox.transform.position,
+            //        scale = blastRadius * speedattack * fajin,
+            //        rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
+
+            //    }, true);
+
+            //    blastAttack2 = new BlastAttack();
+            //    blastAttack2.radius = blastRadius * speedattack * fajin;
+            //    blastAttack2.procCoefficient = 0.2f;
+            //    blastAttack2.position = hurtbox.transform.position;
+            //    blastAttack2.attacker = base.gameObject;
+            //    blastAttack2.crit = base.RollCrit();
+            //    blastAttack2.baseDamage = Modules.StaticValues.stlouis100DamageCoefficient * this.damageStat;
+            //    blastAttack2.falloffModel = BlastAttack.FalloffModel.None;
+            //    blastAttack2.baseForce = force;
+            //    blastAttack2.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+            //    blastAttack2.damageType = damageType;
+            //    blastAttack2.attackerFiltering = AttackerFiltering.Default;
+
+            //    blastAttack2.Fire();
+
+            //}
         }
-
 
         public override void OnExit()
         {
@@ -160,14 +195,14 @@ namespace DekuMod.SkillStates
                 EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius,
+                    scale = blastRadius * speedattack * fajin,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);
                 EffectManager.SpawnEffect(effectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius,
+                    scale = blastRadius * speedattack * fajin,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);

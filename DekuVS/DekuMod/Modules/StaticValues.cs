@@ -30,8 +30,8 @@ namespace DekuMod.Modules
         internal const float blackwhip45DamageCoefficient = 1f;
         internal const float blackwhip100DamageCoefficient = 2f;
         internal const float blackwhipshootDamageCoefficient = 4f;
-        internal const float stlouisDamageCoefficient = 3f;
-        internal const float stlouis100DamageCoefficient = 6f;
+        internal const float stlouisDamageCoefficient = 4f;
+        internal const float stlouis100DamageCoefficient = 4f;
 
         internal const float detroit100DamageCoefficient = 6f;
         internal const float detroitDamageCoefficient = 6f;

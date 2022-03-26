@@ -31,6 +31,7 @@ namespace DekuMod.SkillStates
         public float fajin;
         protected DamageType damageType;
         public DekuController dekucon;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -84,7 +85,7 @@ namespace DekuMod.SkillStates
 
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = StLouis.blastRadius * speedattack * fajin;
+            blastAttack.radius = blastRadius * speedattack * fajin;
             blastAttack.procCoefficient = 0.2f;
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;
@@ -108,7 +109,7 @@ namespace DekuMod.SkillStates
 
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.health +=((healthComponent.health / 20) * speedattack * fajin);
+            base.healthComponent.Heal(((healthComponent.fullCombinedHealth / 20) * speedattack * fajin), default(ProcChainMask), true);
 
         }
 
@@ -146,14 +147,14 @@ namespace DekuMod.SkillStates
                 EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius,
+                    scale = blastRadius * speedattack * fajin,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);
                 EffectManager.SpawnEffect(effectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius,
+                    scale = blastRadius * speedattack * fajin,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);

@@ -87,7 +87,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY6_NAME", "Manchester Smash 100%");
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY6_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Jump in the air and slam down, dealing <style=cIsDamage>2x{100f * StaticValues.manchester100DamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed. Hits and pulls enemies when you jump as well. Radius scales with movespeed." + Helpers.Damage("Costs 10% of max Health") + ".");
             LanguageAPI.Add(prefix + "BOOSTEDSECONDARY7_NAME", "St Louis Smash Airforce 100%");
-            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY7_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing <style=cIsDamage>{100f * StaticValues.stlouis100DamageCoefficient}% damage and healing on hit, scaling with attackspeed</style>." + Helpers.Damage("Costs 10% of max Health") + ".");
+            LanguageAPI.Add(prefix + "BOOSTEDSECONDARY7_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, stunning and dealing <style=cIsDamage>{100f * StaticValues.stlouis100DamageCoefficient}% damage. On hit, create an additional blast and heal, scaling with attackspeed</style>." + Helpers.Damage("Costs 10% of max Health") + ".");
             #endregion
 
             #region Utility
