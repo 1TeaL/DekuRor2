@@ -34,6 +34,12 @@ namespace DekuMod.SkillStates
         public DekuController dekucon;
 
         private BlastAttack blastAttack;
+        private float maxDistance = 0f;
+        private float radius2;
+        private float baseRadius = 1f;
+        private float hitDis;
+        private float damageintake;
+        private BlastAttack blastAttack2;
 
         public override void OnEnter()
         {
@@ -92,7 +98,39 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddBuff(Modules.Buffs.oklahomaBuff);
             }
             dekucon.OKLAHOMA.Play();
+            this.areaIndicator = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+            this.areaIndicator.SetActive(true);
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+        }
 
+        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        {
+            if (self.body.HasBuff(Modules.Buffs.oklahomaBuff.buffIndex))
+            {
+                damageintake = damageInfo.damage;
+
+                var dekucon = self.body.gameObject.GetComponent<DekuController>();
+                dekucon.oklahomacount += (damageintake / self.body.healthComponent.fullCombinedHealth) * 100;
+
+            }
+            orig.Invoke(self, damageInfo);
+        }
+
+        public void IndicatorUpdator()
+        {
+            Ray aimRay = base.GetAimRay();
+            Vector3 direction = aimRay.direction;
+            aimRay.origin = base.characterBody.corePosition;
+            Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
+            this.hitDis = this.raycastHit.distance;
+            bool flag = this.hitDis < this.maxDistance && this.hitDis > 0f;
+            if (flag)
+            {
+                this.maxDistance = this.hitDis;
+            }
+            this.radius2 = fajin * (this.baseRadius + (dekucon.oklahomacount));
+            this.areaIndicator.transform.localScale = Vector3.one * this.radius2;
+            this.areaIndicator.transform.localPosition = aimRay.origin;
         }
 
 
@@ -102,15 +140,48 @@ namespace DekuMod.SkillStates
         }
         public override void OnExit()
         {
+
+            blastAttack2 = new BlastAttack();
+            blastAttack2.radius = radius2;
+            blastAttack2.procCoefficient = 1f;
+            blastAttack2.position = base.characterBody.corePosition;
+            blastAttack2.attacker = base.gameObject;
+            blastAttack2.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+            blastAttack2.baseDamage = base.characterBody.damage * Modules.StaticValues.oklahoma100DamageCoefficient * (dekucon.oklahomacount/10);
+            blastAttack2.falloffModel = BlastAttack.FalloffModel.None;
+            blastAttack2.baseForce = force;
+            blastAttack2.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+            blastAttack2.damageType = DamageType.Stun1s;
+            blastAttack2.attackerFiltering = AttackerFiltering.Default;
+
+            blastAttack2.Fire();
+
+            Ray aimRay = base.GetAimRay();
+            EffectManager.SpawnEffect(effectPrefab, new EffectData
+            {
+                origin = base.characterBody.corePosition,
+                scale = radius2,
+                rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
+
+            }, true);
+
+            dekucon.oklahomacount = 0;
+            On.RoR2.HealthComponent.TakeDamage -= HealthComponent_TakeDamage;
             dekucon.OKLAHOMA.Stop();
             base.characterMotor.walkSpeedPenaltyCoefficient = 1f;
             if (NetworkServer.active)
             {
                 base.characterBody.RemoveBuff(Modules.Buffs.oklahomaBuff);
             }
+            bool flag = this.areaIndicator;
+            if (flag)
+            {
+                this.areaIndicator.SetActive(false);
+                EntityState.Destroy(this.areaIndicator);
+            }
             base.OnExit();
         }
-        
+
         public override void FixedUpdate()
         {
 
@@ -119,22 +190,32 @@ namespace DekuMod.SkillStates
             bool flag = base.IsKeyDownAuthority();
             if (flag)
             {
+                IndicatorUpdator();
                 Ray aimRay = base.GetAimRay();
 
-                if (base.isAuthority && spinage >= this.duration / (4 * fajin))
+                if (base.isAuthority && spinage >= this.duration / 4)
                 {
                     blastAttack.position = base.characterBody.corePosition;
-                    //hasFired = true;                    
+                    //hasFired = true;
+                    if (dekucon.isMaxPower)
+                    {
+
+                        blastAttack.damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                    }
+                    else
+                    {
+                        blastAttack.damageType = DamageType.Generic;
+                    }
                     spinage = 0f;
                     blastAttack.Fire();
+
                     //base.PlayAnimation("Fullbody, Override", "Oklahoma", "Attack.playbackRate", duration/4);
                     base.PlayCrossfade("Fullbody, Override", "Oklahoma", duration / 4);
 
-
                 }
                 else this.spinage += Time.fixedDeltaTime;
-            }
 
+            }
 
             else
             {
