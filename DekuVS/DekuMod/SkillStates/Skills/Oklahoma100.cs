@@ -190,6 +190,7 @@ namespace DekuMod.SkillStates
             bool flag = base.IsKeyDownAuthority();
             if (flag)
             {
+                base.characterMotor.walkSpeedPenaltyCoefficient = 0.2f * fajin + dekucon.oklahomacount/100;
                 IndicatorUpdator();
                 Ray aimRay = base.GetAimRay();
 
