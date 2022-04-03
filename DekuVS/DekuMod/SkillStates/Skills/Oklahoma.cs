@@ -149,7 +149,7 @@ namespace DekuMod.SkillStates
             blastAttack2.position = base.characterBody.corePosition;
             blastAttack2.attacker = base.gameObject;
             blastAttack2.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack2.baseDamage = base.characterBody.damage * Modules.StaticValues.oklahomaDamageCoefficient * (dekucon.oklahomacount/10);
+            blastAttack2.baseDamage = base.characterBody.damage * Modules.StaticValues.oklahomaDamageCoefficient * (1+dekucon.oklahomacount/100);
             blastAttack2.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack2.baseForce = force;
             blastAttack2.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
