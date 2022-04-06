@@ -4,21 +4,36 @@ Go beyond!
 
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
-#### Multiplayer works (hopefully). Standalone Ancient Scepter support.
-#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. https://ko-fi.com/tealpopcorn
-## Latest Changelog, Next update(s)
-## Deku
-Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support BUT DO NOT USE UNTIL IT HAS UPDATED.
-#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. https://ko-fi.com/tealpopcorn
+#### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. 
+#### <a href="https://ko-fi.com/tealpopcorn"><img src="https://user-images.githubusercontent.com/93917577/160220529-efed5020-90ac-467e-98f2-27b5c162d744.png"> </a>
+If you enjoy my work, support me on Ko-fi!
+## Popcorn Factory
+<b>Check out other mods from the Popcorn Factory team!</b>
+<div>
+    <a href="https://thunderstore.io/package/Ethanol10/Ganondorf_Mod/">
+        <img src="https://cdn.discordapp.com/attachments/399901440023330816/960043613428011079/Ethanol10-Ganondorf_Mod-2.1.5.png.128x128_q95.png"><br>
+        <p>Ganondorf Mod (Ethanol 10)</p>
+    </a>
+</div>
+<div>
+    <a href="https://thunderstore.io/package/BokChoyWithSoy/Phoenix_Wright_Mod/">
+        <img src="https://cdn.discordapp.com/attachments/399901440023330816/960054458790850570/BokChoyWithSoy-Phoenix_Wright_Mod-1.6.2.png.128x128_q95.png"><br>
+        <p>Phoenix Wright Mod (BokChoyWithSoy)</p>
+    </a>
+</div>
+<div>
+    <a href="https://thunderstore.io/package/PopcornFactory/Wisp_WarframeSurvivorMod/">
+        <img src="https://cdn.discordapp.com/attachments/399901440023330816/960043613692239942/PopcornFactory-Wisp_WarframeSurvivorMod-1.0.2.png.128x128_q95.png"><br>
+        <p>Wisp Mod (Popcorn Factory Team)</p>
+    </a>
+</div>
+
 ## Latest Changelog, Next update(s)
-- 3.1.0 
-    - Updated readme to include St louis smash skill (oops)
-    - Fixed networking for DangerSense, it now works for non-hosts too!
-    - Fa Jin Aura appears properly now
-    - Balance Changes
-         - DangerSense CD changes, base- 3s, 45%- 2s, 100%- 1s. DangerSense total duration changes, 2s, 45%- 1.5s, 100%- 1s. These changes aim to differentiate the different versions of DangerSense and to buff it as the CD was too long before.
-         - St Louis Smash secondary now heals based on a portion of your max hp, scaling with attack speed, to give it a niche of its own compared to the other secondary
+
+- 3.1.2 
+    - Updated readme
+    - Oklahoma Smash Changes: Deal a blast around yourself when you stop using the skill. Taking damage while using the skill increases your movespeed and increases the AOE and damage of the blast at the end.
 
 - Next update(s)
     -  Further skill reworks, balance changes
@@ -101,7 +116,7 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>St Louis <br>Smash<br>Airforce<br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 300% damage.<br>Heal on hit, scaling with attackspeed.</td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 400% damage.<br>Heal on hit, scaling with attackspeed.</td>
     <td>Proc: 0.2.<br>CD: 4s.<br></td>
     <td>Doubles range.<br>Doubles healing.</td>
   </tr>
@@ -273,7 +288,7 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>St Louis <br>Smash<br>Airforce<br>100%<br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 600% damage.<br>Heal on hit, scaling with attackspeed.</td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 400% damage.<br>Heal on hit, scaling with attackspeed.</td>
     <td>Proc: 0.2.<br>CD: 6s.<br></td>
     <td></td>
   </tr>
@@ -427,6 +442,21 @@ Deku has innate increased health regen the lower his health is. He has a double 
 These stats are prone to change.
 
 ## Changelog
+
+- 3.1.1 
+    - Hopefully fixed Float from causing crashes
+    - Made the healing of St louis smash airforce base and St louis smash airforce 100% properly 'heal', so healing effects should synergise with it.
+    - Balance Changes
+         - Fixed health scaling with all barrier gaining and healing abilities (it was based off current health previously).
+         - Adjusted st louis smash airforce base and st louis smash airforce base to 400% damage for both.
+
+- 3.1.0 
+    - Updated readme to include St louis smash skill (oops)
+    - Fixed networking for DangerSense, it now works for non-hosts too!
+    - Fa Jin Aura appears properly now
+    - Balance Changes
+         - DangerSense CD changes, base- 3s, 45%- 2s, 100%- 1s. DangerSense total duration changes, 2s, 45%- 1.5s, 100%- 1s. These changes aim to differentiate the different versions of DangerSense and to buff it as the CD was too long before.
+         - St Louis Smash secondary now heals based on a portion of your max hp, scaling with attack speed, to give it a niche of its own compared to the other secondary
 
 - 3.0.1 
     - changed deku mod version in code
