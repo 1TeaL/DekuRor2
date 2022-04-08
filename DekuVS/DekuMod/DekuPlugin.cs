@@ -351,7 +351,7 @@ namespace DekuMod
             orig(self);
             if (self.gameObject.name.Contains("DekuDisplay"))
             {
-                AkSoundEngine.PostEvent(2656882895, this.gameObject);
+                AkSoundEngine.PostEvent(2656882895, self.gameObject);
             }
 
         }

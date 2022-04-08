@@ -145,7 +145,7 @@
 																	<PropertyList>
 																		<Property Name="Volume" Type="Real64">
 																			<ValueList>
-																				<Value>-3</Value>
+																				<Value>-7</Value>
 																			</ValueList>
 																		</Property>
 																	</PropertyList>
@@ -171,6 +171,13 @@
 																	</ActiveSourceList>
 																</Sound>
 																<Sound Name="SePl01_0000000E" ID="{6B2F5AB0-5C4E-494A-B213-FDF1F5F09E9E}" ShortID="809685587">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64">
+																			<ValueList>
+																				<Value>-4</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -193,6 +200,13 @@
 																	</ActiveSourceList>
 																</Sound>
 																<Sound Name="SePl01_0000000F" ID="{868F4F23-31AB-497D-BAB7-5E90AF365BCA}" ShortID="522678594">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64">
+																			<ValueList>
+																				<Value>-4</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -223,6 +237,11 @@
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 														<Property Name="OverridePositioning" Type="bool" Value="True"/>
 														<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>4</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -370,6 +389,11 @@
 														</Sound>
 														<Sound Name="VoPl01_0000007D" ID="{25E345F3-638F-4A68-B414-A7802827F30A}" ShortID="777250972">
 															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-4</Value>
+																	</ValueList>
+																</Property>
 																<Property Name="Weight" Type="Real64">
 																	<ValueList>
 																		<Value>11</Value>
@@ -515,7 +539,7 @@
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>7</Value>
+																<Value>3</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -993,13 +1017,6 @@
 												<Folder Name="sfx" ID="{D573F6FC-C367-4888-ABE7-92EF3F02EE35}" ShortID="652387349">
 													<ChildrenList>
 														<RandomSequenceContainer Name="delawaresfx" ID="{572AEB15-89D6-4CCF-81A6-C8603645104C}" ShortID="463098929">
-															<PropertyList>
-																<Property Name="Volume" Type="Real64">
-																	<ValueList>
-																		<Value>7</Value>
-																	</ValueList>
-																</Property>
-															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -1058,6 +1075,13 @@
 													</ChildrenList>
 												</Folder>
 												<RandomSequenceContainer Name="delawarevoice" ID="{4D2849B9-1DF9-4F17-96AE-46545501C930}" ShortID="259956100">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -1149,9 +1173,14 @@
 														</Sound>
 														<Sound Name="VoPl01_0000007D" ID="{C28BBDA9-5B90-42E3-AE92-D6E55ED95FAF}" ShortID="892137717">
 															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-2</Value>
+																	</ValueList>
+																</Property>
 																<Property Name="Weight" Type="Real64">
 																	<ValueList>
-																		<Value>20</Value>
+																		<Value>10</Value>
 																	</ValueList>
 																</Property>
 															</PropertyList>
@@ -1257,7 +1286,7 @@
 																<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
 																<Property Name="Volume" Type="Real64">
 																	<ValueList>
-																		<Value>7</Value>
+																		<Value>12</Value>
 																	</ValueList>
 																</Property>
 															</PropertyList>
@@ -1306,7 +1335,7 @@
 																	<PropertyList>
 																		<Property Name="Volume" Type="Real64">
 																			<ValueList>
-																				<Value>2</Value>
+																				<Value>-7</Value>
 																			</ValueList>
 																		</Property>
 																	</PropertyList>
@@ -1332,6 +1361,13 @@
 																	</ActiveSourceList>
 																</Sound>
 																<Sound Name="SePl01_00000001" ID="{032C7035-80BB-4BE1-AA85-BBAA8BE5FC25}" ShortID="260180866">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64">
+																			<ValueList>
+																				<Value>-9</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -1354,6 +1390,13 @@
 																	</ActiveSourceList>
 																</Sound>
 																<Sound Name="SePl01_00000002" ID="{B6A5B7BF-075D-4AC0-8FAB-3EA3139436F6}" ShortID="1009382715">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64">
+																			<ValueList>
+																				<Value>-9</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -1376,6 +1419,13 @@
 																	</ActiveSourceList>
 																</Sound>
 																<Sound Name="SePl01_00000003" ID="{C97C5208-47E8-4786-AC90-19ED4D7F8EE4}" ShortID="507990588">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64">
+																			<ValueList>
+																				<Value>-9</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -1406,6 +1456,11 @@
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 														<Property Name="OverridePositioning" Type="bool" Value="True"/>
 														<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -1924,7 +1979,7 @@
 																<Property Name="OverridePositioning" Type="bool" Value="True"/>
 																<Property Name="Volume" Type="Real64">
 																	<ValueList>
-																		<Value>7</Value>
+																		<Value>12</Value>
 																	</ValueList>
 																</Property>
 															</PropertyList>
@@ -1973,7 +2028,7 @@
 																	<PropertyList>
 																		<Property Name="Volume" Type="Real64">
 																			<ValueList>
-																				<Value>3</Value>
+																				<Value>-5</Value>
 																			</ValueList>
 																		</Property>
 																	</PropertyList>
@@ -1999,6 +2054,13 @@
 																	</ActiveSourceList>
 																</Sound>
 																<Sound Name="SePl01_00000006" ID="{538FEE0B-8C77-4CDB-AF53-167277AB3681}" ShortID="902655328">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64">
+																			<ValueList>
+																				<Value>-10</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -2063,6 +2125,11 @@
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 														<Property Name="OverridePositioning" Type="bool" Value="True"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>3</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -2444,6 +2511,11 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																<Property Name="OverridePositioning" Type="bool" Value="True"/>
 																<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>5</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
@@ -2490,7 +2562,7 @@
 																	<PropertyList>
 																		<Property Name="Volume" Type="Real64">
 																			<ValueList>
-																				<Value>6</Value>
+																				<Value>4</Value>
 																			</ValueList>
 																		</Property>
 																	</PropertyList>
@@ -2526,6 +2598,11 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																<Property Name="OverridePositioning" Type="bool" Value="True"/>
 																<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
@@ -2570,6 +2647,11 @@
 																</Sound>
 																<Sound Name="VoPl01_0000007D" ID="{9AB57CA5-75B9-4207-AD94-C1979289CD0A}" ShortID="787751438">
 																	<PropertyList>
+																		<Property Name="Volume" Type="Real64">
+																			<ValueList>
+																				<Value>-2</Value>
+																			</ValueList>
+																		</Property>
 																		<Property Name="Weight" Type="Real64">
 																			<ValueList>
 																				<Value>5.001</Value>
@@ -2631,7 +2713,7 @@
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>7</Value>
+																<Value>3</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -2906,7 +2988,7 @@
 																	<PropertyList>
 																		<Property Name="Volume" Type="Real64">
 																			<ValueList>
-																				<Value>6</Value>
+																				<Value>10</Value>
 																			</ValueList>
 																		</Property>
 																	</PropertyList>
@@ -2977,6 +3059,11 @@
 													<ChildrenList>
 														<Sound Name="VoPl01_0000003E" ID="{CB2FB2C0-0477-419A-B3D3-A5A0A059BAEB}" ShortID="91583837">
 															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
 																<Property Name="Weight" Type="Real64">
 																	<ValueList>
 																		<Value>10</Value>
@@ -3006,6 +3093,11 @@
 														</Sound>
 														<Sound Name="VoPl01_00000044" ID="{307F0094-FF65-4F7D-AF95-596491D9A3AD}" ShortID="805947476">
 															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
 																<Property Name="Weight" Type="Real64">
 																	<ValueList>
 																		<Value>30</Value>
@@ -3035,6 +3127,11 @@
 														</Sound>
 														<Sound Name="VoPl01_00000045" ID="{21B860AD-3DA4-4F72-9F07-DC79C6D0ED16}" ShortID="369868432">
 															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
 																<Property Name="Weight" Type="Real64">
 																	<ValueList>
 																		<Value>30</Value>
@@ -3064,6 +3161,11 @@
 														</Sound>
 														<Sound Name="VoPl01_00000046" ID="{6EF8D496-31C5-41A2-81E6-6E0B6FC49DF7}" ShortID="729251789">
 															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
 																<Property Name="Weight" Type="Real64">
 																	<ValueList>
 																		<Value>30</Value>
@@ -3093,6 +3195,11 @@
 														</Sound>
 														<Sound Name="VoPl01_00000047" ID="{EE463005-5871-40A4-835A-A159914F2310}" ShortID="559624241">
 															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>3</Value>
+																	</ValueList>
+																</Property>
 																<Property Name="Weight" Type="Real64">
 																	<ValueList>
 																		<Value>30</Value>

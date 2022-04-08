@@ -16,7 +16,7 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="1943384016" Language="SFX" Hash="3176846526">
+		<SoundBank Id="1943384016" Language="SFX" Hash="3103939903">
 			<ObjectPath>\SoundBanks\Default Work Unit\Deku</ObjectPath>
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
@@ -30,18 +30,6 @@
 						<File Id="615323603" Language="SFX">
 							<ShortName>airforceshotlong.wav</ShortName>
 							<Path>SFX\airforceshotlong_0D5756A9.wem</Path>
-						</File>
-					</IncludedMemoryFiles>
-				</Event>
-				<Event Id="1215621278" Name="airforcevoice" ObjectPath="\Events\Default Work Unit\airforcevoice">
-					<IncludedMemoryFiles>
-						<File Id="134648371" Language="SFX">
-							<ShortName>airforce\VoPl01_00000056.wav</ShortName>
-							<Path>SFX\airforce\VoPl01_00000056_0D5756A9.wem</Path>
-						</File>
-						<File Id="519379338" Language="SFX">
-							<ShortName>airforce\VoPl01_0000008A.wav</ShortName>
-							<Path>SFX\airforce\VoPl01_0000008A_0D5756A9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

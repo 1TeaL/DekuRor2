@@ -10,7 +10,6 @@
 						<ObjectRef Name="shootstylebulletvoice" ID="{64B6DB43-0555-4238-8E0D-2C6ADCBC1056}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="airforcesfx" ID="{DB029791-8559-4422-B112-F91E50417F48}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="blackwhipvoice" ID="{1B6CFFCE-B123-448E-9E4E-B3F9402262F3}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="airforcevoice" ID="{6A62BB05-1ED5-44DC-9CD1-CC611EDAD08C}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="event" ID="{80A424F7-E94F-44E8-A10B-78DFD0B64D6F}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="ofasfx" ID="{139B654F-C39F-4552-B7D5-AC05E60A9AC0}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="ofavoice" ID="{9C7468A3-FEED-48F5-8577-652C0D42478C}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
