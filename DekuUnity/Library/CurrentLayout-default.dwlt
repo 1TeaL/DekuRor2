@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Project
   m_RootView: {fileID: 7}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 1
-  controlID: 182
+  controlID: 127
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 183
+  controlID: 128
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -127,7 +127,7 @@ MonoBehaviour:
   - {fileID: 14}
   - {fileID: 15}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,7 +176,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &8
 MonoBehaviour:
@@ -850,7 +850,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 27296
+  m_LastSelectedObjectID: 19598
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1033,19 +1033,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Deku/DekuV2/VFX
+    - Assets/Deku/DekuV2/Animations
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Deku/DekuV2/VFX
+  - Assets/Deku/DekuV2/Animations
   m_LastFoldersGridSize: 96
   m_LastProjectPath: F:\Theodore 3\GameDev\Mods\DekuRor2\DekuUnity
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 111}
-    m_SelectedIDs: c6500000
-    m_LastClickedID: 20678
+    scrollPos: {x: 0, y: 82}
+    m_SelectedIDs: f8500000
+    m_LastClickedID: 20728
     m_ExpandedIDs: 000000007e50000080500000825000008450000086500000885000008a5000008c5000008e50000090500000925000009450000096500000985000009a5000009c5000009e500000a0500000a2500000a4500000a6500000a8500000aa500000ac500000ae500000b0500000b2500000b4500000b6500000b8500000ba500000bc500000be500000c0500000c2500000c4500000c6500000c8500000ca50000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1102,7 +1102,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000000000003a3f000074d5000068610000483d00003af70000908c0200b8c9feff1e4e0000583d0100c641000056460000a64800003048000006f30000604b0000ae56000052620100f857000096c000006a4b00008c510000824c0000dc570000ce570000744d000018580000
+    m_ExpandedInstanceIDs: c6230000000000003a3f000074d5000068610000483d00003af70000908c0200b8c9feff1e4e0000583d0100c641000056460000a64800003048000006f30000604b0000ae56000052620100f857000096c000006a4b00008c510000824c0000dc570000ce570000744d0000185800003c530000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1126,7 +1126,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 243}
     m_GridSize: 96
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 216
@@ -1197,9 +1197,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 463f0000
+      m_SelectedIDs: c0790000
       m_LastClickedID: 0
-      m_ExpandedIDs: 9cf0ffff
+      m_ExpandedIDs: 2a71ffff2e71ffff3271ffff3a71ffff3e71ffff4271ffff4e71ffff5271ffff5a71ffff5e71ffff6671ffff6a71ffff7271ffff7671ffff7e71ffff8271ffff8671ffff8a71ffff8e71ffff9271ffff9a71ffff9e71ffffa671ffffaa71ffffb271ffffb671ffffbe71ffffc271ffffca71ffffce71ffffd271ffffd671ffffda71ffffde71ffffe671ffffee71fffff671fffffe71ffff0672ffff0e72ffff1672ffff1e72ffff3a72ffff5272ffffaa72ffffb272ffffba72ffffc272ffffca72fffffe72ffff0673ffff0e73ffff1673ffff1e73ffff2273ffff2673ffff2a73ffff2e73ffff3273ffff3673ffff4273ffff6673ffff30fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1259,9 +1259,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.10412833, y: 0.5362655, z: -0.29839158}
+    m_Target: {x: -0.00038359687, y: 0.009972841, z: 0.00317758}
     speed: 2
-    m_Value: {x: -0.10412833, y: 0.5362655, z: -0.29839158}
+    m_Value: {x: -0.00038359687, y: 0.009972841, z: 0.00317758}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1307,13 +1307,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.03491822, y: 0.9635435, z: -0.21325184, w: 0.15777178}
+    m_Target: {x: -0.15334322, y: -0.8460847, z: 0.3436506, w: -0.3775429}
     speed: 2
-    m_Value: {x: 0.034918156, y: 0.96354175, z: -0.21325146, w: 0.1577715}
+    m_Value: {x: -0.15282698, y: -0.8466467, z: 0.3438789, w: -0.37627187}
   m_Size:
-    m_Target: 4.7760158
+    m_Target: 0.004234304
     speed: 2
-    m_Value: 4.4760156
+    m_Value: 0.004234304
   m_Ortho:
     m_Target: 0
     speed: 2
