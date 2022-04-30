@@ -38,6 +38,9 @@
     <Reference Include="AncientScepter">
       <HintPath>..\libs\AncientScepter.dll</HintPath>
     </Reference>
+    <Reference Include="CustomEmotesAPI">
+      <HintPath>..\..\..\ShiggyRor2\ShiggyVS\ShiggyMod\bin\Debug\netstandard2.0\CustomEmotesAPI.dll</HintPath>
+    </Reference>
     <Reference Include="KinematicCharacterController">
       <HintPath>C:\Theodore 1\Steam\SteamApps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\KinematicCharacterController.dll</HintPath>
     </Reference>
