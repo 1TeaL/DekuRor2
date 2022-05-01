@@ -31,9 +31,10 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
-- 3.1.3 
+- 3.1.5 
+    - Properly stated that CustomEmoteAPI is supported.
+- 3.1.4 
     - EMOTES.
-
 - 3.1.3 
     - Adjusted sound balance, fixed bug that made ditto play an unused deku voice line.
 
