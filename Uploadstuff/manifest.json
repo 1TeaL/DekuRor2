@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "3.1.4",
+    "version_number": "3.1.5",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "Go Beyond! 3.1.4 EMOTES. Ror2 1.2.2 update.",
+    "description": "Go Beyond! 3.1.4/5 added CustomEmotesAPI functionality. Ror2 1.2.2 update.",
     "dependencies": [
          "tristanmcpherson-R2API-4.0.11"
     ]

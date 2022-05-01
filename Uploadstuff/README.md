@@ -1,6 +1,6 @@
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
-#### Multiplayer works (hopefully). Standalone Ancient Scepter support BUT DO NOT USE UNTIL IT HAS UPDATED.
+#### Multiplayer works (hopefully). Standalone Ancient Scepter support. CustomEmotesAPI support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. 
 #### <a href="https://ko-fi.com/tealpopcorn"><img src="https://user-images.githubusercontent.com/93917577/160220529-efed5020-90ac-467e-98f2-27b5c162d744.png"> </a>
 If you enjoy my work, support me on Ko-fi!
@@ -27,9 +27,10 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
-- 3.1.3 
+- 3.1.5 
+    - Properly stated that CustomEmoteAPI is supported.
+- 3.1.4 
     - EMOTES.
-
 - 3.1.3 
     - Adjusted sound balance, fixed bug that made ditto play an unused deku voice line.
 
