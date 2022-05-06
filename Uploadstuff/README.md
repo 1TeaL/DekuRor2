@@ -27,6 +27,8 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 3.1.6 
+    - Fixed overlays and other effects not appearing on Deku's body.
 - 3.1.5 
     - Properly stated that CustomEmoteAPI is supported.
 - 3.1.4 
