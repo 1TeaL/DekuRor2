@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
+using EmotesAPI;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -22,6 +23,7 @@ namespace DekuMod
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     [R2APISubmoduleDependency(new string[]
@@ -45,7 +47,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "3.1.1";
+        public const string MODVERSION = "3.1.6";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -106,8 +108,25 @@ namespace DekuMod
             On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
             //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             //On.RoR2.HealthComponent.Awake += HealthComponent_Awake;
+            if (Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI"))
+            {
+                On.RoR2.SurvivorCatalog.Init += SurvivorCatalog_Init;
+            }
         }
 
+        //EMOTES
+        private void SurvivorCatalog_Init(On.RoR2.SurvivorCatalog.orig_Init orig)
+        {
+            orig();
+            foreach (var item in SurvivorCatalog.allSurvivorDefs)
+            {
+                Debug.Log(item.bodyPrefab.name);
+                if (item.bodyPrefab.name == "DekuBody")
+                {
+                    CustomEmotesAPI.ImportArmature(item.bodyPrefab, Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("humanoidDeku"));
+                }
+            }
+        }
         //private void HealthComponent_Awake(On.RoR2.HealthComponent.orig_Awake orig, HealthComponent healthComponent)
         //{
         //    //if (healthComponent)
@@ -116,7 +135,7 @@ namespace DekuMod
         //    //    {
         //    //        healthComponent.gameObject.AddComponent<DangerSenseComponent>();
         //    //    }
-                    
+
         //    //}
 
 
@@ -351,7 +370,7 @@ namespace DekuMod
             orig(self);
             if (self.gameObject.name.Contains("DekuDisplay"))
             {
-                AkSoundEngine.PostEvent(2656882895, this.gameObject);
+                AkSoundEngine.PostEvent(2656882895, self.gameObject);
             }
 
         }

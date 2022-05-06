@@ -1541,7 +1541,7 @@ namespace DekuMod.Modules.Survivors
 
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Mesh"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Body"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
                 }
             };
@@ -1581,6 +1581,47 @@ namespace DekuMod.Modules.Survivors
             //};
 
             //skins.Add(masterySkin);
+            //#endregion
+
+
+            //#region VoidlingSkin
+            //Material voidMat = Modules.Assets.CreateMaterial("Ror2DekuMat", 0f, Color.white, 1.0f);
+            //CharacterModel.RendererInfo[] voidRendererInfos = SkinRendererInfos(defaultRenderers, new Material[] {
+            //    voidMat,
+            //    voidMat,
+            //    voidMat,
+            //    voidMat,
+            //    voidMat
+            //});
+            //SkinDef voidSkin = Modules.Skins.CreateSkinDef(DekuPlugin.developerPrefix + "_DEKU_BODY_ROR2_SKIN_NAME",
+            //    Assets.mainAssetBundle.LoadAsset<Sprite>("dekuRor2SkinIcon"),
+            //    voidRendererInfos,
+            //    mainRenderer,
+            //    model);
+
+            //voidSkin.meshReplacements = new SkinDef.MeshReplacement[] {
+            //    new SkinDef.MeshReplacement
+            //    {
+            //        mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>(" "),
+            //        renderer = defaultRenderers[0].renderer
+            //    },
+            //    new SkinDef.MeshReplacement
+            //    {
+            //        mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Skirt"),
+            //        renderer = defaultRenderers[1].renderer
+            //    },
+            //    new SkinDef.MeshReplacement
+            //    {
+            //        mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("NeckMuffler"),
+            //        renderer = defaultRenderers[2].renderer
+            //    },
+            //    new SkinDef.MeshReplacement
+            //    {
+            //        mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("MainBody"),
+            //        renderer = defaultRenderers[instance.mainRendererIndex].renderer
+            //    }
+            //};
+            //skins.Add(voidSkin);
             //#endregion
 
             skinController.skins = skins.ToArray();

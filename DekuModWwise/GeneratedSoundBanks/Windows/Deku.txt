@@ -4,7 +4,6 @@ Event	ID	Name			Wwise Object Path	Notes
 	779278001	death			\Default Work Unit\death	
 	1063047365	airforcesfx			\Default Work Unit\airforcesfx	
 	1074439307	delawaresfx			\Default Work Unit\delawaresfx	
-	1215621278	airforcevoice			\Default Work Unit\airforcevoice	
 	1356252224	delawarevoice			\Default Work Unit\delawarevoice	
 	1918362945	stlouissfx			\Default Work Unit\stlouissfx	
 	2493696431	ofavoice			\Default Work Unit\ofavoice	
@@ -37,7 +36,6 @@ Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
 	689853809	Wwise Silence	Wwise Silence		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\shootstylebullet\shootstylebulletvoice\Silence_02\Wwise Silence	
 	699045391	Wwise Silence	Wwise Silence		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\shootstylebullet\shootstylebulletvoice\Silence\Wwise Silence	
 	727916799	Wwise Silence	Wwise Silence		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\shootstylebullet\shootstylebulletvoice\Silence_01\Wwise Silence	
-	750468009	Wwise Silence	Wwise Silence		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\airforce\airforcevoice\Silence\Wwise Silence	
 	751618574	Wwise Silence	Wwise Silence		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\shootstylebullet\shootstylebulletvoice\Silence_10\Wwise Silence	
 	807835198	Wwise Silence	Wwise Silence		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\blackwhip\blackwhipvoice\Silence\Wwise Silence	
 	886258220	Wwise Silence	Wwise Silence		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\stlouis\stlouisvoice\Silence_01\Wwise Silence	
@@ -58,7 +56,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	128544243	airforceshot	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\airforceshot_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\airforce\sfx\airforcesfx\airforceshot		2576
 	133485999	VoPl01_000000A2	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\Death\VoPl01_000000A2_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\Death\death\VoPl01_000000A2		17040
 	133882509	gomenasaiwithcharge	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\detroit\charge\gomenasaiwithcharge_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\detroit\charge\detroitcharge\gomenasaiwithcharge		25378
-	134648371	VoPl01_00000056	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\airforce\VoPl01_00000056_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\airforce\airforcevoice\VoPl01_00000056		10243
 	140991218	VoPl01_00000051	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\delaware\VoPl01_00000051_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\delaware\delawarevoice\VoPl01_00000051		4632
 	152619868	VoPl01_00000050	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\delaware\VoPl01_00000050_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\delaware\delawarevoice\VoPl01_00000050		2946
 	153943766	VoPl01_00000089	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\shootstylebullet\VoPl01_00000089_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\shootstylebullet\shootstylebulletvoice\VoPl01_00000089		2309
@@ -82,7 +79,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	487520420	VoPl01_000000E6	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\Entrance\VoPl01_000000E6_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\Entrance\entrance\VoPl01_000000E6		22140
 	487561111	VoPl01_000000F2	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\Death\VoPl01_000000F2_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\Death\death\VoPl01_000000F2		18361
 	492780473	VoPl01_00000080	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\shootstylebullet\VoPl01_00000080_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\shootstylebullet\shootstylebulletvoice\VoPl01_00000080		7647
-	519379338	VoPl01_0000008A	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\airforce\VoPl01_0000008A_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\airforce\airforcevoice\VoPl01_0000008A		6004
 	524330261	VoPl01_0000007D	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\stlouis\VoPl01_0000007D_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\stlouis\stlouisvoice\VoPl01_0000007D		24656
 	524893754	fullcowlcharge	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\ofa\sfx\fullcowlcharge_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\ofa\sfx\ofasfx\fullcowlcharge		25418
 	528051330	VoPl01_0000007D	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\delaware\VoPl01_0000007D_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\Deku\delaware\delawarevoice\VoPl01_0000007D		24656

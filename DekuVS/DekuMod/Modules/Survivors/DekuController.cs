@@ -32,6 +32,7 @@ namespace DekuMod.Modules.Survivors
         public static float fajinscepterrate = 2f;
         public float fajinrate = 4f;
         public bool isMaxPower;
+        public float oklahomacount;
 
         public bool kickBuff;
         public bool kickon;
