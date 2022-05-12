@@ -4,7 +4,7 @@ Go beyond!
 
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
-#### Multiplayer works (hopefully). Standalone Ancient Scepter support BUT DO NOT USE UNTIL IT HAS UPDATED.
+#### Multiplayer works (hopefully). Standalone Ancient Scepter support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. 
 #### <a href="https://ko-fi.com/tealpopcorn"><img src="https://user-images.githubusercontent.com/93917577/160220529-efed5020-90ac-467e-98f2-27b5c162d744.png"> </a>
 If you enjoy my work, support me on Ko-fi!
@@ -31,18 +31,9 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
-- 3.1.6 
-    - Fixed overlays and other effects not appearing on Deku's body.
-- 3.1.5 
-    - Properly stated that CustomEmoteAPI is supported.
-- 3.1.4 
-    - EMOTES.
-- 3.1.3 
-    - Adjusted sound balance, fixed bug that made ditto play an unused deku voice line.
-
-- 3.1.2 
-    - Updated readme
-    - Oklahoma Smash Changes: Deal a blast around yourself when you stop using the skill. Taking damage while using the skill increases your movespeed and increases the AOE and damage of the blast at the end.
+- 3.2.0
+    - Fixed animation timings with attacks to properly scale with attackspeed.
+    - NEW ICONS! (Courtesy of Mr.Bones- in the making of RoRified Deku skin as well).
 
 - Next update(s)
     -  Further skill reworks, balance changes
@@ -452,6 +443,35 @@ These stats are prone to change.
 
 ## Changelog
 
+- 3.1.6 
+    - Fixed overlays and other effects not appearing on Deku's body.
+- 3.1.5 
+    - Properly stated that CustomEmoteAPI is supported.
+- 3.1.4 
+    - EMOTES.
+- 3.1.3 
+    - Adjusted sound balance, fixed bug that made ditto play an unused deku voice line.
+
+- 3.1.2 
+    - Updated readme
+    - Oklahoma Smash Changes: Deal a blast around yourself when you stop using the skill. Taking damage while using the skill increases your movespeed and increases the AOE and damage of the blast at the end.
+- 3.1.1 
+    - Hopefully fixed Float from causing crashes
+    - Made the healing of St louis smash airforce base and St louis smash airforce 100% properly 'heal', so healing effects should synergise with it.
+    - Balance Changes
+         - Fixed health scaling with all barrier gaining and healing abilities (it was based off current health previously).
+         - Adjusted st louis smash airforce base and st louis smash airforce base to 400% damage for both.
+
+- 3.1.0 
+    - Updated readme to include St louis smash skill (oops)
+    - Fixed networking for DangerSense, it now works for non-hosts too!
+    - Fa Jin Aura appears properly now
+    - Balance Changes
+         - DangerSense CD changes, base- 3s, 45%- 2s, 100%- 1s. DangerSense total duration changes, 2s, 45%- 1.5s, 100%- 1s. These changes aim to differentiate the different versions of DangerSense and to buff it as the CD was too long before.
+         - St Louis Smash secondary now heals based on a portion of your max hp, scaling with attack speed, to give it a niche of its own compared to the other secondary
+
+- rest of changelog on github
+
 - 3.1.1 
     - Hopefully fixed Float from causing crashes
     - Made the healing of St louis smash airforce base and St louis smash airforce 100% properly 'heal', so healing effects should synergise with it.
@@ -615,41 +635,4 @@ These stats are prone to change.
 
   
 ## OG Pictures
-![characterselect](https://user-images.githubusercontent.com/93917577/157029633-0196dd84-4e06-46af-a6fb-1c2f4ae125f0.PNG)
-![airforce](https://user-images.githubusercontent.com/93917577/144508155-96faa81f-a22b-4719-8680-e5382e0bc59d.png)
-![shootstylekick](https://user-images.githubusercontent.com/93917577/145331809-b57a4f5b-5f5b-43e1-b0af-175776969f05.png)
-![shootstylekick2](https://user-images.githubusercontent.com/93917577/145331823-67001074-4bd6-4fe2-89e7-28d519cd6928.png)
-![airforce45](https://user-images.githubusercontent.com/93917577/145331910-0a4b1fb1-6223-4ea4-83f5-c84d9684e820.png)
-![stlouis](https://user-images.githubusercontent.com/93917577/144508292-001c3bab-9e43-4266-948c-3fee70b976ab.png)
-![fajin](https://user-images.githubusercontent.com/93917577/148047009-774ef354-e1ab-4f3b-8f19-6bed4a9a7297.png)
-![fajinboost](https://user-images.githubusercontent.com/93917577/148047023-2ff7dfdf-b710-4246-a9f1-c51f4e439569.png)
-![DangerSense](https://user-images.githubusercontent.com/93917577/158124527-cdea65ad-fd74-411c-8af2-4e3f2cf05ce6.PNG)
-![characterselect](https://user-images.githubusercontent.com/93917577/158124577-1fcbdcfb-8697-4dba-8e53-207ad1e6d4e8.PNG)
 
-
-![blackwhip](https://user-images.githubusercontent.com/93917577/144508171-f67f0493-5ed4-4125-b5e7-56b7b32dfa1a.png)
-![manchester](https://user-images.githubusercontent.com/93917577/145331951-692a57ef-3ed0-4ea9-8742-4bfca1a196de.png)
-![detroit](https://user-images.githubusercontent.com/93917577/144508215-3ebf65c6-ef1c-43cd-b41d-0b3255842191.png) 
-![blackwhipsuper](https://user-images.githubusercontent.com/93917577/145331966-38c60bc5-872a-4a0d-a30e-7238feeec167.png)
-![blackwhipshoot](https://user-images.githubusercontent.com/93917577/148047047-eb93efe7-078c-42be-bf80-64ffdaa03f8b.jpg)
-  
-![shootstyle](https://user-images.githubusercontent.com/93917577/144508290-3ac69d84-c2cf-43a4-846d-1f120d066ad5.png)
-![shootstylefullcowling](https://user-images.githubusercontent.com/93917577/144509040-5999395c-19e7-40bb-9246-d2eec5d52257.png)
-![detroitweak](https://user-images.githubusercontent.com/93917577/145331993-9097cd3e-77de-4078-873a-7dff3ea45dd2.png)
-![delaware](https://user-images.githubusercontent.com/93917577/144508192-f0969ea2-2e50-4c33-93ae-1b5f27114889.png)
-![stlouis45](https://user-images.githubusercontent.com/93917577/145332001-e18ba69f-5491-499f-838f-cc26303e1aab.PNG)
-![smokescreen](https://user-images.githubusercontent.com/93917577/148047077-f947c473-01f6-4cb2-b0af-a68ef744dcfa.jpg)
-![Floatactivate](https://user-images.githubusercontent.com/93917577/158124453-6c110889-72ca-41df-9801-50e924675ed1.PNG)
-![Floatcancel](https://user-images.githubusercontent.com/93917577/158124461-a5a236c6-c6d9-489f-b9d6-d845049ad83d.PNG)
-![oklahoma](https://user-images.githubusercontent.com/93917577/158124512-2c06017b-1121-4abd-910d-88f3891532af.png)
-
-
-
-![ultimate](https://user-images.githubusercontent.com/93917577/144508368-f2baed32-895e-495a-88f3-9d15c0a1863e.png)
-![ultimate45](https://user-images.githubusercontent.com/93917577/145332728-e5089c43-f789-4d8b-a963-7e87e2ff1a58.png)
-![ultimateupgrade](https://user-images.githubusercontent.com/93917577/144508393-fac634ad-5dad-4f73-9773-b0c9d24b36f6.png)
-![ultimateupgrade45](https://user-images.githubusercontent.com/93917577/145332711-e86e5c90-1f6c-4a66-8be4-349ce4b19f36.png)
-![ultimate100](https://user-images.githubusercontent.com/93917577/150039319-8fc24d58-cfaa-456e-9c0a-9af8accc74de.png)
-![ultimateupgrade100](https://user-images.githubusercontent.com/93917577/150039332-df34212d-16ea-43d4-9c21-5a48f5601163.png)
-![quirksprevious](https://user-images.githubusercontent.com/93917577/148047101-479424f8-b913-4e32-bc82-7efbcb63394e.png)
-![Quirks](https://user-images.githubusercontent.com/93917577/148047107-cfedc80a-ae75-4122-894b-4b69a76c838b.png)
