@@ -102,7 +102,9 @@ namespace DekuMod.SkillStates
 
             //    }
             //}
-            base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip");
+
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            base.PlayCrossfade("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", fireTime, 0.1f);
 
             RecalculateRollSpeed();
             Ray aimray = base.GetAimRay();

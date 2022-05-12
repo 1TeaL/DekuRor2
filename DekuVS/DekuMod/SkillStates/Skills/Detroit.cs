@@ -82,6 +82,7 @@ namespace DekuMod.SkillStates
             this.areaIndicator = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
             //base.PlayAnimation("FullBody, Override", "SmashCharge", "Attack.playbackRate", 1f);
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 1f);
             //base.PlayAnimation("RightArm, Override", "SmashCharge");
             //base.PlayCrossfade("RightArm, Override", "SmashCharge", 1f);

@@ -47,6 +47,7 @@ namespace DekuMod.SkillStates
                 base.healthComponent.TakeDamage(damageInfo);
             }
 
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             float angle = Vector3.Angle(new Vector3(0, -1, 0), aimRay.direction);
             if (angle < 60)
             {

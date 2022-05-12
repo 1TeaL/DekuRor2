@@ -29,6 +29,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = false;
 
 
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             float angle = Vector3.Angle(new Vector3(0, -1, 0), aimRay.direction);
             if (angle < 60)
             {

@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "3.1.6",
+    "version_number": "3.2.0",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "Go Beyond! 3.1.6 fixed overlays and other effects not appearing on Deku",
+    "description": "Go Beyond! 3.2.0- Fixed animation timings , NEW ICONS, removed specials, Shigaraki arrives",
     "dependencies": [
          "tristanmcpherson-R2API-4.0.11"
     ]

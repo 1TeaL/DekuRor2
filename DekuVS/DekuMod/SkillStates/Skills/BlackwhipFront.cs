@@ -33,6 +33,7 @@ namespace DekuMod.SkillStates
             this.duration = this.baseDuration / attackSpeedStat;
             speedattack = attackSpeedStat / 2;
 
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
             //base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", duration);
             //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);

@@ -74,121 +74,133 @@ namespace DekuMod.SkillStates
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-            if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+            if (damageInfo != null && damageInfo.attacker && damageInfo.attacker.GetComponent<CharacterBody>())
             {
-                damageInfo.rejected = true;
-
-                //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
-
-                var dekucon = self.body.gameObject.GetComponent<DekuController>();
-                dekucon.countershouldflip = true;
-
-                var damageInfo2 = new DamageInfo();
-
-                damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
-                damageInfo2.position = damageInfo.attacker.transform.position;
-                damageInfo2.force = Vector3.zero;
-                damageInfo2.damageColorIndex = DamageColorIndex.Default;
-                damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                damageInfo2.attacker = self.gameObject;
-                damageInfo2.inflictor = null;
-                damageInfo2.damageType = DamageType.BypassArmor | DamageType.WeakOnHit;
-                damageInfo2.procCoefficient = 2f;
-                damageInfo2.procChainMask = default(ProcChainMask);
-
-                if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
-                    != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+                bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
+                if (!flag && damageInfo.damage > 0f)
                 {
-                    damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
-                }
-
-                Vector3 enemyPos = damageInfo.attacker.transform.position;
-                EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                {
-                    origin = self.body.transform.position,
-                    scale = 1f,
-                    rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
-
-                }, true);
-
-                new ForceCounterState(self.body.masterObjectId, enemyPos).Send(R2API.Networking.NetworkDestination.Clients);
-                //if (self.body.characterMotor && self.body.characterDirection)
-                //{
-                //    Debug.Log("pluginmove");
-                //    self.body.characterMotor.rootMotion += (self.body.transform.position - enemyPos).normalized * self.body.moveSpeed;
-                //}
-
-                //self.body.characterMotor.rootMotion += (self.body.transform.position - enemyPos).normalized * self.body.moveSpeed;
-
-                //DangerSenseCounter dangersenseCounter = new DangerSenseCounter();
-                //dangersenseCounter.enemyPosition = enemyPos;
-                //self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(dangersenseCounter);
-
-
-
-
-
-
-                blastAttack = new BlastAttack();
-                blastAttack.radius = blastRadius;
-                blastAttack.procCoefficient = procCoefficient;
-                blastAttack.position = base.characterBody.corePosition;
-                blastAttack.attacker = base.gameObject;
-                blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient;
-                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = force;
-                blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                blastAttack.damageType = DamageType.Stun1s;
-                blastAttack.attackerFiltering = AttackerFiltering.Default;
-
-
-                blastAttack.Fire();
-
-                for (int i = 0; i <= 5; i++)
-                {
-                    this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                    float num = 60f;
-                    Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
-                    float num2 = 0.01f;
-                    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-
-                    EffectData effectData = new EffectData
+                    if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
                     {
-                        scale = 1f,
-                        origin = base.characterBody.corePosition + this.randRelPos,
-                        rotation = rotation
+                        damageInfo.rejected = true;
 
-                    };
-                    EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+
+                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
+
+                        var dekucon = self.body.gameObject.GetComponent<DekuController>();
+                        //dekucon.countershouldflip = true;
+
+                        var damageInfo2 = new DamageInfo();
+
+                        damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
+                        damageInfo2.position = damageInfo.attacker.transform.position;
+                        damageInfo2.force = Vector3.zero;
+                        damageInfo2.damageColorIndex = DamageColorIndex.Default;
+                        damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                        damageInfo2.attacker = self.gameObject;
+                        damageInfo2.inflictor = null;
+                        damageInfo2.damageType = DamageType.BypassArmor | DamageType.WeakOnHit;
+                        damageInfo2.procCoefficient = 2f;
+                        damageInfo2.procChainMask = default(ProcChainMask);
+
+                        if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
+                            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+                        {
+                            damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+                        }
+
+                        Vector3 enemyPos = damageInfo.attacker.transform.position;
+                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                        {
+                            origin = self.body.transform.position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
+
+                        }, true);
+
+                        new ForceCounterState(self.body.masterObjectId, enemyPos).Send(R2API.Networking.NetworkDestination.Clients);
+                        //if (self.body.characterMotor && self.body.characterDirection)
+                        //{
+                        //    Debug.Log("pluginmove");
+                        //    self.body.characterMotor.rootMotion += (self.body.transform.position - enemyPos).normalized * self.body.moveSpeed;
+                        //}
+
+                        //self.body.characterMotor.rootMotion += (self.body.transform.position - enemyPos).normalized * self.body.moveSpeed;
+
+                        //DangerSenseCounter dangersenseCounter = new DangerSenseCounter();
+                        //dangersenseCounter.enemyPosition = enemyPos;
+                        //self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(dangersenseCounter);
+
+
+
+
+
+
+                        blastAttack = new BlastAttack();
+                        blastAttack.radius = blastRadius;
+                        blastAttack.procCoefficient = procCoefficient;
+                        blastAttack.position = base.characterBody.corePosition;
+                        blastAttack.attacker = base.gameObject;
+                        blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+                        blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient;
+                        blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                        blastAttack.baseForce = force;
+                        blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                        blastAttack.damageType = damageType;
+                        blastAttack.attackerFiltering = AttackerFiltering.Default;
+
+
+                        blastAttack.Fire();
+
+                        for (int i = 0; i <= 5; i++)
+                        {
+                            this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+                            float num = 60f;
+                            Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+                            float num2 = 0.01f;
+                            rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                            rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+
+                            EffectData effectData = new EffectData
+                            {
+                                scale = 1f,
+                                origin = base.characterBody.corePosition + this.randRelPos,
+                                rotation = rotation
+
+                            };
+                            EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                        }
+
+
+                        self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+
+                        //self.body.gameObject.GetComponent<EntityStateMachine>().SetInterruptState(new FrozenState(), InterruptPriority.Frozen);
+
+
+                        //EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
+                        //foreach (EntityStateMachine stateMachine in stateMachines)
+                        //{
+                        //    if (stateMachine.customName == "Body")
+                        //    {
+                        //        Debug.Log("bodystatechange");
+                        //        self.body.gameObject.GetComponent<EntityStateMachine>().SetState(new DangerSenseCounter
+                        //        {
+                        //            enemyPosition = enemyPos
+                        //        });
+
+
+                        //    }
+
+                        //}
+
+                    }
+
                 }
 
-
-                self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
-
-                //self.body.gameObject.GetComponent<EntityStateMachine>().SetInterruptState(new FrozenState(), InterruptPriority.Frozen);
-
-
-                //EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
-                //foreach (EntityStateMachine stateMachine in stateMachines)
-                //{
-                //    if (stateMachine.customName == "Body")
-                //    {
-                //        Debug.Log("bodystatechange");
-                //        self.body.gameObject.GetComponent<EntityStateMachine>().SetState(new DangerSenseCounter
-                //        {
-                //            enemyPosition = enemyPos
-                //        });
-
-
-                //    }
-
-                //}
 
             }
             orig.Invoke(self, damageInfo);
         }
+    
 
 
         public override void OnExit()

@@ -74,7 +74,8 @@ namespace DekuMod.SkillStates
 
             //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
             //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
-            base.PlayCrossfade("Fullbody, Override", "LegSmash", duration / 2);
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            base.PlayCrossfade("Fullbody, Override", "LegSmash", "Attack.playbackate", duration / 2, 0.1f);
 
             //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
             //{

@@ -20,7 +20,7 @@ namespace DekuMod.SkillStates
 		public static SkillDef floatDef = Deku.float45SkillDef;
 		public static SkillDef oklahomaDef = Deku.oklahoma45SkillDef;
 		public static SkillDef detroitDef = Deku.detroit45SkillDef;
-		public static SkillDef specialDef = Deku.ofacycle2SkillDef;
+		public static SkillDef specialDef = Deku.ofacycle2scepterSkillDef;
 		public DekuController dekucon;
 		const string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 

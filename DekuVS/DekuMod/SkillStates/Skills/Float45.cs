@@ -107,6 +107,7 @@ namespace DekuMod.SkillStates
 
             }
 
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayAnimation("FullBody, Override", "FloatBegin", "Attack.playbackRate", 1f);
             AkSoundEngine.PostEvent(687990298, this.gameObject);
             AkSoundEngine.PostEvent(1918362945, this.gameObject);

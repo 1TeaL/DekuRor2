@@ -72,6 +72,8 @@ namespace DekuMod.SkillStates
             blastAttack.damageType = DamageType.Generic;
             blastAttack.attackerFiltering = AttackerFiltering.Default;
 
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            base.PlayCrossfade("Fullbody, Override", "Oklahoma", "Attack.playbackRate", duration, 0.1f);
             //base.PlayCrossfade("RightArm, Override", "SmashCharge", 0.2f);
             //Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
             AkSoundEngine.PostEvent(3940341776, this.gameObject);
@@ -211,7 +213,7 @@ namespace DekuMod.SkillStates
                     spinage = 0f;
                     blastAttack.Fire();
                     //base.PlayAnimation("Fullbody, Override", "Oklahoma", "Attack.playbackRate", duration/4);
-                    base.PlayCrossfade("Fullbody, Override", "Oklahoma", duration / 4);
+                    base.PlayCrossfade("Fullbody, Override", "Oklahoma", "Attack.playbackRate", duration / 4, 0.1f);
 
 
                 }

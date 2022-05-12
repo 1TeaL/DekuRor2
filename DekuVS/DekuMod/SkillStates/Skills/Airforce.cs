@@ -39,6 +39,7 @@ namespace DekuMod.SkillStates
 
             hasFired = false;
 
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             //base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, this.fireTime);
             base.PlayAnimation("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration);
 

@@ -165,7 +165,8 @@ namespace DekuMod.SkillStates
 			}
 			float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
 			this.extraDuration = (Math.Max(ShootStyleKick100.hitExtraDuration / (num2 + 1f), ShootStyleKick100.minExtraDuration))/(attackSpeedStat/2);
-			base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", ShootStyleKick100.duration * 1f);
+			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+			base.PlayCrossfade("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", duration, 0.1f);
 
 			AkSoundEngine.PostEvent(3842300745, this.gameObject);
 			AkSoundEngine.PostEvent(573664262, this.gameObject);

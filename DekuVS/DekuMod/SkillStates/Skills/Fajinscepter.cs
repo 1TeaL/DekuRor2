@@ -21,7 +21,8 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
 			this.duration = baseDuration/this.attackSpeedStat;
 			//base.GetModelAnimator().SetFloat("attack.playbackRate", 0.1f);
-			base.PlayAnimation("Rightarm, Override", "Blackwhip", "attack.playbackRate", duration);
+			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+			base.PlayCrossfade("Rightarm, Override", "Blackwhip", "Attack.playbackRate", duration, 0.1f);
 			dekucon = base.GetComponent<DekuController>();
 			hasFired = false;
 

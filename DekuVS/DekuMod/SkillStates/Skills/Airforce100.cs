@@ -39,6 +39,7 @@ namespace DekuMod.SkillStates
             this.duration = Airforce100.baseDuration / (this.attackSpeedStat * ((float)shotsFired/5));
             this.fireTime = 0.5f * this.duration;
             base.characterBody.SetAimTimer(duration);
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             this.muzzleString = punchIndex % 2 == 0 ? "LFinger" : "RFinger";
 
             //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", this.duration);

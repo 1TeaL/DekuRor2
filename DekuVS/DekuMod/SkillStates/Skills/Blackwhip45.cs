@@ -30,6 +30,7 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
 
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
             //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
             speedattack = attackSpeedStat / 2;

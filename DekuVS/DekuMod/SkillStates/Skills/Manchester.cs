@@ -73,7 +73,8 @@ namespace DekuMod.SkillStates
             jumpDuration = basejumpDuration / fajin;
 
 
-            base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", Manchester.jumpDuration);
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            base.PlayCrossfade("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", jumpDuration, 0.1f);
             AkSoundEngine.PostEvent(687990298, this.gameObject);
             AkSoundEngine.PostEvent(1918362945, this.gameObject);
 
@@ -135,7 +136,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = true;
             base.characterMotor.velocity.y = -Manchester.dropForce;
 
-            base.PlayAnimation("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration/3f);
             bool active = NetworkServer.active;
             if (active)
             {
@@ -166,6 +166,7 @@ namespace DekuMod.SkillStates
 
             if (base.isAuthority)
             {
+                base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration/3f, 0.1f);
                 Ray aimRay = base.GetAimRay();
                 if (dekucon.isMaxPower)
                 {
