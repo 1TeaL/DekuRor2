@@ -50,8 +50,11 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef oklahoma100SkillDef;
         internal static SkillDef detroit45SkillDef;
         internal static SkillDef ofacycle2SkillDef;
+        internal static SkillDef ofacycleSkillDef;
         internal static SkillDef ofacycle2scepterSkillDef;
         internal static SkillDef ofacycledownSkillDef;
+        internal static SkillDef ofacycledownscepterSkillDef;
+        internal static SkillDef fajinSkillDef;
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
@@ -103,7 +106,7 @@ namespace DekuMod.Modules.Survivors
         internal override void InitializeCharacter()
         {
             base.InitializeCharacter();
-            bool scepterInstalled = DekuPlugin.scepterInstalled;
+            bool scepterInstalled = DekuPlugin.scepterInstalled |DekuPlugin.fallbackScepter;
             if (scepterInstalled)
             {
                 Deku.CreateScepterSkills();
@@ -428,7 +431,7 @@ namespace DekuMod.Modules.Survivors
             #endregion
 
             #region Special
-            SkillDef skillDef41 = Skills.CreateSkillDef(new SkillDefInfo
+            ofacycleSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "SPECIAL_NAME",
                 skillNameToken = prefix + "SPECIAL_NAME",
@@ -451,57 +454,8 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1
             });
-
-
-            //SkillDef skillDef42 = Skills.CreateSkillDef(new SkillDefInfo
-            //{
-            //    skillName = prefix + "SPECIAL2_NAME",
-            //    skillNameToken = prefix + "SPECIAL2_NAME",
-            //    skillDescriptionToken = prefix + "SPECIAL2_DESCRIPTION",
-            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate45"),
-            //    activationState = new SerializableEntityStateType(typeof(SkillStates.OFAstate45)),
-            //    activationStateMachineName = "Weapon",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 1f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = false,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = InterruptPriority.Any,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = true,
-            //    mustKeyPress = true,
-            //    cancelSprintingOnActivation = false,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1
-            //});
-
-            //SkillDef skillDef43 = Skills.CreateSkillDef(new SkillDefInfo
-            //{
-            //    skillName = prefix + "SPECIAL3_NAME",
-            //    skillNameToken = prefix + "SPECIAL3_NAME",
-            //    skillDescriptionToken = prefix + "SPECIAL3_DESCRIPTION",
-            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate100"),
-            //    activationState = new SerializableEntityStateType(typeof(SkillStates.OFAstate)),
-            //    activationStateMachineName = "Weapon",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 1f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = false,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = InterruptPriority.Any,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = true,
-            //    mustKeyPress = true,
-            //    cancelSprintingOnActivation = false,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1
-            //});
-
-            SkillDef skillDef44 = Skills.CreateSkillDef(new SkillDefInfo
+            Modules.Skills.AddSpecialSkills(bodyPrefab, ofacycleSkillDef);
+            fajinSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "SPECIAL4_NAME",
                 skillNameToken = prefix + "SPECIAL4_NAME",
@@ -524,12 +478,55 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1
             });
+            Modules.Skills.AddSpecialSkills(bodyPrefab, fajinSkillDef);
+            //SkillDef skillDef41 = Skills.CreateSkillDef(new SkillDefInfo
+            //{
+            //    skillName = prefix + "SPECIAL_NAME",
+            //    skillNameToken = prefix + "SPECIAL_NAME",
+            //    skillDescriptionToken = prefix + "SPECIAL_DESCRIPTION",
+            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate"),
+            //    activationState = new SerializableEntityStateType(typeof(SkillStates.OFAcycle1)),
+            //    activationStateMachineName = "Weapon",
+            //    baseMaxStock = 1,
+            //    baseRechargeInterval = 1f,
+            //    beginSkillCooldownOnSkillEnd = false,
+            //    canceledFromSprinting = false,
+            //    forceSprintDuringState = false,
+            //    fullRestockOnAssign = true,
+            //    interruptPriority = InterruptPriority.Any,
+            //    resetCooldownTimerOnUse = false,
+            //    isCombatSkill = true,
+            //    mustKeyPress = true,
+            //    cancelSprintingOnActivation = false,
+            //    rechargeStock = 1,
+            //    requiredStock = 1,
+            //    stockToConsume = 1
+            //});
 
-            Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
-            {
-                skillDef41,
-                skillDef44
-            });
+            //SkillDef skillDef44 = Skills.CreateSkillDef(new SkillDefInfo
+            //{
+            //    skillName = prefix + "SPECIAL4_NAME",
+            //    skillNameToken = prefix + "SPECIAL4_NAME",
+            //    skillDescriptionToken = prefix + "SPECIAL4_DESCRIPTION",
+            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("quirksprevious"),
+            //    activationState = new SerializableEntityStateType(typeof(SkillStates.Fajinstate)),
+            //    activationStateMachineName = "Weapon",
+            //    baseMaxStock = 1,
+            //    baseRechargeInterval = 1f,
+            //    beginSkillCooldownOnSkillEnd = false,
+            //    canceledFromSprinting = false,
+            //    forceSprintDuringState = true,
+            //    fullRestockOnAssign = true,
+            //    interruptPriority = InterruptPriority.Any,
+            //    resetCooldownTimerOnUse = false,
+            //    isCombatSkill = true,
+            //    mustKeyPress = true,
+            //    cancelSprintingOnActivation = false,
+            //    rechargeStock = 1,
+            //    requiredStock = 1,
+            //    stockToConsume = 1
+            //});
+
             #endregion
             #region Boosted Primary
 
@@ -1326,11 +1323,36 @@ namespace DekuMod.Modules.Survivors
 
             Deku.ofacycle2scepterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "BOOSTEDSPECIAL2_NAME",
-                skillNameToken = prefix + "BOOSTEDSPECIAL2_NAME",
-                skillDescriptionToken = prefix + "BOOSTEDSPECIAL2_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade100"),
+                skillName = prefix + "SCEPTERSPECIAL2_NAME",
+                skillNameToken = prefix + "SCEPTERSPECIAL2_NAME",
+                skillDescriptionToken = prefix + "SCEPTERSPECIAL2_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade45"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.OFAcycle2scepter)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = true,
+                interruptPriority = InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+
+
+            });
+            Deku.ofacycledownscepterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "SCEPTERSPECIAL3_NAME",
+                skillNameToken = prefix + "SCEPTERSPECIAL3_NAME",
+                skillDescriptionToken = prefix + "SCEPTERSPECIAL3_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade100"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.OFAcycledownscepter)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
@@ -1354,7 +1376,7 @@ namespace DekuMod.Modules.Survivors
             {
                 skillName = prefix + "FLOATSPECIAL_NAME",
                 skillNameToken = prefix + "FLOATSPECIAL_NAME",
-                skillDescriptionToken = prefix + "FLOATSPECIAL45_DESCRIPTION",
+                skillDescriptionToken = prefix + "FLOATSPECIAL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("delaware"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.DelawareSmash)),
                 activationStateMachineName = "Weapon",
@@ -1378,9 +1400,9 @@ namespace DekuMod.Modules.Survivors
 
             Deku.floatdelaware45SkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "FLOATSPECIAL45_NAME",
-                skillNameToken = prefix + "FLOATSPECIAL45_NAME",
-                skillDescriptionToken = prefix + "FLOATSPECIAL45_DESCRIPTION",
+                skillName = prefix + "FLOATSPECIAL_NAME",
+                skillNameToken = prefix + "FLOATSPECIAL_NAME",
+                skillDescriptionToken = prefix + "FLOATSPECIAL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("delaware"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.DelawareSmash45)),
                 activationStateMachineName = "Weapon",
@@ -1410,7 +1432,7 @@ namespace DekuMod.Modules.Survivors
         private static void CreateScepterSkills()
         {
             string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
-            SkillDef replacingDef = Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef ofascepterDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "SCEPTERSPECIAL_NAME",
                 skillNameToken = prefix + "SCEPTERSPECIAL_NAME",
@@ -1433,59 +1455,8 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1,
             });
-            ItemBase<AncientScepterItem>.instance.RegisterScepterSkill(replacingDef, SurvivorBase.instance.fullBodyName, SkillSlot.Special, 0);
 
-            //SkillDef replacingDef2 = Skills.CreateSkillDef(new SkillDefInfo
-            //{
-            //    skillName = prefix + "SCEPTERSPECIAL2_NAME",
-            //    skillNameToken = prefix + "SCEPTERSPECIAL2_NAME",
-            //    skillDescriptionToken = prefix + "SCEPTERSPECIAL2_DESCRIPTION",
-            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade45"),
-            //    activationState = new SerializableEntityStateType(typeof(SkillStates.OFAstatescepter45)),
-            //    activationStateMachineName = "Weapon",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 1f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = true,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = InterruptPriority.Any,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = true,
-            //    mustKeyPress = true,
-            //    cancelSprintingOnActivation = false,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1,
-            //});
-            //ItemBase<AncientScepterItem>.instance.RegisterScepterSkill(replacingDef2, SurvivorBase.instance.fullBodyName, SkillSlot.Special, 1);
-
-            //SkillDef replacingDef3 = Skills.CreateSkillDef(new SkillDefInfo
-            //{
-            //    skillName = prefix + "SCEPTERSPECIAL3_NAME",
-            //    skillNameToken = prefix + "SCEPTERSPECIAL3_NAME",
-            //    skillDescriptionToken = prefix + "SCEPTERSPECIAL3_DESCRIPTION",
-            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade"),
-            //    activationState = new SerializableEntityStateType(typeof(SkillStates.OFAstatescepter)),
-            //    activationStateMachineName = "Weapon",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 1f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = true,
-            //    fullRestockOnAssign = true,
-            //    interruptPriority = InterruptPriority.Any,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = true,
-            //    mustKeyPress = true,
-            //    cancelSprintingOnActivation = false,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1,
-            //});
-            //ItemBase<AncientScepterItem>.instance.RegisterScepterSkill(replacingDef3, SurvivorBase.instance.fullBodyName, SkillSlot.Special, 2);
-
-            SkillDef replacingDef4 = Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef fajinscepterDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "SCEPTERSPECIAL4_NAME",
                 skillNameToken = prefix + "SCEPTERSPECIAL4_NAME",
@@ -1508,10 +1479,27 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1,
             });
-            ItemBase<AncientScepterItem>.instance.RegisterScepterSkill(replacingDef4, SurvivorBase.instance.fullBodyName, SkillSlot.Special, 1);
+            if (DekuPlugin.scepterInstalled)
+            {
+                RegisterAncientScepterStandalone(ofascepterDef, fajinscepterDef);
+            }
+            else if (DekuPlugin.fallbackScepter)
+            {
+                RegisterTILERScepter(ofascepterDef, fajinscepterDef);
+            }
+        }
+        #endregion
+        private static void RegisterAncientScepterStandalone(SkillDef skill1, SkillDef skill2)
+        {
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(skill1, instance.fullBodyName, SkillSlot.Special, 0);
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(skill2, instance.fullBodyName, SkillSlot.Special, 1);
         }
 
-            #endregion
+        private static void RegisterTILERScepter(SkillDef skill1, SkillDef skill2)
+        {
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(skill1, instance.fullBodyName, SkillSlot.Special, ofacycleSkillDef);
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(skill2, instance.fullBodyName, SkillSlot.Special, fajinSkillDef);
+        }
 
         internal override void InitializeSkins()
         {

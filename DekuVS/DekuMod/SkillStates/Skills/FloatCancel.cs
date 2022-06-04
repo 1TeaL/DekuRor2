@@ -10,7 +10,7 @@ namespace DekuMod.SkillStates
 {
     public class FloatCancel : BaseSkillState
     {
-        public static float basejumpDuration = 1f;
+        public static float basejumpDuration = 10f;
         public static float jumpDuration;
         public static float dropForce = 80f;
 

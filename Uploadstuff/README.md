@@ -1,6 +1,6 @@
 ## Deku
 Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
-#### Multiplayer works (hopefully). Standalone Ancient Scepter support.
+#### Multiplayer works (hopefully). Standalone and Classic Items Ancient Scepter support.
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. 
 #### <a href="https://ko-fi.com/tealpopcorn"><img src="https://user-images.githubusercontent.com/93917577/160220529-efed5020-90ac-467e-98f2-27b5c162d744.png"> </a>
 If you enjoy my work, support me on Ko-fi!
@@ -39,6 +39,13 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 3.2.2
+    - Properly added classic item's scepter compatibility.
+    - Increased blast radius of delaware smash to more match the effect.
+- 3.2.1
+    - Fixed delaware smash description. Fixed infinite 45% and 100% descriptions.
+    - Added Classic Item's scepter compatibility.
+    - Float cancel now waits for 10 seconds before ending the skill if you haven't touched the ground.
 - 3.2.0
     - Fixed animation timings with attacks to properly scale with attackspeed.
     - Removed OFA 45% and 100% as they are basically irrelevant.

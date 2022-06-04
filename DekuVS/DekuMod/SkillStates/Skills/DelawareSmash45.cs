@@ -52,7 +52,7 @@ namespace DekuMod.SkillStates
                 Vector3 theSpot2 = aimRay.origin + 2 * aimRay.direction;
 
                 BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = 15f;
+                blastAttack.radius = 20f;
                 blastAttack.procCoefficient = 1f;
                 blastAttack.position = theSpot;
                 blastAttack.attacker = base.gameObject;

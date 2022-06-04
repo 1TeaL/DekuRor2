@@ -24,6 +24,7 @@ namespace DekuMod
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     [R2APISubmoduleDependency(new string[]
@@ -43,11 +44,13 @@ namespace DekuMod
         //  please change the names to your own stuff, thanks
         //   this shouldn't even have to be said
 
+        //ancient scepters
         public static bool scepterInstalled = false;
+        public static bool fallbackScepter = false;
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "3.2.0";
+        public const string MODVERSION = "3.2.2";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -68,7 +71,10 @@ namespace DekuMod
             {
                 DekuPlugin.scepterInstalled = true;
             }
-
+            if (Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems"))
+            {
+                DekuPlugin.fallbackScepter = true;
+            }
             // load assets and read config
             Modules.Assets.Initialize();
             Modules.Config.ReadConfig();

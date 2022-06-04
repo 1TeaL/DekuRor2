@@ -145,9 +145,11 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL_NAME", "One For All Mastered");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL_DESCRIPTION", $"Cycle between Mastered One For All 45% and 100%, upgrading your skills and stats as well as granting lifesteal. This skill goes to 45%.");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_NAME", $"Infinite 45%");
-            LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_DESCRIPTION", $"Master OFA 45%, gaining the same effects as well as 5% lifesteal.");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL2_DESCRIPTION", $"Master OFA 45%, gaining the same effects as well as 5% lifesteal. " +
+                $"This skill goes to Infinite 100%.");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL3_NAME", $"Infinite 100%");
-            LanguageAPI.Add(prefix + "SCEPTERSPECIAL3_DESCRIPTION", $"Unlock the true power of One For All, gaining the same effects as well as 10% lifesteal.");
+            LanguageAPI.Add(prefix + "SCEPTERSPECIAL3_DESCRIPTION", $"Unlock the true power of One For All, gaining the same effects as well as 10% lifesteal. " +
+                $"This skill returns yourself back to your limits.");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL4_NAME", $"OFA Quirks Mastered");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL4_DESCRIPTION", $"Fa Jin Buff stacks are granted at double the rate.");
             #endregion
