@@ -56,6 +56,15 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef ofacycledownscepterSkillDef;
         internal static SkillDef fajinSkillDef;
 
+        internal static SkillDef Primary;
+        internal static SkillDef Secondary;
+        internal static SkillDef Utility;
+        internal static SkillDef Special;
+        internal static SkillDef Extra1;
+        internal static SkillDef Extra2;
+        internal static SkillDef Extra3;
+        internal static SkillDef Extra4;
+
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
 
@@ -156,6 +165,10 @@ namespace DekuMod.Modules.Survivors
         internal override void InitializeSkills()
         {
             Skills.CreateSkillFamilies(bodyPrefab);
+            Modules.Skills.CreateFirstExtraSkillFamily(bodyPrefab);
+            Modules.Skills.CreateSecondExtraSkillFamily(bodyPrefab);
+            Modules.Skills.CreateThirdExtraSkillFamily(bodyPrefab);
+            Modules.Skills.CreateFourthExtraSkillFamily(bodyPrefab);
 
             string prefix = DekuPlugin.developerPrefix +"_DEKU_BODY_";
 
@@ -171,7 +184,7 @@ namespace DekuMod.Modules.Survivors
             //Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.Airforce)), "Weapon", "Range attack with your fingers, dealing <style=cIsDamage> 150% damage</style>", Assets.mainAssetBundle.LoadAsset<Sprite>("primary"), true));
             //Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
 
-            SkillDef airforceSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            Primary = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
 
                 skillName = prefix + "PRIMARY_NAME",
@@ -197,68 +210,68 @@ namespace DekuMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, airforceSkillDef);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, Primary);
 
-            SkillDef shootstylekickSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            //SkillDef shootstylekickSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            //{
 
-                skillName = prefix + "PRIMARY2_NAME",
-                skillNameToken = prefix + "PRIMARY2_NAME",
-                skillDescriptionToken = prefix + "PRIMARY2_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("shootstylekick"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleKick)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 6f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Any,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
-            });
+            //    skillName = prefix + "PRIMARY2_NAME",
+            //    skillNameToken = prefix + "PRIMARY2_NAME",
+            //    skillDescriptionToken = prefix + "PRIMARY2_DESCRIPTION",
+            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("shootstylekick"),
+            //    activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleKick)),
+            //    activationStateMachineName = "Weapon",
+            //    baseMaxStock = 1,
+            //    baseRechargeInterval = 6f,
+            //    beginSkillCooldownOnSkillEnd = false,
+            //    canceledFromSprinting = false,
+            //    forceSprintDuringState = true,
+            //    fullRestockOnAssign = false,
+            //    interruptPriority = EntityStates.InterruptPriority.Any,
+            //    resetCooldownTimerOnUse = false,
+            //    isCombatSkill = true,
+            //    mustKeyPress = false,
+            //    cancelSprintingOnActivation = false,
+            //    rechargeStock = 1,
+            //    requiredStock = 1,
+            //    stockToConsume = 1,
+            //    keywordTokens = new string[] { "KEYWORD_AGILE" }
+            //});
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, shootstylekickSkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, shootstylekickSkillDef);
 
-            SkillDef counterSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            //SkillDef counterSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            //{
 
-                skillName = prefix + "PRIMARY3_NAME",
-                skillNameToken = prefix + "PRIMARY3_NAME",
-                skillDescriptionToken = prefix + "PRIMARY3_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("DangerSense"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.DangerSense)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 3f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Any,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_STUNNING" }
-            });
+            //    skillName = prefix + "PRIMARY3_NAME",
+            //    skillNameToken = prefix + "PRIMARY3_NAME",
+            //    skillDescriptionToken = prefix + "PRIMARY3_DESCRIPTION",
+            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("DangerSense"),
+            //    activationState = new SerializableEntityStateType(typeof(SkillStates.DangerSense)),
+            //    activationStateMachineName = "Weapon",
+            //    baseMaxStock = 1,
+            //    baseRechargeInterval = 3f,
+            //    beginSkillCooldownOnSkillEnd = false,
+            //    canceledFromSprinting = false,
+            //    forceSprintDuringState = false,
+            //    fullRestockOnAssign = false,
+            //    interruptPriority = EntityStates.InterruptPriority.Any,
+            //    resetCooldownTimerOnUse = false,
+            //    isCombatSkill = true,
+            //    mustKeyPress = false,
+            //    cancelSprintingOnActivation = false,
+            //    rechargeStock = 1,
+            //    requiredStock = 1,
+            //    stockToConsume = 1,
+            //    keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_STUNNING" }
+            //});
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, counterSkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, counterSkillDef);
 
             #endregion
 
             #region Secondary
-            SkillDef skillDef21 = Skills.CreateSkillDef(new SkillDefInfo
+            Secondary = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "SECONDARY_NAME",
                 skillNameToken = prefix + "SECONDARY_NAME",
@@ -338,14 +351,14 @@ namespace DekuMod.Modules.Survivors
 
             Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]
             {
-                skillDef21,
-                skillDef22,
-                skillDef23,
+                Secondary,
+                //skillDef22,
+                //skillDef23,
             });
             #endregion
 
             #region Utility
-            SkillDef skillDef31 = Skills.CreateSkillDef(new SkillDefInfo
+            Utility = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "UTILITY_NAME",
                 skillNameToken = prefix + "UTILITY_NAME",
@@ -424,14 +437,14 @@ namespace DekuMod.Modules.Survivors
             });
             Skills.AddUtilitySkills(this.bodyPrefab, new SkillDef[]
             {
-                skillDef31,
-                skillDef32,
-                skillDef33
+                Utility,
+                //skillDef32,
+                //skillDef33
             });
             #endregion
 
             #region Special
-            ofacycleSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            Special = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "SPECIAL_NAME",
                 skillNameToken = prefix + "SPECIAL_NAME",
@@ -454,7 +467,7 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1
             });
-            Modules.Skills.AddSpecialSkills(bodyPrefab, ofacycleSkillDef);
+            //Modules.Skills.AddSpecialSkills(bodyPrefab, ofacycleSkillDef);
             fajinSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "SPECIAL4_NAME",
@@ -478,7 +491,14 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1
             });
-            Modules.Skills.AddSpecialSkills(bodyPrefab, fajinSkillDef);
+            //Modules.Skills.AddSpecialSkills(bodyPrefab, fajinSkillDef);
+
+            Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
+            {
+                Special,
+                //fajinSkillDef,
+                //skillDef33
+            });
             //SkillDef skillDef41 = Skills.CreateSkillDef(new SkillDefInfo
             //{
             //    skillName = prefix + "SPECIAL_NAME",
@@ -528,6 +548,107 @@ namespace DekuMod.Modules.Survivors
             //});
 
             #endregion
+
+            #region Extra Skills
+
+            Extra1 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "AFO_NAME",
+                skillNameToken = prefix + "AFO_NAME",
+                skillDescriptionToken = prefix + "AFO_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            Extra2 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "AFO_NAME",
+                skillNameToken = prefix + "AFO_NAME",
+                skillDescriptionToken = prefix + "AFO_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 2f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            Extra3 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "AFO_NAME",
+                skillNameToken = prefix + "AFO_NAME",
+                skillDescriptionToken = prefix + "AFO_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 3f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            Extra4 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "AFO_NAME",
+                skillNameToken = prefix + "AFO_NAME",
+                skillDescriptionToken = prefix + "AFO_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Airforce)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            Modules.Skills.AddFirstExtraSkill(bodyPrefab, Extra1);
+            Modules.Skills.AddSecondExtraSkill(bodyPrefab, Extra2);
+            Modules.Skills.AddThirdExtraSkill(bodyPrefab, Extra3);
+            Modules.Skills.AddFourthExtraSkill(bodyPrefab, Extra4);
+            #endregion
+
             #region Boosted Primary
 
             Deku.primaryboostSkillDef = Skills.CreateSkillDef(new SkillDefInfo
