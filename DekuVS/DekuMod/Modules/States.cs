@@ -34,7 +34,7 @@ namespace DekuMod.Modules
 
             entityStates.Add(typeof(Fajinstate));
             entityStates.Add(typeof(Fajinstatescepter));
-            entityStates.Add(typeof(Fajin));
+            entityStates.Add(typeof(UtilitySuper));
             entityStates.Add(typeof(Fajinscepter));
             entityStates.Add(typeof(BlackwhipShoot));
             entityStates.Add(typeof(Smokescreen));

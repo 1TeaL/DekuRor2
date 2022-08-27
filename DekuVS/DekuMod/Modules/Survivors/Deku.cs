@@ -709,7 +709,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "BOOSTEDPRIMARY3_NAME",
                 skillDescriptionToken = prefix + "BOOSTEDPRIMARY3_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("fajin"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.Fajin)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.UtilitySuper)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
