@@ -9,10 +9,15 @@ namespace DekuMod.Modules
              + "< ! > Detroit smash is a chargeable punch that lunges you forward; when powered up turns it into St. Louis Smash, granting larger AOE." + Environment.NewLine + Environment.NewLine
              + "< ! > Blackwhip allows him to move through the environment and grapple on to enemies; when powered up lets him pull multiple enemies towards him." + Environment.NewLine + Environment.NewLine
              + "< ! > One for All 100% enables Deku to use one powered up skill at cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
+        
+        //Energy
+        internal static float maxPlusUltra = 100f;
+        internal static float regenPlusUltraRate = 4f;
+        internal static float basePlusUltraGain = 1f;
+        internal static float skillPlusUltraGain = 5f;
+        internal static float basePlusUltraSpend = 50f;
 
-
-
-
+        //Primary damage
         internal const float airforceDamageCoefficient = 1f;
         internal const float shootkickDamageCoefficient = 3f;
         internal const float shootkick45DamageCoefficient = 3f;
@@ -23,6 +28,7 @@ namespace DekuMod.Modules
         internal const float airforce100DamageCoefficient = 2f;
         internal const float counterDamageCoefficient = 6f;
 
+        //Secondary damage
         internal const float blackwhipDamageCoefficient = 1f;
         internal const float manchesterDamageCoefficient = 3f;
         internal const float manchester45DamageCoefficient = 3f;
@@ -33,6 +39,7 @@ namespace DekuMod.Modules
         internal const float stlouisDamageCoefficient = 4f;
         internal const float stlouis100DamageCoefficient = 4f;
 
+        //Utility damage
         internal const float detroit100DamageCoefficient = 6f;
         internal const float detroitDamageCoefficient = 6f;
         internal const float detroit45DamageCoefficient = 6f;
@@ -53,7 +60,7 @@ namespace DekuMod.Modules
         internal const float oklahoma100DamageCoefficient = 2f;
 
 
-
+        //Extra quirks
         internal const float blackwhipPull = 8f;
 
         internal const int fajinMaxStack = 200;

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1616911800
+CRC: 1513152286
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2db62ec47cc522eaba1d907e3c583084
+    Hash: 294e23df7d4d26d88f0198b5293b9ce5
   TypeTreeHash:
     serializedVersion: 2
-    Hash: fb98380650685d80d5a2c2187dc1369c
+    Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -38,6 +38,8 @@ ClassTypes:
 - Class: 108
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 9a68da65c907acb4eb4dbcd042f172e7, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
@@ -61,15 +63,21 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
 - Class: 319
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Deku/DekuV2/Animations/Armature_CounterEnd.anim
-- Assets/Deku/DekuV2/GUI/45percent/primary/airforce45.png
+- Assets/Deku/DekuV2/GUI/airforce45.png
 - Assets/Deku/DekuV2/GUI/armorblue.tif
 - Assets/Deku/DekuV2/VFX/delaware.prefab
-- Assets/Deku/DekuV2/GUI/100percent/secondary/stlouis100.png
+- Assets/Deku/DekuV2/GUI/stlouis100.png
 - Assets/Deku/DekuV2/Animations/Armature_ShootStyleFlip.anim
 - Assets/Deku/DekuV2/Animations/Armature_Blackwhip.anim
 - Assets/Deku/DekuV2/VFX/airforce100impact.prefab
@@ -84,47 +92,46 @@ Assets:
 - Assets/Deku/DekuV2/Assets/Body.mesh
 - Assets/Deku/DekuV2/VFX/detroit.prefab
 - Assets/Deku/DekuV2/Animations/Armature_Airforce100R.anim
-- Assets/Deku/DekuV2/GUI/Special/ultimateupgrade.png
+- Assets/Deku/DekuV2/GUI/ultimateupgrade.png
 - Assets/Deku/DekuV2/VFX/Material/yellow.mat
 - Assets/Deku/DekuV2/Animations/humanoidDekuAvatar.asset
 - Assets/Deku/DekuV2/VFX/Material/dangersense.mat
 - Assets/Deku/DekuV2/Animations/Armature_ShootStyleDash.anim
-- Assets/Deku/DekuV2/GUI/Special/ultimateupgrade45.png
+- Assets/Deku/DekuV2/GUI/ultimateupgrade45.png
 - Assets/Deku/DekuV2/Animations/Armature_BlackwhipLeft.anim
 - Assets/Deku/DekuV2/VFX/blackwhipeffect 1.prefab
 - Assets/Deku/DekuV2/VFX/airforce100trail.prefab
-- Assets/Deku/DekuV2/GUI/OFA/fajinboost.png
+- Assets/Deku/DekuV2/GUI/fajinboost.png
 - Assets/Deku/DekuV2/VFX/DangerSenseParticle.prefab
 - Assets/Deku/DekuV2/Animations/Armature_DelawareSmashLookUp.anim
-- Assets/Deku/DekuV2/GUI/45percent/Utility/oklahoma45.png
+- Assets/Deku/DekuV2/GUI/oklahoma45.png
 - Assets/Deku/DekuV2/Assets/matDeku.mat
-- Assets/Deku/DekuV2/GUI/Special/ultimate45.png
+- Assets/Deku/DekuV2/GUI/ultimate45.png
 - Assets/Deku/DekuV2/Animations/Armature_Airforce.001.anim
 - Assets/Deku/DekuV2/VFX/Material/windspikering.mat
-- Assets/Deku/DekuV2/GUI/45percent/Utility/detroit45.png
+- Assets/Deku/DekuV2/GUI/detroit45.png
 - Assets/Deku/DekuV2/VFX/Material/windbullet.mat
 - Assets/Deku/DekuV2/VFX/windbullet45.prefab
 - Assets/Deku/DekuV2/VFX/Material/Spark2Particlewhip.mat
 - Assets/Deku/DekuV2/Animations/Armature_Falling.anim
-- Assets/Deku/DekuV2/GUI/Special/ultimate100.png
+- Assets/Deku/DekuV2/GUI/ultimate100.png
 - Assets/Deku/DekuV2/Animations/Armature_Tornado .anim
-- Assets/Deku/DekuV2/GUI/Base/Primarylvl1/airforce.png
+- Assets/Deku/DekuV2/GUI/airforce.png
 - Assets/Deku/DekuV2/VFX/funkytrail.prefab
 - Assets/Deku/DekuV2/Animations/DekuTestAvatar.asset
-- Assets/Deku/DekuV2/Assets/SwordHitbox (1).prefab
-- Assets/Deku/DekuV2/GUI/45percent/Secondary/manchester45.png
-- Assets/Deku/DekuV2/GUI/Base/Utilitylvl1/oklahoma.png
-- Assets/Deku/DekuV2/GUI/45percent/Utility/Floatactivate45.png
+- Assets/Deku/DekuV2/GUI/manchester45.png
+- Assets/Deku/DekuV2/GUI/oklahoma.png
+- Assets/Deku/DekuV2/GUI/Floatactivate45.png
 - Assets/Deku/DekuV2/Assets/mdlDeku.prefab
-- Assets/Deku/DekuV2/GUI/Special/ultimate.png
+- Assets/Deku/DekuV2/GUI/ultimate.png
 - Assets/Deku/DekuV2/VFX/blackwhipline.prefab
 - Assets/Deku/DekuV2/VFX/Material/blackwhip.mat
 - Assets/Deku/DekuV2/GUI/KickCount.tif
 - Assets/Deku/DekuV2/GUI/lightninggreen.tif
-- Assets/Deku/DekuV2/GUI/100percent/secondary/manchester100.png
+- Assets/Deku/DekuV2/GUI/manchester100.png
 - Assets/Deku/DekuV2/GUI/armorgreen.tif
 - Assets/Deku/DekuV2/GUI/lightningblue.tif
-- Assets/Deku/DekuV2/GUI/Base/Secondarylv1/manchester.png
+- Assets/Deku/DekuV2/GUI/manchester.png
 - Assets/Deku/DekuV2/GUI/45 blank.png
 - Assets/Deku/DekuV2/GUI/Counter.tif
 - Assets/Deku/DekuV2/VFX/impact.prefab
@@ -132,31 +139,31 @@ Assets:
 - Assets/Deku/DekuV2/Animations/Armature_RightLegHorizontalSweep.anim
 - Assets/Deku/DekuV2/GUI/Float.tif
 - Assets/Deku/DekuV2/VFX/detroitweak.prefab
-- Assets/Deku/DekuV2/GUI/100percent/utility/oklahoma100.png
+- Assets/Deku/DekuV2/GUI/oklahoma100.png
 - Assets/Deku/DekuV2/Animations/DekuGestureMask.mask
 - Assets/Deku/DekuV2/Animations/animDekuTest.controller
-- Assets/Deku/DekuV2/GUI/Base/Primarylvl1/DangerSense.png
+- Assets/Deku/DekuV2/GUI/DangerSense.png
 - Assets/Deku/DekuV2/Animations/Armature_ShootStyleDashAuto.anim
-- Assets/Deku/DekuV2/GUI/45percent/Secondary/blackwhip45.png
-- Assets/Deku/DekuV2/GUI/Special/ultimateupgrade100.png
-- Assets/Deku/DekuV2/GUI/Base/Utilitylvl1/detroit.png
+- Assets/Deku/DekuV2/GUI/blackwhip45.png
+- Assets/Deku/DekuV2/GUI/ultimateupgrade100.png
+- Assets/Deku/DekuV2/GUI/detroit.png
 - Assets/Deku/DekuV2/GUI/deku portrait.png
 - Assets/Deku/DekuV2/Animations/Armature_Airforce100Reset.anim
 - Assets/Deku/DekuV2/GUI/Airforceskin.png
-- Assets/Deku/DekuV2/GUI/45percent/Secondary/stlouis45.png
-- Assets/Deku/DekuV2/GUI/Special/quirksprevious.png
-- Assets/Deku/DekuV2/GUI/100percent/secondary/blackwhip100.png
+- Assets/Deku/DekuV2/GUI/stlouis45.png
+- Assets/Deku/DekuV2/GUI/quirksprevious.png
+- Assets/Deku/DekuV2/GUI/blackwhip100.png
 - Assets/Deku/DekuV2/VFX/OFA lightning.prefab
 - Assets/Deku/DekuV2/VFX/smokebig.prefab
 - Assets/Deku/DekuV2/Animations/Armature_RightArmPunch.anim
-- Assets/Deku/DekuV2/GUI/OFA/fajin.png
+- Assets/Deku/DekuV2/GUI/fajin.png
 - Assets/Deku/DekuV2/VFX/blackwhipexplosion.prefab
 - Assets/Deku/DekuV2/VFX/Material/windtrail.mat
-- Assets/Deku/DekuV2/GUI/Base/Secondarylv1/stlouis.png
+- Assets/Deku/DekuV2/GUI/stlouis.png
 - Assets/Deku/DekuV2/VFX/circle.prefab
-- Assets/Deku/DekuV2/GUI/100percent/primary/shootstylekick100.png
+- Assets/Deku/DekuV2/GUI/shootstylekick100.png
 - Assets/Deku/DekuV2/Assets/humanoidDeku.prefab
-- Assets/Deku/DekuV2/GUI/Base/Utilitylvl1/Floatcancel.png
+- Assets/Deku/DekuV2/GUI/Floatcancel.png
 - Assets/Deku/DekuV2/Assets/Model.prefab
 - Assets/Deku/DekuV2/GUI/lightningwhiteblue.tif
 - Assets/Deku/DekuV2/Animations/anim.controller
@@ -167,40 +174,40 @@ Assets:
 - Assets/Deku/DekuV2/Animations/Jumping.anim
 - Assets/Deku/DekuV2/Animations/Armature_DelawareSmashLookDown.anim
 - Assets/Deku/DekuV2/VFX/Material/windlineblack.mat
-- Assets/Deku/DekuV2/GUI/OFA/blackwhipshoot.png
+- Assets/Deku/DekuV2/GUI/blackwhipshoot.png
 - Assets/Deku/DekuV2/Animations/Armature_FullBodyPunch.anim
-- Assets/Deku/DekuV2/GUI/Base/Speciallv1/delaware.png
+- Assets/Deku/DekuV2/GUI/delaware.png
 - Assets/Deku/DekuV2/Animations/animDeku.controller
 - Assets/Deku/DekuV2/VFX/Material/blackwhipblack.mat
-- Assets/Deku/DekuV2/GUI/100percent/primary/airforce100.png
-- Assets/Deku/DekuV2/GUI/Base/Utilitylvl1/Floatactivate.png
+- Assets/Deku/DekuV2/GUI/airforce100.png
+- Assets/Deku/DekuV2/Assets/dekuCustomUI.prefab
+- Assets/Deku/DekuV2/GUI/Floatactivate.png
 - Assets/Deku/DekuV2/Animations/Armature_ManchesterBegin.anim
-- Assets/Deku/DekuV2/GUI/Special/Quirks.png
+- Assets/Deku/DekuV2/GUI/Quirks.png
 - Assets/Deku/DekuV2/VFX/windbullet.prefab
 - Assets/Deku/DekuV2/Animations/DekuRightArmMask.mask
 - Assets/Deku/DekuV2/VFX/blackwhipforward.prefab
-- Assets/Deku/DekuV2/GUI/Base/Primarylvl1/shootstylekick.png
-- Assets/Deku/DekuV2/GUI/45percent/primary/shootstylekick45.png
+- Assets/Deku/DekuV2/GUI/shootstylekick.png
+- Assets/Deku/DekuV2/GUI/shootstylekick45.png
 - Assets/Deku/DekuV2/Assets/DekuDisplay.prefab
 - Assets/Deku/DekuV2/VFX/OFA lightning eye.prefab
 - Assets/Deku/DekuV2/VFX/Material/white.mat
-- Assets/Deku/DekuV2/GUI/45percent/primary/DangerSense45.png
+- Assets/Deku/DekuV2/GUI/DangerSense45.png
 - Assets/Deku/DekuV2/VFX/blackwhipshootGhost.prefab
 - Assets/Deku/DekuV2/GUI/texDekuIcon.png
-- Assets/Deku/DekuV2/GUI/OFA/smokescreen.png
+- Assets/Deku/DekuV2/GUI/smokescreen.png
 - Assets/Deku/DekuV2/VFX/Textures/SparkParticleblackwhip.tif
 - Assets/Deku/DekuV2/VFX/fajinaura.prefab
 - Assets/Deku/DekuV2/Animations/Armature_Running.anim
 - Assets/Deku/DekuV2/VFX/blackwhip.prefab
-- Assets/Deku/DekuV2/GUI/100percent/primary/DangerSense100.png
-- Assets/Deku/DekuV2/GUI/Base/Secondarylv1/blackwhip.png
+- Assets/Deku/DekuV2/GUI/DangerSense100.png
+- Assets/Deku/DekuV2/GUI/blackwhip.png
 - Assets/Deku/DekuV2/Animations/Armature_RightArmCharging.anim
 - Assets/Deku/DekuV2/Assets/mdlDekubroken.prefab
-- Assets/Deku/DekuV2/GUI/100percent/utility/detroit100.png
-- Assets/Deku/DekuV2/GUI/100percent/utility/Floatactivate100.png
+- Assets/Deku/DekuV2/GUI/detroit100.png
+- Assets/Deku/DekuV2/GUI/Floatactivate100.png
 - Assets/Deku/DekuV2/VFX/spin.prefab
 - Assets/Deku/DekuV2/Animations/Armature_Airforce100L.anim
-- Assets/Deku/DekuV2/Assets/DekuDisplaycopyingmdlDeku.prefab
 - Assets/Deku/DekuV2/Animations/Armature_RightLegVerticalSweep.anim
 - Assets/Deku/DekuV2/Animations/Armature_Airforce.anim
 - Assets/Deku/DekuV2/VFX/Textures/dangersenseparticle.tif
