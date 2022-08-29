@@ -11,7 +11,7 @@ namespace DekuMod.SkillStates
 	public class OFAstatescepter : BaseSkillState
 	{
 		public static float baseDuration = 0.05f;
-		public static SkillDef primaryDef = Deku.primaryboostSkillDef;
+		//public static SkillDef primaryDef = Deku.shootStyleKickSkillDef;
 		public static SkillDef secondaryDef = Deku.secondaryboostSkillDef;
 		public static SkillDef utilityDef = Deku.utilityboostSkillDef;
 		public static SkillDef specialDef = Deku.ofadownSkillDef;
@@ -36,10 +36,10 @@ namespace DekuMod.SkillStates
 
 			AkSoundEngine.PostEvent(3940341776, this.gameObject);
 			AkSoundEngine.PostEvent(2493696431, this.gameObject);
-			base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAstate.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, OFAstate.secondaryDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAstate.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.special.SetSkillOverride(base.skillLocator.special, OFAstate.specialDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, OFAstate.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, OFAstate.secondaryDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, OFAstate.utilityDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.special.SetSkillOverride(base.skillLocator.special, OFAstate.specialDef, GenericSkill.SkillOverridePriority.Contextual);
 			if (NetworkServer.active && base.healthComponent)
 			{
 				DamageInfo damageInfo = new DamageInfo();

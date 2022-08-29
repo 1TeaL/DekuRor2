@@ -43,43 +43,51 @@ namespace DekuMod.SkillStates
 					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff45);
 				}
 			}
-			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, OFAcycle2.specialDef, GenericSkill.SkillOverridePriority.Contextual);
+			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle2SkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
 			switch (base.skillLocator.primary.skillNameToken)
 			{
-				case prefix + "BOOSTEDPRIMARY5_NAME":
-                    base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, OFAcycle2.airforceDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "FIST100PRIMARY_NAME":
+					base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.fist100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fistPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
-				case prefix + "BOOSTEDPRIMARY7_NAME":
-					base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, OFAcycle2.shootstylekickDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "LEG100PRIMARY_NAME":
+					base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.leg100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.legPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
-				case prefix + "BOOSTEDPRIMARY9_NAME":
-					base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, OFAcycle2.dangersenseDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "QUIRK100PRIMARY_NAME":
+					base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.quirk100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.quirkPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
-
 			}
 			switch (base.skillLocator.secondary.skillNameToken)
 			{
-				case prefix + "BOOSTEDSECONDARY4_NAME":
-					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAcycle2.blackwhipDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "FIST100SECONDARY_NAME":
+					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.fist100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fistSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
-				case prefix + "BOOSTEDSECONDARY6_NAME":
-					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAcycle2.manchesterDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "LEG100SECONDARY_NAME":
+					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.leg100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.legSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
-				case prefix + "BOOSTEDSECONDARY7_NAME":
-					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, OFAcycle2.stlouisDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "QUIRK100SECONDARY_NAME":
+					base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.quirk100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.quirkSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 			}
 			switch (base.skillLocator.utility.skillNameToken)
 			{
-				case prefix + "BOOSTEDUTILITY5_NAME":
-					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle2.floatDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "FIST100UTILITY_NAME":
+					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.fist100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fistUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
-				case prefix + "BOOSTEDUTILITY7_NAME":
-					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle2.oklahomaDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "LEG100UTILITY_NAME":
+					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.leg100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.legUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
-				case prefix + "BOOSTEDSECONDARY_NAME":
-					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, OFAcycle2.detroitDef, GenericSkill.SkillOverridePriority.Contextual);
+				case prefix + "QUIRK100UTILITY_NAME":
+					base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.quirk100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+					base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.quirkUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 			}
 
