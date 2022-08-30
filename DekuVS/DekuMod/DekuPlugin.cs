@@ -113,7 +113,7 @@ namespace DekuMod
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
             On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
-            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             //On.RoR2.HealthComponent.Awake += HealthComponent_Awake;
             if (Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI"))
             {
@@ -149,76 +149,31 @@ namespace DekuMod
         //    //orig.Invoke(healthComponent);
         //}
 
-        //private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
-        //{
-        //    if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
-        //    {
-        //        damageInfo.damage = 0f;
-        //        self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
-        //        Debug.Log(self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
+        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        {
+            if (self)
+            {
+                if (damageInfo != null && damageInfo.attacker && damageInfo.attacker.GetComponent<CharacterBody>())
+                {
+                    if (self.body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
+                    {
+                        DekuController dekucon = self.gameObject.GetComponent<DekuController>();
 
-        //        var dekucon = self.body.gameObject.GetComponent<DekuController>();
-        //        dekucon.countershouldflip = true;
+                        bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
+                        if (!flag && damageInfo.damage > self.body.healthComponent.health)
+                        {
+                            damageInfo.rejected = true;
+                            self.body.healthComponent.health = 1f;
+                            {
+                                new ServerForceGoBeyondStateNetworkRequest(self.body.masterObjectId).Send(NetworkDestination.Clients);
 
-        //        var damageInfo2 = new DamageInfo();
+                            }
+                    }
 
-        //        damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
-        //        damageInfo2.position = damageInfo.attacker.transform.position;
-        //        damageInfo2.force = Vector3.zero;
-        //        damageInfo2.damageColorIndex = DamageColorIndex.Default;
-        //        damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-        //        damageInfo2.attacker = self.gameObject;
-        //        damageInfo2.inflictor = null;
-        //        damageInfo2.damageType = DamageType.BypassArmor | DamageType.Stun1s;
-        //        damageInfo2.procCoefficient = 2f;
-        //        damageInfo2.procChainMask = default(ProcChainMask);
-
-        //        if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
-        //            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
-        //        {
-        //            damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
-        //        }
-
-        //        Vector3 enemyPos = damageInfo.attacker.transform.position;
-        //        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-        //        {
-        //            origin = self.body.transform.position,
-        //            scale = 1f,
-        //            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
-
-        //        }, true);
-
-
-        //        DangerSenseCounter dangersenseCounter = new DangerSenseCounter();
-        //        dangersenseCounter.enemyPosition = enemyPos;
-        //        self.body.gameObject.GetComponent<EntityStateMachine>().SetState(dangersenseCounter);
-
-
-
-        //        if (self.body.characterMotor && self.body.characterDirection)
-        //        {
-        //            self.body.characterMotor.rootMotion += (self.body.transform.position - damageInfo.attacker.transform.position).normalized * self.body.moveSpeed;
-        //        }
-
-        //        EntityStateMachine[] stateMachines = self.body.gameObject.GetComponents<EntityStateMachine>();
-        //        foreach (EntityStateMachine stateMachine in stateMachines)
-        //        {
-        //            if (stateMachine.customName == "Body")
-        //            {
-
-        //                self.body.gameObject.GetComponent<EntityStateMachine>().SetNextState(new DangerSenseCounter
-        //                {
-        //                    enemyPosition = enemyPos
-        //                });
-
-
-        //            }
-
-        //        }
-
-        //    }
-        //    orig.Invoke(self, damageInfo);
-        //}
+                }
+            }
+            orig.Invoke(self, damageInfo);
+        }
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
