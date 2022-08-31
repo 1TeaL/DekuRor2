@@ -13,6 +13,7 @@ using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
 using EmotesAPI;
+using R2API.Networking.Interfaces;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -158,16 +159,18 @@ namespace DekuMod
                     if (self.body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                     {
                         DekuController dekucon = self.gameObject.GetComponent<DekuController>();
+                        EnergySystem energysys = self.gameObject.GetComponent<EnergySystem>();
 
                         bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
-                        if (!flag && damageInfo.damage > self.body.healthComponent.health)
+                        if (!flag && damageInfo.damage > self.body.healthComponent.health && energysys.currentPlusUltra == energysys.maxPlusUltra)
                         {
+                            energysys.currentPlusUltra -= energysys.currentPlusUltra;
                             damageInfo.rejected = true;
                             self.body.healthComponent.health = 1f;
                             {
                                 new ServerForceGoBeyondStateNetworkRequest(self.body.masterObjectId).Send(NetworkDestination.Clients);
-
                             }
+                        }
                     }
 
                 }
@@ -188,13 +191,21 @@ namespace DekuMod
 
             }
 
-
-            bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
-            if (fajin)
+            bool goBeyond = self.HasBuff(Buffs.goBeyondBuff);
+            if (goBeyond)
             {
-                self.damage *= Mathf.Lerp(1f, Modules.StaticValues.fajinMaxMultiplier, (float)self.GetComponent<DekuController>().GetBuffCount() / (float)(Modules.StaticValues.fajinMaxStack/2));
-
+                HealthComponent hp = self.healthComponent;
+                float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
+                float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
+                self.regen += regen;
             }
+
+            //bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
+            //if (fajin)
+            //{
+            //    self.damage *= Mathf.Lerp(1f, Modules.StaticValues.fajinMaxMultiplier, (float)self.GetComponent<DekuController>().GetBuffCount() / (float)(Modules.StaticValues.fajinMaxStack/2));
+
+            //}
 
             bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
 
@@ -204,7 +215,7 @@ namespace DekuMod
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
+                //self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
                 self.damage *= 2f;
                 
             }
@@ -215,7 +226,7 @@ namespace DekuMod
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
+                //self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
                 self.damage *= 2f;
 
             }
@@ -226,7 +237,7 @@ namespace DekuMod
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
+                //self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
                 self.damage *= 2f;
             }
 
@@ -235,7 +246,7 @@ namespace DekuMod
                 self.armor *= 5f;
                 self.moveSpeed *= 1.5f;
                 self.attackSpeed *= 1.5f;
-                self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
+                //self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
                 self.damage *= 2f;
             }                           
 
@@ -245,7 +256,8 @@ namespace DekuMod
                 self.armor *= 2.5f;
                 self.moveSpeed *= 1.2f;
                 self.attackSpeed *= 1.2f;
-                self.regen *= 0f;
+                //self.regen *= 0f;
+                self.regen = 0f;
                 self.damage *= 1.5f;
             }
 
@@ -255,26 +267,27 @@ namespace DekuMod
                 self.armor *= 2.5f;
                 self.moveSpeed *= 1.25f;
                 self.attackSpeed *= 1.25f;
-                self.regen *= 0f;
+                //self.regen *= 0f;
+                self.regen = 0f;
                 self.damage *= 1.5f;
             }
 
-            if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")                
-            {
+            //if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")                
+            //{
 
 
-                if (!ofa45 && !supaofa45)
-                {
+            //    if (!ofa45 && !supaofa45)
+            //    {
 
-                    HealthComponent hp = self.healthComponent;
-                    float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
-                    float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
-                    self.regen += regen;
-                    //Chat.AddMessage("hpregen activated");
-                }
+            //        HealthComponent hp = self.healthComponent;
+            //        float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
+            //        float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
+            //        self.regen += regen;
+            //        //Chat.AddMessage("hpregen activated");
+            //    }
                 
 
-            }
+            //}
 
             if (self)
             {

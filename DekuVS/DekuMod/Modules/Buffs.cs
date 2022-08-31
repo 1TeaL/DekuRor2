@@ -23,6 +23,8 @@ namespace DekuMod.Modules
 
         internal static BuffDef supaofaBuff45;
 
+        internal static BuffDef goBeyondBuff;
+
         internal static BuffDef fajinBuff;
 
         //armor buff for oklahoma
@@ -39,6 +41,8 @@ namespace DekuMod.Modules
             kickBuff = Buffs.AddNewBuff("DekuKickBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("kickCount"), Color.white, true, false);
             ofaBuff45 = Buffs.AddNewBuff("DekuOFA45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningblue"), Color.white, false, false);
             supaofaBuff45 = Buffs.AddNewBuff("DekuInfiniteOFA45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningwhiteblue"), Color.white, false, false);
+            goBeyondBuff = Buffs.AddNewBuff("goBeyondBuff", Assets.healBuffIcon, Color.green, false, false);
+
             fajinBuff = Buffs.AddNewBuff("FaJinBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, true, false);
             floatBuff = Buffs.AddNewBuff("DekuFloatBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Float"), Color.white, false, false);
             counterBuff = Buffs.AddNewBuff("DekuCounterBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);

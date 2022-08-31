@@ -6,6 +6,7 @@ using RoR2;
 using System.IO;
 using System.Collections.Generic;
 using RoR2.UI;
+using UnityEngine.AddressableAssets;
 
 namespace DekuMod.Modules
 {
@@ -13,6 +14,9 @@ namespace DekuMod.Modules
     {
         // the assetbundle to load assets from
         internal static AssetBundle mainAssetBundle;
+
+        //buffs
+        public static Sprite healBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Croco/bdCrocoRegen.asset").WaitForCompletion().iconSprite;
 
         // particle effects
         //internal static GameObject swordSwingEffect;

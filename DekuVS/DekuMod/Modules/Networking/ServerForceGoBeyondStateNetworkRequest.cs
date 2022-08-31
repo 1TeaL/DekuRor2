@@ -42,7 +42,7 @@ namespace DekuMod.Modules.Networking
 
             if (!masterobject)
             {
-                Debug.Log("Specified GameObject not found! Fix your shit Ethanol 10.");
+                Debug.Log("Specified GameObject not found!");
                 return;
             }
             CharacterMaster charMaster = masterobject.GetComponent<CharacterMaster>();
@@ -71,7 +71,8 @@ namespace DekuMod.Modules.Networking
             {
                 if (stateMachine.customName == "Body")
                 {
-
+                    stateMachine.SetState(new GoBeyondState());
+                    return;
                 }
             }
         }

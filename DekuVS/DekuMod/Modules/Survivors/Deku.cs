@@ -59,6 +59,16 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef legExtraSkillDef;
         internal static SkillDef quirkExtraSkillDef;
 
+        //GoBeyond skills
+        internal static SkillDef goBeyondSkillDef1;
+        internal static SkillDef goBeyondSkillDef2;
+        internal static SkillDef goBeyondSkillDef3;
+        internal static SkillDef goBeyondSkillDef4;
+        internal static SkillDef goBeyondSkillDef5;
+        internal static SkillDef goBeyondSkillDef6;
+        internal static SkillDef goBeyondSkillDef7;
+        internal static SkillDef goBeyondSkillDef8;
+
 
         internal static SkillDef secondaryboostSkillDef;
         internal static SkillDef utilityboostSkillDef;
@@ -92,6 +102,7 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef ofacycle1SkillDef;
         internal static SkillDef ofacycle2SkillDef;
         internal static SkillDef ofacycleSkillDef;
+        internal static SkillDef ofacycle1scepterSkillDef;
         internal static SkillDef ofacycle2scepterSkillDef;
         internal static SkillDef ofacycledownSkillDef;
         internal static SkillDef ofacycledownscepterSkillDef;
@@ -586,9 +597,9 @@ namespace DekuMod.Modules.Survivors
 
             fistExtraSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "AFO_NAME",
-                skillNameToken = prefix + "AFO_NAME",
-                skillDescriptionToken = prefix + "AFO_DESCRIPTION",
+                skillName = prefix + "FISTEXTRA_NAME",
+                skillNameToken = prefix + "FISTEXTRA_NAME",
+                skillDescriptionToken = prefix + "FISTEXTRA_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.FistMode)),
                 activationStateMachineName = "Weapon",
@@ -609,9 +620,9 @@ namespace DekuMod.Modules.Survivors
             });
             legExtraSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "AFO_NAME",
-                skillNameToken = prefix + "AFO_NAME",
-                skillDescriptionToken = prefix + "AFO_DESCRIPTION",
+                skillName = prefix + "LEGEXTRA_NAME",
+                skillNameToken = prefix + "LEGEXTRA_NAME",
+                skillDescriptionToken = prefix + "LEGEXTRA_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.LegMode)),
                 activationStateMachineName = "Weapon",
@@ -632,9 +643,9 @@ namespace DekuMod.Modules.Survivors
             });
             quirkExtraSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "AFO_NAME",
-                skillNameToken = prefix + "AFO_NAME",
-                skillDescriptionToken = prefix + "AFO_DESCRIPTION",
+                skillName = prefix + "QUIRKEXTRA_NAME",
+                skillNameToken = prefix + "QUIRKEXTRA_NAME",
+                skillDescriptionToken = prefix + "QUIRKEXTRA_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.QuirkMode)),
                 activationStateMachineName = "Weapon",
@@ -655,9 +666,9 @@ namespace DekuMod.Modules.Survivors
             });
             fistSpecialSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "AFO_NAME",
-                skillNameToken = prefix + "AFO_NAME",
-                skillDescriptionToken = prefix + "AFO_DESCRIPTION",
+                skillName = prefix + "FISTSPECIAL_NAME",
+                skillNameToken = prefix + "FISTSPECIAL_NAME",
+                skillDescriptionToken = prefix + "FISTSPECIAL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
                 activationStateMachineName = "Weapon",
@@ -1347,6 +1358,194 @@ namespace DekuMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
 
             });
+            #endregion
+
+            #region Go Beyond Skills
+            goBeyondSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "GOBEYOND_NAME",
+                skillNameToken = prefix + "GOBEYOND_NAME",
+                skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Pain,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            goBeyondSkillDef2 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "GOBEYOND_NAME",
+                skillNameToken = prefix + "GOBEYOND_NAME",
+                skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Pain,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            goBeyondSkillDef3 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "GOBEYOND_NAME",
+                skillNameToken = prefix + "GOBEYOND_NAME",
+                skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Pain,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            goBeyondSkillDef4 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "GOBEYOND_NAME",
+                skillNameToken = prefix + "GOBEYOND_NAME",
+                skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Pain,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            goBeyondSkillDef5 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "GOBEYOND_NAME",
+                skillNameToken = prefix + "GOBEYOND_NAME",
+                skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Pain,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            goBeyondSkillDef6 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "GOBEYOND_NAME",
+                skillNameToken = prefix + "GOBEYOND_NAME",
+                skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Pain,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            goBeyondSkillDef7 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "GOBEYOND_NAME",
+                skillNameToken = prefix + "GOBEYOND_NAME",
+                skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Pain,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+            goBeyondSkillDef8 = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "GOBEYOND_NAME",
+                skillNameToken = prefix + "GOBEYOND_NAME",
+                skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("allforone"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.FistSuper)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Pain,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
             #endregion
 
             #region Boosted Primary
@@ -2253,7 +2452,7 @@ namespace DekuMod.Modules.Survivors
         private static void CreateScepterSkills()
         {
             string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
-            SkillDef ofascepterDef = Skills.CreateSkillDef(new SkillDefInfo
+            ofacycle1scepterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "SCEPTERSPECIAL_NAME",
                 skillNameToken = prefix + "SCEPTERSPECIAL_NAME",
@@ -2302,11 +2501,11 @@ namespace DekuMod.Modules.Survivors
             });
             if (DekuPlugin.scepterInstalled)
             {
-                RegisterAncientScepterStandalone(ofascepterDef, fajinscepterDef);
+                RegisterAncientScepterStandalone(ofacycle1scepterSkillDef, fajinscepterDef);
             }
             else if (DekuPlugin.fallbackScepter)
             {
-                RegisterTILERScepter(ofascepterDef, fajinscepterDef);
+                RegisterTILERScepter(ofacycle1scepterSkillDef, fajinscepterDef);
             }
         }
         #endregion

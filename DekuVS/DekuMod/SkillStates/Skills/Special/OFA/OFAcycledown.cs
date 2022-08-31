@@ -43,7 +43,8 @@ namespace DekuMod.SkillStates
 					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff45);
 				}
 			}
-			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle2SkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycledownSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Deku.ofacycle1SkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
 			switch (base.skillLocator.primary.skillNameToken)
 			{

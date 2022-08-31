@@ -51,7 +51,6 @@ namespace DekuMod.Modules.Survivors
         internal bool endFloat;
         internal bool hasFloatBuff;
         private Stopwatch floatStopwatch;
-        private CharacterBody characterBody;
 
         public void Awake()
         {
@@ -170,6 +169,11 @@ namespace DekuMod.Modules.Survivors
 
         public void FixedUpdate()
         {
+            if (body.HasBuff(Buffs.ofaBuff))
+            {
+
+            }
+
 
             CheckIfMaxKickPowerStacks();
 
