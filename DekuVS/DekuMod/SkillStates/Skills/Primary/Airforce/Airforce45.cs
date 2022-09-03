@@ -1,11 +1,12 @@
 ﻿using RoR2;
 using UnityEngine;
 using EntityStates;
+using DekuMod.Modules.Survivors;
 
 namespace DekuMod.SkillStates
 {
 
-    public class Airforce45 : BaseSkillState
+    public class Airforce45 : BaseSkill45
     {
 
         public static float procCoefficient = 0.25f;
@@ -29,6 +30,7 @@ namespace DekuMod.SkillStates
         private Animator animator;
         protected string muzzleString;
         private Quaternion baserotation;
+
 
         public override void OnEnter()
         {

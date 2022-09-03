@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 namespace DekuMod.SkillStates
 {
-    public class Detroit100 : BaseSkillState
+    public class Detroit100old : BaseSkillState
     {
 
         //protected float baseDuration = 6f;

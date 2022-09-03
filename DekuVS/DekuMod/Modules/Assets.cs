@@ -19,6 +19,7 @@ namespace DekuMod.Modules
         public static Sprite healBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Croco/bdCrocoRegen.asset").WaitForCompletion().iconSprite;
 
         // particle effects
+        public static GameObject bisonEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bison/BisonChargeStep.prefab").WaitForCompletion();
         //internal static GameObject swordSwingEffect;
         //internal static GameObject swordHitImpactEffect;
 

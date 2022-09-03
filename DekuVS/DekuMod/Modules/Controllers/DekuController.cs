@@ -31,17 +31,17 @@ namespace DekuMod.Modules.Survivors
 
         //Fajin
         public bool fajinon;
-        public bool fajinscepteron;
-        public Animator anim;
-        public float stopwatch;
-        public static float fajinscepterrate = 2f;
-        public float fajinrate = 4f;
-        public bool isMaxPower;
-        public float oklahomacount;
+        //public bool fajinscepteron;
+        //public Animator anim;
+        //public float stopwatch;
+        //public static float fajinscepterrate = 2f;
+        //public float fajinrate = 4f;
+        //public bool isMaxPower;
+        //public float oklahomacount;
 
         //kick freeze
-        public bool kickBuff;
-        public bool kickon;
+        //public bool kickBuff;
+        //public bool kickon;
 
         //danger sense
         public bool countershouldflip;
@@ -51,6 +51,13 @@ namespace DekuMod.Modules.Survivors
         internal bool endFloat;
         internal bool hasFloatBuff;
         private Stopwatch floatStopwatch;
+
+        //OFA 
+        public float ofaHurtTimer;
+
+        //Go Beyond
+        public float goBeyondTimer;
+        
 
         public void Awake()
         {
@@ -69,8 +76,8 @@ namespace DekuMod.Modules.Survivors
             FAJIN.Stop();
             OKLAHOMA.Stop();
             DANGERSENSE.Stop();
-            anim = GetComponentInChildren<Animator>();
-            stopwatch = 0f;
+            //anim = GetComponentInChildren<Animator>();
+            //stopwatch = 0f;
 
         }
 
@@ -79,134 +86,170 @@ namespace DekuMod.Modules.Survivors
             energySystem = gameObject.AddComponent<EnergySystem>();
         }
 
-        public void IncrementBuffCount()
-        {
-            buffCountToApply++;
-            if (buffCountToApply >= Modules.StaticValues.fajinMaxStack)
-            {
-                buffCountToApply = Modules.StaticValues.fajinMaxStack;
-            }
-        }
+        //public void IncrementBuffCount()
+        //{
+        //    buffCountToApply++;
+        //    if (buffCountToApply >= Modules.StaticValues.fajinMaxStack)
+        //    {
+        //        buffCountToApply = Modules.StaticValues.fajinMaxStack;
+        //    }
+        //}
 
-        public void RemoveBuffCount(int numbertominus)
-        {
-            buffCountToApply -= numbertominus;
-            if (buffCountToApply < 0)
-            {
-                buffCountToApply = 0;
-            }
-        }
-        public void AddToBuffCount(int numbertoadd)
-        {
-            buffCountToApply += numbertoadd;
-            if (buffCountToApply >= Modules.StaticValues.fajinMaxStack)
-            {
-                buffCountToApply = Modules.StaticValues.fajinMaxStack;
-            }
-        }
+        //public void RemoveBuffCount(int numbertominus)
+        //{
+        //    buffCountToApply -= numbertominus;
+        //    if (buffCountToApply < 0)
+        //    {
+        //        buffCountToApply = 0;
+        //    }
+        //}
+        //public void AddToBuffCount(int numbertoadd)
+        //{
+        //    buffCountToApply += numbertoadd;
+        //    if (buffCountToApply >= Modules.StaticValues.fajinMaxStack)
+        //    {
+        //        buffCountToApply = Modules.StaticValues.fajinMaxStack;
+        //    }
+        //}
 
-        public bool CheckIfMaxPowerStacks()
-        {
-            if (buffCountToApply >= Modules.StaticValues.fajinMaxPower)
-            {
-                isMaxPower = true;
-            }
-            else
-            {
-                isMaxPower = false;
-            }
-            return isMaxPower;
-        }
+        //public bool CheckIfMaxPowerStacks()
+        //{
+        //    if (buffCountToApply >= Modules.StaticValues.fajinMaxPower)
+        //    {
+        //        isMaxPower = true;
+        //    }
+        //    else
+        //    {
+        //        isMaxPower = false;
+        //    }
+        //    return isMaxPower;
+        //}
 
-        public int GetBuffCount()
-        {
-            if (buffCountToApply > Modules.StaticValues.fajinMaxStack)
-            {
-                return Modules.StaticValues.fajinMaxStack;
-            }
-            return buffCountToApply;
-        }
+        //public int GetBuffCount()
+        //{
+        //    if (buffCountToApply > Modules.StaticValues.fajinMaxStack)
+        //    {
+        //        return Modules.StaticValues.fajinMaxStack;
+        //    }
+        //    return buffCountToApply;
+        //}
 
-        public bool CheckIfMaxKickPowerStacks()
-        {
-            if (buffCountToApply >= Modules.StaticValues.kickMaxStack)
-            {
-                kickBuff = true;
-            }
-            else
-            {
-                kickBuff = false;
-            }
-            return kickBuff;
-        }
+        //public bool CheckIfMaxKickPowerStacks()
+        //{
+        //    if (buffCountToApply >= Modules.StaticValues.kickMaxStack)
+        //    {
+        //        kickBuff = true;
+        //    }
+        //    else
+        //    {
+        //        kickBuff = false;
+        //    }
+        //    return kickBuff;
+        //}
 
-        public void IncrementKickBuffCount()
-        {
-            buffCountToApply++;
-            if (buffCountToApply >= Modules.StaticValues.kickMaxStack)
-            {
-                buffCountToApply = Modules.StaticValues.kickMaxStack;
-            }
-        }
+        //public void IncrementKickBuffCount()
+        //{
+        //    buffCountToApply++;
+        //    if (buffCountToApply >= Modules.StaticValues.kickMaxStack)
+        //    {
+        //        buffCountToApply = Modules.StaticValues.kickMaxStack;
+        //    }
+        //}
 
-        public void RemoveKickBuffCount(int numbertominus)
-        {
-            buffCountToApply -= numbertominus;
-            if (buffCountToApply < 0)
-            {
-                buffCountToApply = 0;
-            }
-        }
+        //public void RemoveKickBuffCount(int numbertominus)
+        //{
+        //    buffCountToApply -= numbertominus;
+        //    if (buffCountToApply < 0)
+        //    {
+        //        buffCountToApply = 0;
+        //    }
+        //}
 
-        public int GetKickBuffCount()
-        {
-            if (buffCountToApply > Modules.StaticValues.kickMaxStack)
-            {
-                return Modules.StaticValues.kickMaxStack;
-            }
-            return buffCountToApply;
-        }
+        //public int GetKickBuffCount()
+        //{
+        //    if (buffCountToApply > Modules.StaticValues.kickMaxStack)
+        //    {
+        //        return Modules.StaticValues.kickMaxStack;
+        //    }
+        //    return buffCountToApply;
+        //}
 
         public void FixedUpdate()
         {
             if (body.HasBuff(Buffs.ofaBuff))
             {
+                if(ofaHurtTimer > 1f)
+                {
+                    ofaHurtTimer = 0f;
 
+                    if (NetworkServer.active && body.healthComponent)
+                    {
+                        DamageInfo damageInfo = new DamageInfo();
+                        damageInfo.damage = body.healthComponent.fullCombinedHealth * 0.05f;
+                        damageInfo.position = base.transform.position;
+                        damageInfo.force = Vector3.zero;
+                        damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+                        damageInfo.crit = false;
+                        damageInfo.attacker = null;
+                        damageInfo.inflictor = null;
+                        damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                        damageInfo.procCoefficient = 0f;
+                        damageInfo.procChainMask = default(ProcChainMask);
+                        body.healthComponent.TakeDamage(damageInfo);
+                    }
+                }
+                else
+                {
+                    ofaHurtTimer += Time.fixedDeltaTime;
+                }
             }
-
-
-            CheckIfMaxKickPowerStacks();
-
-            if (fajinon)
+            if (body.HasBuff(Buffs.goBeyondBuff))
             {
-                CheckIfMaxPowerStacks();
-                if (isMaxPower)
+                body.skillLocator.special.RemoveAllStocks();
+                if(goBeyondTimer > 1f)
                 {
-                    FAJIN.Play();
+                    body.healthComponent.Heal(body.healthComponent.fullCombinedHealth * 0.05f, new ProcChainMask(), true);
+                    goBeyondTimer = 0f;
                 }
                 else
                 {
-                    FAJIN.Stop();
+                    goBeyondTimer += Time.fixedDeltaTime;
                 }
-                if (fajinscepteron)
-                {
-                    if (anim.GetBool("isMoving") && stopwatch >= fajinscepterrate / body.moveSpeed)
-                    {
-                        IncrementBuffCount();
-                        stopwatch = 0f;
-                    }
-                }
-                else
-                {
-                    if (anim.GetBool("isMoving") && stopwatch >= fajinrate / body.moveSpeed)
-                    {
-                        IncrementBuffCount();
-                        stopwatch = 0f;
-                    }
-                }
-
             }
-            stopwatch += Time.fixedDeltaTime;
+
+
+            //CheckIfMaxKickPowerStacks();
+
+            //if (fajinon)
+            //{
+            //    CheckIfMaxPowerStacks();
+            //    if (isMaxPower)
+            //    {
+            //        FAJIN.Play();
+            //    }
+            //    else
+            //    {
+            //        FAJIN.Stop();
+            //    }
+            //    if (fajinscepteron)
+            //    {
+            //        if (anim.GetBool("isMoving") && stopwatch >= fajinscepterrate / body.moveSpeed)
+            //        {
+            //            IncrementBuffCount();
+            //            stopwatch = 0f;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (anim.GetBool("isMoving") && stopwatch >= fajinrate / body.moveSpeed)
+            //        {
+            //            IncrementBuffCount();
+            //            stopwatch = 0f;
+            //        }
+            //    }
+
+            //}
+            //stopwatch += Time.fixedDeltaTime;
 
             
             //if (body.HasBuff(Modules.Buffs.counterBuff))

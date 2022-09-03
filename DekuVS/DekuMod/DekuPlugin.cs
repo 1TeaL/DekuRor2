@@ -183,119 +183,128 @@ namespace DekuMod
             //regen 
             orig.Invoke(self);
 
-            bool floatbuff = self.HasBuff(Buffs.floatBuff);
-            if (floatbuff)
-            {
-                self.moveSpeed *= 1.5f;
-                self.acceleration *= 2f;
-
-            }
-
-            bool goBeyond = self.HasBuff(Buffs.goBeyondBuff);
-            if (goBeyond)
-            {
-                HealthComponent hp = self.healthComponent;
-                float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
-                float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
-                self.regen += regen;
-            }
-
-            //bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
-            //if (fajin)
-            //{
-            //    self.damage *= Mathf.Lerp(1f, Modules.StaticValues.fajinMaxMultiplier, (float)self.GetComponent<DekuController>().GetBuffCount() / (float)(Modules.StaticValues.fajinMaxStack/2));
-
-            //}
-
-            bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
-
-            if (ofa && (self.healthComponent.health - self.healthComponent.barrier) > 1 )
-            {
-
-                self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
-                self.attackSpeed *= 1.5f;
-                //self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
-                self.damage *= 2f;
-                
-            }
-
-            if (ofa && (self.healthComponent.health - self.healthComponent.barrier) <2)
-            {
-
-                self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
-                self.attackSpeed *= 1.5f;
-                //self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
-                self.damage *= 2f;
-
-            }
-
-            bool supaofa = self.HasBuff(Modules.Buffs.supaofaBuff);
-            if (supaofa && (self.healthComponent.health - self.healthComponent.barrier) > 1)
-            {
-                self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
-                self.attackSpeed *= 1.5f;
-                //self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
-                self.damage *= 2f;
-            }
-
-            if (supaofa && (self.healthComponent.health - self.healthComponent.barrier) < 1)
-            {
-                self.armor *= 5f;
-                self.moveSpeed *= 1.5f;
-                self.attackSpeed *= 1.5f;
-                //self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
-                self.damage *= 2f;
-            }                           
-
-            bool ofa45 = self.HasBuff(Modules.Buffs.ofaBuff45);
-            if (ofa45)
-            {
-                self.armor *= 2.5f;
-                self.moveSpeed *= 1.2f;
-                self.attackSpeed *= 1.2f;
-                //self.regen *= 0f;
-                self.regen = 0f;
-                self.damage *= 1.5f;
-            }
-
-            bool supaofa45 = self.HasBuff(Modules.Buffs.supaofaBuff45);
-            if (supaofa45)
-            {
-                self.armor *= 2.5f;
-                self.moveSpeed *= 1.25f;
-                self.attackSpeed *= 1.25f;
-                //self.regen *= 0f;
-                self.regen = 0f;
-                self.damage *= 1.5f;
-            }
-
-            //if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")                
-            //{
-
-
-            //    if (!ofa45 && !supaofa45)
-            //    {
-
-            //        HealthComponent hp = self.healthComponent;
-            //        float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
-            //        float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
-            //        self.regen += regen;
-            //        //Chat.AddMessage("hpregen activated");
-            //    }
-                
-
-            //}
-
             if (self)
             {
-                if (self.HasBuff(Modules.Buffs.oklahomaBuff))
+                if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                 {
-                    self.armor *= 3f;
+                    bool floatbuff = self.HasBuff(Buffs.floatBuff);
+                    if (floatbuff)
+                    {
+                        self.moveSpeed *= 1.5f;
+                        self.acceleration *= 2f;
+
+                    }
+
+                    bool goBeyond = self.HasBuff(Buffs.goBeyondBuff);
+                    if (goBeyond)
+                    {
+                        HealthComponent hp = self.healthComponent;
+                        float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
+                        float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
+                        self.regen += regen;
+                        self.armor *= 5f;
+                        self.moveSpeed *= 1.5f;
+                    }
+
+                    //bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
+                    //if (fajin)
+                    //{
+                    //    self.damage *= Mathf.Lerp(1f, Modules.StaticValues.fajinMaxMultiplier, (float)self.GetComponent<DekuController>().GetBuffCount() / (float)(Modules.StaticValues.fajinMaxStack/2));
+
+                    //}
+
+                    bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
+
+                    if (ofa)
+                    {
+                        self.armor *= 5f;
+                        self.moveSpeed *= 1.5f;
+                        self.regen -= (self.levelRegen * (self.level - 1));
+                        //self.attackSpeed *= 1.5f;
+                        //self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
+                        //self.damage *= 2f;                
+                    }
+
+                    //if (ofa && (self.healthComponent.health - self.healthComponent.barrier) <2)
+                    //{
+
+                    //    self.armor *= 5f;
+                    //    self.moveSpeed *= 1.5f;
+                    //    self.attackSpeed *= 1.5f;
+                    //    //self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
+                    //    self.damage *= 2f;
+
+                    //}
+
+                    bool supaofa = self.HasBuff(Modules.Buffs.supaofaBuff);
+                    if (supaofa)
+                    {
+                        self.armor *= 5f;
+                        self.moveSpeed *= 1.5f;
+                        self.regen -= (1 + (self.levelRegen * (self.level - 1)));
+                        //self.attackSpeed *= 1.5f;
+                        //self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
+                        //self.damage *= 2f;
+                    }
+
+                    //if (supaofa && (self.healthComponent.health - self.healthComponent.barrier) < 1)
+                    //{
+                    //    self.armor *= 5f;
+                    //    self.moveSpeed *= 1.5f;
+                    //    self.attackSpeed *= 1.5f;
+                    //    //self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
+                    //    self.damage *= 2f;
+                    //}                           
+
+                    bool ofa45 = self.HasBuff(Modules.Buffs.ofaBuff45);
+                    if (ofa45)
+                    {
+                        self.armor *= 2.5f;
+                        self.moveSpeed *= 1.2f;
+                        //self.attackSpeed *= 1.2f;
+                        //self.regen *= 0f;
+                        self.regen -= (1 + (self.levelRegen * (self.level - 1)));
+                        //self.damage *= 1.5f;
+                    }
+
+                    bool supaofa45 = self.HasBuff(Modules.Buffs.supaofaBuff45);
+                    if (supaofa45)
+                    {
+                        self.armor *= 2.5f;
+                        self.moveSpeed *= 1.25f;
+                        //self.attackSpeed *= 1.25f;
+                        //self.regen *= 0f;
+                        self.regen -= (1 + (self.levelRegen * (self.level - 1)));
+                        //self.damage *= 1.5f;
+                    }
+
+                    //if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")                
+                    //{
+
+
+                    //    if (!ofa45 && !supaofa45)
+                    //    {
+
+                    //        HealthComponent hp = self.healthComponent;
+                    //        float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
+                    //        float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
+                    //        self.regen += regen;
+                    //        //Chat.AddMessage("hpregen activated");
+                    //    }
+
+
+                    //}
+
+                    if (self.HasBuff(Modules.Buffs.oklahomaBuff))
+                    {
+                        self.armor *= 3f;
+                    }
+
                 }
+
+                
             }
+
         }
         private void CharacterBody_OnDeathStart(On.RoR2.CharacterBody.orig_OnDeathStart orig, CharacterBody self)
         {

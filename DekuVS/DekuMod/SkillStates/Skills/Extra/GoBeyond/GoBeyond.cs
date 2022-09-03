@@ -5,6 +5,7 @@ using ExtraSkillSlots;
 using UnityEngine;
 using static RoR2.CameraTargetParams;
 using UnityEngine.Networking;
+using R2API.Networking;
 
 namespace DekuMod.SkillStates
 {
@@ -99,6 +100,7 @@ namespace DekuMod.SkillStates
 			if (NetworkServer.active)
 			{
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+				base.characterBody.ApplyBuff(Modules.Buffs.goBeyondBuff.buffIndex, 1, 60f);
 			}
 		}
 

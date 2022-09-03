@@ -17,11 +17,11 @@ namespace DekuMod.SkillStates
         internal Vector3 moveVec;
 		//private GameObject explosionPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
 		private GameObject explosionPrefab = Modules.Projectiles.detroitweakTracer;
-		private float baseForce = 600f;
+		private float baseForce = 1000f;
 
 		public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 		public float fajin;
-		protected DamageType damageType;
+		protected DamageType damageType = DamageType.Stun1s;
 		public DekuController dekucon;
 		public float procCoefficient = 2f;
 
@@ -36,15 +36,15 @@ namespace DekuMod.SkillStates
 			AkSoundEngine.PostEvent(3289116818, this.gameObject);
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
-            base.characterMotor.rootMotion += this.moveVec;
+            //base.characterMotor.rootMotion += this.moveVec;
 			//base.characterMotor.velocity += this.moveVec * 2;
 			dekucon = base.GetComponent<DekuController>();
-			if (dekucon.isMaxPower)
-			{
-				fajin = 2f;
-				dekucon.RemoveBuffCount(50);
-			}
-			else
+			//if (dekucon.isMaxPower)
+			//{
+			//	fajin = 2f;
+			//	dekucon.RemoveBuffCount(50);
+			//}
+			//else
 			{
 				fajin = 1f;
 			}
@@ -60,20 +60,16 @@ namespace DekuMod.SkillStates
         {
 
 			Ray aimRay = base.GetAimRay();
-			if (dekucon.isMaxPower)
-			{
-				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-				{
-					origin = base.transform.position,
-					scale = 1f,
-					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, true);
-				damageType = DamageType.BypassArmor | DamageType.Stun1s;
-			}
-            else
-            {
-				damageType = DamageType.Stun1s;
-            }
+			//if (dekucon.isMaxPower)
+			//{
+			//	EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+			//	{
+			//		origin = base.transform.position,
+			//		scale = 1f,
+			//		rotation = Quaternion.LookRotation(aimRay.direction)
+			//	}, true);
+			//	damageType = DamageType.BypassArmor | DamageType.Stun1s;
+			//}
 			for (int i = 0; i <= 20; i++)
 			{
 				float num = 60f;

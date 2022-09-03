@@ -9,7 +9,7 @@ using static RoR2.BulletAttack;
 
 namespace DekuMod.SkillStates
 {
-    public class Airforce : BaseSkillState
+    public class Airforce : BaseSkill
     {
         public static float procCoefficient = 0.5f;
         public static float baseDuration = 0.5f;
@@ -23,11 +23,10 @@ namespace DekuMod.SkillStates
         private bool hasFired;
         private string muzzleString;
 
-        public float fajin;
-        protected DamageType damageType;
-        public DekuController dekucon;
-        public static int maxRicochetCount = 8;
+        public DamageType damageType = DamageType.Generic;
+        public static int maxRicochetCount = 5;
         public static bool resetBouncedObjects = true;
+
 
         public override void OnEnter()
         {
@@ -43,18 +42,6 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, this.fireTime);
             base.PlayAnimation("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration);
 
-            dekucon = base.GetComponent<DekuController>();
-            if (dekucon.isMaxPower)
-            {
-                fajin = 2f;
-                dekucon.RemoveBuffCount(50);
-            }
-            else
-            {
-                fajin = 1f;
-            }
-
-            dekucon.AddToBuffCount(10);
 
         }
 
@@ -77,34 +64,14 @@ namespace DekuMod.SkillStates
                 base.AddRecoil(-1f * Airforce.recoil, -2f * Airforce.recoil, -0.5f * Airforce.recoil, 0.5f * Airforce.recoil);
 
 
-                if (dekucon.isMaxPower)
+                EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
                 {
-                    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-                    {
-                        origin = FindModelChild(this.muzzleString).position,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(aimRay.direction)
-                    }, true);
-                    EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                    {
-                        origin = base.transform.position,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(aimRay.direction)
+                    origin = FindModelChild(this.muzzleString).position,
+                    scale = 1f,
+                    rotation = Quaternion.LookRotation(aimRay.direction)
 
-                    }, true);
-                    damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                }
-                else
-                {
-                    damageType = DamageType.Generic;
-                    EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                    {
-                        origin = FindModelChild(this.muzzleString).position,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(aimRay.direction)
-
-                    }, true);
-                }
+                }, true);
+                
 
                 bool hasHit = false;
                 Vector3 hitPoint = Vector3.zero;
@@ -131,7 +98,7 @@ namespace DekuMod.SkillStates
                     smartCollision = false,
                     procChainMask = default(ProcChainMask),
                     procCoefficient = procCoefficient,
-                    radius = 0.5f * fajin,
+                    radius = 0.5f,
                     sniper = false,
                     stopperMask = LayerIndex.CommonMasks.bullet,
                     weapon = null,
@@ -142,17 +109,19 @@ namespace DekuMod.SkillStates
                     hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
 
                 };
-                if (maxRicochetCount > 0 && dekucon.isMaxPower)
+                if (maxRicochetCount > 0 && bulletAttack.isCrit)
                 {
                     bulletAttack.hitCallback = delegate (BulletAttack bulletAttackRef, ref BulletHit hitInfo)
                     {
                         var result = BulletAttack.defaultHitCallback(bulletAttackRef, ref hitInfo);
                         if (hitInfo.hitHurtBox)
-                        hasHit = true;
-                        hitPoint = hitInfo.point;
-                        hitDistance = hitInfo.distance;
                         {
+                            hasHit = true;
+                            hitPoint = hitInfo.point;
+                            hitDistance = hitInfo.distance;
+            
                             hitHealthComponent = hitInfo.hitHurtBox.healthComponent;
+                            
                         }
                         return result;
                     };
@@ -202,19 +171,8 @@ namespace DekuMod.SkillStates
 
             if (base.fixedAge >= this.fireTime && !this.hasFired)
             {
-                if (dekucon.isMaxPower)
-                {
-                    hasFired = true;
-                    this.Fire();
-                    this.Fire();
-                    this.Fire();
-
-                }
-                else
-                {
-                    hasFired = true;
-                    this.Fire();
-                }
+                hasFired = true;
+                this.Fire();
             }
 
 
