@@ -70,28 +70,28 @@ namespace DekuMod.SkillStates
 
             Ray aimRay = base.GetAimRay();
             base.StartAimMode(duration, true);
-            if (dekucon.isMaxPower)
-            {
-                hitboxName = "BigModelHitbox";
-                fajin = 2f;
-                SpeedCoefficient = baseSpeedCoefficient * 1.5f;
-                damageType = DamageType.Stun1s | DamageType.BypassArmor;
-                dekucon.RemoveBuffCount(50);
-            }
-            else
-            {
-                dekucon.AddToBuffCount(10);
-                hitboxName = "BodyHitbox";
-                fajin = 1f;
-                SpeedCoefficient = baseSpeedCoefficient;
-                damageType = DamageType.SlowOnHit;
-            }
+            //if (dekucon.isMaxPower)
+            //{
+            //    hitboxName = "BigModelHitbox";
+            //    fajin = 2f;
+            //    SpeedCoefficient = baseSpeedCoefficient * 1.5f;
+            //    damageType = DamageType.Stun1s | DamageType.BypassArmor;
+            //    dekucon.RemoveBuffCount(50);
+            //}
+            //else
+            //{
+            //    dekucon.AddToBuffCount(10);
+            //    hitboxName = "BodyHitbox";
+            //    fajin = 1f;
+            //    SpeedCoefficient = baseSpeedCoefficient;
+            //    damageType = DamageType.SlowOnHit;
+            //}
             //base.PlayAnimation("RightArm, Override", "Blackwhip", "attack.playbackRate", duration);
 
             base.PlayCrossfade("RightArm, Override", "Blackwhip", "Attack.playbackRate", this.duration, this.duration / 2);
 
             this.muzzleString = "RHand";
-            if (dekucon.isMaxPower)
+            //if (dekucon.isMaxPower)
             {
                 EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
                 {
@@ -115,7 +115,7 @@ namespace DekuMod.SkillStates
 
             HitBoxGroup hitBoxGroup = Array.Find<HitBoxGroup>(base.GetModelTransform().GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == this.hitboxName);
             this.attack = this.CreateAttack(hitBoxGroup);
-            if (dekucon.isMaxPower)
+            //if (dekucon.isMaxPower)
             {
                 this.attack2 = this.CreateAttack2(hitBoxGroup);
             }
@@ -145,11 +145,11 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
-            if (dekucon.isMaxPower)
+            //if (dekucon.isMaxPower)
             {
                 base.characterMotor.velocity *= 0.5f;
             }            
-            dekucon.RemoveBuffCount(50);
+            //dekucon.RemoveBuffCount(50);
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;
             //base.characterMotor.velocity = Vector3.zero;
@@ -339,7 +339,7 @@ namespace DekuMod.SkillStates
             {
                 this.attack.Fire();
                 blackwhipage = 0;
-                if (dekucon.isMaxPower)
+                //if (dekucon.isMaxPower)
                 {
                     this.attack2.Fire();
                 }
@@ -357,25 +357,25 @@ namespace DekuMod.SkillStates
 
                 if (flag2)
                 {
-                    if (dekucon.isMaxPower)
-                    {
-                        if(blackwhipage >= this.duration / 6)
-                        {
-                            this.hasActivated = false;
-                            blackwhipage = 0f;
-                        }
-                        else
-                        {
-                            this.blackwhipage += Time.fixedDeltaTime;
-                            this.hasActivated = true;
-                        }
+                    //if (dekucon.isMaxPower)
+                    //{
+                    //    if(blackwhipage >= this.duration / 6)
+                    //    {
+                    //        this.hasActivated = false;
+                    //        blackwhipage = 0f;
+                    //    }
+                    //    else
+                    //    {
+                    //        this.blackwhipage += Time.fixedDeltaTime;
+                    //        this.hasActivated = true;
+                    //    }
 
 
-                    }
-                    else
-                    {
-                        this.hasActivated = true;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    this.hasActivated = true;
+                    //}
                     bool isAuthority = base.isAuthority;
                     if (isAuthority)
                     {

@@ -43,25 +43,25 @@ namespace DekuMod.SkillStates
                 speedattack = 1;
             }
             dekucon = base.GetComponent<DekuController>();
-            dekucon.AddToBuffCount(10);
-            if (dekucon.isMaxPower)
-            {
-                dekucon.RemoveBuffCount(50);
-                fajin = 2f;
-            }
-            else
-            {
-                fajin = 1f;
-            }
-            if (dekucon.isMaxPower)
-            {
-                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-                {
-                    origin = base.transform.position,
-                    scale = 1f,
-                    rotation = Quaternion.LookRotation(aimRay.direction)
-                }, false);
-            }
+            //dekucon.AddToBuffCount(10);
+            //if (dekucon.isMaxPower)
+            //{
+            //    dekucon.RemoveBuffCount(50);
+            //    fajin = 2f;
+            //}
+            //else
+            //{
+            //    fajin = 1f;
+            //}
+            //if (dekucon.isMaxPower)
+            //{
+            //    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+            //    {
+            //        origin = base.transform.position,
+            //        scale = 1f,
+            //        rotation = Quaternion.LookRotation(aimRay.direction)
+            //    }, false);
+            //}
 
 
             //hasFired = false;
@@ -129,15 +129,15 @@ namespace DekuMod.SkillStates
             if ((base.fixedAge >= this.duration / 5 * fajin) && base.isAuthority && whipage >= this.duration/5 * fajin)
             {
                 //hasFired = true;
-                if (dekucon.isMaxPower)
-                {
+                //if (dekucon.isMaxPower)
+                //{
 
-                    blastAttack.damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                }
-                else
-                {
-                    blastAttack.damageType = DamageType.Generic;
-                }
+                //    blastAttack.damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                //}
+                //else
+                //{
+                //    blastAttack.damageType = DamageType.Generic;
+                //}
                 blastAttack.position = theSpot;
                 range += rangeaddition;
                 whipage = 0f;

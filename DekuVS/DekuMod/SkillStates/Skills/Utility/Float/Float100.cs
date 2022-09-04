@@ -50,20 +50,20 @@ namespace DekuMod.SkillStates
             dekucon = base.GetComponent<DekuController>();
 
             
-            dekucon.AddToBuffCount(10);
-            if (dekucon.isMaxPower)
-            {
-                dekucon.RemoveBuffCount(50);
-                damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                fajin = 2f;
+            //dekucon.AddToBuffCount(10);
+            //if (dekucon.isMaxPower)
+            //{
+            //    dekucon.RemoveBuffCount(50);
+            //    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+            //    fajin = 2f;
 
 
-            }
-            else
-            {
-                damageType = DamageType.Stun1s;
-                fajin = 1f;
-            }
+            //}
+            //else
+            //{
+            //    damageType = DamageType.Stun1s;
+            //    fajin = 1f;
+            //}
             jumpDuration = basejumpDuration / fajin;
             BlastAttack blastAttack = new BlastAttack();
             blastAttack.radius = Float.slamRadius * fajin;

@@ -27,7 +27,7 @@ namespace DekuMod.SkillStates
 			dekucon = base.GetComponent<DekuController>();
 			//dekucon.OFA.Play();
 			dekucon.fajinon = true;
-			dekucon.fajinscepteron = true;
+			//dekucon.fajinscepteron = true;
 
 			//bool active = NetworkServer.active;
 			//if (active)

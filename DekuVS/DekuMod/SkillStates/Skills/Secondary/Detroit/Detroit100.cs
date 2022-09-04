@@ -37,19 +37,20 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			Ray aimRay = base.GetAimRay();
-			base.StartAimMode(aimRay, 2f, false);
+			base.StartAimMode(aimRay, 2f, true);
 			totalDuration = 0f;
 			damageType = DamageType.Stun1s;
 			bool isAuthority = base.isAuthority;
 			Util.PlaySound(BaseChargeFist.startChargeLoopSFXString, base.gameObject);
 			this.animator = base.GetModelAnimator();
-			//this.animator.SetBool("isSprinting", true);
-			//PlayAnimation("Body", "Sprint");
-			//Util.PlaySound(EntityStates.Bison.Charge.startSoundString, base.gameObject);
-			bool flag = isAuthority;
+            this.animator.SetBool("isSprinting", true);
+            //PlayAnimation("Body", "Sprint");
+            //Util.PlaySound(EntityStates.Bison.Charge.startSoundString, base.gameObject);
+            bool flag = isAuthority;
 			if (flag)
 			{
-				base.characterBody.baseAcceleration = 400f;
+				base.characterBody.characterMotor.useGravity = false;
+				base.characterBody.baseAcceleration = 420f;
 				base.characterDirection.turnSpeed = 30f;
 				base.characterMotor.walkSpeedPenaltyCoefficient = 0f;
 				base.cameraTargetParams.fovOverride = 100f;
@@ -58,35 +59,40 @@ namespace DekuMod.SkillStates
 				{
 					this.idealDirection = base.inputBank.aimDirection;
 					base.characterBody.isSprinting = true;
-					this.UpdateDirection();
+                    this.UpdateDirection();
+
+					base.characterBody.inputBank.enabled = false;
 				}
-			}
+            }
 
 		}
 
 		private void UpdateDirection()
 		{
-			this.idealDirection = base.inputBank.aimDirection;
-			//bool flag = base.inputBank;
-			//if (flag)
-			//{
-			//	Vector2 vector = Util.Vector3XZToVector2XY(base.inputBank.moveVector);
-			//	bool flag2 = vector != Vector2.zero;
-			//	if (flag2)
-			//	{
-			//		vector.Normalize();
-			//		this.idealDirection = (base.characterMotor.moveDirection.normalized + new Vector3(vector.x, 0f, vector.y).normalized).normalized;
-			//	}
-			//}
-		}
+            this.idealDirection = base.inputBank.aimDirection;
+            //bool flag = base.inputBank;
+            //if (flag)
+            //{
+            //    Vector2 vector = Util.Vector3XZToVector2XY(base.inputBank.moveVector);
+            //    bool flag2 = vector != Vector2.zero;
+            //    if (flag2)
+            //    {
+            //        vector.Normalize();
+            //        this.idealDirection = (base.characterMotor.moveDirection.normalized + new Vector3(vector.x, 0f, vector.y).normalized).normalized;
+            //    }
+            //}
+        }
 
-		private Vector3 GetIdealVelocity()
+        private Vector3 GetIdealVelocity()
 		{
-			return base.characterDirection.forward * base.characterBody.moveSpeed * 2.25f;
+			return idealDirection * base.characterBody.moveSpeed * 8.25f;
 		}
 
 		public override void OnExit()
 		{
+			base.characterBody.characterMotor.useGravity = true;
+			base.characterBody.inputBank.enabled = true;
+
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
 			bool isAuthority = base.isAuthority;
 			if (isAuthority)
@@ -105,19 +111,19 @@ namespace DekuMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			totalDuration += Time.fixedDeltaTime / 2;
+			totalDuration += Time.fixedDeltaTime/2;
 
-			if (base.IsKeyDownAuthority())
+            if (base.IsKeyDownAuthority())
 			{
-				//PlayAnimation("Body", "Sprint");
 				Loop();
-			}
-			else
-			{
-				base.outer.SetNextStateToMain();
-			}
+                PlayAnimation("Body", "Sprint");
+            }
+            else
+            {
+                base.outer.SetNextStateToMain();
+            }
 
-		}
+        }
 
 
 		public void Loop()
@@ -133,13 +139,14 @@ namespace DekuMod.SkillStates
 					rotation = Quaternion.LookRotation(aimRay.direction)
 				}, true);
 
-				this.direction = base.GetAimRay().direction.normalized;
-				base.characterDirection.forward = this.direction;
+				//this.direction = base.GetAimRay().direction.normalized;
+				//base.characterDirection.forward = this.direction;
 
 				base.characterBody.isSprinting = true;
 				base.characterDirection.moveVector = this.idealDirection;
 				base.characterMotor.rootMotion += this.GetIdealVelocity() * Time.fixedDeltaTime;
-				Vector3 position = base.characterBody.corePosition + Vector3.up * 0.5f + base.characterDirection.forward.normalized * 0.5f;
+				//Vector3 position = base.transform.position + base.characterDirection.forward.normalized * 0.5f;
+				Vector3 position = base.characterBody.corePosition + Vector3.up * 0.5f + aimRay.direction.normalized * 1f;
 				float radius = 0.4f;
 				LayerIndex layerIndex = LayerIndex.world;
 				int num = layerIndex.mask;
@@ -173,7 +180,7 @@ namespace DekuMod.SkillStates
 					blastAttack.position = base.transform.position;
 					blastAttack.attacker = base.gameObject;
 					blastAttack.crit = base.RollCrit();
-					blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (moveSpeedStat / 7) * totalDuration;
+					blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (moveSpeedStat / 7) * (1+totalDuration);
 					blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 					blastAttack.baseForce = force;
 					blastAttack.teamIndex = base.teamComponent.teamIndex;
@@ -192,10 +199,10 @@ namespace DekuMod.SkillStates
 					}
 					this.outer.SetNextStateToMain();
 				}
-				else
-				{
-					this.UpdateDirection();
-				}
+				//else
+				//{
+				//	this.UpdateDirection();
+				//}
 
 			}
 			else

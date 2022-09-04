@@ -49,39 +49,39 @@ namespace DekuMod.SkillStates
             dekucon = base.GetComponent<DekuController>();
 
            
-            dekucon.AddToBuffCount(10);
-            if (dekucon.isMaxPower)
-            {
-                dekucon.RemoveBuffCount(50);
-                damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                fajin = 2f;
-                BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = Float.slamRadius * fajin;
-                blastAttack.procCoefficient = Float.slamProcCoefficient;
-                blastAttack.position = base.characterBody.footPosition;
-                blastAttack.attacker = base.gameObject;
-                blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.floatDamageCoefficient * (moveSpeedStat / 7);
-                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = -1000f;
-                blastAttack.teamIndex = base.teamComponent.teamIndex;
-                blastAttack.damageType = damageType;
-                blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+            //dekucon.AddToBuffCount(10);
+            //if (dekucon.isMaxPower)
+            //{
+            //    dekucon.RemoveBuffCount(50);
+            //    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+            //    fajin = 2f;
+            //    BlastAttack blastAttack = new BlastAttack();
+            //    blastAttack.radius = Float.slamRadius * fajin;
+            //    blastAttack.procCoefficient = Float.slamProcCoefficient;
+            //    blastAttack.position = base.characterBody.footPosition;
+            //    blastAttack.attacker = base.gameObject;
+            //    blastAttack.crit = base.RollCrit();
+            //    blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.floatDamageCoefficient * (moveSpeedStat / 7);
+            //    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+            //    blastAttack.baseForce = -1000f;
+            //    blastAttack.teamIndex = base.teamComponent.teamIndex;
+            //    blastAttack.damageType = damageType;
+            //    blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
 
-                if (blastAttack.Fire().hitCount > 0)
-                {
-                    this.OnHitEnemyAuthority();
+            //    if (blastAttack.Fire().hitCount > 0)
+            //    {
+            //        this.OnHitEnemyAuthority();
 
-                }
+            //    }
 
-            }
-            else
-            {
-                damageType = DamageType.Stun1s;
-                fajin = 1f;
-            }
+            //}
+            //else
+            //{
+            //    damageType = DamageType.Stun1s;
+            //    fajin = 1f;
+            //}
             jumpDuration = basejumpDuration / fajin;
 
             EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData

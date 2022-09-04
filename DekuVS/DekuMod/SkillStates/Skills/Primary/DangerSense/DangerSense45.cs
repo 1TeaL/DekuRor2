@@ -52,16 +52,16 @@ namespace DekuMod.SkillStates
             counteron = false;
             dekucon.countershouldflip = false;
 
-            if (dekucon.isMaxPower)
-            {
-                dekucon.RemoveBuffCount(50);
-                fajin = 2f;
-            }
-            else
-            {
-                fajin = 1f;
-            }
-            dekucon.AddToBuffCount(10);
+            //if (dekucon.isMaxPower)
+            //{
+            //    dekucon.RemoveBuffCount(50);
+            //    fajin = 2f;
+            //}
+            //else
+            //{
+            //    fajin = 1f;
+            //}
+            //dekucon.AddToBuffCount(10);
 
             this.fireTime = duration / (4f * attackSpeedStat * fajin);
             if (this.fireTime < 0.1f)

@@ -57,12 +57,27 @@ namespace DekuMod.Modules.Survivors
 
         //Go Beyond
         public float goBeyondTimer;
-        
+
+        //Indicator
+        private readonly BullseyeSearch search = new BullseyeSearch();
+        private float trackerUpdateStopwatch;
+        private InputBankTest inputBank;
+        public float maxTrackingDistance = 60f;
+        public float maxTrackingAngle = 60f;
+        public float trackerUpdateFrequency = 10f;
+        private Indicator indicator;
+        private HurtBox trackingTarget;
+        public HurtBox Target;
+
+
+
 
         public void Awake()
         {
             body = gameObject.GetComponent<CharacterBody>();
             child = GetComponentInChildren<ChildLocator>();
+            indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
+
             if (child)
             {
                 OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
@@ -86,6 +101,161 @@ namespace DekuMod.Modules.Survivors
             energySystem = gameObject.AddComponent<EnergySystem>();
         }
 
+
+        public void FixedUpdate()
+        {
+            this.trackerUpdateStopwatch += Time.fixedDeltaTime;
+            if (this.trackerUpdateStopwatch >= 1f / this.trackerUpdateFrequency)
+            {
+                this.trackerUpdateStopwatch -= 1f / this.trackerUpdateFrequency;
+                Ray aimRay = new Ray(this.inputBank.aimOrigin, this.inputBank.aimDirection);
+                this.SearchForTarget(aimRay);
+                HurtBox hurtBox = this.trackingTarget;
+                if (hurtBox)
+                {
+                    this.indicator.active = true;
+                    this.indicator.targetTransform = this.trackingTarget.transform;
+
+                }
+                else
+                {
+                    this.indicator.active = false;
+
+                }
+
+            }
+
+
+
+            if (body.HasBuff(Buffs.ofaBuff))
+            {
+                if (ofaHurtTimer > 1f)
+                {
+                    ofaHurtTimer = 0f;
+
+                    DamageInfo damageInfo = new DamageInfo();
+                    damageInfo.damage = body.healthComponent.fullCombinedHealth * 0.05f;
+                    damageInfo.position = base.transform.position;
+                    damageInfo.force = Vector3.zero;
+                    damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+                    damageInfo.crit = false;
+                    damageInfo.attacker = null;
+                    damageInfo.inflictor = null;
+                    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                    damageInfo.procCoefficient = 0f;
+                    damageInfo.procChainMask = default(ProcChainMask);
+                    body.healthComponent.TakeDamage(damageInfo);
+
+                }
+                else
+                {
+                    ofaHurtTimer += Time.fixedDeltaTime;
+                }
+            }
+            if (body.HasBuff(Buffs.goBeyondBuff))
+            {
+                body.skillLocator.special.RemoveAllStocks();
+                if (goBeyondTimer > 1f)
+                {
+                    body.healthComponent.Heal(body.healthComponent.fullCombinedHealth * 0.05f, new ProcChainMask(), true);
+                    goBeyondTimer = 0f;
+                }
+                else
+                {
+                    goBeyondTimer += Time.fixedDeltaTime;
+                }
+            }
+
+
+            //CheckIfMaxKickPowerStacks();
+
+            //if (fajinon)
+            //{
+            //    CheckIfMaxPowerStacks();
+            //    if (isMaxPower)
+            //    {
+            //        FAJIN.Play();
+            //    }
+            //    else
+            //    {
+            //        FAJIN.Stop();
+            //    }
+            //    if (fajinscepteron)
+            //    {
+            //        if (anim.GetBool("isMoving") && stopwatch >= fajinscepterrate / body.moveSpeed)
+            //        {
+            //            IncrementBuffCount();
+            //            stopwatch = 0f;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (anim.GetBool("isMoving") && stopwatch >= fajinrate / body.moveSpeed)
+            //        {
+            //            IncrementBuffCount();
+            //            stopwatch = 0f;
+            //        }
+            //    }
+
+            //}
+            //stopwatch += Time.fixedDeltaTime;
+
+
+            //if (body.HasBuff(Modules.Buffs.counterBuff))
+            //{
+            //    DANGERSENSE.Play();
+            //}
+            //if (!body.HasBuff(Modules.Buffs.counterBuff))
+            //{
+            //    DANGERSENSE.Stop();
+            //}
+            //if (this.hasFloatBuff)
+            //{
+            //    this.floatStopwatch.Start();
+            //    bool flag2 = this.floatStopwatch.Elapsed.TotalSeconds >= (double)StaticValues.floatDuration;
+            //    if (flag2)
+            //    {
+            //        this.endFloat = true;
+            //    }
+            //}
+            //else
+            //{
+            //    bool isGrounded = this.characterBody.characterMotor.isGrounded;
+            //    if (isGrounded)
+            //    {
+            //        this.floatStopwatch.Reset();
+            //    }
+            //}
+        }
+
+        public HurtBox GetTrackingTarget()
+        {
+            return this.trackingTarget;
+        }
+
+        private void OnEnable()
+        {
+            this.indicator.active = true;
+        }
+
+        private void OnDisable()
+        {
+            this.indicator.active = false;
+        }
+
+        private void SearchForTarget(Ray aimRay)
+        {
+            this.search.teamMaskFilter = TeamMask.all;
+            this.search.filterByLoS = true;
+            this.search.searchOrigin = aimRay.origin;
+            this.search.searchDirection = aimRay.direction;
+            this.search.sortMode = BullseyeSearch.SortMode.Distance;
+            this.search.maxDistanceFilter = this.maxTrackingDistance;
+            this.search.maxAngleFilter = this.maxTrackingAngle;
+            this.search.RefreshCandidates();
+            this.search.FilterOutGameObject(base.gameObject);
+            this.trackingTarget = this.search.GetResults().FirstOrDefault<HurtBox>();
+        }
         //public void IncrementBuffCount()
         //{
         //    buffCountToApply++;
@@ -174,110 +344,6 @@ namespace DekuMod.Modules.Survivors
         //    return buffCountToApply;
         //}
 
-        public void FixedUpdate()
-        {
-            if (body.HasBuff(Buffs.ofaBuff))
-            {
-                if(ofaHurtTimer > 1f)
-                {
-                    ofaHurtTimer = 0f;
-
-                    if (NetworkServer.active && body.healthComponent)
-                    {
-                        DamageInfo damageInfo = new DamageInfo();
-                        damageInfo.damage = body.healthComponent.fullCombinedHealth * 0.05f;
-                        damageInfo.position = base.transform.position;
-                        damageInfo.force = Vector3.zero;
-                        damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
-                        damageInfo.crit = false;
-                        damageInfo.attacker = null;
-                        damageInfo.inflictor = null;
-                        damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                        damageInfo.procCoefficient = 0f;
-                        damageInfo.procChainMask = default(ProcChainMask);
-                        body.healthComponent.TakeDamage(damageInfo);
-                    }
-                }
-                else
-                {
-                    ofaHurtTimer += Time.fixedDeltaTime;
-                }
-            }
-            if (body.HasBuff(Buffs.goBeyondBuff))
-            {
-                body.skillLocator.special.RemoveAllStocks();
-                if(goBeyondTimer > 1f)
-                {
-                    body.healthComponent.Heal(body.healthComponent.fullCombinedHealth * 0.05f, new ProcChainMask(), true);
-                    goBeyondTimer = 0f;
-                }
-                else
-                {
-                    goBeyondTimer += Time.fixedDeltaTime;
-                }
-            }
-
-
-            //CheckIfMaxKickPowerStacks();
-
-            //if (fajinon)
-            //{
-            //    CheckIfMaxPowerStacks();
-            //    if (isMaxPower)
-            //    {
-            //        FAJIN.Play();
-            //    }
-            //    else
-            //    {
-            //        FAJIN.Stop();
-            //    }
-            //    if (fajinscepteron)
-            //    {
-            //        if (anim.GetBool("isMoving") && stopwatch >= fajinscepterrate / body.moveSpeed)
-            //        {
-            //            IncrementBuffCount();
-            //            stopwatch = 0f;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (anim.GetBool("isMoving") && stopwatch >= fajinrate / body.moveSpeed)
-            //        {
-            //            IncrementBuffCount();
-            //            stopwatch = 0f;
-            //        }
-            //    }
-
-            //}
-            //stopwatch += Time.fixedDeltaTime;
-
-            
-            //if (body.HasBuff(Modules.Buffs.counterBuff))
-            //{
-            //    DANGERSENSE.Play();
-            //}
-            //if (!body.HasBuff(Modules.Buffs.counterBuff))
-            //{
-            //    DANGERSENSE.Stop();
-            //}
-            //if (this.hasFloatBuff)
-            //{
-            //    this.floatStopwatch.Start();
-            //    bool flag2 = this.floatStopwatch.Elapsed.TotalSeconds >= (double)StaticValues.floatDuration;
-            //    if (flag2)
-            //    {
-            //        this.endFloat = true;
-            //    }
-            //}
-            //else
-            //{
-            //    bool isGrounded = this.characterBody.characterMotor.isGrounded;
-            //    if (isGrounded)
-            //    {
-            //        this.floatStopwatch.Reset();
-            //    }
-            //}
-        }        
     }
 }
 

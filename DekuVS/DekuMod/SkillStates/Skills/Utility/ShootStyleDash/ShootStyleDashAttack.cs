@@ -67,29 +67,29 @@ namespace DekuMod.SkillStates
 				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 			}
 			dekucon = base.GetComponent<DekuController>();
-			if (dekucon.isMaxPower)
-			{
-				fajin = 2f;
-			}
-			else
-			{
-				fajin = 1f;
-			}
-			Ray aimRay = base.GetAimRay();
-			if (dekucon.isMaxPower)
-			{
-				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-				{
-					origin = base.transform.position,
-					scale = 1f,
-					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, false);
-				damageType = DamageType.BypassArmor | DamageType.Stun1s;
-			}
-			else
-			{
-				damageType = DamageType.Generic;
-			}
+			//if (dekucon.isMaxPower)
+			//{
+			//	fajin = 2f;
+			//}
+			//else
+			//{
+			//	fajin = 1f;
+			//}
+			//Ray aimRay = base.GetAimRay();
+			//if (dekucon.isMaxPower)
+			//{
+			//	EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+			//	{
+			//		origin = base.transform.position,
+			//		scale = 1f,
+			//		rotation = Quaternion.LookRotation(aimRay.direction)
+			//	}, false);
+			//	damageType = DamageType.BypassArmor | DamageType.Stun1s;
+			//}
+			//else
+			//{
+			//	damageType = DamageType.Generic;
+			//}
 			damageFrequency = 1 / (basedamageFrequency * this.attackSpeedStat * fajin);
 			duration = baseduration * fajin;
 		}
@@ -110,20 +110,20 @@ namespace DekuMod.SkillStates
 			{
 				this.outer.SetNextStateToMain();
 			}
-			if (dekucon.isMaxPower)
-            {
-				if (inputBank.skill3.down)
-				{
-					stopwatch = 0;
+			//if (dekucon.isMaxPower)
+   //         {
+			//	if (inputBank.skill3.down)
+			//	{
+			//		stopwatch = 0;
 
-				}
-				if (actualstopwatch >= duration/2)
-				{
+			//	}
+			//	if (actualstopwatch >= duration/2)
+			//	{
 					
-				}
+			//	}
 
 
-			}
+			//}
 
 			this.attackStopwatch += Time.fixedDeltaTime;
 			float num = damageFrequency;
@@ -199,8 +199,6 @@ namespace DekuMod.SkillStates
 		}
 		public override void OnExit()
 		{
-
-			dekucon.RemoveBuffCount(50); 
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
             this.modelTransform = base.GetModelTransform();

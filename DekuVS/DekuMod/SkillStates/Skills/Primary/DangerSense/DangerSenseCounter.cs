@@ -46,23 +46,23 @@ namespace DekuMod.SkillStates
 
             dekucon.countershouldflip = false;
             dekucon.DANGERSENSE.Stop();
-            if (dekucon.isMaxPower)
-            {
-                damageType = DamageType.Freeze2s | DamageType.BypassArmor;
-            }
-            else
-            {
-                damageType = DamageType.Stun1s;
-                if (dekucon.dangersensefreeze)
-                {
-                    damageType = DamageType.Freeze2s;
-                    dekucon.dangersensefreeze = false;
-                }
-                else
-                {
-                    damageType = DamageType.Stun1s;
-                }
-            }
+            //if (dekucon.isMaxPower)
+            //{
+            //    damageType = DamageType.Freeze2s | DamageType.BypassArmor;
+            //}
+            //else
+            //{
+            //    damageType = DamageType.Stun1s;
+            //    if (dekucon.dangersensefreeze)
+            //    {
+            //        damageType = DamageType.Freeze2s;
+            //        dekucon.dangersensefreeze = false;
+            //    }
+            //    else
+            //    {
+            //        damageType = DamageType.Stun1s;
+            //    }
+            //}
 
 
             //blastAttack = new BlastAttack();

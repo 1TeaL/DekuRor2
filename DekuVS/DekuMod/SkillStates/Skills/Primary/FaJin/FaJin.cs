@@ -52,7 +52,7 @@ namespace DekuMod.SkillStates
             base.FixedUpdate();
 			if (base.fixedAge >= duration && !hasFired)
             {
-				dekucon.AddToBuffCount(25);
+				//dekucon.AddToBuffCount(25);
 				hasFired = true;
 
 				this.outer.SetNextStateToMain();

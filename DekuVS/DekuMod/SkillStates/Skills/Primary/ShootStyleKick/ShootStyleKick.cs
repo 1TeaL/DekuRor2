@@ -75,30 +75,30 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
 			this.aimRayDir = aimRay.direction;
 
-			dekucon = base.GetComponent<DekuController>();
-			if (dekucon.isMaxPower)
-			{
-				dekucon.RemoveBuffCount(50);
-				fajin = 2f;
-			}
-			else
-			{
-				fajin = 1f;
-			}
-			if (dekucon.isMaxPower)
-			{
-				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-				{
-					origin = base.transform.position,
-					scale = 1f,
-					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, true);
-				damageType = DamageType.ResetCooldownsOnKill | DamageType.Freeze2s;
-			}
-			else
-			{
-				damageType = DamageType.ResetCooldownsOnKill | DamageType.Generic;
-			}
+			//dekucon = base.GetComponent<DekuController>();
+			//if (dekucon.isMaxPower)
+			//{
+			//	dekucon.RemoveBuffCount(50);
+			//	fajin = 2f;
+			//}
+			//else
+			//{
+			//	fajin = 1f;
+			//}
+			//if (dekucon.isMaxPower)
+			//{
+			//	EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+			//	{
+			//		origin = base.transform.position,
+			//		scale = 1f,
+			//		rotation = Quaternion.LookRotation(aimRay.direction)
+			//	}, true);
+			//	damageType = DamageType.ResetCooldownsOnKill | DamageType.Freeze2s;
+			//}
+			//else
+			//{
+			//	damageType = DamageType.ResetCooldownsOnKill | DamageType.Generic;
+			//}
 
 			duration = baseduration / ((this.attackSpeedStat) / 2);
 			SpeedCoefficient = initialSpeedCoefficient * (this.attackSpeedStat / 2);
@@ -176,7 +176,7 @@ namespace DekuMod.SkillStates
 			AkSoundEngine.PostEvent(3842300745, this.gameObject);
 			AkSoundEngine.PostEvent(573664262, this.gameObject);
 
-			dekucon.AddToBuffCount(10);
+			//dekucon.AddToBuffCount(10);
 		}
 
 		private void RecalculateRollSpeed()
@@ -314,7 +314,7 @@ namespace DekuMod.SkillStates
 						}
 					}
 					this.OnHitEnemyAuthority();
-					if (dekucon.isMaxPower)
+					//if (dekucon.isMaxPower)
 					{
 						blastAttack.Fire();
 						EffectManager.SpawnEffect(this.explosionPrefab, new EffectData
@@ -338,7 +338,7 @@ namespace DekuMod.SkillStates
 			bool flag = !this.hasHopped;
 			if (flag)
 			{
-				if (base.isAuthority && dekucon.isMaxPower)
+				//if (base.isAuthority && dekucon.isMaxPower)
 				{
 					blastAttack.Fire();
 					EffectManager.SpawnEffect(this.explosionPrefab, new EffectData

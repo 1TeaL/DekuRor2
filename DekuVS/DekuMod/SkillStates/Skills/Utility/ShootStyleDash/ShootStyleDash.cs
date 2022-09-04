@@ -61,14 +61,14 @@ namespace DekuMod.SkillStates
 			base.characterDirection.forward = this.dashVector;
 			base.StartAimMode(dashPrepDuration, true);
 			dekucon = base.GetComponent<DekuController>();
-			if (dekucon.isMaxPower)
-			{
-				fajin = 2f;
-			}
-			else
-			{
-				fajin = 1f;
-			}
+			//if (dekucon.isMaxPower)
+			//{
+			//	fajin = 2f;
+			//}
+			//else
+			//{
+			//	fajin = 1f;
+			//}
 
 
 		}
@@ -136,16 +136,16 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
 		{
 			Ray aimRay = base.GetAimRay();
-			if (dekucon.isMaxPower)
-			{
-				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-				{
-					origin = base.transform.position,
-					scale = 1f,
-					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, true);
-			}
-			dekucon.RemoveBuffCount(50);
+			//if (dekucon.isMaxPower)
+			//{
+			//	EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+			//	{
+			//		origin = base.transform.position,
+			//		scale = 1f,
+			//		rotation = Quaternion.LookRotation(aimRay.direction)
+			//	}, true);
+			//}
+			//dekucon.RemoveBuffCount(50);
 			Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 			base.characterMotor.velocity *= 0.1f;
 			base.SmallHop(base.characterMotor, smallHopVelocity);

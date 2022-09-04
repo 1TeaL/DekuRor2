@@ -59,14 +59,14 @@ namespace DekuMod.SkillStates
             //    speedattack = 1;
             //}
             dekucon = base.GetComponent<DekuController>();
-            if (dekucon.isMaxPower)
-            {
-                fajin = 2f;
-            }
-            else
-            {
-                fajin = 1f;
-            }
+            //if (dekucon.isMaxPower)
+            //{
+            //    fajin = 2f;
+            //}
+            //else
+            //{
+            //    fajin = 1f;
+            //}
             SpeedCoefficient = initialSpeedCoefficient * fajin;
             base.StartAimMode(duration, true);
 
@@ -89,14 +89,14 @@ namespace DekuMod.SkillStates
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
-            if (dekucon.isMaxPower)
-            {
-                damageType = DamageType.BypassArmor | DamageType.Stun1s;
-            }
-            else
-            {
-                damageType = DamageType.Stun1s;
-            }
+            //if (dekucon.isMaxPower)
+            //{
+            //    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+            //}
+            //else
+            //{
+            //    damageType = DamageType.Stun1s;
+            //}
             // ray used to shoot position after teleporting
             uint bulletamount = (uint)(1U * this.attackSpeedStat * fajin);
             if (bulletamount > 20)
@@ -171,19 +171,19 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             Ray aimRay = base.GetAimRay();
-            if (dekucon.isMaxPower)
-            {
-                damageType = DamageType.BypassArmor | DamageType.Stun1s;
-            }
-            else
-            {
-                damageType = DamageType.Stun1s;
-            }
-            if (afterattack != null)
-            {
-                afterattack.Fire();
-                dekucon.RemoveBuffCount(50);
-            }
+            //if (dekucon.isMaxPower)
+            //{
+            //    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+            //}
+            //else
+            //{
+            //    damageType = DamageType.Stun1s;
+            //}
+            //if (afterattack != null)
+            //{
+            //    afterattack.Fire();
+            //    dekucon.RemoveBuffCount(50);
+            //}
             //base.PlayAnimation("FullBody, Override", "ShootStyleDashExit", "Attack.playbackRate", 0.2f);
             base.PlayCrossfade("FullBody, Override", "ShootStyleDashExit", 0.2f);
             Util.PlaySound(EvisDash.endSoundString, base.gameObject);

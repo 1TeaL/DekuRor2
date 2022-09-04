@@ -11,15 +11,13 @@ using EntityStates.Bandit2;
 namespace DekuMod.SkillStates
 {
 
-	public class Smokescreen : BaseSkillState
+	public class Smokescreen : BaseSkill
 	{
 		public static float baseDuration = 4f;
 		public static float radius = 15f;
-		public DekuController dekucon;
 
 		public Vector3 theSpot;
 		public CharacterBody body;
-		public float fajin;
 		private float duration;
 		public bool hasFired;
 		private BlastAttack blastAttack;
@@ -46,75 +44,57 @@ namespace DekuMod.SkillStates
 
 			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
 			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
-			dekucon.AddToBuffCount(10);
 
-			if (dekucon.isMaxPower)
-			{
-				dekucon.RemoveBuffCount(50);
-				fajin = 2f;
-				if (base.isAuthority)
-				{
-					Vector3 effectPosition = base.characterBody.corePosition;
-					effectPosition.y = base.characterBody.corePosition.y;
-					EffectManager.SpawnEffect(this.smokebigprefab, new EffectData
-					{
-						origin = effectPosition,
-						scale = radius * fajin,
-						rotation = Quaternion.LookRotation(Vector3.down)
-					}, true);
+			//if (base.isAuthority)
+			//{
+			//	Vector3 effectPosition = base.characterBody.corePosition;
+			//	effectPosition.y = base.characterBody.corePosition.y;
+			//	EffectManager.SpawnEffect(this.smokebigprefab, new EffectData
+			//	{
+			//		origin = effectPosition,
+			//		scale = radius,
+			//		rotation = Quaternion.LookRotation(Vector3.down)
+			//	}, true);
 
-				}
-			}
-            else
-            {
-				fajin = 1f;
-				if (base.isAuthority)
-				{
-					Vector3 effectPosition = base.characterBody.corePosition;
-					effectPosition.y = base.characterBody.corePosition.y;
-					EffectManager.SpawnEffect(this.smokeprefab, new EffectData
-					{
-						origin = effectPosition,
-						scale = radius * fajin,
-						rotation = Quaternion.LookRotation(Vector3.up)
-					}, true);
+			//}
+			//if (base.isAuthority)
+			//{
+			//	Vector3 effectPosition = base.characterBody.corePosition;
+			//	effectPosition.y = base.characterBody.corePosition.y;
+			//	EffectManager.SpawnEffect(this.smokeprefab, new EffectData
+			//	{
+			//		origin = effectPosition,
+			//		scale = radius,
+			//		rotation = Quaternion.LookRotation(Vector3.up)
+			//	}, true);
 
-				}
-			}
+			//}
+			
 
-			if (dekucon.isMaxPower)
-			{
-				EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-				{
-					origin = base.transform.position,
-					scale = 1f,
-					rotation = Quaternion.LookRotation(aimRay.direction)
-				}, false);
+			//EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+			//{
+			//	origin = base.transform.position,
+			//	scale = 1f,
+			//	rotation = Quaternion.LookRotation(aimRay.direction)
+			//}, false);
 
 
-				float radiusSqr = radius * radius;
-				Vector3 position = base.transform.position;
+			//float radiusSqr = radius * radius;
+			//Vector3 position = base.transform.position;
 
-				if (NetworkServer.active)
-				{
-					this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
-				}
-			}
+			//if (NetworkServer.active)
+			//{
+			//	this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
+			//}
+			
 
 			blastAttack = new BlastAttack();
 
-			if (dekucon.isMaxPower)
-			{
-				blastAttack.damageType = DamageType.Stun1s;
-			}
-			else
-			{
-				blastAttack.damageType = DamageType.SlowOnHit;
-			}
 			blastAttack.position = base.transform.position;
 			blastAttack.baseDamage = this.damageStat * Modules.StaticValues.smokescreenDamageCoefficient;
-			blastAttack.baseForce = 1600f * fajin;
-			blastAttack.radius = Smokescreen.radius * fajin;
+			blastAttack.baseForce = 1600f;
+			blastAttack.damageType = DamageType.SlowOnHit;
+			blastAttack.radius = Smokescreen.radius;
 			blastAttack.attacker = base.gameObject;
 			blastAttack.inflictor = base.gameObject;
 			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

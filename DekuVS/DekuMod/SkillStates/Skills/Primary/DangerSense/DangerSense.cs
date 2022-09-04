@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace DekuMod.SkillStates
 {
-    public class DangerSense : BaseSkillState
+    public class DangerSense : BaseSkill
     {
 
         public static float procCoefficient = 2f;
@@ -20,7 +20,6 @@ namespace DekuMod.SkillStates
         private float fireTime;
 
         public float fajin;
-        public DekuController dekucon;
 
         public bool counteron;
         private BlastAttack blastAttack;
@@ -36,14 +35,13 @@ namespace DekuMod.SkillStates
 
         public enum DangerState {STARTBUFF, CHECKFLIP, END };
         public DangerState state;
-        public DamageType damageType;
+        public DamageType damageType = DamageType.Freeze2s;
 
         public override void OnEnter()
         {
             base.OnEnter();
             state = DangerState.STARTBUFF;
 
-            dekucon = base.GetComponent<DekuController>();
             this.duration = baseDuration;
             
             //base.characterBody.SetAimTimer(duration);
@@ -52,18 +50,6 @@ namespace DekuMod.SkillStates
             counteron = false;
             dekucon.countershouldflip = false;
 
-            if (dekucon.isMaxPower)
-            {
-                dekucon.RemoveBuffCount(50);
-                fajin = 2f;
-                damageType = DamageType.Freeze2s;
-            }
-            else
-            {
-                fajin = 1f;
-                damageType = DamageType.SlowOnHit;
-            }
-            dekucon.AddToBuffCount(10);
 
             this.fireTime = duration / (4f * attackSpeedStat * fajin);
             if (this.fireTime < 0.1f)

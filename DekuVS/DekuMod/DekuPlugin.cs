@@ -364,19 +364,19 @@ namespace DekuMod
             orig(self);
 
             //Update fajin
-            if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
-            {
-                DekuController dekucon = self.GetComponent<DekuController>();
-                if (dekucon.fajinon)
-                {
-                    self.SetBuffCount(Modules.Buffs.fajinBuff.buffIndex, dekucon.GetBuffCount());
-                }
-                if (dekucon.kickon)
-                {
-                    self.SetBuffCount(Modules.Buffs.kickBuff.buffIndex, dekucon.GetKickBuffCount());
-                }
+            //if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
+            //{
+                //DekuController dekucon = self.GetComponent<DekuController>();
+                //if (dekucon.fajinon)
+                //{
+                //    self.SetBuffCount(Modules.Buffs.fajinBuff.buffIndex, dekucon.GetBuffCount());
+                //}
+                //if (dekucon.kickon)
+                //{
+                //    self.SetBuffCount(Modules.Buffs.kickBuff.buffIndex, dekucon.GetKickBuffCount());
+                //}
 
-            }
+            //}
 
         }
 

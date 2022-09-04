@@ -140,20 +140,20 @@ namespace DekuMod.SkillStates
             {
                 base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration/3f, 0.1f);
                 Ray aimRay = base.GetAimRay();
-                if (dekucon.isMaxPower)
-                {
-                    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-                    {
-                        origin = base.transform.position,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(aimRay.direction)
-                    }, true);
-                    damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                }
-                else
-                {
-                    damageType = DamageType.Stun1s;
-                }
+                //if (dekucon.isMaxPower)
+                //{
+                //    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                //    {
+                //        origin = base.transform.position,
+                //        scale = 1f,
+                //        rotation = Quaternion.LookRotation(aimRay.direction)
+                //    }, true);
+                //    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                //}
+                //else
+                //{
+                //    damageType = DamageType.Stun1s;
+                //}
                 base.characterMotor.velocity *= 0.1f;
 
                 BlastAttack blastAttack = new BlastAttack();

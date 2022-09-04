@@ -9,7 +9,7 @@ using static RoR2.BlastAttack;
 
 namespace DekuMod.SkillStates
 {
-    public class StLouis100 : BaseSkillState
+    public class StLouis100 : BaseSkill100
     {
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
         private GameObject effectPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
@@ -30,9 +30,7 @@ namespace DekuMod.SkillStates
         public float whipage;
         public float speedattack;
 
-        public float fajin;
         protected DamageType damageType = DamageType.Stun1s;
-        public DekuController dekucon;
         private BlastAttack blastAttack2;
 
         public override void OnEnter()
@@ -45,24 +43,14 @@ namespace DekuMod.SkillStates
             {
                 speedattack = 1;
             }
-            dekucon = base.GetComponent<DekuController>();
-            if (dekucon.isMaxPower)
-            {
-                fajin = 2f;
-            }
-            else
-            {
-                fajin = 1f;
-            }
-            if (dekucon.isMaxPower)
-            {
-                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-                {
-                    origin = base.transform.position,
-                    scale = 1f,
-                    rotation = Quaternion.LookRotation(aimRay.direction)
-                }, false);
-            }
+
+            //EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+            //{
+            //    origin = base.transform.position,
+            //    scale = 1f,
+            //    rotation = Quaternion.LookRotation(aimRay.direction)
+            //}, false);
+            
 
 
             //hasFired = false;
@@ -85,29 +73,16 @@ namespace DekuMod.SkillStates
             //    scale = 1f,       
 
             //}, true);
-            if (NetworkServer.active && base.healthComponent)
-            {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-                damageInfo.position = base.transform.position;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.Default;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                base.healthComponent.TakeDamage(damageInfo);
-            }
+            SpendHealth(0.1f);
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = blastRadius * speedattack * fajin;
+            blastAttack.radius = blastRadius * speedattack;
             blastAttack.procCoefficient = 0.2f;
             blastAttack.position = theSpot;
+            blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouisDamageCoefficient * fajin;
+            //blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouisDamageCoefficient * fajin;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
@@ -129,7 +104,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.Heal(((healthComponent.fullCombinedHealth / 20) * speedattack * fajin), default(ProcChainMask), true);
+            base.healthComponent.Heal(((healthComponent.fullCombinedHealth / 20) * speedattack), default(ProcChainMask), true);
 
             //var hurtbox = blastAttack.inflictor;
             //if (hurtbox)
@@ -164,7 +139,6 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            dekucon.RemoveBuffCount(50);
             base.OnExit();
         }
 
@@ -176,16 +150,6 @@ namespace DekuMod.SkillStates
 
             if ((base.fixedAge >= this.duration / 10) && base.isAuthority && whipage >= this.duration / 10)
             {
-                //hasFired = true;
-                if (dekucon.isMaxPower)
-                {
-
-                    blastAttack.damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                }
-                else
-                {
-                    blastAttack.damageType = DamageType.Stun1s;
-                }
                 blastAttack.position = theSpot;
                 range += rangeaddition;
                 whipage = 0f;
@@ -196,14 +160,14 @@ namespace DekuMod.SkillStates
                 EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius * speedattack * fajin,
+                    scale = blastRadius * speedattack,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);
                 EffectManager.SpawnEffect(effectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius * speedattack * fajin,
+                    scale = blastRadius * speedattack,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);

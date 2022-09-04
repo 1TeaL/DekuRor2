@@ -75,17 +75,17 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
 			this.aimRayDir = aimRay.direction;
 			dekucon = base.GetComponent<DekuController>();
-			dekucon.kickon = true;
+			//dekucon.kickon = true;
 
-			if (dekucon.kickBuff)
-			{
-				damageType = DamageType.Freeze2s | DamageType.ResetCooldownsOnKill;
-				dekucon.RemoveKickBuffCount(4);
-			}
-			else
-			{
-				damageType = DamageType.ResetCooldownsOnKill;
-			}
+			//if (dekucon.kickBuff)
+			//{
+			//	damageType = DamageType.Freeze2s | DamageType.ResetCooldownsOnKill;
+			//	//dekucon.RemoveKickBuffCount(4);
+			//}
+			//else
+			//{
+			//	damageType = DamageType.ResetCooldownsOnKill;
+			//}
 
 			duration = baseduration / ((this.attackSpeedStat) / 2);
 			SpeedCoefficient = initialSpeedCoefficient * (this.attackSpeedStat / 2);
@@ -356,7 +356,7 @@ namespace DekuMod.SkillStates
 			{
 				if (base.isAuthority)
 				{
-					dekucon.IncrementKickBuffCount();
+					//dekucon.IncrementKickBuffCount();
 					blastAttack.Fire();
 
 					EffectManager.SpawnEffect(this.explosionPrefab, new EffectData

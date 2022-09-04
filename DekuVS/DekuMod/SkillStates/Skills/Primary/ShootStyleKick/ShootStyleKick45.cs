@@ -288,15 +288,15 @@ namespace DekuMod.SkillStates
                         }
                     }
                     this.OnHitEnemyAuthority();
-					if (dekucon.isMaxPower)
-					{
-						blastAttack.Fire();
-						EffectManager.SpawnEffect(this.explosionPrefab, new EffectData
-						{
-							origin = base.characterBody.corePosition,
-							scale = this.radius,
-						}, false);
-					}
+					//if (dekucon.isMaxPower)
+					//{
+					//	blastAttack.Fire();
+					//	EffectManager.SpawnEffect(this.explosionPrefab, new EffectData
+					//	{
+					//		origin = base.characterBody.corePosition,
+					//		scale = this.radius,
+					//	}, false);
+					//}
 				}
 			}
 		}

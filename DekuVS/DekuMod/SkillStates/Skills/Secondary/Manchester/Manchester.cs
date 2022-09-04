@@ -39,37 +39,37 @@ namespace DekuMod.SkillStates
             this.flyVector = Vector3.up;
             this.hasDropped = false;
             dekucon = base.GetComponent<DekuController>();
-            if (dekucon.isMaxPower)
-            {
-                dekucon.RemoveBuffCount(50);
-                damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                fajin = 2f;
-                BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = Manchester.slamRadius * fajin;
-                blastAttack.procCoefficient = Manchester.slamProcCoefficient;
-                blastAttack.position = base.characterBody.footPosition;
-                blastAttack.attacker = base.gameObject;
-                blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat / 7);
-                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = -1000f;
-                blastAttack.teamIndex = base.teamComponent.teamIndex;
-                blastAttack.damageType = damageType;
-                blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+            //if (dekucon.isMaxPower)
+            //{
+            //    dekucon.RemoveBuffCount(50);
+            //    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+            //    fajin = 2f;
+            //    BlastAttack blastAttack = new BlastAttack();
+            //    blastAttack.radius = Manchester.slamRadius * fajin;
+            //    blastAttack.procCoefficient = Manchester.slamProcCoefficient;
+            //    blastAttack.position = base.characterBody.footPosition;
+            //    blastAttack.attacker = base.gameObject;
+            //    blastAttack.crit = base.RollCrit();
+            //    blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat / 7);
+            //    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+            //    blastAttack.baseForce = -1000f;
+            //    blastAttack.teamIndex = base.teamComponent.teamIndex;
+            //    blastAttack.damageType = damageType;
+            //    blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
 
-                if (blastAttack.Fire().hitCount > 0)
-                {
-                    this.OnHitEnemyAuthority();
+            //    if (blastAttack.Fire().hitCount > 0)
+            //    {
+            //        this.OnHitEnemyAuthority();
 
-                }
-            }
-            else
-            {
-                damageType = DamageType.Stun1s;
-                fajin = 1f;
-            }
+            //    }
+            //}
+            //else
+            //{
+            //    damageType = DamageType.Stun1s;
+            //    fajin = 1f;
+            //}
             jumpDuration = basejumpDuration / fajin;
 
 
@@ -86,7 +86,7 @@ namespace DekuMod.SkillStates
 
             base.gameObject.layer = LayerIndex.fakeActor.intVal;
             //base.characterMotor.Motor.RebuildCollidableLayers();
-            dekucon.AddToBuffCount(10);
+            //dekucon.AddToBuffCount(10);
 ;
         }
 
@@ -168,20 +168,20 @@ namespace DekuMod.SkillStates
             {
                 base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration/3f, 0.1f);
                 Ray aimRay = base.GetAimRay();
-                if (dekucon.isMaxPower)
-                {
-                    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-                    {
-                        origin = base.transform.position,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(aimRay.direction)
-                    }, true);
-                    damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                }
-                else
-                {
-                    damageType = DamageType.Stun1s;
-                }
+                //if (dekucon.isMaxPower)
+                //{
+                //    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                //    {
+                //        origin = base.transform.position,
+                //        scale = 1f,
+                //        rotation = Quaternion.LookRotation(aimRay.direction)
+                //    }, true);
+                //    damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                //}
+                //else
+                //{
+                //    damageType = DamageType.Stun1s;
+                //}
                 base.characterMotor.velocity *= 0.1f;
 
                 BlastAttack blastAttack = new BlastAttack();

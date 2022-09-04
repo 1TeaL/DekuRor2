@@ -54,18 +54,18 @@ namespace DekuMod.SkillStates
 
 
             dekucon = base.GetComponent<DekuController>();
-            if (dekucon.isMaxPower)
-            {
-                damageType = DamageType.Stun1s | DamageType.BypassArmor;
-                fajin = 2f;
-                dekucon.RemoveBuffCount(50);
-            }
-            else
-            {
-                damageType = DamageType.Generic;
-                fajin = 1f;
-                dekucon.AddToBuffCount(10);
-            }
+            //if (dekucon.isMaxPower)
+            //{
+            //    damageType = DamageType.Stun1s | DamageType.BypassArmor;
+            //    fajin = 2f;
+            //    dekucon.RemoveBuffCount(50);
+            //}
+            //else
+            //{
+            //    damageType = DamageType.Generic;
+            //    fajin = 1f;
+            //    dekucon.AddToBuffCount(10);
+            //}
 
             if (NetworkServer.active && base.healthComponent)
             {

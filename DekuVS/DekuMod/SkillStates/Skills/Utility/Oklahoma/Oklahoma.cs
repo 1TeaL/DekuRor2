@@ -46,16 +46,16 @@ namespace DekuMod.SkillStates
             base.OnEnter();
 
             dekucon = base.GetComponent<DekuController>();
-            dekucon.AddToBuffCount(10);
-            if (dekucon.isMaxPower)
-            {
-                dekucon.RemoveBuffCount(50);
-                fajin = 2f;
-            }
-            else
-            {
-                fajin = 1f;
-            }
+            //dekucon.AddToBuffCount(10);
+            //if (dekucon.isMaxPower)
+            //{
+            //    dekucon.RemoveBuffCount(50);
+            //    fajin = 2f;
+            //}
+            //else
+            //{
+            //    fajin = 1f;
+            //}
 
             duration = baseduration / (this.attackSpeedStat * fajin);
 
@@ -115,7 +115,7 @@ namespace DekuMod.SkillStates
                 damageintake = damageInfo.damage;
 
                 var dekucon = self.body.gameObject.GetComponent<DekuController>();
-                dekucon.oklahomacount += (damageintake/self.body.healthComponent.fullCombinedHealth)* 100;               
+                //dekucon.oklahomacount += (damageintake/self.body.healthComponent.fullCombinedHealth)* 100;               
 
             }
             orig.Invoke(self, damageInfo);
@@ -133,7 +133,7 @@ namespace DekuMod.SkillStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.radius2 = fajin * (this.baseRadius + (dekucon.oklahomacount));
+            //this.radius2 = fajin * (this.baseRadius + (dekucon.oklahomacount));
             this.areaIndicator.transform.localScale = Vector3.one * this.radius2;
             this.areaIndicator.transform.localPosition = aimRay.origin;
         }
@@ -151,7 +151,7 @@ namespace DekuMod.SkillStates
             blastAttack2.position = base.characterBody.corePosition;
             blastAttack2.attacker = base.gameObject;
             blastAttack2.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack2.baseDamage = base.characterBody.damage * Modules.StaticValues.oklahomaDamageCoefficient * (1+dekucon.oklahomacount/100);
+            //blastAttack2.baseDamage = base.characterBody.damage * Modules.StaticValues.oklahomaDamageCoefficient * (1+dekucon.oklahomacount/100);
             blastAttack2.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack2.baseForce = force;
             blastAttack2.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
@@ -169,7 +169,7 @@ namespace DekuMod.SkillStates
 
             }, true);
 
-            dekucon.oklahomacount = 0;
+            //dekucon.oklahomacount = 0;
             On.RoR2.HealthComponent.TakeDamage -= HealthComponent_TakeDamage;
             dekucon.OKLAHOMA.Stop();
             base.characterMotor.walkSpeedPenaltyCoefficient = 1f;
@@ -193,7 +193,7 @@ namespace DekuMod.SkillStates
             bool flag = base.IsKeyDownAuthority();
             if (flag)
             {
-                base.characterMotor.walkSpeedPenaltyCoefficient = 0.2f * fajin + dekucon.oklahomacount/100;
+                //base.characterMotor.walkSpeedPenaltyCoefficient = 0.2f * fajin + dekucon.oklahomacount/100;
                 IndicatorUpdator();
                 Ray aimRay = base.GetAimRay();
 
@@ -201,15 +201,15 @@ namespace DekuMod.SkillStates
                 {
                     blastAttack.position = base.characterBody.corePosition;
                     //hasFired = true;
-                    if (dekucon.isMaxPower)
-                    {
+                    //if (dekucon.isMaxPower)
+                    //{
 
-                        blastAttack.damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                    }
-                    else
-                    {
-                        blastAttack.damageType = DamageType.Generic;
-                    }
+                    //    blastAttack.damageType = DamageType.BypassArmor | DamageType.Stun1s;
+                    //}
+                    //else
+                    //{
+                    //    blastAttack.damageType = DamageType.Generic;
+                    //}
                     spinage = 0f;
                     blastAttack.Fire();
                     //base.PlayAnimation("Fullbody, Override", "Oklahoma", "Attack.playbackRate", duration/4);
