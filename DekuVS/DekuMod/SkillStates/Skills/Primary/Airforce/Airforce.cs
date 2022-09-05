@@ -121,7 +121,8 @@ namespace DekuMod.SkillStates
                             hitDistance = hitInfo.distance;
             
                             hitHealthComponent = hitInfo.hitHurtBox.healthComponent;
-                            
+                            //hitHealthComponent.body.AddBuff();
+
                         }
                         return result;
                     };

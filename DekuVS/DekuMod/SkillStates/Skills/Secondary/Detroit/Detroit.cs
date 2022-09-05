@@ -1,7 +1,10 @@
-﻿using DekuMod.Modules.Survivors;
+﻿using DekuMod.Modules.Networking;
+using DekuMod.Modules.Survivors;
 using EntityStates;
 using EntityStates.Huntress;
 using EntityStates.VagrantMonster;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Audio;
 using System;
@@ -29,6 +32,10 @@ namespace DekuMod.SkillStates
 
         private BlastAttack blastAttack;
 
+        //Indicator
+        private readonly BullseyeSearch search = new BullseyeSearch();
+        public float maxTrackingDistance = 60f;
+        public float maxTrackingAngle = 15f;
         public HurtBox Target;
 
         public override void OnEnter()
@@ -38,40 +45,30 @@ namespace DekuMod.SkillStates
             this.fireTime = this.duration / 3f;
             hasFired = false;
             hasTeleported = false;
-            damageType = DamageType.Stun1s;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            PlayAnimation("FullBody, Override", "Slam", "Attack.playbackRate", fireTime * 2f);
+            //PlayAnimation("FullBody, Override", "Slam", "Attack.playbackRate", fireTime * 2f);
 
-            if (dekucon && base.isAuthority)
-            {
-                Target = dekucon.GetTrackingTarget();
-            }
-            if (!Target)
-            {
-                return;
-            }
+            Ray aimRay = base.GetAimRay();
+            this.SearchForTarget(aimRay);
 
 
-
-            blastAttack = new BlastAttack();
-            blastAttack.radius = radius;
-            blastAttack.procCoefficient = procCoefficient;
-            blastAttack.attacker = base.gameObject;
-            blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.damageStat * damageCoefficient;
-            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.baseForce = force;
-            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = damageType;
-            blastAttack.attackerFiltering = AttackerFiltering.Default;
-
-
-            Shiggycon = gameObject.GetComponent<ShiggyController>();
-            damageCoefficient *= Shiggycon.strengthMultiplier;
 
         }
 
+        private void SearchForTarget(Ray aimRay)
+        {
+            this.search.teamMaskFilter = TeamMask.GetEnemyTeams(TeamIndex.Player);
+            this.search.filterByLoS = true;
+            this.search.searchOrigin = aimRay.origin;
+            this.search.searchDirection = aimRay.direction;
+            this.search.sortMode = BullseyeSearch.SortMode.Distance;
+            this.search.maxDistanceFilter = this.maxTrackingDistance;
+            this.search.maxAngleFilter = this.maxTrackingAngle;
+            this.search.RefreshCandidates();
+            this.search.FilterOutGameObject(base.gameObject);
+            this.Target = this.search.GetResults().FirstOrDefault<HurtBox>();
+        }
 
         public override void OnExit()
         {
@@ -83,89 +80,40 @@ namespace DekuMod.SkillStates
         {
             base.FixedUpdate();
 
-            if (!hasTeleported && Target)
+            if (Target)
             {
-                hasTeleported = true;
-                base.characterMotor.velocity = Vector3.zero;
-                base.characterMotor.Motor.SetPositionAndRotation(Target.healthComponent.body.transform.position, Target.healthComponent.body.transform.rotation, true);
-            }
-
-            Vector3 latestposition = base.transform.position;
-            if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
-            {
-                AkSoundEngine.PostEvent(4108468048, base.gameObject);
-                hasFired = true;
-                blastAttack.position = latestposition;
-                EffectManager.SpawnEffect(Modules.Assets.parentslamEffect, new EffectData
+                if (!hasTeleported)
                 {
-                    origin = latestposition,
-                    scale = radius,
-                }, true);
+                    hasTeleported = true;
+                    base.characterMotor.velocity = Vector3.zero;
+                    base.characterMotor.Motor.SetPositionAndRotation(Target.healthComponent.body.transform.position + Vector3.up, Target.healthComponent.body.transform.rotation, true);
+                    //new PerformDetroitTeleportNetworkRequest(base.characterBody.masterObjectId, Target.gameObject).Send(NetworkDestination.Clients);
 
+                }
 
-                ApplyDoT();
-                if (blastAttack.Fire().hitCount > 0)
+                if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
                 {
-                    this.OnHitEnemyAuthority();
+                    hasFired = true;
+                    new PerformDetroitSmashNetworkRequest(base.characterBody.masterObjectId, Target.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
+
+                }
+
+                if ((base.fixedAge >= this.duration && base.isAuthority))
+                {
+                    this.outer.SetNextStateToMain();
+                    return;
                 }
 
             }
-
-            if ((base.fixedAge >= this.duration && base.isAuthority))
+            else
             {
+                base.skillLocator.secondary.AddOneStock();
                 this.outer.SetNextStateToMain();
                 return;
+
             }
         }
-        protected virtual void OnHitEnemyAuthority()
-        {
-            if (characterBody.HasBuff(Modules.Buffs.loaderBuff))
-            {
-                base.healthComponent.AddBarrierAuthority(healthComponent.fullCombinedHealth / 20);
-            }
-
-        }
-        public void ApplyDoT()
-        {
-            Ray aimRay = base.GetAimRay();
-            BullseyeSearch search = new BullseyeSearch
-            {
-
-                teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-                filterByLoS = false,
-                searchOrigin = base.characterBody.corePosition,
-                searchDirection = UnityEngine.Random.onUnitSphere,
-                sortMode = BullseyeSearch.SortMode.Distance,
-                maxDistanceFilter = radius,
-                maxAngleFilter = 360f
-            };
-
-            search.RefreshCandidates();
-            search.FilterOutGameObject(base.gameObject);
-
-
-
-            List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-            foreach (HurtBox singularTarget in target)
-            {
-                if (singularTarget)
-                {
-                    if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-                    {
-                        InflictDotInfo info = new InflictDotInfo();
-                        info.attackerObject = base.gameObject;
-                        info.victimObject = singularTarget.healthComponent.body.gameObject;
-                        info.duration = Modules.StaticValues.decayDamageTimer;
-                        info.dotIndex = Modules.Dots.decayDot;
-
-                        for (int i = 0; i < Shiggycon.decayCount; i++)
-                        {
-                            DotController.InflictDot(ref info);
-                        }
-                    }
-                }
-            }
-        }
+        
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;

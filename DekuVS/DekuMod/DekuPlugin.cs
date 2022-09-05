@@ -91,6 +91,9 @@ namespace DekuMod
 
             //networking
             NetworkingAPI.RegisterMessageType<ForceCounterState>();
+            NetworkingAPI.RegisterMessageType<ServerForceGoBeyondStateNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<PerformDetroitSmashNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<SpendHealthNetworkRequest>();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
@@ -162,7 +165,10 @@ namespace DekuMod
                         EnergySystem energysys = self.gameObject.GetComponent<EnergySystem>();
 
                         bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
-                        if (!flag && damageInfo.damage > self.body.healthComponent.health && energysys.currentPlusUltra == energysys.maxPlusUltra)
+                        if (!flag 
+                            && damageInfo.damage > self.body.healthComponent.health 
+                            && energysys.currentPlusUltra == energysys.maxPlusUltra 
+                            && !self.body.HasBuff(Modules.Buffs.goBeyondBuffUsed))
                         {
                             energysys.currentPlusUltra -= energysys.currentPlusUltra;
                             damageInfo.rejected = true;

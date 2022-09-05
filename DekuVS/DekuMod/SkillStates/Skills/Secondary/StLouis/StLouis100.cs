@@ -73,7 +73,6 @@ namespace DekuMod.SkillStates
             //    scale = 1f,       
 
             //}, true);
-            SpendHealth(0.1f);
 
             blastAttack = new BlastAttack();
             blastAttack.radius = blastRadius * speedattack;

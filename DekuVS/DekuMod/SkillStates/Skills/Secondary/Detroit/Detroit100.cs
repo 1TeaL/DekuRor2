@@ -1,7 +1,10 @@
-﻿using EntityStates;
+﻿using DekuMod.Modules.Networking;
+using EntityStates;
 using EntityStates.Huntress;
 using EntityStates.Loader;
 using EntityStates.VagrantMonster;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Audio;
 using System;
@@ -44,9 +47,12 @@ namespace DekuMod.SkillStates
 			Util.PlaySound(BaseChargeFist.startChargeLoopSFXString, base.gameObject);
 			this.animator = base.GetModelAnimator();
             this.animator.SetBool("isSprinting", true);
-            //PlayAnimation("Body", "Sprint");
-            //Util.PlaySound(EntityStates.Bison.Charge.startSoundString, base.gameObject);
-            bool flag = isAuthority;
+			//PlayAnimation("Body", "Sprint");
+			//Util.PlaySound(EntityStates.Bison.Charge.startSoundString, base.gameObject);
+
+			new SpendHealthNetworkRequest(body.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+
+			bool flag = isAuthority;
 			if (flag)
 			{
 				base.characterBody.characterMotor.useGravity = false;
@@ -199,12 +205,12 @@ namespace DekuMod.SkillStates
 					}
 					this.outer.SetNextStateToMain();
 				}
-				//else
-				//{
-				//	this.UpdateDirection();
-				//}
+                else
+                {
+                    this.UpdateDirection();
+                }
 
-			}
+            }
 			else
 			{
 				this.outer.SetNextStateToMain();

@@ -10,6 +10,9 @@ using AncientScepter;
 using EntityStates.Mage;
 using System.Diagnostics;
 using UnityEngine.Networking;
+using DekuMod.Modules.Networking;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
 
 namespace DekuMod.Modules.Survivors
 {
@@ -57,17 +60,9 @@ namespace DekuMod.Modules.Survivors
 
         //Go Beyond
         public float goBeyondTimer;
+        public bool goBeyondUsed;
+        public float goBeyondBuffTimer;
 
-        //Indicator
-        private readonly BullseyeSearch search = new BullseyeSearch();
-        private float trackerUpdateStopwatch;
-        private InputBankTest inputBank;
-        public float maxTrackingDistance = 60f;
-        public float maxTrackingAngle = 60f;
-        public float trackerUpdateFrequency = 10f;
-        private Indicator indicator;
-        private HurtBox trackingTarget;
-        public HurtBox Target;
 
 
 
@@ -76,7 +71,6 @@ namespace DekuMod.Modules.Survivors
         {
             body = gameObject.GetComponent<CharacterBody>();
             child = GetComponentInChildren<ChildLocator>();
-            indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
 
             if (child)
             {
@@ -99,53 +93,19 @@ namespace DekuMod.Modules.Survivors
         public void Start()
         {
             energySystem = gameObject.AddComponent<EnergySystem>();
+
+            goBeyondUsed = false;
         }
 
 
         public void FixedUpdate()
         {
-            this.trackerUpdateStopwatch += Time.fixedDeltaTime;
-            if (this.trackerUpdateStopwatch >= 1f / this.trackerUpdateFrequency)
-            {
-                this.trackerUpdateStopwatch -= 1f / this.trackerUpdateFrequency;
-                Ray aimRay = new Ray(this.inputBank.aimOrigin, this.inputBank.aimDirection);
-                this.SearchForTarget(aimRay);
-                HurtBox hurtBox = this.trackingTarget;
-                if (hurtBox)
-                {
-                    this.indicator.active = true;
-                    this.indicator.targetTransform = this.trackingTarget.transform;
-
-                }
-                else
-                {
-                    this.indicator.active = false;
-
-                }
-
-            }
-
-
-
             if (body.HasBuff(Buffs.ofaBuff))
             {
                 if (ofaHurtTimer > 1f)
                 {
                     ofaHurtTimer = 0f;
-
-                    DamageInfo damageInfo = new DamageInfo();
-                    damageInfo.damage = body.healthComponent.fullCombinedHealth * 0.05f;
-                    damageInfo.position = base.transform.position;
-                    damageInfo.force = Vector3.zero;
-                    damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
-                    damageInfo.crit = false;
-                    damageInfo.attacker = null;
-                    damageInfo.inflictor = null;
-                    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                    damageInfo.procCoefficient = 0f;
-                    damageInfo.procChainMask = default(ProcChainMask);
-                    body.healthComponent.TakeDamage(damageInfo);
-
+                    new SpendHealthNetworkRequest(body.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
                 }
                 else
                 {
@@ -163,6 +123,15 @@ namespace DekuMod.Modules.Survivors
                 else
                 {
                     goBeyondTimer += Time.fixedDeltaTime;
+                }
+
+                if(goBeyondBuffTimer > 59f)
+                {
+                    body.AddBuff(Modules.Buffs.goBeyondBuffUsed);
+                }
+                else
+                {
+                    goBeyondBuffTimer += Time.fixedDeltaTime;
                 }
             }
 
@@ -228,34 +197,6 @@ namespace DekuMod.Modules.Survivors
             //}
         }
 
-        public HurtBox GetTrackingTarget()
-        {
-            return this.trackingTarget;
-        }
-
-        private void OnEnable()
-        {
-            this.indicator.active = true;
-        }
-
-        private void OnDisable()
-        {
-            this.indicator.active = false;
-        }
-
-        private void SearchForTarget(Ray aimRay)
-        {
-            this.search.teamMaskFilter = TeamMask.all;
-            this.search.filterByLoS = true;
-            this.search.searchOrigin = aimRay.origin;
-            this.search.searchDirection = aimRay.direction;
-            this.search.sortMode = BullseyeSearch.SortMode.Distance;
-            this.search.maxDistanceFilter = this.maxTrackingDistance;
-            this.search.maxAngleFilter = this.maxTrackingAngle;
-            this.search.RefreshCandidates();
-            this.search.FilterOutGameObject(base.gameObject);
-            this.trackingTarget = this.search.GetResults().FirstOrDefault<HurtBox>();
-        }
         //public void IncrementBuffCount()
         //{
         //    buffCountToApply++;
