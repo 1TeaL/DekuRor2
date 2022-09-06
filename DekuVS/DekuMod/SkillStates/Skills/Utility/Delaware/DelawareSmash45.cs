@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 namespace DekuMod.SkillStates
 {
-    public class DelawareSmash45: BaseSkillState
+    public class DelawareSmash45: BaseSkill45
     {
         public uint Distance = 50;
         public static float damageCoefficient;
@@ -44,7 +44,7 @@ namespace DekuMod.SkillStates
                 base.PlayAnimation("FullBody, Override", "DelawareSmash");
             }
 
-            if (NetworkServer.active) base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+            //if (NetworkServer.active) base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 
             if (base.isAuthority)
             {
@@ -74,7 +74,7 @@ namespace DekuMod.SkillStates
 
                 EffectManager.SpawnEffect(explosionPrefab, effectData, true);
 
-                base.characterMotor.velocity = -Distance * aimRay.direction * moveSpeedStat / 7;
+                //base.characterMotor.velocity = -Distance * aimRay.direction * moveSpeedStat / 7;
 
                 Compacted?.Invoke(result.hitCount);
             }
@@ -82,13 +82,13 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            if (NetworkServer.active)
-            {
-                base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
-                base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
-            }
+            //if (NetworkServer.active)
+            //{
+            //    base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+            //    base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
+            //}
 
-            base.characterMotor.velocity *= 0.7f;
+            //base.characterMotor.velocity *= 0.7f;
 
             base.OnExit();
         }

@@ -1,4 +1,7 @@
-﻿using EntityStates;
+﻿using DekuMod.Modules.Networking;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
+using EntityStates;
 using EntityStates.VagrantMonster;
 using RoR2;
 using System;
@@ -7,10 +10,10 @@ using UnityEngine.Networking;
 
 namespace DekuMod.SkillStates
 {
-    public class DelawareSmash100 : BaseSkillState
+    public class DelawareSmash100 : BaseSkill100
     {
 
-        public uint Distance = 40;
+        public uint Distance = 50;
 
         public static float damageCoefficient;
         public float baseDuration = 1f;
@@ -27,6 +30,7 @@ namespace DekuMod.SkillStates
             AkSoundEngine.PostEvent(1074439307, this.gameObject);
             AkSoundEngine.PostEvent(1356252224, this.gameObject);
             base.StartAimMode(0.6f, true);
+            new SpendHealthNetworkRequest(body.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
 
             base.characterMotor.disableAirControlUntilCollision = false;
 

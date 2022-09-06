@@ -22,6 +22,7 @@ namespace DekuMod.SkillStates
 		private DamageType damageType;
 		private Vector3 idealDirection;
 
+		private float fireTime = 0.3f;
 		private float totalDuration;
 		private float hitradius = 15f;
 		private float damageCoefficient = Modules.StaticValues.detroit100DamageCoefficient;
@@ -119,7 +120,7 @@ namespace DekuMod.SkillStates
 			base.FixedUpdate();
 			totalDuration += Time.fixedDeltaTime/2;
 
-            if (base.IsKeyDownAuthority())
+            if (base.IsKeyDownAuthority() && base.fixedAge > fireTime)
 			{
 				Loop();
                 PlayAnimation("Body", "Sprint");

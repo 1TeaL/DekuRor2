@@ -13,7 +13,7 @@ namespace DekuMod.SkillStates
     {
         public float baseDuration = 0.5f;
         public float duration;
-        private DamageType damageType;
+        private DamageType damageType = DamageType.Shock5s;
         public HurtBox Target;
         private Animator animator;
 
@@ -39,7 +39,7 @@ namespace DekuMod.SkillStates
 
             //PlayCrossfade("RightArm, Override", "RightArmPunch", "Attack.playbackRate", duration, 0.1f);
             AkSoundEngine.PostEvent(3660048432, base.gameObject);
-            damageType = DamageType.Shock5s;
+            
 
             if (effectPrefab)
             {
