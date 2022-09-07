@@ -366,7 +366,7 @@ namespace DekuMod.SkillStates
 						rotation = Quaternion.identity
 					}, true);
 				}
-				base.PlayAnimation("FullBody, Override", "ShootStyleKickExit", "Attack.playbackRate", ShootStyleKick.duration);
+				base.PlayAnimation("FullBody, Override", "ShootStyleKickExit", "Attack.playbackRate", duration);
 				
 				this.stopwatch = ShootStyleKick100.duration - this.extraDuration;
 				bool flag2 = base.cameraTargetParams;

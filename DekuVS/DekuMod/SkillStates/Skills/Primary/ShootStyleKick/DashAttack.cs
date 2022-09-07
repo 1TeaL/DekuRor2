@@ -1,17 +1,15 @@
 ﻿using EntityStates;
-using RimuruMod.Modules.Survivors;
-using RimuruMod.SkillStates.BaseStates;
+using DekuMod.Modules.Survivors;
+using DekuMod.SkillStates.BaseStates;
 using RoR2;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RimuruMod.SkillStates
+namespace DekuMod.SkillStates
 {
-    public class DashAttack : BaseSkillState
+    public class DashAttack : BaseSkill
     {
-        public RimuruController Rimurucon;
-        public RimuruMasterController Rimurumastercon;
         public HurtBox Target;
         private bool targetIsValid;
         private OverlapAttack attack;
@@ -25,11 +23,9 @@ namespace RimuruMod.SkillStates
         public static float damageCoefficient = 0f;
         public override void OnEnter()
         {
-            Rimurucon = base.GetComponent<RimuruController>();
-            Rimurumastercon = characterBody.master.gameObject.GetComponent<RimuruMasterController>();
-            if (Rimurucon && base.isAuthority)
+            if (dekucon && base.isAuthority)
             {
-                Target = Rimurucon.GetTrackingTarget();
+                Target = dekucon.GetTrackingTarget();
             }
 
             if (!Target)
@@ -51,7 +47,7 @@ namespace RimuruMod.SkillStates
             bool flag3 = modelTransform;
             if (flag3)
             {
-                hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == "Sword");
+                hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == "BigModelHitbox");
             }
             this.attack = new OverlapAttack();
             this.attack.damageType = DamageType.Generic;

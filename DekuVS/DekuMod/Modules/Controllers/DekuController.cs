@@ -13,6 +13,7 @@ using UnityEngine.Networking;
 using DekuMod.Modules.Networking;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
+using System.Linq;
 
 namespace DekuMod.Modules.Survivors
 {
@@ -63,7 +64,16 @@ namespace DekuMod.Modules.Survivors
         public bool goBeyondUsed;
         public float goBeyondBuffTimer;
 
-
+        //Indicator
+        public float maxTrackingDistance = 50f;
+        public float maxTrackingAngle = 15f;
+        public float trackerUpdateFrequency = 10f;
+        private Indicator indicator;
+        private HurtBox trackingTarget;
+        public HurtBox Target;
+        private float trackerUpdateStopwatch;
+        private InputBankTest inputBank;
+        private readonly BullseyeSearch search = new BullseyeSearch();
 
 
 
@@ -71,6 +81,8 @@ namespace DekuMod.Modules.Survivors
         {
             body = gameObject.GetComponent<CharacterBody>();
             child = GetComponentInChildren<ChildLocator>();
+            indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
+            inputBank = gameObject.GetComponent<InputBankTest>();
 
             if (child)
             {
@@ -88,6 +100,7 @@ namespace DekuMod.Modules.Survivors
             //anim = GetComponentInChildren<Animator>();
             //stopwatch = 0f;
 
+
         }
 
         public void Start()
@@ -100,6 +113,19 @@ namespace DekuMod.Modules.Survivors
 
         public void FixedUpdate()
         {
+            this.trackerUpdateStopwatch += Time.fixedDeltaTime;
+            if (this.trackerUpdateStopwatch >= 1f / this.trackerUpdateFrequency)
+            {
+                this.trackerUpdateStopwatch -= 1f / this.trackerUpdateFrequency;
+                Ray aimRay = new Ray(this.inputBank.aimOrigin, this.inputBank.aimDirection);
+                this.SearchForTarget(aimRay);
+                HurtBox hurtBox = this.trackingTarget;
+                this.indicator.targetTransform = (this.trackingTarget ? this.trackingTarget.transform : null);
+
+
+            }
+
+
             if (body.HasBuff(Buffs.ofaBuff))
             {
                 if (ofaHurtTimer > 1f)
@@ -195,6 +221,35 @@ namespace DekuMod.Modules.Survivors
             //        this.floatStopwatch.Reset();
             //    }
             //}
+        }
+
+
+        private void SearchForTarget(Ray aimRay)
+        {
+            this.search.teamMaskFilter = TeamMask.AllExcept(TeamIndex.Player);
+            this.search.filterByLoS = true;
+            this.search.searchOrigin = aimRay.origin;
+            this.search.searchDirection = aimRay.direction;
+            this.search.sortMode = BullseyeSearch.SortMode.Distance;
+            this.search.maxDistanceFilter = this.maxTrackingDistance;
+            this.search.maxAngleFilter = this.maxTrackingAngle;
+            this.search.RefreshCandidates();
+            this.search.FilterOutGameObject(base.gameObject);
+            this.trackingTarget = this.search.GetResults().FirstOrDefault<HurtBox>();
+        }
+        public HurtBox GetTrackingTarget()
+        {
+            return this.trackingTarget;
+        }
+
+        private void OnEnable()
+        {
+            this.indicator.active = true;
+        }
+
+        private void OnDisable()
+        {
+            this.indicator.active = false;
         }
 
         //public void IncrementBuffCount()

@@ -33,9 +33,6 @@ namespace DekuMod.SkillStates
         private BlastAttack blastAttack;
 
         //Indicator
-        private readonly BullseyeSearch search = new BullseyeSearch();
-        public float maxTrackingDistance = 60f;
-        public float maxTrackingAngle = 15f;
         public HurtBox Target;
 
         public override void OnEnter()
@@ -48,27 +45,18 @@ namespace DekuMod.SkillStates
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             //PlayAnimation("FullBody, Override", "Slam", "Attack.playbackRate", fireTime * 2f);
+            if (dekucon && base.isAuthority)
+            {
+                Target = dekucon.GetTrackingTarget();
+            }
 
-            Ray aimRay = base.GetAimRay();
-            this.SearchForTarget(aimRay);
-
-
+            if(!Target)
+            {
+                return;
+            }
 
         }
 
-        private void SearchForTarget(Ray aimRay)
-        {
-            this.search.teamMaskFilter = TeamMask.GetEnemyTeams(TeamIndex.Player);
-            this.search.filterByLoS = true;
-            this.search.searchOrigin = aimRay.origin;
-            this.search.searchDirection = aimRay.direction;
-            this.search.sortMode = BullseyeSearch.SortMode.Distance;
-            this.search.maxDistanceFilter = this.maxTrackingDistance;
-            this.search.maxAngleFilter = this.maxTrackingAngle;
-            this.search.RefreshCandidates();
-            this.search.FilterOutGameObject(base.gameObject);
-            this.Target = this.search.GetResults().FirstOrDefault<HurtBox>();
-        }
 
         public override void OnExit()
         {

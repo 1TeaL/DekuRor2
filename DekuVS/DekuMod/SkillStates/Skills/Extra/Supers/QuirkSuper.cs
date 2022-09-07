@@ -8,7 +8,7 @@ using UnityEngine;
 namespace DekuMod.SkillStates
 {
 
-	public class UtilitySuper : BaseSkillState
+	public class QuirkSuper : BaseSkillState
 	{
 		public static float baseDuration = 0.05f;
 		public static SkillDef airforceDef = Deku.primaryboost45SkillDef;

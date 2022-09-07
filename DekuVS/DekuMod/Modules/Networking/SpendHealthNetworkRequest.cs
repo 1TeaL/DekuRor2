@@ -49,20 +49,24 @@ namespace DekuMod.Modules.Networking
             CharacterBody charBody = charMaster.GetBody();
             bodyObj = charBody.gameObject;
 
-            if (NetworkServer.active && charBody.healthComponent)
+            if (!charBody.HasBuff(Modules.Buffs.goBeyondBuff))
             {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = charBody.healthComponent.fullCombinedHealth * healthPercentage;
-                damageInfo.position = charBody.transform.position;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                charBody.healthComponent.TakeDamage(damageInfo);
+                if (NetworkServer.active && charBody.healthComponent)
+                {
+                    DamageInfo damageInfo = new DamageInfo();
+                    damageInfo.damage = charBody.healthComponent.fullCombinedHealth * healthPercentage;
+                    damageInfo.position = charBody.transform.position;
+                    damageInfo.force = Vector3.zero;
+                    damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+                    damageInfo.crit = false;
+                    damageInfo.attacker = null;
+                    damageInfo.inflictor = null;
+                    damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                    damageInfo.procCoefficient = 0f;
+                    damageInfo.procChainMask = default(ProcChainMask);
+                    charBody.healthComponent.TakeDamage(damageInfo);
+                }
+
             }
 
         }
