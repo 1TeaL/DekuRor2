@@ -16,7 +16,14 @@ namespace DekuMod.SkillStates
             this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient;
             this.procCoefficient = 1f;
             this.pushForce = 300f;
-            this.bonusForce = new Vector3(0f, -300f, 0f);
+            if (swingIndex == 2)
+            {
+                this.bonusForce = new Vector3(0f, 1000f, 0f);
+            }
+            else
+            {
+                this.bonusForce = new Vector3(0f, -300f, 0f);
+            }
             this.baseDuration = 1f;
             this.attackStartTime = 0.2f;
             this.attackEndTime = 0.4f;
@@ -36,6 +43,11 @@ namespace DekuMod.SkillStates
             if (dekucon && base.isAuthority)
             {
                 Target = dekucon.GetTrackingTarget();
+            }
+
+            if (!Target)
+            {
+                return;
             }
             base.OnEnter();
         }
