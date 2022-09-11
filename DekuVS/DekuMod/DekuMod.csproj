@@ -50,8 +50,8 @@
     <Reference Include="KinematicCharacterController">
       <HintPath>C:\Theodore 1\Steam\SteamApps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\KinematicCharacterController.dll</HintPath>
     </Reference>
-    <Reference Include="MMHOOK_Assembly-CSharp">
-      <HintPath>bin\Debug\netstandard2.0\MMHOOK_Assembly-CSharp.dll</HintPath>
+    <Reference Include="MMHOOK_RoR2">
+      <HintPath>bin\Debug\netstandard2.0\MMHOOK_RoR2.dll</HintPath>
     </Reference>
     <Reference Include="R2API">
       <HintPath>bin\Debug\netstandard2.0\R2API.dll</HintPath>
