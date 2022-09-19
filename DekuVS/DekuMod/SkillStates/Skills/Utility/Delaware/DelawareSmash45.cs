@@ -17,7 +17,7 @@ namespace DekuMod.SkillStates
         //public static GameObject explosionPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/MageLightningBombExplosion");
         public static GameObject explosionPrefab = Modules.Projectiles.delawareTracer;
 
-        public override void OnEnter()
+        public override void OnEnter() 
         {
             base.OnEnter();
             Ray aimRay = base.GetAimRay();

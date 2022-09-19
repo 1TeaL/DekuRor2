@@ -47,7 +47,7 @@ namespace DekuMod.SkillStates
             bool flag3 = modelTransform;
             if (flag3)
             {
-                hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == "BigModelHitbox");
+                hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == "BigBodyHitbox");
             }
             this.attack = new OverlapAttack();
             this.attack.damageType = DamageType.Generic;
@@ -113,7 +113,6 @@ namespace DekuMod.SkillStates
             }
             else
             {
-                base.skillLocator.secondary.AddOneStock();
                 this.outer.SetNextStateToMain();
             }
         }

@@ -10,7 +10,10 @@ namespace DekuMod.Modules
 
         internal static void RegisterStates()
         {
+            //primary
             entityStates.Add(typeof(Airforce));
+            entityStates.Add(typeof(Airforce45));
+            entityStates.Add(typeof(Airforce100));
             entityStates.Add(typeof(ShootStyleKick));
             entityStates.Add(typeof(ShootStyleBullet));
             entityStates.Add(typeof(BlackwhipFront));
@@ -25,22 +28,13 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(Detroit100Release));
             entityStates.Add(typeof(DelawareSmash100));
             entityStates.Add(typeof(StLouis45));
-
-            entityStates.Add(typeof(OFAstate));
-            entityStates.Add(typeof(OFAstatescepter));
-            entityStates.Add(typeof(OFAstate45));
-            entityStates.Add(typeof(OFAstatescepter45));
-            entityStates.Add(typeof(OFAdown));
-
-            entityStates.Add(typeof(Fajinstate));
-            entityStates.Add(typeof(Fajinstatescepter));
-            entityStates.Add(typeof(QuirkSuper));
-            entityStates.Add(typeof(Fajinscepter));
-            entityStates.Add(typeof(BlackwhipShoot));
-            entityStates.Add(typeof(Smokescreen));
+            entityStates.Add(typeof(DashAttack));
+            entityStates.Add(typeof(DashAttackExit));
+            entityStates.Add(typeof(ShootStyleCombo));
+            entityStates.Add(typeof(ShootStylePrimary));
 
 
-            entityStates.Add(typeof(Airforce100));
+            //secondary
             entityStates.Add(typeof(Blackwhip100));
             entityStates.Add(typeof(Detroit45));
             entityStates.Add(typeof(Manchester45));
@@ -59,7 +53,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(ShootStyleKick45));
             entityStates.Add(typeof(ShootStyleKick100));
 
-
+            //utility
             entityStates.Add(typeof(DelawareSmash));
             entityStates.Add(typeof(DelawareSmash45));
             entityStates.Add(typeof(DangerSense));
@@ -77,6 +71,22 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(Oklahoma));
             entityStates.Add(typeof(Oklahoma45));
             entityStates.Add(typeof(Oklahoma100));
+
+
+            //ofa
+            entityStates.Add(typeof(OFAstate));
+            entityStates.Add(typeof(OFAstatescepter));
+            entityStates.Add(typeof(OFAstate45));
+            entityStates.Add(typeof(OFAstatescepter45));
+            entityStates.Add(typeof(OFAdown));
+
+            //extra
+            entityStates.Add(typeof(Fajinstate));
+            entityStates.Add(typeof(Fajinstatescepter));
+            entityStates.Add(typeof(QuirkSuper));
+            entityStates.Add(typeof(Fajinscepter));
+            entityStates.Add(typeof(BlackwhipShoot));
+            entityStates.Add(typeof(Smokescreen));
         }
     }
 }

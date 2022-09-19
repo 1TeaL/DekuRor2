@@ -143,7 +143,7 @@ namespace DekuMod.Modules.Survivors
                 body.skillLocator.special.RemoveAllStocks();
                 if (goBeyondTimer > 1f)
                 {
-                    body.healthComponent.Heal(body.healthComponent.fullCombinedHealth * 0.05f, new ProcChainMask(), true);
+                    new HealNetworkRequest(body.masterObjectId, body.healthComponent.fullCombinedHealth * 0.05f).Send(NetworkDestination.Clients);
                     goBeyondTimer = 0f;
                 }
                 else

@@ -17,7 +17,7 @@ namespace DekuMod.SkillStates
 			maxPitch = 70,
 			minPitch = -70,
 			pivotVerticalOffset = 1f,
-			idealLocalCameraPos = new Vector3(0, 0.0f, 30f),
+			idealLocalCameraPos = new Vector3(0, 0.0f, -20f),
 			wallCushion = 0.1f,
 		};
 

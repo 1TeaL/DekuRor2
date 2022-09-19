@@ -1,8 +1,8 @@
 ﻿using DekuMod.Modules.Networking;
-using R2API.Networking;
-using R2API.Networking.Interfaces;
 using EntityStates;
 using EntityStates.VagrantMonster;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
 using RoR2;
 using System;
 using UnityEngine;
@@ -12,9 +12,7 @@ namespace DekuMod.SkillStates
 {
     public class DelawareSmash100 : BaseSkill100
     {
-
         public uint Distance = 50;
-
         public static float damageCoefficient;
         public float baseDuration = 1f;
         private float duration;
@@ -26,30 +24,15 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
             Ray aimRay = base.GetAimRay();
-            this.duration = this.baseDuration/this.attackSpeedStat;
+            this.duration = this.baseDuration / this.attackSpeedStat;
             AkSoundEngine.PostEvent(1074439307, this.gameObject);
             AkSoundEngine.PostEvent(1356252224, this.gameObject);
             base.StartAimMode(0.6f, true);
-            new SpendHealthNetworkRequest(body.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+
+            new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
-
-            if (NetworkServer.active && base.healthComponent)
-            {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-                damageInfo.position = base.transform.position;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.Default;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                base.healthComponent.TakeDamage(damageInfo);
-            }
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             float angle = Vector3.Angle(new Vector3(0, -1, 0), aimRay.direction);
@@ -75,7 +58,7 @@ namespace DekuMod.SkillStates
 
                 BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = 20f;
-                blastAttack.procCoefficient = 2f;
+                blastAttack.procCoefficient = 1f;
                 blastAttack.position = theSpot;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
@@ -83,15 +66,15 @@ namespace DekuMod.SkillStates
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = 600f;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                blastAttack.damageType = DamageType.Stun1s;
+                blastAttack.damageType = DamageType.SlowOnHit;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
                 BlastAttack.Result result = blastAttack.Fire();
 
                 EffectData effectData = new EffectData();
                 {
-                effectData.scale = 15;
-                effectData.origin = theSpot2;
-                effectData.rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
+                    effectData.scale = 15;
+                    effectData.origin = theSpot2;
+                    effectData.rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
                 };
 
                 EffectManager.SpawnEffect(explosionPrefab, effectData, true);
@@ -110,7 +93,7 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
             }
 
-            base.characterMotor.velocity *= 0.5f;
+            base.characterMotor.velocity *= 0.7f;
 
             base.OnExit();
         }

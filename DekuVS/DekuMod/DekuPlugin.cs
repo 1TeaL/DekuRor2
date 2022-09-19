@@ -94,6 +94,8 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<ServerForceGoBeyondStateNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformDetroitSmashNetworkRequest>();
             NetworkingAPI.RegisterMessageType<SpendHealthNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<HealNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<PeformShootStyleKickAttackNetworkRequest>();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();

@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates.BaseStates
     {
         public int swingIndex;
 
-        protected string hitboxName = "Sword";
+        protected string hitboxName = "BigBodyHitbox";
 
         protected DamageType damageType = DamageType.Generic;
         protected float damageCoefficient = 3.5f;
@@ -25,15 +25,15 @@ namespace DekuMod.SkillStates.BaseStates
         protected float baseEarlyExitTime = 0.4f;
         protected float hitStopDuration = 0.012f;
         protected float attackRecoil = 0.75f;
-        protected float hitHopVelocity = 4f;
+        protected float hitHopVelocity = 10f;
         protected bool cancelled = false;
 
         protected string swingSoundString = "";
         protected string hitSoundString = "";
         protected string muzzleString = "SwingCenter";
-        protected GameObject swingEffectPrefab;
-        protected GameObject hitEffectPrefab;
-        protected NetworkSoundEventIndex impactSound;
+        //protected GameObject swingEffectPrefab;
+        //protected GameObject hitEffectPrefab;
+        //protected NetworkSoundEventIndex impactSound;
 
         private float earlyExitTime;
         public float duration;
@@ -48,24 +48,20 @@ namespace DekuMod.SkillStates.BaseStates
         private Vector3 storedVelocity;
 
         public DekuController dekucon;
-        public EnergySystem energySystem;
 
         public override void OnEnter()
         {
             base.OnEnter();
 
-            dekucon = base.GetComponent<DekuController>();
-            energySystem = base.GetComponent<EnergySystem>();
-            energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
-
             this.duration = this.baseDuration / this.attackSpeedStat;
             this.earlyExitTime = this.baseEarlyExitTime / this.attackSpeedStat;
             this.hasFired = false;
             this.animator = base.GetModelAnimator();
-            base.StartAimMode(0.5f + this.duration, false);
+            Ray aimray = base.GetAimRay();
+            base.characterBody.SetAimTimer(0.5f + this.duration);
             base.characterBody.outOfCombatStopwatch = 0f;
             this.animator.SetBool("attacking", true);
-            this.animator.SetFloat("Slash.playbackRate", attackSpeedStat);
+            this.animator.SetFloat("Slash.playbackRate", base.attackSpeedStat);
 
             HitBoxGroup hitBoxGroup = null;
             Transform modelTransform = base.GetModelTransform();
@@ -84,17 +80,17 @@ namespace DekuMod.SkillStates.BaseStates
             this.attack.teamIndex = base.GetTeam();
             this.attack.damage = this.damageCoefficient * this.damageStat;
             this.attack.procCoefficient = this.procCoefficient;
-            this.attack.hitEffectPrefab = this.hitEffectPrefab;
+            //this.attack.hitEffectPrefab = this.hitEffectPrefab;
             this.attack.forceVector = this.bonusForce;
             this.attack.pushAwayForce = this.pushForce;
             this.attack.hitBoxGroup = hitBoxGroup;
             this.attack.isCrit = base.RollCrit();
-            this.attack.impactSound = this.impactSound;
+            //this.attack.impactSound = this.impactSound;
         }
 
         protected virtual void PlayAttackAnimation()
         {
-            base.PlayCrossfade("RightArm, Override", "Slash" + (1 + swingIndex), "Slash.playbackRate", this.duration / 2f, 0.01f);
+            base.PlayCrossfade("RightArm, Override", "Slash" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
         }
 
         public override void OnExit()
@@ -108,19 +104,18 @@ namespace DekuMod.SkillStates.BaseStates
 
         protected virtual void PlaySwingEffect()
         {
-            EffectManager.SimpleMuzzleFlash(this.swingEffectPrefab, base.gameObject, this.muzzleString, true);
+            //EffectManager.SimpleMuzzleFlash(this.swingEffectPrefab, base.gameObject, this.muzzleString, true);
         }
 
         protected virtual void OnHitEnemyAuthority()
         {
             Util.PlaySound(this.hitSoundString, base.gameObject);
 
-
             if (!this.hasHopped)
             {
                 if (base.characterMotor && !base.characterMotor.isGrounded && this.hitHopVelocity > 0f)
                 {
-                    base.SmallHop(base.characterMotor, this.hitHopVelocity);
+                    base.SmallHop(base.characterMotor, this.hitHopVelocity / attackSpeedStat);
                 }
 
                 this.hasHopped = true;
@@ -190,8 +185,11 @@ namespace DekuMod.SkillStates.BaseStates
             else
             {
                 if (base.characterMotor) base.characterMotor.velocity = Vector3.zero;
-                if (this.animator) this.animator.SetFloat("Swing.playbackRate", 0f);
-                if (this.animator) this.animator.SetFloat("Slash.playbackRate", 0f);
+                if (this.animator)
+                {
+                    this.animator.SetFloat("Swing.playbackRate", 0f);
+                    this.animator.SetFloat("Slash.playbackRate", 0f);
+                }
             }
 
             if (this.stopwatch >= (this.duration * this.attackStartTime) && this.stopwatch <= (this.duration * this.attackEndTime))
@@ -232,6 +230,5 @@ namespace DekuMod.SkillStates.BaseStates
             base.OnDeserialize(reader);
             this.swingIndex = reader.ReadInt32();
         }
-
     }
 }

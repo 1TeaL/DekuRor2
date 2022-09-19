@@ -54,7 +54,7 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "BlackwipLeft" : "BufferEmpty", "Attack.playbackRate", this.duration, this.fireTime / 3);
             //base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "BufferEmpty" : "Blackwhip", "Attack.playbackRate", this.duration, this.fireTime / 3);
 
-            new SpendHealthNetworkRequest(body.masterObjectId, 0.005f).Send(NetworkDestination.Clients);
+            new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.005f).Send(NetworkDestination.Clients);
 
 
         }

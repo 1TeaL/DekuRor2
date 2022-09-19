@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates
     {
         public override void OnEnter()
         {
-            this.hitboxName = "BigModelHitbox";
+            this.hitboxName = "BigBodyHitbox";
 
             this.damageType = DamageType.Generic;
             this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient;
@@ -33,26 +33,27 @@ namespace DekuMod.SkillStates
             //this.swingEffectPrefab = Modules.Assets.swordSwingEffect;
             //this.hitEffectPrefab = Modules.Assets.swordHitImpactEffect;
 
-            this.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            //this.impactSound = Modules.Assets.swordHitSoundEvent.index;
 
             base.OnEnter();
         }
 
         private string ChooseAnimationString()
         {
-            string returnVal = "SwingLeft";
-            switch (this.swingIndex)
-            {
-                case 0:
-                    returnVal = "SwingLeft";
-                    break;
-                case 1:
-                    returnVal = "SwingRight";
-                    break;
-                case 2:
-                    returnVal = "SwingCenter";
-                    break;
-            }
+            string returnVal = "RHand";
+            //string returnVal = "SwingLeft";
+            //switch (this.swingIndex)
+            //{
+            //    case 0:
+            //        returnVal = "SwingLeft";
+            //        break;
+            //    case 1:
+            //        returnVal = "SwingRight";
+            //        break;
+            //    case 2:
+            //        returnVal = "SwingCenter";
+            //        break;
+            //}
 
             return returnVal;
         }

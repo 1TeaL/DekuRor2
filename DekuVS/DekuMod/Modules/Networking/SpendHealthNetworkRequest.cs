@@ -42,7 +42,6 @@ namespace DekuMod.Modules.Networking
 
         public void OnReceived()
         {
-            //Teleport to enemy
 
             GameObject masterobject = Util.FindNetworkObject(netID);
             CharacterMaster charMaster = masterobject.GetComponent<CharacterMaster>();

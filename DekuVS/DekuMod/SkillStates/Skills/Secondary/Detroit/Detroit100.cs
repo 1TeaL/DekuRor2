@@ -51,7 +51,7 @@ namespace DekuMod.SkillStates
 			//PlayAnimation("Body", "Sprint");
 			//Util.PlaySound(EntityStates.Bison.Charge.startSoundString, base.gameObject);
 
-			new SpendHealthNetworkRequest(body.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+			new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
 
 			bool flag = isAuthority;
 			if (flag)
@@ -77,18 +77,20 @@ namespace DekuMod.SkillStates
 		private void UpdateDirection()
 		{
             this.idealDirection = base.inputBank.aimDirection;
-            //bool flag = base.inputBank;
-            //if (flag)
-            //{
-            //    Vector2 vector = Util.Vector3XZToVector2XY(base.inputBank.moveVector);
-            //    bool flag2 = vector != Vector2.zero;
-            //    if (flag2)
-            //    {
-            //        vector.Normalize();
-            //        this.idealDirection = (base.characterMotor.moveDirection.normalized + new Vector3(vector.x, 0f, vector.y).normalized).normalized;
-            //    }
-            //}
-        }
+			Ray aimRay = base.GetAimRay();
+			base.StartAimMode(aimRay, 2f, true);
+			//bool flag = base.inputBank;
+			//if (flag)
+			//{
+			//    Vector2 vector = Util.Vector3XZToVector2XY(base.inputBank.moveVector);
+			//    bool flag2 = vector != Vector2.zero;
+			//    if (flag2)
+			//    {
+			//        vector.Normalize();
+			//        this.idealDirection = (base.characterMotor.moveDirection.normalized + new Vector3(vector.x, 0f, vector.y).normalized).normalized;
+			//    }
+			//}
+		}
 
         private Vector3 GetIdealVelocity()
 		{
@@ -120,15 +122,18 @@ namespace DekuMod.SkillStates
 			base.FixedUpdate();
 			totalDuration += Time.fixedDeltaTime/2;
 
-            if (base.IsKeyDownAuthority() && base.fixedAge > fireTime)
+			if(base.fixedAge > fireTime)
 			{
-				Loop();
-                PlayAnimation("Body", "Sprint");
-            }
-            else
-            {
-                base.outer.SetNextStateToMain();
-            }
+				if (base.IsKeyDownAuthority())
+				{
+					Loop();
+					PlayAnimation("Body", "Sprint");
+				}
+				else if (!base.IsKeyDownAuthority())
+				{
+					base.outer.SetNextStateToMain();
+				}
+			}
 
         }
 
@@ -154,7 +159,7 @@ namespace DekuMod.SkillStates
 				base.characterMotor.rootMotion += this.GetIdealVelocity() * Time.fixedDeltaTime;
 				//Vector3 position = base.transform.position + base.characterDirection.forward.normalized * 0.5f;
 				Vector3 position = base.characterBody.corePosition + Vector3.up * 0.5f + aimRay.direction.normalized * 1f;
-				float radius = 0.4f;
+				float radius = 0.3f;
 				LayerIndex layerIndex = LayerIndex.world;
 				int num = layerIndex.mask;
 				layerIndex = LayerIndex.entityPrecise;

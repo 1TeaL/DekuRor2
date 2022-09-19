@@ -8,9 +8,10 @@ namespace DekuMod.SkillStates
     public class ShootStyleCombo : BaseMeleeAttack
     {
         public HurtBox Target;
+        public DekuController dekucon;
         public override void OnEnter()
         {
-            this.hitboxName = "BigModelHitbox";
+            this.hitboxName = "BigBodyHitbox";
 
             this.damageType = DamageType.Generic;
             this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient;
@@ -20,7 +21,7 @@ namespace DekuMod.SkillStates
             {
                 this.bonusForce = new Vector3(0f, 1000f, 0f);
             }
-            else
+            else if(swingIndex < 2)
             {
                 this.bonusForce = new Vector3(0f, -300f, 0f);
             }
@@ -32,42 +33,40 @@ namespace DekuMod.SkillStates
             this.attackRecoil = 0.5f;
             this.hitHopVelocity = 10f;
 
-            this.swingSoundString = "RimuruSwordSwing";
+            this.swingSoundString = "";
             this.hitSoundString = "";
             this.muzzleString = ChooseAnimationString();
             //this.swingEffectPrefab = Modules.Assets.swordSwingEffect;
             //this.hitEffectPrefab = Modules.Assets.swordHitImpactEffect;
 
-            this.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            //this.impactSound = Modules.Assets.swordHitSoundEvent.index;
 
+            dekucon = base.GetComponent<DekuController>();
             if (dekucon && base.isAuthority)
             {
                 Target = dekucon.GetTrackingTarget();
             }
 
-            if (!Target)
-            {
-                return;
-            }
             base.OnEnter();
         }
 
 
         private string ChooseAnimationString()
         {
-            string returnVal = "SwingLeft";
-            switch (this.swingIndex)
-            {
-                case 0:
-                    returnVal = "SwingLeft";
-                    break;
-                case 1:
-                    returnVal = "SwingRight";
-                    break;
-                case 2:
-                    returnVal = "SwingCenter";
-                    break;
-            }
+            string returnVal = "RHand";
+            //string returnVal = "SwingLeft";
+            //switch (this.swingIndex)
+            //{
+            //    case 0:
+            //        returnVal = "SwingLeft";
+            //        break;
+            //    case 1:
+            //        returnVal = "SwingRight";
+            //        break;
+            //    case 2:
+            //        returnVal = "SwingCenter";
+            //        break;
+            //}
 
             return returnVal;
         }

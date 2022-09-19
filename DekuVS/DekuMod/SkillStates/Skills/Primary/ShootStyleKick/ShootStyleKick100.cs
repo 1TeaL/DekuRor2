@@ -17,7 +17,7 @@ namespace DekuMod.SkillStates
     {
         "NetworkingAPI"
     })]
-    public class ShootStyleKick100 : BaseSkillState
+    public class ShootStyleKick100 : BaseSkill100
     {
 
         public float previousMass;
@@ -25,8 +25,8 @@ namespace DekuMod.SkillStates
         private string muzzleString;
 
         public static float duration;
-        public float numberOfHits;
-        public static float baseDuration = 0.1f;
+        public float numberOfHits; 
+        public static float baseDuration = 0.5f;
         public static float initialSpeedCoefficient = 50f;
         public static float SpeedCoefficient;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
@@ -139,12 +139,11 @@ namespace DekuMod.SkillStates
                 {
 
                     ShootStyleKickComponent shootStyleKickComponent = characterBody.gameObject.GetComponent<ShootStyleKickComponent>();
-                    if (!shootStyleKickComponent)
-                    {
-                        shootStyleKickComponent = characterBody.gameObject.AddComponent<ShootStyleKickComponent>();
-                        shootStyleKickComponent.charbody = characterBody;
-                        shootStyleKickComponent.numberOfHits = numberOfHits;
-                    }
+                    
+                    shootStyleKickComponent = characterBody.gameObject.AddComponent<ShootStyleKickComponent>();
+                    shootStyleKickComponent.charbody = characterBody;
+                    shootStyleKickComponent.numberOfHits = numberOfHits;
+                    
                 }
             }
         }
