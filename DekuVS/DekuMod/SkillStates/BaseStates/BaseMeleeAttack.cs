@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates.BaseStates
     {
         public int swingIndex;
 
-        protected string hitboxName = "BigBodyHitbox";
+        protected string hitboxName = "Sword";
 
         protected DamageType damageType = DamageType.Generic;
         protected float damageCoefficient = 3.5f;
@@ -31,9 +31,9 @@ namespace DekuMod.SkillStates.BaseStates
         protected string swingSoundString = "";
         protected string hitSoundString = "";
         protected string muzzleString = "SwingCenter";
-        //protected GameObject swingEffectPrefab;
-        //protected GameObject hitEffectPrefab;
-        //protected NetworkSoundEventIndex impactSound;
+        protected GameObject swingEffectPrefab;
+        protected GameObject hitEffectPrefab;
+        protected NetworkSoundEventIndex impactSound;
 
         private float earlyExitTime;
         public float duration;
@@ -47,7 +47,6 @@ namespace DekuMod.SkillStates.BaseStates
         private BaseState.HitStopCachedState hitStopCachedState;
         private Vector3 storedVelocity;
 
-        public DekuController dekucon;
 
         public override void OnEnter()
         {
@@ -80,17 +79,24 @@ namespace DekuMod.SkillStates.BaseStates
             this.attack.teamIndex = base.GetTeam();
             this.attack.damage = this.damageCoefficient * this.damageStat;
             this.attack.procCoefficient = this.procCoefficient;
-            //this.attack.hitEffectPrefab = this.hitEffectPrefab;
+            this.attack.hitEffectPrefab = this.hitEffectPrefab;
             this.attack.forceVector = this.bonusForce;
             this.attack.pushAwayForce = this.pushForce;
             this.attack.hitBoxGroup = hitBoxGroup;
             this.attack.isCrit = base.RollCrit();
-            //this.attack.impactSound = this.impactSound;
+            this.attack.impactSound = this.impactSound;
         }
 
         protected virtual void PlayAttackAnimation()
         {
-            base.PlayCrossfade("RightArm, Override", "Slash" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
+            if (animator.GetBool("isMoving"))
+            {
+                base.PlayCrossfade("RightArm, Override", "Slash" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
+                return;
+            }
+
+            base.PlayCrossfade("RightArm, Override", "SwingIdle" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
+
         }
 
         public override void OnExit()
@@ -104,7 +110,7 @@ namespace DekuMod.SkillStates.BaseStates
 
         protected virtual void PlaySwingEffect()
         {
-            //EffectManager.SimpleMuzzleFlash(this.swingEffectPrefab, base.gameObject, this.muzzleString, true);
+            EffectManager.SimpleMuzzleFlash(this.swingEffectPrefab, base.gameObject, this.muzzleString, true);
         }
 
         protected virtual void OnHitEnemyAuthority()
@@ -134,6 +140,7 @@ namespace DekuMod.SkillStates.BaseStates
         {
             if (!this.hasFired)
             {
+                Chat.AddMessage("has fired false to true");
                 this.hasFired = true;
                 Util.PlayAttackSpeedSound(this.swingSoundString, base.gameObject, this.attackSpeedStat);
 
@@ -148,6 +155,7 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 if (this.attack.Fire())
                 {
+                    Chat.AddMessage("this attack fire");
                     this.OnHitEnemyAuthority();
                 }
             }

@@ -36,10 +36,10 @@ namespace DekuMod.SkillStates
             this.swingSoundString = "";
             this.hitSoundString = "";
             this.muzzleString = ChooseAnimationString();
-            //this.swingEffectPrefab = Modules.Assets.swordSwingEffect;
-            //this.hitEffectPrefab = Modules.Assets.swordHitImpactEffect;
+            this.swingEffectPrefab = null;
+            this.hitEffectPrefab = null;
 
-            //this.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            this.impactSound = Modules.Assets.swordHitSoundEvent.index;
 
             dekucon = base.GetComponent<DekuController>();
             if (dekucon && base.isAuthority)
@@ -88,6 +88,7 @@ namespace DekuMod.SkillStates
 
         protected override void SetNextState()
         {
+            Chat.AddMessage("set next state");
             int index = this.swingIndex;
             index += 1;
             if (index > 2)

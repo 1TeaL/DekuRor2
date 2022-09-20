@@ -27,7 +27,8 @@ namespace DekuMod.SkillStates
         public static float duration;
         public float numberOfHits; 
         public static float baseDuration = 0.5f;
-        public static float initialSpeedCoefficient = 50f;
+        public static float initialSpeedCoefficient = 10f;
+        public static float finalSpeedCoefficient = 1f;
         public static float SpeedCoefficient;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
         public static float procCoefficient = 1f;
@@ -47,28 +48,44 @@ namespace DekuMod.SkillStates
         public Vector3 origin;
         public Vector3 final;
         private Vector3 theSpot;
-        public float dashSearchRadius;
-        private BullseyeSearch search;
+        private readonly BullseyeSearch search = new BullseyeSearch();
 
         public override void OnEnter()
         {
+            base.OnEnter();
+            this.animator = base.GetModelAnimator();
+
+            if (base.isAuthority && base.inputBank && base.characterDirection)
+            {
+                this.forwardDirection = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
+            }
+
+            Vector3 rhs = base.characterDirection ? base.characterDirection.forward : this.forwardDirection;
+            Vector3 rhs2 = Vector3.Cross(Vector3.up, rhs);
+
+            float num = Vector3.Dot(this.forwardDirection, rhs);
+            float num2 = Vector3.Dot(this.forwardDirection, rhs2);
+
+            this.RecalculateRollSpeed();
+
+            if (base.characterMotor && base.characterDirection)
+            {
+                base.characterMotor.velocity.y = 0f;
+                base.characterMotor.velocity = this.forwardDirection * this.rollSpeed;
+            }
+
+            Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
+            this.previousPosition = base.transform.position - b;
+
 
             base.OnEnter();
 
             duration = baseDuration / this.attackSpeedStat;
             numberOfHits = 5f * attackSpeedStat ;
     
-            SpeedCoefficient = initialSpeedCoefficient;
-            base.StartAimMode(duration, true);
 
             AkSoundEngine.PostEvent(3842300745, this.gameObject);
             AkSoundEngine.PostEvent(573664262, this.gameObject);
-            this.modelTransform = base.GetModelTransform();
-            if (this.modelTransform)
-            {
-                this.animator = this.modelTransform.GetComponent<Animator>();
-                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
-            }
             //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
             base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
 
@@ -83,17 +100,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.mass = 0f;
 
 
-            this.RecalculateRollSpeed();
-
-            if (base.characterMotor && base.characterDirection)
-            {
-                base.characterMotor.velocity = this.aimRay.direction * this.rollSpeed;
-            }
-
-            Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
-            this.previousPosition = base.transform.position - b;
-
-            search = new BullseyeSearch();
             origin = base.transform.position;
             new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
 
@@ -101,7 +107,7 @@ namespace DekuMod.SkillStates
         }
         private void RecalculateRollSpeed()
         {
-            this.rollSpeed = this.moveSpeedStat * SpeedCoefficient;
+            this.rollSpeed = this.moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, base.fixedAge / duration);
         }
         private void CreateBlinkEffect(Vector3 origin)
         {
@@ -115,17 +121,15 @@ namespace DekuMod.SkillStates
         {
             Ray aimRay = base.GetAimRay();
             theSpot = Vector3.Lerp(origin,final, 0.5f);
-            BullseyeSearch search = new BullseyeSearch
-            {
 
-                teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-                filterByLoS = false,
-                searchOrigin = theSpot,
-                searchDirection = UnityEngine.Random.onUnitSphere,
-                sortMode = BullseyeSearch.SortMode.Distance,
-                maxDistanceFilter = dashSearchRadius,
-                maxAngleFilter = 360f
-            };
+            search.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
+            search.filterByLoS = false;
+            search.searchOrigin = theSpot;
+            search.searchDirection = UnityEngine.Random.onUnitSphere;
+            search.sortMode = BullseyeSearch.SortMode.Distance;
+            search.maxDistanceFilter = theSpot.magnitude;
+            search.maxAngleFilter = 360f;
+            
 
             search.RefreshCandidates();
             search.FilterOutGameObject(base.gameObject);
@@ -135,13 +139,13 @@ namespace DekuMod.SkillStates
             List<HurtBox> target = search.GetResults().ToList<HurtBox>();
             foreach (HurtBox singularTarget in target)
             {
-                if (singularTarget)
+                if (singularTarget.healthComponent.body)
                 {
 
                     ShootStyleKickComponent shootStyleKickComponent = characterBody.gameObject.GetComponent<ShootStyleKickComponent>();
                     
-                    shootStyleKickComponent = characterBody.gameObject.AddComponent<ShootStyleKickComponent>();
-                    shootStyleKickComponent.charbody = characterBody;
+                    shootStyleKickComponent = singularTarget.gameObject.AddComponent<ShootStyleKickComponent>();
+                    shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
                     shootStyleKickComponent.numberOfHits = numberOfHits;
                     
                 }
@@ -153,9 +157,11 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             base.PlayCrossfade("FullBody, Override", "ShootStyleDashExit", 0.2f);
             Util.PlaySound(EvisDash.endSoundString, base.gameObject);
+
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;
             base.characterMotor.velocity = Vector3.zero;
+
             if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
             base.characterMotor.disableAirControlUntilCollision = false;
             base.characterMotor.velocity.y = 0;
@@ -181,8 +187,9 @@ namespace DekuMod.SkillStates
             if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
             {
                 Vector3 vector = normalized * this.rollSpeed;
-                float d = Mathf.Max(Vector3.Dot(vector, this.aimRay.direction), 0f);
-                vector = this.aimRay.direction * d;
+                float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
+                vector = this.forwardDirection * d;
+                vector.y = 0f;
 
                 base.characterMotor.velocity = vector;
             }

@@ -1,6 +1,7 @@
 ﻿using DekuMod.SkillStates;
 using System.Collections.Generic;
 using System;
+using DekuMod.SkillStates.BaseStates;
 
 namespace DekuMod.Modules
 {
@@ -14,7 +15,14 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(Airforce));
             entityStates.Add(typeof(Airforce45));
             entityStates.Add(typeof(Airforce100));
+
+            entityStates.Add(typeof(BaseMeleeAttack));
             entityStates.Add(typeof(ShootStyleKick));
+            entityStates.Add(typeof(DashAttack));
+            entityStates.Add(typeof(DashAttackExit));
+            entityStates.Add(typeof(ShootStyleCombo));
+            entityStates.Add(typeof(ShootStylePrimary));
+
             entityStates.Add(typeof(ShootStyleBullet));
             entityStates.Add(typeof(BlackwhipFront));
             entityStates.Add(typeof(Manchester));
@@ -28,10 +36,6 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(Detroit100Release));
             entityStates.Add(typeof(DelawareSmash100));
             entityStates.Add(typeof(StLouis45));
-            entityStates.Add(typeof(DashAttack));
-            entityStates.Add(typeof(DashAttackExit));
-            entityStates.Add(typeof(ShootStyleCombo));
-            entityStates.Add(typeof(ShootStylePrimary));
 
 
             //secondary
