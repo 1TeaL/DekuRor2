@@ -19,7 +19,7 @@ namespace DekuMod.Modules
 
         //Primary damage
         internal const float airforceDamageCoefficient = 1f;
-        internal const float shootkickDamageCoefficient = 3f;
+        internal const float shootkickDamageCoefficient = 2f;
         internal const float shootkick45DamageCoefficient = 3f;
         internal const float shootkick100DamageCoefficient = 1f;
         internal const float airforce45DamageCoefficient = 1.25f;

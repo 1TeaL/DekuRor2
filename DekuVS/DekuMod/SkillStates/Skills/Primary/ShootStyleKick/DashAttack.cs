@@ -75,20 +75,16 @@ namespace DekuMod.SkillStates
             bool flag2 = base.isAuthority && this.targetIsValid;
             if (flag2)
             {
-                Chat.AddMessage("authority and target valid");
                 Vector3 velocity = (this.storedPosition - base.transform.position).normalized * dashSpeed;
                 base.characterMotor.velocity = velocity;
                 base.characterDirection.forward = base.characterMotor.velocity.normalized;
-                Chat.AddMessage(velocity +"velocity");
                 bool flag3 = base.fixedAge >= 0.8f;
                 if (flag3)
                 {
-                    Chat.AddMessage("fixed age >0.8");
                     this.outer.SetNextStateToMain();
                 }
                 else
                 {
-                    Chat.AddMessage("authority and target valid");
                     this.attack.forceVector = base.characterMotor.velocity.normalized * pushForce;
                     bool flag4 = this.attack.Fire(this.HitResults);
                     if (flag4)

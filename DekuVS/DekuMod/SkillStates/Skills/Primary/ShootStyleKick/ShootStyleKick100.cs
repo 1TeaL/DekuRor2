@@ -25,7 +25,7 @@ namespace DekuMod.SkillStates
         private string muzzleString;
 
         public static float duration;
-        public float numberOfHits; 
+        public int numberOfHits; 
         public static float baseDuration = 0.5f;
         public static float initialSpeedCoefficient = 10f;
         public static float finalSpeedCoefficient = 1f;
@@ -81,13 +81,13 @@ namespace DekuMod.SkillStates
             base.OnEnter();
 
             duration = baseDuration / this.attackSpeedStat;
-            numberOfHits = 5f * attackSpeedStat ;
+            numberOfHits = Mathf.RoundToInt(5 * attackSpeedStat);
     
 
             AkSoundEngine.PostEvent(3842300745, this.gameObject);
             AkSoundEngine.PostEvent(573664262, this.gameObject);
             //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
-            base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
+            //base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
@@ -119,15 +119,16 @@ namespace DekuMod.SkillStates
 
         public void ApplyComponent()
         {
-            Ray aimRay = base.GetAimRay();
+            Chat.AddMessage("apply component");
             theSpot = Vector3.Lerp(origin,final, 0.5f);
 
+            Chat.AddMessage(theSpot + "thespot");
             search.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
             search.filterByLoS = false;
             search.searchOrigin = theSpot;
             search.searchDirection = UnityEngine.Random.onUnitSphere;
             search.sortMode = BullseyeSearch.SortMode.Distance;
-            search.maxDistanceFilter = theSpot.magnitude;
+            search.maxDistanceFilter = (final-origin).magnitude/2;
             search.maxAngleFilter = 360f;
             
 
@@ -141,12 +142,28 @@ namespace DekuMod.SkillStates
             {
                 if (singularTarget.healthComponent.body)
                 {
+                    int buffcount = singularTarget.healthComponent.body.GetBuffCount(Modules.Buffs.delayAttackDebuff.buffIndex);
+                    if (NetworkServer.active)
+                    {
+                        singularTarget.healthComponent.body.ApplyBuff(Modules.Buffs.delayAttackDebuff.buffIndex, numberOfHits + buffcount);
+                    }
+                    ShootStyleKickComponent shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.GetComponent<ShootStyleKickComponent>();
+                    if (base.isAuthority)
+                    {
+                        if (shootStyleKickComponent)
+                        {
+                            shootStyleKickComponent.numberOfHits += numberOfHits;
+                            shootStyleKickComponent.timer = 0;
+                        }
+                        if (!shootStyleKickComponent)
+                        {
+                            shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.AddComponent<ShootStyleKickComponent>();
+                            shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
+                            shootStyleKickComponent.numberOfHits = numberOfHits;
+                            shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient * moveSpeedStat/7f;
+                        }
 
-                    ShootStyleKickComponent shootStyleKickComponent = characterBody.gameObject.GetComponent<ShootStyleKickComponent>();
-                    
-                    shootStyleKickComponent = singularTarget.gameObject.AddComponent<ShootStyleKickComponent>();
-                    shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
-                    shootStyleKickComponent.numberOfHits = numberOfHits;
+                    }
                     
                 }
             }
@@ -236,7 +253,7 @@ namespace DekuMod.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Skill;
         }
 
 

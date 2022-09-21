@@ -10,10 +10,14 @@ namespace DekuMod.Modules
             #region Deku
             string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 
-            string desc = "Deku is high risk survivor that can boost his stats and abilities but with detrimental health regen and health costs.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            string desc = "Deku is a multi-option, high risk survivor that can change his skills and boost his stats but with detrimental health regen and health costs.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > He scales with attackspeed and movespeed on multiple of his skills" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > OFA 100% focuses on close range but greater mobility while OFA 45% focuses on mid-range attacks." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > OFA 100%'s negative health regen can be mitigated with regen items and it stops at 1-2Hp while OFA 45%'s can't." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > The Plus Ultra Meter in the middle increases as you walk and use base skills, it is used for specific skills and for Going Beyond." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Base form focuses on control, as well as allowing him to build up Plus Ultra Meter." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > OFA 100% focuses on pure power at the cost of self-damage." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > OFA 45% is a mid ground between 100% and base, with no health regeneration." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Deku's can switch his skills between 3 loadouts- Power, Mobility, Utility." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Deku's 4th extra skill depends on his loadout, and costs 50 Plus Ultra Meter." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Ancient Scepter will give 10% Lifesteal for OFA 100% and 5% Lifesteal for OFA 45%." + Environment.NewLine + Environment.NewLine;
 
 

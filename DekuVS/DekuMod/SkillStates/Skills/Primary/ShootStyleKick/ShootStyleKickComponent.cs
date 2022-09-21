@@ -19,10 +19,10 @@ namespace DekuMod.SkillStates
     public class ShootStyleKickComponent : MonoBehaviour
 	{
 		public CharacterBody charbody;
-		private GameObject effectObj;
 		public float numberOfHits;
 		public float currentNumber;
 		public float timer;
+		public float damage;
 
 		public void Start()
 		{
@@ -39,16 +39,18 @@ namespace DekuMod.SkillStates
 		{
 
 			timer += Time.fixedDeltaTime;
-			if (timer > 0.1f)
+			if (timer > 1f)
             {
 				if(currentNumber < numberOfHits)
-				{ 
-					new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.up, 5f).Send(NetworkDestination.Clients);
+				{
+					currentNumber += 1;
+					timer -= 0.1f;
+					new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.up, 2f, damage).Send(NetworkDestination.Server);
 				}
 				else if (currentNumber == numberOfHits)
 				{
-
-					new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f).Send(NetworkDestination.Clients);
+					currentNumber += 1;
+					new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f, damage).Send(NetworkDestination.Server);
 				}
 				else if (currentNumber > numberOfHits)
                 {
@@ -62,14 +64,9 @@ namespace DekuMod.SkillStates
 			if (!charbody)
 			{
 				Destroy(this);
-				Destroy(effectObj);
 			}
 		}
 
 
-		public void OnDestroy()
-		{
-			Destroy(effectObj);
-		}
 	}
 }

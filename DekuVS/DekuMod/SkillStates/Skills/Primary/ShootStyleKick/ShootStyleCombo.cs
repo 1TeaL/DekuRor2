@@ -16,14 +16,14 @@ namespace DekuMod.SkillStates
             this.damageType = DamageType.Generic;
             this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient;
             this.procCoefficient = 1f;
-            this.pushForce = 300f;
+            this.pushForce = 500f;
             if (swingIndex == 2)
             {
-                this.bonusForce = new Vector3(0f, 1000f, 0f);
+                this.bonusForce = new Vector3(10f, 1000f, 0f);
             }
             else if(swingIndex < 2)
             {
-                this.bonusForce = new Vector3(0f, -300f, 0f);
+                this.bonusForce = new Vector3(10f, -300f, 0f);
             }
             this.baseDuration = 1f;
             this.attackStartTime = 0.2f;
@@ -31,15 +31,15 @@ namespace DekuMod.SkillStates
             this.baseEarlyExitTime = 0.4f;
             this.hitStopDuration = 0.012f;
             this.attackRecoil = 0.5f;
-            this.hitHopVelocity = 10f;
+            this.hitHopVelocity = 9f;
 
             this.swingSoundString = "";
             this.hitSoundString = "";
             this.muzzleString = ChooseAnimationString();
-            this.swingEffectPrefab = null;
-            this.hitEffectPrefab = null;
+            this.swingEffectPrefab = Modules.Assets.dekuKickEffect;
+            this.hitEffectPrefab = Modules.Assets.dekuHitImpactEffect;
 
-            this.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            this.impactSound = Modules.Assets.kickHitSoundEvent.index;
 
             dekucon = base.GetComponent<DekuController>();
             if (dekucon && base.isAuthority)
@@ -53,20 +53,19 @@ namespace DekuMod.SkillStates
 
         private string ChooseAnimationString()
         {
-            string returnVal = "RHand";
-            //string returnVal = "SwingLeft";
-            //switch (this.swingIndex)
-            //{
-            //    case 0:
-            //        returnVal = "SwingLeft";
-            //        break;
-            //    case 1:
-            //        returnVal = "SwingRight";
-            //        break;
-            //    case 2:
-            //        returnVal = "SwingCenter";
-            //        break;
-            //}
+            string returnVal = "Swing1";
+            switch (this.swingIndex)
+            {
+                case 0:
+                    returnVal = "Swing1";
+                    break;
+                case 1:
+                    returnVal = "Swing2";
+                    break;
+                case 2:
+                    returnVal = "Swing3";
+                    break;
+            }
 
             return returnVal;
         }
@@ -88,7 +87,6 @@ namespace DekuMod.SkillStates
 
         protected override void SetNextState()
         {
-            Chat.AddMessage("set next state");
             int index = this.swingIndex;
             index += 1;
             if (index > 2)

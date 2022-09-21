@@ -1,4 +1,5 @@
-﻿using R2API.Networking.Interfaces;
+﻿using R2API.Networking;
+using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace DekuMod.Modules.Networking
         NetworkInstanceId netID;
         Vector3 direction;
         private float force;
+        private float damage;
 
         //Don't network these.
         GameObject bodyObj;
@@ -26,11 +28,12 @@ namespace DekuMod.Modules.Networking
 
         }
 
-        public PeformShootStyleKickAttackNetworkRequest(NetworkInstanceId netID, Vector3 direction, float force)
+        public PeformShootStyleKickAttackNetworkRequest(NetworkInstanceId netID, Vector3 direction, float force, float damage)
         {
             this.netID = netID;
             this.direction = direction;
             this.force = force;
+            this.damage = damage;
         }
 
         public void Deserialize(NetworkReader reader)
@@ -38,6 +41,7 @@ namespace DekuMod.Modules.Networking
             netID = reader.ReadNetworkId();
             direction = reader.ReadVector3();
             force = reader.ReadSingle();
+            damage = reader.ReadSingle();
         }
 
         public void Serialize(NetworkWriter writer)
@@ -45,6 +49,7 @@ namespace DekuMod.Modules.Networking
             writer.Write(netID);
             writer.Write(direction);
             writer.Write(force);
+            writer.Write(damage);
         }
 
         public void OnReceived()
@@ -60,37 +65,34 @@ namespace DekuMod.Modules.Networking
                 bodyObj = charBody.gameObject;
 
                 //Damage target and stun
-                PullTargets(charBody);
+                DamageTargets(charBody);
             }
         }
 
-        //Don't do anything until we have a target.
-        //Pull target: let's use a blast attack pointed towards the player with a slight upwards force.
-        //directional vector: terminal point - initial point.
-        //get mass, apply force. object mass * forcemultiplier for enemies.
-        //Make direction point towards player.
-        private void PullTargets(CharacterBody charBody)
+        private void DamageTargets(CharacterBody charBody)
         {
 
             if (charBody.healthComponent && charBody.healthComponent.body)
             {
                 float Weight = 1f;
 
-                if (charBody.healthComponent.body.characterMotor)
+                if (charBody.characterMotor)
                 {
-                    Weight = charBody.healthComponent.body.characterMotor.mass;
+                    Weight = charBody.characterMotor.mass;
                 }
-                else if (charBody.healthComponent.body.rigidbody)
+                else if (charBody.rigidbody)
                 {
-                    Weight = charBody.healthComponent.body.rigidbody.mass;
+                    Weight = charBody.rigidbody.mass;
                 }
 
-                
+                int buffcount = charBody.GetBuffCount(Modules.Buffs.delayAttackDebuff.buffIndex);
+
+                charBody.ApplyBuff(Modules.Buffs.delayAttackDebuff.buffIndex, buffcount-1);
 
                 DamageInfo damageInfo = new DamageInfo
                 {
                     attacker = bodyObj,
-                    damage = charBody.damage * Modules.StaticValues.shootkick100DamageCoefficient,
+                    damage = damage,
                     position = charBody.transform.position,
                     procCoefficient = 1f,
                     damageType = DamageType.Stun1s,
@@ -103,7 +105,7 @@ namespace DekuMod.Modules.Networking
                 GlobalEventManager.instance.OnHitEnemy(damageInfo, charBody.healthComponent.gameObject);
 
 
-                EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
+                EffectManager.SpawnEffect(Modules.Assets.dekuHitImpactEffect, new EffectData
                 {
                     origin = charBody.transform.position,
                     scale = 1f,

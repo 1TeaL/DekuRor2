@@ -184,24 +184,24 @@ namespace DekuMod.Modules.Survivors
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
 
-            Transform hitboxTransform = childLocator.FindChild("SmashHitbox");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform, "SwordHitbox");
+            Transform SmashHitboxTransform = childLocator.FindChild("SmashHitbox");
+            Modules.Prefabs.SetupHitbox(model, SmashHitboxTransform, "SwordHitbox");
 
 
-            Transform hitboxTransform2 = childLocator.FindChild("ModelHitbox");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform2, "ModelHitbox");
+            Transform ModelHitboxTransform = childLocator.FindChild("ModelHitbox");
+            Modules.Prefabs.SetupHitbox(model, ModelHitboxTransform, "ModelHitbox");
 
-            Transform hitboxTransform3 = childLocator.FindChild("BigModelHitbox");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform3, "BigModelHitbox");
+            Transform BigModelHitboxTransform = childLocator.FindChild("BigModelHitbox");
+            Modules.Prefabs.SetupHitbox(model, BigModelHitboxTransform, "BigModelHitbox");
 
-            Transform hitboxTransform4 = childLocator.FindChild("BodyHitbox");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform4, "BodyHitbox");
+            Transform BodyHitboxTransform = childLocator.FindChild("BodyHitbox");
+            Modules.Prefabs.SetupHitbox(model, BodyHitboxTransform, "BodyHitbox");
 
-            Transform hitboxTransform5 = childLocator.FindChild("Blackwhip");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform5, "Blackwhip");
+            Transform BlackwhiphitboxTransform = childLocator.FindChild("Blackwhip");
+            Modules.Prefabs.SetupHitbox(model, BlackwhiphitboxTransform, "Blackwhip");
 
-            Transform hitboxTransform6 = childLocator.FindChild("BigBodyHitbox");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform4, "BigBodyHitbox");
+            Transform BigBodyHitboxTransform = childLocator.FindChild("BigBodyHitbox");
+            Modules.Prefabs.SetupHitbox(model, BigBodyHitboxTransform, "BigBodyHitbox");
         }
 
 
@@ -760,7 +760,7 @@ namespace DekuMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = InterruptPriority.Skill,
+                interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
@@ -785,7 +785,7 @@ namespace DekuMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = InterruptPriority.Skill,
+                interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
@@ -805,12 +805,12 @@ namespace DekuMod.Modules.Survivors
                 activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleKick100)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 0.5f,
+                baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = InterruptPriority.Skill,
+                interruptPriority = InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,

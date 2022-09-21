@@ -17,8 +17,15 @@ namespace DekuMod.SkillStates
             this.damageType = DamageType.Generic;
             this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient;
             this.procCoefficient = 1f;
-            this.pushForce = 300f;
-            this.bonusForce = new Vector3(0f, -500f, 0f);
+            this.pushForce = 500f;
+            if (swingIndex == 2)
+            {
+                this.bonusForce = new Vector3(10f, 1000f, 0f);
+            }
+            else if (swingIndex < 2)
+            {
+                this.bonusForce = new Vector3(10f, -300f, 0f);
+            }
             this.baseDuration = 1f;
             this.attackStartTime = 0.2f;
             this.attackEndTime = 0.4f;
@@ -27,33 +34,32 @@ namespace DekuMod.SkillStates
             this.attackRecoil = 0.5f;
             this.hitHopVelocity = 10f;
 
-            this.swingSoundString = "RimuruSwordSwing";
+            this.swingSoundString = "";
             this.hitSoundString = "";
             this.muzzleString = ChooseAnimationString();
-            //this.swingEffectPrefab = Modules.Assets.swordSwingEffect;
-            //this.hitEffectPrefab = Modules.Assets.swordHitImpactEffect;
+            this.swingEffectPrefab = Modules.Assets.dekuKickEffect;
+            this.hitEffectPrefab = Modules.Assets.dekuHitImpactEffect;
 
-            //this.impactSound = Modules.Assets.swordHitSoundEvent.index;
+            this.impactSound = Modules.Assets.kickHitSoundEvent.index;
 
             base.OnEnter();
         }
 
         private string ChooseAnimationString()
         {
-            string returnVal = "RHand";
-            //string returnVal = "SwingLeft";
-            //switch (this.swingIndex)
-            //{
-            //    case 0:
-            //        returnVal = "SwingLeft";
-            //        break;
-            //    case 1:
-            //        returnVal = "SwingRight";
-            //        break;
-            //    case 2:
-            //        returnVal = "SwingCenter";
-            //        break;
-            //}
+            string returnVal = "Swing1";
+            switch (this.swingIndex)
+            {
+                case 0:
+                    returnVal = "Swing1";
+                    break;
+                case 1:
+                    returnVal = "Swing2";
+                    break;
+                case 2:
+                    returnVal = "Swing3";
+                    break;
+            }
 
             return returnVal;
         }

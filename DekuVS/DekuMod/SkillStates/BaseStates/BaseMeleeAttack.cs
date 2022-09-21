@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates.BaseStates
     {
         public int swingIndex;
 
-        protected string hitboxName = "Sword";
+        protected string hitboxName = "BigBodyHitbox";
 
         protected DamageType damageType = DamageType.Generic;
         protected float damageCoefficient = 3.5f;
@@ -47,10 +47,13 @@ namespace DekuMod.SkillStates.BaseStates
         private BaseState.HitStopCachedState hitStopCachedState;
         private Vector3 storedVelocity;
 
-
+        public EnergySystem energySystem;
         public override void OnEnter()
         {
             base.OnEnter();
+
+            energySystem = base.GetComponent<EnergySystem>();
+            energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
 
             this.duration = this.baseDuration / this.attackSpeedStat;
             this.earlyExitTime = this.baseEarlyExitTime / this.attackSpeedStat;
@@ -77,7 +80,7 @@ namespace DekuMod.SkillStates.BaseStates
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
             this.attack.teamIndex = base.GetTeam();
-            this.attack.damage = this.damageCoefficient * this.damageStat;
+            this.attack.damage = this.damageCoefficient * this.damageStat * base.moveSpeedStat/7f;
             this.attack.procCoefficient = this.procCoefficient;
             this.attack.hitEffectPrefab = this.hitEffectPrefab;
             this.attack.forceVector = this.bonusForce;
@@ -138,9 +141,9 @@ namespace DekuMod.SkillStates.BaseStates
 
         private void FireAttack()
         {
+            Debug.Log($"timer: {stopwatch}");
             if (!this.hasFired)
             {
-                Chat.AddMessage("has fired false to true");
                 this.hasFired = true;
                 Util.PlayAttackSpeedSound(this.swingSoundString, base.gameObject, this.attackSpeedStat);
 
@@ -155,7 +158,7 @@ namespace DekuMod.SkillStates.BaseStates
             {
                 if (this.attack.Fire())
                 {
-                    Chat.AddMessage("this attack fire");
+
                     this.OnHitEnemyAuthority();
                 }
             }

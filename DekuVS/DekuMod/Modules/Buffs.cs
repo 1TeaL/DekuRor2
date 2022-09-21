@@ -11,28 +11,28 @@ namespace DekuMod.Modules
     {
         internal static List<BuffDef> buffDefs = new List<BuffDef>();
 
+        //ofa
         internal static BuffDef ofaBuff;
-
-        internal static BuffDef kickBuff;
-
-        internal static BuffDef floatBuff;
-
         internal static BuffDef supaofaBuff;
-
         internal static BuffDef ofaBuff45;
-
         internal static BuffDef supaofaBuff45;
 
+        //skills
+        internal static BuffDef kickBuff;
+        internal static BuffDef floatBuff;
+        internal static BuffDef fajinBuff;
+
+        //go beyond
         internal static BuffDef goBeyondBuff;
         internal static BuffDef goBeyondBuffUsed;
 
-        internal static BuffDef fajinBuff;
-
         //armor buff for oklahoma
         internal static BuffDef oklahomaBuff;
-
-
+        //counter
         internal static BuffDef counterBuff;
+
+        //debuffs
+        internal static BuffDef delayAttackDebuff;
 
         internal static void RegisterBuffs()
         {
@@ -49,6 +49,7 @@ namespace DekuMod.Modules
             floatBuff = Buffs.AddNewBuff("DekuFloatBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Float"), Color.white, false, false);
             counterBuff = Buffs.AddNewBuff("DekuCounterBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, false, false);
+            delayAttackDebuff = Buffs.AddNewBuff("delayAttackDebuff", Assets.crippleBuffIcon, Color.green, true, true);
 
             //oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.green, false, false);
             //oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", Addressables.LoadAssetAsync<Sprite>(key: "RoR2/Base/Textures/BuffIcons/texBuffGenericShield.prefab").WaitForCompletion(), Color.green, false, false);

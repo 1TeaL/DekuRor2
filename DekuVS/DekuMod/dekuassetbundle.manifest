@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1513152286
+CRC: 2992303681
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 294e23df7d4d26d88f0198b5293b9ce5
+    Hash: a6fcf159d973df8cdf38b35e6e42f720
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -97,6 +97,7 @@ Assets:
 - Assets/Deku/DekuV2/Animations/humanoidDekuAvatar.asset
 - Assets/Deku/DekuV2/VFX/Material/dangersense.mat
 - Assets/Deku/DekuV2/Animations/Armature_ShootStyleDash.anim
+- Assets/Deku/DekuV2/VFX/ImpactDekuKick.prefab
 - Assets/Deku/DekuV2/GUI/ultimateupgrade45.png
 - Assets/Deku/DekuV2/Animations/Armature_BlackwhipLeft.anim
 - Assets/Deku/DekuV2/VFX/blackwhipeffect 1.prefab
@@ -172,6 +173,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/smoke.prefab
 - Assets/Deku/DekuV2/Animations/Armature_Jumping.anim
 - Assets/Deku/DekuV2/Animations/Jumping.anim
+- Assets/Deku/DekuV2/VFX/DekuKickEffect.prefab
 - Assets/Deku/DekuV2/Animations/Armature_DelawareSmashLookDown.anim
 - Assets/Deku/DekuV2/VFX/Material/windlineblack.mat
 - Assets/Deku/DekuV2/GUI/blackwhipshoot.png
