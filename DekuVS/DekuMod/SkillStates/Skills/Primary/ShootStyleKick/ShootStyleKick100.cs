@@ -101,8 +101,10 @@ namespace DekuMod.SkillStates
 
 
             origin = base.transform.position;
-            new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
-
+            if (base.isAuthority)
+            {
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+            }
 
         }
         private void RecalculateRollSpeed()

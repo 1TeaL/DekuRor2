@@ -51,7 +51,10 @@ namespace DekuMod.SkillStates
 			//PlayAnimation("Body", "Sprint");
 			//Util.PlaySound(EntityStates.Bison.Charge.startSoundString, base.gameObject);
 
-			new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+			if (base.isAuthority)
+			{
+				new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.005f).Send(NetworkDestination.Clients);
+			}
 
 			bool flag = isAuthority;
 			if (flag)

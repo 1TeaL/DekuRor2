@@ -131,7 +131,10 @@ namespace DekuMod.Modules.Survivors
                 if (ofaHurtTimer > 1f)
                 {
                     ofaHurtTimer = 0f;
-                    new SpendHealthNetworkRequest(body.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+                    if (body.hasEffectiveAuthority)
+                    {
+                        new SpendHealthNetworkRequest(body.masterObjectId, 0.05f).Send(NetworkDestination.Clients);
+                    }
                 }
                 else
                 {
@@ -143,7 +146,10 @@ namespace DekuMod.Modules.Survivors
                 body.skillLocator.special.RemoveAllStocks();
                 if (goBeyondTimer > 1f)
                 {
-                    new HealNetworkRequest(body.masterObjectId, body.healthComponent.fullCombinedHealth * 0.05f).Send(NetworkDestination.Clients);
+                    if (body.hasEffectiveAuthority)
+                    {
+                        new HealNetworkRequest(body.masterObjectId, body.healthComponent.fullCombinedHealth * 0.05f).Send(NetworkDestination.Clients);
+                    }
                     goBeyondTimer = 0f;
                 }
                 else

@@ -175,9 +175,8 @@ namespace DekuMod
                             energysys.currentPlusUltra -= energysys.currentPlusUltra;
                             damageInfo.rejected = true;
                             self.body.healthComponent.health = 1f;
-                            {
-                                new ServerForceGoBeyondStateNetworkRequest(self.body.masterObjectId).Send(NetworkDestination.Clients);
-                            }
+                            new ServerForceGoBeyondStateNetworkRequest(self.body.masterObjectId).Send(NetworkDestination.Clients);
+                            
                         }
                     }
 

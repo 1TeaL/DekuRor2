@@ -29,7 +29,10 @@ namespace DekuMod.SkillStates
             AkSoundEngine.PostEvent(1356252224, this.gameObject);
             base.StartAimMode(0.6f, true);
 
-            new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+            if (base.isAuthority)
+            {
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+            }
 
             base.characterMotor.disableAirControlUntilCollision = false;
 

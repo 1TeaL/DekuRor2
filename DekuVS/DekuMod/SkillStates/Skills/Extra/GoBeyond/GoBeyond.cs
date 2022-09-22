@@ -100,6 +100,7 @@ namespace DekuMod.SkillStates
 			if (NetworkServer.active)
 			{
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+				base.characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 5);
 				base.characterBody.ApplyBuff(Modules.Buffs.goBeyondBuff.buffIndex, 1, 60f);
 			}
 		}

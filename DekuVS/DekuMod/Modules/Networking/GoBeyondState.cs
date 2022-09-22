@@ -5,6 +5,7 @@ using DekuMod.Modules.Survivors;
 using RoR2;
 using UnityEngine.Networking;
 using DekuMod.SkillStates;
+using R2API.Networking;
 
 namespace DekuMod.Modules.Networking
 {
@@ -24,7 +25,7 @@ namespace DekuMod.Modules.Networking
             //Play Animation here.
             if (NetworkServer.active)
             {
-				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+				base.characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex);
             }
 
 			extraskillLocator = base.GetComponent<ExtraSkillLocator>();
