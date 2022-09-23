@@ -1,14 +1,15 @@
 ﻿using RoR2;
 using UnityEngine;
-using System.Linq;
 using UnityEngine.Networking;
 using EntityStates;
-using DekuMod.Modules.Survivors;
 using System.Collections.Generic;
+using System.Linq;
+using DekuMod.Modules.Survivors;
+using static RoR2.BlastAttack;
 
 namespace DekuMod.SkillStates
 {
-    public class Manchester : BaseSkill
+    public class StLouis100 : BaseSkill100
     {
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
         private GameObject effectPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
@@ -17,16 +18,17 @@ namespace DekuMod.SkillStates
         public float fireTime;
         //private GameObject effectPrefab = Modules.Assets.sEffect;
 
-        public static float blastRadius = 6f;
-        public float distance = 2f;
+        public static float blastRadius = 4f;
+        public float distance = 5f;
         public float maxWeight;
-        public float force = 50f;
+        public float force = 100f;
         private float duration;
         private BlastAttack blastAttack;
         private bool hasFired;
         public Vector3 theSpot;
 
         protected DamageType damageType = DamageType.Stun1s;
+        private BlastAttack blastAttack2;
 
         public override void OnEnter()
         {
@@ -46,32 +48,34 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
             //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", duration, 0.01f);
-            if (NetworkServer.active)
-            {
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration + 1);
-            }
+            base.PlayCrossfade("Fullbody, Override", "LegSmash", "Attack.playbackate", duration / 2, 0.1f);
 
-            //move up a little
-            base.characterMotor.rootMotion += Vector3.up * distance;
-            //get weight, blast attack after
+            //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+            //{
+            //    origin = theSpot,
+            //    scale = 1f,       
+
+            //}, true);
+
+
+            //get weight, teleport after
             GetMaxWeight();
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = blastRadius;
+            blastAttack.radius = blastRadius * moveSpeedStat;
             blastAttack.procCoefficient = 1f;
             blastAttack.position = theSpot;
-            blastAttack.damageType = DamageType.Shock5s;
+            blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis100DamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force * maxWeight;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = damageType;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-        
+            base.characterMotor.Motor.SetPositionAndRotation(characterBody.transform.position + Vector3.up * distance * moveSpeedStat, Util.QuaternionSafeLookRotation(aimRay.direction), true);
         }
 
         protected virtual void OnHitEnemyAuthority()
@@ -88,7 +92,7 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            base.characterMotor.velocity.y = 0f;
+
             if (base.fixedAge >= fireTime && base.isAuthority && !hasFired)
             {
                 hasFired = true;
@@ -96,6 +100,35 @@ namespace DekuMod.SkillStates
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
+                }
+                EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
+                {
+                    origin = theSpot,
+                    scale = blastRadius * moveSpeedStat,
+                    rotation = Util.QuaternionSafeLookRotation(Vector3.down)
+
+                }, true);
+                EffectManager.SpawnEffect(effectPrefab2, new EffectData
+                {
+                    origin = theSpot,
+                    scale = blastRadius * moveSpeedStat,
+                    rotation = Util.QuaternionSafeLookRotation(Vector3.down)
+
+                }, true);
+                for (int i = 0; i <= 10; i++)
+                {
+                    float num = 60f;
+                    Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
+                    float num2 = 0.01f;
+                    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+                    EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
+                    {
+                        origin = theSpot,
+                        scale = blastRadius * moveSpeedStat,
+                        rotation = rotation
+                    }, false);
+
                 }
             }
 
@@ -120,7 +153,7 @@ namespace DekuMod.SkillStates
                 searchOrigin = theSpot,
                 searchDirection = UnityEngine.Random.onUnitSphere,
                 sortMode = BullseyeSearch.SortMode.Distance,
-                maxDistanceFilter = blastRadius,
+                maxDistanceFilter = blastRadius * moveSpeedStat,
                 maxAngleFilter = 360f
             };
 

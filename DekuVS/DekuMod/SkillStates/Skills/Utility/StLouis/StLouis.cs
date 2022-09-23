@@ -1,22 +1,18 @@
-﻿using DekuMod.Modules.Networking;
-using DekuMod.Modules.Survivors;
+﻿using RoR2;
+using UnityEngine;
+using UnityEngine.Networking;
 using EntityStates;
-using EntityStates.Huntress;
-using EntityStates.VagrantMonster;
+using System.Collections.Generic;
+using System.Linq;
+using DekuMod.Modules.Survivors;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using RoR2.Audio;
-using System;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.Networking;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
+using DekuMod.Modules.Networking;
 
 namespace DekuMod.SkillStates
 {
-    public class Detroit : BaseSkill
+    public class StLouis : BaseSkill
     {
         public bool hasTeleported;
         public bool hasFired;
@@ -50,7 +46,7 @@ namespace DekuMod.SkillStates
                 Target = dekucon.GetTrackingTarget();
             }
 
-            if(!Target)
+            if (!Target)
             {
                 return;
             }
@@ -95,13 +91,13 @@ namespace DekuMod.SkillStates
             }
             else
             {
-                base.skillLocator.secondary.AddOneStock();
+                base.skillLocator.utility.AddOneStock();
                 this.outer.SetNextStateToMain();
                 return;
 
             }
         }
-        
+
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;

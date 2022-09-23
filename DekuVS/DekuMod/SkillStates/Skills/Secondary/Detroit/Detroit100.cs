@@ -22,7 +22,8 @@ namespace DekuMod.SkillStates
 		private DamageType damageType;
 		private Vector3 idealDirection;
 
-		private float fireTime = 0.3f;
+		private float baseFireTime = 0.2f;
+		private float fireTime;
 		private float totalDuration;
 		private float hitradius = 15f;
 		private float damageCoefficient = Modules.StaticValues.detroit100DamageCoefficient;
@@ -31,6 +32,7 @@ namespace DekuMod.SkillStates
 		private Vector3 direction;
 		private Animator animator;
 
+		private GameObject areaIndicator;
 		private GameObject explosionPrefab = Modules.Assets.detroitEffect;
 		public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 		private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
@@ -43,6 +45,8 @@ namespace DekuMod.SkillStates
 			Ray aimRay = base.GetAimRay();
 			base.StartAimMode(aimRay, 2f, true);
 			totalDuration = 0f;
+			fireTime = baseFireTime / attackSpeedStat;
+
 			damageType = DamageType.Stun1s;
 			bool isAuthority = base.isAuthority;
 			Util.PlaySound(BaseChargeFist.startChargeLoopSFXString, base.gameObject);
@@ -56,6 +60,7 @@ namespace DekuMod.SkillStates
 				new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.005f).Send(NetworkDestination.Clients);
 			}
 
+			//set speed
 			bool flag = isAuthority;
 			if (flag)
 			{
@@ -74,6 +79,10 @@ namespace DekuMod.SkillStates
 					base.characterBody.inputBank.enabled = false;
 				}
             }
+
+			//indicator
+			this.areaIndicator = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+			this.areaIndicator.SetActive(true);
 
 		}
 
@@ -102,6 +111,13 @@ namespace DekuMod.SkillStates
 
 		public override void OnExit()
 		{
+			bool flag = this.areaIndicator;
+			if (flag)
+			{
+				this.areaIndicator.SetActive(false);
+				EntityState.Destroy(this.areaIndicator);
+			}
+
 			base.characterBody.characterMotor.useGravity = true;
 			base.characterBody.inputBank.enabled = true;
 
@@ -157,6 +173,10 @@ namespace DekuMod.SkillStates
 				//this.direction = base.GetAimRay().direction.normalized;
 				//base.characterDirection.forward = this.direction;
 
+				//indicator update
+				this.areaIndicator.transform.localScale = Vector3.one * this.hitradius * totalDuration;
+				this.areaIndicator.transform.localPosition = base.transform.position;
+
 				base.characterBody.isSprinting = true;
 				base.characterDirection.moveVector = this.idealDirection;
 				base.characterMotor.rootMotion += this.GetIdealVelocity() * Time.fixedDeltaTime;
@@ -188,7 +208,6 @@ namespace DekuMod.SkillStates
 						}, false);
 					}
 
-
 					BlastAttack blastAttack = new BlastAttack();
 					blastAttack.radius = hitradius * totalDuration;
 					blastAttack.procCoefficient = procCoefficient;
@@ -206,7 +225,6 @@ namespace DekuMod.SkillStates
 
 					AkSoundEngine.PostEvent(4108468048, base.gameObject);
 
-					ApplyDoT();
 
 					if (blastAttack.Fire().hitCount > 0)
 					{
@@ -226,25 +244,6 @@ namespace DekuMod.SkillStates
 			}
 		}
 
-		public void ApplyDoT()
-		{
-			Ray aimRay = base.GetAimRay();
-			BullseyeSearch search = new BullseyeSearch
-			{
-
-				teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-				filterByLoS = false,
-				searchOrigin = base.transform.position,
-				searchDirection = UnityEngine.Random.onUnitSphere,
-				sortMode = BullseyeSearch.SortMode.Distance,
-				maxDistanceFilter = hitradius * totalDuration,
-				maxAngleFilter = 360f
-			};
-
-			search.RefreshCandidates();
-			search.FilterOutGameObject(base.gameObject);
-
-		}
 		protected virtual void OnHitEnemyAuthority()
 		{
 			Ray aimRay = base.GetAimRay();

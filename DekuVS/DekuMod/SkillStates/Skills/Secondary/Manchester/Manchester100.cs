@@ -5,30 +5,27 @@ using UnityEngine.Networking;
 using EntityStates;
 using DekuMod.Modules.Survivors;
 using System.Collections.Generic;
+using EntityStates.Huntress;
 
 namespace DekuMod.SkillStates
 {
-    public class Manchester100 : BaseSkillState
+    public class Manchester100 : BaseSkill100
     {
-        public static float basejumpDuration = 0.5f;
-        public static float jumpDuration;
         public static float dropForce = 80f;
-
-        public static float baseRadius = 15f;
-        public static float slamRadius;
+        public float dropTimer;
+        public static float slamRadius = 8f;
         public static float slamProcCoefficient = 1f;
         public static float slamForce = 1000f;
+        private float damageCoefficient = Modules.StaticValues.manchester100DamageCoefficient;
 
         private bool hasDropped;
         private Vector3 flyVector = Vector3.zero;
         private Transform modelTransform;
-        private Transform slamIndicatorInstance;
-        private Transform slamCenterIndicatorInstance;
+        private GameObject slamIndicatorInstance;
         private Ray downRay;
 
-        protected DamageType damageType = DamageType.Stun1s;
-        public DekuController dekucon;
-        private float maxWeight;
+        protected DamageType damageType;
+        private Vector3 theSpot;
 
         //private NemforcerGrabController grabController;
 
@@ -37,21 +34,118 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             this.modelTransform = base.GetModelTransform();
             this.flyVector = Vector3.up;
-            this.hasDropped = false;
-            slamRadius = baseRadius * attackSpeedStat;
-            GetMaxWeight();
-            dekucon = base.GetComponent<DekuController>();
+            damageType = DamageType.Stun1s;
+
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", 0.5f);
+
+
+            base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
+            base.characterMotor.Motor.ForceUnground();
+            base.characterMotor.velocity = Vector3.zero;
+
+            //base.gameObject.layer = LayerIndex.fakeActor.intVal;
+            base.characterMotor.Motor.RebuildCollidableLayers();
+        }
+
+
+        public override void Update()
+        {
+            base.Update();
+
+            if (this.slamIndicatorInstance) this.UpdateSlamIndicator();
+        }
+        protected virtual void OnHitEnemyAuthority()
+        {
+            //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 20) * (this.moveSpeedStat / 7) * dropTimer);
+            //if (characterBody.HasBuff(Modules.Buffs.loaderBuff))
+            //{
+            //    base.healthComponent.AddBarrierAuthority(healthComponent.fullCombinedHealth / 20);
+            //}
+
+        }
+
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", 0.5f);
+            dropTimer += Time.fixedDeltaTime;
+            if (!this.hasDropped)
+            {
+                this.StartDrop();
+            }
+
+            if (!this.slamIndicatorInstance)
+            {
+                this.CreateIndicator();
+            }
+            if (this.slamIndicatorInstance)
+            {
+                this.UpdateSlamIndicator();
+            }
+
+            if (this.hasDropped && base.isAuthority && !base.characterMotor.disableAirControlUntilCollision)
+            {
+                this.LandingImpact();
+                this.outer.SetNextStateToMain();
+            }
+
+        }
+
+        private void StartDrop()
+        {
+            this.hasDropped = true;
+
+            base.characterMotor.disableAirControlUntilCollision = true;
+            base.characterMotor.velocity.y = -dropForce;
+
+            //base.PlayAnimation("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration / 3f);
+            bool active = NetworkServer.active;
+            if (active)
+            {
+                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+            }
+
+        }
+
+        private void CreateIndicator()
+        {
+            if (EntityStates.Huntress.ArrowRain.areaIndicatorPrefab)
+            {
+                this.slamIndicatorInstance = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+                this.slamIndicatorInstance.SetActive(true);
+
+            }
+        }
+        private void UpdateSlamIndicator()
+        {
+            if (this.slamIndicatorInstance)
+            {
+                this.slamIndicatorInstance.transform.localScale = Vector3.one * slamRadius * (1 + dropTimer/2);
+                this.slamIndicatorInstance.transform.localPosition = base.transform.position;
+            }
+        }
+        private void LandingImpact()
+        {
+
             if (base.isAuthority)
             {
+                AkSoundEngine.PostEvent(4108468048, base.gameObject);
+                Ray aimRay = base.GetAimRay();
+
+                base.characterMotor.velocity *= 0.1f;
+
                 BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = Manchester100.slamRadius;
-                blastAttack.procCoefficient = Manchester100.slamProcCoefficient;
+                blastAttack.radius = slamRadius + (1 + dropTimer / 2) * (moveSpeedStat / 7);
+                blastAttack.procCoefficient = slamProcCoefficient;
                 blastAttack.position = base.characterBody.footPosition;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat / 7);
+                blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (moveSpeedStat / 7) * (1 + dropTimer/2);
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = -2 * maxWeight;
+                blastAttack.baseForce = slamForce;
                 blastAttack.teamIndex = base.teamComponent.teamIndex;
                 blastAttack.damageType = damageType;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
@@ -61,248 +155,38 @@ namespace DekuMod.SkillStates
                     this.OnHitEnemyAuthority();
 
                 }
-            }
-
-            if (NetworkServer.active && base.healthComponent)
-            {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-                damageInfo.position = base.transform.position;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.Default;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                base.healthComponent.TakeDamage(damageInfo);
-            }
-
-            jumpDuration = basejumpDuration;
-
-
-            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", jumpDuration, 0.1f);
-            AkSoundEngine.PostEvent(687990298, this.gameObject);
-            AkSoundEngine.PostEvent(1918362945, this.gameObject);
-
-            base.characterMotor.Motor.ForceUnground();
-            base.characterMotor.velocity = Vector3.zero;
-
-            base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
-            
-
-            //base.gameObject.layer = LayerIndex.fakeActor.intVal;
-            base.characterMotor.Motor.RebuildCollidableLayers();
-
-
-            
-        }
-
-        public void GetMaxWeight()
-        {
-            Ray aimRay = base.GetAimRay();
-            BullseyeSearch search = new BullseyeSearch
-            {
-
-                teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-                filterByLoS = false,
-                searchOrigin = base.transform.position,
-                searchDirection = UnityEngine.Random.onUnitSphere,
-                sortMode = BullseyeSearch.SortMode.Distance,
-                maxDistanceFilter = slamRadius,
-                maxAngleFilter = 360f
-            };
-
-            search.RefreshCandidates();
-            search.FilterOutGameObject(base.gameObject);
-
-
-
-            List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-            foreach (HurtBox singularTarget in target)
-            {
-                if (singularTarget)
-                {
-                    if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-                    {
-                        if (singularTarget.healthComponent.body.characterMotor)
-                        {
-                            if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
-                            {
-                                maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
-                            }
-                        }
-                        else if (singularTarget.healthComponent.body.rigidbody)
-                        {
-                            if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
-                            {
-                                maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        public override void Update()
-        {
-            base.Update();
-
-            if (this.slamIndicatorInstance) this.UpdateSlamIndicator();
-        }
-        protected virtual void OnHitEnemyAuthority()
-        {
-            base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 20) * (this.moveSpeedStat/7));
-
-        }
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-
-            if (!this.hasDropped)
-            {
-                base.characterMotor.rootMotion += this.flyVector * ((1f * this.moveSpeedStat) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / Manchester100.jumpDuration) * Time.fixedDeltaTime);
-                base.characterMotor.velocity.y = 0f;
-            }
-
-            if (base.fixedAge >= (0.25f * Manchester100.jumpDuration) && !this.slamIndicatorInstance)
-            {
-                this.CreateIndicator();
-            }
-
-            if (base.fixedAge >= Manchester100.jumpDuration && !this.hasDropped)
-            {
-                this.StartDrop();
-            }
-
-            if (this.hasDropped && base.isAuthority && !base.characterMotor.disableAirControlUntilCollision)
-            {
-                this.LandingImpact();
-                this.outer.SetNextStateToMain();
-            }
-        }
-
-        private void StartDrop()
-        {
-            this.hasDropped = true;
-
-            base.characterMotor.disableAirControlUntilCollision = true;
-            base.characterMotor.velocity.y = -Manchester100.dropForce;
-
-            bool active = NetworkServer.active;
-            if (active)
-            {
-                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
-            }
-        }
-
-        private void CreateIndicator()
-        {
-            if (EntityStates.Huntress.ArrowRain.areaIndicatorPrefab)
-            {
-                this.downRay = new Ray
-                {
-                    direction = Vector3.down,
-                    origin = base.transform.position
-                };
-
-                this.slamIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(EntityStates.Huntress.ArrowRain.areaIndicatorPrefab).transform;
-                this.slamIndicatorInstance.localScale = Vector3.one * Manchester100.slamRadius;
-
-                this.slamCenterIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(EntityStates.Huntress.ArrowRain.areaIndicatorPrefab).transform;
-                this.slamCenterIndicatorInstance.localScale = (Vector3.one * Manchester100.slamRadius) / 3f;
-            }
-        }
-
-        private void LandingImpact()
-        {
-
-            if (base.isAuthority)
-            {
-                base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration / 3f, 0.1f);
-                Ray aimRay = base.GetAimRay();
-                //if (dekucon.isMaxPower)
-                //{
-                //    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-                //    {
-                //        origin = base.transform.position,
-                //        scale = 1f,
-                //        rotation = Quaternion.LookRotation(aimRay.direction)
-                //    }, true);
-                //    damageType = DamageType.Stun1s;
-                //}
-                //else
-                //{
-                //    damageType = DamageType.Stun1s;
-                //}
-                base.characterMotor.velocity *= 0.1f;
-
-                BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = Manchester100.slamRadius;
-                blastAttack.procCoefficient = Manchester100.slamProcCoefficient;
-                blastAttack.position = base.characterBody.footPosition;
-                blastAttack.attacker = base.gameObject;
-                blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat/7f);
-                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = Manchester100.slamForce;
-                blastAttack.teamIndex = base.teamComponent.teamIndex; 
-                blastAttack.damageType = damageType;
-                blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
-
-                if (blastAttack.Fire().hitCount > 0)
-                {
-                    this.OnHitEnemyAuthority();
-
-                }
-
 
 
                 for (int i = 0; i <= 8; i += 1)
                 {
-                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * 8f);
+                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (slamRadius * (1 + dropTimer / 2) * 0.5f));
                     effectPosition.y = base.characterBody.footPosition.y;
-                    EffectManager.SpawnEffect(EntityStates.LemurianBruiserMonster.SpawnState.spawnEffectPrefab, new EffectData
+                    EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
                     {
                         origin = effectPosition,
-                        scale = slamRadius/6,
+                        scale = slamRadius * (1 + dropTimer / 2) * 0.5f * (moveSpeedStat / 7),
                     }, true);
                 }
+
+                //EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
+                //{
+                //    origin = base.characterBody.footPosition,
+                //    scale = slamRadius * (1 + dropTimer / 2),
+                //}, true);
+
+
             }
         }
 
-        private void UpdateSlamIndicator()
-        {
-            if (this.slamIndicatorInstance)
-            {
-                float maxDistance = 250f;
-
-                this.downRay = new Ray
-                {
-                    direction = Vector3.down,
-                    origin = base.transform.position
-                };
-
-                RaycastHit raycastHit;
-                if (Physics.Raycast(this.downRay, out raycastHit, maxDistance, LayerIndex.world.mask))
-                {
-                    this.slamIndicatorInstance.transform.position = raycastHit.point;
-                    this.slamIndicatorInstance.transform.up = raycastHit.normal;
-
-                    this.slamCenterIndicatorInstance.transform.position = raycastHit.point;
-                    this.slamCenterIndicatorInstance.transform.up = raycastHit.normal;
-                }
-            }
-        }
 
         public override void OnExit()
         {
 
-            if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);
-            if (this.slamCenterIndicatorInstance) EntityState.Destroy(this.slamCenterIndicatorInstance.gameObject);
+            base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", 0.5f, 0.01f);
+            if (this.slamIndicatorInstance)
+                this.slamIndicatorInstance.SetActive(false);
+            EntityState.Destroy(this.slamIndicatorInstance);
 
-            base.PlayAnimation("FullBody, Override", "BufferEmpty");
 
 
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
@@ -315,7 +199,7 @@ namespace DekuMod.SkillStates
             base.OnExit();
         }
 
-       
+
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {

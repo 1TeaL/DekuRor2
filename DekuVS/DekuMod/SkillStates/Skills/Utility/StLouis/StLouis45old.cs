@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 namespace DekuMod.SkillStates
 {
 
-	public class StLouis45 : BaseSkillState
+	public class StLouis45old : BaseSkill45
 	{
 
 		public static Vector3 CameraPosition = new Vector3(1.8f, -2.4f, -8f);

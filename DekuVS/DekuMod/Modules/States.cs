@@ -11,9 +11,14 @@ namespace DekuMod.Modules
 
         internal static void RegisterStates()
         {
+            //base skills
             entityStates.Add(typeof(BaseSkill));
             entityStates.Add(typeof(BaseSkill45));
             entityStates.Add(typeof(BaseSkill100));
+
+            //go beyond
+            entityStates.Add(typeof(GoBeyond));
+            entityStates.Add(typeof(GoBeyondEmptySkill));
 
             //primary
             entityStates.Add(typeof(Airforce));

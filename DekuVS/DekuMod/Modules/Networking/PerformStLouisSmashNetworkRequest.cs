@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 namespace DekuMod.Modules.Networking
 {
-    internal class PerformDetroitSmashNetworkRequest : INetMessage
+    internal class PerformStLouisSmashNetworkRequest : INetMessage
     {
         //Network these ones.
         NetworkInstanceId netID;
@@ -21,12 +21,12 @@ namespace DekuMod.Modules.Networking
         private List<HurtBox> trackingTargets;
         private GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 
-        public PerformDetroitSmashNetworkRequest()
+        public PerformStLouisSmashNetworkRequest()
         {
 
         }
 
-        public PerformDetroitSmashNetworkRequest(NetworkInstanceId netID, Vector3 position)
+        public PerformStLouisSmashNetworkRequest(NetworkInstanceId netID, Vector3 position)
         {
             this.netID = netID;
             this.position = position;
@@ -98,7 +98,7 @@ namespace DekuMod.Modules.Networking
                     DamageInfo damageInfo = new DamageInfo
                     {
                         attacker = bodyObj,
-                        damage = dekucharBody.damage * Modules.StaticValues.detroitDamageCoefficient,
+                        damage = dekucharBody.damage * Modules.StaticValues.stlouisDamageCoefficient,
                         position = singularTarget.transform.position,
                         procCoefficient = 1f,
                         damageType = DamageType.Generic,
@@ -106,64 +106,27 @@ namespace DekuMod.Modules.Networking
 
                     };
 
-                    Vector3 direction = Vector3.down;
+                    Vector3 direction = dekucharBody.characterDirection.forward;
                     if (singularTarget.healthComponent.body.characterMotor)
                     {
-                        if (singularTarget.healthComponent.body.characterMotor.isGrounded)
-                        {
                             direction = Vector3.up;
 
                             EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
                             {
                                 origin = singularTarget.transform.position,
                                 scale = 1f,
-                                rotation = Quaternion.LookRotation(Vector3.down).normalized,
+                                rotation = Quaternion.LookRotation(direction).normalized,
 
                             }, true);
                             EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
                             {
                                 origin = singularTarget.transform.position,
                                 scale = 1f,
-                                rotation = Quaternion.LookRotation(Vector3.down).normalized,
+                                rotation = Quaternion.LookRotation(direction).normalized,
 
                             }, true);
-                        }
-                        else
-                        {
-
-                            EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
-                            {
-                                origin = singularTarget.transform.position,
-                                scale = 1f,
-                                rotation = Quaternion.LookRotation(Vector3.up).normalized,
-
-                            }, true);
-                            EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
-                            {
-                                origin = singularTarget.transform.position,
-                                scale = 1f,
-                                rotation = Quaternion.LookRotation(Vector3.up).normalized,
-
-                            }, true);
-                        }
-                    }
-                    else
-                    {
-
-                        EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
-                        {
-                            origin = singularTarget.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(Vector3.up).normalized,
-
-                        }, true);
-                        EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
-                        {
-                            origin = singularTarget.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(Vector3.up).normalized,
-
-                        }, true);
+                        
+                        
                     }
 
                     singularTarget.healthComponent.TakeDamageForce(direction * 40f * (Weight), true, true);

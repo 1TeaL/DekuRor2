@@ -17,6 +17,13 @@ namespace DekuMod.Modules
         internal static float skillPlusUltraGain = 5f;
         internal static float basePlusUltraSpend = 50f;
 
+        //detroit
+        internal const float detroitDamageCoefficient = 6f;
+        internal const float detroitRange = 5f;
+        internal const float detroit45DamageCoefficient = 6f;
+        internal const float detroit100DamageCoefficient = 6f;
+
+
         //Primary damage
         internal const float airforceDamageCoefficient = 1f;
         internal const float shootkickDamageCoefficient = 2f;
@@ -40,9 +47,6 @@ namespace DekuMod.Modules
         internal const float stlouis100DamageCoefficient = 4f;
 
         //Utility damage
-        internal const float detroit100DamageCoefficient = 6f;
-        internal const float detroitDamageCoefficient = 6f;
-        internal const float detroit45DamageCoefficient = 6f;
         internal const float stlouis45DamageCoefficient = 6f;
         internal const float delawareDamageCoefficient = 6f;
         internal const float delaware45DamageCoefficient = 6f;
