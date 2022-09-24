@@ -7,21 +7,20 @@ using System.Linq;
 
 namespace DekuMod.SkillStates
 {
-    public class Blackwhip100 : BaseSkillState
+    public class Blackwhip100 : BaseSkill100
     {
+        private BlastAttack blastAttack;
+
         public float baseDuration = 0.5f;
+        private float duration;
+        public float fireTime;
+        public float fireInterval;
+        public float timer;
+
         public static float blastRadius = 10f;
         public static float succForce = 4f;
-        private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/ImpBossBlink");
 
-        private float duration;
-        private float maxWeight;
-        private BlastAttack blastAttack;
-        private bool hasFired;
-        private bool hasFired2;
-        private bool hasFired3;
         public Vector3 theSpot;
-        public Vector3 thecloserSpot;
         public float whipage;
 
 
@@ -32,17 +31,15 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
-            hasFired = false;
-            hasFired2 = false;
-            hasFired3 = false;
-            speedattack = attackSpeedStat / 2;
+            fireTime = duration / 2f;
+            fireInterval = fireTime / 2f;
+            timer = 0f;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
             //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
 
-            GetMaxWeight();
-            theSpot = aimRay.origin + 20 * aimRay.direction;
+            theSpot = aimRay.origin + 0.5f * attackSpeedStat * blastRadius * aimRay.direction;
             AkSoundEngine.PostEvent(3709822086, this.gameObject);
             AkSoundEngine.PostEvent(3062535197, this.gameObject);
             base.StartAimMode(duration, true);
@@ -61,96 +58,73 @@ namespace DekuMod.SkillStates
 
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = Blackwhip100.blastRadius * this.attackSpeedStat;
+            blastAttack.radius = blastRadius * this.attackSpeedStat;
             blastAttack.procCoefficient = 1f;
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
             blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.blackwhip100DamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.baseForce = -2f * maxWeight * Modules.StaticValues.blackwhipPull;
+            blastAttack.baseForce = 0f;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-            if (NetworkServer.active && base.healthComponent)
+            //pull
+            if (NetworkServer.active)
             {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.1f;
-                damageInfo.position = base.transform.position;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.Default;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                base.healthComponent.TakeDamage(damageInfo);
-            }
-
-            //EffectData effectData = new EffectData();
-            //effectData.origin = theSpot2;
-            //effectData.scale = (blastRadius / 5) * this.attackSpeedStat;
-            //effectData.rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z));
-
-            //EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
-
-        }
-
-        public void GetMaxWeight()
-        {
-            Ray aimRay = base.GetAimRay();
-            theSpot = aimRay.origin + 20 * aimRay.direction;
-            BullseyeSearch search = new BullseyeSearch
-            {
-
-                teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-                filterByLoS = false,
-                searchOrigin = theSpot,
-                searchDirection = UnityEngine.Random.onUnitSphere,
-                sortMode = BullseyeSearch.SortMode.Distance,
-                maxDistanceFilter = blastRadius * speedattack,
-                maxAngleFilter = 360f
-            };
-
-            search.RefreshCandidates();
-            search.FilterOutGameObject(base.gameObject);
-
-
-
-            List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-            foreach (HurtBox singularTarget in target)
-            {
-                if (singularTarget)
+                Collider[] array = Physics.OverlapSphere(theSpot, blastRadius * attackSpeedStat, LayerIndex.defaultLayer.mask);
+                for (int i = 0; i < array.Length; i++)
                 {
-                    if (singularTarget.healthComponent && singularTarget.healthComponent.body)
+                    HealthComponent healthComponent = array[i].GetComponent<HealthComponent>();
+                    if (healthComponent)
                     {
-                        if (singularTarget.healthComponent.body.characterMotor)
+                        TeamComponent component2 = healthComponent.GetComponent<TeamComponent>();
+                        if (component2.teamIndex != TeamIndex.Player)
                         {
-                            if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
+                            var charb = healthComponent.body;
+                            if (charb)
                             {
-                                maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
-                            }
-                        }
-                        else if (singularTarget.healthComponent.body.rigidbody)
-                        {
-                            if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
-                            {
-                                maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
+                                Vector3 pushForce = (theSpot - charb.corePosition) * succForce;
+                                var motor = charb.GetComponent<CharacterMotor>();
+                                var rb = charb.GetComponent<Rigidbody>();
+
+                                float mass = 1;
+                                if (motor) mass = motor.mass;
+                                else if (rb) mass = rb.mass;
+                                if (mass < 100) mass = 100;
+
+                                pushForce *= mass;
+
+                                DamageInfo info = new DamageInfo
+                                {
+                                    attacker = base.gameObject,
+                                    inflictor = base.gameObject,
+                                    damage = 0,
+                                    damageColorIndex = DamageColorIndex.Default,
+                                    damageType = DamageType.Generic,
+                                    crit = false,
+                                    dotIndex = DotController.DotIndex.None,
+                                    force = pushForce,
+                                    position = base.transform.position,
+                                    procChainMask = default(ProcChainMask),
+                                    procCoefficient = 0
+                                };
+
+                                charb.healthComponent.TakeDamageForce(info, true, true);
                             }
                         }
                     }
                 }
             }
+
         }
+
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 30) * this.attackSpeedStat);
+            //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 30) * this.attackSpeedStat);
 
         }
-
-
 
 
         public override void OnExit()
@@ -164,13 +138,11 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            Ray aimRay = base.GetAimRay();
+            timer += Time.fixedDeltaTime;
 
-            if (base.fixedAge >= this.duration / 2 && base.isAuthority && !hasFired)
+            if (timer >= fireTime && base.isAuthority)
             {
-                hasFired = true;
-                theSpot = aimRay.origin + 20 * aimRay.direction;
-                blastAttack.position = theSpot;
+                timer -= fireInterval;
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
@@ -183,41 +155,7 @@ namespace DekuMod.SkillStates
                 }, true);
             }
 
-            if (base.fixedAge >= this.duration / 1.7 && base.isAuthority && !hasFired2)
-            {
-                hasFired2 = true;
-                theSpot = aimRay.origin + 15 * aimRay.direction;
-                blastAttack.position = theSpot;
-                if (blastAttack.Fire().hitCount > 0)
-                {
-                    this.OnHitEnemyAuthority();
-                }
-                EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
-                {
-                    origin = theSpot,
-                    scale = 1f,
-
-                }, true);
-            }
-
-            if (base.fixedAge >= this.duration / 1.5 && base.isAuthority && !hasFired3)
-            {
-                hasFired3 = true;
-                theSpot = aimRay.origin + 10 * aimRay.direction;
-                blastAttack.position = theSpot;
-                if (blastAttack.Fire().hitCount > 0)
-                {
-                    this.OnHitEnemyAuthority();
-                }
-                EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
-                {
-                    origin = theSpot,
-                    scale = 1f,
-
-                }, true);
-            }
-
-
+            
             if ((base.fixedAge >= this.duration && base.isAuthority))
             {
                 this.outer.SetNextStateToMain();

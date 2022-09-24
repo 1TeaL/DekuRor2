@@ -827,7 +827,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "QUIRKPRIMARY_NAME",
                 skillDescriptionToken = prefix + "QUIRKPRIMARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("blackwhip"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.BlackwhipFront)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Blackwhip)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0.5f,

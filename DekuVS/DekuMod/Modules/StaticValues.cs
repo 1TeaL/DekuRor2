@@ -15,26 +15,36 @@ namespace DekuMod.Modules
         internal static float regenPlusUltraRate = 4f;
         internal static float basePlusUltraGain = 1f;
         internal static float skillPlusUltraGain = 5f;
-        internal static float basePlusUltraSpend = 50f;
+        internal static float skillPlusUltraSpend = 5f;
+        internal static float skill45PlusUltraSpend = 15f;
+        internal static float skill100PlusUltraSpend = 25f;
+        internal static float specialPlusUltraSpend = 50f;
 
+
+
+        //Primary
+        //airforce
+        internal const float airforceDamageCoefficient = 1f;
+        internal const float airforce45DamageCoefficient = 1.25f;
+        internal const float airforce100DamageCoefficient = 2f;
+
+        internal const float shootkickDamageCoefficient = 2f;
+        internal const float shootkick45DamageCoefficient = 3f;
+        internal const float shootkick100DamageCoefficient = 1f;
+        internal const float shootbulletDamageCoefficient = 2f;
+        internal const float fajinDamageCoefficient = 0.5f;
+        internal const float counterDamageCoefficient = 6f;
+
+        //Secondary
         //detroit
         internal const float detroitDamageCoefficient = 6f;
         internal const float detroitRange = 5f;
         internal const float detroit45DamageCoefficient = 6f;
         internal const float detroit100DamageCoefficient = 6f;
-
-
-        //Primary damage
-        internal const float airforceDamageCoefficient = 1f;
-        internal const float shootkickDamageCoefficient = 2f;
-        internal const float shootkick45DamageCoefficient = 3f;
-        internal const float shootkick100DamageCoefficient = 1f;
-        internal const float airforce45DamageCoefficient = 1.25f;
-        internal const float shootbulletDamageCoefficient = 2f;
-        internal const float fajinDamageCoefficient = 0.5f;
-        internal const float airforce100DamageCoefficient = 2f;
-        internal const float counterDamageCoefficient = 6f;
-
+        //dangersense
+        internal const int dangersenseBuffTimer = 2;
+        internal const int dangersense45BuffTimer = 4;
+        internal const int dangersense100BuffTimer = 10;
         //Secondary damage
         internal const float blackwhipDamageCoefficient = 1f;
         internal const float manchesterDamageCoefficient = 3f;

@@ -9,11 +9,11 @@ using Random = UnityEngine.Random;
 
 namespace DekuMod.SkillStates
 {
-    public class DangerSense100 : BaseSkillState
+    public class DangerSense45old : BaseSkillState
     {
 
         public static float procCoefficient = 2f;
-        public static float baseDuration = 1f;
+        public static float baseDuration = 1.5f;
         public static float force = 300f;
 
         private float duration;
@@ -67,22 +67,6 @@ namespace DekuMod.SkillStates
             if (this.fireTime < 0.1f)
             {
                 fireTime = 0.1f;
-            }
-
-            if (NetworkServer.active && base.healthComponent)
-            {
-                DamageInfo damageInfo = new DamageInfo();
-                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
-                damageInfo.position = base.transform.position;
-                damageInfo.force = Vector3.zero;
-                damageInfo.damageColorIndex = DamageColorIndex.Default;
-                damageInfo.crit = false;
-                damageInfo.attacker = null;
-                damageInfo.inflictor = null;
-                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
-                damageInfo.procCoefficient = 0f;
-                damageInfo.procChainMask = default(ProcChainMask);
-                base.healthComponent.TakeDamage(damageInfo);
             }
 
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
@@ -216,6 +200,7 @@ namespace DekuMod.SkillStates
             }
             orig.Invoke(self, damageInfo);
         }
+    
 
 
         public override void OnExit()
@@ -254,7 +239,7 @@ namespace DekuMod.SkillStates
                     }
                     break;
                 case DangerState.CHECKFLIP:
-                  
+
                     if (base.fixedAge > duration - fireTime)
                     {
                         state = DangerState.END;

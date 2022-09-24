@@ -15,6 +15,9 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(BaseSkill));
             entityStates.Add(typeof(BaseSkill45));
             entityStates.Add(typeof(BaseSkill100));
+            entityStates.Add(typeof(BaseQuirk));
+            entityStates.Add(typeof(BaseQuirk45));
+            entityStates.Add(typeof(BaseQuirk100));
 
             //go beyond
             entityStates.Add(typeof(GoBeyond));
@@ -33,7 +36,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(ShootStylePrimary));
 
             entityStates.Add(typeof(ShootStyleBullet));
-            entityStates.Add(typeof(BlackwhipFront));
+            entityStates.Add(typeof(Blackwhip));
             entityStates.Add(typeof(Manchester));
             entityStates.Add(typeof(Blackwhip45));
             entityStates.Add(typeof(ShootStyleDash));

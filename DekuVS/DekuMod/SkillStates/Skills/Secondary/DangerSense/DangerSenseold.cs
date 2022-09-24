@@ -9,23 +9,21 @@ using Random = UnityEngine.Random;
 
 namespace DekuMod.SkillStates
 {
-    public class DangerSense45 : BaseSkillState
+    public class DangerSenseold : BaseSkill
     {
 
-        public static float procCoefficient = 2f;
-        public static float baseDuration = 1.5f;
-        public static float force = 300f;
 
         private float duration;
         private float fireTime;
 
         public float fajin;
-        protected DamageType damageType;
-        public DekuController dekucon;
 
         public bool counteron;
         private BlastAttack blastAttack;
         public float blastRadius = 7f;
+        public static float procCoefficient = 2f;
+        public static float baseDuration = 2f;
+        public static float force = 300f;
 
 
         private Vector3 randRelPos;
@@ -35,45 +33,36 @@ namespace DekuMod.SkillStates
 
         public DangerSenseComponent dangercon;
 
-        public enum DangerState { STARTBUFF, CHECKFLIP, END };
+        public enum DangerState {STARTBUFF, CHECKFLIP, END };
         public DangerState state;
+        public DamageType damageType = DamageType.Freeze2s;
 
         public override void OnEnter()
         {
             base.OnEnter();
             state = DangerState.STARTBUFF;
 
-            dekucon = base.GetComponent<DekuController>();
             this.duration = baseDuration;
-
+            
             //base.characterBody.SetAimTimer(duration);
             //this.muzzleString = "LFinger";
 
             counteron = false;
             dekucon.countershouldflip = false;
 
-            //if (dekucon.isMaxPower)
-            //{
-            //    dekucon.RemoveBuffCount(50);
-            //    fajin = 2f;
-            //}
-            //else
-            //{
-            //    fajin = 1f;
-            //}
-            //dekucon.AddToBuffCount(10);
 
             this.fireTime = duration / (4f * attackSpeedStat * fajin);
             if (this.fireTime < 0.1f)
             {
                 fireTime = 0.1f;
             }
-
+                                 
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
         }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
+
             if (damageInfo != null && damageInfo.attacker && damageInfo.attacker.GetComponent<CharacterBody>())
             {
                 bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
@@ -195,12 +184,11 @@ namespace DekuMod.SkillStates
                     }
 
                 }
-
+        
 
             }
             orig.Invoke(self, damageInfo);
         }
-    
 
 
         public override void OnExit()
@@ -238,9 +226,8 @@ namespace DekuMod.SkillStates
                         state = DangerState.CHECKFLIP;
                     }
                     break;
-                case DangerState.CHECKFLIP:
-
-                    if (base.fixedAge > duration - fireTime)
+                case DangerState.CHECKFLIP:                    
+                    if(base.fixedAge > duration - fireTime)
                     {
                         state = DangerState.END;
                     }
@@ -330,7 +317,7 @@ namespace DekuMod.SkillStates
 
             //    //base.PlayCrossfade("Gesture, Override", "CounterEnd", "Attack.playbackRate", this.duration / (4 * attackSpeedStat * fajin), this.duration / (4 * attackSpeedStat * fajin));
             //}
-
+            
 
 
             //if (base.fixedAge >= this.duration && base.isAuthority)
@@ -342,7 +329,7 @@ namespace DekuMod.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

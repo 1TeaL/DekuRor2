@@ -9,17 +9,19 @@ using Random = UnityEngine.Random;
 
 namespace DekuMod.SkillStates
 {
-    public class DangerSense : BaseSkill
+    public class DangerSense100old : BaseSkillState
     {
 
         public static float procCoefficient = 2f;
-        public static float baseDuration = 2f;
+        public static float baseDuration = 1f;
         public static float force = 300f;
 
         private float duration;
         private float fireTime;
 
         public float fajin;
+        protected DamageType damageType;
+        public DekuController dekucon;
 
         public bool counteron;
         private BlastAttack blastAttack;
@@ -33,36 +35,61 @@ namespace DekuMod.SkillStates
 
         public DangerSenseComponent dangercon;
 
-        public enum DangerState {STARTBUFF, CHECKFLIP, END };
+        public enum DangerState { STARTBUFF, CHECKFLIP, END };
         public DangerState state;
-        public DamageType damageType = DamageType.Freeze2s;
 
         public override void OnEnter()
         {
             base.OnEnter();
             state = DangerState.STARTBUFF;
 
+            dekucon = base.GetComponent<DekuController>();
             this.duration = baseDuration;
-            
+
             //base.characterBody.SetAimTimer(duration);
             //this.muzzleString = "LFinger";
 
             counteron = false;
             dekucon.countershouldflip = false;
 
+            //if (dekucon.isMaxPower)
+            //{
+            //    dekucon.RemoveBuffCount(50);
+            //    fajin = 2f;
+            //}
+            //else
+            //{
+            //    fajin = 1f;
+            //}
+            //dekucon.AddToBuffCount(10);
 
             this.fireTime = duration / (4f * attackSpeedStat * fajin);
             if (this.fireTime < 0.1f)
             {
                 fireTime = 0.1f;
             }
-                                 
+
+            if (NetworkServer.active && base.healthComponent)
+            {
+                DamageInfo damageInfo = new DamageInfo();
+                damageInfo.damage = base.healthComponent.fullCombinedHealth * 0.05f;
+                damageInfo.position = base.transform.position;
+                damageInfo.force = Vector3.zero;
+                damageInfo.damageColorIndex = DamageColorIndex.Default;
+                damageInfo.crit = false;
+                damageInfo.attacker = null;
+                damageInfo.inflictor = null;
+                damageInfo.damageType = (DamageType.NonLethal | DamageType.BypassArmor);
+                damageInfo.procCoefficient = 0f;
+                damageInfo.procChainMask = default(ProcChainMask);
+                base.healthComponent.TakeDamage(damageInfo);
+            }
+
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
         }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-
             if (damageInfo != null && damageInfo.attacker && damageInfo.attacker.GetComponent<CharacterBody>())
             {
                 bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
@@ -184,7 +211,7 @@ namespace DekuMod.SkillStates
                     }
 
                 }
-        
+
 
             }
             orig.Invoke(self, damageInfo);
@@ -226,8 +253,9 @@ namespace DekuMod.SkillStates
                         state = DangerState.CHECKFLIP;
                     }
                     break;
-                case DangerState.CHECKFLIP:                    
-                    if(base.fixedAge > duration - fireTime)
+                case DangerState.CHECKFLIP:
+                  
+                    if (base.fixedAge > duration - fireTime)
                     {
                         state = DangerState.END;
                     }
@@ -317,7 +345,7 @@ namespace DekuMod.SkillStates
 
             //    //base.PlayCrossfade("Gesture, Override", "CounterEnd", "Attack.playbackRate", this.duration / (4 * attackSpeedStat * fajin), this.duration / (4 * attackSpeedStat * fajin));
             //}
-            
+
 
 
             //if (base.fixedAge >= this.duration && base.isAuthority)

@@ -97,6 +97,7 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<HealNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PeformShootStyleKickAttackNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformStLouisSmashNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<PerformForceNetworkRequest>();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
