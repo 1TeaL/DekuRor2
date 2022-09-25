@@ -39,12 +39,11 @@ namespace DekuMod.SkillStates
             this.fireTime = duration / (4 * attackSpeedStat);
 
 
-            //characterBody.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+            //characterBody.RemoveBuff(Modules.Buffs.dangersenseBuff.buffIndex);
 
             dekucon = base.GetComponent<DekuController>();
             base.skillLocator.primary.AddOneStock();
 
-            dekucon.countershouldflip = false;
             dekucon.DANGERSENSE.Stop();
             //if (dekucon.isMaxPower)
             //{
@@ -71,7 +70,7 @@ namespace DekuMod.SkillStates
             //blastAttack.position = base.characterBody.corePosition;
             //blastAttack.attacker = base.gameObject;
             //blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            //blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient;
+            //blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.dangersenseDamageCoefficient;
             //blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             //blastAttack.baseForce = force;
             //blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

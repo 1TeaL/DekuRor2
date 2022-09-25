@@ -97,7 +97,7 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<HealNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PeformShootStyleKickAttackNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformStLouisSmashNetworkRequest>();
-            NetworkingAPI.RegisterMessageType<PerformForceNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<PerformBlackwhipNetworkRequest>();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
@@ -207,10 +207,10 @@ namespace DekuMod
                     bool goBeyond = self.HasBuff(Buffs.goBeyondBuff);
                     if (goBeyond)
                     {
-                        HealthComponent hp = self.healthComponent;
-                        float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
-                        float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
-                        self.regen += regen;
+                        //HealthComponent hp = self.healthComponent;
+                        //float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
+                        //float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
+                        //self.regen += regen;
                         self.armor *= 5f;
                         self.moveSpeed *= 1.5f;
                     }

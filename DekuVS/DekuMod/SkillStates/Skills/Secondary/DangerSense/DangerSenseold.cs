@@ -48,7 +48,6 @@ namespace DekuMod.SkillStates
             //this.muzzleString = "LFinger";
 
             counteron = false;
-            dekucon.countershouldflip = false;
 
 
             this.fireTime = duration / (4f * attackSpeedStat * fajin);
@@ -68,19 +67,19 @@ namespace DekuMod.SkillStates
                 bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
                 if (!flag && damageInfo.damage > 0f)
                 {
-                    if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+                    if (self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex))
                     {
                         damageInfo.rejected = true;
 
 
-                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
+                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
 
                         var dekucon = self.body.gameObject.GetComponent<DekuController>();
                         //dekucon.countershouldflip = true;
 
                         var damageInfo2 = new DamageInfo();
 
-                        damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
+                        damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
                         damageInfo2.position = damageInfo.attacker.transform.position;
                         damageInfo2.force = Vector3.zero;
                         damageInfo2.damageColorIndex = DamageColorIndex.Default;
@@ -130,7 +129,7 @@ namespace DekuMod.SkillStates
                         blastAttack.position = base.characterBody.corePosition;
                         blastAttack.attacker = base.gameObject;
                         blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-                        blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.counterDamageCoefficient;
+                        blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.dangersenseDamageCoefficient;
                         blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                         blastAttack.baseForce = force;
                         blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
@@ -160,7 +159,7 @@ namespace DekuMod.SkillStates
                         }
 
 
-                        self.body.RemoveBuff(Modules.Buffs.counterBuff.buffIndex);
+                        self.body.RemoveBuff(Modules.Buffs.dangersenseBuff.buffIndex);
 
                         //self.body.gameObject.GetComponent<EntityStateMachine>().SetInterruptState(new FrozenState(), InterruptPriority.Frozen);
 
@@ -195,9 +194,9 @@ namespace DekuMod.SkillStates
         {
             On.RoR2.HealthComponent.TakeDamage -= HealthComponent_TakeDamage;
             bool active = NetworkServer.active;
-            if (active && base.characterBody.HasBuff(Modules.Buffs.counterBuff))
+            if (active && base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff))
             {
-                base.characterBody.RemoveBuff(Modules.Buffs.counterBuff);
+                base.characterBody.RemoveBuff(Modules.Buffs.dangersenseBuff);
             }
             base.OnExit();
         }
@@ -211,7 +210,7 @@ namespace DekuMod.SkillStates
             {
                 case DangerState.STARTBUFF:
                     if (base.fixedAge >= fireTime && base.fixedAge < (duration - fireTime)
-                && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+                && !base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex))
                     {
                         //Debug.Log(fireTime);
                         //Debug.Log("counterstart");
@@ -219,7 +218,7 @@ namespace DekuMod.SkillStates
                         bool active = NetworkServer.active;
                         if (active)
                         {
-                            base.characterBody.AddBuff(Modules.Buffs.counterBuff);
+                            base.characterBody.AddBuff(Modules.Buffs.dangersenseBuff);
 
                         }
                         AkSoundEngine.PostEvent(573664262, this.gameObject);
@@ -240,9 +239,9 @@ namespace DekuMod.SkillStates
                         //Debug.Log("counterend");
                         dekucon.DANGERSENSE.Stop();
                         bool active = NetworkServer.active;
-                        if (active && base.characterBody.HasBuff(Modules.Buffs.counterBuff))
+                        if (active && base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff))
                         {
-                            base.characterBody.RemoveBuff(Modules.Buffs.counterBuff);
+                            base.characterBody.RemoveBuff(Modules.Buffs.dangersenseBuff);
                         }
 
                     }
@@ -256,7 +255,7 @@ namespace DekuMod.SkillStates
             }
 
             //if (base.fixedAge >= fireTime && base.fixedAge < (duration - fireTime) 
-            //    && !base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex) 
+            //    && !base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex) 
             //    && !counteron)
             //{
             //    Debug.Log(fireTime);
@@ -266,7 +265,7 @@ namespace DekuMod.SkillStates
             //    bool active = NetworkServer.active;
             //    if (active)
             //    {
-            //        base.characterBody.AddBuff(Modules.Buffs.counterBuff);
+            //        base.characterBody.AddBuff(Modules.Buffs.dangersenseBuff);
             //        //dangercon = base.characterBody.gameObject.GetComponent<DangerSenseComponent>();
             //        //characterBody.gameObject.AddComponent<DangerSenseComponent>();
 
@@ -282,10 +281,10 @@ namespace DekuMod.SkillStates
 
 
 
-            //    Debug.Log("buffmiddle" + base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex));
+            //    Debug.Log("buffmiddle" + base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
             //    Debug.Log("counteronmiddle"+counteron);
 
-            //    if (!base.characterBody.HasBuff(Modules.Buffs.counterBuff.buffIndex) 
+            //    if (!base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex) 
             //        && counteron)
             //    {
             //        On.RoR2.HealthComponent.TakeDamage -= HealthComponent_TakeDamage;
@@ -310,9 +309,9 @@ namespace DekuMod.SkillStates
             //    dekucon.countershouldflip = false;
             //    dekucon.DANGERSENSE.Stop();
             //    bool active = NetworkServer.active;
-            //    if (active && base.characterBody.HasBuff(Modules.Buffs.counterBuff))
+            //    if (active && base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff))
             //    {
-            //        base.characterBody.RemoveBuff(Modules.Buffs.counterBuff);
+            //        base.characterBody.RemoveBuff(Modules.Buffs.dangersenseBuff);
             //    }
 
             //    //base.PlayCrossfade("Gesture, Override", "CounterEnd", "Attack.playbackRate", this.duration / (4 * attackSpeedStat * fajin), this.duration / (4 * attackSpeedStat * fajin));

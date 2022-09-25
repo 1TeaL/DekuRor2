@@ -57,7 +57,7 @@ namespace DekuMod.SkillStates
 
 			if (base.isAuthority)
 			{
-				new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.005f).Send(NetworkDestination.Clients);
+				new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
 			}
 
 			//set speed

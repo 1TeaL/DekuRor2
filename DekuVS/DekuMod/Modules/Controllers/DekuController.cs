@@ -49,11 +49,11 @@ namespace DekuMod.Modules.Survivors
         //public bool kickon;
 
         //danger sense
-        public bool countershouldflip;
-        public bool dangersensefreeze;
         private Vector3 randRelPos;
         private BlastAttack blastAttack;
-        public float blastRadius = 7f;
+        public float dangersenseBlastRadius = 3f;
+        public float dangersense45BlastRadius = 5f;
+        public float dangersense100BlastRadius = 7f;
         public static float procCoefficient = 1f;
         public static float force = 300f;
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
@@ -119,27 +119,113 @@ namespace DekuMod.Modules.Survivors
                 bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
                 if (!flag && damageInfo.damage > 0f)
                 {
-                    if (self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex))
+                    //dangersense base
+                    if (self.body.HasBuff(Modules.Buffs.dangersense100Buff.buffIndex))
                     {
-                        damageInfo.rejected = true;
+                        damageInfo.force = Vector3.zero;
+                        damageInfo.damage -= self.body.level * 3f;
+                        if(damageInfo.damage < 0f)
+                        {
+                            self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
+                            damageInfo.damage = 0f;
+                        }
 
-
-                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.counterBuff.buffIndex));
+                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
 
                         var dekucon = self.body.gameObject.GetComponent<DekuController>();
                         //dekucon.countershouldflip = true;
 
                         var damageInfo2 = new DamageInfo();
 
-                        damageInfo2.damage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
+                        damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
                         damageInfo2.position = damageInfo.attacker.transform.position;
                         damageInfo2.force = Vector3.zero;
                         damageInfo2.damageColorIndex = DamageColorIndex.Default;
                         damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
                         damageInfo2.attacker = self.gameObject;
                         damageInfo2.inflictor = null;
-                        damageInfo2.damageType = DamageType.BypassArmor | DamageType.WeakOnHit;
-                        damageInfo2.procCoefficient = 2f;
+                        damageInfo2.damageType = DamageType.Generic;
+                        damageInfo2.procCoefficient = 1f;
+                        damageInfo2.procChainMask = default(ProcChainMask);
+
+                        if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
+                            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+                        {
+                            damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+                        }
+
+                        Vector3 enemyPos = damageInfo.attacker.transform.position;
+                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                        {
+                            origin = self.body.transform.position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
+
+                        }, true);
+
+                        new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
+
+
+
+                        //blastAttack = new BlastAttack();
+                        //blastAttack.radius = dangersenseBlastRadius;
+                        //blastAttack.procCoefficient = procCoefficient;
+                        //blastAttack.position = self.transform.position;
+                        //blastAttack.attacker = base.gameObject;
+                        //blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                        //blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
+                        //blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                        //blastAttack.baseForce = force;
+                        //blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                        //blastAttack.damageType = DamageType.Shock5s;
+                        //blastAttack.attackerFiltering = AttackerFiltering.Default;
+
+
+                        //blastAttack.Fire();
+
+                        //for (int i = 0; i <= 5; i++)
+                        //{
+                        //    this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+                        //    float num = 60f;
+                        //    Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
+                        //    float num2 = 0.01f;
+                        //    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                        //    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+
+                        //    EffectData effectData = new EffectData
+                        //    {
+                        //        scale = 1f,
+                        //        origin = self.body.corePosition + this.randRelPos,
+                        //        rotation = rotation
+
+                        //    };
+                        //    EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                        //}
+
+
+                    }
+                    //dangersense 45
+                    if (self.body.HasBuff(Modules.Buffs.dangersense100Buff.buffIndex))
+                    {
+                        damageInfo.damage *= StaticValues.dangersense45DamageReduction;
+
+
+                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
+
+                        var dekucon = self.body.gameObject.GetComponent<DekuController>();
+                        //dekucon.countershouldflip = true;
+
+                        var damageInfo2 = new DamageInfo();
+
+                        damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersense45DamageCoefficient;
+                        damageInfo2.position = damageInfo.attacker.transform.position;
+                        damageInfo2.force = Vector3.zero;
+                        damageInfo2.damageColorIndex = DamageColorIndex.Default;
+                        damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                        damageInfo2.attacker = self.gameObject;
+                        damageInfo2.inflictor = null;
+                        damageInfo2.damageType = DamageType.Shock5s;
+                        damageInfo2.procCoefficient = 1f;
                         damageInfo2.procChainMask = default(ProcChainMask);
 
                         if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
@@ -162,16 +248,96 @@ namespace DekuMod.Modules.Survivors
 
 
                         blastAttack = new BlastAttack();
-                        blastAttack.radius = blastRadius;
+                        blastAttack.radius = dangersenseBlastRadius;
                         blastAttack.procCoefficient = procCoefficient;
                         blastAttack.position = self.transform.position;
                         blastAttack.attacker = base.gameObject;
                         blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        blastAttack.baseDamage = self.body.damage * Modules.StaticValues.counterDamageCoefficient;
+                        blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersense45DamageCoefficient;
                         blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                         blastAttack.baseForce = force;
                         blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                         blastAttack.damageType = DamageType.Shock5s;
+                        blastAttack.attackerFiltering = AttackerFiltering.Default;
+
+
+                        blastAttack.Fire();
+
+                        for (int i = 0; i <= 5; i++)
+                        {
+                            this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+                            float num = 60f;
+                            Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
+                            float num2 = 0.01f;
+                            rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                            rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+
+                            EffectData effectData = new EffectData
+                            {
+                                scale = 1f,
+                                origin = self.body.corePosition + this.randRelPos,
+                                rotation = rotation
+
+                            };
+                            EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                        }
+
+
+                    }
+                    //dangersense 100
+                    if (self.body.HasBuff(Modules.Buffs.dangersense100Buff.buffIndex))
+                    {
+                        damageInfo.rejected = true;
+
+
+                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
+
+                        var dekucon = self.body.gameObject.GetComponent<DekuController>();
+                        //dekucon.countershouldflip = true;
+
+                        var damageInfo2 = new DamageInfo();
+
+                        damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersense100DamageCoefficient;
+                        damageInfo2.position = damageInfo.attacker.transform.position;
+                        damageInfo2.force = Vector3.zero;
+                        damageInfo2.damageColorIndex = DamageColorIndex.Default;
+                        damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                        damageInfo2.attacker = self.gameObject;
+                        damageInfo2.inflictor = null;
+                        damageInfo2.damageType = DamageType.Freeze2s;
+                        damageInfo2.procCoefficient = 1f;
+                        damageInfo2.procChainMask = default(ProcChainMask);
+
+                        if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
+                            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+                        {
+                            damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+                        }
+
+                        Vector3 enemyPos = damageInfo.attacker.transform.position;
+                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                        {
+                            origin = self.body.transform.position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
+
+                        }, true);
+
+                        new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
+
+
+
+                        blastAttack = new BlastAttack();
+                        blastAttack.radius = dangersense100BlastRadius;
+                        blastAttack.procCoefficient = procCoefficient;
+                        blastAttack.position = self.transform.position;
+                        blastAttack.attacker = base.gameObject;
+                        blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                        blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersense100DamageCoefficient;
+                        blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                        blastAttack.baseForce = force;
+                        blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                        blastAttack.damageType = DamageType.Freeze2s;
                         blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 
@@ -237,7 +403,7 @@ namespace DekuMod.Modules.Survivors
                     ofaHurtTimer = 0f;
                     if (body.hasEffectiveAuthority)
                     {
-                        new SpendHealthNetworkRequest(body.masterObjectId, 0.05f).Send(NetworkDestination.Clients);
+                        new SpendHealthNetworkRequest(body.masterObjectId, 0.1f * body.healthComponent.health).Send(NetworkDestination.Clients);
                     }
                 }
                 else
@@ -272,11 +438,11 @@ namespace DekuMod.Modules.Survivors
                 }
             }
             //danger sense particle
-            if (body.HasBuff(Buffs.counterBuff))
+            if (body.HasBuff(Buffs.dangersenseBuff) || body.HasBuff(Buffs.dangersense45Buff) || body.HasBuff(Buffs.dangersense100Buff))
             {
                 DANGERSENSE.Play();
             }
-            else if (!body.HasBuff(Buffs.counterBuff))
+            else 
             {
                 DANGERSENSE.Stop();
             }
@@ -315,11 +481,11 @@ namespace DekuMod.Modules.Survivors
             //stopwatch += Time.fixedDeltaTime;
 
 
-            //if (body.HasBuff(Modules.Buffs.counterBuff))
+            //if (body.HasBuff(Modules.Buffs.dangersenseBuff))
             //{
             //    DANGERSENSE.Play();
             //}
-            //if (!body.HasBuff(Modules.Buffs.counterBuff))
+            //if (!body.HasBuff(Modules.Buffs.dangersenseBuff))
             //{
             //    DANGERSENSE.Stop();
             //}

@@ -12,7 +12,7 @@ namespace DekuMod.Modules.Networking
     {
         //Network these ones.
         NetworkInstanceId netID;
-        float healthPercentage;
+        float health;
 
         //Don't network these.
         GameObject bodyObj;
@@ -22,22 +22,22 @@ namespace DekuMod.Modules.Networking
 
         }
 
-        public SpendHealthNetworkRequest(NetworkInstanceId netID, float healthPercentage)
+        public SpendHealthNetworkRequest(NetworkInstanceId netID, float health)
         {
             this.netID = netID;
-            this.healthPercentage = healthPercentage;
+            this.health = health;
         }
 
         public void Deserialize(NetworkReader reader)
         {
             netID = reader.ReadNetworkId();
-            healthPercentage = reader.ReadSingle();
+            health = reader.ReadSingle();
         }
 
         public void Serialize(NetworkWriter writer)
         {
             writer.Write(netID);
-            writer.Write(healthPercentage);
+            writer.Write(health);
         }
 
         public void OnReceived()
@@ -48,12 +48,13 @@ namespace DekuMod.Modules.Networking
             CharacterBody charBody = charMaster.GetBody();
             bodyObj = charBody.gameObject;
 
+            //deal health damage
             if (!charBody.HasBuff(Modules.Buffs.goBeyondBuff))
             {
                 if (NetworkServer.active && charBody.healthComponent)
                 {
                     DamageInfo damageInfo = new DamageInfo();
-                    damageInfo.damage = charBody.healthComponent.fullCombinedHealth * healthPercentage;
+                    damageInfo.damage = health;
                     damageInfo.position = charBody.transform.position;
                     damageInfo.force = Vector3.zero;
                     damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;

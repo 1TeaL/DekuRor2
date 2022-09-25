@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DekuMod.SkillStates
 {
-    public class Blackwhip45 : BaseSkill45
+    public class Blackwhip45 : BaseQuirk45
     {
         public float baseDuration = 0.5f;
         public static float blastRadius = 15f;

@@ -12,23 +12,16 @@ namespace DekuMod.SkillStates
     public class DangerSense45 : BaseQuirk45
     {
 
-        public static float duration = Modules.StaticValues.dangersense45BuffTimer;
-        public bool dangersense45;
-
+        public static float duration = 0.5f;
 
         public override void OnEnter()
         {
             base.OnEnter();
 
-            dangersense45 = true;
-
-            //base.characterBody.SetAimTimer(duration);
-            //this.muzzleString = "LFinger";
-
             bool active = NetworkServer.active;
             if (active)
             {
-                base.characterBody.AddBuff(Modules.Buffs.counterBuff);
+                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.dangersenseBuff.buffIndex, Modules.StaticValues.dangersense45BuffTimer);
 
             }
 
@@ -38,11 +31,10 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-            dangersense45 = false;
             bool active = NetworkServer.active;
-            if (active && base.characterBody.HasBuff(Modules.Buffs.counterBuff))
+            if (active && base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff))
             {
-                base.characterBody.RemoveBuff(Modules.Buffs.counterBuff);
+                base.characterBody.RemoveBuff(Modules.Buffs.dangersenseBuff);
             }
         }
 

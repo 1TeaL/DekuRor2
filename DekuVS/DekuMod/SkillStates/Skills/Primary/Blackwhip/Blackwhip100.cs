@@ -4,10 +4,13 @@ using UnityEngine.Networking;
 using EntityStates;
 using System.Collections.Generic;
 using System.Linq;
+using DekuMod.Modules.Networking;
+using R2API.Networking.Interfaces;
+using R2API.Networking;
 
 namespace DekuMod.SkillStates
 {
-    public class Blackwhip100 : BaseSkill100
+    public class Blackwhip100 : BaseQuirk100
     {
         private BlastAttack blastAttack;
 
@@ -69,6 +72,12 @@ namespace DekuMod.SkillStates
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+
+            if (base.isAuthority)
+            {
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+            }
 
             //pull
             if (NetworkServer.active)

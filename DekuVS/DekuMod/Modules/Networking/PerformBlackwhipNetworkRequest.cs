@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 namespace DekuMod.Modules.Networking
 {
-    internal class PerformForceNetworkRequest : INetMessage
+    internal class PerformBlackwhipNetworkRequest : INetMessage
     {
         //Network these ones.
         NetworkInstanceId netID;
@@ -22,12 +22,12 @@ namespace DekuMod.Modules.Networking
         private List<HurtBox> trackingTargets;
         private GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 
-        public PerformForceNetworkRequest()
+        public PerformBlackwhipNetworkRequest()
         {
 
         }
 
-        public PerformForceNetworkRequest(NetworkInstanceId netID, Vector3 origin, Vector3 direction, float pullRange)
+        public PerformBlackwhipNetworkRequest(NetworkInstanceId netID, Vector3 origin, Vector3 direction, float pullRange)
         {
             this.netID = netID;
             this.origin = origin;
@@ -153,7 +153,7 @@ namespace DekuMod.Modules.Networking
             this.search.searchOrigin = origin;
             this.search.searchDirection = direction;
             this.search.sortMode = BullseyeSearch.SortMode.Distance;
-            this.search.maxDistanceFilter = pullRange;
+            this.search.maxDistanceFilter = StaticValues.blackwhipPullRange;
             this.search.maxAngleFilter = 30f;
             this.search.RefreshCandidates();
             this.search.FilterOutGameObject(charBody.gameObject);

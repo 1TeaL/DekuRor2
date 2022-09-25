@@ -12,14 +12,14 @@ namespace DekuMod.SkillStates
         public void OnIncomingDamageServer(DamageInfo damageInfo)
         {
             body = gameObject.GetComponent<CharacterBody>();
-            if (body.HasBuff(Modules.Buffs.counterBuff))
+            if (body.HasBuff(Modules.Buffs.dangersenseBuff))
             {
-                body.RemoveBuff(Modules.Buffs.counterBuff);
+                body.RemoveBuff(Modules.Buffs.dangersenseBuff);
                 damageInfo.damage = 0f;
 
                 var damageInfo2 = new DamageInfo();
 
-                damageInfo2.damage = body.damage * Modules.StaticValues.counterDamageCoefficient;
+                damageInfo2.damage = body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
                 damageInfo2.position = damageInfo.attacker.transform.position;
                 damageInfo2.force = Vector3.zero;
                 damageInfo2.damageColorIndex = DamageColorIndex.Default;

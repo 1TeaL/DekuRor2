@@ -29,7 +29,9 @@ namespace DekuMod.Modules
         //armor buff for oklahoma
         internal static BuffDef oklahomaBuff;
         //counter
-        internal static BuffDef counterBuff;
+        internal static BuffDef dangersenseBuff;
+        internal static BuffDef dangersense45Buff;
+        internal static BuffDef dangersense100Buff;
 
         //debuffs
         internal static BuffDef delayAttackDebuff;
@@ -47,7 +49,9 @@ namespace DekuMod.Modules
 
             fajinBuff = Buffs.AddNewBuff("FaJinBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, true, false);
             floatBuff = Buffs.AddNewBuff("DekuFloatBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Float"), Color.white, false, false);
-            counterBuff = Buffs.AddNewBuff("DekuCounterBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
+            dangersenseBuff = Buffs.AddNewBuff("DangerSenseBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
+            dangersense45Buff = Buffs.AddNewBuff("DangerSense45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
+            dangersense100Buff = Buffs.AddNewBuff("DangerSense100Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, false, false);
             delayAttackDebuff = Buffs.AddNewBuff("delayAttackDebuff", Assets.crippleBuffIcon, Color.green, true, true);
 
@@ -61,7 +65,7 @@ namespace DekuMod.Modules
 
             //fajinBuff = Buffs.AddNewBuff("FaJinBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffBodyArmorIcon"), Color.green, true, false);
             //floatBuff = Buffs.AddNewBuff("DekuFloatBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texMovespeedBufficon"), Color.blue, false, false);
-            //counterBuff = Buffs.AddNewBuff("DekuCounterBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffNullifyStackIcon"), Color.green, false, false);
+            //dangersenseBuff = Buffs.AddNewBuff("DekudangersenseBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffNullifyStackIcon"), Color.green, false, false);
         }
 
         // simple helper method

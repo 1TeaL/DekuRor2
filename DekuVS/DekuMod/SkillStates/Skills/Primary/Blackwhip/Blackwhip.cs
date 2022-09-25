@@ -11,12 +11,12 @@ using DekuMod.Modules.Networking;
 
 namespace DekuMod.SkillStates
 {
-    public class Blackwhip : BaseSkill
+    public class Blackwhip : BaseQuirk
     {
         public HurtBox Target;
         public float maxTrackingDistance = 100f;
         public float maxTrackingAngle = 30f;
-        public float pullRange = 50f;
+        public float pullRange = 0f;
         private ChildLocator child;
         public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         public float chargeTime = 0.25f;
@@ -63,7 +63,7 @@ namespace DekuMod.SkillStates
 
                 if (base.fixedAge > duration && base.isAuthority)
                 {
-                    new PerformForceNetworkRequest(base.characterBody.masterObjectId, base.GetAimRay().origin - GetAimRay().direction, base.GetAimRay().direction, pullRange).Send(NetworkDestination.Clients);
+                    new PerformBlackwhipNetworkRequest(base.characterBody.masterObjectId, base.GetAimRay().origin - GetAimRay().direction, base.GetAimRay().direction, pullRange).Send(NetworkDestination.Clients);
                     
                     this.outer.SetNextStateToMain();
                     return;

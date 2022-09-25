@@ -13,17 +13,15 @@ namespace DekuMod.SkillStates
     {
 
         public static float duration = 0.5f;
-        public bool dangersense;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            dangersense = true;
 
             bool active = NetworkServer.active;
             if (active)
             {
-                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.counterBuff.buffIndex, Modules.StaticValues.dangersenseBuffTimer);
+                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.dangersenseBuff.buffIndex, Modules.StaticValues.dangersenseBuffTimer);
 
             }
 
@@ -32,7 +30,6 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            dangersense = false;
             base.OnExit();
         }
 

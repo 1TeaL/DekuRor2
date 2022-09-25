@@ -1,6 +1,7 @@
 ﻿using DekuMod.Modules.Networking;
 using DekuMod.Modules.Survivors;
 using EntityStates;
+using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using UnityEngine;
@@ -13,26 +14,27 @@ namespace DekuMod.SkillStates
     {
 
         public static float duration = 0.5f;
-        public bool dangersense;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            dangersense = true;
 
             bool active = NetworkServer.active;
             if (active)
             {
-                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.counterBuff.buffIndex, Modules.StaticValues.dangersenseBuffTimer);
+                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.dangersense100Buff.buffIndex, Modules.StaticValues.dangersense100BuffTimer);
 
             }
 
+            if (base.isAuthority)
+            {
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.25f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+            }
         }
 
 
         public override void OnExit()
         {
-            dangersense = false;
             base.OnExit();
         }
 

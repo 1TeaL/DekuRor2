@@ -27,7 +27,7 @@ namespace DekuMod.SkillStates
         public static float duration;
         public int numberOfHits; 
         public static float baseDuration = 0.5f;
-        public static float initialSpeedCoefficient = 10f;
+        public static float initialSpeedCoefficient = 25f;
         public static float finalSpeedCoefficient = 1f;
         public static float SpeedCoefficient;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
@@ -103,7 +103,7 @@ namespace DekuMod.SkillStates
             origin = base.transform.position;
             if (base.isAuthority)
             {
-                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
             }
 
         }
