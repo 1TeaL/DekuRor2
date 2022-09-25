@@ -84,6 +84,14 @@ namespace DekuMod.Modules
         internal const float oklahoma45DamageCoefficient = 3f;
         internal const float oklahoma100DamageCoefficient = 2f;
 
+        //Special
+        //fist
+        internal const float detroitdelawareDamageCoefficient = 20f;
+        internal const float detroitdelawareRange = 40f;
+        //leg
+        internal const float finalsmashDamageCoefficient = 2f;
+        //quirk
+        internal const float fajinDuration = 10f;
 
         //Extra quirks
         internal const float blackwhipPull = 8f;

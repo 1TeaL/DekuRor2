@@ -21,7 +21,7 @@ namespace DekuMod.SkillStates
         public float timer;
 
         public static float blastRadius = 10f;
-        public static float succForce = 4f;
+        public static float succForce = 10f;
 
         public Vector3 theSpot;
         public float whipage;

@@ -32,7 +32,6 @@ namespace DekuMod.Modules
         internal static BuffDef dangersenseBuff;
         internal static BuffDef dangersense45Buff;
         internal static BuffDef dangersense100Buff;
-
         //debuffs
         internal static BuffDef delayAttackDebuff;
 
