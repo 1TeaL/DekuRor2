@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 namespace DekuMod.SkillStates
 {
 
-	public class BaseSkill : BaseSkillState
+	public class BaseSpecial : BaseSkillState
 	{
 		public DekuController dekucon;
 		public EnergySystem energySystem;
@@ -17,7 +17,7 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
 			dekucon = base.GetComponent<DekuController>();
 			energySystem = base.GetComponent<EnergySystem>();
-			energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
+			energySystem.currentPlusUltra -= Modules.StaticValues.basePlusUltraGain;
 
 
 		}
