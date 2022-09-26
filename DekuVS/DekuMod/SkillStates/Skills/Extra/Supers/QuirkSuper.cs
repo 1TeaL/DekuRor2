@@ -29,7 +29,6 @@ namespace DekuMod.SkillStates
 
 		}
 
-
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -37,6 +36,11 @@ namespace DekuMod.SkillStates
 			{
 				this.outer.SetNextStateToMain();
 			}
+
+		}
+		public override void OnExit()
+		{
+			base.OnExit();
 
 		}
 		public override InterruptPriority GetMinimumInterruptPriority()

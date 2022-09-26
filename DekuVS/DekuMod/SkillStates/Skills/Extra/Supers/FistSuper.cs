@@ -7,6 +7,8 @@ using UnityEngine;
 using DekuMod.Modules.Networking;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DekuMod.SkillStates
 {
@@ -16,15 +18,19 @@ namespace DekuMod.SkillStates
 		public static float baseDuration = 5f;
 		private float duration;
 		private float fireTime = 0.5f;
-		private float blastRadius = 20f;
+		private float baseBlastRadius = 20f;
+		private float blastRadius;
+		private float FOV = 100f;
 
 		private BlastAttack blastAttack;
 		public Vector3 theSpot;
+        private float maxWeight;
 
-		public override void OnEnter()
+        public override void OnEnter()
 		{
 			base.OnEnter();
 			this.duration = baseDuration;
+			blastRadius = baseBlastRadius * attackSpeedStat;
 			Ray aimRay = base.GetAimRay();
 			base.StartAimMode(0.5f + this.duration, false);
 
@@ -33,24 +39,26 @@ namespace DekuMod.SkillStates
 			{ 				
 				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 			}
-			//intial pull
-			new PerformBlackwhipNetworkRequest(base.characterBody.masterObjectId, 
-				base.GetAimRay().origin - GetAimRay().direction, 
-				base.GetAimRay().direction, 
-				Modules.StaticValues.detroitdelawareDamageCoefficient).Send(NetworkDestination.Clients);
-
+            //intial pull
+            if (base.isAuthority)
+			{
+				new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
+					base.GetAimRay().origin - GetAimRay().direction,
+					base.GetAimRay().direction,
+					Modules.StaticValues.detroitdelawareDamageCoefficient).Send(NetworkDestination.Clients);
+			}
 
 			theSpot = aimRay.origin + blastRadius * aimRay.direction;
 			//blast attack
 			blastAttack = new BlastAttack();
-			blastAttack.radius = blastRadius * this.attackSpeedStat;
+			blastAttack.radius = blastRadius;
 			blastAttack.procCoefficient = 1f;
 			blastAttack.position = theSpot;
 			blastAttack.attacker = base.gameObject;
 			blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
 			blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.detroitdelawareDamageCoefficient;
 			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-			blastAttack.baseForce = 5000f;
+			blastAttack.baseForce = maxWeight * 50f;
 			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 			blastAttack.damageType = DamageType.Freeze2s;
 			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
@@ -64,15 +72,65 @@ namespace DekuMod.SkillStates
 
 		}
 
+		public void GetMaxWeight()
+		{
+			Ray aimRay = base.GetAimRay();
+			BullseyeSearch search = new BullseyeSearch
+			{
+
+				teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
+				filterByLoS = false,
+				searchOrigin = theSpot,
+				searchDirection = UnityEngine.Random.onUnitSphere,
+				sortMode = BullseyeSearch.SortMode.Distance,
+				maxDistanceFilter = blastRadius,
+				maxAngleFilter = 360f
+			};
+
+			search.RefreshCandidates();
+			search.FilterOutGameObject(base.gameObject);
+
+
+
+			List<HurtBox> target = search.GetResults().ToList<HurtBox>();
+			foreach (HurtBox singularTarget in target)
+			{
+				if (singularTarget)
+				{
+					if (singularTarget.healthComponent && singularTarget.healthComponent.body)
+					{
+						if (singularTarget.healthComponent.body.characterMotor)
+						{
+							if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
+							{
+								maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
+							}
+						}
+						else if (singularTarget.healthComponent.body.rigidbody)
+						{
+							if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
+							{
+								maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
+							}
+						}
+					}
+				}
+			}
+		}
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			if(base.fixedAge > fireTime)
+			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 60f, base.fixedAge / duration);
+
+			if (base.fixedAge > fireTime)
 			{
-				new PerformBlackwhipNetworkRequest(base.characterBody.masterObjectId,
-					base.GetAimRay().origin - GetAimRay().direction,
-					base.GetAimRay().direction,
-					0f).Send(NetworkDestination.Clients);
+                if (base.isAuthority)
+				{
+					new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
+						base.GetAimRay().origin - GetAimRay().direction,
+						base.GetAimRay().direction,
+						0f).Send(NetworkDestination.Clients);
+				}
 			}
 
 			if(base.fixedAge > duration)
@@ -86,7 +144,13 @@ namespace DekuMod.SkillStates
 			}
 			
 		}
-		public override InterruptPriority GetMinimumInterruptPriority()
+        public override void OnExit()
+        {
+            base.OnExit();
+
+			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
+		}
+        public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Frozen;
 		}

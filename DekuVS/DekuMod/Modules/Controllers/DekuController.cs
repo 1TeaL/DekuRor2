@@ -36,17 +36,9 @@ namespace DekuMod.Modules.Survivors
 
         //Fajin
         public bool fajinon;
-        //public bool fajinscepteron;
-        //public Animator anim;
-        //public float stopwatch;
-        //public static float fajinscepterrate = 2f;
-        //public float fajinrate = 4f;
-        //public bool isMaxPower;
-        //public float oklahomacount;
 
-        //kick freeze
-        //public bool kickBuff;
-        //public bool kickon;
+        //float
+        public float stopwatch;
 
         //danger sense
         private Vector3 randRelPos;
@@ -144,7 +136,7 @@ namespace DekuMod.Modules.Survivors
                         damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
                         damageInfo2.attacker = self.gameObject;
                         damageInfo2.inflictor = null;
-                        damageInfo2.damageType = DamageType.Generic;
+                        damageInfo2.damageType = DamageType.Freeze2s;
                         damageInfo2.procCoefficient = 1f;
                         damageInfo2.procChainMask = default(ProcChainMask);
 
@@ -257,7 +249,7 @@ namespace DekuMod.Modules.Survivors
                         blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                         blastAttack.baseForce = force;
                         blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                        blastAttack.damageType = DamageType.Shock5s;
+                        blastAttack.damageType = DamageType.Generic;
                         blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 
@@ -304,7 +296,7 @@ namespace DekuMod.Modules.Survivors
                         damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
                         damageInfo2.attacker = self.gameObject;
                         damageInfo2.inflictor = null;
-                        damageInfo2.damageType = DamageType.Freeze2s;
+                        damageInfo2.damageType = DamageType.Generic;
                         damageInfo2.procCoefficient = 1f;
                         damageInfo2.procChainMask = default(ProcChainMask);
 
@@ -337,7 +329,7 @@ namespace DekuMod.Modules.Survivors
                         blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                         blastAttack.baseForce = force;
                         blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                        blastAttack.damageType = DamageType.Freeze2s;
+                        blastAttack.damageType = DamageType.Generic;
                         blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 
@@ -393,6 +385,51 @@ namespace DekuMod.Modules.Survivors
                 this.indicator.targetTransform = (this.trackingTarget ? this.trackingTarget.transform : null);
 
 
+            }
+
+            //float
+            if (!body.characterMotor.isGrounded)
+            {
+                if(energySystem.currentPlusUltra > 5f)
+                {
+                    if (body.inputBank.jump.justPressed)
+                    {
+                        energySystem.SpendPlusUltra(2f);
+                    }
+                    if (body.inputBank.jump.down)
+                    {
+                        if (NetworkServer.active)
+                        {
+                            body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 1);
+                        }
+                        stopwatch += Time.fixedDeltaTime;
+                        if (stopwatch > 1f)
+                        {
+                            if (body.characterMotor.velocity.y <= 0)
+                            {
+                                energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
+                                body.characterMotor.velocity.y += StaticValues.floatSpeed;
+                            }
+                            else if (body.characterMotor.velocity.y > 0)
+                            {
+                                energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
+                                body.characterMotor.velocity.y += StaticValues.floatSpeed / 2;
+                            }
+                        }
+                    }
+                    else if (!body.inputBank.jump.down)
+                    {
+                        if (NetworkServer.active)
+                        {
+                            body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 0);
+                        }
+                    }
+
+                }
+            }
+            else if (body.characterMotor.isGrounded)
+            {
+                stopwatch = 0f;
             }
 
             //ofabuff self damage

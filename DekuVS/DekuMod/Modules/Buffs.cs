@@ -26,8 +26,10 @@ namespace DekuMod.Modules
         internal static BuffDef goBeyondBuff;
         internal static BuffDef goBeyondBuffUsed;
 
-        //armor buff for oklahoma
+        //armor buff 
+        internal static BuffDef manchesterBuff;
         internal static BuffDef oklahomaBuff;
+
         //counter
         internal static BuffDef dangersenseBuff;
         internal static BuffDef dangersense45Buff;
@@ -37,7 +39,8 @@ namespace DekuMod.Modules
 
         internal static void RegisterBuffs()
         {
-            oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorblue"), Color.white, false, false);
+            oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", Assets.shieldBuffIcon, Color.green, false, false);
+            manchesterBuff = Buffs.AddNewBuff("DekuArmorBuff", Assets.shieldBuffIcon, Color.green, false, false);
             ofaBuff = Buffs.AddNewBuff("DekuOFABuff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightninggreen"), Color.white, false, false);
             supaofaBuff = Buffs.AddNewBuff("DekuInfiniteOFABuff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningwhitegreen"), Color.white, false, false);
             kickBuff = Buffs.AddNewBuff("DekuKickBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("kickCount"), Color.white, true, false);
@@ -51,7 +54,6 @@ namespace DekuMod.Modules
             dangersenseBuff = Buffs.AddNewBuff("DangerSenseBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             dangersense45Buff = Buffs.AddNewBuff("DangerSense45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             dangersense100Buff = Buffs.AddNewBuff("DangerSense100Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
-            oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, false, false);
             delayAttackDebuff = Buffs.AddNewBuff("delayAttackDebuff", Assets.crippleBuffIcon, Color.green, true, true);
 
             //oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.green, false, false);

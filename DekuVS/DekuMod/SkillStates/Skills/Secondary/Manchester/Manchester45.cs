@@ -15,9 +15,9 @@ namespace DekuMod.SkillStates
         public static float dropForce = 80f;
 
         public static float slamRadius;
-        public static float baseRadius = 15f;
+        public static float baseRadius = 3f;
         public static float slamProcCoefficient = 1f;
-        public static float slamForce = 1000f;
+        public static float slamForce = 5000f;
 
         private bool hasDropped;
         private Vector3 flyVector = Vector3.zero;
@@ -40,10 +40,11 @@ namespace DekuMod.SkillStates
             this.hasDropped = false;
             dekucon = base.GetComponent<DekuController>();
 
-            slamRadius = baseRadius * attackSpeedStat;
+            slamRadius = baseRadius * moveSpeedStat;
 
-            jumpDuration = basejumpDuration;
+            jumpDuration = basejumpDuration / attackSpeedStat;
 
+            base.characterMotor.disableAirControlUntilCollision = true;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", jumpDuration, 0.1f);
@@ -60,6 +61,28 @@ namespace DekuMod.SkillStates
             base.characterMotor.Motor.RebuildCollidableLayers();
 
 
+            BlastAttack blastAttack = new BlastAttack();
+            blastAttack.radius = slamRadius;
+            blastAttack.procCoefficient = slamProcCoefficient;
+            blastAttack.position = base.characterBody.footPosition;
+            blastAttack.attacker = base.gameObject;
+            blastAttack.crit = base.RollCrit();
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat / 7);
+            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+            blastAttack.baseForce = slamForce;
+            blastAttack.teamIndex = base.teamComponent.teamIndex;
+            blastAttack.damageType = damageType;
+            blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+            if (blastAttack.Fire().hitCount > 0)
+            {
+                this.OnHitEnemyAuthority();
+            }
+
+            if (NetworkServer.active)
+            {
+                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.manchesterBuff.buffIndex, basejumpDuration + 1);
+            }
         }
 
 
@@ -71,124 +94,23 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 10) * (this.moveSpeedStat / 7));
+            //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 10) * (this.moveSpeedStat / 7));
 
         }
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if (!this.hasDropped)
-            {
-                base.characterMotor.rootMotion += this.flyVector * ((1f * this.moveSpeedStat) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / Manchester45.jumpDuration) * Time.fixedDeltaTime);
-                base.characterMotor.velocity.y = 0f;
-            }
+            base.characterMotor.rootMotion += this.flyVector * ((1f * this.moveSpeedStat) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / jumpDuration) * Time.fixedDeltaTime);
+            base.characterMotor.velocity.y = 0f;           
 
-            if (base.fixedAge >= (0.25f * Manchester45.jumpDuration) && !this.slamIndicatorInstance)
-            {
-                this.CreateIndicator();
-            }
 
-            if (base.fixedAge >= Manchester45.jumpDuration && !this.hasDropped)
+            if (base.fixedAge > jumpDuration && base.isAuthority)
             {
-                this.StartDrop();
-            }
-
-            if (this.hasDropped && base.isAuthority && !base.characterMotor.disableAirControlUntilCollision)
-            {
-                this.LandingImpact();
                 this.outer.SetNextStateToMain();
             }
         }
 
-        private void StartDrop()
-        {
-            this.hasDropped = true;
-
-            base.characterMotor.disableAirControlUntilCollision = true;
-            base.characterMotor.velocity.y = -Manchester45.dropForce;
-
-            bool active = NetworkServer.active;
-            if (active)
-            {
-                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
-            }
-        }
-
-        private void CreateIndicator()
-        {
-            if (EntityStates.Huntress.ArrowRain.areaIndicatorPrefab)
-            {
-                this.downRay = new Ray
-                {
-                    direction = Vector3.down,
-                    origin = base.transform.position
-                };
-
-                this.slamIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(EntityStates.Huntress.ArrowRain.areaIndicatorPrefab).transform;
-                this.slamIndicatorInstance.localScale = Vector3.one * Manchester45.slamRadius;
-
-                this.slamCenterIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(EntityStates.Huntress.ArrowRain.areaIndicatorPrefab).transform;
-                this.slamCenterIndicatorInstance.localScale = (Vector3.one * Manchester45.slamRadius) / 3f;
-            }
-        }
-
-        private void LandingImpact()
-        {
-
-            if (base.isAuthority)
-            {
-                base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration/3f, 0.1f);
-                Ray aimRay = base.GetAimRay();
-                //if (dekucon.isMaxPower)
-                //{
-                //    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-                //    {
-                //        origin = base.transform.position,
-                //        scale = 1f,
-                //        rotation = Quaternion.LookRotation(aimRay.direction)
-                //    }, true);
-                //    damageType = DamageType.BypassArmor | DamageType.Stun1s;
-                //}
-                //else
-                //{
-                //    damageType = DamageType.Stun1s;
-                //}
-                base.characterMotor.velocity *= 0.1f;
-
-                BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = Manchester45.slamRadius;
-                blastAttack.procCoefficient = Manchester45.slamProcCoefficient;
-                blastAttack.position = base.characterBody.footPosition;
-                blastAttack.attacker = base.gameObject;
-                blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * (moveSpeedStat/7);
-                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = Manchester45.slamForce;
-                blastAttack.teamIndex = base.teamComponent.teamIndex; 
-                blastAttack.damageType = damageType;
-                blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
-
-                if (blastAttack.Fire().hitCount > 0)
-                {
-                    this.OnHitEnemyAuthority();
-
-                }
-
-
-
-                for (int i = 0; i <= 8; i += 1)
-                {
-                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * 8f);
-                    effectPosition.y = base.characterBody.footPosition.y;
-                    EffectManager.SpawnEffect(EntityStates.LemurianBruiserMonster.SpawnState.spawnEffectPrefab, new EffectData
-                    {
-                        origin = effectPosition,
-                        scale = slamRadius/6,
-                    }, true);
-                }
-            }
-        }
 
         private void UpdateSlamIndicator()
         {
@@ -216,6 +138,7 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
+            base.characterMotor.disableAirControlUntilCollision = false;
 
             if (this.slamIndicatorInstance) EntityState.Destroy(this.slamIndicatorInstance.gameObject);
             if (this.slamCenterIndicatorInstance) EntityState.Destroy(this.slamCenterIndicatorInstance.gameObject);

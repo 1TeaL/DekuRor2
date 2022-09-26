@@ -90,14 +90,19 @@ namespace DekuMod
             new Deku().Initialize();
 
             //networking
-            NetworkingAPI.RegisterMessageType<ForceCounterState>();
-            NetworkingAPI.RegisterMessageType<ServerForceGoBeyondStateNetworkRequest>();
-            NetworkingAPI.RegisterMessageType<PerformDetroitSmashNetworkRequest>();
             NetworkingAPI.RegisterMessageType<SpendHealthNetworkRequest>();
             NetworkingAPI.RegisterMessageType<HealNetworkRequest>();
+
+            NetworkingAPI.RegisterMessageType<ServerForceGoBeyondStateNetworkRequest>();
+
+            NetworkingAPI.RegisterMessageType<PerformDetroitSmashNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PeformShootStyleKickAttackNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformStLouisSmashNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformBlackwhipNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<ForceCounterState>();
+
+            NetworkingAPI.RegisterMessageType<PerformDetroitDelawareNetworkRequest>();
+
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
@@ -196,6 +201,11 @@ namespace DekuMod
             {
                 if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                 {
+                    if (self.HasBuff(Buffs.manchesterBuff))
+                    {
+                        self.armor += StaticValues.manchesterArmor;
+                    }
+
                     bool floatbuff = self.HasBuff(Buffs.floatBuff);
                     if (floatbuff)
                     {

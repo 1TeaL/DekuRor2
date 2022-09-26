@@ -6,6 +6,9 @@ using EntityStates;
 using DekuMod.Modules.Survivors;
 using System.Collections.Generic;
 using EntityStates.Huntress;
+using DekuMod.Modules.Networking;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
 
 namespace DekuMod.SkillStates
 {
@@ -46,6 +49,14 @@ namespace DekuMod.SkillStates
 
             //base.gameObject.layer = LayerIndex.fakeActor.intVal;
             base.characterMotor.Motor.RebuildCollidableLayers();
+            if (NetworkServer.active)
+            {
+                base.characterBody.AddBuff(Modules.Buffs.manchesterBuff);
+            }
+            if (base.isAuthority)
+            {
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+            }
         }
 
 
@@ -102,11 +113,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.velocity.y = -dropForce;
 
             //base.PlayAnimation("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration / 3f);
-            bool active = NetworkServer.active;
-            if (active)
-            {
-                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
-            }
+
 
         }
 
@@ -191,8 +198,10 @@ namespace DekuMod.SkillStates
 
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
 
-
-            if (NetworkServer.active && base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility)) base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+            if (NetworkServer.active && base.characterBody.HasBuff(Modules.Buffs.manchesterBuff))
+            {
+                base.characterBody.RemoveBuff(Modules.Buffs.manchesterBuff);
+            }
 
             base.gameObject.layer = LayerIndex.defaultLayer.intVal;
             base.characterMotor.Motor.RebuildCollidableLayers();

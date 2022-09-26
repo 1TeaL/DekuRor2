@@ -49,7 +49,7 @@ namespace DekuMod.SkillStates
             base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", duration, 0.01f);
             if (NetworkServer.active)
             {
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration + 1);
+                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.manchesterBuff.buffIndex, baseDuration + 1);
             }
 
             //move up a little

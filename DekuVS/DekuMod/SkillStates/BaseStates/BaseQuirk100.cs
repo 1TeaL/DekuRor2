@@ -17,7 +17,14 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
 			dekucon = base.GetComponent<DekuController>();
 			energySystem = base.GetComponent<EnergySystem>();
-			energySystem.currentPlusUltra -= Modules.StaticValues.skill100PlusUltraSpend;
+			if (energySystem.currentPlusUltra > Modules.StaticValues.skill100PlusUltraSpend)
+			{
+				energySystem.SpendPlusUltra(Modules.StaticValues.skill100PlusUltraSpend);
+			}
+			else
+			{
+				energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
+			}
 
 
 		}

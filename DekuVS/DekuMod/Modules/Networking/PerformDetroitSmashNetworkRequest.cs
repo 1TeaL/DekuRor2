@@ -12,8 +12,8 @@ namespace DekuMod.Modules.Networking
     {
         //Network these ones.
         NetworkInstanceId netID;
-        Vector3 position;
-        
+        NetworkInstanceId enemyNetID;
+
         //Don't network these.
         GameObject bodyObj;
         GameObject enemybodyObj;
@@ -26,22 +26,22 @@ namespace DekuMod.Modules.Networking
 
         }
 
-        public PerformDetroitSmashNetworkRequest(NetworkInstanceId netID, Vector3 position)
+        public PerformDetroitSmashNetworkRequest(NetworkInstanceId netID, NetworkInstanceId enemyNetID)
         {
             this.netID = netID;
-            this.position = position;
+            this.enemyNetID = enemyNetID;
         }
 
         public void Deserialize(NetworkReader reader)
         {
             netID = reader.ReadNetworkId();
-            position = reader.ReadVector3();
+            enemyNetID = reader.ReadNetworkId();
         }
 
         public void Serialize(NetworkWriter writer)
         {
             writer.Write(netID);
-            writer.Write(position);
+            writer.Write(enemyNetID);
         }
 
         public void OnReceived()
@@ -54,127 +54,113 @@ namespace DekuMod.Modules.Networking
                 CharacterBody charBody = charMaster.GetBody();
                 bodyObj = charBody.gameObject;
 
-                //Check targets in range
-                SearchForTarget(charBody, position);
+                GameObject enemymasterobject = Util.FindNetworkObject(enemyNetID);
+                CharacterMaster enemycharMaster = enemymasterobject.GetComponent<CharacterMaster>();
+                CharacterBody enemycharBody = enemycharMaster.GetBody();
+                enemybodyObj = enemycharBody.gameObject;
+
                 //Smash targets and stun
-                SmashTargets(charBody);
+                SmashTarget(charBody, enemycharBody);
             }
         }
 
 
-        private void SearchForTarget(CharacterBody charBody, Vector3 position)
-        {
-            this.search.teamMaskFilter = TeamMask.GetUnprotectedTeams(charBody.teamComponent.teamIndex);
-            this.search.filterByLoS = true;
-            this.search.searchOrigin = position;
-            this.search.searchDirection = Vector3.up;
-            this.search.sortMode = BullseyeSearch.SortMode.Distance;
-            this.search.maxDistanceFilter = Modules.StaticValues.detroitRange;
-            this.search.maxAngleFilter = 360;
-            this.search.RefreshCandidates();
-            this.search.FilterOutGameObject(charBody.gameObject);
-            this.trackingTargets = this.search.GetResults().ToList<HurtBox>();
-        }
 
 
-        private void SmashTargets(CharacterBody dekucharBody)
+        private void SmashTarget(CharacterBody dekucharBody, CharacterBody enemycharBody)
         {
-            if (trackingTargets.Count > 0)
-            {
-                foreach (HurtBox singularTarget in trackingTargets)
+                float Weight = 1f;
+                if (enemycharBody.characterMotor)
                 {
-                    float Weight = 1f;
-                    if (singularTarget.healthComponent.body.characterMotor)
+                    Weight = enemycharBody.characterMotor.mass;
+                }
+                else if (enemycharBody.rigidbody)
+                {
+                    Weight = enemycharBody.rigidbody.mass;
+                }
+
+
+
+                DamageInfo damageInfo = new DamageInfo
+                {
+                    attacker = bodyObj,
+                    damage = dekucharBody.damage * Modules.StaticValues.detroitDamageCoefficient,
+                    position = enemycharBody.transform.position,
+                    procCoefficient = 1f,
+                    damageType = DamageType.Generic,
+                    crit = dekucharBody.RollCrit(),
+
+                };
+
+                Vector3 direction = Vector3.down;
+                if (enemycharBody.characterMotor)
+                {
+                    if (enemycharBody.characterMotor.isGrounded)
                     {
-                        Weight = singularTarget.healthComponent.body.characterMotor.mass;
-                    }
-                    else if (singularTarget.healthComponent.body.rigidbody)
-                    {
-                        Weight = singularTarget.healthComponent.body.rigidbody.mass;
-                    }
+                        direction = Vector3.up;
 
-
-
-                    DamageInfo damageInfo = new DamageInfo
-                    {
-                        attacker = bodyObj,
-                        damage = dekucharBody.damage * Modules.StaticValues.detroitDamageCoefficient,
-                        position = singularTarget.transform.position,
-                        procCoefficient = 1f,
-                        damageType = DamageType.Generic,
-                        crit = dekucharBody.RollCrit(),
-
-                    };
-
-                    Vector3 direction = Vector3.down;
-                    if (singularTarget.healthComponent.body.characterMotor)
-                    {
-                        if (singularTarget.healthComponent.body.characterMotor.isGrounded)
+                        EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
                         {
-                            direction = Vector3.up;
+                            origin = enemycharBody.transform.position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(Vector3.down).normalized,
 
-                            EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
-                            {
-                                origin = singularTarget.transform.position,
-                                scale = 1f,
-                                rotation = Quaternion.LookRotation(Vector3.down).normalized,
-
-                            }, true);
-                            EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
-                            {
-                                origin = singularTarget.transform.position,
-                                scale = 1f,
-                                rotation = Quaternion.LookRotation(Vector3.down).normalized,
-
-                            }, true);
-                        }
-                        else
+                        }, true);
+                        EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
                         {
+                            origin = enemycharBody.transform.position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(Vector3.down).normalized,
 
-                            EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
-                            {
-                                origin = singularTarget.transform.position,
-                                scale = 1f,
-                                rotation = Quaternion.LookRotation(Vector3.up).normalized,
-
-                            }, true);
-                            EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
-                            {
-                                origin = singularTarget.transform.position,
-                                scale = 1f,
-                                rotation = Quaternion.LookRotation(Vector3.up).normalized,
-
-                            }, true);
-                        }
+                        }, true);
                     }
                     else
                     {
 
                         EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
                         {
-                            origin = singularTarget.transform.position,
+                            origin = enemycharBody.transform.position,
                             scale = 1f,
                             rotation = Quaternion.LookRotation(Vector3.up).normalized,
 
                         }, true);
                         EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
                         {
-                            origin = singularTarget.transform.position,
+                            origin = enemycharBody.transform.position,
                             scale = 1f,
                             rotation = Quaternion.LookRotation(Vector3.up).normalized,
 
                         }, true);
                     }
-
-                    singularTarget.healthComponent.TakeDamageForce(direction * 40f * (Weight), true, true);
-                    singularTarget.healthComponent.TakeDamage(damageInfo);
-                    GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
-
                 }
+                else
+                {
+
+                    EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
+                    {
+                        origin = enemycharBody.transform.position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(Vector3.up).normalized,
+
+                    }, true);
+                    EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
+                    {
+                        origin = enemycharBody.transform.position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(Vector3.up).normalized,
+
+                    }, true);
+                }
+
+                enemycharBody.healthComponent.TakeDamageForce(direction * 40f * (Weight), true, true);
+                enemycharBody.healthComponent.TakeDamage(damageInfo);
+                GlobalEventManager.instance.OnHitEnemy(damageInfo, enemycharBody.healthComponent.gameObject);
 
                 
 
-            }
+                
+
+            
         }
 
     }

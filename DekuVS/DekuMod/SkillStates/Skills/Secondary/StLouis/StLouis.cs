@@ -78,7 +78,7 @@ namespace DekuMod.SkillStates
                 if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
                 {
                     hasFired = true;
-                    new PerformDetroitSmashNetworkRequest(base.characterBody.masterObjectId, Target.transform.position).Send(NetworkDestination.Clients);
+                    new PerformStLouisSmashNetworkRequest(base.characterBody.masterObjectId, Target.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
 
                 }
 

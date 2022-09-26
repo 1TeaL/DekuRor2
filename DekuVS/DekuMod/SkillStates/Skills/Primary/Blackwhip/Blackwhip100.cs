@@ -20,8 +20,8 @@ namespace DekuMod.SkillStates
         public float fireInterval;
         public float timer;
 
-        public static float blastRadius = 10f;
-        public static float succForce = 10f;
+        public static float blastRadius = 15f;
+        public static float succForce = 5f;
 
         public Vector3 theSpot;
         public float whipage;

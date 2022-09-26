@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 namespace DekuMod.Modules.Networking
 {
-    internal class PerformDetroitDelawareNetworkRequest : INetMessage
+    internal class PerformFinalSmashNetworkRequest : INetMessage
     {
         //Network these ones.
         NetworkInstanceId netID;
@@ -22,12 +22,12 @@ namespace DekuMod.Modules.Networking
         private List<HurtBox> trackingTargets;
         private GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 
-        public PerformDetroitDelawareNetworkRequest()
+        public PerformFinalSmashNetworkRequest()
         {
 
         }
 
-        public PerformDetroitDelawareNetworkRequest(NetworkInstanceId netID, Vector3 origin, Vector3 direction, float damage)
+        public PerformFinalSmashNetworkRequest(NetworkInstanceId netID, Vector3 origin, Vector3 direction, float damage)
         {
             this.netID = netID;
             this.origin = origin;
@@ -153,8 +153,8 @@ namespace DekuMod.Modules.Networking
             this.search.searchOrigin = origin;
             this.search.searchDirection = direction;
             this.search.sortMode = BullseyeSearch.SortMode.Distance;
-            this.search.maxDistanceFilter = StaticValues.detroitdelawareRange;
-            this.search.maxAngleFilter = 60f;
+            this.search.maxDistanceFilter = StaticValues.finalsmashRange;
+            this.search.maxAngleFilter = 360f;
             this.search.RefreshCandidates();
             this.search.FilterOutGameObject(charBody.gameObject);
             this.trackingTargets = this.search.GetResults().ToList<HurtBox>();

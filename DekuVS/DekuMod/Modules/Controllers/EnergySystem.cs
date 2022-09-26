@@ -41,6 +41,10 @@ namespace DekuMod.Modules.Survivors
         private Color originalColor;
         private Color currentColor;
         private GlowState state;
+        //bools to stop energy regen after skill used
+        private bool ifEnergyUsed;
+        private float energyDecayTimer;
+        private bool ifEnergyRegenAllowed;
 
         public void Awake()
         {
@@ -56,6 +60,7 @@ namespace DekuMod.Modules.Survivors
             currentPlusUltra = 0f;
             regenPlusUltra = StaticValues.regenPlusUltraRate;
             plusUltraGain = StaticValues.basePlusUltraGain;
+            ifEnergyRegenAllowed = true;
 
             //UI objects 
             CustomUIObject = UnityEngine.Object.Instantiate(Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("dekuCustomUI"));
@@ -107,23 +112,48 @@ namespace DekuMod.Modules.Survivors
         private void CalculateEnergyStats()
         {
             //Energy updates
-            if (anim)
+            if (ifEnergyRegenAllowed)
             {
-                if (anim.GetBool("isMoving"))
+                if (anim)
                 {
-                    plusUltraTimer += Time.fixedDeltaTime;
-                    if (plusUltraTimer >= regenPlusUltra / characterBody.moveSpeed)
+                    if (anim.GetBool("isMoving"))
                     {
-                        currentPlusUltra += StaticValues.basePlusUltraGain;
-                        plusUltraTimer = 0f;
+                        if (!characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff))
+                        {
+                            plusUltraTimer += Time.fixedDeltaTime;
+                            if (plusUltraTimer >= regenPlusUltra / characterBody.moveSpeed)
+                            {
+                                currentPlusUltra += StaticValues.basePlusUltraGain;
+                                plusUltraTimer = 0f;
+                            }
+
+                        }
                     }
                 }
             }
 
+            if (ifEnergyUsed)
+            {
+                if (energyDecayTimer > 1f)
+                {
+                    energyDecayTimer = 0f;
+                    ifEnergyRegenAllowed = true;
+                    ifEnergyUsed = false;
+                }
+                else
+                {
+                    ifEnergyRegenAllowed = false;
+                    energyDecayTimer += Time.fixedDeltaTime;
+                }
+            }
 
             if (currentPlusUltra > maxPlusUltra)
             {
                 currentPlusUltra = maxPlusUltra;
+            }
+            if (currentPlusUltra < 0f)
+            {
+                currentPlusUltra = 0f;
             }
 
             if (plusUltraNumber)
@@ -199,12 +229,16 @@ namespace DekuMod.Modules.Survivors
 
         public void GainPlusUltra(float Energy)
         {
-            currentPlusUltra += Energy;
-            TriggerGlow(0.3f, 0.3f, Color.white);
+            if (ifEnergyRegenAllowed)
+            {
+                currentPlusUltra += Energy;
+                TriggerGlow(0.3f, 0.3f, Color.white);
+            }
         }
 
         public void SpendPlusUltra(float Energy)
         {
+            ifEnergyUsed = true;
             currentPlusUltra -= Energy;
             TriggerGlow(0.3f, 0.3f, Color.green);
         }

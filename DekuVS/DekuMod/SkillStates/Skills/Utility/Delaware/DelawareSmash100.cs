@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates
 {
     public class DelawareSmash100 : BaseSkill100
     {
-        public uint Distance = 50;
+        public uint Distance = 20;
         public static float damageCoefficient;
         public float baseDuration = 1f;
         private float duration;
@@ -29,10 +29,6 @@ namespace DekuMod.SkillStates
             AkSoundEngine.PostEvent(1356252224, this.gameObject);
             base.StartAimMode(0.6f, true);
 
-            if (base.isAuthority)
-            {
-                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
-            }
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
@@ -54,6 +50,10 @@ namespace DekuMod.SkillStates
 
             if (NetworkServer.active) base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 
+            if (base.isAuthority)
+            {
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+            }
             if (base.isAuthority)
             {
                 Vector3 theSpot = aimRay.origin + 8 * aimRay.direction;

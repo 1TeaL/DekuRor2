@@ -21,13 +21,12 @@ namespace DekuMod.SkillStates
     {
 
         public float previousMass;
-        private Vector3 dashDirection;
         private string muzzleString;
 
         public static float duration;
         public int numberOfHits; 
         public static float baseDuration = 0.5f;
-        public static float initialSpeedCoefficient = 25f;
+        public static float initialSpeedCoefficient = 20f;
         public static float finalSpeedCoefficient = 1f;
         public static float SpeedCoefficient;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
@@ -38,8 +37,6 @@ namespace DekuMod.SkillStates
         public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerMageIceLaser");
         private Transform modelTransform;
         private CharacterModel characterModel;
-        private BulletAttack afterattack;
-        private Ray aimRay;
         private float rollSpeed;
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
@@ -114,17 +111,15 @@ namespace DekuMod.SkillStates
         private void CreateBlinkEffect(Vector3 origin)
         {
             EffectData effectData = new EffectData();
-            effectData.rotation = Util.QuaternionSafeLookRotation(this.dashDirection);
+            effectData.rotation = Util.QuaternionSafeLookRotation(this.forwardDirection);
             effectData.origin = origin;
             EffectManager.SpawnEffect(EvisDash.blinkPrefab, effectData, false);
         }
 
         public void ApplyComponent()
         {
-            Chat.AddMessage("apply component");
             theSpot = Vector3.Lerp(origin,final, 0.5f);
 
-            Chat.AddMessage(theSpot + "thespot");
             search.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
             search.filterByLoS = false;
             search.searchOrigin = theSpot;
@@ -162,7 +157,7 @@ namespace DekuMod.SkillStates
                             shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.AddComponent<ShootStyleKickComponent>();
                             shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
                             shootStyleKickComponent.numberOfHits = numberOfHits;
-                            shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient * moveSpeedStat/7f;
+                            shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient;
                         }
 
                     }

@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DekuMod.Modules.Survivors;
 using static RoR2.BlastAttack;
+using DekuMod.Modules.Networking;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
 
 namespace DekuMod.SkillStates
 {
@@ -76,6 +79,12 @@ namespace DekuMod.SkillStates
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
             base.characterMotor.Motor.SetPositionAndRotation(characterBody.transform.position + Vector3.up * distance * moveSpeedStat, Util.QuaternionSafeLookRotation(aimRay.direction), true);
+
+
+            if (base.isAuthority)
+            {
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+            }
         }
 
         protected virtual void OnHitEnemyAuthority()
