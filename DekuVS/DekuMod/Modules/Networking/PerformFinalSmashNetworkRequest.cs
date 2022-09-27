@@ -81,67 +81,32 @@ namespace DekuMod.Modules.Networking
             {
                 foreach (HurtBox singularTarget in trackingTargets)
                 {
+                    singularTarget.healthComponent.body.characterMotor.Motor.SetPositionAndRotation(charBody.transform.position + charBody.characterDirection.forward * 2f,
+                        Util.QuaternionSafeLookRotation(charBody.characterDirection.forward), true);
 
-                    Vector3 a = singularTarget.transform.position - origin;
-                    float magnitude = a.magnitude;
-                    Vector3 vector = a / magnitude;
-
-                    if (singularTarget.healthComponent && singularTarget.healthComponent.body)
+                    DamageInfo damageInfo = new DamageInfo
                     {
-                        float Weight = 1f;
-                        if (singularTarget.healthComponent.body.isBoss)
-                        {
-                            if (singularTarget.healthComponent.body.characterMotor)
-                            {
-                                Weight = singularTarget.healthComponent.body.characterMotor.mass/5;
-                            }
-                            else if (singularTarget.healthComponent.body.rigidbody)
-                            {
-                                Weight = singularTarget.healthComponent.body.rigidbody.mass/5;
-                            }
+                        attacker = bodyObj,
+                        damage = damage,
+                        position = singularTarget.transform.position,
+                        procCoefficient = 1f,
+                        damageType = DamageType.Stun1s,
+                        crit = charBody.RollCrit(),
 
-                        }
-                        else
-                        {
-                            if (singularTarget.healthComponent.body.characterMotor)
-                            {
-                                Weight = singularTarget.healthComponent.body.characterMotor.mass;
-                            }
-                            else if (singularTarget.healthComponent.body.rigidbody)
-                            {
-                                Weight = singularTarget.healthComponent.body.rigidbody.mass;
-                            }
+                    };
 
-                        }
-
-                        Vector3 a2 = vector;
-                        float d = Trajectory.CalculateInitialYSpeedForHeight(Mathf.Abs(0f - magnitude)) * Mathf.Sign(0f - magnitude);
-                        a2 *= d;
-                        //a2.y = -30f;
-                        DamageInfo damageInfo = new DamageInfo
-                        {
-                            attacker = bodyObj,
-                            damage = damage,
-                            position = singularTarget.transform.position,
-                            procCoefficient = 1f,
-                            damageType = DamageType.Stun1s,
-                            crit = charBody.RollCrit(),
-
-                        };
-
-                        singularTarget.healthComponent.TakeDamageForce(a2 * (Weight), true, true);
-                        singularTarget.healthComponent.TakeDamage(damageInfo);
-                        GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
+                    singularTarget.healthComponent.TakeDamage(damageInfo);
+                    GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
 
 
-                        EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
-                        {
-                            origin = singularTarget.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(singularTarget.transform.position - origin),
+                    EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
+                    {
+                        origin = singularTarget.transform.position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(singularTarget.transform.position - origin),
 
-                        }, true);
-                    }
+                    }, true);
+                    
                 }
             }
         }

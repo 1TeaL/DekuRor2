@@ -31,7 +31,12 @@ namespace DekuMod.SkillStates
         public Vector3 theSpot;
 
         protected DamageType damageType = DamageType.Stun1s;
-        private BlastAttack blastAttack2;
+
+        //teleporting up
+        private GameObject aimSphere;
+        public float radius = 3f;
+        private Ray aimRay;
+        private float maxDistance = 150f;
 
         public override void OnEnter()
         {
@@ -97,7 +102,39 @@ namespace DekuMod.SkillStates
         {
             base.OnExit();
         }
-
+        public override void Update()
+        {
+            base.Update();
+            this.UpdateAreaIndicator();
+        }
+        private void UpdateAreaIndicator()
+        {
+            bool isAuthority = base.isAuthority;
+            bool flag = isAuthority;
+            if (flag)
+            {
+                this.aimSphere.transform.localScale = new Vector3(this.radius, this.radius, this.radius);
+            }
+            this.aimRay = base.GetAimRay();
+            RaycastHit raycastHit;
+            //bool flag2 = Physics.Raycast(base.GetAimRay(), out raycastHit, this.maxDistance, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
+            bool flag2 = Physics.Raycast(aimRay.origin, Vector3.up, out raycastHit, this.maxDistance, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
+            bool flag3 = flag2;
+            if (flag3)
+            {
+                this.aimSphere.transform.position = raycastHit.point + Vector3.up;
+                this.aimSphere.transform.up = raycastHit.normal;
+                this.aimSphere.transform.forward = -this.aimRay.direction;
+            }
+            else
+            {
+                Ray ray = base.GetAimRay();
+                Vector3 position = ray.origin + this.maxDistance * ray.direction;
+                this.aimSphere.transform.position = position;
+                this.aimSphere.transform.up = raycastHit.normal;
+                this.aimSphere.transform.forward = -this.aimRay.direction;
+            }
+        }
         public override void FixedUpdate()
         {
             base.FixedUpdate();

@@ -20,10 +20,11 @@ namespace DekuMod.SkillStates
 		private float fireTime = 0.5f;
 		private float baseBlastRadius = 20f;
 		private float blastRadius;
-		private float FOV = 100f;
+		private float FOV = 120f;
 
 		private BlastAttack blastAttack;
 		public Vector3 theSpot;
+		public Vector3 theDirection;
         private float maxWeight;
 
         public override void OnEnter()
@@ -49,6 +50,7 @@ namespace DekuMod.SkillStates
 			}
 
 			theSpot = aimRay.origin + blastRadius * aimRay.direction;
+			theDirection = aimRay.direction;
 			//blast attack
 			blastAttack = new BlastAttack();
 			blastAttack.radius = blastRadius;
@@ -58,7 +60,7 @@ namespace DekuMod.SkillStates
 			blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
 			blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.detroitdelawareDamageCoefficient;
 			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-			blastAttack.baseForce = maxWeight * 50f;
+			blastAttack.baseForce = maxWeight * 20f;
 			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 			blastAttack.damageType = DamageType.Freeze2s;
 			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
@@ -128,7 +130,7 @@ namespace DekuMod.SkillStates
 				{
 					new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
 						base.GetAimRay().origin - GetAimRay().direction,
-						base.GetAimRay().direction,
+						theDirection,
 						0f).Send(NetworkDestination.Clients);
 				}
 			}

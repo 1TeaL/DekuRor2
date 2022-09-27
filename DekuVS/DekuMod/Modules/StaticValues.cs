@@ -92,10 +92,10 @@ namespace DekuMod.Modules
         //Special
         //fist
         internal const float detroitdelawareDamageCoefficient = 20f;
-        internal const float detroitdelawareRange = 40f;
+        internal const float detroitdelawareRange = 50f;
         //leg
         internal const float finalsmashDamageCoefficient = 2f;
-        internal const float finalsmashRange = 40f;
+        internal const float finalsmashRange = 20f;
         //quirk
         internal const float fajinDuration = 10f;
 

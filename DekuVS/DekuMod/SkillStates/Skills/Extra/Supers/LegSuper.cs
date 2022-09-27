@@ -21,10 +21,10 @@ namespace DekuMod.SkillStates
         public static float blastRadius;
 
         public float timer;
-        public float fireTime = 0.2f;
+        public float fireTime = 0.5f;
         public float baseFireInterval = 0.1f;
         public float fireInterval;
-        private float FOV = 100f;
+        private float FOV = 120f;
         private float duration;
         public float previousMass;
 
@@ -32,7 +32,7 @@ namespace DekuMod.SkillStates
         private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
-        private float speedCoefficient = 3f;
+        private float speedCoefficient = 10f;
         private string muzzleString;
 
         private BlastAttack blastAttack;
@@ -48,15 +48,20 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             base.StartAimMode(0.5f + this.duration, false);
 
+            base.characterMotor.useGravity = false;
+            this.previousMass = base.characterMotor.mass;
+            base.characterMotor.mass = 0f;
+            base.characterMotor.Motor.ForceUnground();
+            base.characterMotor.disableAirControlUntilCollision = true;
 
             if (base.isAuthority && base.characterDirection)
             {
                 this.forwardDirection = aimRay.direction;
             }
-            if (base.characterMotor && base.characterDirection)
-            {
-                base.characterMotor.velocity = this.forwardDirection * this.speedCoefficient * moveSpeedStat;
-            }
+            //if (base.characterMotor && base.characterDirection)
+            //{
+            //    base.characterMotor.velocity = this.forwardDirection * this.speedCoefficient * moveSpeedStat;
+            //}
             Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
             this.previousPosition = base.transform.position - b;
 
@@ -66,9 +71,6 @@ namespace DekuMod.SkillStates
             EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
             EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
 
-            base.characterMotor.useGravity = false;
-            this.previousMass = base.characterMotor.mass;
-            base.characterMotor.mass = 0f;
 
             bool active = NetworkServer.active;
 			if (active)
@@ -158,7 +160,44 @@ namespace DekuMod.SkillStates
 
             if (base.fixedAge > fireTime)
             {
-                if(timer > (fireInterval))
+                this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
+
+                Ray aimRay = base.GetAimRay();
+                aimRay.direction = this.forwardDirection;
+
+                if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 60f, base.fixedAge / duration);
+
+                Vector3 normalized = (base.transform.position - this.previousPosition).normalized;
+                if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
+                {
+                    Vector3 vector = normalized * this.speedCoefficient * moveSpeedStat;
+                    float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
+                    vector = this.forwardDirection * d;
+                    vector.y = 0f;
+
+                    base.characterMotor.velocity = vector;
+                }
+                this.previousPosition = base.transform.position;
+
+                if (this.modelTransform)
+                {
+                    TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                    temporaryOverlay.duration = 0.6f;
+                    temporaryOverlay.animateShaderAlpha = true;
+                    temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                    temporaryOverlay.destroyComponentOnEnd = true;
+                    temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                    temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+                    TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                    temporaryOverlay2.duration = 0.7f;
+                    temporaryOverlay2.animateShaderAlpha = true;
+                    temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                    temporaryOverlay2.destroyComponentOnEnd = true;
+                    temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+                    temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+                }
+
+                if (timer > (fireInterval))
                 {
                     timer = 0;
                     if (base.isAuthority)
@@ -175,42 +214,7 @@ namespace DekuMod.SkillStates
                 }
             }
 
-            this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
-
-            Ray aimRay = base.GetAimRay();
-            aimRay.direction = this.forwardDirection;
-
-            if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 60f, base.fixedAge / duration);
-
-            Vector3 normalized = (base.transform.position - this.previousPosition).normalized;
-            if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-            {
-                Vector3 vector = normalized * this.speedCoefficient * moveSpeedStat;
-                float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
-                vector = this.forwardDirection * d;
-                vector.y = 0f;
-
-                base.characterMotor.velocity = vector;
-            }
-            this.previousPosition = base.transform.position;
-
-            if (this.modelTransform)
-            {
-                TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                temporaryOverlay.duration = 0.6f;
-                temporaryOverlay.animateShaderAlpha = true;
-                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                temporaryOverlay.destroyComponentOnEnd = true;
-                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-                temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-                TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                temporaryOverlay2.duration = 0.7f;
-                temporaryOverlay2.animateShaderAlpha = true;
-                temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                temporaryOverlay2.destroyComponentOnEnd = true;
-                temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-                temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-            }
+            
 
             if (base.fixedAge > baseDuration)
 			{
@@ -225,6 +229,7 @@ namespace DekuMod.SkillStates
         {
             base.OnExit();
 
+            base.characterMotor.disableAirControlUntilCollision = false;
             base.characterMotor.mass = this.previousMass;
             base.characterMotor.useGravity = true;
             base.characterMotor.velocity = Vector3.zero;
