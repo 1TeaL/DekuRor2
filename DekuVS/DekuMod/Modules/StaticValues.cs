@@ -19,8 +19,7 @@ namespace DekuMod.Modules
         internal static float skill45PlusUltraSpend = 15f;
         internal static float skill100PlusUltraSpend = 25f;
         internal static float specialPlusUltraSpend = 50f;
-
-
+        internal static float goBeyondBuffGain = 1f;
 
         //Primary
         //airforce

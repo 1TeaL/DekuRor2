@@ -32,7 +32,8 @@ namespace DekuMod.SkillStates
         private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
-        private float speedCoefficient = 10f;
+        private float basespeedCoefficient = 4f;
+        private float speedCoefficient;
         private string muzzleString;
 
         private BlastAttack blastAttack;
@@ -45,6 +46,7 @@ namespace DekuMod.SkillStates
             timer = 0f;
             blastRadius = baseBlastRadius * attackSpeedStat;
             fireInterval = baseFireInterval / attackSpeedStat;
+            speedCoefficient = basespeedCoefficient * moveSpeedStat;
             Ray aimRay = base.GetAimRay();
             base.StartAimMode(0.5f + this.duration, false);
 
@@ -62,8 +64,7 @@ namespace DekuMod.SkillStates
             //{
             //    base.characterMotor.velocity = this.forwardDirection * this.speedCoefficient * moveSpeedStat;
             //}
-            Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
-            this.previousPosition = base.transform.position - b;
+            this.previousPosition = base.transform.position;
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
@@ -94,9 +95,9 @@ namespace DekuMod.SkillStates
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
             blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.finalsmashDamageCoefficient * (duration/fireInterval);
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.baseForce = maxWeight * 50f;
+            blastAttack.baseForce = maxWeight * 20f;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = DamageType.Freeze2s;
+            blastAttack.damageType = DamageType.IgniteOnHit;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
         }
 
@@ -167,13 +168,13 @@ namespace DekuMod.SkillStates
 
                 if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 60f, base.fixedAge / duration);
 
-                Vector3 normalized = (base.transform.position - this.previousPosition).normalized;
+                Vector3 normalized = (aimRay.origin - this.previousPosition).normalized;
                 if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
                 {
-                    Vector3 vector = normalized * this.speedCoefficient * moveSpeedStat;
+                    Vector3 vector = normalized * this.speedCoefficient;
                     float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
                     vector = this.forwardDirection * d;
-                    vector.y = 0f;
+                    //vector.y = 0f;
 
                     base.characterMotor.velocity = vector;
                 }

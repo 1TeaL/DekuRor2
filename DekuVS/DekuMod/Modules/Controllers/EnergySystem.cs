@@ -112,6 +112,11 @@ namespace DekuMod.Modules.Survivors
         private void CalculateEnergyStats()
         {
             //Energy updates
+            if (characterBody.HasBuff(Buffs.goBeyondBuff.buffIndex))
+            {
+                currentPlusUltra += StaticValues.goBeyondBuffGain;
+            }
+
             if (ifEnergyRegenAllowed)
             {
                 if (anim)

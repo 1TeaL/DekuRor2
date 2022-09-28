@@ -26,6 +26,7 @@ namespace DekuMod.SkillStates
 		public Vector3 theSpot;
 		public Vector3 theDirection;
         private float maxWeight;
+        private float timer;
 
         public override void OnEnter()
 		{
@@ -126,8 +127,10 @@ namespace DekuMod.SkillStates
 
 			if (base.fixedAge > fireTime)
 			{
-                if (base.isAuthority)
+				timer += Time.fixedDeltaTime;
+                if (base.isAuthority && timer > 0.5f)
 				{
+					timer = 0f;
 					new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
 						base.GetAimRay().origin - GetAimRay().direction,
 						theDirection,

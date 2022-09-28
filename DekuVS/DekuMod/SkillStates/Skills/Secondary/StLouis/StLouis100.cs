@@ -9,6 +9,7 @@ using static RoR2.BlastAttack;
 using DekuMod.Modules.Networking;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
+using EntityStates.Huntress;
 
 namespace DekuMod.SkillStates
 {
@@ -24,7 +25,7 @@ namespace DekuMod.SkillStates
         public static float blastRadius = 4f;
         public float distance = 5f;
         public float maxWeight;
-        public float force = 100f;
+        public float force = 20f;
         private float duration;
         private BlastAttack blastAttack;
         private bool hasFired;
@@ -36,7 +37,8 @@ namespace DekuMod.SkillStates
         private GameObject aimSphere;
         public float radius = 3f;
         private Ray aimRay;
-        private float maxDistance = 150f;
+        private float baseDistance = 10f;
+        private float maxDistance;
 
         public override void OnEnter()
         {
@@ -44,13 +46,14 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
             fireTime = duration / 2f;
-
+            maxDistance = baseDistance * moveSpeedStat;
             hasFired = false;
             theSpot = base.transform.position;
             AkSoundEngine.PostEvent(3709822086, this.gameObject);
             AkSoundEngine.PostEvent(3062535197, this.gameObject);
             base.StartAimMode(duration, true);
 
+            this.aimSphere = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
 
 
             //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
@@ -83,7 +86,7 @@ namespace DekuMod.SkillStates
             blastAttack.damageType = damageType;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-            base.characterMotor.Motor.SetPositionAndRotation(characterBody.transform.position + Vector3.up * distance * moveSpeedStat, Util.QuaternionSafeLookRotation(aimRay.direction), true);
+            //base.characterMotor.Motor.SetPositionAndRotation(characterBody.transform.position + Vector3.up * distance * moveSpeedStat, Util.QuaternionSafeLookRotation(aimRay.direction), true);
 
 
             if (base.isAuthority)
@@ -101,6 +104,7 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
+            EntityState.Destroy(this.aimSphere.gameObject);
         }
         public override void Update()
         {
@@ -128,8 +132,7 @@ namespace DekuMod.SkillStates
             }
             else
             {
-                Ray ray = base.GetAimRay();
-                Vector3 position = ray.origin + this.maxDistance * ray.direction;
+                Vector3 position = aimRay.origin + this.maxDistance * Vector3.up;
                 this.aimSphere.transform.position = position;
                 this.aimSphere.transform.up = raycastHit.normal;
                 this.aimSphere.transform.forward = -this.aimRay.direction;
@@ -139,10 +142,9 @@ namespace DekuMod.SkillStates
         {
             base.FixedUpdate();
 
-            if (base.fixedAge >= fireTime && base.isAuthority && !hasFired)
+            if (base.fixedAge >= fireTime && base.isAuthority && !base.IsKeyDownAuthority())
             {
-                hasFired = true;
-
+                base.characterMotor.rootMotion += this.aimSphere.transform.position - base.characterBody.corePosition;
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
@@ -176,12 +178,8 @@ namespace DekuMod.SkillStates
                     }, false);
 
                 }
-            }
 
-            if ((base.fixedAge >= this.duration && base.isAuthority))
-            {
                 this.outer.SetNextStateToMain();
-                return;
             }
 
 

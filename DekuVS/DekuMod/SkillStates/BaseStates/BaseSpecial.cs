@@ -29,6 +29,11 @@ namespace DekuMod.SkillStates
 
 		}
 
+		public void DoSpecial()
+        {
+
+        }
+
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();

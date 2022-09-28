@@ -81,7 +81,7 @@ namespace DekuMod.Modules.Networking
             {
                 foreach (HurtBox singularTarget in trackingTargets)
                 {
-                    singularTarget.healthComponent.body.characterMotor.Motor.SetPositionAndRotation(charBody.transform.position + charBody.characterDirection.forward * 2f,
+                    singularTarget.healthComponent.body.characterMotor.Motor.SetPositionAndRotation(charBody.transform.position + charBody.characterDirection.forward * -3f,
                         Util.QuaternionSafeLookRotation(charBody.characterDirection.forward), true);
 
                     DamageInfo damageInfo = new DamageInfo

@@ -14,9 +14,8 @@ namespace DekuMod.SkillStates
     class DangerSenseCounter: BaseSkillState
     {
         public static float procCoefficient = 1f;
-        public float duration = 1f;
+        public float duration = 0.25f;
         private float stopwatch;
-        private float fireTime;
         private BlastAttack blastAttack;
         public float blastRadius = 7f;
         public static float force = 300f;
@@ -30,13 +29,13 @@ namespace DekuMod.SkillStates
         
         public Vector3 enemyPosition;
         public float rollSpeed;
+        private Animator animator;
 
         public override void OnEnter()
         {
             base.OnEnter();
             stopwatch = 0f;
             AkSoundEngine.PostEvent(2548270042, this.gameObject);
-            this.fireTime = duration / (4 * attackSpeedStat);
 
 
             //characterBody.RemoveBuff(Modules.Buffs.dangersenseBuff.buffIndex);
@@ -44,66 +43,9 @@ namespace DekuMod.SkillStates
             dekucon = base.GetComponent<DekuController>();
             base.skillLocator.primary.AddOneStock();
 
-            dekucon.DANGERSENSE.Stop();
-            //if (dekucon.isMaxPower)
-            //{
-            //    damageType = DamageType.Freeze2s | DamageType.BypassArmor;
-            //}
-            //else
-            //{
-            //    damageType = DamageType.Stun1s;
-            //    if (dekucon.dangersensefreeze)
-            //    {
-            //        damageType = DamageType.Freeze2s;
-            //        dekucon.dangersensefreeze = false;
-            //    }
-            //    else
-            //    {
-            //        damageType = DamageType.Stun1s;
-            //    }
-            //}
-
-
-            //blastAttack = new BlastAttack();
-            //blastAttack.radius = blastRadius;
-            //blastAttack.procCoefficient = procCoefficient;
-            //blastAttack.position = base.characterBody.corePosition;
-            //blastAttack.attacker = base.gameObject;
-            //blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            //blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.dangersenseDamageCoefficient;
-            //blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            //blastAttack.baseForce = force;
-            //blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            //blastAttack.damageType = damageType;
-            //blastAttack.attackerFiltering = AttackerFiltering.Default;
-
-            //if (base.isAuthority)
-            //{
-            //    blastAttack.Fire();
-
-            //    for (int i = 0; i <= 5; i++)
-            //    {
-            //        this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-            //        float num = 60f;
-            //        Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
-            //        float num2 = 0.01f;
-            //        rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-            //        rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-
-            //        EffectData effectData = new EffectData
-            //        {
-            //            scale = 1f,
-            //            origin = base.characterBody.corePosition + this.randRelPos,
-            //            rotation = rotation
-
-            //        };
-            //        EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
-
-            //    }
-            //}
-
+            this.animator = base.GetModelAnimator();
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", fireTime);
+            base.PlayAnimation("Fullbody, Override", "ShootStyleFullFlip", "Attack.playbackRate", duration);
 
             RecalculateRollSpeed();
             Ray aimray = base.GetAimRay();
@@ -114,12 +56,6 @@ namespace DekuMod.SkillStates
                 //base.characterMotor.velocity = (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
             }
 
-            //if (base.characterMotor && base.characterDirection)
-            //{
-            //    Debug.Log("statemove");
-            //    //base.characterMotor.rootMotion += -(aimray.direction).normalized * this.rollSpeed;
-            //    base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
-            //}
         }
         private void RecalculateRollSpeed()
         {
@@ -129,7 +65,7 @@ namespace DekuMod.SkillStates
             {
                 num /= base.characterBody.sprintingSpeedMultiplier;
             }
-            this.rollSpeed = num * Mathf.Lerp(initialspeedCoefficient, 0, base.fixedAge / fireTime);
+            this.rollSpeed = num * Mathf.Lerp(initialspeedCoefficient, 0, base.fixedAge / duration);
         }
 
         public override void OnSerialize(NetworkWriter writer)
@@ -161,13 +97,9 @@ namespace DekuMod.SkillStates
                 base.characterMotor.velocity = -(aimray.direction).normalized * this.rollSpeed;
                 //base.characterMotor.velocity = (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed;
             }
-            //base.characterMotor.rootMotion += (characterBody.transform.position - enemyPosition).normalized * this.rollSpeed * Time.fixedDeltaTime;
-            //base.characterMotor.rootMotion += -(aimray.direction).normalized * this.rollSpeed * Time.fixedDeltaTime;
-            //Increment timer
-            stopwatch += Time.fixedDeltaTime;
 
             //GET OUTTA HERE
-            if (stopwatch >= this.fireTime)
+            if (base.fixedAge >= this.duration)
             {
                 base.outer.SetNextStateToMain();
             }
@@ -175,7 +107,7 @@ namespace DekuMod.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Death;
+            return InterruptPriority.Skill;
         }
     }
 }
