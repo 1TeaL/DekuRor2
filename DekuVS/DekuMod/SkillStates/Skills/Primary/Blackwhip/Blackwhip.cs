@@ -36,8 +36,8 @@ namespace DekuMod.SkillStates
 
             AkSoundEngine.PostEvent(3709822086, this.gameObject);
             AkSoundEngine.PostEvent(3062535197, this.gameObject);
-            //animate blackwhip ready stance
-            base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", chargeTime);
+            //animate blackwhip full
+            base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", duration);
 
         }
 

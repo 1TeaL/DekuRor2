@@ -30,19 +30,8 @@ namespace DekuMod.SkillStates
 
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            float angle = Vector3.Angle(new Vector3(0, -1, 0), aimRay.direction);
-            if (angle < 60)
-            {
-                base.PlayAnimation("FullBody, Override", "DelawareSmashUp");
-            }
-            else if (angle > 120)
-            {
-                base.PlayAnimation("FullBody, Override", "DelawareSmashDown");
-            }
-            else
-            {
-                base.PlayAnimation("FullBody, Override", "DelawareSmash");
-            }
+
+            base.PlayAnimation("FullBody, Override", "DelawareSmash45", "Attack.playbackRate", duration);
 
             //if (NetworkServer.active) base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 
