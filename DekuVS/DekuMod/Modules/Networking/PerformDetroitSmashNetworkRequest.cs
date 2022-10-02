@@ -20,6 +20,7 @@ namespace DekuMod.Modules.Networking
         private BullseyeSearch search;
         private List<HurtBox> trackingTargets;
         private GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
+        private BlastAttack blastAttack;
 
         public PerformDetroitSmashNetworkRequest()
         {
@@ -61,6 +62,7 @@ namespace DekuMod.Modules.Networking
 
                 //Smash targets and stun
                 SmashTarget(charBody, enemycharBody);
+
             }
         }
 
@@ -69,69 +71,49 @@ namespace DekuMod.Modules.Networking
 
         private void SmashTarget(CharacterBody dekucharBody, CharacterBody enemycharBody)
         {
-                float Weight = 1f;
-                if (enemycharBody.characterMotor)
+            float Weight = 1f;
+            if (enemycharBody.characterMotor)
+            {
+                Weight = enemycharBody.characterMotor.mass;
+            }
+            else if (enemycharBody.rigidbody)
+            {
+                Weight = enemycharBody.rigidbody.mass;
+            }
+
+
+            DamageInfo damageInfo = new DamageInfo
+            {
+                attacker = bodyObj,
+                damage = dekucharBody.damage * Modules.StaticValues.detroitDamageCoefficient,
+                position = enemycharBody.transform.position,
+                procCoefficient = 1f,
+                damageType = DamageType.Generic,
+                crit = dekucharBody.RollCrit(),
+
+            };
+
+            Vector3 direction = Vector3.down;
+            if (enemycharBody.characterMotor)
+            {
+                if (enemycharBody.characterMotor.isGrounded)
                 {
-                    Weight = enemycharBody.characterMotor.mass;
-                }
-                else if (enemycharBody.rigidbody)
-                {
-                    Weight = enemycharBody.rigidbody.mass;
-                }
+                    direction = Vector3.up;
 
-
-
-                DamageInfo damageInfo = new DamageInfo
-                {
-                    attacker = bodyObj,
-                    damage = dekucharBody.damage * Modules.StaticValues.detroitDamageCoefficient,
-                    position = enemycharBody.transform.position,
-                    procCoefficient = 1f,
-                    damageType = DamageType.Generic,
-                    crit = dekucharBody.RollCrit(),
-
-                };
-
-                Vector3 direction = Vector3.down;
-                if (enemycharBody.characterMotor)
-                {
-                    if (enemycharBody.characterMotor.isGrounded)
+                    EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
                     {
-                        direction = Vector3.up;
+                        origin = enemycharBody.transform.position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(Vector3.down).normalized,
 
-                        EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
-                        {
-                            origin = enemycharBody.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(Vector3.down).normalized,
-
-                        }, true);
-                        EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
-                        {
-                            origin = enemycharBody.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(Vector3.down).normalized,
-
-                        }, true);
-                    }
-                    else
+                    }, true);
+                    EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
                     {
+                        origin = enemycharBody.transform.position,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(Vector3.down).normalized,
 
-                        EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
-                        {
-                            origin = enemycharBody.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(Vector3.up).normalized,
-
-                        }, true);
-                        EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
-                        {
-                            origin = enemycharBody.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(Vector3.up).normalized,
-
-                        }, true);
-                    }
+                    }, true);
                 }
                 else
                 {
@@ -151,16 +133,30 @@ namespace DekuMod.Modules.Networking
 
                     }, true);
                 }
+            }
+            else
+            {
 
-                enemycharBody.healthComponent.TakeDamageForce(direction * 40f * (Weight), true, true);
-                enemycharBody.healthComponent.TakeDamage(damageInfo);
-                GlobalEventManager.instance.OnHitEnemy(damageInfo, enemycharBody.healthComponent.gameObject);
+                EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
+                {
+                    origin = enemycharBody.transform.position,
+                    scale = 1f,
+                    rotation = Quaternion.LookRotation(Vector3.up).normalized,
 
-                
+                }, true);
+                EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
+                {
+                    origin = enemycharBody.transform.position,
+                    scale = 1f,
+                    rotation = Quaternion.LookRotation(Vector3.up).normalized,
 
-                
+                }, true);
+            }
 
-            
+            enemycharBody.healthComponent.TakeDamageForce(direction * 40f * (Weight), true, true);
+            enemycharBody.healthComponent.TakeDamage(damageInfo);
+            GlobalEventManager.instance.OnHitEnemy(damageInfo, enemycharBody.healthComponent.gameObject);
+
         }
 
     }

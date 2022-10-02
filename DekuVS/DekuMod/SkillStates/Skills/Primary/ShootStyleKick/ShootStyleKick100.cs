@@ -33,8 +33,8 @@ namespace DekuMod.SkillStates
         public static float procCoefficient = 1f;
         private Animator animator;
 
-        private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
-        public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerMageIceLaser");
+        //private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
+        //public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerMageIceLaser");
         private Transform modelTransform;
         private CharacterModel characterModel;
         private float rollSpeed;
@@ -85,12 +85,14 @@ namespace DekuMod.SkillStates
             AkSoundEngine.PostEvent(573664262, this.gameObject);
             //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
             //base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
+            this.animator.SetBool("attacking", true);
+            base.PlayCrossfade("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", duration, 0.1f);
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
             this.muzzleString = "LFoot";
             EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
-            EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
+            EffectManager.SimpleMuzzleFlash(Modules.Assets.muzzleflashMageLightningLargePrefab, base.gameObject, this.muzzleString, false);
 
             base.characterMotor.useGravity = false;
             this.previousMass = base.characterMotor.mass;
@@ -100,7 +102,7 @@ namespace DekuMod.SkillStates
             origin = base.transform.position;
             if (base.isAuthority)
             {
-                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, Modules.StaticValues.shootkick100HealthCostFraction * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
             }
 
         }
@@ -169,7 +171,8 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             Ray aimRay = base.GetAimRay();
-            base.PlayCrossfade("FullBody, Override", "ShootStyleDashExit", 0.2f);
+            this.animator.SetBool("attacking", false);
+            base.PlayCrossfade("FullBody, Override", "ShootStyleKickAuto", 0.01f);
             Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 
             base.characterMotor.mass = this.previousMass;

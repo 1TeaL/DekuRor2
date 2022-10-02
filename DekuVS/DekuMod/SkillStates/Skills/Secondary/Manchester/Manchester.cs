@@ -46,10 +46,10 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
             //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", duration, 0.01f);
+            base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", fireTime, 0.01f);
             if (NetworkServer.active)
             {
-                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.manchesterBuff.buffIndex, baseDuration + 1);
+                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.manchesterBuff.buffIndex, Modules.StaticValues.manchesterBuffDuration);
             }
 
             //move up a little
@@ -88,7 +88,11 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            base.characterMotor.velocity.y = 0f;
+            if(base.fixedAge < fireTime)
+            {
+                base.characterMotor.velocity.y = 0f;
+            }
+
             if (base.fixedAge >= fireTime && base.isAuthority && !hasFired)
             {
                 hasFired = true;

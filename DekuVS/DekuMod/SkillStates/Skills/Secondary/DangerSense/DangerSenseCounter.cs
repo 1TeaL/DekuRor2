@@ -41,7 +41,6 @@ namespace DekuMod.SkillStates
             //characterBody.RemoveBuff(Modules.Buffs.dangersenseBuff.buffIndex);
 
             dekucon = base.GetComponent<DekuController>();
-            base.skillLocator.primary.AddOneStock();
 
             this.animator = base.GetModelAnimator();
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
@@ -107,7 +106,7 @@ namespace DekuMod.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

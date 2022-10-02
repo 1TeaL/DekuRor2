@@ -15,12 +15,8 @@ namespace DekuMod.SkillStates
 {
     public class StLouis100 : BaseSkill100
     {
-        private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
-        private GameObject effectPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
-        public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         public float baseDuration = 1f;
         public float fireTime;
-        //private GameObject effectPrefab = Modules.Assets.sEffect;
 
         public static float blastRadius = 4f;
         public float distance = 5f;
@@ -31,7 +27,6 @@ namespace DekuMod.SkillStates
         private bool hasFired;
         public Vector3 theSpot;
 
-        protected DamageType damageType = DamageType.Stun1s;
 
         //teleporting up
         private GameObject aimSphere;
@@ -59,7 +54,7 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
             //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("Fullbody, Override", "LegSmash", "Attack.playbackate", duration / 2, 0.1f);
+            PlayCrossfade("FullBody, Override", "StLouis100Charge", "Attack.playbackRate",fireTime, 0.01f);
 
             //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
             //{
@@ -83,7 +78,6 @@ namespace DekuMod.SkillStates
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force * maxWeight;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = damageType;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
             //base.characterMotor.Motor.SetPositionAndRotation(characterBody.transform.position + Vector3.up * distance * moveSpeedStat, Util.QuaternionSafeLookRotation(aimRay.direction), true);
@@ -91,7 +85,7 @@ namespace DekuMod.SkillStates
 
             if (base.isAuthority)
             {
-                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, Modules.StaticValues.stlouis100HealthCostFraction * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
             }
         }
 
@@ -142,21 +136,28 @@ namespace DekuMod.SkillStates
         {
             base.FixedUpdate();
 
+            if (base.IsKeyDownAuthority())
+            {
+                PlayCrossfade("FullBody, Override", "StLouis100Charge", "Attack.playbackRate", fireTime, 0.01f);
+            }
+
             if (base.fixedAge >= fireTime && base.isAuthority && !base.IsKeyDownAuthority())
             {
+
+                PlayCrossfade("FullBody, Override", "StLouis100Smash", "Attack.playbackRate", duration - fireTime, 0.01f);
                 base.characterMotor.rootMotion += this.aimSphere.transform.position - base.characterBody.corePosition;
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
                 }
-                EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
+                EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
                 {
                     origin = theSpot,
                     scale = blastRadius * moveSpeedStat,
                     rotation = Util.QuaternionSafeLookRotation(Vector3.down)
 
                 }, true);
-                EffectManager.SpawnEffect(effectPrefab2, new EffectData
+                EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
                 {
                     origin = theSpot,
                     scale = blastRadius * moveSpeedStat,
@@ -170,7 +171,7 @@ namespace DekuMod.SkillStates
                     float num2 = 0.01f;
                     rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
                     rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-                    EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
+                    EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
                     {
                         origin = theSpot,
                         scale = blastRadius * moveSpeedStat,

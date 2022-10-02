@@ -44,7 +44,7 @@ namespace DekuMod.SkillStates
             hasTeleported = false;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            //PlayAnimation("FullBody, Override", "Slam", "Attack.playbackRate", fireTime * 2f);
+            PlayCrossfade("RightArm, Override", "DetroitCharge", "Attack.playbackRate", fireTime, 0.01f);
             if (dekucon && base.isAuthority)
             {
                 Target = dekucon.GetTrackingTarget();
@@ -70,19 +70,49 @@ namespace DekuMod.SkillStates
 
             if (Target)
             {
-                if (!hasTeleported)
-                {
-                    hasTeleported = true;
-                    base.characterMotor.velocity = Vector3.zero;
-                    base.characterMotor.Motor.SetPositionAndRotation(Target.healthComponent.body.transform.position + Vector3.up, Target.healthComponent.body.transform.rotation, true);
-                    //new PerformDetroitTeleportNetworkRequest(base.characterBody.masterObjectId, Target.gameObject).Send(NetworkDestination.Clients);
-
-                }
 
                 if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
                 {
+                    if (!hasTeleported)
+                    {
+                        hasTeleported = true;
+                        base.characterMotor.velocity = Vector3.zero;
+                        base.characterMotor.Motor.SetPositionAndRotation(Target.healthComponent.body.transform.position + Vector3.up, Target.healthComponent.body.transform.rotation, true);
+                        //new PerformDetroitTeleportNetworkRequest(base.characterBody.masterObjectId, Target.gameObject).Send(NetworkDestination.Clients);
+
+                    }
+
                     hasFired = true;
                     new PerformDetroitSmashNetworkRequest(base.characterBody.masterObjectId, Target.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
+
+                    blastAttack = new BlastAttack();
+                    blastAttack.radius = 10f;
+                    blastAttack.procCoefficient = 1f;
+                    blastAttack.position = base.transform.position;
+                    blastAttack.damageType = DamageType.Stun1s;
+                    blastAttack.attacker = base.gameObject;
+                    blastAttack.crit = base.RollCrit();
+                    blastAttack.baseDamage = base.damageStat * Modules.StaticValues.detroitDamageCoefficient;
+                    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                    //blastAttack.baseForce = 10f * Weight;
+                    blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                    blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+                    if (Target.healthComponent.body.characterMotor.isGrounded)
+                    {
+                        PlayCrossfade("RightArm, Override", "DetroitSmashUp", "Attack.playbackRate", fireTime, 0.01f);
+                        blastAttack.bonusForce = Vector3.up * 50f;
+                        blastAttack.Fire();
+
+                    }
+                    if (!Target.healthComponent.body.characterMotor.isGrounded)
+                    {
+                        PlayCrossfade("RightArm, Override", "DetroitSmashDown", "Attack.playbackRate", fireTime, 0.01f);
+                        blastAttack.bonusForce = Vector3.down * 50f;
+                        blastAttack.Fire();
+                    }
+
+
 
                 }
 

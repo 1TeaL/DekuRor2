@@ -37,7 +37,7 @@ namespace DekuMod.SkillStates
             AkSoundEngine.PostEvent(3709822086, this.gameObject);
             AkSoundEngine.PostEvent(3062535197, this.gameObject);
             //animate blackwhip full
-            base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", duration);
+            //base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", duration);
 
         }
 
@@ -57,14 +57,13 @@ namespace DekuMod.SkillStates
                 {
                     hasFired = true;
                     //animate blackwhip pulling
-                    base.PlayCrossfade("FullBody, Override", "Blackwhip", "Attack.playbackRate", castTime, 0.05f);
+                    base.PlayCrossfade("RightArm, Override", "Blackwhip", "Attack.playbackRate", castTime, 0.05f);
+                    new PerformBlackwhipNetworkRequest(base.characterBody.masterObjectId, base.GetAimRay().origin - GetAimRay().direction, base.GetAimRay().direction, pullRange).Send(NetworkDestination.Clients);
 
                 }
 
                 if (base.fixedAge > duration && base.isAuthority)
                 {
-                    new PerformBlackwhipNetworkRequest(base.characterBody.masterObjectId, base.GetAimRay().origin - GetAimRay().direction, base.GetAimRay().direction, pullRange).Send(NetworkDestination.Clients);
-                    
                     this.outer.SetNextStateToMain();
                     return;
                 }

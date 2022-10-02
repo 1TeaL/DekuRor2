@@ -92,13 +92,13 @@ namespace DekuMod.SkillStates.BaseStates
 
         protected virtual void PlayAttackAnimation()
         {
-            if (animator.GetBool("isMoving"))
-            {
-                base.PlayCrossfade("RightArm, Override", "Slash" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
-                return;
-            }
+            //if (animator.GetBool("isMoving"))
+            //{
+            //    base.PlayCrossfade("RightArm, Override", "Slash" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
+            //    return;
+            //}
 
-            base.PlayCrossfade("RightArm, Override", "SwingIdle" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
+            base.PlayCrossfade("Fullbody, Override", "ShootStyleCombo" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
 
         }
 

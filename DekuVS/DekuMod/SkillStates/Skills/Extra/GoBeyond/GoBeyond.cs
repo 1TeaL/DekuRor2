@@ -6,6 +6,8 @@ using UnityEngine;
 using static RoR2.CameraTargetParams;
 using UnityEngine.Networking;
 using R2API.Networking;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DekuMod.SkillStates
 {
@@ -28,12 +30,16 @@ namespace DekuMod.SkillStates
 		public float duration = 5f;
 
         private Animator animator;
+        private BlastAttack blastAttack;
+        private float maxWeight;
 
         public override void OnEnter()
 		{
 			base.OnEnter();
 			dekucon = base.GetComponent<DekuController>();
 			extraskillLocator = base.GetComponent<ExtraSkillLocator>();
+
+			PlayAnimation("Fullbody, Override", "GoBeyond", "Attack.playbackRate", duration);
 
 			bool active = NetworkServer.active;
 			if (active)
@@ -88,11 +94,72 @@ namespace DekuMod.SkillStates
 
 			camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, duration/2);
 
-		}
+			//get weight, teleport after
+			GetMaxWeight();
 
-        public override void OnExit()
+			blastAttack = new BlastAttack();
+			blastAttack.radius = 20f;
+			blastAttack.procCoefficient = 1f;
+			blastAttack.position = base.transform.position;
+			blastAttack.damageType = DamageType.Stun1s;
+			blastAttack.attacker = base.gameObject;
+			blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+			blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.gobeyondDamageCoefficient;
+			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+			blastAttack.baseForce = 100f * maxWeight;
+			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+		}
+		public void GetMaxWeight()
+		{
+			Ray aimRay = base.GetAimRay();
+			BullseyeSearch search = new BullseyeSearch
+			{
+
+				teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
+				filterByLoS = false,
+				searchOrigin = base.transform.position,
+				searchDirection = UnityEngine.Random.onUnitSphere,
+				sortMode = BullseyeSearch.SortMode.Distance,
+				maxDistanceFilter = 20f,
+				maxAngleFilter = 360f
+			};
+
+			search.RefreshCandidates();
+			search.FilterOutGameObject(base.gameObject);
+
+
+
+			List<HurtBox> target = search.GetResults().ToList<HurtBox>();
+			foreach (HurtBox singularTarget in target)
+			{
+				if (singularTarget)
+				{
+					if (singularTarget.healthComponent && singularTarget.healthComponent.body)
+					{
+						if (singularTarget.healthComponent.body.characterMotor)
+						{
+							if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
+							{
+								maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
+							}
+						}
+						else if (singularTarget.healthComponent.body.rigidbody)
+						{
+							if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
+							{
+								maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
+							}
+						}
+					}
+				}
+			}
+		}
+		public override void OnExit()
         {
             base.OnExit();
+			blastAttack.Fire();
+
 
 			if (base.GetAimAnimator()) base.GetAimAnimator().enabled = true;
 			base.characterBody.hideCrosshair = false;
@@ -101,8 +168,14 @@ namespace DekuMod.SkillStates
 			{
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 				base.characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 5);
-				base.characterBody.ApplyBuff(Modules.Buffs.goBeyondBuff.buffIndex, 1, 60f);
+				base.characterBody.ApplyBuff(Modules.Buffs.goBeyondBuff.buffIndex, 1, Modules.StaticValues.goBeyondBuffDuration);
 			}
+
+			dekucon.GOBEYOND.Play();
+			dekucon.RARM.Play();
+			dekucon.LARM.Play();
+			dekucon.RLEG.Play();
+			dekucon.LLEG.Play();
 		}
 
         public override void FixedUpdate()

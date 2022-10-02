@@ -20,7 +20,6 @@ namespace DekuMod.Modules.Networking
         GameObject bodyObj;
         private BullseyeSearch search;
         private List<HurtBox> trackingTargets;
-        private GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 
         public PerformDetroitDelawareNetworkRequest()
         {
@@ -99,7 +98,7 @@ namespace DekuMod.Modules.Networking
                     GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
 
 
-                    EffectManager.SpawnEffect(blastEffectPrefab, new EffectData
+                    EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
                     {
                         origin = singularTarget.transform.position,
                         scale = 1f,

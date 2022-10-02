@@ -40,7 +40,6 @@ namespace DekuMod.SkillStates
             hasTeleported = false;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            //PlayAnimation("FullBody, Override", "Slam", "Attack.playbackRate", fireTime * 2f);
             if (dekucon && base.isAuthority)
             {
                 Target = dekucon.GetTrackingTarget();
@@ -78,8 +77,24 @@ namespace DekuMod.SkillStates
                 if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
                 {
                     hasFired = true;
+                    PlayCrossfade("FullBody, Override", "StLouis", "Attack.playbackRate", duration - fireTime, 0.01f);
                     new PerformStLouisSmashNetworkRequest(base.characterBody.masterObjectId, Target.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
 
+                    blastAttack = new BlastAttack();
+                    blastAttack.radius = 10f;
+                    blastAttack.procCoefficient = 1f;
+                    blastAttack.position = base.transform.position;
+                    blastAttack.damageType = DamageType.Stun1s;
+                    blastAttack.attacker = base.gameObject;
+                    blastAttack.crit = base.RollCrit();
+                    blastAttack.baseDamage = base.damageStat * Modules.StaticValues.detroitDamageCoefficient;
+                    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                    //blastAttack.baseForce = 10f * Weight;
+                    blastAttack.bonusForce = GetAimRay().direction * 100f;
+                    blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                    blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+                    blastAttack.Fire();
                 }
 
                 if ((base.fixedAge >= this.duration && base.isAuthority))

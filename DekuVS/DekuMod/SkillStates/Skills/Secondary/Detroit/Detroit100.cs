@@ -51,13 +51,13 @@ namespace DekuMod.SkillStates
 			bool isAuthority = base.isAuthority;
 			Util.PlaySound(BaseChargeFist.startChargeLoopSFXString, base.gameObject);
 			this.animator = base.GetModelAnimator();
-            this.animator.SetBool("isSprinting", true);
 			//PlayAnimation("Body", "Sprint");
 			//Util.PlaySound(EntityStates.Bison.Charge.startSoundString, base.gameObject);
+			PlayCrossfade("Fullbody, Override", "DetroitCharge", "Attack.playbackRate", fireTime, 0.01f);
 
 			if (base.isAuthority)
 			{
-				new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+				new SpendHealthNetworkRequest(characterBody.masterObjectId, Modules.StaticValues.detroit100HealthCostFraction * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
 			}
 
 			//set speed
@@ -146,7 +146,6 @@ namespace DekuMod.SkillStates
 				if (base.IsKeyDownAuthority())
 				{
 					Loop();
-					PlayAnimation("Body", "Sprint");
 				}
 				else if (!base.IsKeyDownAuthority())
 				{
@@ -192,7 +191,9 @@ namespace DekuMod.SkillStates
 				{
 					base.characterMotor.velocity = Vector3.zero;
 
-				
+					this.animator.SetBool("detroitRelease", true);
+					PlayAnimation("Fullbody, Override", "Detroit100Smash");
+
 					for (int i = 0; i <= 10; i++)
 					{
 						float rand = 60f;
@@ -233,8 +234,9 @@ namespace DekuMod.SkillStates
 					this.outer.SetNextStateToMain();
 				}
                 else
-                {
-                    this.UpdateDirection();
+				{
+					PlayAnimation("Fullbody, Override", "Detroit100Charging");
+					this.UpdateDirection();
                 }
 
             }

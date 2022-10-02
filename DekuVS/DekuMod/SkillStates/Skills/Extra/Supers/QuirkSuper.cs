@@ -16,8 +16,11 @@ namespace DekuMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			this.duration = baseDuration;
-			base.StartAimMode(0.5f + this.duration, false);
+			
+		}
+
+		protected override void DoSkill()
+		{
 
 			bool active = NetworkServer.active;
 			if (active)
@@ -25,10 +28,7 @@ namespace DekuMod.SkillStates
 				base.characterBody.AddTimedBuffAuthority(Modules.Buffs.fajinBuff.buffIndex, Modules.StaticValues.fajinDuration);
 			}
 
-
-
 		}
-
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();

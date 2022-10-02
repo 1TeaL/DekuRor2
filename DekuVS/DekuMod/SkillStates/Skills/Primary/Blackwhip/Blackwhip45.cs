@@ -31,7 +31,7 @@ namespace DekuMod.SkillStates
             this.duration = this.baseDuration / attackSpeedStat;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
+            base.PlayCrossfade("FullBody, Override", "Blackwhip", "Attack.playbackRate", duration, 0.05f);
             //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
             speedattack = attackSpeedStat / 2;
             if (speedattack < 1)
@@ -60,7 +60,7 @@ namespace DekuMod.SkillStates
 
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = Blackwhip45.blastRadius * this.attackSpeedStat;
+            blastAttack.radius = blastRadius * this.attackSpeedStat;
             blastAttack.procCoefficient = 0.5f;
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;

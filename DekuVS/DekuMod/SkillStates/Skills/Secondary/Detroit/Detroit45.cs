@@ -46,7 +46,7 @@ namespace DekuMod.SkillStates
             this.areaIndicator.SetActive(true);
             //base.PlayAnimation("FullBody, Override", "SmashCharge", "Attack.playbackRate", 1f);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 1f);
+            PlayCrossfade("RightArm, Override", "DetroitCharge", "Attack.playbackRate", duration/3, 0.01f);
             //base.PlayAnimation("RightArm, Override", "SmashCharge");
             //base.PlayCrossfade("RightArm, Override", "SmashCharge", 0.2f);
             //base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 0.2f);
@@ -100,7 +100,6 @@ namespace DekuMod.SkillStates
             bool flag = base.fixedAge < this.maxCharge && base.IsKeyDownAuthority();
             if (flag)
             {
-                base.PlayAnimation("FullBody, Override", "SmashFullCharge", "Attack.playbackRate", 1f);
                 this.chargePercent = base.fixedAge / this.maxCharge;
 
                 base.characterMotor.walkSpeedPenaltyCoefficient = 1f - this.chargePercent / 3f;

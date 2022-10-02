@@ -19,16 +19,26 @@ namespace DekuMod.SkillStates
 			energySystem = base.GetComponent<EnergySystem>();
 			if(energySystem.currentPlusUltra > Modules.StaticValues.skillPlusUltraSpend)
 			{
+				DoSkill();
 				energySystem.SpendPlusUltra(Modules.StaticValues.skillPlusUltraSpend);
 			}
 			else
 			{
-				energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
+				DontDoSkill();
 			}
 
 
 		}
 
+		protected virtual void DoSkill()
+		{
+
+		}
+		protected virtual void DontDoSkill()
+		{
+			energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
+			this.outer.SetNextStateToMain();
+		}
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();

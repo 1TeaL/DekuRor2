@@ -25,6 +25,11 @@ namespace DekuMod.Modules.Survivors
         private EnergySystem energySystem;
 
         //Particles
+        public ParticleSystem GOBEYOND;
+        public ParticleSystem RARM;
+        public ParticleSystem LARM;
+        public ParticleSystem LLEG;
+        public ParticleSystem RLEG;
         public ParticleSystem OFA;
         public ParticleSystem OFAeye;
         public ParticleSystem FAJIN;
@@ -85,12 +90,23 @@ namespace DekuMod.Modules.Survivors
 
             if (child)
             {
+                GOBEYOND = child.FindChild("goBeyondAura").GetComponent<ParticleSystem>();
+                LARM = child.FindChild("lArmAura").GetComponent<ParticleSystem>();
+                RARM = child.FindChild("rArmAura").GetComponent<ParticleSystem>();
+                LLEG = child.FindChild("lLegAura").GetComponent<ParticleSystem>();
+                RLEG = child.FindChild("rLegAura").GetComponent<ParticleSystem>();
                 OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
                 OFAeye = child.FindChild("OFAlightningeye").GetComponent<ParticleSystem>();
                 FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
                 OKLAHOMA = child.FindChild("Oklahoma").GetComponent<ParticleSystem>();
                 DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
             }
+            GOBEYOND.Stop();
+            LARM.Stop();
+            RARM.Stop();
+            LLEG.Stop();
+            RLEG.Stop();
+            OFA.Stop();
             OFAeye.Stop();
             OFA.Stop();
             FAJIN.Stop();
@@ -106,16 +122,18 @@ namespace DekuMod.Modules.Survivors
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             //dangersense
-            if (damageInfo != null && damageInfo.attacker && damageInfo.attacker.GetComponent<CharacterBody>())
+            if (damageInfo != null && damageInfo.attacker && 
+                damageInfo.attacker.GetComponent<CharacterBody>() && 
+                damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
             {
                 bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
                 if (!flag && damageInfo.damage > 0f)
                 {
                     //dangersense base
-                    if (self.body.HasBuff(Modules.Buffs.dangersense100Buff.buffIndex))
+                    if (self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex))
                     {
                         damageInfo.force = Vector3.zero;
-                        damageInfo.damage -= self.body.level * 3f;
+                        damageInfo.damage -= self.body.level * 5f;
                         if(damageInfo.damage < 0f)
                         {
                             self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
@@ -155,7 +173,7 @@ namespace DekuMod.Modules.Survivors
 
                         }, true);
 
-                        new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
+                        //new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
 
 
 
@@ -197,7 +215,7 @@ namespace DekuMod.Modules.Survivors
 
                     }
                     //dangersense 45
-                    if (self.body.HasBuff(Modules.Buffs.dangersense100Buff.buffIndex))
+                    if (self.body.HasBuff(Modules.Buffs.dangersense45Buff.buffIndex))
                     {
                         damageInfo.damage *= StaticValues.dangersense45DamageReduction;
 
@@ -279,7 +297,13 @@ namespace DekuMod.Modules.Survivors
                     //dangersense 100
                     if (self.body.HasBuff(Modules.Buffs.dangersense100Buff.buffIndex))
                     {
-                        damageInfo.rejected = true;
+                        damageInfo.force = Vector3.zero;
+                        damageInfo.damage -= self.body.armor;
+                        if (damageInfo.damage < 0f)
+                        {
+                            //self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
+                            damageInfo.damage = 0f;
+                        }
 
 
                         //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
@@ -408,12 +432,26 @@ namespace DekuMod.Modules.Survivors
                             if (body.characterMotor.velocity.y <= 0)
                             {
                                 energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
-                                body.characterMotor.velocity.y += StaticValues.floatSpeed;
+                                if(body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
+                                {
+                                    body.characterMotor.velocity.y += StaticValues.floatSpeed;
+                                }
+                                else
+                                {
+                                    body.characterMotor.velocity.y = body.moveSpeed;
+                                }
                             }
                             else if (body.characterMotor.velocity.y > 0)
                             {
                                 energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
-                                body.characterMotor.velocity.y += StaticValues.floatSpeed / 2;
+                                if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
+                                {
+                                    body.characterMotor.velocity.y += StaticValues.floatSpeed;
+                                }
+                                else
+                                {
+                                    body.characterMotor.velocity.y = body.moveSpeed;
+                                }
                             }
                         }
                     }
@@ -430,6 +468,10 @@ namespace DekuMod.Modules.Survivors
             else if (body.characterMotor.isGrounded)
             {
                 stopwatch = 0f;
+                if (NetworkServer.active)
+                {
+                    body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 0);
+                }
             }
 
             //ofabuff self damage
@@ -482,6 +524,50 @@ namespace DekuMod.Modules.Survivors
             else 
             {
                 DANGERSENSE.Stop();
+            }
+            //fajin particle
+            if (body.HasBuff(Buffs.fajinBuff))
+            {
+                FAJIN.Play();
+            }
+            else
+            {
+                FAJIN.Stop();
+            }
+            //ofa particle
+            if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.ofaBuff45))
+            {
+                OFA.Play();
+            }
+            else
+            {
+                OFA.Stop();
+            }
+            //ofa eye particle
+            if (body.HasBuff(Buffs.ofaBuff))
+            {
+                OFAeye.Play();
+            }
+            else
+            {
+                OFAeye.Stop();
+            }
+            //go beyond particle
+            if (body.HasBuff(Buffs.goBeyondBuff))
+            {
+                GOBEYOND.Play();
+                RARM.Play();
+                LARM.Play();
+                RLEG.Play();
+                LLEG.Play();
+            }
+            else
+            {
+                GOBEYOND.Stop();
+                RARM.Stop();
+                LARM.Stop();
+                RLEG.Stop();
+                LLEG.Stop();
             }
 
             //CheckIfMaxKickPowerStacks();

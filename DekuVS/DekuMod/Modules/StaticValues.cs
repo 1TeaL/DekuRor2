@@ -15,26 +15,31 @@ namespace DekuMod.Modules
         internal static float regenPlusUltraRate = 8f;
         internal static float basePlusUltraGain = 1f;
         internal static float skillPlusUltraGain = 2f;
-        internal static float skillPlusUltraSpend = 5f;
+        internal static float skillPlusUltraSpend = 20f;
         internal static float skill45PlusUltraSpend = 15f;
-        internal static float skill100PlusUltraSpend = 25f;
+        internal static float skill100PlusUltraSpend = 10f;
         internal static float specialPlusUltraSpend = 50f;
+        internal static float modePlusUltraSpend = 10f;
         internal static float goBeyondBuffGain = 1f;
+        internal static int goBeyondBuffDuration = 60;
 
         //Primary
         //airforce
         internal const float airforceDamageCoefficient = 1f;
         internal const float airforce45DamageCoefficient = 1.25f;
         internal const float airforce100DamageCoefficient = 2f;
+        internal const float airforce100HealthCostFraction = 0.005f;
         //shootstylekick
         internal const float shootkickDamageCoefficient = 2f;
         internal const float shootkick45DamageCoefficient = 3f;
         internal const float shootkick100DamageCoefficient = 1f;
+        internal const float shootkick100HealthCostFraction = 0.1f;
         //blackwhip
         internal const float blackwhipPullRange = 50f;
         internal const float blackwhipDamageCoefficient = 1f;
         internal const float blackwhip45DamageCoefficient = 1f;
         internal const float blackwhip100DamageCoefficient = 2f;
+        internal const float blackwhip100HealthCostFraction = 0.25f;
 
 
         internal const float shootbulletDamageCoefficient = 2f;
@@ -46,15 +51,18 @@ namespace DekuMod.Modules
         internal const float detroitRange = 5f;
         internal const float detroit45DamageCoefficient = 12f;
         internal const float detroit100DamageCoefficient = 18f;
+        internal const float detroit100HealthCostFraction = 0.15f;
         //stlouis
         internal const float stlouisDamageCoefficient = 4f;
         internal const float stlouis45DamageCoefficient = 6f;
         internal const float stlouis100DamageCoefficient = 4f;
+        internal const float stlouis100HealthCostFraction = 0.15f;
         //dangersense
         internal const float dangersense45DamageReduction = 0.5f;
         internal const float dangersenseDamageCoefficient = 1f;
         internal const float dangersense45DamageCoefficient = 2f;
         internal const float dangersense100DamageCoefficient = 2f;
+        internal const float dangersense100HealthCostFraction = 0.5f;
         internal const int dangersenseBuffTimer = 6;
         internal const int dangersense45BuffTimer = 6;
         internal const int dangersense100BuffTimer = 8;
@@ -66,16 +74,21 @@ namespace DekuMod.Modules
         internal const float delawareDamageCoefficient = 6f;
         internal const float delaware45DamageCoefficient = 6f;
         internal const float delaware100DamageCoefficient = 6f;
+        internal const float delaware100HealthCostFraction = 0.15f;
         //manchester
         internal const float manchesterArmor = 300f;
         internal const float manchesterDamageCoefficient = 4f;
+        internal const int manchesterBuffDuration = 5;
         internal const float manchester45DamageCoefficient = 4f;
+        internal const int manchester45BuffDuration = 3;
         internal const float manchester100DamageCoefficient = 8f;
+        internal const float manchester100HealthCostFraction = 0.15f;
         //smokescreen
         internal const float smokescreenDuration = 4f;
         internal const float smokescreen45Duration = 8f;
         internal const float smokescreen100Duration = 8f;
         internal const float smokescreenDamageCoefficient = 2f;
+        internal const float smokescreen100HealthCostFraction = 0.25f;
         //Utility damage
         internal const float shootattackDamageCoefficient = 1f;
         internal const float shootattack45DamageCoefficient = 1.5f;
@@ -97,6 +110,8 @@ namespace DekuMod.Modules
         internal const float finalsmashRange = 20f;
         //quirk
         internal const float fajinDuration = 10f;
+        //gobeyond
+        internal const float gobeyondDamageCoefficient = 10f;
 
         //Extra quirks
         internal const float floatForceEnergyFraction = 0.01f;

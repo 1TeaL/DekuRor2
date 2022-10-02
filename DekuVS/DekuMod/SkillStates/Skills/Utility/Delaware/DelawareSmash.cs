@@ -24,6 +24,8 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             base.characterBody.SetAimTimer(this.duration);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            base.GetModelAnimator().SetBool("delawareRelease", false);
+            PlayCrossfade("FullBody, Override", "DelawareSmashBaseCharge", "Attack.playbackRate", duration, 0.01f);
 
 
             //PlayAnimation("RightArm, Override", "RightArmOut", "Attack.playbackRate", 1f);
@@ -49,6 +51,7 @@ namespace DekuMod.SkillStates
             base.FixedUpdate();
             if (base.IsKeyDownAuthority())
             {
+                PlayCrossfade("FullBody, Override", "DelawareSmashBaseCharge", "Attack.playbackRate", duration, 0.01f);
                 //PlayAnimation("RightArm, Override", "RightArmOut", "Attack.playbackRate", duration);
             }
             if (base.characterBody)

@@ -29,7 +29,7 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
             base.characterMotor.velocity = Vector3.zero;
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-			base.PlayAnimation("FullBody, Override", "SmashChargeAttack", "Attack.playbackRate", 1f);
+			PlayCrossfade("RightArm, Override", "DetroitSmash", "Attack.playbackRate", 0.3f, 0.01f);
 			//Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
 			AkSoundEngine.PostEvent(3289116818, this.gameObject);
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);

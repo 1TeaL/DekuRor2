@@ -40,7 +40,7 @@ namespace DekuMod.SkillStates
             damageType = DamageType.Stun1s;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", 0.5f);
+            base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", 0.5f, 0.01f);
 
 
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;

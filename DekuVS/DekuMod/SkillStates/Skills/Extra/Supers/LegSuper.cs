@@ -17,6 +17,7 @@ namespace DekuMod.SkillStates
 	public class LegSuper : BaseSpecial
 	{
 		public static float baseDuration = 2.5f;
+        public static float exitDuration;
         public static float baseBlastRadius = Modules.StaticValues.finalsmashRange;
         public static float blastRadius;
 
@@ -42,7 +43,13 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
 		{
 			base.OnEnter();
-			this.duration = baseDuration;
+			
+        }
+
+        protected override void DoSkill()
+        {
+            this.duration = baseDuration;
+            exitDuration = duration - fireTime;
             timer = 0f;
             blastRadius = baseBlastRadius * attackSpeedStat;
             fireInterval = baseFireInterval / attackSpeedStat;
@@ -56,7 +63,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.Motor.ForceUnground();
             base.characterMotor.disableAirControlUntilCollision = true;
 
-            if (base.isAuthority && base.characterDirection)
+            if (base.isAuthority)
             {
                 this.forwardDirection = aimRay.direction;
             }
@@ -74,10 +81,10 @@ namespace DekuMod.SkillStates
 
 
             bool active = NetworkServer.active;
-			if (active)
-			{
-				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
-			}
+            if (active)
+            {
+                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+            }
 
             if (base.isAuthority)
             {
@@ -93,14 +100,18 @@ namespace DekuMod.SkillStates
             blastAttack.position = base.transform.position;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.finalsmashDamageCoefficient * (duration/fireInterval);
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.finalsmashDamageCoefficient * (duration / fireInterval);
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = maxWeight * 20f;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = DamageType.IgniteOnHit;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
-        }
 
+
+            base.GetModelAnimator().SetBool("finalsmashRelease", false);
+            PlayAnimation("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", duration - exitDuration);
+
+        }
         public void GetMaxWeight()
         {
             Ray aimRay = base.GetAimRay();
@@ -159,7 +170,7 @@ namespace DekuMod.SkillStates
 			base.FixedUpdate();
             GetMaxWeight();
 
-            if (base.fixedAge > fireTime)
+            if (base.fixedAge >= fireTime && base.fixedAge < exitDuration)
             {
                 this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
@@ -213,15 +224,31 @@ namespace DekuMod.SkillStates
                 {
                     timer += Time.fixedDeltaTime;
                 }
-            }
-
+            }           
+            else if(base.fixedAge > exitDuration)
+            {
+                base.GetModelAnimator().SetBool("finalsmashRelease", true);
+                PlayAnimation("FullBody, Override", "FinalSmashSmash", "Attack.playbackRate", exitDuration);
+                if (base.isAuthority)
+                {
+                    new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
+                        base.transform.position,
+                        base.GetAimRay().direction,
+                        0f).Send(NetworkDestination.Clients);
+                }
+            } 
             
-
             if (base.fixedAge > baseDuration)
 			{
                 blastAttack.position = base.transform.position;
                 blastAttack.Fire();
-				this.outer.SetNextStateToMain();
+                EffectManager.SpawnEffect(Modules.Assets.elderlemurianexplosionEffect, new EffectData
+                {
+                    origin = base.transform.position,
+                    scale = blastRadius,
+                    rotation = Quaternion.LookRotation(Vector3.up)
+                }, true);
+                this.outer.SetNextStateToMain();
 			}
 
 		}

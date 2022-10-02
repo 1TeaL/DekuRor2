@@ -15,8 +15,9 @@ namespace DekuMod.SkillStates
 
 	public class FistSuper : BaseSpecial
 	{
-		public static float baseDuration = 5f;
+		public static float baseDuration = 2.5f;
 		private float duration;
+		private float exitDuration;
 		private float fireTime = 0.5f;
 		private float baseBlastRadius = 20f;
 		private float blastRadius;
@@ -31,18 +32,24 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
 		{
 			base.OnEnter();
+
+
+		}
+		protected override void DoSkill()
+		{
 			this.duration = baseDuration;
+			exitDuration = duration - fireTime;
 			blastRadius = baseBlastRadius * attackSpeedStat;
 			Ray aimRay = base.GetAimRay();
 			base.StartAimMode(0.5f + this.duration, false);
 
 			bool active = NetworkServer.active;
 			if (active)
-			{ 				
+			{
 				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
 			}
-            //intial pull
-            if (base.isAuthority)
+			//intial pull
+			if (base.isAuthority)
 			{
 				new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
 					base.GetAimRay().origin - GetAimRay().direction,
@@ -66,6 +73,9 @@ namespace DekuMod.SkillStates
 			blastAttack.damageType = DamageType.Freeze2s;
 			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
+			base.GetModelAnimator().SetBool("detroitDelawareCharge", false);
+			base.GetModelAnimator().SetBool("detroitDelawareRelease", false);
+			PlayCrossfade("FullBody, Override", "DetroitDelawareDelaware", "Attack.playbackRate", fireTime, 0.01f);
 
 		}
 
@@ -127,6 +137,7 @@ namespace DekuMod.SkillStates
 
 			if (base.fixedAge > fireTime)
 			{
+				base.GetModelAnimator().SetBool("detroitDelawareCharge", true);
 				timer += Time.fixedDeltaTime;
                 if (base.isAuthority && timer > 0.5f)
 				{
@@ -137,6 +148,10 @@ namespace DekuMod.SkillStates
 						0f).Send(NetworkDestination.Clients);
 				}
 			}
+			if(base.fixedAge > duration - exitDuration)
+            {
+				base.GetModelAnimator().SetBool("detroitDelawareRelease", true);
+			}
 
 			if(base.fixedAge > duration)
 			{
@@ -144,6 +159,19 @@ namespace DekuMod.SkillStates
 				{
 					this.OnHitEnemyAuthority();
 				}
+
+				EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
+				{
+					origin = base.transform.position,
+					scale = blastRadius,
+					rotation = Quaternion.LookRotation(Vector3.up)
+				}, true);
+				EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
+				{
+					origin = base.transform.position,
+					scale = blastRadius,
+					rotation = Quaternion.LookRotation(Vector3.up)
+				}, true);
 
 				this.outer.SetNextStateToMain();
 			}

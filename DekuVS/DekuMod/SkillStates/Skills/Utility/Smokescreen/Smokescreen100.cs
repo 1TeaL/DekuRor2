@@ -28,50 +28,47 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
 		{
 			base.OnEnter();
+
+		}
+
+		protected override void DoSkill()
+		{
 			this.duration = baseDuration;
 			hasFired = false;
 			dekucon = base.GetComponent<DekuController>();
 			Ray aimRay = base.GetAimRay();
 			theSpot = aimRay.origin + 0 * aimRay.direction;
-            bool active = NetworkServer.active;
-            if (active)
-            {
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreen100Duration);
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreen100Duration);
+			bool active = NetworkServer.active;
+			if (active)
+			{
+				base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreen100Duration);
+				base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreen100Duration);
 			}
 
 			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
-            //base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
+			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
 
-            if (base.isAuthority)
-            {
-                Vector3 effectPosition = base.characterBody.corePosition;
-                effectPosition.y = base.characterBody.corePosition.y;
-                EffectManager.SpawnEffect(this.smokebigprefab, new EffectData
-                {
-                    origin = effectPosition,
-                    scale = radius,
-                    rotation = Quaternion.LookRotation(Vector3.down)
-                }, true);
+			if (base.isAuthority)
+			{
+				Vector3 effectPosition = base.characterBody.corePosition;
+				effectPosition.y = base.characterBody.corePosition.y;
+				EffectManager.SpawnEffect(this.smokebigprefab, new EffectData
+				{
+					origin = effectPosition,
+					scale = radius,
+					rotation = Quaternion.LookRotation(Vector3.down)
+				}, true);
 
-            }
-
-
-            EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-            {
-                origin = base.transform.position,
-                scale = 1f,
-                rotation = Quaternion.LookRotation(aimRay.direction)
-            }, false);
+			}
 
 
-            float radiusSqr = radius * radius;
-            Vector3 position = base.transform.position;
+			float radiusSqr = radius * radius;
+			Vector3 position = base.transform.position;
 
-            if (NetworkServer.active)
-            {
-                this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
-            }
+			if (NetworkServer.active)
+			{
+				this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
+			}
 
 			GetMaxWeight();
 
@@ -93,7 +90,6 @@ namespace DekuMod.SkillStates
 			blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 		}
-
 
 		public void GetMaxWeight()
 		{

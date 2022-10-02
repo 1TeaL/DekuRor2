@@ -17,7 +17,7 @@ namespace DekuMod.SkillStates
         public static float slamRadius;
         public static float baseRadius = 3f;
         public static float slamProcCoefficient = 1f;
-        public static float slamForce = 5000f;
+        public static float slamForce = 1000f;
 
         private bool hasDropped;
         private Vector3 flyVector = Vector3.zero;
@@ -47,7 +47,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = true;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", jumpDuration, 0.1f);
+            base.PlayCrossfade("Body", "Jump", "Attack.playbackRate", jumpDuration, 0.1f);
             AkSoundEngine.PostEvent(687990298, this.gameObject);
             AkSoundEngine.PostEvent(1918362945, this.gameObject);
 
@@ -81,7 +81,7 @@ namespace DekuMod.SkillStates
 
             if (NetworkServer.active)
             {
-                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.manchesterBuff.buffIndex, basejumpDuration + 1);
+                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.manchesterBuff.buffIndex, Modules.StaticValues.manchester45BuffDuration);
             }
         }
 

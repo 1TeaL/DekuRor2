@@ -17,8 +17,8 @@ namespace DekuMod.SkillStates
         public float baseDuration = 0.5f;
         private float duration;
         public float fireTime;
-        public float fireInterval;
         public float timer;
+        public bool hasFired;
 
         public static float blastRadius = 15f;
         public static float succForce = 5f;
@@ -32,14 +32,19 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
+            
+
+        }
+
+        protected override void DoSkill()
+        {
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
             fireTime = duration / 2f;
-            fireInterval = fireTime / 2f;
             timer = 0f;
+            hasFired = false;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
             //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
 
             theSpot = aimRay.origin + 0.5f * attackSpeedStat * blastRadius * aimRay.direction;
@@ -76,62 +81,8 @@ namespace DekuMod.SkillStates
 
             if (base.isAuthority)
             {
-                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, Modules.StaticValues.blackwhip100HealthCostFraction * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
             }
-
-            //pull
-            if (NetworkServer.active)
-            {
-                Collider[] array = Physics.OverlapSphere(theSpot, blastRadius * attackSpeedStat, LayerIndex.defaultLayer.mask);
-                for (int i = 0; i < array.Length; i++)
-                {
-                    HealthComponent healthComponent = array[i].GetComponent<HealthComponent>();
-                    if (healthComponent)
-                    {
-                        TeamComponent component2 = healthComponent.GetComponent<TeamComponent>();
-                        if (component2.teamIndex != TeamIndex.Player)
-                        {
-                            var charb = healthComponent.body;
-                            if (charb)
-                            {
-                                Vector3 pushForce = (theSpot - charb.corePosition) * succForce;
-                                var motor = charb.GetComponent<CharacterMotor>();
-                                var rb = charb.GetComponent<Rigidbody>();
-
-                                float mass = 1;
-                                if (motor) mass = motor.mass;
-                                else if (rb) mass = rb.mass;
-                                if (mass < 100) mass = 100;
-
-                                pushForce *= mass;
-
-                                DamageInfo info = new DamageInfo
-                                {
-                                    attacker = base.gameObject,
-                                    inflictor = base.gameObject,
-                                    damage = 0,
-                                    damageColorIndex = DamageColorIndex.Default,
-                                    damageType = DamageType.Generic,
-                                    crit = false,
-                                    dotIndex = DotController.DotIndex.None,
-                                    force = pushForce,
-                                    position = base.transform.position,
-                                    procChainMask = default(ProcChainMask),
-                                    procCoefficient = 0
-                                };
-
-                                charb.healthComponent.TakeDamageForce(info, true, true);
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        protected virtual void OnHitEnemyAuthority()
-        {
-            //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 30) * this.attackSpeedStat);
 
         }
 
@@ -147,21 +98,26 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            timer += Time.fixedDeltaTime;
 
-            if (timer >= fireTime && base.isAuthority)
+            if (base.fixedAge >= fireTime && base.isAuthority && hasFired)
             {
-                timer -= fireInterval;
-                if (blastAttack.Fire().hitCount > 0)
+                base.PlayCrossfade("FullBody, Override", "Blackwhip", "Attack.playbackRate", fireTime, 0.05f);
+                hasFired = true;
+                if (base.isAuthority)
                 {
-                    this.OnHitEnemyAuthority();
-                }
-                EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
-                {
-                    origin = theSpot,
-                    scale = 1f,
+                    new PerformBlackwhip100NetworkRequest(base.characterBody.masterObjectId,
+                        theSpot,
+                        base.GetAimRay().direction,
+                        Modules.StaticValues.blackwhip100DamageCoefficient).Send(NetworkDestination.Clients);
 
-                }, true);
+                    EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+                    {
+                        origin = theSpot,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(base.GetAimRay().direction),
+
+                    }, true);
+                }
             }
 
             

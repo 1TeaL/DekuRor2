@@ -37,7 +37,8 @@ namespace DekuMod.SkillStates
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.AddRecoil(-3f * recoilAmplitude, -4f * recoilAmplitude, -0.5f * recoilAmplitude, 0.5f * recoilAmplitude);
 
-            //PlayCrossfade("RightArm, Override", "RightArmPunch", "Attack.playbackRate", duration, 0.1f);
+            base.GetModelAnimator().SetBool("delawareRelease", true);
+            PlayCrossfade("FullBody, Override", "DelawareSmash45", "Attack.playbackRate", duration, 0.01f);
             AkSoundEngine.PostEvent(3660048432, base.gameObject);
             
 
@@ -45,6 +46,13 @@ namespace DekuMod.SkillStates
             {
                 EffectManager.SimpleMuzzleFlash(effectPrefab, base.gameObject, muzzleName, false);
             }
+            EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+            {
+                origin = FindModelChild(this.muzzleName).position,
+                scale = 1f,
+                rotation = Quaternion.LookRotation(aimRay.direction)
+
+            }, true);
             if (base.isAuthority)
             {
                 new BulletAttack
@@ -58,12 +66,12 @@ namespace DekuMod.SkillStates
                     maxSpread = 0f,
                     force = force,
                     falloffModel = BulletAttack.FalloffModel.None,
-                    tracerEffectPrefab = Modules.Assets.bandittracerEffectPrefab,
+                    //tracerEffectPrefab = Modules.Assets.bandittracerEffectPrefab,
                     muzzleName = muzzleName,
                     hitEffectPrefab = Modules.Assets.banditimpactEffect,
                     isCrit = base.RollCrit(),
                     HitEffectNormal = true,
-                    radius = 0.7f,
+                    radius = 1f,
                     maxDistance = 500f,
                     stopperMask = LayerIndex.CommonMasks.bullet,
                     procCoefficient = 1f,
@@ -77,6 +85,7 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
+            PlayAnimation("FullBody, Override", "BufferEmpty", "Attack.playbackRate", duration);
         }
 
 

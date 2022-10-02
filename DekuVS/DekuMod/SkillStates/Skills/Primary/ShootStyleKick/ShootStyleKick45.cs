@@ -50,8 +50,8 @@ namespace DekuMod.SkillStates
 		protected bool inHitPause;
 		private BaseState.HitStopCachedState hitStopCachedState;
 		private Vector3 storedVelocity;
-		public static GameObject muzzleEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashMageLightningLarge");
-		public static GameObject muzzleEffectPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/BoostJumpEffect");
+		//public static GameObject muzzleEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashMageLightningLarge");
+		//public static GameObject muzzleEffectPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/BoostJumpEffect");
 		protected GameObject swingEffectPrefab;
 		protected GameObject hitEffectPrefab;
 		public static string dodgeSoundString = "HenryRoll";
@@ -144,7 +144,7 @@ namespace DekuMod.SkillStates
 				num /= base.characterBody.sprintingSpeedMultiplier;
 			}
 			float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
-			this.extraDuration = Math.Max(ShootStyleKick45.hitExtraDuration / (num2 + 1f), ShootStyleKick45.minExtraDuration);
+			this.extraDuration = Math.Max(hitExtraDuration / (num2 + 1f), minExtraDuration);
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 			base.PlayCrossfade("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", duration, 0.1f);
 
@@ -161,7 +161,7 @@ namespace DekuMod.SkillStates
 			{
 				num /= base.characterBody.sprintingSpeedMultiplier;
 			}
-			this.rollSpeed =  num * Mathf.Lerp(ShootStyleKick45.SpeedCoefficient, ShootStyleKick45.finalSpeedCoefficient, base.fixedAge / ShootStyleKick45.duration);
+			this.rollSpeed =  num * Mathf.Lerp(SpeedCoefficient, finalSpeedCoefficient, base.fixedAge / duration);
 		}
 
 
@@ -229,9 +229,9 @@ namespace DekuMod.SkillStates
 			bool flag6 = base.cameraTargetParams;
 			if (flag6)
 			{
-				base.cameraTargetParams.fovOverride = Mathf.Lerp(ShootStyleKick45.dodgeFOV, 60f, base.fixedAge / ShootStyleKick45.duration);
+				base.cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, base.fixedAge / duration);
 			}
-			bool flag7 = base.isAuthority && this.stopwatch >= ShootStyleKick45.duration;
+			bool flag7 = base.isAuthority && this.stopwatch >= duration;
 			if (flag7)
 			{
 				this.outer.SetNextStateToMain();
@@ -314,14 +314,14 @@ namespace DekuMod.SkillStates
 			{
 
 				base.PlayAnimation("FullBody, Override", "ShootStyleKickExit", "Attack.playbackRate", duration);
-				this.stopwatch = ShootStyleKick45.duration - this.extraDuration;
+				this.stopwatch = duration - this.extraDuration;
 				bool flag2 = base.cameraTargetParams;
 				if (flag2)
 				{
 					base.cameraTargetParams.fovOverride = -1f;
 				}
-				EffectManager.SimpleMuzzleFlash(ShootStyleKick45.muzzleEffectPrefab, base.gameObject, "LFoot", false);
-				EffectManager.SimpleMuzzleFlash(ShootStyleKick45.muzzleEffectPrefab2, base.gameObject, "LFoot", false);
+				EffectManager.SimpleMuzzleFlash(Modules.Assets.boostJumpEffectPrefab, base.gameObject, "LFoot", false);
+				EffectManager.SimpleMuzzleFlash(Modules.Assets.muzzleflashMageLightningLargePrefab, base.gameObject, "LFoot", false);
 
 				bool flag3 = base.characterMotor;
 				if (flag3)

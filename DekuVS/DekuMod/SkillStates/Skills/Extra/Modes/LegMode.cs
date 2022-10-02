@@ -6,7 +6,7 @@ using ExtraSkillSlots;
 namespace DekuMod.SkillStates
 {
 
-	public class LegMode : BaseSkillState
+	public class LegMode : BaseMode
 	{
 		public DekuController dekucon;
 		const string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
@@ -15,6 +15,13 @@ namespace DekuMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
+			
+
+
+		}
+
+        protected override void DoSkill()
+        {
 			dekucon = base.GetComponent<DekuController>();
 			extraskillLocator = base.GetComponent<ExtraSkillLocator>();
 
@@ -111,13 +118,12 @@ namespace DekuMod.SkillStates
 					extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, Deku.legSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 			}
-
-
+			base.skillLocator.primary.AddOneStock();
+			base.skillLocator.secondary.AddOneStock();
+			base.skillLocator.utility.AddOneStock();
 		}
 
-
-
-		public override void FixedUpdate()
+        public override void FixedUpdate()
 		{
 			base.FixedUpdate();
 			this.outer.SetNextStateToMain();

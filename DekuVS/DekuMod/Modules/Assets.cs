@@ -51,9 +51,50 @@ namespace DekuMod.Modules
         public static GameObject banditmuzzleEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/MuzzleflashBandit2.prefab").WaitForCompletion();
         public static GameObject bandittracerEffectPrefab = Resources.Load<GameObject>("prefabs/effects/tracers/tracerbandit2rifle");
         public static GameObject banditimpactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/HitsparkBandit2Pistol.prefab").WaitForCompletion();
+        
+		public static GameObject boostJumpEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/BoostJumpEffect");
+        public static GameObject muzzleflashMageLightningLargePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MuzzleFlashes/MuzzleflashMageLightningLarge");
+        public static GameObject lightningNovaEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
+        public static GameObject mageLightningBombEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
+        public static GameObject sonicboomEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
+        public static GameObject GupSpikeEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Gup/GupExplosion.prefab").WaitForCompletion();
+        public static GameObject lemfireBall = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Lemurian/Fireball.prefab").WaitForCompletion();
+        public static GameObject greaterwispBall = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/GreaterWisp/WispCannon.prefab").WaitForCompletion();
+        public static GameObject chargegreaterwispBall = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/GreaterWisp/OmniExplosionVFXGreaterWisp.prefab").WaitForCompletion();
+        public static GameObject larvajumpEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/AcidLarva/AcidLarvaLeapExplosion.prefab").WaitForCompletion();
+        public static GameObject elderlemurianexplosionEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LemurianBruiser/OmniExplosionVFXLemurianBruiserFireballImpact.prefab").WaitForCompletion();
+        public static GameObject parentslamEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Parent/ParentSlamEffect.prefab").WaitForCompletion();
+        public static GameObject claydunestriderEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ClayBruiser/ClayShockwaveEffect.prefab").WaitForCompletion();
+        public static GameObject voidjailerEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidJailer/VoidJailerDeathBombExplosion.prefab").WaitForCompletion();
+        public static GameObject voidjailermuzzleEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidSurvivorBeamTracer.prefab").WaitForCompletion();
+        public static GameObject xiconstructbeamEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/MajorConstructInitialMuzzleFlash.prefab").WaitForCompletion();
+        public static GameObject xiconstructexplosionEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MajorAndMinorConstruct/MajorConstructSecondMuzzleFlash.prefab").WaitForCompletion();
+        public static RoR2.Audio.LoopSoundDef xiconstructsound = Addressables.LoadAssetAsync<RoR2.Audio.LoopSoundDef>("RoR2/DLC1/MajorAndMinorConstruct/lsdMajorConstructLaser.asset").WaitForCompletion();
+        //public static GameObject grandparentSunPrefab;
+        //public static GameObject grandparentSunSpawnPrefab;
 
+        //public static GameObject artificerfireEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageFlamethrowerEffect.prefab").WaitForCompletion();
+        //public static GameObject artificerlightningorbchargeEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightning.prefab").WaitForCompletion();
+        //public static GameObject artificerlightningorbMuzzleEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MuzzleflashMageLightning.prefab").WaitForCompletion();
+        //public static GameObject artificerlightningorbprojectileEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageLightningBombProjectile.prefab").WaitForCompletion();
+        //public static GameObject artificerCrosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/MageCrosshair.prefab").WaitForCompletion();
+        //public static RoR2.Audio.LoopSoundDef artificerlightningsound = Addressables.LoadAssetAsync<RoR2.Audio.LoopSoundDef>("RoR2/Base/Vagrant/lsdVagrantTrackingBombFlight.asset").WaitForCompletion();
+        //public static GameObject engiTurret = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiTurretMaster.prefab").WaitForCompletion();
+        //public static GameObject voidfiendblinkVFX = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidBlinkVfx.prefab").WaitForCompletion();
+        //public static GameObject voidfiendblinkmuzzleEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/VoidBlinkMuzzleflash.prefab").WaitForCompletion();
+        //public static GameObject voidfiendblinktrailEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidSurvivor/PodVoidGroundImpact.prefab").WaitForCompletion();
+        //public static Material voidfiendblinkMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkBodyOverlay.mat").WaitForCompletion();
+        //public static GameObject railgunnercryoCrosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Railgunner/RailgunnerCryochargeCrosshair.prefab").WaitForCompletion();
+        //public static GameObject railgunnercryochargeCrosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Railgunner/RailgunnerCryochargeUI.prefab").WaitForCompletion();
+        //public static GameObject railgunnercryoreloadCrosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Railgunner/RailgunnerReloadUI.prefab").WaitForCompletion();
+        //public static GameObject railgunnercryoTracer = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/Railgunner/TracerRailgunCryo.prefab").WaitForCompletion();
+        //public static RoR2.Audio.LoopSoundDef railgunnercryochargingSound = Addressables.LoadAssetAsync<RoR2.Audio.LoopSoundDef>("RoR2/DLC1/Railgunner/lsdRailgunnerBackpackCharging.asset").WaitForCompletion();
+        //public static RoR2.Audio.LoopSoundDef railgunnercryoofflineSound = Addressables.LoadAssetAsync<RoR2.Audio.LoopSoundDef>("RoR2/DLC1/Railgunner/lsdRailgunnerBackpackOffline.asset").WaitForCompletion();
+        //public static GameObject multEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/OmniExplosionVFXToolbotQuick.prefab").WaitForCompletion();
 
+        //own effects
         internal static GameObject blackwhip;
+        internal static GameObject blackwhipTrail;
         internal static GameObject blackwhipbullet;
         internal static GameObject blackwhipforward;
         internal static GameObject detroitEffect;
@@ -62,6 +103,7 @@ namespace DekuMod.Modules
         internal static GameObject airforceEffect;
         internal static GameObject airforce45Effect;
         internal static GameObject impactEffect;
+        internal static GameObject windringEffect;
         internal static GameObject smokeEffect;
         internal static GameObject smokebigEffect;
         internal static GameObject airforce100Effect;
@@ -142,7 +184,9 @@ namespace DekuMod.Modules
             detroitweakEffect = LoadEffect("detroitweak");
             blackwhipforward = LoadEffect("blackwhipforward");
             blackwhip = LoadEffect("blackwhipeffect");
+            blackwhipTrail = LoadEffect("blackwhipTrail");
             impactEffect = LoadEffect("impact");
+            windringEffect = LoadEffect("windringBig");
             blackwhipbullet = LoadEffect("blackwhipshootGhost");
             smokeEffect = LoadEffect("smoke");
             smokebigEffect = LoadEffect("smokebig");

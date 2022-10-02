@@ -1,6 +1,7 @@
 ﻿using DekuMod.Modules.Networking;
 using DekuMod.Modules.Survivors;
 using EntityStates;
+using ExtraSkillSlots;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
@@ -19,6 +20,10 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
 
+        }
+
+        protected override void DoSkill()
+        {
             bool active = NetworkServer.active;
             if (active)
             {
@@ -28,10 +33,10 @@ namespace DekuMod.SkillStates
 
             if (base.isAuthority)
             {
-                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.25f * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+                new SpendHealthNetworkRequest(characterBody.masterObjectId, Modules.StaticValues.dangersense100HealthCostFraction * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
             }
-        }
 
+        }
 
         public override void OnExit()
         {

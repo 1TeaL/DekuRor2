@@ -24,7 +24,7 @@ namespace DekuMod.SkillStates
 
         public float range = 10f;
         public float rangeaddition = 15f;
-        public float force = 1000f;
+        public float force = 200f;
         private float duration;
         private float maxWeight;
         private BlastAttack blastAttack;
@@ -68,7 +68,7 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
             //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("Fullbody, Override", "LegSmash", "Attack.playbackate", duration / 2, 0.1f);
+            PlayCrossfade("FullBody, Override", "StLouis45", "Attack.playbackRate", duration/2, 0.01f);
 
 
             blastAttack = new BlastAttack();
@@ -78,24 +78,15 @@ namespace DekuMod.SkillStates
             blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouisDamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis45DamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
             blastAttack.damageType = damageType;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-
-
-            if (base.isAuthority)
-            {
-                new SpendHealthNetworkRequest(characterBody.masterObjectId, 0.1f).Send(NetworkDestination.Clients);
-            }
         }
 
-        public void HandleHits(HitPoint[] hitPoints)
-        {
-        }
         protected virtual void OnHitEnemyAuthority()
         {
             //base.healthComponent.Heal(((healthComponent.fullCombinedHealth / 20) * speedattack), default(ProcChainMask), true);

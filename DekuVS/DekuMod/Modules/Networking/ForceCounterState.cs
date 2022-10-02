@@ -33,34 +33,38 @@ namespace DekuMod.Modules.Networking
 
         public void OnReceived()
         {
-            GameObject masterobj = Util.FindNetworkObject(IDNet);
-            if (!masterobj)
+            if (NetworkServer.active)
             {
-                Debug.Log("masterobj not found");
-                return;
-            }
-            CharacterMaster charmast = masterobj.GetComponent<CharacterMaster>();
-            if (!charmast)
-            {
-                Debug.Log("charmast not found");
-                return;
-            }
-            GameObject charbodyobj = charmast.GetBodyObject();
-            if (!charbodyobj)
-            {
-                Debug.Log("charbodyobj not found");
-                return;
-            }
-            EntityStateMachine[] statemachines = charbodyobj.GetComponents<EntityStateMachine>();
-            foreach (EntityStateMachine statemachine in statemachines)
-            {
-                if (statemachine.customName == "Body")
+                GameObject masterobj = Util.FindNetworkObject(IDNet);
+                if (!masterobj)
                 {
-                    statemachine.SetState(new DangerSenseCounter
-                    {
-                        enemyPosition = enemyPos,
-                    });
+                    Debug.Log("masterobj not found");
+                    return;
                 }
+                CharacterMaster charmast = masterobj.GetComponent<CharacterMaster>();
+                if (!charmast)
+                {
+                    Debug.Log("charmast not found");
+                    return;
+                }
+                GameObject charbodyobj = charmast.GetBodyObject();
+                if (!charbodyobj)
+                {
+                    Debug.Log("charbodyobj not found");
+                    return;
+                }
+                EntityStateMachine[] statemachines = charbodyobj.GetComponents<EntityStateMachine>();
+                foreach (EntityStateMachine statemachine in statemachines)
+                {
+                    if (statemachine.customName == "Body")
+                    {
+                        statemachine.SetState(new DangerSenseCounter
+                        {
+                            enemyPosition = enemyPos,
+                        });
+                    }
+                }
+
             }
         }
 
