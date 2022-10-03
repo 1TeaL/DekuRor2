@@ -79,7 +79,8 @@ namespace DekuMod.Modules.Survivors
         private InputBankTest inputBank;
         private readonly BullseyeSearch search = new BullseyeSearch();
 
-
+        //gobeyond loop sound
+        public uint gobeyondLoopID;
 
         public void Awake()
         {
@@ -87,7 +88,6 @@ namespace DekuMod.Modules.Survivors
             child = GetComponentInChildren<ChildLocator>();
             indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
             inputBank = gameObject.GetComponent<InputBankTest>();
-
             if (child)
             {
                 GOBEYOND = child.FindChild("goBeyondAura").GetComponent<ParticleSystem>();
@@ -112,6 +112,9 @@ namespace DekuMod.Modules.Survivors
             FAJIN.Stop();
             OKLAHOMA.Stop();
             DANGERSENSE.Stop();
+
+            StopGobeyondLoop();
+
             //anim = GetComponentInChildren<Animator>();
             //stopwatch = 0f;
 
@@ -434,11 +437,11 @@ namespace DekuMod.Modules.Survivors
                                 energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
                                 if(body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
                                 {
-                                    body.characterMotor.velocity.y += StaticValues.floatSpeed;
+                                    body.characterMotor.velocity.y = 0f;
                                 }
                                 else
                                 {
-                                    body.characterMotor.velocity.y = body.moveSpeed;
+                                    body.characterMotor.velocity.y += StaticValues.floatSpeed * 5;
                                 }
                             }
                             else if (body.characterMotor.velocity.y > 0)
@@ -446,11 +449,11 @@ namespace DekuMod.Modules.Survivors
                                 energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
                                 if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
                                 {
-                                    body.characterMotor.velocity.y += StaticValues.floatSpeed;
+                                    body.characterMotor.velocity.y = 0f;
                                 }
                                 else
                                 {
-                                    body.characterMotor.velocity.y = body.moveSpeed;
+                                    body.characterMotor.velocity.y += StaticValues.floatSpeed * 2;
                                 }
                             }
                         }
@@ -474,7 +477,7 @@ namespace DekuMod.Modules.Survivors
                 }
             }
 
-            //ofabuff self damage
+            //ofabuff self damage and eye particle
             if (body.HasBuff(Buffs.ofaBuff))
             {
                 if (ofaHurtTimer > 1f)
@@ -489,8 +492,13 @@ namespace DekuMod.Modules.Survivors
                 {
                     ofaHurtTimer += Time.fixedDeltaTime;
                 }
+                OFAeye.Play();
             }
-            //go beyond healing and one use
+            else
+            {
+                OFAeye.Stop();
+            }
+            //go beyond healing and one use and particle
             if (body.HasBuff(Buffs.goBeyondBuff))
             {
                 body.skillLocator.special.RemoveAllStocks();
@@ -515,6 +523,19 @@ namespace DekuMod.Modules.Survivors
                 {
                     goBeyondBuffTimer += Time.fixedDeltaTime;
                 }
+                GOBEYOND.Play();
+                RARM.Play();
+                LARM.Play();
+                RLEG.Play();
+                LLEG.Play();
+            }
+            else if (!body.HasBuff(Buffs.goBeyondBuff))
+            {
+                GOBEYOND.Stop();
+                RARM.Stop();
+                LARM.Stop();
+                RLEG.Stop();
+                LLEG.Stop();
             }
             //danger sense particle
             if (body.HasBuff(Buffs.dangersenseBuff) || body.HasBuff(Buffs.dangersense45Buff) || body.HasBuff(Buffs.dangersense100Buff))
@@ -542,32 +563,6 @@ namespace DekuMod.Modules.Survivors
             else
             {
                 OFA.Stop();
-            }
-            //ofa eye particle
-            if (body.HasBuff(Buffs.ofaBuff))
-            {
-                OFAeye.Play();
-            }
-            else
-            {
-                OFAeye.Stop();
-            }
-            //go beyond particle
-            if (body.HasBuff(Buffs.goBeyondBuff))
-            {
-                GOBEYOND.Play();
-                RARM.Play();
-                LARM.Play();
-                RLEG.Play();
-                LLEG.Play();
-            }
-            else
-            {
-                GOBEYOND.Stop();
-                RARM.Stop();
-                LARM.Stop();
-                RLEG.Stop();
-                LLEG.Stop();
             }
 
             //CheckIfMaxKickPowerStacks();
@@ -631,6 +626,19 @@ namespace DekuMod.Modules.Survivors
             //}
         }
 
+        
+        public void PlayGobeyondLoop()
+        {
+            if (body.hasEffectiveAuthority)
+            {
+                gobeyondLoopID = AkSoundEngine.PostEvent("gobeyondost", body.gameObject);
+            }
+        }
+
+        public void StopGobeyondLoop()
+        {
+            AkSoundEngine.StopPlayingID(gobeyondLoopID);
+        }
 
         private void SearchForTarget(Ray aimRay)
         {
@@ -660,93 +668,6 @@ namespace DekuMod.Modules.Survivors
             this.indicator.active = false;
         }
 
-        //public void IncrementBuffCount()
-        //{
-        //    buffCountToApply++;
-        //    if (buffCountToApply >= Modules.StaticValues.fajinMaxStack)
-        //    {
-        //        buffCountToApply = Modules.StaticValues.fajinMaxStack;
-        //    }
-        //}
-
-        //public void RemoveBuffCount(int numbertominus)
-        //{
-        //    buffCountToApply -= numbertominus;
-        //    if (buffCountToApply < 0)
-        //    {
-        //        buffCountToApply = 0;
-        //    }
-        //}
-        //public void AddToBuffCount(int numbertoadd)
-        //{
-        //    buffCountToApply += numbertoadd;
-        //    if (buffCountToApply >= Modules.StaticValues.fajinMaxStack)
-        //    {
-        //        buffCountToApply = Modules.StaticValues.fajinMaxStack;
-        //    }
-        //}
-
-        //public bool CheckIfMaxPowerStacks()
-        //{
-        //    if (buffCountToApply >= Modules.StaticValues.fajinMaxPower)
-        //    {
-        //        isMaxPower = true;
-        //    }
-        //    else
-        //    {
-        //        isMaxPower = false;
-        //    }
-        //    return isMaxPower;
-        //}
-
-        //public int GetBuffCount()
-        //{
-        //    if (buffCountToApply > Modules.StaticValues.fajinMaxStack)
-        //    {
-        //        return Modules.StaticValues.fajinMaxStack;
-        //    }
-        //    return buffCountToApply;
-        //}
-
-        //public bool CheckIfMaxKickPowerStacks()
-        //{
-        //    if (buffCountToApply >= Modules.StaticValues.kickMaxStack)
-        //    {
-        //        kickBuff = true;
-        //    }
-        //    else
-        //    {
-        //        kickBuff = false;
-        //    }
-        //    return kickBuff;
-        //}
-
-        //public void IncrementKickBuffCount()
-        //{
-        //    buffCountToApply++;
-        //    if (buffCountToApply >= Modules.StaticValues.kickMaxStack)
-        //    {
-        //        buffCountToApply = Modules.StaticValues.kickMaxStack;
-        //    }
-        //}
-
-        //public void RemoveKickBuffCount(int numbertominus)
-        //{
-        //    buffCountToApply -= numbertominus;
-        //    if (buffCountToApply < 0)
-        //    {
-        //        buffCountToApply = 0;
-        //    }
-        //}
-
-        //public int GetKickBuffCount()
-        //{
-        //    if (buffCountToApply > Modules.StaticValues.kickMaxStack)
-        //    {
-        //        return Modules.StaticValues.kickMaxStack;
-        //    }
-        //    return buffCountToApply;
-        //}
 
     }
 }

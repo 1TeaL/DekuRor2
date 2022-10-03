@@ -115,10 +115,7 @@ namespace DekuMod.Modules.Networking
             enemycharBody.healthComponent.TakeDamage(damageInfo);
             GlobalEventManager.instance.OnHitEnemy(damageInfo, enemycharBody.healthComponent.gameObject);
 
-
-
-
-
+            AkSoundEngine.PostEvent("stlouissfx", this.enemybodyObj);
 
         }
 

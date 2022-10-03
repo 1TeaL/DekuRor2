@@ -50,6 +50,12 @@ namespace DekuMod.SkillStates
                 return;
             }
 
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
+            }
+            AkSoundEngine.PostEvent("stlouissfx", this.gameObject);
+
         }
 
 
@@ -93,6 +99,7 @@ namespace DekuMod.SkillStates
                     blastAttack.bonusForce = GetAimRay().direction * 100f;
                     blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                     blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+                    
 
                     blastAttack.Fire();
                 }

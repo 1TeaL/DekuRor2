@@ -17,7 +17,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="detroitcharge" ID="{F702D838-287B-4B12-A453-60F73572B83D}">
+				<Event Name="detroitchargesfxvoice" ID="{F702D838-287B-4B12-A453-60F73572B83D}">
 					<ChildrenList>
 						<Action Name="" ID="{370500F8-A39D-4EC0-AAEC-C2BC94B35DB2}" ShortID="897165710">
 							<PropertyList>
@@ -25,13 +25,13 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="detroitcharge" ID="{46DC3C35-4BE3-45C3-823C-4F4A6C046D92}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+									<ObjectRef Name="detroitchargesfx+voice" ID="{46DC3C35-4BE3-45C3-823C-4F4A6C046D92}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="detroitexit" ID="{F7B36D41-23BE-400F-BC9B-98A0DF408C13}">
+				<Event Name="detroitexitvoice" ID="{F7B36D41-23BE-400F-BC9B-98A0DF408C13}">
 					<ChildrenList>
 						<Action Name="" ID="{733676A5-F7CC-4726-B48A-FA37E7EE11ED}" ShortID="129847353">
 							<PropertyList>
@@ -39,21 +39,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="detroitexit" ID="{FE55D0BB-053A-4E93-9B77-BBEB3666EFF7}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
-				<Event Name="event" ID="{80A424F7-E94F-44E8-A10B-78DFD0B64D6F}">
-					<ChildrenList>
-						<Action Name="" ID="{E4990478-E4F0-4D49-A644-C94576C7672C}" ShortID="528228869">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="1"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="entrance" ID="{48554783-E3B0-4195-9A6B-CE0D728E3009}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+									<ObjectRef Name="detroitexitvoice" ID="{FE55D0BB-053A-4E93-9B77-BBEB3666EFF7}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -87,7 +73,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="shootstylebulletsfx" ID="{4E06D5F1-137F-4FB4-A5AC-C69D29B67BB3}">
+				<Event Name="shootstyedashsfx" ID="{4E06D5F1-137F-4FB4-A5AC-C69D29B67BB3}">
 					<ChildrenList>
 						<Action Name="" ID="{3047B189-DCBA-4007-9EC3-967F2CC3CAAD}" ShortID="933111016">
 							<PropertyList>
@@ -95,13 +81,13 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="shootstylebulletsfx" ID="{0C9D24AE-84C0-4619-A7B4-34A526F87CBB}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+									<ObjectRef Name="shootstyledashsfx" ID="{0C9D24AE-84C0-4619-A7B4-34A526F87CBB}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="shootstylebulletvoice" ID="{64B6DB43-0555-4238-8E0D-2C6ADCBC1056}">
+				<Event Name="shootstyedashvoice" ID="{64B6DB43-0555-4238-8E0D-2C6ADCBC1056}">
 					<ChildrenList>
 						<Action Name="" ID="{27A51D56-2B49-41C9-B8EB-E50A65E28077}" ShortID="959833888">
 							<PropertyList>
@@ -109,7 +95,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="shootstylebulletvoice" ID="{D5FB01D5-2FDE-4CCE-B94A-2E3567A64221}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+									<ObjectRef Name="shootstyledashvoice" ID="{D5FB01D5-2FDE-4CCE-B94A-2E3567A64221}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -222,6 +208,146 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="death" ID="{50BE8A17-2848-4E2B-AF52-88E2783AA16E}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="shootstyedashcombosfx" ID="{2B34676C-CADA-43A6-B5E8-93D95CCC2E8F}">
+					<ChildrenList>
+						<Action Name="" ID="{0BD62AB5-B2E4-44CF-ABD9-754D63A24DA4}" ShortID="706700900">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="shootstylecombosfx" ID="{4D14E841-D93A-4C7D-B841-97F77D5FB820}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="shootstyedashcombovoice" ID="{545CB135-269A-43BF-8389-C54B70AFD0D8}">
+					<ChildrenList>
+						<Action Name="" ID="{C257A33A-479E-4AD2-B9AA-74FD49E63279}" ShortID="369616731">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="shootstylecombovoice" ID="{C11606A8-E2D1-4E42-B520-BE1E09EA3C76}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="shootstyedashcomboimpact" ID="{31AA75C3-850A-4B82-B27C-E54C2D40AB99}">
+					<ChildrenList>
+						<Action Name="" ID="{A58C447E-217E-42E3-80E2-7441F5D9160D}" ShortID="543535834">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="shootstylecomboimpact" ID="{F5B2423E-DB28-47E4-B232-D547DC948913}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="gobeyondost" ID="{6BBC6B42-FDCD-4B5F-ADB5-FBAFE32661CD}">
+					<ChildrenList>
+						<Action Name="" ID="{9048319D-2250-4391-AEE3-3B49067745BF}" ShortID="713105052">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="gobeyondmusic" ID="{EC825FAE-4F6F-4580-ADB2-8DA82EC685AC}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="impactsfx" ID="{538C0132-6E87-4E44-A98B-05D9AEF4AD1E}">
+					<ChildrenList>
+						<Action Name="" ID="{02BF4F3F-46CB-41B8-A97A-AF8C39269E35}" ShortID="745148619">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="impactsfx" ID="{E54B4F51-FB84-477C-AE38-FE437982B70C}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="stlouisexitsfx" ID="{BCA4887F-0B1F-4EBD-B5E1-4D0353C02461}">
+					<ChildrenList>
+						<Action Name="" ID="{0C649175-2240-463D-94EA-BEA73DA9F5B1}" ShortID="81908470">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="stlouisexitsfx" ID="{81D68FF4-6643-4F4F-A580-64132E1143DB}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="finalsmashsfxvoice" ID="{9DA210B0-6C53-42C7-BACE-45DE5B0C6E9E}">
+					<ChildrenList>
+						<Action Name="" ID="{B7058374-2BC0-477E-88B7-BEB9DD000757}" ShortID="684825743">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="finalsmashsfx+voice" ID="{C8A697CA-4082-4E19-9103-B06682916B96}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="detroitexitsfx" ID="{5BBBA23D-8B9E-4AA5-A258-55E286C6F3B2}">
+					<ChildrenList>
+						<Action Name="" ID="{CAF9B411-2BDF-4F98-BCCB-308CC4A874F5}" ShortID="36412552">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="detroitexitsfx" ID="{59125D6B-7F72-4BFB-BD68-A9271B10E214}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="delawaredetroitvoice" ID="{5546335D-FF43-4EB8-A119-3BC85A7862B4}">
+					<ChildrenList>
+						<Action Name="" ID="{2D31256C-31E6-4577-B89C-C74954F016C5}" ShortID="538170140">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="delawaredetroitvoice" ID="{AD1C35C1-05BD-4422-865A-30BECBFC8C32}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="manchester" ID="{6501562B-C4C3-4D8A-BD07-839D3ABADB32}">
+					<ChildrenList>
+						<Action Name="" ID="{60C2D2C3-9A5A-4C27-86BD-3776960D8178}" ShortID="40459964">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="manchester[rebalanced]" ID="{41CC915E-7D04-45FE-B2E1-262E64141815}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

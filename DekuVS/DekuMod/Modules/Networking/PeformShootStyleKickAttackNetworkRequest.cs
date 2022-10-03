@@ -104,6 +104,7 @@ namespace DekuMod.Modules.Networking
                 charBody.healthComponent.TakeDamage(damageInfo);
                 GlobalEventManager.instance.OnHitEnemy(damageInfo, charBody.healthComponent.gameObject);
 
+                
 
                 EffectManager.SpawnEffect(Modules.Assets.dekuHitImpactEffect, new EffectData
                 {

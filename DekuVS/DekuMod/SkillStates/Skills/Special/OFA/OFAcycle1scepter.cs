@@ -28,9 +28,11 @@ namespace DekuMod.SkillStates
 				base.characterBody.AddBuff(Modules.Buffs.supaofaBuff45);
 			}
 
-
-			AkSoundEngine.PostEvent(3940341776, this.gameObject);
-			AkSoundEngine.PostEvent(2493696431, this.gameObject);
+			if (base.isAuthority)
+			{
+				AkSoundEngine.PostEvent("ofavoice", this.gameObject);
+				AkSoundEngine.PostEvent("ofasfx", this.gameObject);
+			}
 			base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Deku.ofacycle2scepterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
 

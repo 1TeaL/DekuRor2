@@ -31,13 +31,17 @@ namespace DekuMod.SkillStates
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 			PlayCrossfade("RightArm, Override", "DetroitSmash", "Attack.playbackRate", 0.3f, 0.01f);
 			//Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
-			AkSoundEngine.PostEvent(3289116818, this.gameObject);
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
             base.characterMotor.rootMotion += this.moveVec;
-            //base.characterMotor.velocity += this.moveVec * 2;
+			//base.characterMotor.velocity += this.moveVec * 2;
+			if (base.isAuthority)
+			{
+				AkSoundEngine.PostEvent("detroitexitvoice", this.gameObject);
+			}
+			AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
 
-        }
+		}
         public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Frozen;

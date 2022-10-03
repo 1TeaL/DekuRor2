@@ -56,6 +56,10 @@ namespace DekuMod.SkillStates
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("FullBody, Override", "StLouis100Charge", "Attack.playbackRate",fireTime, 0.01f);
 
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
+            }
             //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
             //{
             //    origin = theSpot,
@@ -180,6 +184,8 @@ namespace DekuMod.SkillStates
 
                 }
 
+                AkSoundEngine.PostEvent("stlouisexitsfx", this.gameObject);
+                
                 this.outer.SetNextStateToMain();
             }
 

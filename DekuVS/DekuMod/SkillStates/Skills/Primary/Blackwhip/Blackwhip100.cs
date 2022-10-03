@@ -48,8 +48,11 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
 
             theSpot = aimRay.origin + 0.5f * attackSpeedStat * blastRadius * aimRay.direction;
-            AkSoundEngine.PostEvent(3709822086, this.gameObject);
-            AkSoundEngine.PostEvent(3062535197, this.gameObject);
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("blackwhipvoice", this.gameObject);
+            }
+            AkSoundEngine.PostEvent("blackwhipsfx", this.gameObject);
             base.StartAimMode(duration, true);
 
             base.characterMotor.disableAirControlUntilCollision = false;

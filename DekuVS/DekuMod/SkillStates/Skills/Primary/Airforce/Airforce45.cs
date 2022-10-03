@@ -57,8 +57,10 @@ namespace DekuMod.SkillStates
             if (!hasFired)
             {
                 hasFired = true;
-
-                AkSoundEngine.PostEvent(1063047365, this.gameObject);
+                if (base.isAuthority)
+                {
+                    AkSoundEngine.PostEvent("airforcesfx", this.gameObject);
+                }
 
                 bool isCrit = RollCrit();
 

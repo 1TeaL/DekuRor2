@@ -16,7 +16,7 @@ namespace DekuMod.SkillStates
 
 	public class LegSuper : BaseSpecial
 	{
-		public static float baseDuration = 2.5f;
+		public static float baseDuration = 4.5f;
         public static float exitDuration;
         public static float baseBlastRadius = Modules.StaticValues.finalsmashRange;
         public static float blastRadius;
@@ -39,6 +39,7 @@ namespace DekuMod.SkillStates
 
         private BlastAttack blastAttack;
         private float maxWeight;
+        public bool animChange;
 
         public override void OnEnter()
 		{
@@ -54,6 +55,7 @@ namespace DekuMod.SkillStates
             blastRadius = baseBlastRadius * attackSpeedStat;
             fireInterval = baseFireInterval / attackSpeedStat;
             speedCoefficient = basespeedCoefficient * moveSpeedStat;
+            animChange = false;
             Ray aimRay = base.GetAimRay();
             base.StartAimMode(0.5f + this.duration, false);
 
@@ -108,7 +110,6 @@ namespace DekuMod.SkillStates
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
-            base.GetModelAnimator().SetBool("finalsmashRelease", false);
             PlayAnimation("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", duration - exitDuration);
 
         }
@@ -227,8 +228,11 @@ namespace DekuMod.SkillStates
             }           
             else if(base.fixedAge > exitDuration)
             {
-                base.GetModelAnimator().SetBool("finalsmashRelease", true);
-                PlayAnimation("FullBody, Override", "FinalSmashSmash", "Attack.playbackRate", exitDuration);
+                if (!animChange)
+                {
+                    PlayAnimation("FullBody, Override", "FinalSmashSmash", "Attack.playbackRate", exitDuration);
+                    animChange = true;
+                }
                 if (base.isAuthority)
                 {
                     new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,

@@ -41,8 +41,11 @@ namespace DekuMod.SkillStates
 
             GetMaxWeight();
             theSpot = aimRay.origin + 5 * aimRay.direction;
-            AkSoundEngine.PostEvent(3709822086, this.gameObject);
-            AkSoundEngine.PostEvent(3062535197, this.gameObject);
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("blackwhipvoice", this.gameObject);
+            }
+            AkSoundEngine.PostEvent("blackwhipsfx", this.gameObject);
             base.StartAimMode(duration, true);
 
             base.characterMotor.disableAirControlUntilCollision = false;

@@ -22,8 +22,11 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration/this.attackSpeedStat;
-            AkSoundEngine.PostEvent(1074439307, this.gameObject);
-            AkSoundEngine.PostEvent(1356252224, this.gameObject);
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("delawarevoice", this.gameObject);
+                AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
+            }
             base.StartAimMode(0.6f, true);
 
             base.characterMotor.disableAirControlUntilCollision = false;

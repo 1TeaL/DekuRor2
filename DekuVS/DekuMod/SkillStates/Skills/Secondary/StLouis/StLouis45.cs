@@ -58,8 +58,11 @@ namespace DekuMod.SkillStates
 
             //hasFired = false;
             theSpot = aimRay.origin + range * aimRay.direction;
-            AkSoundEngine.PostEvent(3709822086, this.gameObject);
-            AkSoundEngine.PostEvent(3062535197, this.gameObject);
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
+            }
+            AkSoundEngine.PostEvent("stlouissfx", this.gameObject);
             base.StartAimMode(duration, true);
 
             base.characterMotor.disableAirControlUntilCollision = false;

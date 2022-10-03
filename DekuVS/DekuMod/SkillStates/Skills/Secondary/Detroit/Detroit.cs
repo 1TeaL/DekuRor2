@@ -42,7 +42,6 @@ namespace DekuMod.SkillStates
             this.fireTime = this.duration / 3f;
             hasFired = false;
             hasTeleported = false;
-
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("RightArm, Override", "DetroitCharge", "Attack.playbackRate", fireTime, 0.01f);
             if (dekucon && base.isAuthority)
@@ -73,6 +72,11 @@ namespace DekuMod.SkillStates
 
                 if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
                 {
+                    if (base.isAuthority)
+                    {
+                        AkSoundEngine.PostEvent("detroitexitsfx", this.gameObject);
+                    }
+
                     if (!hasTeleported)
                     {
                         hasTeleported = true;

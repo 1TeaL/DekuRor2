@@ -33,9 +33,12 @@ namespace DekuMod.SkillStates
 
             duration = chargeTime + castTime;
             base.StartAimMode(0.5f + this.duration, false);
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("blackwhipvoice", this.gameObject);
+            }
+            AkSoundEngine.PostEvent("blackwhipsfx", this.gameObject);
 
-            AkSoundEngine.PostEvent(3709822086, this.gameObject);
-            AkSoundEngine.PostEvent(3062535197, this.gameObject);
             //animate blackwhip full
             //base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", duration);
 

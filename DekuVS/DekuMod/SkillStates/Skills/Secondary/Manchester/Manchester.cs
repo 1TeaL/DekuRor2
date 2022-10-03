@@ -37,8 +37,10 @@ namespace DekuMod.SkillStates
 
             hasFired = false;
             theSpot = base.transform.position;
-            AkSoundEngine.PostEvent(3709822086, this.gameObject);
-            AkSoundEngine.PostEvent(3062535197, this.gameObject);
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("manchester", this.gameObject);
+            }
             base.StartAimMode(duration, true);
 
 
@@ -76,6 +78,10 @@ namespace DekuMod.SkillStates
 
         protected virtual void OnHitEnemyAuthority()
         {
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("shootstyledashcombosfx", this.gameObject);
+            }
             //base.healthComponent.Heal(((healthComponent.fullCombinedHealth / 20)), default(ProcChainMask), true);
 
         }

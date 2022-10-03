@@ -121,6 +121,7 @@ namespace DekuMod.SkillStates
 			this.attack.pushAwayForce = this.pushForce;
 			this.attack.hitBoxGroup = hitBoxGroup;
 			this.attack.isCrit = base.RollCrit();
+			this.attack.impactSound = Modules.Assets.kickHitSoundEvent.index;
 
 
 			this.detector = new OverlapAttack();
@@ -148,8 +149,11 @@ namespace DekuMod.SkillStates
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 			base.PlayCrossfade("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", duration, 0.1f);
 
-			AkSoundEngine.PostEvent(3842300745, this.gameObject);
-			AkSoundEngine.PostEvent(573664262, this.gameObject);
+			if (base.isAuthority)
+			{
+				AkSoundEngine.PostEvent("shootstyedashvoice", this.gameObject);
+			}
+			AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
 
 		}
 
@@ -308,6 +312,9 @@ namespace DekuMod.SkillStates
 			base.characterBody.SetAimTimer(2f);
 			//base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, ShootStyleKick45.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
 			//base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, ShootStyleKick452.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
+
+			//AkSoundEngine.PostEvent("impactsfx", this.gameObject);
+
 			base.skillLocator.primary.AddOneStock();
 			bool flag = !this.hasHopped;
 			if (flag)

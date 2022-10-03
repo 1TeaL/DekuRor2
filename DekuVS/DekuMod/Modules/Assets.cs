@@ -196,7 +196,7 @@ namespace DekuMod.Modules
             //sword swing
             dekuKickEffect = Assets.LoadEffect("DekuKickEffect", true);
             dekuHitImpactEffect = Assets.LoadEffect("ImpactDekuKick");            
-            kickHitSoundEvent = CreateNetworkSoundEventDef("DekuKickHit");
+            kickHitSoundEvent = CreateNetworkSoundEventDef("shootstyedashcomboimpact");
 
             //blackwhipbullet = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
 

@@ -330,7 +330,7 @@ namespace DekuMod
             orig(self);
             if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
             {
-                AkSoundEngine.PostEvent(779278001, this.gameObject);
+                AkSoundEngine.PostEvent("death", this.gameObject);
             }
 
         }
@@ -373,7 +373,7 @@ namespace DekuMod
             orig(self);
             if (self.gameObject.name.Contains("DekuDisplay"))
             {
-                AkSoundEngine.PostEvent(2656882895, self.gameObject);
+                AkSoundEngine.PostEvent("Entrance", self.gameObject);
             }
 
         }

@@ -79,10 +79,13 @@ namespace DekuMod.SkillStates
 
             duration = baseDuration / this.attackSpeedStat;
             numberOfHits = Mathf.RoundToInt(5 * attackSpeedStat);
-    
 
-            AkSoundEngine.PostEvent(3842300745, this.gameObject);
-            AkSoundEngine.PostEvent(573664262, this.gameObject);
+
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("shootstyedashvoice", this.gameObject);
+            }
+            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
             //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
             //base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
             this.animator.SetBool("attacking", true);

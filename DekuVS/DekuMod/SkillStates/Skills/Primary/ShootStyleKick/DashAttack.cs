@@ -63,6 +63,7 @@ namespace DekuMod.SkillStates
             //Util.PlaySound("Misc_StartDash", base.gameObject);
             base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash");
 
+            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
             base.OnEnter();
         }
         public override void FixedUpdate()

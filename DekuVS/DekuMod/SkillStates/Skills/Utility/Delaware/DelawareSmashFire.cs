@@ -37,10 +37,12 @@ namespace DekuMod.SkillStates
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.AddRecoil(-3f * recoilAmplitude, -4f * recoilAmplitude, -0.5f * recoilAmplitude, 0.5f * recoilAmplitude);
 
-            base.GetModelAnimator().SetBool("delawareRelease", true);
             PlayCrossfade("FullBody, Override", "DelawareSmash45", "Attack.playbackRate", duration, 0.01f);
-            AkSoundEngine.PostEvent(3660048432, base.gameObject);
-            
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
+            }
+
 
             if (effectPrefab)
             {

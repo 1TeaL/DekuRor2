@@ -27,11 +27,13 @@ namespace DekuMod.SkillStates
 		public DekuController dekucon;
 		const string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 		private ExtraSkillLocator extraskillLocator;
-		public float duration = 5f;
+		public float duration = 10f;
 
         private Animator animator;
         private BlastAttack blastAttack;
         private float maxWeight;
+
+		public float FOV = 20f;
 
         public override void OnEnter()
 		{
@@ -39,6 +41,7 @@ namespace DekuMod.SkillStates
 			dekucon = base.GetComponent<DekuController>();
 			extraskillLocator = base.GetComponent<ExtraSkillLocator>();
 
+			dekucon.PlayGobeyondLoop();
 			PlayAnimation("Fullbody, Override", "GoBeyond", "Attack.playbackRate", duration);
 
 			bool active = NetworkServer.active;
@@ -86,16 +89,16 @@ namespace DekuMod.SkillStates
 			base.characterBody.hideCrosshair = true;
 			if (base.GetAimAnimator()) base.GetAimAnimator().enabled = false;
 
-			CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
-			{
-				cameraParamsData = emoteCameraParams,
-				priority = 0,
-			};
+            CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
+            {
+                cameraParamsData = emoteCameraParams,
+                priority = 0,
+            };
 
-			camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, duration/2);
+            camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, duration);
 
-			//get weight, teleport after
-			GetMaxWeight();
+            //get weight, teleport after
+            GetMaxWeight();
 
 			blastAttack = new BlastAttack();
 			blastAttack.radius = 20f;
@@ -159,12 +162,13 @@ namespace DekuMod.SkillStates
         {
             base.OnExit();
 			blastAttack.Fire();
+			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
 
 
 			if (base.GetAimAnimator()) base.GetAimAnimator().enabled = true;
 			base.characterBody.hideCrosshair = false;
-			base.cameraTargetParams.RemoveParamsOverride(camOverrideHandle, 0.5f);
-			if (NetworkServer.active)
+            base.cameraTargetParams.RemoveParamsOverride(camOverrideHandle, 0.5f);
+            if (NetworkServer.active)
 			{
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 				base.characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 5);
@@ -181,7 +185,8 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			if(base.fixedAge > duration && base.isAuthority)
+			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 90f, base.fixedAge / duration);
+			if (base.fixedAge > duration && base.isAuthority)
             {
 				this.outer.SetNextStateToMain();
 				return;

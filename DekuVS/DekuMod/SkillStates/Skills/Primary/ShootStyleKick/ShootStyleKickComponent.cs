@@ -49,6 +49,7 @@ namespace DekuMod.SkillStates
 				}
 				else if (currentNumber == numberOfHits)
 				{
+					AkSoundEngine.PostEvent("impactsfx", charbody.gameObject);
 					currentNumber += 1;
 					new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f, damage).Send(NetworkDestination.Server);
 				}

@@ -15,7 +15,7 @@ namespace DekuMod.SkillStates
 
 	public class FistSuper : BaseSpecial
 	{
-		public static float baseDuration = 2.5f;
+		public static float baseDuration = 4f;
 		private float duration;
 		private float exitDuration;
 		private float fireTime = 0.5f;
@@ -29,7 +29,9 @@ namespace DekuMod.SkillStates
         private float maxWeight;
         private float timer;
 
-        public override void OnEnter()
+		private bool animChange;
+
+		public override void OnEnter()
 		{
 			base.OnEnter();
 
@@ -40,6 +42,8 @@ namespace DekuMod.SkillStates
 			this.duration = baseDuration;
 			exitDuration = duration - fireTime;
 			blastRadius = baseBlastRadius * attackSpeedStat;
+			animChange = false;
+
 			Ray aimRay = base.GetAimRay();
 			base.StartAimMode(0.5f + this.duration, false);
 
@@ -73,16 +77,19 @@ namespace DekuMod.SkillStates
 			blastAttack.damageType = DamageType.Freeze2s;
 			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-			base.GetModelAnimator().SetBool("detroitDelawareCharge", false);
-			base.GetModelAnimator().SetBool("detroitDelawareRelease", false);
 			PlayCrossfade("FullBody, Override", "DetroitDelawareDelaware", "Attack.playbackRate", fireTime, 0.01f);
+
+            if (base.isAuthority)
+			{
+				AkSoundEngine.PostEvent("delawaredetroitvoice", this.gameObject);
+			}
 
 		}
 
 		protected virtual void OnHitEnemyAuthority()
 		{
+			AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 			//base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 30) * this.attackSpeedStat);
-
 		}
 
 		public void GetMaxWeight()
@@ -137,7 +144,6 @@ namespace DekuMod.SkillStates
 
 			if (base.fixedAge > fireTime)
 			{
-				base.GetModelAnimator().SetBool("detroitDelawareCharge", true);
 				timer += Time.fixedDeltaTime;
                 if (base.isAuthority && timer > 0.5f)
 				{
@@ -147,10 +153,16 @@ namespace DekuMod.SkillStates
 						theDirection,
 						0f).Send(NetworkDestination.Clients);
 				}
+                if (!animChange)
+				{
+					animChange = true;
+					PlayCrossfade("FullBody, Override", "DetroitDelawareDetroit", "Attack.playbackRate", exitDuration - fireTime, 0.01f);
+				}
 			}
-			if(base.fixedAge > duration - exitDuration)
-            {
-				base.GetModelAnimator().SetBool("detroitDelawareRelease", true);
+			if(base.fixedAge > exitDuration && animChange)
+			{
+				animChange = false;
+				PlayCrossfade("FullBody, Override", "DetroitDelawareSmash", "Attack.playbackRate", fireTime, 0.01f);
 			}
 
 			if(base.fixedAge > duration)
@@ -172,6 +184,7 @@ namespace DekuMod.SkillStates
 					scale = blastRadius,
 					rotation = Quaternion.LookRotation(Vector3.up)
 				}, true);
+
 
 				this.outer.SetNextStateToMain();
 			}

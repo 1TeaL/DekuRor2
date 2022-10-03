@@ -51,8 +51,10 @@ namespace DekuMod.SkillStates
             //base.PlayCrossfade("RightArm, Override", "SmashCharge", 0.2f);
             //base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 0.2f);
             //Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
-            AkSoundEngine.PostEvent(3806074874, this.gameObject);
-
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("detroitchargesfxvoice", this.gameObject);
+            }
 
         }
 

@@ -48,8 +48,10 @@ namespace DekuMod.SkillStates
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("Body", "Jump", "Attack.playbackRate", jumpDuration, 0.1f);
-            AkSoundEngine.PostEvent(687990298, this.gameObject);
-            AkSoundEngine.PostEvent(1918362945, this.gameObject);
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("manchester", this.gameObject);
+            }
 
             base.characterMotor.Motor.ForceUnground();
             base.characterMotor.velocity = Vector3.zero;
@@ -94,6 +96,10 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
+            }
             //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 10) * (this.moveSpeedStat / 7));
 
         }

@@ -42,6 +42,10 @@ namespace DekuMod.SkillStates
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", 0.5f, 0.01f);
 
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("manchester", this.gameObject);
+            }
 
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
             base.characterMotor.Motor.ForceUnground();
@@ -68,6 +72,10 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("impactsfx", this.gameObject);
+            }
             //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 20) * (this.moveSpeedStat / 7) * dropTimer);
             //if (characterBody.HasBuff(Modules.Buffs.loaderBuff))
             //{

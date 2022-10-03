@@ -16,7 +16,7 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="1943384016" Language="SFX" Hash="3103939903">
+		<SoundBank Id="1943384016" Language="SFX" Hash="694972651">
 			<ObjectPath>\SoundBanks\Default Work Unit\Deku</ObjectPath>
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
@@ -35,26 +35,18 @@
 				</Event>
 				<Event Id="3062535197" Name="blackwhipsfx" ObjectPath="\Events\Default Work Unit\blackwhipsfx">
 					<IncludedMemoryFiles>
-						<File Id="740940922" Language="SFX">
-							<ShortName>blackwhip\sfx\blackwhipsfx.wav</ShortName>
-							<Path>SFX\blackwhip\sfx\blackwhipsfx_0D5756A9.wem</Path>
+						<File Id="695456801" Language="SFX">
+							<ShortName>blackwhipmovie.wav</ShortName>
+							<Path>SFX\blackwhipmovie_3F75BDB9.wem</Path>
 						</File>
 						<File Id="757473651" Language="SFX">
 							<ShortName>blackwhip\sfx\blackwhipsfx2.wav</ShortName>
 							<Path>SFX\blackwhip\sfx\blackwhipsfx2_0D5756A9.wem</Path>
 						</File>
-						<File Id="1007881140" Language="SFX">
-							<ShortName>blackwhip\sfx\SePl01_00000011.wav</ShortName>
-							<Path>SFX\blackwhip\sfx\SePl01_00000011_0D5756A9.wem</Path>
-						</File>
 					</IncludedMemoryFiles>
 				</Event>
 				<Event Id="3709822086" Name="blackwhipvoice" ObjectPath="\Events\Default Work Unit\blackwhipvoice">
 					<IncludedMemoryFiles>
-						<File Id="13923596" Language="SFX">
-							<ShortName>blackwhip\VoPl01_00000045.wav</ShortName>
-							<Path>SFX\blackwhip\VoPl01_00000045_0D5756A9.wem</Path>
-						</File>
 						<File Id="18708744" Language="SFX">
 							<ShortName>blackwhip\VoPl01_00000044.wav</ShortName>
 							<Path>SFX\blackwhip\VoPl01_00000044_0D5756A9.wem</Path>
@@ -66,10 +58,6 @@
 						<File Id="352397840" Language="SFX">
 							<ShortName>blackwhip\VoPl01_00000046.wav</ShortName>
 							<Path>SFX\blackwhip\VoPl01_00000046_0D5756A9.wem</Path>
-						</File>
-						<File Id="398723116" Language="SFX">
-							<ShortName>blackwhip\VoPl01_0000003E.wav</ShortName>
-							<Path>SFX\blackwhip\VoPl01_0000003E_0D5756A9.wem</Path>
 						</File>
 						<File Id="657530836" Language="SFX">
 							<ShortName>blackwhip\VoPl01_00000047.wav</ShortName>
@@ -117,6 +105,14 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="2232132915" Name="delawaredetroitvoice" ObjectPath="\Events\Default Work Unit\delawaredetroitvoice">
+					<IncludedMemoryFiles>
+						<File Id="323701474" Language="SFX">
+							<ShortName>dekudelawaredetroitsmashDone.wav</ShortName>
+							<Path>SFX\dekudelawaredetroitsmashDone_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 				<Event Id="1074439307" Name="delawaresfx" ObjectPath="\Events\Default Work Unit\delawaresfx">
 					<IncludedMemoryFiles>
 						<File Id="754389255" Language="SFX">
@@ -131,10 +127,6 @@
 				</Event>
 				<Event Id="1356252224" Name="delawarevoice" ObjectPath="\Events\Default Work Unit\delawarevoice">
 					<IncludedMemoryFiles>
-						<File Id="24956156" Language="SFX">
-							<ShortName>delaware\smashvoice.wav</ShortName>
-							<Path>SFX\delaware\smashvoice_0D5756A9.wem</Path>
-						</File>
 						<File Id="140991218" Language="SFX">
 							<ShortName>delaware\VoPl01_00000051.wav</ShortName>
 							<Path>SFX\delaware\VoPl01_00000051_0D5756A9.wem</Path>
@@ -147,21 +139,13 @@
 							<ShortName>delaware\VoPl01_00000052.wav</ShortName>
 							<Path>SFX\delaware\VoPl01_00000052_0D5756A9.wem</Path>
 						</File>
-						<File Id="528051330" Language="SFX">
-							<ShortName>delaware\VoPl01_0000007D.wav</ShortName>
-							<Path>SFX\delaware\VoPl01_0000007D_0D5756A9.wem</Path>
-						</File>
 						<File Id="655583295" Language="SFX">
 							<ShortName>delaware\VoPl01_000000C0.wav</ShortName>
 							<Path>SFX\delaware\VoPl01_000000C0_0D5756A9.wem</Path>
 						</File>
-						<File Id="830531229" Language="SFX">
-							<ShortName>delaware\delawarevoice.wav</ShortName>
-							<Path>SFX\delaware\delawarevoice_0D5756A9.wem</Path>
-						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="3806074874" Name="detroitcharge" ObjectPath="\Events\Default Work Unit\detroitcharge">
+				<Event Id="792953415" Name="detroitchargesfxvoice" ObjectPath="\Events\Default Work Unit\detroitchargesfxvoice">
 					<IncludedMemoryFiles>
 						<File Id="33232957" Language="SFX">
 							<ShortName>detroit\charge\detroitwithcharge.wav</ShortName>
@@ -173,15 +157,43 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="3289116818" Name="detroitexit" ObjectPath="\Events\Default Work Unit\detroitexit">
+				<Event Id="459820003" Name="detroitexitsfx" ObjectPath="\Events\Default Work Unit\detroitexitsfx">
 					<IncludedMemoryFiles>
+						<File Id="6101938" Language="SFX">
+							<ShortName>star platinum 1.wav</ShortName>
+							<Path>SFX\star platinum 1_3F75BDB9.wem</Path>
+						</File>
+						<File Id="309000996" Language="SFX">
+							<ShortName>smashpunchKO.wav</ShortName>
+							<Path>SFX\smashpunchKO_3F75BDB9.wem</Path>
+						</File>
+						<File Id="456060191" Language="SFX">
+							<ShortName>star platinum3 (1).wav</ShortName>
+							<Path>SFX\star platinum3 (1)_3F75BDB9.wem</Path>
+						</File>
+						<File Id="576498875" Language="SFX">
+							<ShortName>smashKO.wav</ShortName>
+							<Path>SFX\smashKO_3F75BDB9.wem</Path>
+						</File>
+						<File Id="667323673" Language="SFX">
+							<ShortName>star platinum3.wav</ShortName>
+							<Path>SFX\star platinum3_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="4254263816" Name="detroitexitvoice" ObjectPath="\Events\Default Work Unit\detroitexitvoice">
+					<IncludedMemoryFiles>
+						<File Id="505011092" Language="SFX">
+							<ShortName>deku100%smashDone.wav</ShortName>
+							<Path>SFX\deku100%smashDone_3F75BDB9.wem</Path>
+						</File>
 						<File Id="579125949" Language="SFX">
 							<ShortName>detroit\exit\smashvoice.wav</ShortName>
 							<Path>SFX\detroit\exit\smashvoice_0D5756A9.wem</Path>
 						</File>
-						<File Id="794352150" Language="SFX">
-							<ShortName>detroit\exit\VoPl01_0000007D.wav</ShortName>
-							<Path>SFX\detroit\exit\VoPl01_0000007D_0D5756A9.wem</Path>
+						<File Id="592007255" Language="SFX">
+							<ShortName>dekusmashnomuDone.wav</ShortName>
+							<Path>SFX\dekusmashnomuDone_3F75BDB9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -225,43 +237,67 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="3161415855" Name="event" ObjectPath="\Events\Default Work Unit\event">
+				<Event Id="2586644684" Name="finalsmashsfxvoice" ObjectPath="\Events\Default Work Unit\finalsmashsfxvoice">
 					<IncludedMemoryFiles>
-						<File Id="66608882" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000E7.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000E7_0D5756A9.wem</Path>
+						<File Id="944265988" Language="SFX">
+							<ShortName>dekufinalsmash[rebalanced]Done.wav</ShortName>
+							<Path>SFX\dekufinalsmash[rebalanced]Done_3F75BDB9.wem</Path>
 						</File>
-						<File Id="310105775" Language="SFX">
-							<ShortName>Entrance\VoPl01_0000010F.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_0000010F_0D5756A9.wem</Path>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2412150284" Name="gobeyondost" ObjectPath="\Events\Default Work Unit\gobeyondost">
+					<IncludedMemoryFiles>
+						<File Id="44042533" Language="SFX">
+							<ShortName>My Hero Academia OST   Jet Set Run.wav</ShortName>
+							<Path>SFX\My Hero Academia OST   Jet Set Run_3F75BDB9.wem</Path>
 						</File>
-						<File Id="355347321" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000F5.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000F5_0D5756A9.wem</Path>
+						<File Id="543457860" Language="SFX">
+							<ShortName>GO Beyond!! -You Say Run-.wav</ShortName>
+							<Path>SFX\GO Beyond!! -You Say Run-_3F75BDB9.wem</Path>
 						</File>
-						<File Id="487520420" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000E6.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000E6_0D5756A9.wem</Path>
+						<File Id="653751196" Language="SFX">
+							<ShortName>jetsetrunShort.wav</ShortName>
+							<Path>SFX\jetsetrunShort_3F75BDB9.wem</Path>
 						</File>
-						<File Id="612985191" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000FD.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000FD_0D5756A9.wem</Path>
+						<File Id="724948110" Language="SFX">
+							<ShortName>yousayrunShort.wav</ShortName>
+							<Path>SFX\yousayrunShort_3F75BDB9.wem</Path>
 						</File>
-						<File Id="810254431" Language="SFX">
-							<ShortName>Entrance\dekudesu.wav</ShortName>
-							<Path>SFX\Entrance\dekudesu_0D5756A9.wem</Path>
+						<File Id="910675969" Language="SFX">
+							<ShortName>My Hero Academia OST - You Say Run.wav</ShortName>
+							<Path>SFX\My Hero Academia OST - You Say Run_3F75BDB9.wem</Path>
 						</File>
-						<File Id="906836170" Language="SFX">
-							<ShortName>Entrance\VoPl01_AgencyEvent_00000000.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_AgencyEvent_00000000_0D5756A9.wem</Path>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3298394996" Name="impactsfx" ObjectPath="\Events\Default Work Unit\impactsfx">
+					<IncludedMemoryFiles>
+						<File Id="6101938" Language="SFX">
+							<ShortName>star platinum 1.wav</ShortName>
+							<Path>SFX\star platinum 1_3F75BDB9.wem</Path>
 						</File>
-						<File Id="911964384" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000EF.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000EF_0D5756A9.wem</Path>
+						<File Id="309000996" Language="SFX">
+							<ShortName>smashpunchKO.wav</ShortName>
+							<Path>SFX\smashpunchKO_3F75BDB9.wem</Path>
 						</File>
-						<File Id="1004362541" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000E8.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000E8_0D5756A9.wem</Path>
+						<File Id="456060191" Language="SFX">
+							<ShortName>star platinum3 (1).wav</ShortName>
+							<Path>SFX\star platinum3 (1)_3F75BDB9.wem</Path>
+						</File>
+						<File Id="576498875" Language="SFX">
+							<ShortName>smashKO.wav</ShortName>
+							<Path>SFX\smashKO_3F75BDB9.wem</Path>
+						</File>
+						<File Id="667323673" Language="SFX">
+							<ShortName>star platinum3.wav</ShortName>
+							<Path>SFX\star platinum3_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="876996991" Name="manchester" ObjectPath="\Events\Default Work Unit\manchester">
+					<IncludedMemoryFiles>
+						<File Id="202331745" Language="SFX">
+							<ShortName>manchester[rebalanced].wav</ShortName>
+							<Path>SFX\manchester[rebalanced]_3F75BDB9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -345,7 +381,51 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="573664262" Name="shootstylebulletsfx" ObjectPath="\Events\Default Work Unit\shootstylebulletsfx">
+				<Event Id="2853938439" Name="shootstyedashcomboimpact" ObjectPath="\Events\Default Work Unit\shootstyedashcomboimpact">
+					<IncludedMemoryFiles>
+						<File Id="206582851" Language="SFX">
+							<ShortName>smashpunch1.wav</ShortName>
+							<Path>SFX\smashpunch1_3F75BDB9.wem</Path>
+						</File>
+						<File Id="374868213" Language="SFX">
+							<ShortName>smashpunch3.wav</ShortName>
+							<Path>SFX\smashpunch3_3F75BDB9.wem</Path>
+						</File>
+						<File Id="873117885" Language="SFX">
+							<ShortName>smashpunch2.wav</ShortName>
+							<Path>SFX\smashpunch2_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1485257246" Name="shootstyedashcombosfx" ObjectPath="\Events\Default Work Unit\shootstyedashcombosfx">
+					<IncludedMemoryFiles>
+						<File Id="5132529" Language="SFX">
+							<ShortName>SePl01_00000002.wav</ShortName>
+							<Path>SFX\SePl01_00000002_3F75BDB9.wem</Path>
+						</File>
+						<File Id="815080430" Language="SFX">
+							<ShortName>SePl01_00000003.wav</ShortName>
+							<Path>SFX\SePl01_00000003_3F75BDB9.wem</Path>
+						</File>
+						<File Id="1049779095" Language="SFX">
+							<ShortName>SePl01_00000001.wav</ShortName>
+							<Path>SFX\SePl01_00000001_3F75BDB9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="240596017" Name="shootstyedashcombovoice" ObjectPath="\Events\Default Work Unit\shootstyedashcombovoice">
+					<IncludedMemoryFiles>
+						<File Id="134648371" Language="SFX">
+							<ShortName>airforce\VoPl01_00000056.wav</ShortName>
+							<Path>SFX\airforce\VoPl01_00000056_0D5756A9.wem</Path>
+						</File>
+						<File Id="519379338" Language="SFX">
+							<ShortName>airforce\VoPl01_0000008A.wav</ShortName>
+							<Path>SFX\airforce\VoPl01_0000008A_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2082540294" Name="shootstyedashsfx" ObjectPath="\Events\Default Work Unit\shootstyedashsfx">
 					<IncludedMemoryFiles>
 						<File Id="189355726" Language="SFX">
 							<ShortName>shootstylebullet\sfx\SePl01_00000001.wav</ShortName>
@@ -369,11 +449,15 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="3842300745" Name="shootstylebulletvoice" ObjectPath="\Events\Default Work Unit\shootstylebulletvoice">
+				<Event Id="940773961" Name="shootstyedashvoice" ObjectPath="\Events\Default Work Unit\shootstyedashvoice">
 					<IncludedMemoryFiles>
 						<File Id="14386378" Language="SFX">
 							<ShortName>shootstylebullet\VoPl01_00000082.wav</ShortName>
 							<Path>SFX\shootstylebullet\VoPl01_00000082_0D5756A9.wem</Path>
+						</File>
+						<File Id="34808390" Language="SFX">
+							<ShortName>shootstyle.wav</ShortName>
+							<Path>SFX\shootstyle_3F75BDB9.wem</Path>
 						</File>
 						<File Id="153943766" Language="SFX">
 							<ShortName>shootstylebullet\VoPl01_00000089.wav</ShortName>
@@ -399,10 +483,6 @@
 							<ShortName>shootstylebullet\VoPl01_00000085.wav</ShortName>
 							<Path>SFX\shootstylebullet\VoPl01_00000085_0D5756A9.wem</Path>
 						</File>
-						<File Id="570338746" Language="SFX">
-							<ShortName>shootstylebullet\shootstylewithrocks.wav</ShortName>
-							<Path>SFX\shootstylebullet\shootstylewithrocks_0D5756A9.wem</Path>
-						</File>
 						<File Id="670907558" Language="SFX">
 							<ShortName>shootstylebullet\VoPl01_00000088.wav</ShortName>
 							<Path>SFX\shootstylebullet\VoPl01_00000088_0D5756A9.wem</Path>
@@ -422,6 +502,30 @@
 						<File Id="1014234507" Language="SFX">
 							<ShortName>shootstylebullet\VoPl01_00000015.wav</ShortName>
 							<Path>SFX\shootstylebullet\VoPl01_00000015_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="480488529" Name="stlouisexitsfx" ObjectPath="\Events\Default Work Unit\stlouisexitsfx">
+					<IncludedMemoryFiles>
+						<File Id="6101938" Language="SFX">
+							<ShortName>star platinum 1.wav</ShortName>
+							<Path>SFX\star platinum 1_3F75BDB9.wem</Path>
+						</File>
+						<File Id="309000996" Language="SFX">
+							<ShortName>smashpunchKO.wav</ShortName>
+							<Path>SFX\smashpunchKO_3F75BDB9.wem</Path>
+						</File>
+						<File Id="456060191" Language="SFX">
+							<ShortName>star platinum3 (1).wav</ShortName>
+							<Path>SFX\star platinum3 (1)_3F75BDB9.wem</Path>
+						</File>
+						<File Id="576498875" Language="SFX">
+							<ShortName>smashKO.wav</ShortName>
+							<Path>SFX\smashKO_3F75BDB9.wem</Path>
+						</File>
+						<File Id="667323673" Language="SFX">
+							<ShortName>star platinum3.wav</ShortName>
+							<Path>SFX\star platinum3_3F75BDB9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -447,13 +551,21 @@
 				</Event>
 				<Event Id="687990298" Name="stlouisvoice" ObjectPath="\Events\Default Work Unit\stlouisvoice">
 					<IncludedMemoryFiles>
+						<File Id="15923498" Language="SFX">
+							<ShortName>stlouis smash.wav</ShortName>
+							<Path>SFX\stlouis smash_3F75BDB9.wem</Path>
+						</File>
 						<File Id="485064595" Language="SFX">
 							<ShortName>stlouis\VoPl01_0000004C.wav</ShortName>
 							<Path>SFX\stlouis\VoPl01_0000004C_0D5756A9.wem</Path>
 						</File>
-						<File Id="524330261" Language="SFX">
-							<ShortName>stlouis\VoPl01_0000007D.wav</ShortName>
-							<Path>SFX\stlouis\VoPl01_0000007D_0D5756A9.wem</Path>
+						<File Id="505011092" Language="SFX">
+							<ShortName>deku100%smashDone.wav</ShortName>
+							<Path>SFX\deku100%smashDone_3F75BDB9.wem</Path>
+						</File>
+						<File Id="592007255" Language="SFX">
+							<ShortName>dekusmashnomuDone.wav</ShortName>
+							<Path>SFX\dekusmashnomuDone_3F75BDB9.wem</Path>
 						</File>
 						<File Id="604310980" Language="SFX">
 							<ShortName>stlouis\VoPl01_0000004F.wav</ShortName>

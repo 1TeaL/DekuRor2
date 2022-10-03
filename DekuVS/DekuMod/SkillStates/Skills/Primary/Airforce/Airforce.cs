@@ -54,9 +54,10 @@ namespace DekuMod.SkillStates
         {
             base.characterBody.AddSpreadBloom(1f);
             EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-            AkSoundEngine.PostEvent(1063047365, this.gameObject);
-
-
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("airforcesfx", this.gameObject);
+            }
 
             if (base.isAuthority)
             {
