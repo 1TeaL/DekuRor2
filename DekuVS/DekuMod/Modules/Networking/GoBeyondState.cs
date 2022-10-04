@@ -29,7 +29,7 @@ namespace DekuMod.Modules.Networking
 
 		private CameraParamsOverrideHandle camOverrideHandle;
 		public DekuController dekucon;
-		public float duration = 5f;
+		public float duration = 8f;
 
 		private Animator animator;
 		private BlastAttack blastAttack;
@@ -50,7 +50,9 @@ namespace DekuMod.Modules.Networking
 
 			dekucon.PlayGobeyondLoop();
 			this.animator = base.GetModelAnimator();
-			PlayAnimation("Fullbody, Override", "GoBeyond", "Attack.playbackRate", duration);
+			base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
+            PlayAnimation("Body", "GoBeyond", "Attack.playbackRate", duration);
+            //PlayAnimation("Fullbody, Override", "GoBeyond", "Attack.playbackRate", duration);
 
 			base.characterBody.hideCrosshair = true;
 			if (base.GetAimAnimator()) base.GetAimAnimator().enabled = false;

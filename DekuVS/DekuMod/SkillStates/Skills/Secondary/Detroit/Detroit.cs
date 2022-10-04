@@ -16,8 +16,11 @@ using Random = UnityEngine.Random;
 
 namespace DekuMod.SkillStates
 {
-    public class Detroit : BaseSkill
+    public class Detroit : BaseSkillState
     {
+        public DekuController dekucon;
+        public EnergySystem energySystem;
+
         public bool hasTeleported;
         public bool hasFired;
         public float baseDuration = 1f;
@@ -44,6 +47,8 @@ namespace DekuMod.SkillStates
             hasTeleported = false;
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("RightArm, Override", "DetroitCharge", "Attack.playbackRate", fireTime, 0.01f);
+            dekucon = base.GetComponent<DekuController>();
+            energySystem = base.GetComponent<EnergySystem>();
             if (dekucon && base.isAuthority)
             {
                 Target = dekucon.GetTrackingTarget();
@@ -72,6 +77,7 @@ namespace DekuMod.SkillStates
 
                 if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
                 {
+                    energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
                     if (base.isAuthority)
                     {
                         AkSoundEngine.PostEvent("detroitexitsfx", this.gameObject);
@@ -116,14 +122,10 @@ namespace DekuMod.SkillStates
                         blastAttack.Fire();
                     }
 
-
-
-                }
-
-                if ((base.fixedAge >= this.duration && base.isAuthority))
-                {
                     this.outer.SetNextStateToMain();
                     return;
+
+
                 }
 
             }

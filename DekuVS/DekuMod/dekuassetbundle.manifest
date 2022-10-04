@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1357693264
+CRC: 3830875956
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9bbd1ca500b3113fcb2a4f88b4b07b2c
+    Hash: 97f3af6705302ca3741676939223d3d3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -92,6 +92,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/Material/yellow.mat
 - Assets/Deku/DekuV2/Animations/ShootStyleDashAuto.anim
 - Assets/Deku/DekuV2/Animations/ManchesterEnd.anim
+- Assets/Deku/DekuV2/Animations/Running.anim
 - Assets/Deku/DekuV2/Animations/humanoidDekuAvatar.asset
 - Assets/Deku/DekuV2/Animations/ManchesterFlip.anim
 - Assets/Deku/DekuV2/VFX/Material/dangersense.mat
@@ -166,7 +167,6 @@ Assets:
 - Assets/Deku/DekuV2/VFX/smokebig.prefab
 - Assets/Deku/DekuV2/GUI/fajin.png
 - Assets/Deku/DekuV2/VFX/blackwhipexplosion.prefab
-- Assets/Deku/DekuV2/Animations/Running.anim
 - Assets/Deku/DekuV2/VFX/Material/windtrail.mat
 - Assets/Deku/DekuV2/GUI/stlouis.png
 - Assets/Deku/DekuV2/VFX/circle.prefab

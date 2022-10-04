@@ -173,6 +173,7 @@ namespace DekuMod.SkillStates
 
             if (base.fixedAge >= fireTime && base.fixedAge < exitDuration)
             {
+                PlayCrossfade("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", duration - exitDuration, 0.01f);
                 this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
                 Ray aimRay = base.GetAimRay();

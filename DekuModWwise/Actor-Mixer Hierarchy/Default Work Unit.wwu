@@ -423,7 +423,7 @@
 														<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-5</Value>
+																<Value>-1</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -1327,7 +1327,7 @@
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-6</Value>
+																<Value>-2</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -1615,7 +1615,7 @@
 														<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-6</Value>
+																<Value>-2</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -2290,7 +2290,7 @@
 														<Property Name="OverridePositioning" Type="bool" Value="True"/>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-5</Value>
+																<Value>-1</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -2676,7 +2676,7 @@
 																<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
 																<Property Name="Volume" Type="Real64">
 																	<ValueList>
-																		<Value>-4</Value>
+																		<Value>1</Value>
 																	</ValueList>
 																</Property>
 															</PropertyList>
@@ -2761,11 +2761,6 @@
 																<Property Name="3DSpatialization" Type="int16" Value="1"/>
 																<Property Name="OverridePositioning" Type="bool" Value="True"/>
 																<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
-																<Property Name="Volume" Type="Real64">
-																	<ValueList>
-																		<Value>-6</Value>
-																	</ValueList>
-																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Attenuation">
@@ -3729,13 +3724,6 @@
 																	</ActiveSourceList>
 																</Sound>
 																<Sound Name="smashpunch2" ID="{7A81E556-E1B1-4FAD-8464-8AC33F44F422}" ShortID="708367266">
-																	<PropertyList>
-																		<Property Name="Volume" Type="Real64">
-																			<ValueList>
-																				<Value>3</Value>
-																			</ValueList>
-																		</Property>
-																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -3764,6 +3752,13 @@
 																	</ActiveSourceList>
 																</Sound>
 																<Sound Name="smashpunch3" ID="{2147833E-3A10-4117-B3A0-0EE34FEDB38A}" ShortID="802721516">
+																	<PropertyList>
+																		<Property Name="Volume" Type="Real64">
+																			<ValueList>
+																				<Value>-3</Value>
+																			</ValueList>
+																		</Property>
+																	</PropertyList>
 																	<ReferenceList>
 																		<Reference Name="Conversion">
 																			<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -3909,7 +3904,7 @@
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-3</Value>
+																<Value>3</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -3960,7 +3955,7 @@
 													<PropertyList>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>3</Value>
+																<Value>10</Value>
 															</ValueList>
 														</Property>
 													</PropertyList>
@@ -4197,11 +4192,6 @@
 														<Property Name="3DSpatialization" Type="int16" Value="1"/>
 														<Property Name="OverridePositioning" Type="bool" Value="True"/>
 														<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
-														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>-3</Value>
-															</ValueList>
-														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Attenuation">
@@ -4229,6 +4219,7 @@
 																	<PropertyList>
 																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
 																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
 																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
 																	</PropertyList>
@@ -4269,62 +4260,6 @@
 															</ChildrenList>
 															<ActiveSourceList>
 																<ActiveSource Name="jetsetrunShort" ID="{32F54548-430C-4B87-8C32-76FB495872F4}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="My Hero Academia OST   Jet Set Run" ID="{B0F12B89-6CB1-4AF2-9636-8B5B1D539F71}" ShortID="672193571">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{87F9AF01-F64A-4F2B-A11D-BEF67188C94B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="My Hero Academia OST   Jet Set Run" ID="{990D9EEC-63A5-4BAF-A1B5-654A8CC6BE74}">
-																	<PropertyList>
-																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>My Hero Academia OST   Jet Set Run.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="44042533"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="My Hero Academia OST   Jet Set Run" ID="{990D9EEC-63A5-4BAF-A1B5-654A8CC6BE74}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="My Hero Academia OST - You Say Run" ID="{86519508-FEF1-4DAF-AC51-58079EA70BC3}" ShortID="497412469">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{87F9AF01-F64A-4F2B-A11D-BEF67188C94B}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="My Hero Academia OST - You Say Run" ID="{C2F08857-A01E-41FF-9CBA-EABC659A3C19}">
-																	<PropertyList>
-																		<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>My Hero Academia OST - You Say Run.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="910675969"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="My Hero Academia OST - You Say Run" ID="{C2F08857-A01E-41FF-9CBA-EABC659A3C19}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="yousayrunShort" ID="{E1299557-E0C1-4C1D-9896-CFB6623BDD35}" ShortID="870071160">

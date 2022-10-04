@@ -65,8 +65,8 @@
 				<Property Name="MonitoringManager\WatchMgr\x64_Watches" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\FirstVisible_10_1" Type="string" Value="{4C96B38B-3DB4-40C7-91C9-665510E38993}"/>
 				<Property Name="ProjectExplorer\FirstVisible_11_1" Type="string" Value="{23EC2DE3-3ED8-4B82-AC99-92E25F2E4C6B}"/>
-				<Property Name="ProjectExplorer\FirstVisible_1_1" Type="string" Value="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
-				<Property Name="ProjectExplorer\FirstVisible_3_1" Type="string" Value="{3B48BBB0-768E-4A5E-ACB1-810887B42A10}"/>
+				<Property Name="ProjectExplorer\FirstVisible_1_1" Type="string" Value="{5D523994-1B83-447B-B0A7-D33A98759560}"/>
+				<Property Name="ProjectExplorer\FirstVisible_3_1" Type="string" Value="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}"/>
 				<Property Name="ProjectExplorer\FirstVisible_4_1" Type="string" Value="{CB6175F1-6080-4A23-92EF-0807E304D0C1}"/>
 				<Property Name="ProjectExplorer\FirstVisible_6_1" Type="string" Value="{C98E673F-A24C-48A8-960F-10565FFE70A0}"/>
 				<Property Name="ProjectExplorer\FirstVisible_8_1" Type="string" Value="{41093F77-829F-4D88-8601-E8B25F3D4781}"/>
@@ -83,7 +83,7 @@
 				<Property Name="ProjectExplorer\x64_Expanded_1_1" Type="string" Value="Aa/5h0r2K0+hHb72cYjJSw=="/>
 				<Property Name="ProjectExplorer\x64_Expanded_20_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_21_1" Type="string" Value=""/>
-				<Property Name="ProjectExplorer\x64_Expanded_2_1" Type="string" Value="1qpuWBp9EUCzS82PRt5rT8eZE1zIJDRAi+PfwoAT0cNN6LMtz3t4QKIenIyj95Cbl8mPb77Yw0CY+pGTx6IFV6ddbLc5BHZBqG9mhq7WSQ12XdjKN4U8Q7jd7/w1e630GXr4OMVaa0OufnwUYzUi7bQuXNE+OolDgIMhOQgpIyzjOqHFgffqQ54hDML+zuvde2671UUhoUS9eOlmuKU9kNpQ+9cf+SJFgu5myaCyToAVIAMTMZCSRaMkAn+1f1R2t3oqeoJIyUW4rvuKJIy4t98qLXSEc05Hg+l8WaYJJuzFheb1epRfSIVCj/FEzy7iufye83MAckiXIzYq/47WX8Cvhj+ZYIBIjvcvkjd4jCn89nPVZ8OISKvnku8/Au41LIDGjPGtq0iv+fHRAhsUQIt4z9gedJ5JmuVZd4ldbX0NeUdyvky4SYgGBih/71h3OC2B4OvhOkqb9z67sq7YtjMPLMyLzalLomGMccnBDWtB6BRNOtl9TLhBl/d9X7ggArAI2OgYlEy6f0397TS5CGnzJcXyu6pMqdBY2RJc2d6uLtrPaRKwTLzrP55DeYmb1QH71d4vzky5Si41Z6ZCIXPmpPhk+dtMuylhy5Ay6KOeoOui8QrkTIm8mvXqQuRU32+gVNAYBE2hFE5zC5R0lK4+8zeIf39NvHVu7f8XZpYXir5QSCgrTq9SiOJ4OqFuqAYWwdHiQk61IL4eCeo8dinGwpP4VqVOv9iVjLnHLnQ="/>
+				<Property Name="ProjectExplorer\x64_Expanded_2_1" Type="string" Value="1qpuWBp9EUCzS82PRt5rT8eZE1zIJDRAi+PfwoAT0cNN6LMtz3t4QKIenIyj95Cbl8mPb77Yw0CY+pGTx6IFV6ddbLc5BHZBqG9mhq7WSQ12XdjKN4U8Q7jd7/w1e630GXr4OMVaa0OufnwUYzUi7bQuXNE+OolDgIMhOQgpIyzjOqHFgffqQ54hDML+zuvde2671UUhoUS9eOlmuKU9kNpQ+9cf+SJFgu5myaCyToCuX4Lsb0+ARa2yjaguxoWsFSADEzGQkkWjJAJ/tX9Udrd6KnqCSMlFuK77iiSMuLffKi10hHNOR4PpfFmmCSbsPkKy9Sjb5EeyMtVH3JSJE8WF5vV6lF9IhUKP8UTPLuK5/J7zcwBySJcjNir/jtZfwK+GP5lggEiO9y+SN3iMKfz2c9Vnw4hIq+eS7z8C7jUsgMaM8a2rSK/58dECGxRAi3jP2B50nkma5Vl3iV1tfQ15R3K+TLhJiAYGKH/vWHc4LYHg6+E6Spv3Pruyrti2Mw8szIvNqUuiYYxxycENa0HoFE062X1MuEGX931fuCACsAjY6BiUTLp/Tf3tNLkIafMlxfK7qkyp0FjZElzZ3q4u2s9pErBMvOs/nkN5iZvVAfvV3i/OTLlKLjVnpkIhc+ak+GT520y7KWHLkDLoo56g66LxCuRMibya9epC5FTfb6BU0BgETaEUTnMLlHSUrj7zN4h/f028dW7t/xdmlheKvlBIKCtOr1KI4ng6oW6oBhbB0eJCTrUgvh4J6jx2KcbCk/hWpU6/2JWMuccudA=="/>
 				<Property Name="ProjectExplorer\x64_Expanded_3_1" Type="string" Value="f0uNIE8sjka+Rv9EfcZJwA=="/>
 				<Property Name="ProjectExplorer\x64_Expanded_4_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_5_1" Type="string" Value=""/>

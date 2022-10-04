@@ -140,7 +140,7 @@ namespace DekuMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 60f, base.fixedAge / duration);
+			//if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 60f, base.fixedAge / duration);
 
 			if (base.fixedAge > fireTime)
 			{
@@ -176,17 +176,17 @@ namespace DekuMod.SkillStates
 				{
 					origin = base.transform.position,
 					scale = blastRadius,
-					rotation = Quaternion.LookRotation(Vector3.up)
+					rotation = Quaternion.LookRotation(GetAimRay().direction)
 				}, true);
 				EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
 				{
 					origin = base.transform.position,
 					scale = blastRadius,
-					rotation = Quaternion.LookRotation(Vector3.up)
+					rotation = Quaternion.LookRotation(GetAimRay().direction)
 				}, true);
 
-
 				this.outer.SetNextStateToMain();
+				return;
 			}
 			
 		}
@@ -194,7 +194,7 @@ namespace DekuMod.SkillStates
         {
             base.OnExit();
 
-			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
+			//if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
 		}
         public override InterruptPriority GetMinimumInterruptPriority()
 		{
