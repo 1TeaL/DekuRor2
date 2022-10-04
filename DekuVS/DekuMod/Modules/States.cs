@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using DekuMod.SkillStates.BaseStates;
+using DekuMod.Modules.Networking;
 
 namespace DekuMod.Modules
 {
@@ -22,6 +23,7 @@ namespace DekuMod.Modules
 
             //go beyond
             entityStates.Add(typeof(GoBeyond));
+            entityStates.Add(typeof(GoBeyondState));
             entityStates.Add(typeof(GoBeyondEmptySkill));
 
             //primary

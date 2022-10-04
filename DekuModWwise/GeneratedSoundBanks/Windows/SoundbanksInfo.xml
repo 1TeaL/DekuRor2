@@ -16,7 +16,7 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="1943384016" Language="SFX" Hash="694972651">
+		<SoundBank Id="1943384016" Language="SFX" Hash="4270928735">
 			<ObjectPath>\SoundBanks\Default Work Unit\Deku</ObjectPath>
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
@@ -247,10 +247,6 @@
 				</Event>
 				<Event Id="2412150284" Name="gobeyondost" ObjectPath="\Events\Default Work Unit\gobeyondost">
 					<IncludedMemoryFiles>
-						<File Id="44042533" Language="SFX">
-							<ShortName>My Hero Academia OST   Jet Set Run.wav</ShortName>
-							<Path>SFX\My Hero Academia OST   Jet Set Run_3F75BDB9.wem</Path>
-						</File>
 						<File Id="543457860" Language="SFX">
 							<ShortName>GO Beyond!! -You Say Run-.wav</ShortName>
 							<Path>SFX\GO Beyond!! -You Say Run-_3F75BDB9.wem</Path>
@@ -262,10 +258,6 @@
 						<File Id="724948110" Language="SFX">
 							<ShortName>yousayrunShort.wav</ShortName>
 							<Path>SFX\yousayrunShort_3F75BDB9.wem</Path>
-						</File>
-						<File Id="910675969" Language="SFX">
-							<ShortName>My Hero Academia OST - You Say Run.wav</ShortName>
-							<Path>SFX\My Hero Academia OST - You Say Run_3F75BDB9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

@@ -27,7 +27,7 @@ namespace DekuMod.SkillStates
 		public DekuController dekucon;
 		const string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 		private ExtraSkillLocator extraskillLocator;
-		public float duration = 10f;
+		public float duration = 1f;
 
         private Animator animator;
         private BlastAttack blastAttack;
@@ -185,7 +185,6 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 90f, base.fixedAge / duration);
 			if (base.fixedAge > duration && base.isAuthority)
             {
 				this.outer.SetNextStateToMain();
@@ -195,7 +194,7 @@ namespace DekuMod.SkillStates
 		}
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return InterruptPriority.Frozen;
+			return InterruptPriority.Death;
 		}
 	}
 }

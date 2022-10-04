@@ -73,7 +73,7 @@ namespace DekuMod.SkillStates
             //{
             //    base.characterMotor.velocity = this.forwardDirection * this.speedCoefficient * moveSpeedStat;
             //}
-            this.previousPosition = base.transform.position;
+            this.previousPosition = -aimRay.direction * 2f;
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
@@ -110,7 +110,7 @@ namespace DekuMod.SkillStates
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
-            PlayAnimation("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", duration - exitDuration);
+            PlayCrossfade("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", duration - exitDuration, 0.01f);
 
         }
         public void GetMaxWeight()
@@ -240,7 +240,11 @@ namespace DekuMod.SkillStates
                         base.GetAimRay().direction,
                         0f).Send(NetworkDestination.Clients);
                 }
-            } 
+            }
+            else
+            {
+                PlayAnimation("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", fireTime);
+            }
             
             if (base.fixedAge > baseDuration)
 			{

@@ -43,6 +43,7 @@ namespace DekuMod.SkillStates
             this.fireTime = 0.5f * this.duration;
             base.characterBody.SetAimTimer(duration);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            base.GetModelAnimator().SetBool("attacking", true);
             this.muzzleString = punchIndex % 2 == 0 ? "LFinger" : "RFinger";
 
             //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", this.duration);
@@ -115,6 +116,7 @@ namespace DekuMod.SkillStates
             //base.PlayAnimation("Fullbody, Override", "Armature_AIdle", "Attack.playbackRate", 0.1f);
             //base.PlayAnimation("Body", "IdleIn");
             base.OnExit();
+            base.GetModelAnimator().SetBool("attacking", false);
         }
 
         private void Fire()

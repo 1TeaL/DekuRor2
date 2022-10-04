@@ -46,7 +46,7 @@ namespace DekuMod.SkillStates
             this.areaIndicator.SetActive(true);
             //base.PlayAnimation("FullBody, Override", "SmashCharge", "Attack.playbackRate", 1f);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            PlayCrossfade("RightArm, Override", "DetroitCharge", "Attack.playbackRate", duration/3, 0.01f);
+            PlayCrossfade("RightArm, Override", "DetroitCharge", "Attack.playbackRate", duration, 0.01f);
             //base.PlayAnimation("RightArm, Override", "SmashCharge");
             //base.PlayCrossfade("RightArm, Override", "SmashCharge", 0.2f);
             //base.PlayAnimation("RightArm, Override", "SmashCharge", "Attack.playbackRate", 0.2f);
@@ -96,9 +96,11 @@ namespace DekuMod.SkillStates
         
         public override void FixedUpdate()
         {
-
-
             base.FixedUpdate();
+            if (base.fixedAge > duration)
+            {
+                PlayCrossfade("RightArm, Override", "DetroitCharging", "Attack.playbackRate", duration, 0.01f);
+            }
             bool flag = base.fixedAge < this.maxCharge && base.IsKeyDownAuthority();
             if (flag)
             {

@@ -492,7 +492,11 @@ namespace DekuMod.Modules.Survivors
                 {
                     ofaHurtTimer += Time.fixedDeltaTime;
                 }
-                OFAeye.Play();
+
+                if (OFAeye.isStopped)
+                {
+                    OFAeye.Play();
+                }
             }
             else
             {
@@ -518,29 +522,38 @@ namespace DekuMod.Modules.Survivors
                 if(goBeyondBuffTimer > 59f)
                 {
                     body.AddBuff(Modules.Buffs.goBeyondBuffUsed);
+                    if (!goBeyondUsed)
+                    {
+                        goBeyondUsed = true;
+                        body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1);
+                    }
                 }
                 else
                 {
                     goBeyondBuffTimer += Time.fixedDeltaTime;
                 }
-                GOBEYOND.Play();
-                RARM.Play();
-                LARM.Play();
-                RLEG.Play();
-                LLEG.Play();
+                //GOBEYOND.Play();
+                //RARM.Play();
+                //LARM.Play();
+                //RLEG.Play();
+                //LLEG.Play();
             }
             else if (!body.HasBuff(Buffs.goBeyondBuff))
             {
-                GOBEYOND.Stop();
-                RARM.Stop();
-                LARM.Stop();
-                RLEG.Stop();
-                LLEG.Stop();
+                //GOBEYOND.Stop();
+                //RARM.Stop();
+                //LARM.Stop();
+                //RLEG.Stop();
+                //LLEG.Stop();
             }
             //danger sense particle
             if (body.HasBuff(Buffs.dangersenseBuff) || body.HasBuff(Buffs.dangersense45Buff) || body.HasBuff(Buffs.dangersense100Buff))
             {
-                DANGERSENSE.Play();
+                if (DANGERSENSE.isStopped)
+                {
+                    DANGERSENSE.Play();
+
+                }
             }
             else 
             {
@@ -549,7 +562,10 @@ namespace DekuMod.Modules.Survivors
             //fajin particle
             if (body.HasBuff(Buffs.fajinBuff))
             {
-                FAJIN.Play();
+                if (FAJIN.isStopped)
+                {
+                    FAJIN.Play();
+                }
             }
             else
             {
@@ -558,7 +574,10 @@ namespace DekuMod.Modules.Survivors
             //ofa particle
             if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.ofaBuff45))
             {
-                OFA.Play();
+                if (OFA.isStopped)
+                {
+                    OFA.Play();
+                }
             }
             else
             {

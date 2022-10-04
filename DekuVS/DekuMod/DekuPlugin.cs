@@ -99,9 +99,11 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<PeformShootStyleKickAttackNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformStLouisSmashNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformBlackwhipNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<PerformBlackwhip100NetworkRequest>();
             NetworkingAPI.RegisterMessageType<ForceCounterState>();
 
             NetworkingAPI.RegisterMessageType<PerformDetroitDelawareNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<PerformFinalSmashNetworkRequest>();
 
 
             // now make a content pack and add it- this part will change with the next update
