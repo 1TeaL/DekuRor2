@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using EntityStates;
 using DekuMod.Modules.Survivors;
 using System.Collections.Generic;
+using R2API.Networking;
 
 namespace DekuMod.SkillStates
 {
@@ -18,13 +19,14 @@ namespace DekuMod.SkillStates
         //private GameObject effectPrefab = Modules.Assets.sEffect;
 
         public static float blastRadius = 6f;
-        public float distance = 2f;
+        public float distance = 3f;
         public float maxWeight;
         public float force = 50f;
         private float duration;
         private BlastAttack blastAttack;
         private bool hasFired;
         public Vector3 theSpot;
+        public int buffDuration;
 
         protected DamageType damageType = DamageType.Stun1s;
 
@@ -34,6 +36,7 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
             fireTime = duration / 2f;
+            buffDuration = 0;
 
             hasFired = false;
             theSpot = base.transform.position;
@@ -49,13 +52,10 @@ namespace DekuMod.SkillStates
             //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", fireTime, 0.01f);
-            if (NetworkServer.active)
-            {
-                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.manchesterBuff.buffIndex, Modules.StaticValues.manchesterBuffDuration);
-            }
+
 
             //move up a little
-            base.characterMotor.rootMotion += Vector3.up * distance;
+            base.characterMotor.velocity += Vector3.up * distance;
             //get weight, blast attack after
             GetMaxWeight();
 
@@ -106,6 +106,7 @@ namespace DekuMod.SkillStates
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
+                    base.characterBody.ApplyBuff(Modules.Buffs.manchesterBuff.buffIndex, 1, buffDuration);                    
                 }
             }
 
@@ -142,6 +143,7 @@ namespace DekuMod.SkillStates
             List<HurtBox> target = search.GetResults().ToList<HurtBox>();
             foreach (HurtBox singularTarget in target)
             {
+                buffDuration += 1;
                 if (singularTarget)
                 {
                     if (singularTarget.healthComponent && singularTarget.healthComponent.body)

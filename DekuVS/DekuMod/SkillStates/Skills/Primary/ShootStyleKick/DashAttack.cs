@@ -61,13 +61,15 @@ namespace DekuMod.SkillStates
             this.attack.isCrit = base.RollCrit();
             this.attack.pushAwayForce = pushForce * 0.2f;
             //Util.PlaySound("Misc_StartDash", base.gameObject);
-            base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash");
+            base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
+        
 
             AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
             base.OnEnter();
         }
         public override void FixedUpdate()
         {
+            base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
             base.FixedUpdate();
             if (Target)
             {

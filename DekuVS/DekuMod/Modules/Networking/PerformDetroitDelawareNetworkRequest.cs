@@ -118,7 +118,7 @@ namespace DekuMod.Modules.Networking
             this.search.searchDirection = direction;
             this.search.sortMode = BullseyeSearch.SortMode.Distance;
             this.search.maxDistanceFilter = StaticValues.detroitdelawareRange;
-            this.search.maxAngleFilter = 60f;
+            this.search.maxAngleFilter = 360f;
             this.search.RefreshCandidates();
             this.search.FilterOutGameObject(charBody.gameObject);
             this.trackingTargets = this.search.GetResults().ToList<HurtBox>();

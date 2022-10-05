@@ -12,8 +12,10 @@ using DekuMod.Modules.Networking;
 
 namespace DekuMod.SkillStates
 {
-    public class StLouis : BaseSkill
+    public class StLouis : BaseSkillState
     {
+        public DekuController dekucon;
+        public EnergySystem energySystem;
         public bool hasTeleported;
         public bool hasFired;
         public float baseDuration = 1f;
@@ -82,6 +84,7 @@ namespace DekuMod.SkillStates
 
                 if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
                 {
+                    energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
                     hasFired = true;
                     PlayCrossfade("FullBody, Override", "StLouis", "Attack.playbackRate", duration - fireTime, 0.01f);
                     new PerformStLouisSmashNetworkRequest(base.characterBody.masterObjectId, Target.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);

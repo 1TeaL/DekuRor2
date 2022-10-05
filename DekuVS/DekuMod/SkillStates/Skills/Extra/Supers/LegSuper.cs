@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates
 	{
 		public static float baseDuration = 4.5f;
         public static float exitDuration;
-        public static float baseBlastRadius = Modules.StaticValues.finalsmashRange;
+        public static float baseBlastRadius = Modules.StaticValues.finalsmashBlastRadius;
         public static float blastRadius;
 
         public float timer;
@@ -102,7 +102,7 @@ namespace DekuMod.SkillStates
             blastAttack.position = base.transform.position;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.finalsmashDamageCoefficient * (duration / fireInterval);
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.finalsmashSmashDamageCoefficient * attackSpeedStat;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = maxWeight * 20f;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
@@ -110,6 +110,8 @@ namespace DekuMod.SkillStates
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
 
+            AkSoundEngine.PostEvent("finalsmashsfxvoice", this.gameObject);
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", duration - exitDuration, 0.01f);
 
         }
@@ -179,14 +181,13 @@ namespace DekuMod.SkillStates
                 Ray aimRay = base.GetAimRay();
                 aimRay.direction = this.forwardDirection;
 
-                if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 60f, base.fixedAge / duration);
 
-                Vector3 normalized = (aimRay.origin - this.previousPosition).normalized;
-                if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
+                Vector3 normalized = (aimRay.direction).normalized;
+                if (base.characterMotor && normalized != Vector3.zero)
                 {
                     Vector3 vector = normalized * this.speedCoefficient;
-                    float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
-                    vector = this.forwardDirection * d;
+                    //float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
+                    //vector = aimRay.direction;
                     //vector.y = 0f;
 
                     base.characterMotor.velocity = vector;
@@ -211,21 +212,6 @@ namespace DekuMod.SkillStates
                     temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
                 }
 
-                if (timer > (fireInterval))
-                {
-                    timer = 0;
-                    if (base.isAuthority)
-                    {
-                        new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
-                            base.transform.position,
-                            base.GetAimRay().direction,
-                            Modules.StaticValues.finalsmashDamageCoefficient).Send(NetworkDestination.Clients);
-                    }
-                }
-                else
-                {
-                    timer += Time.fixedDeltaTime;
-                }
             }           
             else if(base.fixedAge > exitDuration)
             {
@@ -234,20 +220,26 @@ namespace DekuMod.SkillStates
                     PlayAnimation("FullBody, Override", "FinalSmashSmash", "Attack.playbackRate", exitDuration);
                     animChange = true;
                 }
+            }
+
+            if (timer > fireInterval)
+            {
+                timer = 0;
                 if (base.isAuthority)
                 {
                     new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
                         base.transform.position,
                         base.GetAimRay().direction,
-                        0f).Send(NetworkDestination.Clients);
+                        Modules.StaticValues.finalsmashDamageCoefficient).Send(NetworkDestination.Clients);
                 }
             }
             else
             {
-                PlayAnimation("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", fireTime);
+                timer += Time.fixedDeltaTime;
             }
-            
-            if (base.fixedAge > baseDuration)
+
+
+            if (base.fixedAge > duration)
 			{
                 blastAttack.position = base.transform.position;
                 blastAttack.Fire();
@@ -258,6 +250,7 @@ namespace DekuMod.SkillStates
                     rotation = Quaternion.LookRotation(Vector3.up)
                 }, true);
                 this.outer.SetNextStateToMain();
+                return;
 			}
 
 		}
@@ -271,7 +264,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.useGravity = true;
             base.characterMotor.velocity = Vector3.zero;
 
-            if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
             base.characterMotor.disableAirControlUntilCollision = false;
             base.characterMotor.velocity.y = 0;
         }

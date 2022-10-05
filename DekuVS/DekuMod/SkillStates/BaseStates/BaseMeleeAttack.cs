@@ -92,13 +92,8 @@ namespace DekuMod.SkillStates.BaseStates
 
         protected virtual void PlayAttackAnimation()
         {
-            //if (animator.GetBool("isMoving"))
-            //{
-            //    base.PlayCrossfade("RightArm, Override", "Slash" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
-            //    return;
-            //}
-
-            base.PlayCrossfade("Fullbody, Override", "ShootStyleCombo" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.05f);
+            base.PlayCrossfade("FullBody, Override", "ShootStyleCombo" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.01f);
+            //base.PlayAnimation("Fullbody, Override", "ShootStyleCombo" + (1 + swingIndex), "Slash.playbackRate", this.duration);
 
         }
 
@@ -118,6 +113,7 @@ namespace DekuMod.SkillStates.BaseStates
 
         protected virtual void OnHitEnemyAuthority()
         {
+            base.skillLocator.DeductCooldownFromAllSkillsServer(1f);
             Util.PlaySound(this.hitSoundString, base.gameObject);
 
             if (!this.hasHopped)
@@ -141,7 +137,7 @@ namespace DekuMod.SkillStates.BaseStates
 
         private void FireAttack()
         {
-            Debug.Log($"timer: {stopwatch}");
+            //Debug.Log($"timer: {stopwatch}");
             if (!this.hasFired)
             {
                 this.hasFired = true;

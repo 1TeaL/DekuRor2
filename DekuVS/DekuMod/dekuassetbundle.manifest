@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3830875956
+CRC: 3663819028
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 97f3af6705302ca3741676939223d3d3
+    Hash: c78a42414c32eb26866a4683943704c8
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -93,6 +93,7 @@ Assets:
 - Assets/Deku/DekuV2/Animations/ShootStyleDashAuto.anim
 - Assets/Deku/DekuV2/Animations/ManchesterEnd.anim
 - Assets/Deku/DekuV2/Animations/Running.anim
+- Assets/Deku/DekuV2/Animations/DetroitDelawareFull.anim
 - Assets/Deku/DekuV2/Animations/humanoidDekuAvatar.asset
 - Assets/Deku/DekuV2/Animations/ManchesterFlip.anim
 - Assets/Deku/DekuV2/VFX/Material/dangersense.mat
@@ -109,11 +110,13 @@ Assets:
 - Assets/Deku/DekuV2/GUI/oklahoma45.png
 - Assets/Deku/DekuV2/Animations/ShootStyleComboDash.anim
 - Assets/Deku/DekuV2/Assets/matDeku.mat
+- Assets/Deku/DekuV2/Animations/FinalSmashSmash.anim
 - Assets/Deku/DekuV2/GUI/ultimate45.png
 - Assets/Deku/DekuV2/Animations/StLouis45.anim
 - Assets/Deku/DekuV2/VFX/Material/windspikering.mat
 - Assets/Deku/DekuV2/Animations/Airforce100R.anim
 - Assets/Deku/DekuV2/GUI/detroit45.png
+- Assets/Deku/DekuV2/Animations/GoBeyond.anim
 - Assets/Deku/DekuV2/VFX/Material/windbullet.mat
 - Assets/Deku/DekuV2/VFX/windbullet45.prefab
 - Assets/Deku/DekuV2/VFX/Material/Spark2Particlewhip.mat
@@ -191,8 +194,8 @@ Assets:
 - Assets/Deku/DekuV2/GUI/delaware.png
 - Assets/Deku/DekuV2/Animations/DetroitDelawareDetroit.anim
 - Assets/Deku/DekuV2/Animations/animDeku.controller
+- Assets/Deku/DekuV2/Animations/DetroitDelawareDetroitCharge.anim
 - Assets/Deku/DekuV2/VFX/Material/blackwhipblack.mat
-- Assets/Deku/DekuV2/Animations/GoBeyond.anim
 - Assets/Deku/DekuV2/GUI/airforce100.png
 - Assets/Deku/DekuV2/Assets/dekuCustomUI.prefab
 - Assets/Deku/DekuV2/GUI/Floatactivate.png
@@ -208,7 +211,6 @@ Assets:
 - Assets/Deku/DekuV2/Assets/DekuDisplay.prefab
 - Assets/Deku/DekuV2/VFX/OFA lightning eye.prefab
 - Assets/Deku/DekuV2/Animations/Landing.anim
-- Assets/Deku/DekuV2/Animations/FinalSmashSmash.anim
 - Assets/Deku/DekuV2/VFX/Material/white.mat
 - Assets/Deku/DekuV2/GUI/DangerSense45.png
 - Assets/Deku/DekuV2/VFX/blackwhipshootGhost.prefab

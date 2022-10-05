@@ -19,7 +19,7 @@ namespace DekuMod.SkillStates
 		private float duration;
 		private float exitDuration;
 		private float fireTime = 0.5f;
-		private float baseBlastRadius = 20f;
+		private float baseBlastRadius = Modules.StaticValues.finalsmashBlastRadius;
 		private float blastRadius;
 		private float FOV = 120f;
 
@@ -46,6 +46,7 @@ namespace DekuMod.SkillStates
 
 			Ray aimRay = base.GetAimRay();
 			base.StartAimMode(0.5f + this.duration, false);
+			theSpot = aimRay.origin + blastRadius * aimRay.direction;
 
 			bool active = NetworkServer.active;
 			if (active)
@@ -56,12 +57,11 @@ namespace DekuMod.SkillStates
 			if (base.isAuthority)
 			{
 				new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
-					base.GetAimRay().origin - GetAimRay().direction,
+					theSpot,
 					base.GetAimRay().direction,
 					Modules.StaticValues.detroitdelawareDamageCoefficient).Send(NetworkDestination.Clients);
 			}
 
-			theSpot = aimRay.origin + blastRadius * aimRay.direction;
 			theDirection = aimRay.direction;
 			//blast attack
 			blastAttack = new BlastAttack();
@@ -77,7 +77,8 @@ namespace DekuMod.SkillStates
 			blastAttack.damageType = DamageType.Freeze2s;
 			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-			PlayCrossfade("FullBody, Override", "DetroitDelawareDelaware", "Attack.playbackRate", fireTime, 0.01f);
+			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+			PlayCrossfade("FullBody, Override", "DetroitDelawareFull", "Attack.playbackRate", fireTime, 0.01f);
 
             if (base.isAuthority)
 			{
@@ -144,26 +145,29 @@ namespace DekuMod.SkillStates
 
 			if (base.fixedAge > fireTime)
 			{
-				timer += Time.fixedDeltaTime;
-                if (base.isAuthority && timer > 0.5f)
+                if (base.isAuthority && timer > 0.2f)
 				{
 					timer = 0f;
 					new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
-						base.GetAimRay().origin - GetAimRay().direction,
+						theSpot,
 						theDirection,
 						0f).Send(NetworkDestination.Clients);
 				}
-                if (!animChange)
-				{
-					animChange = true;
-					PlayCrossfade("FullBody, Override", "DetroitDelawareDetroit", "Attack.playbackRate", exitDuration - fireTime, 0.01f);
+                else
+                {
+					timer += Time.fixedDeltaTime;
 				}
+				//if (!animChange)
+				//{
+				//	animChange = true;
+				//	PlayCrossfade("FullBody, Override", "DetroitDelawareDetroit", "Attack.playbackRate", exitDuration - fireTime, 0.01f);
+				//}
 			}
-			if(base.fixedAge > exitDuration && animChange)
-			{
-				animChange = false;
-				PlayCrossfade("FullBody, Override", "DetroitDelawareSmash", "Attack.playbackRate", fireTime, 0.01f);
-			}
+			//if(base.fixedAge > exitDuration && animChange)
+			//{
+			//	animChange = false;
+			//	PlayCrossfade("FullBody, Override", "DetroitDelawareSmash", "Attack.playbackRate", fireTime, 0.01f);
+			//}
 
 			if(base.fixedAge > duration)
 			{
@@ -174,13 +178,13 @@ namespace DekuMod.SkillStates
 
 				EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
 				{
-					origin = base.transform.position,
+					origin = theSpot,
 					scale = blastRadius,
 					rotation = Quaternion.LookRotation(GetAimRay().direction)
 				}, true);
 				EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
 				{
-					origin = base.transform.position,
+					origin = theSpot,
 					scale = blastRadius,
 					rotation = Quaternion.LookRotation(GetAimRay().direction)
 				}, true);
