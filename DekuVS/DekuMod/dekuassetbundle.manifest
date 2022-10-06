@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3663819028
+CRC: 3309389434
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c78a42414c32eb26866a4683943704c8
+    Hash: e841bda5637d6667ad5cb53acc575654
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -110,7 +110,6 @@ Assets:
 - Assets/Deku/DekuV2/GUI/oklahoma45.png
 - Assets/Deku/DekuV2/Animations/ShootStyleComboDash.anim
 - Assets/Deku/DekuV2/Assets/matDeku.mat
-- Assets/Deku/DekuV2/Animations/FinalSmashSmash.anim
 - Assets/Deku/DekuV2/GUI/ultimate45.png
 - Assets/Deku/DekuV2/Animations/StLouis45.anim
 - Assets/Deku/DekuV2/VFX/Material/windspikering.mat
@@ -200,6 +199,7 @@ Assets:
 - Assets/Deku/DekuV2/Assets/dekuCustomUI.prefab
 - Assets/Deku/DekuV2/GUI/Floatactivate.png
 - Assets/Deku/DekuV2/GUI/Quirks.png
+- Assets/Deku/DekuV2/Animations/FinalSmashSmash.anim
 - Assets/Deku/DekuV2/Animations/Floating.anim
 - Assets/Deku/DekuV2/VFX/windbullet.prefab
 - Assets/Deku/DekuV2/Animations/DekuRightArmMask.mask

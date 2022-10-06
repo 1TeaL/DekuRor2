@@ -129,6 +129,7 @@ namespace DekuMod
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
             On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
             //On.RoR2.HealthComponent.Awake += HealthComponent_Awake;
             if (Chainloader.PluginInfos.ContainsKey("com.weliveinasociety.CustomEmotesAPI"))
             {
@@ -163,6 +164,28 @@ namespace DekuMod
 
         //    //orig.Invoke(healthComponent);
         //}
+
+        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim)
+        {
+            var attacker = damageInfo.attacker;
+            if (attacker)
+            {
+                var body = attacker.GetComponent<CharacterBody>();
+                var victimBody = victim.GetComponent<CharacterBody>();
+                if (body && victimBody)
+                {
+                    if (body && victimBody)
+                    {
+                        //heal mark
+                        if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.Shock5s)
+                        {
+                            victimBody.ApplyBuff(Modules.Buffs.WetLightningDebuff.buffIndex, 1, 1);
+                        }
+                        
+                    }
+                }
+            }
+        }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {

@@ -37,6 +37,10 @@ namespace DekuMod.Modules
         //debuffs
         internal static BuffDef delayAttackDebuff;
 
+        //marks
+        internal static BuffDef healMark;
+        internal static BuffDef armorMark;
+
         internal static void RegisterBuffs()
         {
             oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", Assets.shieldBuffIcon, Color.green, false, false);

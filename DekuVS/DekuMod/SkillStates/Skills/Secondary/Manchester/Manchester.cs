@@ -19,7 +19,7 @@ namespace DekuMod.SkillStates
         //private GameObject effectPrefab = Modules.Assets.sEffect;
 
         public static float blastRadius = 6f;
-        public float distance = 3f;
+        public float distance = 7f;
         public float maxWeight;
         public float force = 50f;
         private float duration;
@@ -56,6 +56,7 @@ namespace DekuMod.SkillStates
 
             //move up a little
             base.characterMotor.velocity += Vector3.up * distance;
+            base.characterMotor.Motor.ForceUnground();
             //get weight, blast attack after
             GetMaxWeight();
 
@@ -94,10 +95,6 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            if(base.fixedAge < fireTime)
-            {
-                base.characterMotor.velocity.y = 0f;
-            }
 
             if (base.fixedAge >= fireTime && base.isAuthority && !hasFired)
             {
