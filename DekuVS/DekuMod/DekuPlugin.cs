@@ -179,9 +179,29 @@ namespace DekuMod
                         //heal mark
                         if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.Shock5s)
                         {
-                            victimBody.ApplyBuff(Modules.Buffs.WetLightningDebuff.buffIndex, 1, 1);
+                            victimBody.ApplyBuff(Modules.Buffs.healMark.buffIndex, 1, -1);
                         }
-                        
+                        //armor mark
+                        if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.Stun1s)
+                        {
+                            victimBody.ApplyBuff(Modules.Buffs.armorMark.buffIndex, 1, -1);
+                        }
+
+                        if (victimBody.HasBuff(Buffs.healMark.buffIndex))
+                        {
+                            int buffCount = victimBody.GetBuffCount(Buffs.healMark.buffIndex);
+                            if(buffCount < 3)
+                            {
+                                victimBody.ApplyBuff(Buffs.healMark.buffIndex, buffCount + 1);
+                            }
+                            else if (buffCount >= 3)
+                            {
+                                body.healthComponent.Heal(damageInfo.damage * 0.1f, default(ProcChainMask), true);
+                            }
+
+                            
+                        }
+
                     }
                 }
             }

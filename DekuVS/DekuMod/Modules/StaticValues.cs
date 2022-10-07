@@ -9,7 +9,11 @@ namespace DekuMod.Modules
              + "< ! > Detroit smash is a chargeable punch that lunges you forward; when powered up turns it into St. Louis Smash, granting larger AOE." + Environment.NewLine + Environment.NewLine
              + "< ! > Blackwhip allows him to move through the environment and grapple on to enemies; when powered up lets him pull multiple enemies towards him." + Environment.NewLine + Environment.NewLine
              + "< ! > One for All 100% enables Deku to use one powered up skill at cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
-        
+        //Passive
+        internal static float healMarkCoefficient = 0.1f;
+        internal static float armorMarkCoefficient = 0.1f;
+
+
         //Energy
         internal static float maxPlusUltra = 100f;
         internal static float regenPlusUltraRate = 8f;
