@@ -27,6 +27,11 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
+
+        }
+
+        protected override void DoSkill()
+        {
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
 
@@ -84,7 +89,6 @@ namespace DekuMod.SkillStates
             //EffectManager.SpawnEffect(this.effectPrefab, effectData, false);
 
         }
-
         public void GetMaxWeight()
         {
             Ray aimRay = base.GetAimRay();

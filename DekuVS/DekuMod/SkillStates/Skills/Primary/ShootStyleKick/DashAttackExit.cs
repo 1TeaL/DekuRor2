@@ -21,10 +21,12 @@ namespace DekuMod.SkillStates
             if (swingIndex == 2)
             {
                 this.bonusForce = new Vector3(10f, 1000f, 0f);
+                this.damageType = DamageType.Shock5s;
             }
             else if (swingIndex < 2)
             {
                 this.bonusForce = new Vector3(10f, -300f, 0f);
+                this.damageType = DamageType.Generic;
             }
             this.baseDuration = 1f;
             this.attackStartTime = 0.2f;

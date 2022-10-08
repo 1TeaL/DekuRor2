@@ -15,11 +15,11 @@
 						<ObjectRef Name="blackwhipvoice" ID="{1B6CFFCE-B123-448E-9E4E-B3F9402262F3}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="ofasfx" ID="{139B654F-C39F-4552-B7D5-AC05E60A9AC0}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="ofavoice" ID="{9C7468A3-FEED-48F5-8577-652C0D42478C}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="death" ID="{60F36010-2A10-49D8-AED9-ECA45F5F71DD}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="dekudeath" ID="{60F36010-2A10-49D8-AED9-ECA45F5F71DD}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="blackwhipsfx" ID="{3B48BBB0-768E-4A5E-ACB1-810887B42A10}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="detroitexitsfx" ID="{5BBBA23D-8B9E-4AA5-A258-55E286C6F3B2}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="detroitchargesfxvoice" ID="{F702D838-287B-4B12-A453-60F73572B83D}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="Entrance" ID="{1E8A360D-D364-4B45-8DFA-CAF3A2F1D66A}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="dekuEntrance" ID="{1E8A360D-D364-4B45-8DFA-CAF3A2F1D66A}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="gobeyondost" ID="{6BBC6B42-FDCD-4B5F-ADB5-FBAFE32661CD}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="shootstyedashcomboimpact" ID="{31AA75C3-850A-4B82-B27C-E54C2D40AB99}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="stlouisvoice" ID="{9B643E81-0966-4CF9-B539-FBB2B724AA0B}" WorkUnitID="{208D4B7F-2C4F-468E-BE46-FF447DC649C0}" Origin="Manual" Filter="7"/>

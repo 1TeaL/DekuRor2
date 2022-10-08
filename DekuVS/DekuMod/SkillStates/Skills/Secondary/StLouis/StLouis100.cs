@@ -42,6 +42,10 @@ namespace DekuMod.SkillStates
             this.duration = this.baseDuration / attackSpeedStat;
             fireTime = duration / 2f;
             maxDistance = baseDistance * moveSpeedStat;
+            if(maxDistance > 100f)
+            {
+                maxDistance = 100f;
+            }
             hasFired = false;
             theSpot = base.transform.position;
             AkSoundEngine.PostEvent(3709822086, this.gameObject);
@@ -75,7 +79,7 @@ namespace DekuMod.SkillStates
             blastAttack.radius = blastRadius * moveSpeedStat;
             blastAttack.procCoefficient = 1f;
             blastAttack.position = theSpot;
-            blastAttack.damageType = DamageType.Stun1s;
+            blastAttack.damageType = DamageType.Generic;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
             blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis100DamageCoefficient;

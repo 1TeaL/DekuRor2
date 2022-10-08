@@ -177,6 +177,8 @@ namespace DekuMod.Modules.Survivors
             }
 
             //Chat.AddMessage($"{currentPlusUltra}/{maxPlusUltra}");
+            //particles
+
         }
 
         public void FixedUpdate()

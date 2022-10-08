@@ -36,8 +36,9 @@ namespace DekuMod.Modules.Networking
 		private float maxWeight;
 
 		public float FOV = 20f;
+        private float blastRadius = 20f;
 
-		public override void OnEnter()
+        public override void OnEnter()
         {
             base.OnEnter();
             stopwatch = 0f;
@@ -68,7 +69,7 @@ namespace DekuMod.Modules.Networking
 			GetMaxWeight();
 
 			blastAttack = new BlastAttack();
-			blastAttack.radius = 20f;
+			blastAttack.radius = blastRadius;
 			blastAttack.procCoefficient = 1f;
 			blastAttack.position = base.transform.position;
 			blastAttack.damageType = DamageType.Stun1s;
@@ -279,7 +280,7 @@ namespace DekuMod.Modules.Networking
 				searchOrigin = base.transform.position,
 				searchDirection = UnityEngine.Random.onUnitSphere,
 				sortMode = BullseyeSearch.SortMode.Distance,
-				maxDistanceFilter = 20f,
+				maxDistanceFilter = blastRadius,
 				maxAngleFilter = 360f
 			};
 
@@ -321,7 +322,6 @@ namespace DekuMod.Modules.Networking
 
 			base.characterBody.inputBank.enabled = true;
 			blastAttack.Fire();
-			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
 
 
 			if (base.GetAimAnimator()) base.GetAimAnimator().enabled = true;
@@ -334,11 +334,15 @@ namespace DekuMod.Modules.Networking
 				base.characterBody.ApplyBuff(Modules.Buffs.goBeyondBuff.buffIndex, 1, Modules.StaticValues.goBeyondBuffDuration);
 			}
 
+			EffectManager.SpawnEffect(Modules.Assets.gobeyondPulseEffect, new EffectData
+			{
+				origin = base.transform.position,
+				scale = blastRadius,
+				rotation = Quaternion.LookRotation(Vector3.up)
+			}, true);
+
+
 			dekucon.GOBEYOND.Play();
-			dekucon.RARM.Play();
-			dekucon.LARM.Play();
-			dekucon.RLEG.Play();
-			dekucon.LLEG.Play();
 
 			extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, Deku.goBeyondSkillDef1, GenericSkill.SkillOverridePriority.Contextual);
 			extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, Deku.goBeyondSkillDef2, GenericSkill.SkillOverridePriority.Contextual);
@@ -364,7 +368,6 @@ namespace DekuMod.Modules.Networking
 		public override void FixedUpdate()
         {
             base.FixedUpdate();
-			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 90f, base.fixedAge / duration);
 
 			if (base.fixedAge > duration && base.isAuthority)
 			{

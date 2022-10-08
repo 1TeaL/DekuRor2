@@ -16,7 +16,7 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="1943384016" Language="SFX" Hash="4270928735">
+		<SoundBank Id="1943384016" Language="SFX" Hash="1615666874">
 			<ObjectPath>\SoundBanks\Default Work Unit\Deku</ObjectPath>
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
@@ -65,7 +65,7 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="779278001" Name="death" ObjectPath="\Events\Default Work Unit\death">
+				<Event Id="4073174054" Name="dekudeath" ObjectPath="\Events\Default Work Unit\dekudeath">
 					<IncludedMemoryFiles>
 						<File Id="78216023" Language="SFX">
 							<ShortName>Death\VoPl01_00000099.wav</ShortName>
@@ -102,6 +102,46 @@
 						<File Id="1005886961" Language="SFX">
 							<ShortName>Death\VoPl01_0000009A.wav</ShortName>
 							<Path>SFX\Death\VoPl01_0000009A_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2145546858" Name="dekuEntrance" ObjectPath="\Events\Default Work Unit\dekuEntrance">
+					<IncludedMemoryFiles>
+						<File Id="66608882" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E7.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E7_0D5756A9.wem</Path>
+						</File>
+						<File Id="310105775" Language="SFX">
+							<ShortName>Entrance\VoPl01_0000010F.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_0000010F_0D5756A9.wem</Path>
+						</File>
+						<File Id="355347321" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000F5.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000F5_0D5756A9.wem</Path>
+						</File>
+						<File Id="487520420" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E6.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E6_0D5756A9.wem</Path>
+						</File>
+						<File Id="612985191" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000FD.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000FD_0D5756A9.wem</Path>
+						</File>
+						<File Id="810254431" Language="SFX">
+							<ShortName>Entrance\dekudesu.wav</ShortName>
+							<Path>SFX\Entrance\dekudesu_0D5756A9.wem</Path>
+						</File>
+						<File Id="906836170" Language="SFX">
+							<ShortName>Entrance\VoPl01_AgencyEvent_00000000.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_AgencyEvent_00000000_0D5756A9.wem</Path>
+						</File>
+						<File Id="911964384" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000EF.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000EF_0D5756A9.wem</Path>
+						</File>
+						<File Id="1004362541" Language="SFX">
+							<ShortName>Entrance\VoPl01_000000E8.wav</ShortName>
+							<Path>SFX\Entrance\VoPl01_000000E8_0D5756A9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -197,46 +237,6 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="2656882895" Name="Entrance" ObjectPath="\Events\Default Work Unit\Entrance">
-					<IncludedMemoryFiles>
-						<File Id="66608882" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000E7.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000E7_0D5756A9.wem</Path>
-						</File>
-						<File Id="310105775" Language="SFX">
-							<ShortName>Entrance\VoPl01_0000010F.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_0000010F_0D5756A9.wem</Path>
-						</File>
-						<File Id="355347321" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000F5.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000F5_0D5756A9.wem</Path>
-						</File>
-						<File Id="487520420" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000E6.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000E6_0D5756A9.wem</Path>
-						</File>
-						<File Id="612985191" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000FD.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000FD_0D5756A9.wem</Path>
-						</File>
-						<File Id="810254431" Language="SFX">
-							<ShortName>Entrance\dekudesu.wav</ShortName>
-							<Path>SFX\Entrance\dekudesu_0D5756A9.wem</Path>
-						</File>
-						<File Id="906836170" Language="SFX">
-							<ShortName>Entrance\VoPl01_AgencyEvent_00000000.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_AgencyEvent_00000000_0D5756A9.wem</Path>
-						</File>
-						<File Id="911964384" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000EF.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000EF_0D5756A9.wem</Path>
-						</File>
-						<File Id="1004362541" Language="SFX">
-							<ShortName>Entrance\VoPl01_000000E8.wav</ShortName>
-							<Path>SFX\Entrance\VoPl01_000000E8_0D5756A9.wem</Path>
-						</File>
-					</IncludedMemoryFiles>
-				</Event>
 				<Event Id="2586644684" Name="finalsmashsfxvoice" ObjectPath="\Events\Default Work Unit\finalsmashsfxvoice">
 					<IncludedMemoryFiles>
 						<File Id="944265988" Language="SFX">
@@ -254,6 +254,10 @@
 						<File Id="653751196" Language="SFX">
 							<ShortName>jetsetrunShort.wav</ShortName>
 							<Path>SFX\jetsetrunShort_3F75BDB9.wem</Path>
+						</File>
+						<File Id="656494371" Language="SFX">
+							<ShortName>My Hero Academia OST - You Say Run.wav</ShortName>
+							<Path>SFX\My Hero Academia OST - You Say Run_3F75BDB9.wem</Path>
 						</File>
 						<File Id="724948110" Language="SFX">
 							<ShortName>yousayrunShort.wav</ShortName>
@@ -287,9 +291,9 @@
 				</Event>
 				<Event Id="876996991" Name="manchester" ObjectPath="\Events\Default Work Unit\manchester">
 					<IncludedMemoryFiles>
-						<File Id="202331745" Language="SFX">
-							<ShortName>manchester[rebalanced].wav</ShortName>
-							<Path>SFX\manchester[rebalanced]_3F75BDB9.wem</Path>
+						<File Id="267946191" Language="SFX">
+							<ShortName>manchesterDone.wav</ShortName>
+							<Path>SFX\manchesterDone_3F75BDB9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

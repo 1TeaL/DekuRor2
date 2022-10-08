@@ -12,28 +12,11 @@ namespace DekuMod.SkillStates
 		public DekuController dekucon;
 		public EnergySystem energySystem;
 
-        public override void OnEnter()
+		public override void OnEnter()
 		{
 			base.OnEnter();
 			dekucon = base.GetComponent<DekuController>();
 			energySystem = base.GetComponent<EnergySystem>();
-			if(energySystem.currentPlusUltra > Modules.StaticValues.specialPlusUltraSpend)
-			{
-				DoSkill();
-				energySystem.SpendPlusUltra(Modules.StaticValues.specialPlusUltraSpend);
-            }
-            else
-			{
-				energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
-				this.outer.SetNextStateToMain();
-			}
-
-
-		}
-
-		protected virtual void DoSkill()
-		{
-
 		}
 
 		public override void FixedUpdate()

@@ -38,6 +38,11 @@ namespace DekuMod.SkillStates
 
         }
 
+        protected override void DontDoSkill()
+        {
+            base.DontDoSkill();
+            skillLocator.secondary.AddOneStock();
+        }
         public override void OnExit()
         {
             base.OnExit();

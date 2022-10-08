@@ -29,6 +29,11 @@ namespace DekuMod.SkillStates
             base.OnEnter();
 
 
+        }
+
+        protected override void DoSkill()
+        {
+
             hasFired = false;
 
             duration = chargeTime + castTime;
@@ -41,9 +46,7 @@ namespace DekuMod.SkillStates
 
             //animate blackwhip full
             //base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", duration);
-
         }
-
 
         public override void OnExit()
         {

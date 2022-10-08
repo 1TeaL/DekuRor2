@@ -185,7 +185,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Entrance" ID="{1E8A360D-D364-4B45-8DFA-CAF3A2F1D66A}">
+				<Event Name="dekuEntrance" ID="{1E8A360D-D364-4B45-8DFA-CAF3A2F1D66A}">
 					<ChildrenList>
 						<Action Name="" ID="{C2E0B3A6-8CC2-42BA-B647-38F293418C87}" ShortID="407856813">
 							<PropertyList>
@@ -199,7 +199,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="death" ID="{60F36010-2A10-49D8-AED9-ECA45F5F71DD}">
+				<Event Name="dekudeath" ID="{60F36010-2A10-49D8-AED9-ECA45F5F71DD}">
 					<ChildrenList>
 						<Action Name="" ID="{442C046A-E88E-4A26-BF95-D6FDC11BC66F}" ShortID="698167104">
 							<PropertyList>
@@ -341,13 +341,13 @@
 				</Event>
 				<Event Name="manchester" ID="{6501562B-C4C3-4D8A-BD07-839D3ABADB32}">
 					<ChildrenList>
-						<Action Name="" ID="{60C2D2C3-9A5A-4C27-86BD-3776960D8178}" ShortID="40459964">
+						<Action Name="" ID="{C086B477-B1C6-40A0-8BA2-4294A4D4A316}" ShortID="1044577016">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="manchester[rebalanced]" ID="{41CC915E-7D04-45FE-B2E1-262E64141815}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+									<ObjectRef Name="manchestersfx+voice" ID="{D8CF788B-741E-499E-9AE5-5977895D6D7D}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

@@ -61,6 +61,8 @@ namespace DekuMod.SkillStates
             this.attack.isCrit = base.RollCrit();
             this.attack.pushAwayForce = pushForce * 0.2f;
             //Util.PlaySound("Misc_StartDash", base.gameObject);
+            base.GetModelAnimator().SetBool("attacking", true);
+            base.GetModelAnimator().SetFloat("Slash.playbackRate", base.attackSpeedStat);
             base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
         
 
@@ -125,6 +127,7 @@ namespace DekuMod.SkillStates
             base.OnExit();
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
             base.characterMotor.velocity *= 0.1f;
+            base.GetModelAnimator().SetBool("attacking", false);
             base.PlayAnimation("Fullbody, Override", "BufferEmpty");
         }
         public override InterruptPriority GetMinimumInterruptPriority()

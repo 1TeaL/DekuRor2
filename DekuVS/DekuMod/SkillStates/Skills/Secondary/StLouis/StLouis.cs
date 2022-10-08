@@ -41,6 +41,8 @@ namespace DekuMod.SkillStates
             hasFired = false;
             hasTeleported = false;
 
+            dekucon = base.GetComponent<DekuController>();
+            energySystem = base.GetComponent<EnergySystem>();
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             if (dekucon && base.isAuthority)
             {
@@ -52,11 +54,6 @@ namespace DekuMod.SkillStates
                 return;
             }
 
-            if (base.isAuthority)
-            {
-                AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
-            }
-            AkSoundEngine.PostEvent("stlouissfx", this.gameObject);
 
         }
 
@@ -80,6 +77,11 @@ namespace DekuMod.SkillStates
                     base.characterMotor.Motor.SetPositionAndRotation(Target.healthComponent.body.transform.position + Vector3.up, Target.healthComponent.body.transform.rotation, true);
                     //new PerformDetroitTeleportNetworkRequest(base.characterBody.masterObjectId, Target.gameObject).Send(NetworkDestination.Clients);
 
+                    if (base.isAuthority)
+                    {
+                        AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
+                    }
+                    AkSoundEngine.PostEvent("stlouissfx", this.gameObject);
                 }
 
                 if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)

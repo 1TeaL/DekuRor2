@@ -18,24 +18,27 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
 
+
+        }
+
+        protected override void DoSkill()
+        {
             bool active = NetworkServer.active;
             if (active)
             {
                 base.characterBody.AddTimedBuffAuthority(Modules.Buffs.dangersenseBuff.buffIndex, Modules.StaticValues.dangersense45BuffTimer);
 
             }
-
         }
-
+        protected override void DontDoSkill()
+        {
+            base.DontDoSkill();
+            skillLocator.secondary.AddOneStock();
+        }
 
         public override void OnExit()
         {
             base.OnExit();
-            bool active = NetworkServer.active;
-            if (active && base.characterBody.HasBuff(Modules.Buffs.dangersenseBuff))
-            {
-                base.characterBody.RemoveBuff(Modules.Buffs.dangersenseBuff);
-            }
         }
 
         public override void FixedUpdate()
@@ -52,7 +55,7 @@ namespace DekuMod.SkillStates
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Frozen;
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

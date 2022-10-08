@@ -71,7 +71,7 @@ namespace DekuMod.SkillStates
             {
                 this.maxDistance = this.hitDis;
             }
-            this.damageMult = Modules.StaticValues.detroit100DamageCoefficient + 2f * (this.chargePercent * Modules.StaticValues.detroit100DamageCoefficient);
+            this.damageMult = Modules.StaticValues.detroit45DamageCoefficient + 2f * (this.chargePercent * Modules.StaticValues.detroit45DamageCoefficient);
             this.radius = (this.baseRadius * this.damageMult + 10f) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
             this.areaIndicator.transform.localScale = Vector3.one * this.radius;

@@ -11,7 +11,7 @@ namespace DekuMod.Modules
              + "< ! > One for All 100% enables Deku to use one powered up skill at cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
         //Passive
         internal static float healMarkCoefficient = 0.1f;
-        internal static float armorMarkCoefficient = 0.1f;
+        internal static float barrierMarkCoefficient = 0.1f;
 
 
         //Energy
@@ -67,8 +67,8 @@ namespace DekuMod.Modules
         internal const float dangersense45DamageCoefficient = 2f;
         internal const float dangersense100DamageCoefficient = 4f;
         internal const float dangersense100HealthCostFraction = 0.5f;
-        internal const int dangersenseBuffTimer = 6;
-        internal const int dangersense45BuffTimer = 6;
+        internal const int dangersenseBuffTimer = 8;
+        internal const int dangersense45BuffTimer = 8;
         internal const int dangersense100BuffTimer = 8;
         //Secondary damage
         internal const float blackwhipshootDamageCoefficient = 4f;
@@ -106,8 +106,8 @@ namespace DekuMod.Modules
 
         //Special
         //fist
-        internal const float detroitdelawareDamageCoefficient = 20f;
-        internal const float detroitdelawareRange = 50f;
+        internal const float detroitdelawareDamageCoefficient = 10f;
+        internal const float detroitdelawareRange = 30f;
         //leg
         internal const float finalsmashDamageCoefficient = 2f;
         internal const float finalsmashSmashDamageCoefficient = 10f;
@@ -122,11 +122,11 @@ namespace DekuMod.Modules
         internal const float floatForceEnergyFraction = 0.01f;
         internal const float floatSpeed = 1f;
         internal const float blackwhipPull = 8f;
+        internal const float fajinDamageMultiplier = 1.5f;
 
         internal const int fajinMaxStack = 200;
         internal const int kickMaxStack= 4;
         internal const int fajinMaxPower = 50;
-        internal const float fajinMaxMultiplier = 2f;
         internal const float floatDuration = 10f;
 
 

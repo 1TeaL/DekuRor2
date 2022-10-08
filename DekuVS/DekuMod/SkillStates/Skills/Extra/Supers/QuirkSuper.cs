@@ -16,19 +16,32 @@ namespace DekuMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			
-		}
 
-		protected override void DoSkill()
-		{
-
-			bool active = NetworkServer.active;
-			if (active)
+			if (energySystem.currentPlusUltra > Modules.StaticValues.specialPlusUltraSpend)
 			{
-				base.characterBody.AddTimedBuffAuthority(Modules.Buffs.fajinBuff.buffIndex, Modules.StaticValues.fajinDuration);
+				energySystem.SpendPlusUltra(Modules.StaticValues.specialPlusUltraSpend);
+
+				bool active = NetworkServer.active;
+				if (active)
+				{
+					base.characterBody.AddTimedBuffAuthority(Modules.Buffs.fajinBuff.buffIndex, Modules.StaticValues.fajinDuration);
+				}
+			}
+			else
+			{
+				if (base.isAuthority)
+				{
+					Chat.AddMessage($"You need {Modules.StaticValues.specialPlusUltraSpend} plus ultra.");
+					energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
+					this.outer.SetNextStateToMain();
+					return;
+
+				}
 			}
 
-		}
+
+		}	
+
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();

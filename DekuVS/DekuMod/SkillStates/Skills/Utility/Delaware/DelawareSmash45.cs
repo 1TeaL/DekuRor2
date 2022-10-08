@@ -25,8 +25,8 @@ namespace DekuMod.SkillStates
             if (base.isAuthority)
             {
                 AkSoundEngine.PostEvent("delawarevoice", this.gameObject);
-                AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
             }
+            AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
             base.StartAimMode(0.6f, true);
 
             base.characterMotor.disableAirControlUntilCollision = false;

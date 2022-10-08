@@ -78,10 +78,7 @@ namespace DekuMod.SkillStates
                 if (base.fixedAge > this.fireTime && !hasFired && base.isAuthority)
                 {
                     energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
-                    if (base.isAuthority)
-                    {
-                        AkSoundEngine.PostEvent("detroitexitsfx", this.gameObject);
-                    }
+                    
 
                     if (!hasTeleported)
                     {
@@ -89,7 +86,11 @@ namespace DekuMod.SkillStates
                         base.characterMotor.velocity = Vector3.zero;
                         base.characterMotor.Motor.SetPositionAndRotation(Target.healthComponent.body.transform.position + Vector3.up, Target.healthComponent.body.transform.rotation, true);
                         //new PerformDetroitTeleportNetworkRequest(base.characterBody.masterObjectId, Target.gameObject).Send(NetworkDestination.Clients);
-
+                        if (base.isAuthority)
+                        {
+                            AkSoundEngine.PostEvent("detroitexitvoice", this.gameObject);
+                        }
+                        AkSoundEngine.PostEvent("detroitexitsfx", this.gameObject);
                     }
 
                     hasFired = true;

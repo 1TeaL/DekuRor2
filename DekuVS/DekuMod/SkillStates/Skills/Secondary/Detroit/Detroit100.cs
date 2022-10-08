@@ -19,7 +19,7 @@ namespace DekuMod.SkillStates
 {
     public class Detroit100 : BaseSkill100
     {
-		private DamageType damageType;
+		private DamageType damageType = DamageType.Stun1s;
 		private Vector3 idealDirection;
 
 		private float baseFireTime = 0.2f;
@@ -47,7 +47,6 @@ namespace DekuMod.SkillStates
 			totalDuration = 0f;
 			fireTime = baseFireTime / attackSpeedStat;
 
-			damageType = DamageType.Stun1s;
 			bool isAuthority = base.isAuthority;
 			Util.PlaySound(BaseChargeFist.startChargeLoopSFXString, base.gameObject);
 			this.animator = base.GetModelAnimator();
@@ -106,7 +105,7 @@ namespace DekuMod.SkillStates
 
         private Vector3 GetIdealVelocity()
 		{
-			return idealDirection * base.characterBody.moveSpeed * 8.25f;
+			return idealDirection * base.characterBody.moveSpeed * 3f;
 		}
 
 		public override void OnExit()
@@ -224,7 +223,7 @@ namespace DekuMod.SkillStates
 
 					Util.PlaySound(EntityStates.Bison.Headbutt.attackSoundString, base.gameObject);
 
-					AkSoundEngine.PostEvent(4108468048, base.gameObject);
+					AkSoundEngine.PostEvent("detroitexitsfx", base.gameObject);
 
 
 					if (blastAttack.Fire().hitCount > 0)

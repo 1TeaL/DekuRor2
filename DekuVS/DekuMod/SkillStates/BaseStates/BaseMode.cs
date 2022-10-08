@@ -36,8 +36,13 @@ namespace DekuMod.SkillStates
 		}
 		protected virtual void DontDoSkill()
 		{
-			energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
-			this.outer.SetNextStateToMain();
+            if (base.isAuthority)
+			{
+				Chat.AddMessage($"You need {Modules.StaticValues.modePlusUltraSpend} plus ultra.");
+				energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
+				this.outer.SetNextStateToMain();
+				return;
+			}
 		}
 		public override void FixedUpdate()
 		{

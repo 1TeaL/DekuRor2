@@ -26,10 +26,6 @@ namespace DekuMod.SkillStates
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("FullBody, Override", "DelawareSmashBaseCharge", "Attack.playbackRate", duration, 0.01f);
 
-            if (base.isAuthority)
-            {
-                AkSoundEngine.PostEvent("delawarevoice", this.gameObject);
-            }
 
             //PlayAnimation("RightArm, Override", "RightArmOut", "Attack.playbackRate", 1f);
             if (this.crosshairOverridePrefab)

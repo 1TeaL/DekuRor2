@@ -87,7 +87,7 @@ namespace DekuMod.Modules.Networking
                 damage = dekucharBody.damage * Modules.StaticValues.detroitDamageCoefficient,
                 position = enemycharBody.transform.position,
                 procCoefficient = 1f,
-                damageType = DamageType.Stun1s,
+                damageType = DamageType.Shock5s,
                 crit = dekucharBody.RollCrit(),
 
             };

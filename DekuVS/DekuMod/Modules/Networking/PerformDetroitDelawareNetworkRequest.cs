@@ -80,7 +80,7 @@ namespace DekuMod.Modules.Networking
             {
                 foreach (HurtBox singularTarget in trackingTargets)
                 {
-                    singularTarget.healthComponent.body.characterMotor.Motor.SetPositionAndRotation(charBody.transform.position + charBody.characterDirection.forward * 2f,
+                    singularTarget.healthComponent.body.characterMotor.Motor.SetPositionAndRotation(charBody.transform.position + charBody.characterDirection.forward * 5f,
                         Util.QuaternionSafeLookRotation(charBody.characterDirection.forward), true);
 
                     DamageInfo damageInfo = new DamageInfo
@@ -98,7 +98,7 @@ namespace DekuMod.Modules.Networking
                     GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
 
 
-                    EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
+                    EffectManager.SpawnEffect(Modules.Assets.dekuHitImpactEffect, new EffectData
                     {
                         origin = singularTarget.transform.position,
                         scale = 1f,

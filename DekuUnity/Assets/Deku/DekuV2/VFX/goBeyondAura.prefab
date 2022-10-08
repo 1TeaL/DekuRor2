@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7009960547624336041}
   - component: {fileID: 6114681085642405551}
   m_Layer: 0
-  m_Name: goBeyondAura 1 1
+  m_Name: goBeyondAura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

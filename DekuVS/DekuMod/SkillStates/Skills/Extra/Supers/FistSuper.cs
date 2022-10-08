@@ -9,6 +9,7 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using EntityStates.Merc;
 
 namespace DekuMod.SkillStates
 {
@@ -25,64 +26,86 @@ namespace DekuMod.SkillStates
 
 		private BlastAttack blastAttack;
 		public Vector3 theSpot;
-		public Vector3 theDirection;
         private float maxWeight;
         private float timer;
 
 		private bool animChange;
+		private string muzzleString;
+		private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
 
 		public override void OnEnter()
 		{
 			base.OnEnter();
-
-
-		}
-		protected override void DoSkill()
-		{
-			this.duration = baseDuration;
-			exitDuration = duration - fireTime;
-			blastRadius = baseBlastRadius * attackSpeedStat;
-			animChange = false;
-
-			Ray aimRay = base.GetAimRay();
-			base.StartAimMode(0.5f + this.duration, false);
-			theSpot = aimRay.origin + blastRadius * aimRay.direction;
-
-			bool active = NetworkServer.active;
-			if (active)
+			dekucon = base.GetComponent<DekuController>();
+			energySystem = base.GetComponent<EnergySystem>();
+			if (energySystem.currentPlusUltra > Modules.StaticValues.specialPlusUltraSpend)
 			{
-				base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+				energySystem.SpendPlusUltra(Modules.StaticValues.specialPlusUltraSpend);
+				this.duration = baseDuration;
+				exitDuration = duration - fireTime;
+				blastRadius = baseBlastRadius * attackSpeedStat;
+				animChange = false;
+
+				Ray aimRay = base.GetAimRay();
+				base.StartAimMode(0.5f + this.duration, false);
+				theSpot = baseBlastRadius * aimRay.direction;
+
+
+				if (NetworkServer.active)
+				{
+					base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
+				}
+				//intial pull
+				if (base.isAuthority)
+				{
+					new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
+						base.transform.position,
+						base.GetAimRay().direction,
+						Modules.StaticValues.detroitdelawareDamageCoefficient).Send(NetworkDestination.Clients);
+
+					this.muzzleString = "RFinger";
+					EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
+					EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
+
+					//blast attack
+					blastAttack = new BlastAttack();
+					blastAttack.radius = blastRadius;
+					blastAttack.procCoefficient = 1f;
+					blastAttack.position = theSpot;
+					blastAttack.attacker = base.gameObject;
+					blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+					blastAttack.baseDamage = damageStat * Modules.StaticValues.detroitdelawareDamageCoefficient;
+					blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+					blastAttack.baseForce = maxWeight * 10f;
+					blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+					blastAttack.damageType = DamageType.Freeze2s;
+					blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+					EffectManager.SpawnEffect(Modules.Projectiles.delawareTracer, new EffectData
+					{
+						origin = theSpot,
+						scale = 1f,
+						rotation = Quaternion.LookRotation(GetAimRay().direction)
+					}, true);
+
+					base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
+					PlayCrossfade("FullBody, Override", "DetroitDelawareFull", "Attack.playbackRate", fireTime, 0.01f);
+
+					AkSoundEngine.PostEvent("delawaredetroitvoice", this.gameObject);
+					
+				}
+
 			}
-			//intial pull
-			if (base.isAuthority)
+			else
 			{
-				new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
-					theSpot,
-					base.GetAimRay().direction,
-					Modules.StaticValues.detroitdelawareDamageCoefficient).Send(NetworkDestination.Clients);
-			}
+                if (base.isAuthority)
+				{
+					Chat.AddMessage($"You need {Modules.StaticValues.specialPlusUltraSpend} plus ultra.");
+					energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
+					this.outer.SetNextStateToMain();
+					return;
 
-			theDirection = aimRay.direction;
-			//blast attack
-			blastAttack = new BlastAttack();
-			blastAttack.radius = blastRadius;
-			blastAttack.procCoefficient = 1f;
-			blastAttack.position = theSpot;
-			blastAttack.attacker = base.gameObject;
-			blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-			blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.detroitdelawareDamageCoefficient;
-			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-			blastAttack.baseForce = maxWeight * 20f;
-			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-			blastAttack.damageType = DamageType.Freeze2s;
-			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
-
-			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-			PlayCrossfade("FullBody, Override", "DetroitDelawareFull", "Attack.playbackRate", fireTime, 0.01f);
-
-            if (base.isAuthority)
-			{
-				AkSoundEngine.PostEvent("delawaredetroitvoice", this.gameObject);
+				}
 			}
 
 		}
@@ -141,35 +164,37 @@ namespace DekuMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			//if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(FOV, 60f, base.fixedAge / duration);
+
 
 			if (base.fixedAge > fireTime)
 			{
-                if (base.isAuthority && timer > 0.2f)
+				if (base.isAuthority && timer > 0.2f)
 				{
 					timer = 0f;
 					new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
-						theSpot,
-						theDirection,
+						base.transform.position,
+						base.GetAimRay().direction,
 						0f).Send(NetworkDestination.Clients);
 				}
-                else
-                {
+				else
+				{
 					timer += Time.fixedDeltaTime;
 				}
-				//if (!animChange)
-				//{
-				//	animChange = true;
-				//	PlayCrossfade("FullBody, Override", "DetroitDelawareDetroit", "Attack.playbackRate", exitDuration - fireTime, 0.01f);
-				//}
-			}
-			//if(base.fixedAge > exitDuration && animChange)
-			//{
-			//	animChange = false;
-			//	PlayCrossfade("FullBody, Override", "DetroitDelawareSmash", "Attack.playbackRate", fireTime, 0.01f);
-			//}
 
-			if(base.fixedAge > duration)
+			}
+            if (base.fixedAge > exitDuration && !animChange && base.isAuthority)
+			{
+				animChange = true;
+				AkSoundEngine.PostEvent("shootstyedashcomboimpact", this.gameObject);
+				EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
+				{
+					origin = theSpot,
+					scale = blastRadius,
+					rotation = Quaternion.LookRotation(GetAimRay().direction)
+				}, true);
+			}
+
+            if (base.fixedAge > duration && base.isAuthority)
 			{
 				if (blastAttack.Fire().hitCount > 0)
 				{
@@ -177,12 +202,6 @@ namespace DekuMod.SkillStates
 				}
 
 				EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
-				{
-					origin = theSpot,
-					scale = blastRadius,
-					rotation = Quaternion.LookRotation(GetAimRay().direction)
-				}, true);
-				EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
 				{
 					origin = theSpot,
 					scale = blastRadius,

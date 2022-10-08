@@ -91,6 +91,11 @@ namespace DekuMod.SkillStates
 
 		}
 
+		protected override void DontDoSkill()
+		{
+			base.DontDoSkill();
+			skillLocator.utility.AddOneStock();
+		}
 		public void GetMaxWeight()
 		{
 			Ray aimRay = base.GetAimRay();

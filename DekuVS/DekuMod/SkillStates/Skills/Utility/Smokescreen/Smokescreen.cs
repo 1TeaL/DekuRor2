@@ -26,33 +26,41 @@ namespace DekuMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
+        }
+
+		protected override void DoSkill()
+		{
 			hasFired = false;
 			dekucon = base.GetComponent<DekuController>();
 			Ray aimRay = base.GetAimRay();
 			theSpot = aimRay.origin + 0 * aimRay.direction;
-            bool active = NetworkServer.active;
-            if (active)
-            {
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreenDuration);
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreenDuration);
+			bool active = NetworkServer.active;
+			if (active)
+			{
+				base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreenDuration);
+				base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreenDuration);
 			}
 
 			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
 
-            if (base.isAuthority)
-            {
-                Vector3 effectPosition = base.characterBody.corePosition;
-                effectPosition.y = base.characterBody.corePosition.y;
-                EffectManager.SpawnEffect(this.smokeprefab, new EffectData
-                {
-                    origin = effectPosition,
-                    scale = radius,
-                    rotation = Quaternion.LookRotation(Vector3.up)
-                }, true);
+			if (base.isAuthority)
+			{
+				Vector3 effectPosition = base.characterBody.corePosition;
+				effectPosition.y = base.characterBody.corePosition.y;
+				EffectManager.SpawnEffect(this.smokeprefab, new EffectData
+				{
+					origin = effectPosition,
+					scale = radius,
+					rotation = Quaternion.LookRotation(Vector3.up)
+				}, true);
 
-            }
-        }
-
+			}
+		}
+		protected override void DontDoSkill()
+		{
+			base.DontDoSkill();
+			skillLocator.utility.AddOneStock();
+		}
 		public override void OnExit()
         {
 			Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);

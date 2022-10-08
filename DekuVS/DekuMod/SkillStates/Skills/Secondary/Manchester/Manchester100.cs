@@ -27,7 +27,7 @@ namespace DekuMod.SkillStates
         private GameObject slamIndicatorInstance;
         private Ray downRay;
 
-        protected DamageType damageType;
+        protected DamageType damageType = DamageType.Generic;
         private Vector3 theSpot;
 
         //private NemforcerGrabController grabController;
@@ -37,7 +37,6 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             this.modelTransform = base.GetModelTransform();
             this.flyVector = Vector3.up;
-            damageType = DamageType.Stun1s;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", 0.5f, 0.01f);

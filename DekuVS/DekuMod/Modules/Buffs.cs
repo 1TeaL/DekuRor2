@@ -39,7 +39,7 @@ namespace DekuMod.Modules
 
         //marks
         internal static BuffDef healMark;
-        internal static BuffDef armorMark;
+        internal static BuffDef barrierMark;
 
         internal static void RegisterBuffs()
         {
@@ -53,14 +53,14 @@ namespace DekuMod.Modules
             goBeyondBuff = Buffs.AddNewBuff("goBeyondBuff", Assets.healBuffIcon, Color.green, false, false);
             goBeyondBuffUsed = Buffs.AddNewBuff("goBeyondBuffUsed", Assets.healBuffIcon, Color.black, false, false);
 
-            fajinBuff = Buffs.AddNewBuff("FaJinBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, true, false);
+            fajinBuff = Buffs.AddNewBuff("FaJinBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, false, false);
             floatBuff = Buffs.AddNewBuff("DekuFloatBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Float"), Color.white, false, false);
             dangersenseBuff = Buffs.AddNewBuff("DangerSenseBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             dangersense45Buff = Buffs.AddNewBuff("DangerSense45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             dangersense100Buff = Buffs.AddNewBuff("DangerSense100Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             delayAttackDebuff = Buffs.AddNewBuff("delayAttackDebuff", Assets.crippleBuffIcon, Color.green, true, true);
             healMark = Buffs.AddNewBuff("healMark", Assets.critBuffIcon, Color.green, true, true);
-            armorMark = Buffs.AddNewBuff("goBeyondBuffUsed", Assets.critBuffIcon, Color.yellow, true, true);
+            barrierMark = Buffs.AddNewBuff("goBeyondBuffUsed", Assets.critBuffIcon, Color.yellow, true, true);
 
             //oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.green, false, false);
             //oklahomaBuff = Buffs.AddNewBuff("DekuArmorBuff", Addressables.LoadAssetAsync<Sprite>(key: "RoR2/Base/Textures/BuffIcons/texBuffGenericShield.prefab").WaitForCompletion(), Color.green, false, false);

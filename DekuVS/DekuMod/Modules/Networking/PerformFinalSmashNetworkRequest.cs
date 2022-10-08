@@ -98,7 +98,7 @@ namespace DekuMod.Modules.Networking
                     GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
 
 
-                    EffectManager.SpawnEffect(Modules.Assets.windringEffect, new EffectData
+                    EffectManager.SpawnEffect(Modules.Assets.dekuHitImpactEffect, new EffectData
                     {
                         origin = singularTarget.transform.position,
                         scale = 1f,

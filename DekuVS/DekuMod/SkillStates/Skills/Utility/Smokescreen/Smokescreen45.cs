@@ -26,6 +26,11 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
 		{
 			base.OnEnter();
+
+		}
+
+		protected override void DoSkill()
+		{
 			hasFired = false;
 			dekucon = base.GetComponent<DekuController>();
 			Ray aimRay = base.GetAimRay();
@@ -38,24 +43,24 @@ namespace DekuMod.SkillStates
 			}
 
 			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
-            //base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
+			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
 
-            if (base.isAuthority)
-            {
-                Vector3 effectPosition = base.characterBody.corePosition;
-                effectPosition.y = base.characterBody.corePosition.y;
-                EffectManager.SpawnEffect(this.smokeprefab, new EffectData
-                {
-                    origin = effectPosition,
-                    scale = radius,
-                    rotation = Quaternion.LookRotation(Vector3.up)
-                }, true);
+			if (base.isAuthority)
+			{
+				Vector3 effectPosition = base.characterBody.corePosition;
+				effectPosition.y = base.characterBody.corePosition.y;
+				EffectManager.SpawnEffect(this.smokeprefab, new EffectData
+				{
+					origin = effectPosition,
+					scale = radius,
+					rotation = Quaternion.LookRotation(Vector3.up)
+				}, true);
 
-            }
+			}
 
-            GetMaxWeight();
+			GetMaxWeight();
 
-            blastAttack = new BlastAttack();
+			blastAttack = new BlastAttack();
 
 			blastAttack.position = base.transform.position;
 			blastAttack.baseDamage = this.damageStat * Modules.StaticValues.smokescreenDamageCoefficient;
@@ -71,10 +76,13 @@ namespace DekuMod.SkillStates
 			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 			blastAttack.damageColorIndex = DamageColorIndex.Default;
 			blastAttack.attackerFiltering = AttackerFiltering.Default;
-
 		}
 
-
+		protected override void DontDoSkill()
+		{
+			base.DontDoSkill();
+			skillLocator.utility.AddOneStock();
+		}
 		public void GetMaxWeight()
 		{
 			Ray aimRay = base.GetAimRay();

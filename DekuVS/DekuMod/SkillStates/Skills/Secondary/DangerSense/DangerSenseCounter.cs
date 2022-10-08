@@ -44,7 +44,7 @@ namespace DekuMod.SkillStates
 
             this.animator = base.GetModelAnimator();
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayAnimation("Fullbody, Override", "ShootStyleKickExit", "Attack.playbackRate", duration);
+            base.PlayAnimation("Body", "ShootStyleFlip", "Attack.playbackRate", duration);
 
             RecalculateRollSpeed();
             Ray aimray = base.GetAimRay();

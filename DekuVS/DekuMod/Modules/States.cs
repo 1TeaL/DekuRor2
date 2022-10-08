@@ -20,6 +20,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(BaseQuirk45));
             entityStates.Add(typeof(BaseQuirk100));
             entityStates.Add(typeof(BaseSpecial));
+            entityStates.Add(typeof(BaseMode));
 
             //go beyond
             entityStates.Add(typeof(GoBeyond));

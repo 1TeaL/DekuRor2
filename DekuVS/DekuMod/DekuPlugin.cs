@@ -176,32 +176,81 @@ namespace DekuMod
                 {
                     if (body && victimBody)
                     {
-                        //heal mark
-                        if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.Shock5s)
+                        //deku mark system
+                        if(body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                         {
-                            victimBody.ApplyBuff(Modules.Buffs.healMark.buffIndex, 1, -1);
-                        }
-                        //armor mark
-                        if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.Stun1s)
-                        {
-                            victimBody.ApplyBuff(Modules.Buffs.armorMark.buffIndex, 1, -1);
-                        }
-
-                        if (victimBody.HasBuff(Buffs.healMark.buffIndex))
-                        {
-                            int buffCount = victimBody.GetBuffCount(Buffs.healMark.buffIndex);
-                            if(buffCount < 3)
+                            //heal and armor mark for freeze
+                            if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.Freeze2s)
                             {
-                                victimBody.ApplyBuff(Buffs.healMark.buffIndex, buffCount + 1);
+                                if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
+                                {
+                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
+                                }
+                                if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
+                                {
+                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
+                                }
                             }
-                            else if (buffCount >= 3)
+                            //heal and armor mark for ignite
+                            if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.IgniteOnHit)
                             {
-                                body.healthComponent.Heal(damageInfo.damage * 0.1f, default(ProcChainMask), true);
+                                if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
+                                {
+                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
+                                }
+                                if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
+                                {
+                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
+                                }
+                            }
+                            //heal mark for shock
+                            if (damageInfo.damageType == DamageType.Shock5s)
+                            {
+                                if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
+                                {
+                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
+                                }
+                            }
+                            //armor mark for stun
+                            if (damageInfo.damageType == DamageType.Stun1s)
+                            {
+                                if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
+                                {
+                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
+                                }
                             }
 
-                            
-                        }
+                            //heal after 3 hits, based on damage dealt
+                            if (victimBody.HasBuff(Buffs.healMark.buffIndex))
+                            {
+                                int buffCount = victimBody.GetBuffCount(Buffs.healMark.buffIndex);
+                                if (buffCount < 4)
+                                {
+                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, buffCount + 1);
+                                }
+                                else if (buffCount >= 4)
+                                {
+                                    body.healthComponent.Heal(damageInfo.damage * StaticValues.healMarkCoefficient, default(ProcChainMask), true);
+                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, 0);
+                                }
+                            }
 
+                            //barrier after 3 hits, based on damage dealt
+                            if (victimBody.HasBuff(Buffs.barrierMark.buffIndex))
+                            {
+                                int buffCount = victimBody.GetBuffCount(Buffs.barrierMark.buffIndex);
+                                if (buffCount < 4)
+                                {
+                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, buffCount + 1);
+                                }
+                                else if (buffCount >= 4)
+                                {
+                                    body.healthComponent.AddBarrierAuthority(body.healthComponent.fullHealth * StaticValues.barrierMarkCoefficient);
+                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 0);
+                                }
+                            }
+
+                        }
                     }
                 }
             }
@@ -270,12 +319,12 @@ namespace DekuMod
                         self.moveSpeed *= 1.5f;
                     }
 
-                    //bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
-                    //if (fajin)
-                    //{
-                    //    self.damage *= Mathf.Lerp(1f, Modules.StaticValues.fajinMaxMultiplier, (float)self.GetComponent<DekuController>().GetBuffCount() / (float)(Modules.StaticValues.fajinMaxStack/2));
+                    bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
+                    if (fajin)
+                    {
+                        self.damage *= StaticValues.fajinDamageMultiplier;
 
-                    //}
+                    }
 
                     bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
 
@@ -375,7 +424,7 @@ namespace DekuMod
             orig(self);
             if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
             {
-                AkSoundEngine.PostEvent("death", this.gameObject);
+                AkSoundEngine.PostEvent("dekudeath", this.gameObject);
             }
 
         }
@@ -418,7 +467,7 @@ namespace DekuMod
             orig(self);
             if (self.gameObject.name.Contains("DekuDisplay"))
             {
-                AkSoundEngine.PostEvent("Entrance", self.gameObject);
+                AkSoundEngine.PostEvent("dekuEntrance", self.gameObject);
             }
 
         }

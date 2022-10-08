@@ -18,15 +18,24 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
 
+
+        }
+
+        protected override void DoSkill()
+        {
+            base.DoSkill();
             bool active = NetworkServer.active;
             if (active)
             {
                 base.characterBody.AddTimedBuffAuthority(Modules.Buffs.dangersenseBuff.buffIndex, Modules.StaticValues.dangersenseBuffTimer);
 
             }
-
         }
-
+        protected override void DontDoSkill()
+        {
+            base.DontDoSkill();
+            skillLocator.secondary.AddOneStock();
+        }
 
         public override void OnExit()
         {

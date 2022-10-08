@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3309389434
+CRC: 4009061521
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e841bda5637d6667ad5cb53acc575654
+    Hash: 03caaf18f0881f9d4079b14e7db58a9d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -82,6 +82,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/airforce100impact.prefab
 - Assets/Deku/DekuV2/Animations/FinalSmashDash.anim
 - Assets/Deku/DekuV2/GUI/lightningwhitegreen.tif
+- Assets/Deku/DekuV2/Animations/FinalSmashBegin.anim
 - Assets/Deku/DekuV2/Animations/DelawareSmash.anim
 - Assets/Deku/DekuV2/VFX/Material/windline.mat
 - Assets/Deku/DekuV2/VFX/trail.prefab
@@ -175,6 +176,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/goBeyondAura.prefab
 - Assets/Deku/DekuV2/GUI/shootstylekick100.png
 - Assets/Deku/DekuV2/Assets/humanoidDeku.prefab
+- Assets/Deku/DekuV2/VFX/goBeyondPulse.prefab
 - Assets/Deku/DekuV2/GUI/Floatcancel.png
 - Assets/Deku/DekuV2/Assets/Model.prefab
 - Assets/Deku/DekuV2/Animations/Blackwhip.anim

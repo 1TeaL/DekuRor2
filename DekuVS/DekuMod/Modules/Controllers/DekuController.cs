@@ -35,6 +35,7 @@ namespace DekuMod.Modules.Survivors
         public ParticleSystem FAJIN;
         public ParticleSystem OKLAHOMA;
         public ParticleSystem DANGERSENSE;
+        public ParticleSystem WINDRING;
         private int buffCountToApply;
         public GenericSkill specialSkillSlot;
         string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
@@ -66,6 +67,7 @@ namespace DekuMod.Modules.Survivors
         //Go Beyond
         public float goBeyondTimer;
         public bool goBeyondUsed;
+        public bool goBeyondOFAGiven;
         public float goBeyondBuffTimer;
 
         //Indicator
@@ -81,6 +83,10 @@ namespace DekuMod.Modules.Survivors
 
         //gobeyond loop sound
         public uint gobeyondLoopID;
+
+        //auras
+        public bool halfMeterAuraGiven;
+        public bool fullMeterAuraGiven;
 
         public void Awake()
         {
@@ -100,6 +106,7 @@ namespace DekuMod.Modules.Survivors
                 FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
                 OKLAHOMA = child.FindChild("Oklahoma").GetComponent<ParticleSystem>();
                 DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
+                WINDRING = child.FindChild("windRing").GetComponent<ParticleSystem>();
             }
             GOBEYOND.Stop();
             LARM.Stop();
@@ -112,6 +119,7 @@ namespace DekuMod.Modules.Survivors
             FAJIN.Stop();
             OKLAHOMA.Stop();
             DANGERSENSE.Stop();
+            WINDRING.Stop();
 
             StopGobeyondLoop();
 
@@ -155,8 +163,8 @@ namespace DekuMod.Modules.Survivors
                         damageInfo2.force = Vector3.zero;
                         damageInfo2.damageColorIndex = DamageColorIndex.Default;
                         damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        damageInfo2.attacker = self.gameObject;
-                        damageInfo2.inflictor = null;
+                        damageInfo2.attacker = self.body.gameObject;
+                        damageInfo2.inflictor = self.body.gameObject;
                         damageInfo2.damageType = DamageType.Freeze2s;
                         damageInfo2.procCoefficient = 1f;
                         damageInfo2.procChainMask = default(ProcChainMask);
@@ -235,8 +243,8 @@ namespace DekuMod.Modules.Survivors
                         damageInfo2.force = Vector3.zero;
                         damageInfo2.damageColorIndex = DamageColorIndex.Default;
                         damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        damageInfo2.attacker = self.gameObject;
-                        damageInfo2.inflictor = null;
+                        damageInfo2.attacker = self.body.gameObject;
+                        damageInfo2.inflictor = self.body.gameObject;
                         damageInfo2.damageType = DamageType.Shock5s;
                         damageInfo2.procCoefficient = 1f;
                         damageInfo2.procChainMask = default(ProcChainMask);
@@ -264,7 +272,7 @@ namespace DekuMod.Modules.Survivors
                         blastAttack.radius = dangersenseBlastRadius;
                         blastAttack.procCoefficient = procCoefficient;
                         blastAttack.position = self.transform.position;
-                        blastAttack.attacker = base.gameObject;
+                        blastAttack.attacker = self.body.gameObject;
                         blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
                         blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersense45DamageCoefficient;
                         blastAttack.falloffModel = BlastAttack.FalloffModel.None;
@@ -321,8 +329,8 @@ namespace DekuMod.Modules.Survivors
                         damageInfo2.force = Vector3.zero;
                         damageInfo2.damageColorIndex = DamageColorIndex.Default;
                         damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        damageInfo2.attacker = self.gameObject;
-                        damageInfo2.inflictor = null;
+                        damageInfo2.attacker = self.body.gameObject;
+                        damageInfo2.inflictor = self.body.gameObject;
                         damageInfo2.damageType = DamageType.Generic;
                         damageInfo2.procCoefficient = 1f;
                         damageInfo2.procChainMask = default(ProcChainMask);
@@ -396,6 +404,9 @@ namespace DekuMod.Modules.Survivors
             energySystem = gameObject.AddComponent<EnergySystem>();
 
             goBeyondUsed = false;
+            goBeyondOFAGiven = false;
+            halfMeterAuraGiven = false;
+            fullMeterAuraGiven = false;
         }
 
 
@@ -419,10 +430,6 @@ namespace DekuMod.Modules.Survivors
             {
                 if(energySystem.currentPlusUltra > 5f)
                 {
-                    if (body.inputBank.jump.justPressed)
-                    {
-                        energySystem.SpendPlusUltra(2f);
-                    }
                     if (body.inputBank.jump.down)
                     {
                         if (NetworkServer.active)
@@ -441,7 +448,7 @@ namespace DekuMod.Modules.Survivors
                                 }
                                 else
                                 {
-                                    body.characterMotor.velocity.y += StaticValues.floatSpeed * 5;
+                                    body.characterMotor.velocity.y += StaticValues.floatSpeed;
                                 }
                             }
                             else if (body.characterMotor.velocity.y > 0)
@@ -453,7 +460,7 @@ namespace DekuMod.Modules.Survivors
                                 }
                                 else
                                 {
-                                    body.characterMotor.velocity.y += StaticValues.floatSpeed * 2;
+                                    body.characterMotor.velocity.y += StaticValues.floatSpeed;
                                 }
                             }
                         }
@@ -532,19 +539,18 @@ namespace DekuMod.Modules.Survivors
                 {
                     goBeyondBuffTimer += Time.fixedDeltaTime;
                 }
-                //GOBEYOND.Play();
-                //RARM.Play();
-                //LARM.Play();
-                //RLEG.Play();
-                //LLEG.Play();
             }
             else if (!body.HasBuff(Buffs.goBeyondBuff))
             {
-                //GOBEYOND.Stop();
-                //RARM.Stop();
-                //LARM.Stop();
-                //RLEG.Stop();
-                //LLEG.Stop();
+                //give ofa after gobeyond is used, once only
+                if (body.HasBuff(Buffs.goBeyondBuffUsed))
+                {
+                    if (!goBeyondOFAGiven)
+                    {
+                        goBeyondOFAGiven = true;
+                        body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1, -1);
+                    }
+                }
             }
             //danger sense particle
             if (body.HasBuff(Buffs.dangersenseBuff) || body.HasBuff(Buffs.dangersense45Buff) || body.HasBuff(Buffs.dangersense100Buff))
@@ -552,7 +558,6 @@ namespace DekuMod.Modules.Survivors
                 if (DANGERSENSE.isStopped)
                 {
                     DANGERSENSE.Play();
-
                 }
             }
             else 
@@ -583,6 +588,42 @@ namespace DekuMod.Modules.Survivors
             {
                 OFA.Stop();
             }
+
+            if (energySystem.currentPlusUltra >= 99f)
+            {
+                if (!fullMeterAuraGiven)
+                {
+                    RLEG.Play();
+                    LLEG.Play();
+                    fullMeterAuraGiven = true;
+                }
+            }
+            else if (energySystem.currentPlusUltra >= 50f)
+            {
+                if (!halfMeterAuraGiven)
+                {
+                    RARM.Play();
+                    LARM.Play();
+                    halfMeterAuraGiven = true;
+
+                    if (fullMeterAuraGiven)
+                    {
+                        RLEG.Stop();
+                        LLEG.Stop();
+                        fullMeterAuraGiven = false;
+                    }
+                }
+            }
+            else if (energySystem.currentPlusUltra < 50f)
+            {
+                halfMeterAuraGiven = false;
+                fullMeterAuraGiven = false;
+                RARM.Stop();
+                LARM.Stop();
+                RLEG.Stop();
+                LLEG.Stop();
+            }
+
 
             //CheckIfMaxKickPowerStacks();
 
@@ -654,6 +695,7 @@ namespace DekuMod.Modules.Survivors
             }
         }
 
+        
         public void StopGobeyondLoop()
         {
             AkSoundEngine.StopPlayingID(gobeyondLoopID);
@@ -687,6 +729,10 @@ namespace DekuMod.Modules.Survivors
             this.indicator.active = false;
         }
 
+        private void OnDestroy()
+        {
+            StopGobeyondLoop();
+        }
 
     }
 }

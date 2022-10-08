@@ -24,7 +24,7 @@ namespace DekuMod.SkillStates
         private float fireTime;
         private bool hasFired;
         private string muzzleString;
-        protected DamageType damageType = DamageType.Stun1s;
+        protected DamageType damageType = DamageType.Generic;
         private BulletAttack bulletAttack;
         private BlastAttack blastAttack;
         public float blastRadius = 5f;

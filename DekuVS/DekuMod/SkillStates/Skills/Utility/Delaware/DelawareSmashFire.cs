@@ -11,7 +11,7 @@ namespace DekuMod.SkillStates
 {
     public class DelawareSmashFire : BaseSkill
     {
-        public float baseDuration = 0.5f;
+        public float baseDuration = 0.2f;
         public float duration;
         private DamageType damageType = DamageType.Shock5s;
         public HurtBox Target;
@@ -40,8 +40,10 @@ namespace DekuMod.SkillStates
             PlayCrossfade("FullBody, Override", "DelawareSmash45", "Attack.playbackRate", duration, 0.01f);
             if (base.isAuthority)
             {
-                AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
+                AkSoundEngine.PostEvent("delawarevoice", this.gameObject);
             }
+
+            AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
 
 
             if (effectPrefab)

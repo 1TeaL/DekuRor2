@@ -108,6 +108,7 @@ namespace DekuMod.Modules
         internal static GameObject smokebigEffect;
         internal static GameObject airforce100Effect;
         internal static GameObject airforce100impactEffect;
+        internal static GameObject gobeyondPulseEffect;
 
         //sword swing
         internal static GameObject dekuKickEffect;
@@ -192,6 +193,7 @@ namespace DekuMod.Modules
             smokebigEffect = LoadEffect("smokebig");
             airforce100Effect = LoadEffect("airforce100trail");
             airforce100impactEffect= LoadEffect("airforce100impact");
+            gobeyondPulseEffect = LoadEffect("goBeyondPulse");
 
             //sword swing
             dekuKickEffect = Assets.LoadEffect("DekuKickEffect", true);
