@@ -110,11 +110,6 @@ namespace DekuMod.SkillStates
 
 		}
 
-		protected virtual void OnHitEnemyAuthority()
-		{
-			AkSoundEngine.PostEvent("impactsfx", this.gameObject);
-			//base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 30) * this.attackSpeedStat);
-		}
 
 		public void GetMaxWeight()
 		{
@@ -196,10 +191,8 @@ namespace DekuMod.SkillStates
 
             if (base.fixedAge > duration && base.isAuthority)
 			{
-				if (blastAttack.Fire().hitCount > 0)
-				{
-					this.OnHitEnemyAuthority();
-				}
+				blastAttack.Fire();
+				AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 
 				EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
 				{
