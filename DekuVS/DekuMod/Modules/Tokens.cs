@@ -39,15 +39,31 @@ namespace DekuMod.Modules
 
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Ninth One For All User");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", Helpers.Passive("Deku has innate increased health regen the lower his health is.") + "<style=cIsUtility> He has a double jump. He can sprint in any direction.</style>");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", 
+$"Deku has a plus ultra meter that builds up by walking and using base form skills. Changing modes, using quirk skills and using supers cost energy." 
++ "Shocking attacks apply a heal mark that after 3 hits," + Helpers.Passive("heals 10% of the damage dealt.") 
++ "Stunning attacks apply a barrier mark that after 3 hits," + Helpers.Passive("gives barrier based on 10% of the damage dealt.")
++ "Freezing and Igniting attacks apply both." 
++ "<style=cIsUtility> He has a double jump. He can sprint in any direction. Holding jump in the air after 1 second let's him Float, flying up or slowing descent if using a skill.</style>");
              #endregion
 
             #region Primary
             LanguageAPI.Add(prefix + "FISTPRIMARY_NAME", "Airforce");
-            LanguageAPI.Add(prefix + "FISTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}%</style>." + Helpers.Passive(" Fa Jin buff makes the bullets ricochet") + ".");
+            LanguageAPI.Add(prefix + "FISTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage</style>" + ".");
             LanguageAPI.Add(prefix + "LEGPRIMARY_NAME", "Shoot Style Kick");
-            LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill</style>." + Helpers.Passive(" Fa Jin buff makes shoot style kick freeze enemies and deal an extra hit") + ".");
-            LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
+            LanguageAPI.Add(prefix + "LEGPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
+            LanguageAPI.Add(prefix + "QUIRKPRIMARY_NAME", "Blackwhip");
+            LanguageAPI.Add(prefix + "QUIRKPRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>." + Helpers.Passive(" Fa Jin buff makes blackwhip double the barrier gain") + ".");
+            
+            LanguageAPI.Add(prefix + "FIST45PRIMARY_NAME", "Airforce");
+            LanguageAPI.Add(prefix + "FISTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage</style>" + ".");
+            LanguageAPI.Add(prefix + "LEGPRIMARY_NAME", "Shoot Style Kick");
+            LanguageAPI.Add(prefix + "LEGPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
+            LanguageAPI.Add(prefix + "QUIRKPRIMARY_NAME", "Blackwhip");
+            LanguageAPI.Add(prefix + "QUIRKPRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>." + Helpers.Passive(" Fa Jin buff makes blackwhip double the barrier gain") + ".");
+            
+
+LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
             LanguageAPI.Add(prefix + "PRIMARY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, stun and deal <style=cIsDamage>{100f * StaticValues.dangersenseDamageCoefficient}% damage</style>, to the attacker and enemies around Deku. Timing window scales with attackspeed. Total duration is 2 seconds</style>." + Helpers.Passive(" Fa Jin buff freezes and increases the timing window") + ".");
 
             LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_NAME", "Shoot Style Full Cowling 100%");
@@ -71,8 +87,6 @@ namespace DekuMod.Modules
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "SECONDARY_NAME", "Blackwhip");
-            LanguageAPI.Add(prefix + "SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhipDamageCoefficient}%</style>, gaining barrier on hit, scaling with attackspeed</style>." + Helpers.Passive(" Fa Jin buff makes blackwhip double the barrier gain") + ".");
             LanguageAPI.Add(prefix + "SECONDARY2_NAME", "Manchester Smash");
             LanguageAPI.Add(prefix + "SECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Jump in the air and slam down, dealing <style=cIsDamage>{100f * StaticValues.manchesterDamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed</style>." + Helpers.Passive(" Fa Jin buff hits and pulls enemies when you jump as well as doubling barrier gain") + ".");
             LanguageAPI.Add(prefix + "SECONDARY3_NAME", "St Louis Smash Airforce");
