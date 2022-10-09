@@ -58,10 +58,18 @@ $"Deku has a plus ultra meter that builds up by walking and using base form skil
             LanguageAPI.Add(prefix + "FIST45PRIMARY_NAME", "Airforce 45%");
             LanguageAPI.Add(prefix + "FIST45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot 4 bullets with all your fingers, dealing <style=cIsDamage>{100f * StaticValues.airforce45DamageCoefficient}% damage each" + ".");
             LanguageAPI.Add(prefix + "LEG45PRIMARY_NAME", "Shoot Style 45%");
-            LanguageAPI.Add(prefix + "LEG45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill" + ".");
+            LanguageAPI.Add(prefix + "LEG45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing  <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill" + ".");
             LanguageAPI.Add(prefix + "QUIRK45PRIMARY_NAME", "Blackwhip 45%");
-            LanguageAPI.Add(prefix + "QUIRK45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning. </style> Blackwhip enemies, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>" + ".");
+            LanguageAPI.Add(prefix + "QUIRK45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>" + ".");
             
+            LanguageAPI.Add(prefix + "FIST100PRIMARY_NAME", "Airforce 100%");
+            LanguageAPI.Add(prefix + "FIST100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot beams with your fists, stunning and dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage</style>, initially having 20% attackspeed, ramping up to 200%." + Helpers.Damage(" Costs {}% of max health") + ".";
+            LanguageAPI.Add(prefix + "LEG100PRIMARY_NAME", "Shoot Style 100%");
+            LanguageAPI.Add(prefix + "LEG100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" + Helpers.Damage(" Costs {}% of max health") + ".");
+            LanguageAPI.Add(prefix + "QUIRK100PRIMARY_NAME", "Blackwhip 100%");
+            LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies around you, restricting their movements and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}%</style>" + Helpers.Damage(" Costs {}% of max health.") + Helpers.Passive(" Costs {} of plus ultra") + ".");
+            
+
 
 LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
             LanguageAPI.Add(prefix + "PRIMARY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, stun and deal <style=cIsDamage>{100f * StaticValues.dangersenseDamageCoefficient}% damage</style>, to the attacker and enemies around Deku. Timing window scales with attackspeed. Total duration is 2 seconds</style>." + Helpers.Passive(" Fa Jin buff freezes and increases the timing window") + ".");
@@ -87,6 +95,29 @@ LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
             #endregion
 
             #region Secondary
+            LanguageAPI.Add(prefix + "FISTSECONDARY_NAME", "Airforce");
+            LanguageAPI.Add(prefix + "FISTSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage</style>" + ".");
+            LanguageAPI.Add(prefix + "LEGSECONDARY_NAME", "Shoot Style");
+            LanguageAPI.Add(prefix + "LEGSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_NAME", "Blackwhip");
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Shocking.</style> Blackwhip enemies, pulling, shocking and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" + ".");
+            
+            LanguageAPI.Add(prefix + "FIST45SECONDARY_NAME", "Airforce 45%");
+            LanguageAPI.Add(prefix + "FIST45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot 4 bullets with all your fingers, dealing <style=cIsDamage>{100f * StaticValues.airforce45DamageCoefficient}% damage each" + ".");
+            LanguageAPI.Add(prefix + "LEG45SECONDARY_NAME", "Shoot Style 45%");
+            LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing  <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill" + ".");
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Blackwhip 45%");
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>" + ".");
+            
+            LanguageAPI.Add(prefix + "FIST100SECONDARY_NAME", "Airforce 100%");
+            LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot beams with your fists, stunning and dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage</style>, initially having 20% attackspeed, ramping up to 200%." + Helpers.Damage(" Costs {}% of max health") + ".";
+            LanguageAPI.Add(prefix + "LEG100SECONDARY_NAME", "Shoot Style 100%");
+            LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" + Helpers.Damage(" Costs {}% of max health") + ".");
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Blackwhip 100%");
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies around you, restricting their movements and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}%</style>" + Helpers.Damage(" Costs {}% of max health.") + Helpers.Passive(" Costs {} of plus ultra") + ".");
+            
+
+
             LanguageAPI.Add(prefix + "SECONDARY2_NAME", "Manchester Smash");
             LanguageAPI.Add(prefix + "SECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Jump in the air and slam down, dealing <style=cIsDamage>{100f * StaticValues.manchesterDamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed</style>." + Helpers.Passive(" Fa Jin buff hits and pulls enemies when you jump as well as doubling barrier gain") + ".");
             LanguageAPI.Add(prefix + "SECONDARY3_NAME", "St Louis Smash Airforce");
@@ -109,6 +140,29 @@ LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
             #endregion
 
             #region Utility
+            LanguageAPI.Add(prefix + "FISTSECONDARY_NAME", "Airforce");
+            LanguageAPI.Add(prefix + "FISTSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage</style>" + ".");
+            LanguageAPI.Add(prefix + "LEGSECONDARY_NAME", "Shoot Style");
+            LanguageAPI.Add(prefix + "LEGSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_NAME", "Blackwhip");
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Shocking.</style> Blackwhip enemies, pulling, shocking and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" + ".");
+            
+            LanguageAPI.Add(prefix + "FIST45SECONDARY_NAME", "Airforce 45%");
+            LanguageAPI.Add(prefix + "FIST45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot 4 bullets with all your fingers, dealing <style=cIsDamage>{100f * StaticValues.airforce45DamageCoefficient}% damage each" + ".");
+            LanguageAPI.Add(prefix + "LEG45SECONDARY_NAME", "Shoot Style 45%");
+            LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing  <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill" + ".");
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Blackwhip 45%");
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>" + ".");
+            
+            LanguageAPI.Add(prefix + "FIST100SECONDARY_NAME", "Airforce 100%");
+            LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot beams with your fists, stunning and dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage</style>, initially having 20% attackspeed, ramping up to 200%." + Helpers.Damage(" Costs {}% of max health") + ".";
+            LanguageAPI.Add(prefix + "LEG100SECONDARY_NAME", "Shoot Style 100%");
+            LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" + Helpers.Damage(" Costs {}% of max health") + ".");
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Blackwhip 100%");
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies around you, restricting their movements and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}%</style>" + Helpers.Damage(" Costs {}% of max health.") + Helpers.Passive(" Costs {} of plus ultra") + ".");
+            
+
+
             LanguageAPI.Add(prefix + "UTILITY_NAME", "Float");
             LanguageAPI.Add(prefix + "UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. Press the button to cancel Float</style>." + Helpers.Passive(" Fa Jin buff causes a blast of wind to damage enemies around you as you jump as well") + ".");
             LanguageAPI.Add(prefix + "UTILITY2_NAME", "Oklahoma Smash");
