@@ -28,12 +28,13 @@ namespace DekuMod.SkillStates
 			
 			base.OnEnter();
             base.characterMotor.velocity = Vector3.zero;
+			base.characterMotor.rootMotion += this.moveVec;
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 			PlayCrossfade("RightArm, Override", "DetroitSmash", "Attack.playbackRate", 0.3f, 0.01f);
+			EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "RPunchSwing", true);
 			//Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);
-            base.characterMotor.rootMotion += this.moveVec;
 			//base.characterMotor.velocity += this.moveVec * 2;
 			if (base.isAuthority)
 			{

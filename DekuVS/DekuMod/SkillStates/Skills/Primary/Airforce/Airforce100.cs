@@ -24,6 +24,7 @@ namespace DekuMod.SkillStates
         private float fireTime;
         private bool hasFired;
         private string muzzleString;
+        private string muzzleSwingString;
         protected DamageType damageType = DamageType.Generic;
         private BulletAttack bulletAttack;
         private BlastAttack blastAttack;
@@ -45,6 +46,9 @@ namespace DekuMod.SkillStates
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.GetModelAnimator().SetBool("attacking", true);
             this.muzzleString = punchIndex % 2 == 0 ? "LFinger" : "RFinger";
+            this.muzzleSwingString = punchIndex % 2 == 0 ? "LPunchSwing" : "RPunchSwing";
+
+            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, this.muzzleSwingString, true);
 
             //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", this.duration);
             //base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", this.duration);

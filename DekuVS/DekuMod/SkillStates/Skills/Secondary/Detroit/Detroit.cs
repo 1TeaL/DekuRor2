@@ -26,17 +26,11 @@ namespace DekuMod.SkillStates
         public float baseDuration = 1f;
         public float duration;
         public float fireTime;
-        private DamageType damageType;
-
-        private float radius = 10f;
-        private float damageCoefficient = Modules.StaticValues.detroitDamageCoefficient;
-        private float procCoefficient = 1f;
-        private float force = 1000f;
-
         private BlastAttack blastAttack;
 
         //Indicator
         public HurtBox Target;
+        private float blastRadius = 5f;
 
         public override void OnEnter()
         {
@@ -97,7 +91,7 @@ namespace DekuMod.SkillStates
                     new PerformDetroitSmashNetworkRequest(base.characterBody.masterObjectId, Target.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
 
                     blastAttack = new BlastAttack();
-                    blastAttack.radius = 10f;
+                    blastAttack.radius = blastRadius;
                     blastAttack.procCoefficient = 1f;
                     blastAttack.position = base.transform.position;
                     blastAttack.damageType = DamageType.Stun1s;
@@ -111,6 +105,7 @@ namespace DekuMod.SkillStates
 
                     if (Target.healthComponent.body.characterMotor.isGrounded)
                     {
+                        EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing3", true);
                         PlayCrossfade("RightArm, Override", "DetroitSmashUp", "Attack.playbackRate", fireTime, 0.01f);
                         blastAttack.bonusForce = Vector3.up * 50f;
                         blastAttack.Fire();
@@ -118,10 +113,24 @@ namespace DekuMod.SkillStates
                     }
                     if (!Target.healthComponent.body.characterMotor.isGrounded)
                     {
+                        EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
                         PlayCrossfade("RightArm, Override", "DetroitSmashDown", "Attack.playbackRate", fireTime, 0.01f);
                         blastAttack.bonusForce = Vector3.down * 50f;
                         blastAttack.Fire();
                     }
+
+                    EffectManager.SpawnEffect(Modules.Assets.lightningNovaEffectPrefab, new EffectData
+                    {
+                        origin = base.transform.position,
+                        scale = blastRadius,
+
+                    }, true);
+                    EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
+                    {
+                        origin = base.transform.position,
+                        scale = blastRadius,
+
+                    }, true);
 
                     this.outer.SetNextStateToMain();
                     return;

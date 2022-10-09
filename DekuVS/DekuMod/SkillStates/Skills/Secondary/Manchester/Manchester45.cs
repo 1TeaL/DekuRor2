@@ -8,16 +8,14 @@ using System.Collections.Generic;
 
 namespace DekuMod.SkillStates
 {
-    public class Manchester45 : BaseSkillState
+    public class Manchester45 : BaseSkill45
     {
-        public static float basejumpDuration = 0.8f;
-        public static float jumpDuration;
-        public static float dropForce = 80f;
+        public static float jumpDuration = 0.8f;
+        public static float dropForce = 7f;
 
-        public static float slamRadius;
-        public static float baseRadius = 3f;
+        public static float slamRadius = 5f;
         public static float slamProcCoefficient = 1f;
-        public static float slamForce = 1000f;
+        public static float slamForce = 10f;
 
         private bool hasDropped;
         private Vector3 flyVector = Vector3.zero;
@@ -40,9 +38,6 @@ namespace DekuMod.SkillStates
             this.hasDropped = false;
             dekucon = base.GetComponent<DekuController>();
 
-            slamRadius = baseRadius * moveSpeedStat;
-
-            jumpDuration = basejumpDuration / attackSpeedStat;
 
             base.characterMotor.disableAirControlUntilCollision = true;
 
@@ -75,6 +70,17 @@ namespace DekuMod.SkillStates
             blastAttack.teamIndex = base.teamComponent.teamIndex;
             blastAttack.damageType = damageType;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+            for (int i = 0; i <= 4; i += 1)
+            {
+                Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (slamRadius * 0.5f));
+                effectPosition.y = base.characterBody.footPosition.y;
+                EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
+                {
+                    origin = effectPosition,
+                    scale = slamRadius,
+                }, true);
+            }
 
             if (blastAttack.Fire().hitCount > 0)
             {

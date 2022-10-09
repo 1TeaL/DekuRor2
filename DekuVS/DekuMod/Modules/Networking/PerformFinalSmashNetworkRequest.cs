@@ -12,42 +12,32 @@ namespace DekuMod.Modules.Networking
     {
         //Network these ones.
         NetworkInstanceId netID;
-        Vector3 origin;
-        Vector3 direction;
-        private float damage;
+        NetworkInstanceId enemynetID;
 
         //Don't network these.
         GameObject bodyObj;
-        private BullseyeSearch search;
-        private List<HurtBox> trackingTargets;
-
+        GameObject enemybodyObj;
         public PerformFinalSmashNetworkRequest()
         {
 
         }
 
-        public PerformFinalSmashNetworkRequest(NetworkInstanceId netID, Vector3 origin, Vector3 direction, float damage)
+        public PerformFinalSmashNetworkRequest(NetworkInstanceId netID, NetworkInstanceId enemynetID)
         {
             this.netID = netID;
-            this.origin = origin;
-            this.direction = direction;
-            this.damage = damage;
+            this.enemynetID = enemynetID;
         }
 
         public void Deserialize(NetworkReader reader)
         {
             netID = reader.ReadNetworkId();
-            origin = reader.ReadVector3();
-            direction = reader.ReadVector3();
-            damage = reader.ReadSingle();
+            enemynetID = reader.ReadNetworkId();
         }
 
         public void Serialize(NetworkWriter writer)
         {
             writer.Write(netID);
-            writer.Write(origin);
-            writer.Write(direction);
-            writer.Write(damage);
+            writer.Write(enemynetID);
         }
 
         public void OnReceived()
@@ -55,73 +45,56 @@ namespace DekuMod.Modules.Networking
 
             if (NetworkServer.active)
             {
-                search = new BullseyeSearch();
-                //Spawn the effect around this object.
                 GameObject masterobject = Util.FindNetworkObject(netID);
                 CharacterMaster charMaster = masterobject.GetComponent<CharacterMaster>();
                 CharacterBody charBody = charMaster.GetBody();
                 bodyObj = charBody.gameObject;
 
-                //Check targets in range
-                SearchForTarget(charBody);
+                GameObject enemymasterobject = Util.FindNetworkObject(enemynetID);
+                CharacterMaster enemycharMaster = enemymasterobject.GetComponent<CharacterMaster>();
+                CharacterBody enemycharBody = enemycharMaster.GetBody();
+                enemybodyObj = enemycharBody.gameObject;
+
                 //Pull targets and stun
-                PullTargets(charBody);
+                PullTargets(charBody, enemycharBody);
             }
         }
 
-        //Don't do anything until we have a target.
-        //Pull target: let's use a blast attack pointed towards the player with a slight upwards force.
-        //directional vector: terminal point - initial point.
-        //get mass, apply force. object mass * forcemultiplier for enemies.
-        //Make direction point towards player.
-        private void PullTargets(CharacterBody charBody)
+
+        private void PullTargets(CharacterBody charBody, CharacterBody enemycharBody)
         {
-            if (trackingTargets.Count > 0)
+
+            if (enemycharBody.healthComponent && enemycharBody)
             {
-                foreach (HurtBox singularTarget in trackingTargets)
+                enemycharBody.characterMotor.Motor.SetPositionAndRotation(charBody.gameObject.transform.position + charBody.characterDirection.forward * 5f,
+                                        Util.QuaternionSafeLookRotation(charBody.characterDirection.forward), true);
+
+                DamageInfo damageInfo = new DamageInfo
                 {
-                    singularTarget.healthComponent.body.characterMotor.Motor.SetPositionAndRotation(charBody.transform.position + charBody.characterDirection.forward * 5f,
-                        Util.QuaternionSafeLookRotation(charBody.characterDirection.forward), true);
+                    attacker = charBody.gameObject,
+                    damage = charBody.damage * Modules.StaticValues.finalsmashDamageCoefficient,
+                    position = enemycharBody.gameObject.transform.position,
+                    procCoefficient = 1f,
+                    damageType = DamageType.Stun1s,
+                    crit = charBody.RollCrit(),
 
-                    DamageInfo damageInfo = new DamageInfo
-                    {
-                        attacker = bodyObj,
-                        damage = damage,
-                        position = singularTarget.transform.position,
-                        procCoefficient = 1f,
-                        damageType = DamageType.Stun1s,
-                        crit = charBody.RollCrit(),
+                };
 
-                    };
-
-                    singularTarget.healthComponent.TakeDamage(damageInfo);
-                    GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
+                enemycharBody.healthComponent.TakeDamage(damageInfo);
+                GlobalEventManager.instance.OnHitEnemy(damageInfo, enemycharBody.healthComponent.gameObject);
 
 
-                    EffectManager.SpawnEffect(Modules.Assets.dekuHitImpactEffect, new EffectData
-                    {
-                        origin = singularTarget.transform.position,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(singularTarget.transform.position - origin),
+                EffectManager.SpawnEffect(Modules.Assets.dekuHitImpactEffect, new EffectData
+                {
+                    origin = enemycharBody.gameObject.transform.position,
+                    scale = 1f,
 
-                    }, true);
-                    
-                }
+                }, true);
+
             }
+
+
         }
 
-        private void SearchForTarget(CharacterBody charBody)
-        {
-            this.search.teamMaskFilter = TeamMask.GetUnprotectedTeams(charBody.teamComponent.teamIndex);
-            this.search.filterByLoS = true;
-            this.search.searchOrigin = origin;
-            this.search.searchDirection = direction;
-            this.search.sortMode = BullseyeSearch.SortMode.Distance;
-            this.search.maxDistanceFilter = StaticValues.finalsmashRange;
-            this.search.maxAngleFilter = 360f;
-            this.search.RefreshCandidates();
-            this.search.FilterOutGameObject(charBody.gameObject);
-            this.trackingTargets = this.search.GetResults().ToList<HurtBox>();
-        }
     }
 }

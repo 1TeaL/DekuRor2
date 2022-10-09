@@ -16,11 +16,12 @@ namespace DekuMod.SkillStates
 
 	public class FistSuper : BaseSpecial
 	{
-		public static float baseDuration = 4f;
-		private float duration;
-		private float exitDuration;
+		public float baseFireInterval = 0.4f;
+		public float fireInterval;
+		private float duration = 4f;
+		private float exitDuration = 3.5f;
 		private float fireTime = 0.5f;
-		private float baseBlastRadius = Modules.StaticValues.finalsmashBlastRadius;
+		private float baseBlastRadius = Modules.StaticValues.detroitdelawareBlastRadius;
 		private float blastRadius;
 		private float FOV = 120f;
 
@@ -32,63 +33,76 @@ namespace DekuMod.SkillStates
 		private bool animChange;
 		private string muzzleString;
 		private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
+        private EffectData effectData1;
+		private EffectData effectData2;
+		private BullseyeSearch search;
+        private List<HurtBox> target;
 
-		public override void OnEnter()
+        public override void OnEnter()
 		{
-			base.OnEnter();
+			base.OnEnter();					
 			dekucon = base.GetComponent<DekuController>();
 			energySystem = base.GetComponent<EnergySystem>();
+			blastRadius = baseBlastRadius * attackSpeedStat;
+			fireInterval = baseFireInterval / attackSpeedStat;
+			animChange = false;
+			base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
+			this.muzzleString = "RHand";
+
+			Ray aimRay = base.GetAimRay();
+			theSpot = base.transform.position;
+
+			//blast attack
+			blastAttack = new BlastAttack();
+			blastAttack.radius = blastRadius;
+			blastAttack.procCoefficient = 1f;
+			blastAttack.position = theSpot;
+			blastAttack.attacker = base.gameObject;
+			blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+			blastAttack.baseDamage = base.damageStat * Modules.StaticValues.detroitdelawareSmashDamageCoefficient * attackSpeedStat;
+			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+			blastAttack.baseForce = maxWeight * 10f;
+			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+			blastAttack.damageType = DamageType.Freeze2s;
+			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+			effectData1 = new EffectData
+			{
+				scale = 1f,
+				origin = base.characterBody.corePosition,
+				rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z)),
+			};
+
+			effectData2 = new EffectData
+			{
+				scale = 1f,
+				origin = base.characterBody.corePosition,
+				rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z)),
+			};
+
 			if (energySystem.currentPlusUltra > Modules.StaticValues.specialPlusUltraSpend)
 			{
 				energySystem.SpendPlusUltra(Modules.StaticValues.specialPlusUltraSpend);
-				this.duration = baseDuration;
-				exitDuration = duration - fireTime;
-				blastRadius = baseBlastRadius * attackSpeedStat;
-				animChange = false;
-
-				Ray aimRay = base.GetAimRay();
-				base.StartAimMode(0.5f + this.duration, false);
-				theSpot = baseBlastRadius * aimRay.direction;
-
 
 				if (NetworkServer.active)
 				{
-					base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
+					base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
 				}
-				//intial pull
+
+
 				if (base.isAuthority)
 				{
-					new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
-						base.transform.position,
-						base.GetAimRay().direction,
-						Modules.StaticValues.detroitdelawareDamageCoefficient).Send(NetworkDestination.Clients);
+					base.StartAimMode(0.5f + this.duration, false);
+					GetMaxWeight();
 
-					this.muzzleString = "RFinger";
+
 					EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
 					EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
 
-					//blast attack
-					blastAttack = new BlastAttack();
-					blastAttack.radius = blastRadius;
-					blastAttack.procCoefficient = 1f;
-					blastAttack.position = theSpot;
-					blastAttack.attacker = base.gameObject;
-					blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-					blastAttack.baseDamage = damageStat * Modules.StaticValues.detroitdelawareDamageCoefficient;
-					blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-					blastAttack.baseForce = maxWeight * 10f;
-					blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-					blastAttack.damageType = DamageType.Freeze2s;
-					blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-					EffectManager.SpawnEffect(Modules.Projectiles.delawareTracer, new EffectData
-					{
-						origin = theSpot,
-						scale = 1f,
-						rotation = Quaternion.LookRotation(GetAimRay().direction)
-					}, true);
+					EffectManager.SpawnEffect(Modules.Projectiles.delawareTracer, effectData2, true);
 
-					base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
+
 					PlayCrossfade("FullBody, Override", "DetroitDelawareFull", "Attack.playbackRate", fireTime, 0.01f);
 
 					AkSoundEngine.PostEvent("delawaredetroitvoice", this.gameObject);
@@ -114,7 +128,7 @@ namespace DekuMod.SkillStates
 		public void GetMaxWeight()
 		{
 			Ray aimRay = base.GetAimRay();
-			BullseyeSearch search = new BullseyeSearch
+			search = new BullseyeSearch
 			{
 
 				teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
@@ -130,8 +144,7 @@ namespace DekuMod.SkillStates
 			search.FilterOutGameObject(base.gameObject);
 
 
-
-			List<HurtBox> target = search.GetResults().ToList<HurtBox>();
+			target = search.GetResults().ToList<HurtBox>();
 			foreach (HurtBox singularTarget in target)
 			{
 				if (singularTarget)
@@ -152,6 +165,10 @@ namespace DekuMod.SkillStates
 								maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
 							}
 						}
+
+						new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
+						singularTarget.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
+						
 					}
 				}
 			}
@@ -163,13 +180,10 @@ namespace DekuMod.SkillStates
 
 			if (base.fixedAge > fireTime)
 			{
-				if (base.isAuthority && timer > 0.2f)
+				if (base.isAuthority && timer > fireInterval)
 				{
 					timer = 0f;
-					new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
-						base.transform.position,
-						base.GetAimRay().direction,
-						0f).Send(NetworkDestination.Clients);
+					GetMaxWeight();
 				}
 				else
 				{
@@ -191,15 +205,11 @@ namespace DekuMod.SkillStates
 
             if (base.fixedAge > duration && base.isAuthority)
 			{
+				GetMaxWeight();
 				blastAttack.Fire();
 				AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 
-				EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
-				{
-					origin = theSpot,
-					scale = blastRadius,
-					rotation = Quaternion.LookRotation(GetAimRay().direction)
-				}, true);
+				EffectManager.SpawnEffect(Modules.Assets.detroitEffect, effectData2, true);
 
 				this.outer.SetNextStateToMain();
 				return;

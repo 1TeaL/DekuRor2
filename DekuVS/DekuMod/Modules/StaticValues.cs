@@ -11,7 +11,7 @@ namespace DekuMod.Modules
              + "< ! > One for All 100% enables Deku to use one powered up skill at cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
         //Passive
         internal static float healMarkCoefficient = 0.1f;
-        internal static float barrierMarkCoefficient = 0.1f;
+        internal static float barrierMarkCoefficient = 0.05f;
 
 
         //Energy
@@ -106,10 +106,12 @@ namespace DekuMod.Modules
 
         //Special
         //fist
-        internal const float detroitdelawareDamageCoefficient = 10f;
+        internal const float detroitdelawareDamageCoefficient = 0.1f;
+        internal const float detroitdelawareSmashDamageCoefficient = 10f;
+        internal const float detroitdelawareBlastRadius = 5f;
         internal const float detroitdelawareRange = 30f;
         //leg
-        internal const float finalsmashDamageCoefficient = 2f;
+        internal const float finalsmashDamageCoefficient = 0.1f;
         internal const float finalsmashSmashDamageCoefficient = 10f;
         internal const float finalsmashBlastRadius = 5f;
         internal const float finalsmashRange = 20f;

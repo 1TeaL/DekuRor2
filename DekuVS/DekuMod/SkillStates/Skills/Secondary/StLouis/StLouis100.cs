@@ -32,7 +32,7 @@ namespace DekuMod.SkillStates
         private GameObject aimSphere;
         public float radius = 3f;
         private Ray aimRay;
-        private float baseDistance = 10f;
+        private float baseDistance = 5f;
         private float maxDistance;
 
         public override void OnEnter()
@@ -158,6 +158,7 @@ namespace DekuMod.SkillStates
                 {
                     this.OnHitEnemyAuthority();
                 }
+                EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing1", true);
                 EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
                 {
                     origin = theSpot,

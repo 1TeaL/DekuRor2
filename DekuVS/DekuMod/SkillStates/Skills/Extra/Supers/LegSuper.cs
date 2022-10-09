@@ -15,84 +15,77 @@ namespace DekuMod.SkillStates
 {
 
 	public class LegSuper : BaseSpecial
-	{
-		public static float baseDuration = 4.5f;
-        public static float exitDuration;
+    {
+        public float timer;
+        public float baseFireInterval = 0.3f;
+        public float fireTime = 0.5f;
+        private float duration = 4.5f;
+        public static float exitDuration = 4f;
         public static float baseBlastRadius = Modules.StaticValues.finalsmashBlastRadius;
         public static float blastRadius;
 
-        public float timer;
-        public float fireTime = 0.5f;
-        public float baseFireInterval = 0.1f;
         public float fireInterval;
-        private float FOV = 120f;
-        private float duration;
         public float previousMass;
+        public Vector3 direction;
 
         private Transform modelTransform;
         private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
-        private Vector3 forwardDirection;
-        private Vector3 previousPosition;
-        private float basespeedCoefficient = 2f;
+        private float basespeedCoefficient = 3f;
         private float speedCoefficient;
         private string muzzleString;
 
         private BlastAttack blastAttack;
         private float maxWeight;
         public bool animChange;
+        private BullseyeSearch search;
+        private List<HurtBox> target;
 
         public override void OnEnter()
 		{
 			base.OnEnter();
             dekucon = base.GetComponent<DekuController>();
             energySystem = base.GetComponent<EnergySystem>();
+
+            timer = 0f;
+            blastRadius = baseBlastRadius * attackSpeedStat;
+            fireInterval = baseFireInterval / attackSpeedStat;
+            speedCoefficient = basespeedCoefficient * moveSpeedStat;
+            animChange = false;
+            Ray aimRay = base.GetAimRay();
+            direction = aimRay.direction;
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
+            this.muzzleString = "LFoot";
+
+            blastAttack = new BlastAttack();
+            blastAttack.radius = blastRadius;
+            blastAttack.procCoefficient = 1f;
+            blastAttack.attacker = base.gameObject;
+            blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+            blastAttack.baseDamage = damageStat * Modules.StaticValues.finalsmashSmashDamageCoefficient * attackSpeedStat;
+            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+            blastAttack.baseForce = maxWeight * 10f;
+            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+            blastAttack.damageType = DamageType.IgniteOnHit;
+            blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
             if (energySystem.currentPlusUltra > Modules.StaticValues.specialPlusUltraSpend)
             {
                 energySystem.SpendPlusUltra(Modules.StaticValues.specialPlusUltraSpend);
 
-                this.duration = baseDuration;
-                exitDuration = duration - fireTime;
-                timer = 0f;
-                blastRadius = baseBlastRadius * attackSpeedStat;
-                fireInterval = baseFireInterval / attackSpeedStat;
-                speedCoefficient = basespeedCoefficient * moveSpeedStat;
-                animChange = false;
-                Ray aimRay = base.GetAimRay();
                 base.StartAimMode(0.5f + this.duration, false);
-
-
-                if (base.isAuthority)
-                {
-                    this.forwardDirection = aimRay.direction;
-                }
-                //if (base.characterMotor && base.characterDirection)
-                //{
-                //    base.characterMotor.velocity = this.forwardDirection * this.speedCoefficient * moveSpeedStat;
-                //}
-                this.previousPosition = -aimRay.direction * 2f;
 
                 if (NetworkServer.active)
                 {
-                    base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
+                    base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
                 }
 
-                this.muzzleString = "LFoot";
                 EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
                 EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
 
 
-                bool active = NetworkServer.active;
-                if (active)
-                {
-                    base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
-                }
-
                 if (base.isAuthority)
                 {
-                    new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
-                        base.transform.position,
-                        base.GetAimRay().direction,
-                        Modules.StaticValues.finalsmashDamageCoefficient).Send(NetworkDestination.Clients);
+                    GetMaxWeight();
 
 
                     base.characterMotor.useGravity = false;
@@ -100,23 +93,10 @@ namespace DekuMod.SkillStates
                     base.characterMotor.mass = 0f;
                     base.characterMotor.Motor.ForceUnground();
                     base.characterMotor.disableAirControlUntilCollision = true;
-                    blastAttack = new BlastAttack();
-                    blastAttack.radius = blastRadius;
-                    blastAttack.procCoefficient = 1f;
-                    blastAttack.position = base.transform.position;
-                    blastAttack.attacker = base.gameObject;
-                    blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-                    blastAttack.baseDamage = damageStat * Modules.StaticValues.finalsmashSmashDamageCoefficient * attackSpeedStat;
-                    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                    blastAttack.baseForce = maxWeight * 20f;
-                    blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                    blastAttack.damageType = DamageType.IgniteOnHit;
-                    blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
                     dekucon.WINDRING.Play();
                     AkSoundEngine.PostEvent("finalsmashsfxvoice", this.gameObject);
                     
-                    base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
                     PlayCrossfade("FullBody, Override", "FinalSmashBegin", "Attack.playbackRate", fireTime, 0.01f);
                 }
 
@@ -140,7 +120,7 @@ namespace DekuMod.SkillStates
         public void GetMaxWeight()
         {
             Ray aimRay = base.GetAimRay();
-            BullseyeSearch search = new BullseyeSearch
+            search = new BullseyeSearch
             {
 
                 teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
@@ -157,7 +137,7 @@ namespace DekuMod.SkillStates
 
 
 
-            List<HurtBox> target = search.GetResults().ToList<HurtBox>();
+            target = search.GetResults().ToList<HurtBox>();
             foreach (HurtBox singularTarget in target)
             {
                 if (singularTarget)
@@ -178,87 +158,80 @@ namespace DekuMod.SkillStates
                                 maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
                             }
                         }
+                        new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
+                        singularTarget.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
                     }
                 }
             }
         }
-        //private void CreateBlinkEffect(Vector3 origin)
-        //{
-        //    EffectData effectData = new EffectData();
-        //    effectData.rotation = Util.QuaternionSafeLookRotation(this.forwardDirection);
-        //    effectData.origin = origin;
-        //    EffectManager.SpawnEffect(EvisDash.blinkPrefab, effectData, false);
-        //}
+        private void CreateBlinkEffect(Vector3 origin)
+        {
+            EffectData effectData = new EffectData();
+            effectData.rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward);
+            effectData.origin = origin;
+            EffectManager.SpawnEffect(EvisDash.blinkPrefab, effectData, false);
+        }
 
         public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-            GetMaxWeight();
 
             if (timer > fireInterval && base.isAuthority)
             {
                 timer = 0;
-                if (base.isAuthority)
-                {
-                    new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
-                        base.transform.position,
-                        base.GetAimRay().direction,
-                        Modules.StaticValues.finalsmashDamageCoefficient).Send(NetworkDestination.Clients);
-                }
+                GetMaxWeight();
+                
             }
             else
             {
                 timer += Time.fixedDeltaTime;
             }
 
-
+            if (this.modelTransform)
+            {
+                TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                temporaryOverlay.duration = 0.6f;
+                temporaryOverlay.animateShaderAlpha = true;
+                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                temporaryOverlay.destroyComponentOnEnd = true;
+                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+                TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                temporaryOverlay2.duration = 0.7f;
+                temporaryOverlay2.animateShaderAlpha = true;
+                temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                temporaryOverlay2.destroyComponentOnEnd = true;
+                temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+                temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+            }
 
 
             if (base.fixedAge >= fireTime && base.fixedAge < exitDuration && base.isAuthority)
             {
-                PlayCrossfade("FullBody, Override", "FinalSmashDash", "Attack.playbackRate", duration - exitDuration, 0.01f);
-                //this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
+                PlayCrossfade("FullBody, Override", "FinalSmashDash", "Attack.playbackRate",fireTime, 0.1f);
+                this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
                 Ray aimRay = base.GetAimRay();
-                aimRay.direction = this.forwardDirection;
 
-
-                Vector3 normalized = (aimRay.direction).normalized;
-                if (base.characterMotor && normalized != Vector3.zero)
+                
+                if (base.characterMotor)
                 {
-                    Vector3 vector = normalized * this.speedCoefficient;
+                    Vector3 vector = direction * this.speedCoefficient;
                     //float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
                     //vector = aimRay.direction;
                     //vector.y = 0f;
 
                     base.characterMotor.velocity = vector;
                 }
-                this.previousPosition = base.transform.position;
 
-                if (this.modelTransform)
-                {
-                    TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                    temporaryOverlay.duration = 0.6f;
-                    temporaryOverlay.animateShaderAlpha = true;
-                    temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                    temporaryOverlay.destroyComponentOnEnd = true;
-                    temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-                    temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-                    TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                    temporaryOverlay2.duration = 0.7f;
-                    temporaryOverlay2.animateShaderAlpha = true;
-                    temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                    temporaryOverlay2.destroyComponentOnEnd = true;
-                    temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-                    temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-                }
 
-            }           
-            else if(base.fixedAge > exitDuration && base.isAuthority)
+            } 
+            
+            if(base.fixedAge > exitDuration && base.isAuthority)
             {
                 if (!animChange)
                 {
-                    PlayAnimation("FullBody, Override", "FinalSmashSmash", "Attack.playbackRate", exitDuration);
+                    PlayAnimation("FullBody, Override", "FinalSmashSmash", "Attack.playbackRate", fireTime);
                     animChange = true;
                 }
             }
@@ -267,13 +240,25 @@ namespace DekuMod.SkillStates
             if (base.fixedAge > duration && base.isAuthority)
 			{
                 blastAttack.position = base.transform.position;
+                GetMaxWeight();
+
                 blastAttack.Fire();
-                EffectManager.SpawnEffect(Modules.Assets.elderlemurianexplosionEffect, new EffectData
+
+                AkSoundEngine.PostEvent("impactsfx", this.gameObject);
+                dekucon.WINDRING.Stop();
+
+
+                for (int i = 0; i <= 4; i += 1)
                 {
-                    origin = base.transform.position,
-                    scale = blastRadius,
-                    rotation = Quaternion.LookRotation(Vector3.up)
-                }, true);
+                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (blastRadius * 0.5f));
+                    effectPosition.y = base.characterBody.footPosition.y;
+                    EffectManager.SpawnEffect(Modules.Assets.elderlemurianexplosionEffect, new EffectData
+                    {
+                        origin = effectPosition,
+                        scale = blastRadius,
+                    }, true);
+                }
+
                 this.outer.SetNextStateToMain();
                 return;
 			}
@@ -283,7 +268,6 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-            dekucon.WINDRING.Stop();
 
             base.characterMotor.disableAirControlUntilCollision = false;
             base.characterMotor.mass = this.previousMass;

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4009061521
+CRC: 2351034022
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 03caaf18f0881f9d4079b14e7db58a9d
+    Hash: 8c2e916c624e6a9cca033a59f7f85eca
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -90,11 +90,11 @@ Assets:
 - Assets/Deku/DekuV2/Assets/Body.mesh
 - Assets/Deku/DekuV2/VFX/detroit.prefab
 - Assets/Deku/DekuV2/GUI/ultimateupgrade.png
+- Assets/Deku/DekuV2/VFX/limbAuraWorld.prefab
 - Assets/Deku/DekuV2/VFX/Material/yellow.mat
 - Assets/Deku/DekuV2/Animations/ShootStyleDashAuto.anim
 - Assets/Deku/DekuV2/Animations/ManchesterEnd.anim
 - Assets/Deku/DekuV2/Animations/Running.anim
-- Assets/Deku/DekuV2/Animations/DetroitDelawareFull.anim
 - Assets/Deku/DekuV2/Animations/humanoidDekuAvatar.asset
 - Assets/Deku/DekuV2/Animations/ManchesterFlip.anim
 - Assets/Deku/DekuV2/VFX/Material/dangersense.mat
@@ -218,6 +218,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/blackwhipshootGhost.prefab
 - Assets/Deku/DekuV2/GUI/texDekuIcon.png
 - Assets/Deku/DekuV2/GUI/smokescreen.png
+- Assets/Deku/DekuV2/Animations/DetroitDelawareFull.anim
 - Assets/Deku/DekuV2/VFX/Textures/SparkParticleblackwhip.tif
 - Assets/Deku/DekuV2/Animations/DelawareSmashBaseCharge.anim
 - Assets/Deku/DekuV2/Animations/DelawareSmashLookUp.anim
@@ -226,6 +227,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/fajinaura.prefab
 - Assets/Deku/DekuV2/VFX/blackwhipTrail.prefab
 - Assets/Deku/DekuV2/VFX/blackwhip.prefab
+- Assets/Deku/DekuV2/VFX/goBeyondAuraWorld.prefab
 - Assets/Deku/DekuV2/GUI/DangerSense100.png
 - Assets/Deku/DekuV2/GUI/blackwhip.png
 - Assets/Deku/DekuV2/Assets/mdlDekubroken.prefab

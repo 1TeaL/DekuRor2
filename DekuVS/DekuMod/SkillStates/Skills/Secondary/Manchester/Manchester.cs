@@ -18,10 +18,10 @@ namespace DekuMod.SkillStates
         public float fireTime;
         //private GameObject effectPrefab = Modules.Assets.sEffect;
 
-        public static float blastRadius = 6f;
+        public static float blastRadius = 4f;
         public float distance = 7f;
         public float maxWeight;
-        public float force = 50f;
+        public float force = 5f;
         private float duration;
         private BlastAttack blastAttack;
         private bool hasFired;
@@ -53,6 +53,7 @@ namespace DekuMod.SkillStates
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", fireTime, 0.01f);
 
+            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
 
             //move up a little
             base.characterMotor.velocity += Vector3.up * distance;
@@ -100,6 +101,17 @@ namespace DekuMod.SkillStates
             {
                 hasFired = true;
 
+
+                for (int i = 0; i <= 4; i += 1)
+                {
+                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (blastRadius * 0.5f));
+                    effectPosition.y = base.characterBody.footPosition.y;
+                    EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
+                    {
+                        origin = effectPosition,
+                        scale = blastRadius,
+                    }, true);
+                }
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();

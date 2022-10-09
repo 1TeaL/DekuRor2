@@ -71,8 +71,8 @@ namespace DekuMod.SkillStates
         }
         public override void FixedUpdate()
         {
-            base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
             base.FixedUpdate();
+            base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
             if (Target)
             {
                 this.storedPosition = Target.transform.position;

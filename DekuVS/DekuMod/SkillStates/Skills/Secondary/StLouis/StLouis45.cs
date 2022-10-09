@@ -14,9 +14,6 @@ namespace DekuMod.SkillStates
 {
     public class StLouis45 : BaseSkill100
     {
-        private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
-        private GameObject effectPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
-        public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
         public float baseDuration = 1f;
         public static float blastRadius = 15f;
         public static float succForce = 4.5f;
@@ -72,6 +69,7 @@ namespace DekuMod.SkillStates
             //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("FullBody, Override", "StLouis45", "Attack.playbackRate", duration/2, 0.01f);
+            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing1", true);
 
 
             blastAttack = new BlastAttack();
@@ -116,14 +114,14 @@ namespace DekuMod.SkillStates
                 {
                     this.OnHitEnemyAuthority();
                 }
-                EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
+                EffectManager.SpawnEffect(Modules.Assets.lightningNovaEffectPrefab, new EffectData
                 {
                     origin = theSpot,
                     scale = blastRadius * speedattack,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);
-                EffectManager.SpawnEffect(effectPrefab, new EffectData
+                EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
                 {
                     origin = theSpot,
                     scale = blastRadius * speedattack,

@@ -193,6 +193,7 @@ namespace DekuMod.SkillStates
 					this.animator.SetBool("detroitRelease", true);
 					PlayAnimation("Fullbody, Override", "Detroit100Smash");
 
+					EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
 					for (int i = 0; i <= 10; i++)
 					{
 						float rand = 60f;

@@ -7,7 +7,6 @@ using System.Linq;
 using DekuMod.Modules.Survivors;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
-using RoR2;
 using DekuMod.Modules.Networking;
 
 namespace DekuMod.SkillStates
@@ -21,12 +20,8 @@ namespace DekuMod.SkillStates
         public float baseDuration = 1f;
         public float duration;
         public float fireTime;
-        private DamageType damageType;
 
-        private float radius = 10f;
-        private float damageCoefficient = Modules.StaticValues.detroitDamageCoefficient;
-        private float procCoefficient = 1f;
-        private float force = 1000f;
+        private float blastRadius = 5f;
 
         private BlastAttack blastAttack;
 
@@ -88,23 +83,36 @@ namespace DekuMod.SkillStates
                 {
                     energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
                     hasFired = true;
+                    EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing1", true);
                     PlayCrossfade("FullBody, Override", "StLouis", "Attack.playbackRate", duration - fireTime, 0.01f);
                     new PerformStLouisSmashNetworkRequest(base.characterBody.masterObjectId, Target.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
 
                     blastAttack = new BlastAttack();
-                    blastAttack.radius = 10f;
+                    blastAttack.radius = blastRadius;
                     blastAttack.procCoefficient = 1f;
                     blastAttack.position = base.transform.position;
                     blastAttack.damageType = DamageType.Stun1s;
                     blastAttack.attacker = base.gameObject;
                     blastAttack.crit = base.RollCrit();
-                    blastAttack.baseDamage = base.damageStat * Modules.StaticValues.detroitDamageCoefficient;
+                    blastAttack.baseDamage = base.damageStat * Modules.StaticValues.stlouisDamageCoefficient;
                     blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                     //blastAttack.baseForce = 10f * Weight;
                     blastAttack.bonusForce = GetAimRay().direction * 100f;
                     blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                     blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
-                    
+
+                    EffectManager.SpawnEffect(Modules.Assets.lightningNovaEffectPrefab, new EffectData
+                    {
+                        origin = base.transform.position,
+                        scale = blastRadius,
+
+                    }, true);
+                    EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
+                    {
+                        origin = base.transform.position,
+                        scale = blastRadius,
+
+                    }, true);
 
                     blastAttack.Fire();
                 }

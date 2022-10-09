@@ -40,6 +40,7 @@ namespace DekuMod.SkillStates
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", 0.5f, 0.01f);
+            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
 
             if (base.isAuthority)
             {
@@ -157,7 +158,7 @@ namespace DekuMod.SkillStates
                 blastAttack.position = base.characterBody.footPosition;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (moveSpeedStat / 7) * (1 + dropTimer/2);
+                blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (moveSpeedStat / 7) * (1 + dropTimer);
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = slamForce;
                 blastAttack.teamIndex = base.teamComponent.teamIndex;
@@ -171,7 +172,7 @@ namespace DekuMod.SkillStates
                 }
 
 
-                for (int i = 0; i <= 8; i += 1)
+                for (int i = 0; i <= 4; i += 1)
                 {
                     Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (slamRadius * (1 + dropTimer / 2) * 0.5f));
                     effectPosition.y = base.characterBody.footPosition.y;
