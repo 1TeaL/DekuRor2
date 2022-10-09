@@ -245,7 +245,7 @@ namespace DekuMod
                                 }
                                 else if (buffCount >= 4)
                                 {
-                                    body.healthComponent.AddBarrierAuthority(body.healthComponent.fullHealth * StaticValues.barrierMarkCoefficient);
+                                    body.healthComponent.AddBarrierAuthority(damageInfo.damage * StaticValues.barrierMarkCoefficient);
                                     victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 0);
                                 }
                             }
