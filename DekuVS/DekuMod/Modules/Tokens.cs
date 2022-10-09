@@ -43,10 +43,10 @@ namespace DekuMod.Modules
              #endregion
 
             #region Primary
-            LanguageAPI.Add(prefix + "PRIMARY_NAME", "Airforce");
-            LanguageAPI.Add(prefix + "PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}%</style>." + Helpers.Passive(" Fa Jin buff makes the bullets ricochet") + ".");
-            LanguageAPI.Add(prefix + "PRIMARY2_NAME", "Shoot Style Kick");
-            LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill</style>." + Helpers.Passive(" Fa Jin buff makes shoot style kick freeze enemies and deal an extra hit") + ".");
+            LanguageAPI.Add(prefix + "FISTPRIMARY_NAME", "Airforce");
+            LanguageAPI.Add(prefix + "FISTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}%</style>." + Helpers.Passive(" Fa Jin buff makes the bullets ricochet") + ".");
+            LanguageAPI.Add(prefix + "LEGPRIMARY_NAME", "Shoot Style Kick");
+            LanguageAPI.Add(prefix + "PRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill</style>." + Helpers.Passive(" Fa Jin buff makes shoot style kick freeze enemies and deal an extra hit") + ".");
             LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
             LanguageAPI.Add(prefix + "PRIMARY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, stun and deal <style=cIsDamage>{100f * StaticValues.dangersenseDamageCoefficient}% damage</style>, to the attacker and enemies around Deku. Timing window scales with attackspeed. Total duration is 2 seconds</style>." + Helpers.Passive(" Fa Jin buff freezes and increases the timing window") + ".");
 
