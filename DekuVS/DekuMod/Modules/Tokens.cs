@@ -50,17 +50,17 @@ $"Deku has a plus ultra meter that builds up by walking and using base form skil
             #region Primary
             LanguageAPI.Add(prefix + "FISTPRIMARY_NAME", "Airforce");
             LanguageAPI.Add(prefix + "FISTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage</style>" + ".");
-            LanguageAPI.Add(prefix + "LEGPRIMARY_NAME", "Shoot Style Kick");
+            LanguageAPI.Add(prefix + "LEGPRIMARY_NAME", "Shoot Style");
             LanguageAPI.Add(prefix + "LEGPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
             LanguageAPI.Add(prefix + "QUIRKPRIMARY_NAME", "Blackwhip");
-            LanguageAPI.Add(prefix + "QUIRKPRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>." + Helpers.Passive(" Fa Jin buff makes blackwhip double the barrier gain") + ".");
+            LanguageAPI.Add(prefix + "QUIRKPRIMARY_DESCRIPTION", $"<style=cIsDamage>Shocking.</style> Blackwhip enemies, pulling, shocking and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" + ".");
             
-            LanguageAPI.Add(prefix + "FIST45PRIMARY_NAME", "Airforce");
-            LanguageAPI.Add(prefix + "FISTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage</style>" + ".");
-            LanguageAPI.Add(prefix + "LEGPRIMARY_NAME", "Shoot Style Kick");
-            LanguageAPI.Add(prefix + "LEGPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
-            LanguageAPI.Add(prefix + "QUIRKPRIMARY_NAME", "Blackwhip");
-            LanguageAPI.Add(prefix + "QUIRKPRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>." + Helpers.Passive(" Fa Jin buff makes blackwhip double the barrier gain") + ".");
+            LanguageAPI.Add(prefix + "FIST45PRIMARY_NAME", "Airforce 45%");
+            LanguageAPI.Add(prefix + "FIST45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot 4 bullets with all your fingers, dealing <style=cIsDamage>{100f * StaticValues.airforce45DamageCoefficient}% damage each" + ".");
+            LanguageAPI.Add(prefix + "LEG45PRIMARY_NAME", "Shoot Style 45%");
+            LanguageAPI.Add(prefix + "LEG45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill" + ".");
+            LanguageAPI.Add(prefix + "QUIRK45PRIMARY_NAME", "Blackwhip 45%");
+            LanguageAPI.Add(prefix + "QUIRK45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning. </style> Blackwhip enemies, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>" + ".");
             
 
 LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
