@@ -95,26 +95,31 @@ LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "FISTSECONDARY_NAME", "Airforce");
-            LanguageAPI.Add(prefix + "FISTSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage</style>" + ".");
-            LanguageAPI.Add(prefix + "LEGSECONDARY_NAME", "Shoot Style");
-            LanguageAPI.Add(prefix + "LEGSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
-            LanguageAPI.Add(prefix + "QUIRKSECONDARY_NAME", "Blackwhip");
-            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Shocking.</style> Blackwhip enemies, pulling, shocking and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" + ".");
+            LanguageAPI.Add(prefix + "FISTSECONDARY_NAME", "Detroit Smash");
+            LanguageAPI.Add(prefix + "FISTSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Teleport and punch the target and enemies around, dealing <style=cIsDamage>{100f * StaticValues.detroit}% damage</style>. Uppercut them if they are grounded and smash them down if they are in the air" + ".");
+            LanguageAPI.Add(prefix + "LEGSECONDARY_NAME", "St Louis Smash");
+            LanguageAPI.Add(prefix + "LEGSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Teleport and kick the target and enemies around, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, sending them forward" + ".");
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_NAME", "Danger Sense");
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Freezing.</style> Activate danger sense for {} seconds. When hit, take reduced damage based off your armor and freeze the enemy, dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>." 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
             
-            LanguageAPI.Add(prefix + "FIST45SECONDARY_NAME", "Airforce 45%");
-            LanguageAPI.Add(prefix + "FIST45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot 4 bullets with all your fingers, dealing <style=cIsDamage>{100f * StaticValues.airforce45DamageCoefficient}% damage each" + ".");
-            LanguageAPI.Add(prefix + "LEG45SECONDARY_NAME", "Shoot Style 45%");
-            LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing  <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill" + ".");
-            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Blackwhip 45%");
-            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>" + ".");
+            LanguageAPI.Add(prefix + "FIST45SECONDARY_NAME", "Detroit Smash 45%");
+            LanguageAPI.Add(prefix + "FIST45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to charge a Detroit Smash. When the skill key is released or after some time, teleport and smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% - {}% damage</style>" + ".");
+            LanguageAPI.Add(prefix + "LEG45SECONDARY_NAME", "St Louis Smash 45%");
+            LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing <style=cIsDamage>{100f * StaticValues.stlouis45DamageCoefficient}% damage" + ".");
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Danger Sense 45%");
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Activate danger sense for {} seconds. When hit, take {} reduced damage, shock the enemy and nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
             
-            LanguageAPI.Add(prefix + "FIST100SECONDARY_NAME", "Airforce 100%");
-            LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot beams with your fists, stunning and dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage</style>, initially having 20% attackspeed, ramping up to 200%." + Helpers.Damage(" Costs {}% of max health") + ".";
-            LanguageAPI.Add(prefix + "LEG100SECONDARY_NAME", "Shoot Style 100%");
-            LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" + Helpers.Damage(" Costs {}% of max health") + ".");
-            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Blackwhip 100%");
-            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies around you, restricting their movements and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}%</style>" + Helpers.Damage(" Costs {}% of max health.") + Helpers.Passive(" Costs {} of plus ultra") + ".");
+            LanguageAPI.Add(prefix + "FIST100SECONDARY_NAME", "Detroit Smash 100%");
+            LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to jump forward while charging a Detroit Smash. When the skill key is released or you collide with an enemy, smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage, based on how long you've been flying</style>." 
++ Helpers.Damage(" Costs {}% of max health") + ".";
+            LanguageAPI.Add(prefix + "LEG100SECONDARY_NAME", "St Louis Smash 100%");
+            LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to charge a St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" 
++ Helpers.Damage(" Costs {}% of max health") + ".");
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Danger Sense 100%");
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate danger sense for {} seconds. When hit, take {} reduced damage, dodging out of the way as well as deal damage to the enemy and nearby enemies for <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
             
 
 
