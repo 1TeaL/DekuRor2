@@ -61,14 +61,14 @@ $"Deku has a plus ultra meter that builds up by walking and using base form skil
             LanguageAPI.Add(prefix + "LEG45PRIMARY_NAME", "Shoot Style 45%");
             LanguageAPI.Add(prefix + "LEG45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing  <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill" + ".");
             LanguageAPI.Add(prefix + "QUIRK45PRIMARY_NAME", "Blackwhip 45%");
-            LanguageAPI.Add(prefix + "QUIRK45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>" 
+            LanguageAPI.Add(prefix + "QUIRK45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies in front, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style>" 
 + Helpers.Passive(" Costs {} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST100PRIMARY_NAME", "Airforce 100%");
             LanguageAPI.Add(prefix + "FIST100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot beams with your fists, stunning and dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage</style>, initially having 20% attackspeed, ramping up to 200%." 
 + Helpers.Damage(" Costs {}% of max health") + ".";
             LanguageAPI.Add(prefix + "LEG100PRIMARY_NAME", "Shoot Style 100%");
-            LanguageAPI.Add(prefix + "LEG100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" 
+            LanguageAPI.Add(prefix + "LEG100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Instantly dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" 
 + Helpers.Damage(" Costs {}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100PRIMARY_NAME", "Blackwhip 100%");
             LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies around you, restricting their movements and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}%</style>" 
@@ -121,10 +121,10 @@ LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
             LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to jump forward while charging a Detroit Smash. When the skill key is released or you collide with an enemy, smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage, based on how long you've been flying</style>." 
 + Helpers.Damage(" Costs {}% of max health") + ".";
             LanguageAPI.Add(prefix + "LEG100SECONDARY_NAME", "St Louis Smash 100%");
-            LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to charge a St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" 
+            LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to prep a physics breaking St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" 
 + Helpers.Damage(" Costs {}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Danger Sense 100%");
-            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate danger sense for {} seconds. When hit, take {} reduced damage, dodging out of the way as well as deal damage to the enemy and nearby enemies for <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" 
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate full concentration danger sense for {} seconds. When hit, take {} reduced damage, dodging out of the way as well as deal damage to the enemy and nearby enemies for <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" 
 + Helpers.Damage(" Costs {}% of max health")
 + Helpers.Passive(" Costs {} of plus ultra") + ".");
             
@@ -161,21 +161,21 @@ LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
 + Helpers.Passive(" Costs {} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST45UTILITY_NAME", "Delaware Smash 45%");
-            LanguageAPI.Add(prefix + "FIST45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Hold the button to aim, then release to shoot a Delaware smash, shocking and dealing <style=cIsDamage>{100f * StaticValues.detroit}% damage</style>" + ".");
+            LanguageAPI.Add(prefix + "FIST45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Flick your fingers, releasing a blast of wind in front, dealing <style=cIsDamage>{100f * StaticValues.detroit}% damage</style>" + ".");
             LanguageAPI.Add(prefix + "LEG45UTILITY_NAME", "Manchester Smash 45%");
-            LanguageAPI.Add(prefix + "LEG45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Manchester Smash, damaging nearby enemies for <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, each enemy hit gives an extra second of a {} armor buff" + ".");
+            LanguageAPI.Add(prefix + "LEG45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Manchester Smash, jumping and damaging nearby enemies for <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>. Gain {} armor for {} seconds" + ".");
             LanguageAPI.Add(prefix + "QUIRK45UTILITY_NAME", "Smokescreen 45%");
-            LanguageAPI.Add(prefix + "QUIRK45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style>. Release a smokescreen, making teammates and yourself go invisible for {} seconds" + "." 
+            LanguageAPI.Add(prefix + "QUIRK45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style>. Release a smokescreen, make yourself go invisible for {} seconds" + "." 
 + Helpers.Passive(" Costs {} of plus ultra") + ".");
             
-            LanguageAPI.Add(prefix + "FIST100UTILITY_NAME", "Detroit Smash 100%");
-            LanguageAPI.Add(prefix + "FIST100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to jump forward while charging a Detroit Smash. When the skill key is released or you collide with an enemy, smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage, based on how long you've been flying</style>." 
+            LanguageAPI.Add(prefix + "FIST100UTILITY_NAME", "Delaware Smash 100%");
+            LanguageAPI.Add(prefix + "FIST100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Flick your fingers, releasing an intense blast of wind in front, sending you flying backwards and dealing <style=cIsDamage>{100f * StaticValues.detroit}% damage</style>." 
 + Helpers.Damage(" Costs {}% of max health") + ".";
-            LanguageAPI.Add(prefix + "LEG100UTILITY_NAME", "St Louis Smash 100%");
-            LanguageAPI.Add(prefix + "LEG100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to charge a St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>" 
+            LanguageAPI.Add(prefix + "LEG100UTILITY_NAME", "Manchester Smash 100%");
+            LanguageAPI.Add(prefix + "LEG100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Manchester Smash, rapidly drop down from the sky. Upon landing on the ground, stun enemies and deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>, scaling with the time before landing" 
 + Helpers.Damage(" Costs {}% of max health") + ".");
-            LanguageAPI.Add(prefix + "QUIRK100UTILITY_NAME", "Danger Sense 100%");
-            LanguageAPI.Add(prefix + "QUIRK100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate danger sense for {} seconds. When hit, take {} reduced damage, dodging out of the way as well as deal damage to the enemy and nearby enemies for <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" 
+            LanguageAPI.Add(prefix + "QUIRK100UTILITY_NAME", "Smokescreen 100%");
+            LanguageAPI.Add(prefix + "QUIRK100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Crippling.</style> Release a blinding smokescreen, making yourself invisible for {} seconds. The smokescreen also deals <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style> damage to enemies as well." 
 + Helpers.Damage(" Costs {}% of max health.")
 + Helpers.Passive(" Costs {} of plus ultra") + ".");
           
@@ -225,7 +225,8 @@ LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
             LanguageAPI.Add(prefix + "SPECIAL3_DESCRIPTION", $"Go beyond your limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 100% moves, " + Helpers.Damage("gaining negative Regen and Self-Damage from every move") + ".");
             LanguageAPI.Add(prefix + "SPECIAL4_NAME", "OFA Quirks");
             LanguageAPI.Add(prefix + "SPECIAL4_DESCRIPTION", $"Unlock your additional quirks. This skill grants the Fa Jin buff. Moving increases the buff up to 200 stacks. Gain up to 2x damage at 50 stacks. Every move gives 10 stacks and will consume 50 stacks if able. However, if a move uses 50 stacks it has additional effects. <style=cIsUtility>In general all moves will stun and bypass armor, have double the movement, double the radius and range</style>.");
-           
+          
+
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_NAME", "OFA down");
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_DESCRIPTION", $"Return yourself back to your limits.");
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL2_NAME", "OFA 45%");
@@ -242,6 +243,28 @@ LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
                 $"This skill returns yourself back to your limits.");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL4_NAME", $"OFA Quirks Mastered");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL4_DESCRIPTION", $"Fa Jin Buff stacks are granted at double the rate.");
+            #endregion
+
+            #region Extra
+            LanguageAPI.Add(prefix + "FISTEXTRA_NAME", "Fist mode");
+            LanguageAPI.Add(prefix + "FISTEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Fist based." 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
+            LanguageAPI.Add(prefix + "LEGEXTRA_NAME", "Shoot Style mode");
+            LanguageAPI.Add(prefix + "LEGEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Shoot Style based." 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
+            LanguageAPI.Add(prefix + "QUIRKEXTRA_NAME", "Quirk mode");
+            LanguageAPI.Add(prefix + "QUIRKEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Quirk based." 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
+
+            LanguageAPI.Add(prefix + "FISTSPECIAL_NAME", "1,000,000% Detroit Delaware Smash");
+            LanguageAPI.Add(prefix + "FISTSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Delaware Smash enemies, stunning and grouping them in front of you, dealing damages, then Detroit Smash all of them, freezing and dealing damage." 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
+            LanguageAPI.Add(prefix + "LEGSPECIAL_NAME", "Final Smash");
+            LanguageAPI.Add(prefix + "LEGSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash forward, stunning and grouping enemies to your front, dealing damage, then Final Smash all of them, igniting and dealing damage ." 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
+            LanguageAPI.Add(prefix + "QUIRKSPECIAL_NAME", "Fa Jin");
+            LanguageAPI.Add(prefix + "QUIRKSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Use your stored energy with Fa Jin, granting 1.5x damage and disabling all health costs for {} seconds." 
++ Helpers.Passive(" Costs {} of plus ultra") + ".");
             #endregion
 
             #region Achievements
