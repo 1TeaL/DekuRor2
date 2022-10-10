@@ -9,7 +9,14 @@ Adds Deku from My Hero Academia, a high risk survivor which can boost his stats 
 #### <a href="https://ko-fi.com/tealpopcorn"><img src="https://user-images.githubusercontent.com/93917577/160220529-efed5020-90ac-467e-98f2-27b5c162d744.png"> </a>
 If you enjoy my work, support me on Ko-fi!
 ## Popcorn Factory
-<b>Check out other mods from the Popcorn Factory team!</b>
+<details>
+<summary>Check out other mods from the Popcorn Factory team!</summary>	
+<div>
+    <a href="https://thunderstore.io/package/PopcornFactory/DarthVaderMod/">
+      <img width="130" src="https://user-images.githubusercontent.com/93917577/180753359-4906ca0b-6ce5-4ff7-9962-bdec3329682c.png"/>
+      <p>Darth Vader Mod</p>
+    </a>
+</div>
 <div>
     <a href="https://thunderstore.io/package/PopcornFactory/ShigarakiMod/">
         <img src="https://user-images.githubusercontent.com/93917577/168004591-39480a52-c7fe-4962-997f-cd9460bb4d4a.png"><br>
@@ -40,13 +47,16 @@ If you enjoy my work, support me on Ko-fi!
         <p>Wisp Mod (Popcorn Factory Team)</p>
     </a>
 </div>
+</details>
 
 ## Latest Changelog, Next update(s)
 
-- 3.2.0
-    - Fixed animation timings with attacks to properly scale with attackspeed.
-    - Removed OFA 45% and 100% as they are basically irrelevant.
-    - NEW ICONS! (Courtesy of Mr.Bones- in the making of RoRified Deku skin as well).
+- 4.0.0
+    - *THE DEKU REWORK!*
+    - *NEW*
+    	- *NEW*
+    - *REMOVED*
+    	- *NEW*
 
 - Next update(s)
     -  Further skill reworks, balance changes
@@ -389,14 +399,20 @@ Deku has innate increased health regen the lower his health is. He has a double 
 </table>
 
 ## Numbers
-##### Armor = 15 +0.5 per level
-##### Damage = 10 + 2 per level
-##### Regen = 1 + 0.2 per level (note: increases the lower his health is)
-##### Health = 150 + 30 per level
+##### Armor = 15 + 0.5 per level
+##### Damage = 12 + 2.4 per level
+##### Regen = 1 + 0.2 per level 
+##### Health = 144 + 19 per level
 ##### Movespeed = 7
 
 These stats are prone to change.
+<details>
+<summary>Click to expand previous patch notes:</summary>
 
+- 3.2.0
+    - Fixed animation timings with attacks to properly scale with attackspeed.
+    - Removed OFA 45% and 100% as they are basically irrelevant.
+    - NEW ICONS! (Courtesy of Mr.Bones- in the making of RoRified Deku skin as well).
 - 3.1.6 
     - Fixed overlays and other effects not appearing on Deku's body.
 - 3.1.5 
@@ -565,17 +581,19 @@ These stats are prone to change.
 - 1.0.1 
 	- removed r2modman from dependencies.
 - 1.0.0 
-	- released
+	- released	
+	
+</details>
 
 ## Future plans
-##### Better animations (I animated them myself and they are not great- TCoolDzn is helping me big thanks to him!).
+##### Better animations.
 ##### Still more Alt skills (tried to use loader hook code for blackwhip and..yea, similarly might try to implement artificer's hover for float).
 ##### Code clean-up (lots of leftover code that I commented out).
 ##### Alt skins 
 
-
 ## Credits
-##### Big thanks to TCoolDzn for the 3D Model, future models and animations.
+##### Big thanks to TCoolDzn for the 3D Model and animations.
+##### Smash sounds, JoJo sounds.
 ##### HenryMod for the template.
 ##### Ganondorf for networked suck code for blackwhip.
 ##### Enforcer/Nemesis Enforcer mod for nemesis enforcer passive code, heatcrash and shotgun code.
@@ -583,8 +601,7 @@ These stats are prone to change.
 ##### MinerUnearthed for partial utility/alt utility code for blackwhip and delaware smash.
 ##### Ninja for partial utility code for st louis smash.
 ##### Daredevil for bounce code for shoot style kick.
-##### Sett for haymaker code for st louis smash 45%.
-##### TTGL for crit ricochet orb code for airforce fa jin buff.
+##### TTGL for crit ricochet orb code for airforce crit buff.
 
 
   
