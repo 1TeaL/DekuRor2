@@ -58,24 +58,6 @@ namespace DekuMod.SkillStates
 
 			}
 
-			GetMaxWeight();
-
-			blastAttack = new BlastAttack();
-
-			blastAttack.position = base.transform.position;
-			blastAttack.baseDamage = this.damageStat * Modules.StaticValues.smokescreenDamageCoefficient;
-			blastAttack.baseForce = 100f * maxWeight;
-			blastAttack.damageType = DamageType.SlowOnHit;
-			blastAttack.radius = radius;
-			blastAttack.attacker = base.gameObject;
-			blastAttack.inflictor = base.gameObject;
-			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-			blastAttack.crit = base.RollCrit();
-			blastAttack.procChainMask = default(ProcChainMask);
-			blastAttack.procCoefficient = 1f;
-			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-			blastAttack.damageColorIndex = DamageColorIndex.Default;
-			blastAttack.attackerFiltering = AttackerFiltering.Default;
 		}
 
 		protected override void DontDoSkill()
@@ -83,64 +65,19 @@ namespace DekuMod.SkillStates
 			base.DontDoSkill();
 			skillLocator.utility.AddOneStock();
 		}
-		public void GetMaxWeight()
-		{
-			Ray aimRay = base.GetAimRay();
-			BullseyeSearch search = new BullseyeSearch
-			{
-
-				teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-				filterByLoS = false,
-				searchOrigin = theSpot,
-				searchDirection = UnityEngine.Random.onUnitSphere,
-				sortMode = BullseyeSearch.SortMode.Distance,
-				maxDistanceFilter = radius,
-				maxAngleFilter = 360f
-			};
-
-			search.RefreshCandidates();
-			search.FilterOutGameObject(base.gameObject);
-
-
-
-			List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-			foreach (HurtBox singularTarget in target)
-			{
-				if (singularTarget)
-				{
-					if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-					{
-						if (singularTarget.healthComponent.body.characterMotor)
-						{
-							if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
-							{
-								maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
-							}
-						}
-						else if (singularTarget.healthComponent.body.rigidbody)
-						{
-							if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
-							{
-								maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
-							}
-						}
-					}
-				}
-			}
-		}
 
 
 		public override void OnExit()
         {
-			Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
 
 			base.OnExit();
 		}
         public override void FixedUpdate()
 		{
-            if (!hasFired)
+            if (!hasFired && base.fixedAge > 0.1f && base.isAuthority)
             {
 				hasFired = true;
+				Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
 				blastAttack.position = base.transform.position;
 				blastAttack.Fire();
 				this.outer.SetNextStateToMain();

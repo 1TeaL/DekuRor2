@@ -19,7 +19,7 @@ namespace DekuMod.SkillStates
 {
     public class Detroit100 : BaseSkill100
     {
-		private DamageType damageType = DamageType.Stun1s;
+		private DamageType damageType = DamageType.Generic;
 		private Vector3 idealDirection;
 
 		private float baseFireTime = 0.2f;
@@ -52,7 +52,7 @@ namespace DekuMod.SkillStates
 			this.animator = base.GetModelAnimator();
 			//PlayAnimation("Body", "Sprint");
 			//Util.PlaySound(EntityStates.Bison.Charge.startSoundString, base.gameObject);
-			PlayCrossfade("Fullbody, Override", "DetroitCharge", "Attack.playbackRate", fireTime, 0.01f);
+			PlayCrossfade("FullBody, Override", "DetroitCharge", "Attack.playbackRate", fireTime, 0.01f);
 
 			if (base.isAuthority)
 			{
@@ -142,14 +142,7 @@ namespace DekuMod.SkillStates
 
 			if(base.fixedAge > fireTime)
 			{
-				if (base.IsKeyDownAuthority())
-				{
-					Loop();
-				}
-				else if (!base.IsKeyDownAuthority())
-				{
-					base.outer.SetNextStateToMain();
-				}
+				Loop();
 			}
 
         }
@@ -186,12 +179,12 @@ namespace DekuMod.SkillStates
 				layerIndex = LayerIndex.entityPrecise;
 				int num2 = Physics.OverlapSphere(position, radius, num | layerIndex.mask).Length;
 				bool flag2 = num2 != 0;
-				if (flag2)
+				if (flag2 || !base.IsKeyDownAuthority())
 				{
 					base.characterMotor.velocity = Vector3.zero;
 
 					this.animator.SetBool("detroitRelease", true);
-					PlayAnimation("Fullbody, Override", "Detroit100Smash");
+					PlayAnimation("FullBody, Override", "Detroit100Smash");
 
 					EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
 					for (int i = 0; i <= 10; i++)
@@ -235,7 +228,7 @@ namespace DekuMod.SkillStates
 				}
                 else
 				{
-					PlayAnimation("Fullbody, Override", "Detroit100Charging");
+					PlayAnimation("FullBody, Override", "Detroit100Charging");
 					this.UpdateDirection();
                 }
 

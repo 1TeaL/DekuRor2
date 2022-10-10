@@ -37,7 +37,6 @@ namespace DekuMod.SkillStates
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("FullBody, Override", "Blackwhip", "Attack.playbackRate", duration, 0.05f);
-            //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
             speedattack = attackSpeedStat / 2;
             if (speedattack < 1)
             {
@@ -56,7 +55,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = false;
 
 
-            //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
 
             EffectManager.SpawnEffect(Modules.Assets.blackwhipforward, new EffectData
             {

@@ -67,8 +67,15 @@ namespace DekuMod.Modules.Networking
             
             if (enemycharBody.healthComponent && enemycharBody)
             {
-                enemycharBody.characterMotor.Motor.SetPositionAndRotation(charBody.gameObject.transform.position + charBody.characterDirection.forward * 5f,
-                                        Util.QuaternionSafeLookRotation(charBody.characterDirection.forward), true);
+                if (enemycharBody.characterMotor)
+                {
+                    enemycharBody.characterMotor.Motor.SetPositionAndRotation(charBody.gameObject.transform.position + charBody.characterDirection.forward * 5f,
+                                            Util.QuaternionSafeLookRotation(charBody.characterDirection.forward), true);
+                }
+                else if (enemycharBody.rigidbody)
+                {
+                    enemycharBody.rigidbody.MovePosition(charBody.gameObject.transform.position + charBody.characterDirection.forward * 5f);
+                }
 
                 DamageInfo damageInfo = new DamageInfo
                 {

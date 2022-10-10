@@ -62,13 +62,13 @@ namespace DekuMod.SkillStates
 			}
 
 
-			float radiusSqr = radius * radius;
-			Vector3 position = base.transform.position;
+			//float radiusSqr = radius * radius;
+			//Vector3 position = base.transform.position;
 
-			if (NetworkServer.active)
-			{
-				this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
-			}
+			//if (NetworkServer.active)
+			//{
+			//	this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
+			//}
 
 			GetMaxWeight();
 
@@ -142,43 +142,21 @@ namespace DekuMod.SkillStates
 			}
 		}
 
-		private void BuffTeam(IEnumerable<TeamComponent> recipients, float radiusSqr, Vector3 currentPosition)
-		{
-			bool flag = !NetworkServer.active;
-			if (!flag)
-			{
-				foreach (TeamComponent teamComponent in recipients)
-				{
-					bool flag2 = (teamComponent.transform.position - currentPosition).sqrMagnitude <= radiusSqr;
-					if (flag2)
-					{
-						CharacterBody body = teamComponent.body;
-						bool flag3 = body;
-						if (flag3)
-						{
-							body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreen100Duration);
-							body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreen100Duration);
-
-						}
-					}
-				}
-			}
-		}
 
 		public override void OnExit()
         {
-			Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
 
 			base.OnExit();
 		}
         public override void FixedUpdate()
 		{
 
-            if (!hasFired)
+            if (!hasFired && base.fixedAge > 0.1f && base.isAuthority)
             {
 				hasFired = true;
 				blastAttack.position = base.transform.position;
 				blastAttack.Fire();
+				Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
 				this.outer.SetNextStateToMain();
 			}
 

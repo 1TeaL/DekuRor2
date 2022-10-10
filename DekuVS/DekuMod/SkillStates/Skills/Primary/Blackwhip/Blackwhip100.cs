@@ -20,14 +20,12 @@ namespace DekuMod.SkillStates
         public float timer;
         public bool hasFired;
 
-        public static float blastRadius = 15f;
+        public static float blastRadius = Modules.StaticValues.blackwhip100Range;
         public static float succForce = 5f;
 
         public Vector3 theSpot;
         public float whipage;
 
-
-        public float speedattack;
 
         public override void OnEnter()
         {
@@ -38,14 +36,16 @@ namespace DekuMod.SkillStates
 
         protected override void DoSkill()
         {
+            base.DoSkill();
+
             Ray aimRay = base.GetAimRay();
+            base.StartAimMode(duration, true);
             this.duration = this.baseDuration / attackSpeedStat;
             fireTime = duration / 2f;
             timer = 0f;
             hasFired = false;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
 
             theSpot = aimRay.origin + 0.5f * attackSpeedStat * blastRadius * aimRay.direction;
             if (base.isAuthority)
@@ -53,33 +53,33 @@ namespace DekuMod.SkillStates
                 AkSoundEngine.PostEvent("blackwhipvoice", this.gameObject);
             }
             AkSoundEngine.PostEvent("blackwhipsfx", this.gameObject);
-            base.StartAimMode(duration, true);
-
-            base.characterMotor.disableAirControlUntilCollision = false;
 
 
 
-            EffectManager.SpawnEffect(Modules.Assets.blackwhipforward, new EffectData
+            //EffectManager.SpawnEffect(Modules.Assets.blackwhipforward, new EffectData
+            //{
+            //    origin = aimRay.origin,
+            //    scale = 1f,
+            //    rotation = Quaternion.LookRotation(aimRay.direction),
+
+            //}, true);
+            if (NetworkServer.active)
             {
-                origin = aimRay.origin,
-                scale = 1f,
-                rotation = Quaternion.LookRotation(aimRay.direction),
+                characterBody.AddTimedBuffAuthority(Modules.Buffs.blackwhipBuff.buffIndex, Modules.StaticValues.blackwhip100DebuffDuration);
+            }
 
-            }, true);
-
-
-            blastAttack = new BlastAttack();
-            blastAttack.radius = blastRadius * this.attackSpeedStat;
-            blastAttack.procCoefficient = 1f;
-            blastAttack.position = theSpot;
-            blastAttack.attacker = base.gameObject;
-            blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.blackwhip100DamageCoefficient;
-            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.baseForce = 0f;
-            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = DamageType.Stun1s;
-            blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+            if (!dekucon.attachment)
+            {
+                dekucon.attachment = UnityEngine.Object.Instantiate<GameObject>(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BodyAttachments/SiphonNearbyBodyAttachment")).GetComponent<NetworkedBodyAttachment>();
+                dekucon.attachment.AttachToGameObjectAndSpawn(base.gameObject, null);
+            }
+            if (!dekucon.siphonNearbyController)
+            {
+                dekucon.siphonNearbyController = dekucon.attachment.GetComponent<SiphonNearbyController>();
+                dekucon.siphonNearbyController.damagePerSecondCoefficient = Modules.StaticValues.blackwhip100DamageCoefficient;
+                dekucon.siphonNearbyController.Networkradius = Modules.StaticValues.blackwhip100Range;
+                dekucon.siphonNearbyController.NetworkmaxTargets =  Modules.StaticValues.blackwhip100Targets;
+            }
 
 
             if (base.isAuthority)
@@ -93,8 +93,6 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
 
-            //base.PlayAnimation("RightArm, Override", "SmashCharge", "this.duration", 0.2f);
-
             base.OnExit();
         }
 
@@ -106,21 +104,6 @@ namespace DekuMod.SkillStates
             {
                 base.PlayCrossfade("FullBody, Override", "Blackwhip", "Attack.playbackRate", fireTime, 0.05f);
                 hasFired = true;
-                if (base.isAuthority)
-                {
-                    new PerformBlackwhip100NetworkRequest(base.characterBody.masterObjectId,
-                        theSpot,
-                        base.GetAimRay().direction,
-                        Modules.StaticValues.blackwhip100DamageCoefficient).Send(NetworkDestination.Clients);
-
-                    EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
-                    {
-                        origin = theSpot,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(base.GetAimRay().direction),
-
-                    }, true);
-                }
             }
 
             

@@ -142,7 +142,7 @@ namespace DekuMod.SkillStates
             List<HurtBox> target = search.GetResults().ToList<HurtBox>();
             foreach (HurtBox singularTarget in target)
             {
-                if (singularTarget.healthComponent.body)
+                if (singularTarget.healthComponent.body && singularTarget.healthComponent)
                 {
                     int buffcount = singularTarget.healthComponent.body.GetBuffCount(Modules.Buffs.delayAttackDebuff.buffIndex);
                     if (NetworkServer.active)

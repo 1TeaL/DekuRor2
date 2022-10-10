@@ -42,16 +42,15 @@ namespace DekuMod.SkillStates
             theSpot = base.transform.position;
             if (base.isAuthority)
             {
-                AkSoundEngine.PostEvent("manchester", this.gameObject);
+                AkSoundEngine.PostEvent("shootstyedashvoice", this.gameObject);
             }
+            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
             base.StartAimMode(duration, true);
 
 
 
-            //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
-            //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", fireTime, 0.01f);
+            base.PlayCrossfade("FullBody, Override", "ManchesterFlip", "Attack.playbackRate", fireTime, 0.01f);
 
             EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
 
@@ -80,10 +79,8 @@ namespace DekuMod.SkillStates
 
         protected virtual void OnHitEnemyAuthority()
         {
-            if (base.isAuthority)
-            {
-                AkSoundEngine.PostEvent("shootstyledashcombosfx", this.gameObject);
-            }
+            AkSoundEngine.PostEvent("shootstyledashcombosfx", this.gameObject);
+            
             //base.healthComponent.Heal(((healthComponent.fullCombinedHealth / 20)), default(ProcChainMask), true);
 
         }

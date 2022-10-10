@@ -93,7 +93,6 @@ namespace DekuMod.SkillStates.BaseStates
         protected virtual void PlayAttackAnimation()
         {
             base.PlayCrossfade("FullBody, Override", "ShootStyleCombo" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.01f);
-            //base.PlayAnimation("Fullbody, Override", "ShootStyleCombo" + (1 + swingIndex), "Slash.playbackRate", this.duration);
 
         }
 

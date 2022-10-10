@@ -42,7 +42,7 @@ namespace DekuMod.SkillStates
 			extraskillLocator = base.GetComponent<ExtraSkillLocator>();
 
 			dekucon.PlayGobeyondLoop();
-			PlayAnimation("Fullbody, Override", "GoBeyond", "Attack.playbackRate", duration);
+			PlayAnimation("FullBody, Override", "GoBeyond", "Attack.playbackRate", duration);
 
 			bool active = NetworkServer.active;
 			if (active)

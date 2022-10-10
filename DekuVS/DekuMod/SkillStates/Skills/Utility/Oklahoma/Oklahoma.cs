@@ -101,7 +101,7 @@ namespace DekuMod.SkillStates
                 base.characterBody.AddBuff(Modules.Buffs.oklahomaBuff);
             }
 
-            dekucon.OKLAHOMA.Play();
+            //dekucon.OKLAHOMA.Play();
 
             this.areaIndicator = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
@@ -171,7 +171,7 @@ namespace DekuMod.SkillStates
 
             //dekucon.oklahomacount = 0;
             On.RoR2.HealthComponent.TakeDamage -= HealthComponent_TakeDamage;
-            dekucon.OKLAHOMA.Stop();
+            //dekucon.OKLAHOMA.Stop();
             base.characterMotor.walkSpeedPenaltyCoefficient = 1f;
             if (NetworkServer.active)
             {

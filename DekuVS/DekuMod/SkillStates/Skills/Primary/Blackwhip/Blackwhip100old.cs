@@ -39,7 +39,6 @@ namespace DekuMod.SkillStates
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayAnimation("FullBody, Override", "Blackwhip", "Attack.playbackRate", baseDuration);
-            //base.PlayCrossfade("Fullbody, Override", "Blackwhip", duration);
 
             GetMaxWeight();
             theSpot = aimRay.origin + 20 * aimRay.direction;

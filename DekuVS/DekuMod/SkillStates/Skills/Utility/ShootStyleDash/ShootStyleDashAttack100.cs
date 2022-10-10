@@ -224,7 +224,7 @@ namespace DekuMod.SkillStates
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 				base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, Evis.lingeringInvincibilityDuration);
 			}
-			base.PlayAnimation("Fullbody, Override", "BufferEmpty", "Attack.playbackRate", 0.1f);
+			base.PlayAnimation("FullBody, Override", "BufferEmpty", "Attack.playbackRate", 0.1f);
 			Util.PlaySound(Evis.endSoundString, base.gameObject);
 			base.SmallHop(base.characterMotor, smallHopVelocity);
 			base.OnExit();

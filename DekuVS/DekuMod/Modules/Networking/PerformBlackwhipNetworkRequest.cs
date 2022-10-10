@@ -123,7 +123,7 @@ namespace DekuMod.Modules.Networking
                             damage = charBody.damage * Modules.StaticValues.blackwhipDamageCoefficient,
                             position = singularTarget.transform.position,
                             procCoefficient = 1f,
-                            damageType = DamageType.Stun1s,
+                            damageType = DamageType.Shock5s,
                             crit = charBody.RollCrit(),
 
                         };

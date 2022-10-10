@@ -111,14 +111,6 @@ namespace DekuMod.SkillStates
 
         public override void OnExit()
         {
-            //base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
-            //base.PlayCrossfade("Gesture, Override", "BufferEmpty", this.fireTime / 3);
-            //base.PlayCrossfade("LeftArm, Override", "AirforceReset", 0.1f);
-            //base.PlayCrossfade("RightArm, Override", "AirforceReset", 0.1f);
-            //base.PlayCrossfade("Fullbody, Override", "AirforceReset", 0.1f);
-            //base.PlayCrossfade("Fullbody, Override", "BufferEmpty", 0.1f);
-            //base.PlayAnimation("Fullbody, Override", "Armature_AIdle", "Attack.playbackRate", 0.1f);
-            //base.PlayAnimation("Body", "IdleIn");
             base.OnExit();
             base.GetModelAnimator().SetBool("attacking", false);
         }

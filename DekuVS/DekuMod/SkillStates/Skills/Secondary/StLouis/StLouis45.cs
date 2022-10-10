@@ -65,8 +65,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = false;
 
 
-            //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
-            //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("FullBody, Override", "StLouis45", "Attack.playbackRate", duration/2, 0.01f);
             EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing1", true);

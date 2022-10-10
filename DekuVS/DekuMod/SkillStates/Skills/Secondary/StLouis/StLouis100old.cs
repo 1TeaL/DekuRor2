@@ -62,10 +62,8 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = false;
 
 
-            //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
-            //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("Fullbody, Override", "LegSmash", "Attack.playbackate", duration / 2, 0.1f);
+            base.PlayCrossfade("FullBody, Override", "LegSmash", "Attack.playbackate", duration / 2, 0.1f);
 
             //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
             //{

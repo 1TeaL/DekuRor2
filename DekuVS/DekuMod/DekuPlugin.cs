@@ -127,7 +127,6 @@ namespace DekuMod
             On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
-            On.RoR2.CharacterBody.FixedUpdate += CharacterBody_FixedUpdate;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
             //On.RoR2.HealthComponent.Awake += HealthComponent_Awake;
@@ -179,6 +178,12 @@ namespace DekuMod
                         //deku mark system
                         if(body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                         {
+                            //blackwhip debuff
+                            if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.ClayGoo)
+                            {
+                                victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhip100DebuffDuration);
+                                
+                            }
                             //heal and armor mark for freeze
                             if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.Freeze2s)
                             {
@@ -245,7 +250,7 @@ namespace DekuMod
                                 }
                                 else if (buffCount >= 4)
                                 {
-                                    body.healthComponent.AddBarrierAuthority(damageInfo.damage * StaticValues.barrierMarkCoefficient);
+                                    body.healthComponent.AddBarrierAuthority(damageInfo.damage* StaticValues.barrierMarkCoefficient);
                                     victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 0);
                                 }
                             }
@@ -293,6 +298,11 @@ namespace DekuMod
 
             if (self)
             {
+                if (self.HasBuff(Buffs.blackwhipDebuff))
+                {
+                    self.moveSpeed = 0f;
+                }
+
                 if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                 {
                     if (self.HasBuff(Buffs.manchesterBuff))
@@ -311,10 +321,6 @@ namespace DekuMod
                     bool goBeyond = self.HasBuff(Buffs.goBeyondBuff);
                     if (goBeyond)
                     {
-                        //HealthComponent hp = self.healthComponent;
-                        //float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
-                        //float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
-                        //self.regen += regen;
                         self.armor *= 5f;
                         self.moveSpeed *= 1.5f;
                     }
@@ -332,52 +338,24 @@ namespace DekuMod
                     {
                         self.armor *= 5f;
                         self.moveSpeed *= 1.5f;
-                        self.regen -= (self.levelRegen * (self.level - 1));
-                        //self.attackSpeed *= 1.5f;
-                        //self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
-                        //self.damage *= 2f;                
+                        self.regen -= (self.levelRegen * (self.level - 1));              
                     }
 
-                    //if (ofa && (self.healthComponent.health - self.healthComponent.barrier) <2)
-                    //{
-
-                    //    self.armor *= 5f;
-                    //    self.moveSpeed *= 1.5f;
-                    //    self.attackSpeed *= 1.5f;
-                    //    //self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
-                    //    self.damage *= 2f;
-
-                    //}
 
                     bool supaofa = self.HasBuff(Modules.Buffs.supaofaBuff);
                     if (supaofa)
                     {
                         self.armor *= 5f;
                         self.moveSpeed *= 1.5f;
-                        self.regen -= (1 + (self.levelRegen * (self.level - 1)));
-                        //self.attackSpeed *= 1.5f;
-                        //self.regen = (1 + (self.levelRegen * (self.level-1))) * -4f;
-                        //self.damage *= 2f;
                     }
-
-                    //if (supaofa && (self.healthComponent.health - self.healthComponent.barrier) < 1)
-                    //{
-                    //    self.armor *= 5f;
-                    //    self.moveSpeed *= 1.5f;
-                    //    self.attackSpeed *= 1.5f;
-                    //    //self.regen = (1 + (self.levelRegen * (self.level - 1))) * 0f;
-                    //    self.damage *= 2f;
-                    //}                           
+                         
 
                     bool ofa45 = self.HasBuff(Modules.Buffs.ofaBuff45);
                     if (ofa45)
                     {
                         self.armor *= 2.5f;
                         self.moveSpeed *= 1.2f;
-                        //self.attackSpeed *= 1.2f;
-                        //self.regen *= 0f;
                         self.regen -= (1 + (self.levelRegen * (self.level - 1)));
-                        //self.damage *= 1.5f;
                     }
 
                     bool supaofa45 = self.HasBuff(Modules.Buffs.supaofaBuff45);
@@ -385,28 +363,9 @@ namespace DekuMod
                     {
                         self.armor *= 2.5f;
                         self.moveSpeed *= 1.25f;
-                        //self.attackSpeed *= 1.25f;
-                        //self.regen *= 0f;
                         self.regen -= (1 + (self.levelRegen * (self.level - 1)));
-                        //self.damage *= 1.5f;
                     }
 
-                    //if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")                
-                    //{
-
-
-                    //    if (!ofa45 && !supaofa45)
-                    //    {
-
-                    //        HealthComponent hp = self.healthComponent;
-                    //        float regenValue = hp.fullCombinedHealth * DekuPlugin.passiveRegenBonus;
-                    //        float regen = Mathf.SmoothStep(regenValue, 0, hp.combinedHealth / hp.fullCombinedHealth);
-                    //        self.regen += regen;
-                    //        //Chat.AddMessage("hpregen activated");
-                    //    }
-
-
-                    //}
 
                     if (self.HasBuff(Modules.Buffs.oklahomaBuff))
                     {
@@ -431,21 +390,6 @@ namespace DekuMod
         //lifesteal
         private void GlobalEventManager_OnDamageDealt(DamageReport report)
         {
-            //orig(self, damageinfo, victim);
-
-            //if(damageinfo.attacker.name.Contains("Deku"))
-            //{
-            //    if(DekuCharacterBody == null)
-            //    {
-            //        DekuCharacterBody = damageinfo.attacker.GetComponent<CharacterBody>();
-            //    }
-            //    if (DekuCharacterBody.HasBuff(Modules.Buffs.supaofaBuff))
-            //    {
-            //        HealthComponent hp = DekuCharacterBody.healthComponent;
-            //        hp.health += damageinfo.damage * 0.1f;
-            //    }
-
-            //}
             bool flag = !report.attacker || !report.attackerBody;
             if (!flag && report.attackerBody.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && report.attackerBody.HasBuff(Modules.Buffs.supaofaBuff))
             {
@@ -469,27 +413,6 @@ namespace DekuMod
             {
                 AkSoundEngine.PostEvent("dekuEntrance", self.gameObject);
             }
-
-        }
-        
-        private void CharacterBody_FixedUpdate(On.RoR2.CharacterBody.orig_FixedUpdate orig, CharacterBody self)
-        {
-            orig(self);
-
-            //Update fajin
-            //if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
-            //{
-                //DekuController dekucon = self.GetComponent<DekuController>();
-                //if (dekucon.fajinon)
-                //{
-                //    self.SetBuffCount(Modules.Buffs.fajinBuff.buffIndex, dekucon.GetBuffCount());
-                //}
-                //if (dekucon.kickon)
-                //{
-                //    self.SetBuffCount(Modules.Buffs.kickBuff.buffIndex, dekucon.GetKickBuffCount());
-                //}
-
-            //}
 
         }
 

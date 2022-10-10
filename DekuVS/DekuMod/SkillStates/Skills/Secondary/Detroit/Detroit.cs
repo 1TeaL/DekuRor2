@@ -30,7 +30,7 @@ namespace DekuMod.SkillStates
 
         //Indicator
         public HurtBox Target;
-        private float blastRadius = 5f;
+        private float blastRadius = Modules.StaticValues.detroitRange;
 
         public override void OnEnter()
         {
@@ -59,7 +59,7 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-            this.PlayAnimation("Fullbody, Override", "BufferEmpty");
+            this.PlayAnimation("FullBody, Override", "BufferEmpty");
         }
 
         public override void FixedUpdate()

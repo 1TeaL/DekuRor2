@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2351034022
+CRC: 3792865083
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8c2e916c624e6a9cca033a59f7f85eca
+    Hash: 7afa83a959f762a7d571e35d0a60cd0a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -84,6 +84,8 @@ Assets:
 - Assets/Deku/DekuV2/GUI/lightningwhitegreen.tif
 - Assets/Deku/DekuV2/Animations/FinalSmashBegin.anim
 - Assets/Deku/DekuV2/Animations/DelawareSmash.anim
+- Assets/Deku/DekuV2/GUI/fistmodeIcon.png
+- Assets/Deku/DekuV2/GUI/legmodeIcon.png
 - Assets/Deku/DekuV2/VFX/Material/windline.mat
 - Assets/Deku/DekuV2/VFX/trail.prefab
 - Assets/Deku/DekuV2/VFX/Material/blackwhipspark.mat
@@ -116,7 +118,6 @@ Assets:
 - Assets/Deku/DekuV2/VFX/Material/windspikering.mat
 - Assets/Deku/DekuV2/Animations/Airforce100R.anim
 - Assets/Deku/DekuV2/GUI/detroit45.png
-- Assets/Deku/DekuV2/Animations/GoBeyond.anim
 - Assets/Deku/DekuV2/VFX/Material/windbullet.mat
 - Assets/Deku/DekuV2/VFX/windbullet45.prefab
 - Assets/Deku/DekuV2/VFX/Material/Spark2Particlewhip.mat
@@ -128,6 +129,7 @@ Assets:
 - Assets/Deku/DekuV2/Animations/DelawareSmashLookDown.anim
 - Assets/Deku/DekuV2/VFX/forwardHuricane.prefab
 - Assets/Deku/DekuV2/Animations/DekuTestAvatar.asset
+- Assets/Deku/DekuV2/VFX/blackwhipAura.prefab
 - Assets/Deku/DekuV2/GUI/manchester45.png
 - Assets/Deku/DekuV2/GUI/oklahoma.png
 - Assets/Deku/DekuV2/GUI/Floatactivate45.png
@@ -137,6 +139,7 @@ Assets:
 - Assets/Deku/DekuV2/GUI/ultimate.png
 - Assets/Deku/DekuV2/VFX/blackwhipline.prefab
 - Assets/Deku/DekuV2/VFX/Material/blackwhip.mat
+- Assets/Deku/DekuV2/GUI/goBeyondE.png
 - Assets/Deku/DekuV2/GUI/KickCount.tif
 - Assets/Deku/DekuV2/Animations/Airforce100L.anim
 - Assets/Deku/DekuV2/GUI/lightninggreen.tif
@@ -166,13 +169,17 @@ Assets:
 - Assets/Deku/DekuV2/GUI/stlouis45.png
 - Assets/Deku/DekuV2/GUI/quirksprevious.png
 - Assets/Deku/DekuV2/GUI/blackwhip100.png
+- Assets/Deku/DekuV2/GUI/gobeyondD.png
 - Assets/Deku/DekuV2/VFX/OFA lightning.prefab
+- Assets/Deku/DekuV2/GUI/finalSmash.png
 - Assets/Deku/DekuV2/VFX/smokebig.prefab
+- Assets/Deku/DekuV2/GUI/gobeyondB.png
 - Assets/Deku/DekuV2/GUI/fajin.png
 - Assets/Deku/DekuV2/VFX/blackwhipexplosion.prefab
 - Assets/Deku/DekuV2/VFX/Material/windtrail.mat
 - Assets/Deku/DekuV2/GUI/stlouis.png
 - Assets/Deku/DekuV2/VFX/circle.prefab
+- Assets/Deku/DekuV2/VFX/eyeAuraWorld.prefab
 - Assets/Deku/DekuV2/VFX/goBeyondAura.prefab
 - Assets/Deku/DekuV2/GUI/shootstylekick100.png
 - Assets/Deku/DekuV2/Assets/humanoidDeku.prefab
@@ -190,12 +197,14 @@ Assets:
 - Assets/Deku/DekuV2/VFX/DekuKickEffect.prefab
 - Assets/Deku/DekuV2/VFX/Material/windlineblack.mat
 - Assets/Deku/DekuV2/GUI/blackwhipshoot.png
-- Assets/Deku/DekuV2/Animations/Entrance.anim
+- Assets/Deku/DekuV2/GUI/gobeyondY.png
+- Assets/Deku/DekuV2/GUI/detroitdelawareSmash.PNG
 - Assets/Deku/DekuV2/Animations/StLouis100Smash.anim
 - Assets/Deku/DekuV2/GUI/delaware.png
 - Assets/Deku/DekuV2/Animations/DetroitDelawareDetroit.anim
 - Assets/Deku/DekuV2/Animations/animDeku.controller
 - Assets/Deku/DekuV2/Animations/DetroitDelawareDetroitCharge.anim
+- Assets/Deku/DekuV2/Animations/GoBeyondfinal.anim
 - Assets/Deku/DekuV2/VFX/Material/blackwhipblack.mat
 - Assets/Deku/DekuV2/GUI/airforce100.png
 - Assets/Deku/DekuV2/Assets/dekuCustomUI.prefab
@@ -217,6 +226,7 @@ Assets:
 - Assets/Deku/DekuV2/GUI/DangerSense45.png
 - Assets/Deku/DekuV2/VFX/blackwhipshootGhost.prefab
 - Assets/Deku/DekuV2/GUI/texDekuIcon.png
+- Assets/Deku/DekuV2/Animations/Entrance.anim
 - Assets/Deku/DekuV2/GUI/smokescreen.png
 - Assets/Deku/DekuV2/Animations/DetroitDelawareFull.anim
 - Assets/Deku/DekuV2/VFX/Textures/SparkParticleblackwhip.tif
@@ -228,9 +238,12 @@ Assets:
 - Assets/Deku/DekuV2/VFX/blackwhipTrail.prefab
 - Assets/Deku/DekuV2/VFX/blackwhip.prefab
 - Assets/Deku/DekuV2/VFX/goBeyondAuraWorld.prefab
+- Assets/Deku/DekuV2/GUI/goBeyondO.png
 - Assets/Deku/DekuV2/GUI/DangerSense100.png
 - Assets/Deku/DekuV2/GUI/blackwhip.png
+- Assets/Deku/DekuV2/GUI/gobeyondN.png
 - Assets/Deku/DekuV2/Assets/mdlDekubroken.prefab
+- Assets/Deku/DekuV2/GUI/gobeyondG.png
 - Assets/Deku/DekuV2/GUI/detroit100.png
 - Assets/Deku/DekuV2/GUI/Floatactivate100.png
 - Assets/Deku/DekuV2/VFX/spin.prefab

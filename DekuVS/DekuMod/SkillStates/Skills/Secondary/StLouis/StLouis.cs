@@ -21,7 +21,7 @@ namespace DekuMod.SkillStates
         public float duration;
         public float fireTime;
 
-        private float blastRadius = 5f;
+        private float blastRadius = Modules.StaticValues.stlouisRange;
 
         private BlastAttack blastAttack;
 
@@ -56,7 +56,7 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-            this.PlayAnimation("Fullbody, Override", "BufferEmpty");
+            this.PlayAnimation("FullBody, Override", "BufferEmpty");
         }
 
         public override void FixedUpdate()

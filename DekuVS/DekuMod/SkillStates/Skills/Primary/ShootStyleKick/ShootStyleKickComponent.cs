@@ -38,31 +38,33 @@ namespace DekuMod.SkillStates
 		public void FixedUpdate()
 		{
 
-			timer += Time.fixedDeltaTime;
-			if (timer > 1f)
-            {
-				if(currentNumber < numberOfHits)
+            if (charbody.healthComponent.alive)
+			{
+				timer += Time.fixedDeltaTime;
+				if (timer > 1f)
 				{
-					currentNumber += 1;
-					timer -= 0.1f;
-					new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.up, 2f, damage).Send(NetworkDestination.Server);
+					if (currentNumber < numberOfHits)
+					{
+						currentNumber += 1;
+						timer -= 0.1f;
+						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.up, 2f, damage).Send(NetworkDestination.Server);
+					}
+					else if (currentNumber == numberOfHits)
+					{
+						AkSoundEngine.PostEvent("impactsfx", charbody.gameObject);
+						currentNumber += 1;
+						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f, damage).Send(NetworkDestination.Server);
+					}
+					else if (currentNumber > numberOfHits)
+					{
+
+						Destroy(this);
+					}
+
 				}
-				else if (currentNumber == numberOfHits)
-				{
-					AkSoundEngine.PostEvent("impactsfx", charbody.gameObject);
-					currentNumber += 1;
-					new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f, damage).Send(NetworkDestination.Server);
-				}
-				else if (currentNumber > numberOfHits)
-                {
 
-					Destroy(this);
-				}
-
-            }
-
-
-			if (!charbody)
+			}
+			else if (!charbody)
 			{
 				Destroy(this);
 			}

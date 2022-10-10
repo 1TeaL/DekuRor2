@@ -33,9 +33,9 @@ namespace DekuMod.Modules.Survivors
         public ParticleSystem OFA;
         public ParticleSystem OFAeye;
         public ParticleSystem FAJIN;
-        public ParticleSystem OKLAHOMA;
         public ParticleSystem DANGERSENSE;
         public ParticleSystem WINDRING;
+        public ParticleSystem BLACKWHIP;
         private int buffCountToApply;
         public GenericSkill specialSkillSlot;
         string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
@@ -56,10 +56,10 @@ namespace DekuMod.Modules.Survivors
         public static float force = 300f;
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
-        //float
-        internal bool endFloat;
-        internal bool hasFloatBuff;
-        private Stopwatch floatStopwatch;
+
+        //blackwhip
+        public NetworkedBodyAttachment attachment;
+        public SiphonNearbyController siphonNearbyController;
 
         //OFA 
         public float ofaHurtTimer;
@@ -87,6 +87,7 @@ namespace DekuMod.Modules.Survivors
         //auras
         public bool halfMeterAuraGiven;
         public bool fullMeterAuraGiven;
+        public bool blackwhipAuraGiven;
 
         public void Awake()
         {
@@ -104,9 +105,9 @@ namespace DekuMod.Modules.Survivors
                 OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
                 OFAeye = child.FindChild("OFAlightningeye").GetComponent<ParticleSystem>();
                 FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
-                OKLAHOMA = child.FindChild("Oklahoma").GetComponent<ParticleSystem>();
                 DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
                 WINDRING = child.FindChild("windRing").GetComponent<ParticleSystem>();
+                BLACKWHIP = child.FindChild("blackwhipAura").GetComponent<ParticleSystem>();
             }
             GOBEYOND.Stop();
             LARM.Stop();
@@ -117,9 +118,9 @@ namespace DekuMod.Modules.Survivors
             OFAeye.Stop();
             OFA.Stop();
             FAJIN.Stop();
-            OKLAHOMA.Stop();
             DANGERSENSE.Stop();
             WINDRING.Stop();
+            BLACKWHIP.Stop();
 
             StopGobeyondLoop();
 
@@ -268,40 +269,40 @@ namespace DekuMod.Modules.Survivors
 
 
 
-                        blastAttack = new BlastAttack();
-                        blastAttack.radius = dangersenseBlastRadius;
-                        blastAttack.procCoefficient = procCoefficient;
-                        blastAttack.position = self.transform.position;
-                        blastAttack.attacker = self.body.gameObject;
-                        blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersense45DamageCoefficient;
-                        blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                        blastAttack.baseForce = force;
-                        blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                        blastAttack.damageType = DamageType.Generic;
-                        blastAttack.attackerFiltering = AttackerFiltering.Default;
+                        //blastAttack = new BlastAttack();
+                        //blastAttack.radius = dangersenseBlastRadius;
+                        //blastAttack.procCoefficient = procCoefficient;
+                        //blastAttack.position = self.transform.position;
+                        //blastAttack.attacker = self.body.gameObject;
+                        //blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                        //blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersense45DamageCoefficient;
+                        //blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                        //blastAttack.baseForce = force;
+                        //blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                        //blastAttack.damageType = DamageType.Generic;
+                        //blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 
-                        blastAttack.Fire();
+                        //blastAttack.Fire();
 
-                        for (int i = 0; i <= 5; i++)
-                        {
-                            this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                            float num = 60f;
-                            Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
-                            float num2 = 0.01f;
-                            rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                            rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+                        //for (int i = 0; i <= 5; i++)
+                        //{
+                        //    this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+                        //    float num = 60f;
+                        //    Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
+                        //    float num2 = 0.01f;
+                        //    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                        //    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
 
-                            EffectData effectData = new EffectData
-                            {
-                                scale = 1f,
-                                origin = self.body.corePosition + this.randRelPos,
-                                rotation = rotation
+                        //    EffectData effectData = new EffectData
+                        //    {
+                        //        scale = 1f,
+                        //        origin = self.body.corePosition + this.randRelPos,
+                        //        rotation = rotation
 
-                            };
-                            EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
-                        }
+                        //    };
+                        //    EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                        //}
 
 
                     }
@@ -407,6 +408,7 @@ namespace DekuMod.Modules.Survivors
             goBeyondOFAGiven = false;
             halfMeterAuraGiven = false;
             fullMeterAuraGiven = false;
+            blackwhipAuraGiven = false;
         }
 
 
@@ -423,6 +425,32 @@ namespace DekuMod.Modules.Survivors
                 this.indicator.targetTransform = (this.trackingTarget ? this.trackingTarget.transform : null);
 
 
+            }
+
+            //blackwhip
+
+            if (this.siphonNearbyController)
+            {
+                this.siphonNearbyController.NetworkmaxTargets = (body.healthComponent.alive ? Modules.StaticValues.blackwhip100Targets : 0);
+
+            }
+            if (body.HasBuff(Buffs.blackwhipBuff.buffIndex))
+            {
+                if (!blackwhipAuraGiven)
+                {
+                    BLACKWHIP.Play();
+                    blackwhipAuraGiven = true;
+                }
+
+            }
+            else if (!body.HasBuff(Buffs.blackwhipBuff.buffIndex))
+            {
+                this.DestroyAttachment();
+                if (blackwhipAuraGiven)
+                {
+                    BLACKWHIP.Stop();
+                    blackwhipAuraGiven = false;
+                }
             }
 
             //float
@@ -485,14 +513,14 @@ namespace DekuMod.Modules.Survivors
             }
 
             //ofabuff self damage and eye particle
-            if (body.HasBuff(Buffs.ofaBuff))
+            if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.supaofaBuff))
             {
                 if (ofaHurtTimer > 1f)
                 {
                     ofaHurtTimer = 0f;
                     if (body.hasEffectiveAuthority)
                     {
-                        new SpendHealthNetworkRequest(body.masterObjectId, 0.1f * body.healthComponent.health).Send(NetworkDestination.Clients);
+                        new SpendHealthNetworkRequest(body.masterObjectId, StaticValues.ofaHealthCost * body.healthComponent.health).Send(NetworkDestination.Clients);
                     }
                 }
                 else
@@ -517,7 +545,7 @@ namespace DekuMod.Modules.Survivors
                 {
                     if (body.hasEffectiveAuthority)
                     {
-                        new HealNetworkRequest(body.masterObjectId, body.healthComponent.fullCombinedHealth * 0.05f).Send(NetworkDestination.Clients);
+                        new HealNetworkRequest(body.masterObjectId, body.healthComponent.fullCombinedHealth * StaticValues.gobeyondHealCoefficient).Send(NetworkDestination.Clients);
                     }
                     goBeyondTimer = 0f;
                 }
@@ -577,7 +605,7 @@ namespace DekuMod.Modules.Survivors
                 FAJIN.Stop();
             }
             //ofa particle
-            if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.ofaBuff45))
+            if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.ofaBuff45) || body.HasBuff(Buffs.supaofaBuff) || body.HasBuff(Buffs.supaofaBuff45))
             {
                 if (OFA.isStopped)
                 {
@@ -625,65 +653,6 @@ namespace DekuMod.Modules.Survivors
             }
 
 
-            //CheckIfMaxKickPowerStacks();
-
-            //if (fajinon)
-            //{
-            //    CheckIfMaxPowerStacks();
-            //    if (isMaxPower)
-            //    {
-            //        FAJIN.Play();
-            //    }
-            //    else
-            //    {
-            //        FAJIN.Stop();
-            //    }
-            //    if (fajinscepteron)
-            //    {
-            //        if (anim.GetBool("isMoving") && stopwatch >= fajinscepterrate / body.moveSpeed)
-            //        {
-            //            IncrementBuffCount();
-            //            stopwatch = 0f;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (anim.GetBool("isMoving") && stopwatch >= fajinrate / body.moveSpeed)
-            //        {
-            //            IncrementBuffCount();
-            //            stopwatch = 0f;
-            //        }
-            //    }
-
-            //}
-            //stopwatch += Time.fixedDeltaTime;
-
-
-            //if (body.HasBuff(Modules.Buffs.dangersenseBuff))
-            //{
-            //    DANGERSENSE.Play();
-            //}
-            //if (!body.HasBuff(Modules.Buffs.dangersenseBuff))
-            //{
-            //    DANGERSENSE.Stop();
-            //}
-            //if (this.hasFloatBuff)
-            //{
-            //    this.floatStopwatch.Start();
-            //    bool flag2 = this.floatStopwatch.Elapsed.TotalSeconds >= (double)StaticValues.floatDuration;
-            //    if (flag2)
-            //    {
-            //        this.endFloat = true;
-            //    }
-            //}
-            //else
-            //{
-            //    bool isGrounded = this.characterBody.characterMotor.isGrounded;
-            //    if (isGrounded)
-            //    {
-            //        this.floatStopwatch.Reset();
-            //    }
-            //}
         }
 
         
@@ -714,6 +683,7 @@ namespace DekuMod.Modules.Survivors
             this.search.FilterOutGameObject(base.gameObject);
             this.trackingTarget = this.search.GetResults().FirstOrDefault<HurtBox>();
         }
+
         public HurtBox GetTrackingTarget()
         {
             return this.trackingTarget;
@@ -727,6 +697,16 @@ namespace DekuMod.Modules.Survivors
         private void OnDisable()
         {
             this.indicator.active = false;
+            this.DestroyAttachment();
+        }
+        private void DestroyAttachment()
+        {
+            if (this.attachment)
+            {
+                UnityEngine.Object.Destroy(this.attachment.gameObject);
+            }
+            this.attachment = null;
+            this.siphonNearbyController = null;
         }
 
         private void OnDestroy()

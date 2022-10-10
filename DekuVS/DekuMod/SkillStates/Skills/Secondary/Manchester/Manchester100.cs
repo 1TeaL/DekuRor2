@@ -39,7 +39,7 @@ namespace DekuMod.SkillStates
             this.flyVector = Vector3.up;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("Fullbody, Override", "ManchesterFlip", "Attack.playbackRate", 0.5f, 0.01f);
+            base.PlayCrossfade("FullBody, Override", "ManchesterFlip", "Attack.playbackRate", 0.5f, 0.01f);
             EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
 
             if (base.isAuthority)
@@ -72,10 +72,7 @@ namespace DekuMod.SkillStates
         }
         protected virtual void OnHitEnemyAuthority()
         {
-            if (base.isAuthority)
-            {
-                AkSoundEngine.PostEvent("impactsfx", this.gameObject);
-            }
+            AkSoundEngine.PostEvent("impactsfx", this.gameObject);
             //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 20) * (this.moveSpeedStat / 7) * dropTimer);
             //if (characterBody.HasBuff(Modules.Buffs.loaderBuff))
             //{
@@ -89,11 +86,11 @@ namespace DekuMod.SkillStates
         {
             base.FixedUpdate();
 
-            base.PlayAnimation("FullBody, Override", "ManchesterBegin", "Attack.playbackRate", 0.5f);
             dropTimer += Time.fixedDeltaTime;
             if (!this.hasDropped)
             {
                 this.StartDrop();
+                base.PlayCrossfade("FullBody, Override", "ManchesterEnd", "Attack.playbackRate", 0.5f, 0.2f);
             }
 
             if (!this.slamIndicatorInstance)
@@ -120,7 +117,6 @@ namespace DekuMod.SkillStates
             base.characterMotor.disableAirControlUntilCollision = true;
             base.characterMotor.velocity.y = -dropForce;
 
-            //base.PlayAnimation("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", jumpDuration / 3f);
 
 
         }
@@ -197,7 +193,6 @@ namespace DekuMod.SkillStates
         public override void OnExit()
         {
 
-            base.PlayCrossfade("Fullbody, Override", "ManchesterSmashExit", "Attack.playbackRate", 0.5f, 0.01f);
             if (this.slamIndicatorInstance)
                 this.slamIndicatorInstance.SetActive(false);
             EntityState.Destroy(this.slamIndicatorInstance);

@@ -21,6 +21,7 @@ namespace DekuMod.Modules
         internal static BuffDef kickBuff;
         internal static BuffDef floatBuff;
         internal static BuffDef fajinBuff;
+        internal static BuffDef blackwhipBuff;
 
         //go beyond
         internal static BuffDef goBeyondBuff;
@@ -36,6 +37,7 @@ namespace DekuMod.Modules
         internal static BuffDef dangersense100Buff;
         //debuffs
         internal static BuffDef delayAttackDebuff;
+        internal static BuffDef blackwhipDebuff;
 
         //marks
         internal static BuffDef healMark;
@@ -48,6 +50,7 @@ namespace DekuMod.Modules
             ofaBuff = Buffs.AddNewBuff("DekuOFABuff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightninggreen"), Color.white, false, false);
             supaofaBuff = Buffs.AddNewBuff("DekuInfiniteOFABuff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningwhitegreen"), Color.white, false, false);
             kickBuff = Buffs.AddNewBuff("DekuKickBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("kickCount"), Color.white, true, false);
+            blackwhipBuff = Buffs.AddNewBuff("blackwhipBuff", Assets.crippleBuffIcon, Color.white, false, false);
             ofaBuff45 = Buffs.AddNewBuff("DekuOFA45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningblue"), Color.white, false, false);
             supaofaBuff45 = Buffs.AddNewBuff("DekuInfiniteOFA45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningwhiteblue"), Color.white, false, false);
             goBeyondBuff = Buffs.AddNewBuff("goBeyondBuff", Assets.healBuffIcon, Color.green, false, false);
@@ -59,6 +62,7 @@ namespace DekuMod.Modules
             dangersense45Buff = Buffs.AddNewBuff("DangerSense45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             dangersense100Buff = Buffs.AddNewBuff("DangerSense100Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             delayAttackDebuff = Buffs.AddNewBuff("delayAttackDebuff", Assets.crippleBuffIcon, Color.green, true, true);
+            blackwhipDebuff = Buffs.AddNewBuff("blackwhipDebuff", Assets.crippleBuffIcon, Color.black, false, true);
             healMark = Buffs.AddNewBuff("healMark", Assets.critBuffIcon, Color.green, true, true);
             barrierMark = Buffs.AddNewBuff("goBeyondBuffUsed", Assets.critBuffIcon, Color.yellow, true, true);
 

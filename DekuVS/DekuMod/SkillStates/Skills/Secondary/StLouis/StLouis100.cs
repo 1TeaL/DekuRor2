@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates
         public float baseDuration = 1f;
         public float fireTime;
 
-        public static float blastRadius = 4f;
+        public static float blastRadius = 10f;
         public float distance = 5f;
         public float maxWeight;
         public float force = 20f;
@@ -55,8 +55,6 @@ namespace DekuMod.SkillStates
             this.aimSphere = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
 
 
-            //base.PlayCrossfade("Fullbody, Override", "LegSmash", startUp);
-            //base.PlayAnimation("Fullbody, Override" "LegSmash", "Attack.playbackRate", startUp);
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("FullBody, Override", "StLouis100Charge", "Attack.playbackRate",fireTime, 0.01f);
 
@@ -76,10 +74,10 @@ namespace DekuMod.SkillStates
             GetMaxWeight();
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = blastRadius * moveSpeedStat;
+            blastAttack.radius = blastRadius;
             blastAttack.procCoefficient = 1f;
             blastAttack.position = theSpot;
-            blastAttack.damageType = DamageType.Generic;
+            blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
             blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis100DamageCoefficient;

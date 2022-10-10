@@ -53,7 +53,7 @@ namespace DekuMod.SkillStates
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = 600f;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                blastAttack.damageType = DamageType.SlowOnHit;
+                blastAttack.damageType = DamageType.Generic;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
                 BlastAttack.Result result = blastAttack.Fire();
 

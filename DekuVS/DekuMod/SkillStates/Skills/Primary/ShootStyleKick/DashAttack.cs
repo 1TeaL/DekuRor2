@@ -63,8 +63,8 @@ namespace DekuMod.SkillStates
             //Util.PlaySound("Misc_StartDash", base.gameObject);
             base.GetModelAnimator().SetBool("attacking", true);
             base.GetModelAnimator().SetFloat("Slash.playbackRate", base.attackSpeedStat);
-            base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
-        
+            base.PlayAnimation("FullBody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
+
 
             AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
             base.OnEnter();
@@ -72,7 +72,7 @@ namespace DekuMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            base.PlayAnimation("Fullbody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
+            base.PlayAnimation("FullBody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
             if (Target)
             {
                 this.storedPosition = Target.transform.position;

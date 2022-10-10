@@ -52,10 +52,10 @@ namespace DekuMod.Modules.Networking
 			dekucon.PlayGobeyondLoop();
 			this.animator = base.GetModelAnimator();
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
-            PlayAnimation("Body", "GoBeyond", "Attack.playbackRate", duration);
-            //PlayAnimation("Fullbody, Override", "GoBeyond", "Attack.playbackRate", duration);
+            //PlayAnimation("Body", "GoBeyond", "Attack.playbackRate", duration);
+            PlayAnimation("FullBody, Override", "GoBeyond", "Attack.playbackRate", duration);
 
-			base.characterBody.hideCrosshair = true;
+            base.characterBody.hideCrosshair = true;
 			if (base.GetAimAnimator()) base.GetAimAnimator().enabled = false;
 
 			CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
