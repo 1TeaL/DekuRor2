@@ -3,8 +3,9 @@ Deku mod for Ror2
 Go beyond!
 
 ## Deku
-Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
+Adds Deku from My Hero Academia, a multiple quirk using survivor which can access numerous skills at a cost.
 #### Multiplayer works (hopefully). Standalone Ancient Scepter support.
+#### CustomEmotesAPI support!
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. 
 #### <a href="https://ko-fi.com/tealpopcorn"><img src="https://user-images.githubusercontent.com/93917577/160220529-efed5020-90ac-467e-98f2-27b5c162d744.png"> </a>
 If you enjoy my work, support me on Ko-fi!
@@ -54,24 +55,29 @@ If you enjoy my work, support me on Ko-fi!
 - 4.0.0
     - *THE DEKU REWORK!*
     - *NEW*
-    	- *NEW*
+    	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
+    	    - It is used for Mode switching, Float, Danger Sense, Supers and Going Beyond.
+    	    - At max Plus Ultra, once per stage, prevent death, Going Beyond your limits! For 60 seconds remain in 100% without any health costs and heal as well.
+    	- Added 3 modes- each having their own set of skills and a Super. Costs 5 plus ultra.
+            - When including the one for all versions, each mode has 10 skills!
+            - Power mode- focused on high damage with his punches.
+    	    - Shoot Style mode- focused on mobility.
+    	    - Quirk mode- focused on the utility quirks deku has. All skills cost plus ultra.
+    	- Added 3 supers- costs 50 plus ultra.
+            - Power mode- 1,000,000% Detroit Delaware Smash- pulling enemies in with Delaware Smash and then freezing them with a Detroit smash for massive damage.
+            - Shoot Style mode- Final Smash- Dash forward, pulling enemies in and then igniting them with a Final Smash for massive damage.
+            - Quirk mode- Fa Jin- pulling enemies in with Delaware Smash and then freezing them with a Detroit smash for massive damage
+
     - *REMOVED*
     	- *NEW*
 
 - Next update(s)
-    -  Further skill reworks, balance changes
+    -  Balance changes
+    -  Bug fixes
 
 <img src="https://user-images.githubusercontent.com/93917577/168006847-fb5312bf-6ba3-486b-b9a9-44460377d5d8.png">
 
 ## Known Issues
-Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
-
-Pulling enemies with blackwhip combo is fixed so some enemies will be pulled more than others.
-
-There may be crashes when using float or manchester? can't replicate it consistently.
-
-Body effects like invisibility don't show up.
-
 
 
 ## Overview
