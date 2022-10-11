@@ -1,4 +1,5 @@
-﻿using R2API.Networking.Interfaces;
+﻿using R2API.Networking;
+using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,6 +81,7 @@ namespace DekuMod.Modules.Networking
             {
                 foreach (HurtBox singularTarget in trackingTargets)
                 {
+                    singularTarget.healthComponent.body.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhipDebuffDuration);
 
                     Vector3 a = singularTarget.transform.position - origin;
                     float magnitude = a.magnitude;

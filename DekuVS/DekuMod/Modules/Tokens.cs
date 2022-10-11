@@ -51,7 +51,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEGPRIMARY_NAME", "Shoot Style");
             LanguageAPI.Add(prefix + "LEGPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
             LanguageAPI.Add(prefix + "QUIRKPRIMARY_NAME", "Blackwhip");
-            LanguageAPI.Add(prefix + "QUIRKPRIMARY_DESCRIPTION", $"<style=cIsDamage>Shocking.</style> Blackwhip enemies, pulling, shocking and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}%</style>" 
+            LanguageAPI.Add(prefix + "QUIRKPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate blackwhip for {StaticValues.blackwhipDebuffDuration} seconds, restricting their movements for {StaticValues.blackwhipDebuffDuration} seconds and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage</style> per tick, healing based on your damage dealt." 
                 + Helpers.Passive($" Costs {StaticValues.skillPlusUltraSpend} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST45PRIMARY_NAME", "Airforce 45%");
@@ -59,7 +59,8 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEG45PRIMARY_NAME", "Shoot Style 45%");
             LanguageAPI.Add(prefix + "LEG45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing  <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill" + ".");
             LanguageAPI.Add(prefix + "QUIRK45PRIMARY_NAME", "Blackwhip 45%");
-            LanguageAPI.Add(prefix + "QUIRK45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies in front, pulling and stunning them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}% damage</style>." 
+            LanguageAPI.Add(prefix + "QUIRK45PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning. </style> Blackwhip towards the target, dashing towards them, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip45DamageCoefficient}% damage</style>." +
+                $" Enemies hit have their movement restricted for {StaticValues.blackwhipDebuffDuration} seconds. " 
                 + Helpers.Passive($" Costs {StaticValues.skill45PlusUltraSpend} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST100PRIMARY_NAME", "Airforce 100%");
@@ -69,7 +70,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEG100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Instantly dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.shootkick100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100PRIMARY_NAME", "Blackwhip 100%");
-            LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Activate blackwhip for {StaticValues.blackwhipDebuffDuration} seconds, restricting their movements and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage</style> per tick, healing based on your damage dealt." 
+            LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies towards you for, restricting their movements for {StaticValues.blackwhipDebuffDuration} seconds, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.blackwhip100HealthCostFraction}% of max health.") 
                 + Helpers.Passive($" Costs {StaticValues.skill100PlusUltraSpend} of plus ultra") + ".");
             

@@ -27,14 +27,13 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-
+            hasFired = false;
 
         }
 
         protected override void DoSkill()
         {
 
-            hasFired = false;
 
             base.StartAimMode(0.5f + this.duration, false);
             if (base.isAuthority)
