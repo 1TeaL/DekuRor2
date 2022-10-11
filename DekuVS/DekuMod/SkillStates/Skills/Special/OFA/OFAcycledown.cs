@@ -92,6 +92,8 @@ namespace DekuMod.SkillStates
 					break;
 			}
 
+			base.skillLocator.DeductCooldownFromAllSkillsServer(dekucon.skillCDTimer);
+			dekucon.skillCDTimer = 0f;
 		}
 		public override void FixedUpdate()
 		{

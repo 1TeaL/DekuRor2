@@ -4,121 +4,94 @@ using UnityEngine.Networking;
 using EntityStates;
 using System.Collections.Generic;
 using System.Linq;
-using DekuMod.Modules.Networking;
-using R2API.Networking.Interfaces;
+using DekuMod.Modules.Survivors;
 using R2API.Networking;
+using R2API.Networking.Interfaces;
+using DekuMod.Modules.Networking;
 
 namespace DekuMod.SkillStates
 {
     public class Blackwhip100 : BaseQuirk100
     {
-        private BlastAttack blastAttack;
-
-        public float baseDuration = 0.5f;
-        private float duration;
-        public float fireTime;
-        public float timer;
+        public HurtBox Target;
+        public float maxTrackingDistance = 100f;
+        public float maxTrackingAngle = 30f;
+        public float pullRange = 0f;
+        private ChildLocator child;
+        public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
+        public float chargeTime = 0.1f;
+        public float castTime = 0.2f;
+        public float duration = 0.3f;
         public bool hasFired;
-
-        public static float blastRadius = Modules.StaticValues.blackwhip100Range;
-        public static float succForce = 5f;
-
-        public Vector3 theSpot;
-        public float whipage;
-
 
         public override void OnEnter()
         {
             base.OnEnter();
-            
+
 
         }
 
         protected override void DoSkill()
         {
-            base.DoSkill();
 
-            Ray aimRay = base.GetAimRay();
-            base.StartAimMode(duration, true);
-            this.duration = this.baseDuration / attackSpeedStat;
-            fireTime = duration / 2f;
-            timer = 0f;
             hasFired = false;
 
-            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-
-            theSpot = aimRay.origin + 0.5f * attackSpeedStat * blastRadius * aimRay.direction;
+            base.StartAimMode(0.5f + this.duration, false);
             if (base.isAuthority)
             {
                 AkSoundEngine.PostEvent("blackwhipvoice", this.gameObject);
             }
             AkSoundEngine.PostEvent("blackwhipsfx", this.gameObject);
 
-
-
-            //EffectManager.SpawnEffect(Modules.Assets.blackwhipforward, new EffectData
-            //{
-            //    origin = aimRay.origin,
-            //    scale = 1f,
-            //    rotation = Quaternion.LookRotation(aimRay.direction),
-
-            //}, true);
-            if (NetworkServer.active)
-            {
-                characterBody.AddTimedBuffAuthority(Modules.Buffs.blackwhipBuff.buffIndex, Modules.StaticValues.blackwhip100DebuffDuration);
-            }
-
-            if (!dekucon.attachment)
-            {
-                dekucon.attachment = UnityEngine.Object.Instantiate<GameObject>(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BodyAttachments/SiphonNearbyBodyAttachment")).GetComponent<NetworkedBodyAttachment>();
-                dekucon.attachment.AttachToGameObjectAndSpawn(base.gameObject, null);
-            }
-            if (!dekucon.siphonNearbyController)
-            {
-                dekucon.siphonNearbyController = dekucon.attachment.GetComponent<SiphonNearbyController>();
-                dekucon.siphonNearbyController.damagePerSecondCoefficient = Modules.StaticValues.blackwhip100DamageCoefficient;
-                dekucon.siphonNearbyController.Networkradius = Modules.StaticValues.blackwhip100Range;
-                dekucon.siphonNearbyController.NetworkmaxTargets =  Modules.StaticValues.blackwhip100Targets;
-            }
-
-
             if (base.isAuthority)
             {
                 new SpendHealthNetworkRequest(characterBody.masterObjectId, Modules.StaticValues.blackwhip100HealthCostFraction * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
             }
-
+            //animate blackwhip full
+            //base.PlayAnimation("RightArm, Override", "Blackwhip", "Attack.playbackRate", duration);
         }
 
-
+        protected override void DontDoSkill()
+        {
+            base.DontDoSkill();
+        }
         public override void OnExit()
         {
-
             base.OnExit();
         }
+
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            if (base.fixedAge >= fireTime && base.isAuthority && hasFired)
+            if (base.fixedAge > chargeTime && base.isAuthority)
             {
-                base.PlayCrossfade("FullBody, Override", "Blackwhip", "Attack.playbackRate", fireTime, 0.05f);
-                hasFired = true;
-            }
+                if (!hasFired)
+                {
+                    hasFired = true;
+                    //animate blackwhip pulling
+                    base.PlayCrossfade("RightArm, Override", "Blackwhip", "Attack.playbackRate", castTime, 0.01f);
+                    new PerformBlackwhipPullNetworkRequest(base.characterBody.masterObjectId, base.GetAimRay().origin - GetAimRay().direction, base.GetAimRay().direction, pullRange).Send(NetworkDestination.Clients);
 
-            
-            if ((base.fixedAge >= this.duration && base.isAuthority))
-            {
-                this.outer.SetNextStateToMain();
-                return;
+                }
+
+                if (base.fixedAge > duration && base.isAuthority)
+                {
+                    this.outer.SetNextStateToMain();
+                    return;
+                }
+
+
             }
 
 
         }
+
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;
         }
+
     }
 }

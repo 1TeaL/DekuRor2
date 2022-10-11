@@ -53,6 +53,8 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
         {
             base.OnExit();
+			base.skillLocator.DeductCooldownFromAllSkillsServer(dekucon.skillCDTimer);
+			dekucon.skillCDTimer = 0f;
 		}
 
 		public override InterruptPriority GetMinimumInterruptPriority()

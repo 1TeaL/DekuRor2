@@ -98,7 +98,7 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<PerformDetroitSmashNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PeformShootStyleKickAttackNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformStLouisSmashNetworkRequest>();
-            NetworkingAPI.RegisterMessageType<PerformBlackwhipNetworkRequest>();
+            NetworkingAPI.RegisterMessageType<PerformBlackwhip100NetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformBlackwhip100NetworkRequest>();
             NetworkingAPI.RegisterMessageType<ForceCounterState>();
 
@@ -178,10 +178,98 @@ namespace DekuMod
                         //deku mark system
                         if(body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                         {
+                            //gearshift buff
+                            if (damageInfo.damage > 0 && body.HasBuff(Buffs.gearshiftBuff))
+                            {
+                                damageInfo.force *= StaticValues.gearshiftForceBoost;
+                            }
+                            //gearshift45 buff
+                            if (damageInfo.damage > 0 && damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift45Buff))
+                            {
+                                var bulletAttack = new BulletAttack
+                                {
+                                    bulletCount = 1,
+                                    aimVector = body.inputBank.aimDirection,
+                                    origin = damageInfo.position,
+                                    damage = StaticValues.gearshift45DamageCoefficient * damageInfo.damage,
+                                    damageColorIndex = DamageColorIndex.WeakPoint,
+                                    damageType = damageInfo.damageType |= DamageType.SlowOnHit,
+                                    falloffModel = BulletAttack.FalloffModel.DefaultBullet,
+                                    maxDistance = 10f,
+                                    force = 500f,
+                                    hitMask = LayerIndex.CommonMasks.bullet,
+                                    minSpread = 0f,
+                                    maxSpread = 0f,
+                                    isCrit = body.RollCrit(),
+                                    owner = body.gameObject,
+                                    smartCollision = false,
+                                    procChainMask = default(ProcChainMask),
+                                    procCoefficient = 0,
+                                    radius = 1.5f,
+                                    sniper = true,
+                                    stopperMask = LayerIndex.world.collisionMask,
+                                    weapon = null,
+                                    spreadPitchScale = 0f,
+                                    spreadYawScale = 0f,
+                                    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
+                                    hitEffectPrefab = Modules.Assets.dekuHitImpactEffect,
+
+                                };
+                                bulletAttack.Fire();
+
+                                EffectManager.SpawnEffect(Modules.Assets.gearshiftPierceEffect, new EffectData
+                                {
+                                    origin = damageInfo.position,
+                                    scale = 1f,
+                                    rotation = Quaternion.LookRotation(body.inputBank.aimDirection) 
+
+                                }, true);
+
+                            }
+                            //gearshift100 buff
+                            if (damageInfo.damage > 0 && damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift100Buff))
+                            {
+                                var damageInfo2 = new DamageInfo();
+
+                                damageInfo2.damage = damageInfo.damage;
+                                damageInfo2.position = victimBody.transform.position;
+                                damageInfo2.force = Vector3.zero;
+                                damageInfo2.damageColorIndex = DamageColorIndex.Fragile;
+                                damageInfo2.crit = body.RollCrit();
+                                damageInfo2.attacker = body.gameObject;
+                                damageInfo2.inflictor = body.gameObject;
+                                damageInfo2.damageType = damageInfo.damageType;
+                                damageInfo2.procCoefficient = 0f;
+                                damageInfo2.procChainMask = default(ProcChainMask);
+
+                                float number = 0f;
+                                float threshold = StaticValues.gearshift100Threshold;
+                                while(body.moveSpeed >= threshold)
+                                {
+                                    AkSoundEngine.PostEvent("detroitexitsfx", body.gameObject);
+
+                                    if (victimBody.gameObject.GetComponent<CharacterBody>().baseNameToken
+                                        != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && body != null)
+                                    {
+                                        victimBody.healthComponent.TakeDamage(damageInfo2);
+                                    }
+
+                                    Vector3 enemyPos = victimBody.transform.position;
+                                    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                                    {
+                                        origin = enemyPos + ((body.transform.position - enemyPos) * number),
+                                        scale = 1f,
+                                        rotation = Quaternion.LookRotation((enemyPos - body.transform.position))
+
+                                    }, true);
+                                    number++;
+                                    threshold *= 2f;
+                                }
+                            }
                             //blackwhip debuff
                             if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.ClayGoo)
                             {
-                                victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhip100DebuffDuration);
+                                victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhipDebuffDuration);
                                 
                             }
                             //heal and armor mark for freeze

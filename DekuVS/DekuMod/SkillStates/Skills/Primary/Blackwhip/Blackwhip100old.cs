@@ -60,7 +60,7 @@ namespace DekuMod.SkillStates
 
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = Blackwhip100.blastRadius * this.attackSpeedStat;
+            blastAttack.radius = blastRadius * this.attackSpeedStat;
             blastAttack.procCoefficient = 1f;
             blastAttack.position = theSpot;
             blastAttack.attacker = base.gameObject;

@@ -36,6 +36,8 @@ namespace DekuMod.Modules.Survivors
         public ParticleSystem DANGERSENSE;
         public ParticleSystem WINDRING;
         public ParticleSystem BLACKWHIP;
+        public ParticleSystem GEARSHIFTIN;
+        public ParticleSystem GEARSHIFTOUT;
         private int buffCountToApply;
         public GenericSkill specialSkillSlot;
         string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
@@ -52,7 +54,7 @@ namespace DekuMod.Modules.Survivors
         public float dangersenseBlastRadius = 3f;
         public float dangersense45BlastRadius = 5f;
         public float dangersense100BlastRadius = 7f;
-        public static float procCoefficient = 1f;
+        public static float dangersenseprocCoefficient = 1f;
         public static float force = 300f;
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
@@ -71,7 +73,7 @@ namespace DekuMod.Modules.Survivors
         public float goBeyondBuffTimer;
 
         //Indicator
-        public float maxTrackingDistance = 50f;
+        public float maxTrackingDistance = 70f;
         public float maxTrackingAngle = 15f;
         public float trackerUpdateFrequency = 10f;
         private Indicator indicator;
@@ -85,9 +87,14 @@ namespace DekuMod.Modules.Survivors
         public uint gobeyondLoopID;
 
         //auras
-        public bool halfMeterAuraGiven;
-        public bool fullMeterAuraGiven;
-        public bool blackwhipAuraGiven;
+        //public bool halfMeterAuraGiven;
+        //public bool fullMeterAuraGiven;
+        //public bool blackwhipAuraGiven;
+        //public bool gearshiftInAuraGiven;
+        //public bool gearshiftOutAuraGiven;
+
+        //skill cd
+        public float skillCDTimer;
 
         public void Awake()
         {
@@ -108,6 +115,8 @@ namespace DekuMod.Modules.Survivors
                 DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
                 WINDRING = child.FindChild("windRing").GetComponent<ParticleSystem>();
                 BLACKWHIP = child.FindChild("blackwhipAura").GetComponent<ParticleSystem>();
+                GEARSHIFTIN = child.FindChild("gearshiftAuraIn").GetComponent<ParticleSystem>();
+                GEARSHIFTOUT = child.FindChild("gearshiftAuraOut").GetComponent<ParticleSystem>();
             }
             GOBEYOND.Stop();
             LARM.Stop();
@@ -121,6 +130,8 @@ namespace DekuMod.Modules.Survivors
             DANGERSENSE.Stop();
             WINDRING.Stop();
             BLACKWHIP.Stop();
+            GEARSHIFTIN.Stop();
+            GEARSHIFTOUT.Stop();
 
             StopGobeyondLoop();
 
@@ -142,10 +153,13 @@ namespace DekuMod.Modules.Survivors
                 if (!flag && damageInfo.damage > 0f)
                 {
                     //dangersense base
-                    if (self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex))
+                    if (self.body.HasBuff(Buffs.dangersenseBuff.buffIndex))
                     {
+                        self.body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 0, -1);
+                        self.body.ApplyBuff(Buffs.dangersenseDebuff.buffIndex, 1, StaticValues.dangersenseBuffTimer);
+
                         damageInfo.force = Vector3.zero;
-                        damageInfo.damage -= self.body.level * 5f;
+                        damageInfo.damage -= self.body.armor;
                         if(damageInfo.damage < 0f)
                         {
                             self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
@@ -185,209 +199,45 @@ namespace DekuMod.Modules.Survivors
 
                         }, true);
 
-                        //new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
-
-
-
-                        //blastAttack = new BlastAttack();
-                        //blastAttack.radius = dangersenseBlastRadius;
-                        //blastAttack.procCoefficient = procCoefficient;
-                        //blastAttack.position = self.transform.position;
-                        //blastAttack.attacker = base.gameObject;
-                        //blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        //blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
-                        //blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                        //blastAttack.baseForce = force;
-                        //blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                        //blastAttack.damageType = DamageType.Shock5s;
-                        //blastAttack.attackerFiltering = AttackerFiltering.Default;
-
-
-                        //blastAttack.Fire();
-
-                        //for (int i = 0; i <= 5; i++)
-                        //{
-                        //    this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                        //    float num = 60f;
-                        //    Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
-                        //    float num2 = 0.01f;
-                        //    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                        //    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-
-                        //    EffectData effectData = new EffectData
-                        //    {
-                        //        scale = 1f,
-                        //        origin = self.body.corePosition + this.randRelPos,
-                        //        rotation = rotation
-
-                        //    };
-                        //    EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
-                        //}
-
-
-                    }
-                    //dangersense 45
-                    if (self.body.HasBuff(Modules.Buffs.dangersense45Buff.buffIndex))
-                    {
-                        damageInfo.damage *= StaticValues.dangersense45DamageReduction;
-
-
-                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
-
-                        var dekucon = self.body.gameObject.GetComponent<DekuController>();
-                        //dekucon.countershouldflip = true;
-
-                        var damageInfo2 = new DamageInfo();
-
-                        damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersense45DamageCoefficient;
-                        damageInfo2.position = damageInfo.attacker.transform.position;
-                        damageInfo2.force = Vector3.zero;
-                        damageInfo2.damageColorIndex = DamageColorIndex.Default;
-                        damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        damageInfo2.attacker = self.body.gameObject;
-                        damageInfo2.inflictor = self.body.gameObject;
-                        damageInfo2.damageType = DamageType.Shock5s;
-                        damageInfo2.procCoefficient = 1f;
-                        damageInfo2.procChainMask = default(ProcChainMask);
-
-                        if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
-                            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+                        if (!self.body.inputBank.skill1.down && !self.body.inputBank.skill2.down && !self.body.inputBank.skill3.down)
                         {
-                            damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
-                        }
+                            new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
 
-                        Vector3 enemyPos = damageInfo.attacker.transform.position;
-                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                        {
-                            origin = self.body.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
-
-                        }, true);
-
-                        new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
-
-
-
-                        //blastAttack = new BlastAttack();
-                        //blastAttack.radius = dangersenseBlastRadius;
-                        //blastAttack.procCoefficient = procCoefficient;
-                        //blastAttack.position = self.transform.position;
-                        //blastAttack.attacker = self.body.gameObject;
-                        //blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        //blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersense45DamageCoefficient;
-                        //blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                        //blastAttack.baseForce = force;
-                        //blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                        //blastAttack.damageType = DamageType.Generic;
-                        //blastAttack.attackerFiltering = AttackerFiltering.Default;
+                            blastAttack = new BlastAttack();
+                            blastAttack.radius = dangersenseBlastRadius;
+                            blastAttack.procCoefficient = dangersenseprocCoefficient;
+                            blastAttack.position = self.transform.position;
+                            blastAttack.attacker = base.gameObject;
+                            blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                            blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
+                            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                            blastAttack.baseForce = force;
+                            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                            blastAttack.damageType = DamageType.Shock5s;
+                            blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 
-                        //blastAttack.Fire();
+                            blastAttack.Fire();
 
-                        //for (int i = 0; i <= 5; i++)
-                        //{
-                        //    this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                        //    float num = 60f;
-                        //    Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
-                        //    float num2 = 0.01f;
-                        //    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                        //    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-
-                        //    EffectData effectData = new EffectData
-                        //    {
-                        //        scale = 1f,
-                        //        origin = self.body.corePosition + this.randRelPos,
-                        //        rotation = rotation
-
-                        //    };
-                        //    EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
-                        //}
-
-
-                    }
-                    //dangersense 100
-                    if (self.body.HasBuff(Modules.Buffs.dangersense100Buff.buffIndex))
-                    {
-                        damageInfo.force = Vector3.zero;
-                        damageInfo.damage -= self.body.armor;
-                        if (damageInfo.damage < 0f)
-                        {
-                            //self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
-                            damageInfo.damage = 0f;
-                        }
-
-
-                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
-
-                        var dekucon = self.body.gameObject.GetComponent<DekuController>();
-                        //dekucon.countershouldflip = true;
-
-                        var damageInfo2 = new DamageInfo();
-
-                        damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersense100DamageCoefficient;
-                        damageInfo2.position = damageInfo.attacker.transform.position;
-                        damageInfo2.force = Vector3.zero;
-                        damageInfo2.damageColorIndex = DamageColorIndex.Default;
-                        damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        damageInfo2.attacker = self.body.gameObject;
-                        damageInfo2.inflictor = self.body.gameObject;
-                        damageInfo2.damageType = DamageType.Generic;
-                        damageInfo2.procCoefficient = 1f;
-                        damageInfo2.procChainMask = default(ProcChainMask);
-
-                        if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
-                            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
-                        {
-                            damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
-                        }
-
-                        Vector3 enemyPos = damageInfo.attacker.transform.position;
-                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                        {
-                            origin = self.body.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
-
-                        }, true);
-
-                        new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
-
-
-
-                        blastAttack = new BlastAttack();
-                        blastAttack.radius = dangersense100BlastRadius;
-                        blastAttack.procCoefficient = procCoefficient;
-                        blastAttack.position = self.transform.position;
-                        blastAttack.attacker = base.gameObject;
-                        blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersense100DamageCoefficient;
-                        blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                        blastAttack.baseForce = force;
-                        blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                        blastAttack.damageType = DamageType.Generic;
-                        blastAttack.attackerFiltering = AttackerFiltering.Default;
-
-
-                        blastAttack.Fire();
-
-                        for (int i = 0; i <= 5; i++)
-                        {
-                            this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                            float num = 60f;
-                            Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
-                            float num2 = 0.01f;
-                            rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                            rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-
-                            EffectData effectData = new EffectData
+                            for (int i = 0; i <= 5; i++)
                             {
-                                scale = 1f,
-                                origin = self.body.corePosition + this.randRelPos,
-                                rotation = rotation
+                                this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+                                float num = 60f;
+                                Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
+                                float num2 = 0.01f;
+                                rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                                rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
 
-                            };
-                            EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                                EffectData effectData = new EffectData
+                                {
+                                    scale = 1f,
+                                    origin = self.body.corePosition + this.randRelPos,
+                                    rotation = rotation
+
+                                };
+                                EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                            }
+
                         }
 
 
@@ -406,9 +256,7 @@ namespace DekuMod.Modules.Survivors
 
             goBeyondUsed = false;
             goBeyondOFAGiven = false;
-            halfMeterAuraGiven = false;
-            fullMeterAuraGiven = false;
-            blackwhipAuraGiven = false;
+            skillCDTimer = 0f;
         }
 
 
@@ -427,29 +275,84 @@ namespace DekuMod.Modules.Survivors
 
             }
 
-            //blackwhip
+            //skill CD timer
+            skillCDTimer += Time.fixedDeltaTime;
 
+            //gearshift
+            if (body.HasBuff(Buffs.gearshift100Buff.buffIndex))
+            {
+                int gearshiftMovespeed = (int)Math.Round(body.moveSpeed);
+                if (NetworkServer.active)
+                {
+                    body.SetBuffCount(Buffs.gearshift100MovespeedBuff.buffIndex, gearshiftMovespeed);
+                }
+
+
+                if (GEARSHIFTIN.isStopped)
+                {
+                    GEARSHIFTIN.Play();
+                }
+                if (GEARSHIFTOUT.isStopped)
+                {
+                    GEARSHIFTOUT.Play();
+                }
+            }
+            else if (!body.HasBuff(Buffs.gearshift100Buff.buffIndex))
+            {
+                if (NetworkServer.active)
+                {
+                    body.SetBuffCount(Buffs.gearshift100MovespeedBuff.buffIndex, 0);
+                }
+                if (body.HasBuff(Buffs.gearshiftBuff.buffIndex))
+                {
+                    if (GEARSHIFTIN.isStopped)
+                    {
+                        GEARSHIFTIN.Play();
+                    }
+                }
+                else if (!body.HasBuff(Buffs.gearshiftBuff.buffIndex))
+                {
+                    if (GEARSHIFTIN.isPlaying)
+                    {
+                        GEARSHIFTIN.Stop();
+                    }
+                }
+
+                if (body.HasBuff(Buffs.gearshift45Buff.buffIndex))
+                {
+                    if (GEARSHIFTOUT.isStopped)
+                    {
+                        GEARSHIFTOUT.Play();
+                    }
+                }
+                else if (!body.HasBuff(Buffs.gearshift45Buff.buffIndex))
+                {
+                    if (GEARSHIFTOUT.isPlaying)
+                    {
+                        GEARSHIFTOUT.Stop();
+                    }
+                }
+
+            }
+            //blackwhip
             if (this.siphonNearbyController)
             {
-                this.siphonNearbyController.NetworkmaxTargets = (body.healthComponent.alive ? Modules.StaticValues.blackwhip100Targets : 0);
-
+                this.siphonNearbyController.NetworkmaxTargets = (body.healthComponent.alive ? StaticValues.blackwhipTargets : 0);
             }
             if (body.HasBuff(Buffs.blackwhipBuff.buffIndex))
             {
-                if (!blackwhipAuraGiven)
+                if (BLACKWHIP.isStopped)
                 {
                     BLACKWHIP.Play();
-                    blackwhipAuraGiven = true;
                 }
 
             }
             else if (!body.HasBuff(Buffs.blackwhipBuff.buffIndex))
             {
                 this.DestroyAttachment();
-                if (blackwhipAuraGiven)
+                if (BLACKWHIP.isPlaying)
                 {
                     BLACKWHIP.Stop();
-                    blackwhipAuraGiven = false;
                 }
             }
 
@@ -465,7 +368,7 @@ namespace DekuMod.Modules.Survivors
                             body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 1);
                         }
                         stopwatch += Time.fixedDeltaTime;
-                        if (stopwatch > 1f)
+                        if (stopwatch > 0.5f)
                         {
                             if (body.characterMotor.velocity.y <= 0)
                             {
@@ -559,8 +462,11 @@ namespace DekuMod.Modules.Survivors
                     body.AddBuff(Modules.Buffs.goBeyondBuffUsed);
                     if (!goBeyondUsed)
                     {
-                        goBeyondUsed = true;
-                        body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1);
+                        goBeyondUsed = true; 
+                        if (NetworkServer.active)
+                        {
+                            body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1);
+                        }
                     }
                 }
                 else
@@ -576,12 +482,22 @@ namespace DekuMod.Modules.Survivors
                     if (!goBeyondOFAGiven)
                     {
                         goBeyondOFAGiven = true;
-                        body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1, -1);
+                        if (NetworkServer.active)
+                        {
+                            body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1, -1);
+                        }
                     }
                 }
             }
-            //danger sense particle
-            if (body.HasBuff(Buffs.dangersenseBuff) || body.HasBuff(Buffs.dangersense45Buff) || body.HasBuff(Buffs.dangersense100Buff))
+            //danger sense and particle
+            if (!body.HasBuff(Buffs.dangersenseDebuff))
+            {
+                if (NetworkServer.active)
+                {
+                    body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 1, -1);
+                }
+            }
+            if (body.HasBuff(Buffs.dangersenseBuff))
             {
                 if (DANGERSENSE.isStopped)
                 {
@@ -617,39 +533,54 @@ namespace DekuMod.Modules.Survivors
                 OFA.Stop();
             }
 
-            if (energySystem.currentPlusUltra >= 99f)
+            if (energySystem.currentPlusUltra >= 90f)
             {
-                if (!fullMeterAuraGiven)
+                if (RLEG.isStopped)
                 {
                     RLEG.Play();
+                }
+                if (LLEG.isStopped)
+                {
                     LLEG.Play();
-                    fullMeterAuraGiven = true;
                 }
             }
-            else if (energySystem.currentPlusUltra >= 50f)
+            else if (energySystem.currentPlusUltra >= 50f && energySystem.currentPlusUltra < 90f)
             {
-                if (!halfMeterAuraGiven)
+                if (RARM.isStopped)
                 {
                     RARM.Play();
+                }
+                if (LARM.isStopped)
+                {
                     LARM.Play();
-                    halfMeterAuraGiven = true;
-
-                    if (fullMeterAuraGiven)
-                    {
-                        RLEG.Stop();
-                        LLEG.Stop();
-                        fullMeterAuraGiven = false;
-                    }
+                }
+                if (RLEG.isPlaying)
+                {
+                    RLEG.Stop();
+                }
+                if (LLEG.isPlaying)
+                {
+                    LLEG.Stop();
                 }
             }
             else if (energySystem.currentPlusUltra < 50f)
             {
-                halfMeterAuraGiven = false;
-                fullMeterAuraGiven = false;
-                RARM.Stop();
-                LARM.Stop();
-                RLEG.Stop();
-                LLEG.Stop();
+                if (RLEG.isPlaying)
+                {
+                    RLEG.Stop();
+                }
+                if (LLEG.isPlaying)
+                {
+                    LLEG.Stop();
+                }
+                if (RARM.isPlaying)
+                {
+                    RARM.Stop();
+                }
+                if (LARM.isPlaying)
+                {
+                    LARM.Stop();
+                }
             }
 
 

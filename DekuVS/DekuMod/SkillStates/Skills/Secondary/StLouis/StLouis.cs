@@ -96,7 +96,7 @@ namespace DekuMod.SkillStates
                     blastAttack.crit = base.RollCrit();
                     blastAttack.baseDamage = base.damageStat * Modules.StaticValues.stlouisDamageCoefficient;
                     blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                    //blastAttack.baseForce = 10f * Weight;
+                    blastAttack.baseForce = 500f;
                     blastAttack.bonusForce = GetAimRay().direction * 100f;
                     blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                     blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;

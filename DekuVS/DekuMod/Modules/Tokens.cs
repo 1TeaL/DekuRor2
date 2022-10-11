@@ -41,13 +41,13 @@ namespace DekuMod.Modules
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Ninth One For All User");
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", 
-            Helpers.Passive("[Plus Ultra Meter] [Marks] [Float]") +"." + Environment.NewLine
+            Helpers.Passive("[Plus Ultra Meter] [Marks] [Float] [Danger Sense]") +"." + Environment.NewLine
             + "<style=cIsUtility>He has a double jump. He can sprint in any direction. </style>");
              #endregion
 
             #region Primary
             LanguageAPI.Add(prefix + "FISTPRIMARY_NAME", "Airforce");
-            LanguageAPI.Add(prefix + "FISTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage</style>" + ".");
+            LanguageAPI.Add(prefix + "FISTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>2x{100f * StaticValues.airforceDamageCoefficient}% damage. On Crit, ricochet to {StaticValues.airforceMaxRicochet} additional enemies</style>" + " .");
             LanguageAPI.Add(prefix + "LEGPRIMARY_NAME", "Shoot Style");
             LanguageAPI.Add(prefix + "LEGPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Kick forward, dealing <style=cIsDamage>{100f * StaticValues.shootkickDamageCoefficient}% damage</style>, with every 3 hits reducing cooldowns by 1 second and shocking. Dash towards distant targets" + ".");
             LanguageAPI.Add(prefix + "QUIRKPRIMARY_NAME", "Blackwhip");
@@ -69,7 +69,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEG100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Instantly dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.shootkick100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100PRIMARY_NAME", "Blackwhip 100%");
-            LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Activate blackwhip for {StaticValues.blackwhip100DebuffDuration} seconds, restricting their movements and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style> per tick, healing based on your damage dealt." 
+            LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Activate blackwhip for {StaticValues.blackwhipDebuffDuration} seconds, restricting their movements and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage</style> per tick, healing based on your damage dealt." 
                 + Helpers.Damage($" Costs {100f * StaticValues.blackwhip100HealthCostFraction}% of max health.") 
                 + Helpers.Passive($" Costs {StaticValues.skill100PlusUltraSpend} of plus ultra") + ".");
             
@@ -103,30 +103,30 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "FISTSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Teleport and punch the target and enemies around, dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}% damage</style>. Uppercut them if they are grounded and smash them down if they are in the air" + ".");
             LanguageAPI.Add(prefix + "LEGSECONDARY_NAME", "St Louis Smash");
             LanguageAPI.Add(prefix + "LEGSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Teleport and kick the target and enemies around, dealing <style=cIsDamage>{100f * StaticValues.stlouisDamageCoefficient}% damage</style>, sending them forward" + ".");
-            LanguageAPI.Add(prefix + "QUIRKSECONDARY_NAME", "Danger Sense");
-            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Freezing.</style> Activate danger sense for {StaticValues.dangersenseBuffTimer} seconds. When hit, take reduced damage based on your [current level x 5] and freeze the enemy, dealing <style=cIsDamage>{100f * StaticValues.dangersenseDamageCoefficient}% damage</style>." +
-                $" Heal if all damage is negated." 
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_NAME", "Gear Shift");
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate gear shift for {StaticValues.gearshiftBuffTimer} seconds. <style=cIsDamage>The knockback of attacks are multiplied by {StaticValues.gearshiftForceBoost}x</style>." 
                 + Helpers.Passive($" Costs {StaticValues.skillPlusUltraSpend} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST45SECONDARY_NAME", "Detroit Smash 45%");
             LanguageAPI.Add(prefix + "FIST45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to charge a Detroit Smash. When the skill key is released or after some time, teleport and smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.detroit45DamageCoefficient}% - {3 * 100f * StaticValues.detroit45DamageCoefficient}% damage</style>" + ".");
             LanguageAPI.Add(prefix + "LEG45SECONDARY_NAME", "St Louis Smash 45%");
             LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing <style=cIsDamage>{100f * StaticValues.stlouis45DamageCoefficient}% damage</style>" + ".");
-            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Danger Sense 45%");
-            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Activate danger sense for {StaticValues.dangersense45BuffTimer} seconds. When hit, take {100f * StaticValues.dangersense45DamageReduction} reduced damage, dodging out of the way as well as shock the enemy dealing <style=cIsDamage>{100f * StaticValues.dangersense45DamageCoefficient}% damage</style>." 
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Gear Shift 45%");
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate gear shift for {StaticValues.gearshift45BuffTimer} seconds. <style=cIsDamage>Attacks slow enemies and pierce through them for {100f * StaticValues.gearshift45DamageCoefficient}% of the damage</style>."
                 + Helpers.Passive($" Costs {StaticValues.skill45PlusUltraSpend} of plus ultra") + ".");
-            
+
             LanguageAPI.Add(prefix + "FIST100SECONDARY_NAME", "Detroit Smash 100%");
-            LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to jump forward while charging a Detroit Smash. When the skill key is released or you collide with an enemy, smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.detroit100DamageCoefficient}% damage, multiplied by flight time</style>." 
+            LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to jump forward while charging a Detroit Smash. When the skill key is released or you collide with an enemy, smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.detroit100DamageCoefficient}% damage, multiplied by flight time and movespeed</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.detroit100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "LEG100SECONDARY_NAME", "St Louis Smash 100%");
             LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to prep a physics breaking St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>5x{100f * StaticValues.stlouis100DamageCoefficient}% damage</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.stlouis100HealthCostFraction}% of max health") + ".");
-            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Danger Sense 100%");
-            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate full concentration danger sense for {StaticValues.dangersense100BuffTimer} seconds. When hit, take reduced damage based on your current armor, dodging out of the way as well as dealing damage to the enemy and nearby enemies for <style=cIsDamage>{100f * StaticValues.dangersense100DamageCoefficient}% damage</style>." 
-                + Helpers.Damage($" Costs {100f * StaticValues.dangersense100HealthCostFraction}% of max health")
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Gear Shift 100%");
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Overdrive gear shift for {StaticValues.gearshift100BuffTimer} seconds. <style=cIsDamage>Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed</style>." + Environment.NewLine +
+                $" <style=cIsUtility>The initial threshold is {StaticValues.gearshift100Threshold} movespeed, doubling for each subsequent threshold</style>."
+                + Helpers.Damage($" Costs {100f * StaticValues.gearshift100HealthCostFraction}% of max health")
                 + Helpers.Passive($" Costs {StaticValues.skill100PlusUltraSpend} of plus ultra") + ".");
-            
+
 
 
             //LanguageAPI.Add(prefix + "SECONDARY2_NAME", "Manchester Smash");
@@ -286,7 +286,13 @@ namespace DekuMod.Modules
                 + Environment.NewLine
             + $"<style=cKeywordName>Float</style>" 
                 + "<style=cIsUtility>Holding jump in the air after 1 second let's him Float, flying up or slowing descent if using a skill</style>." 
-                + Helpers.Passive(" Drains energy") + ".");
+                + Helpers.Passive(" Drains energy")
+                + Environment.NewLine
+                + Environment.NewLine
+            + $"<style=cKeywordName>Danger Sense</style>"
+                + $"<style=cIsUtility>Take reduced damage based on your armor every 10 seconds</style>, <style=cIsDamage>freezing the attacker for {100f * StaticValues.dangersenseDamageCoefficient}% damage</style>." 
+                + Helpers.Passive(" If the damage is fully negated, heal for the damage dealt.")
+                + $" If not using a skill, <style=cIsUtility>dodge out of the way</style> and <style=cIsDamage>shock enemies around you for {100f * StaticValues.dangersenseDamageCoefficient}% damage</style> as well.");
 
             #endregion
 

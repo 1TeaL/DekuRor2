@@ -112,7 +112,6 @@ namespace DekuMod.SkillStates.BaseStates
 
         protected virtual void OnHitEnemyAuthority()
         {
-            base.skillLocator.DeductCooldownFromAllSkillsServer(1f);
             Util.PlaySound(this.hitSoundString, base.gameObject);
 
             if (!this.hasHopped)

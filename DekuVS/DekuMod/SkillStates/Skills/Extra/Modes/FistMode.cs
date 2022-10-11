@@ -121,9 +121,6 @@ namespace DekuMod.SkillStates
 					break;
 			}
 
-			base.skillLocator.primary.AddOneStock();
-			base.skillLocator.secondary.AddOneStock();
-			base.skillLocator.utility.AddOneStock();
 
 		}
 

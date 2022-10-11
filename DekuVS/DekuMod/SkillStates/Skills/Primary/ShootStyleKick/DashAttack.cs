@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates
         private float procCoefficient = 1f;
         private float pushForce = 0f;
         private Vector3 storedPosition;
-        public static float dashSpeed = 80f;       
+        public static float dashSpeed = 100f;       
         public static float hopForce = 10f;
         public static float damageCoefficient = 0f;
         public override void OnEnter()

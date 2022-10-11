@@ -138,7 +138,7 @@ namespace DekuMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			totalDuration += Time.fixedDeltaTime/2;
+			totalDuration += Time.fixedDeltaTime/4;
 
 			if(base.fixedAge > fireTime)
 			{
@@ -165,7 +165,7 @@ namespace DekuMod.SkillStates
 				//base.characterDirection.forward = this.direction;
 
 				//indicator update
-				this.areaIndicator.transform.localScale = Vector3.one * this.hitradius * totalDuration;
+				this.areaIndicator.transform.localScale = Vector3.one * this.hitradius * (1+totalDuration);
 				this.areaIndicator.transform.localPosition = base.transform.position;
 
 				base.characterBody.isSprinting = true;

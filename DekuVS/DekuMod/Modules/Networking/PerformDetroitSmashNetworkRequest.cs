@@ -115,7 +115,7 @@ namespace DekuMod.Modules.Networking
 
                     }, true);
                 }
-                else
+                else if (!enemycharBody.characterMotor.isGrounded)
                 {
 
                     EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData
@@ -134,7 +134,7 @@ namespace DekuMod.Modules.Networking
                     }, true);
                 }
             }
-            else
+            else if (enemycharBody.rigidbody)
             {
 
                 EffectManager.SpawnEffect(Modules.Assets.detroitweakEffect, new EffectData

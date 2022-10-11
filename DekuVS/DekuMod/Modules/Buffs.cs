@@ -31,12 +31,20 @@ namespace DekuMod.Modules
         internal static BuffDef manchesterBuff;
         internal static BuffDef oklahomaBuff;
 
-        //counter
+        //dangersense
         internal static BuffDef dangersenseBuff;
-        internal static BuffDef dangersense45Buff;
-        internal static BuffDef dangersense100Buff;
+        //internal static BuffDef dangersense45Buff;
+        //internal static BuffDef dangersense100Buff;
+
+        //gearshift
+        internal static BuffDef gearshiftBuff;
+        internal static BuffDef gearshift45Buff;
+        internal static BuffDef gearshift100Buff;
+        internal static BuffDef gearshift100MovespeedBuff;
+
         //debuffs
         internal static BuffDef delayAttackDebuff;
+        internal static BuffDef dangersenseDebuff;
         internal static BuffDef blackwhipDebuff;
 
         //marks
@@ -58,9 +66,14 @@ namespace DekuMod.Modules
 
             fajinBuff = Buffs.AddNewBuff("FaJinBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, false, false);
             floatBuff = Buffs.AddNewBuff("DekuFloatBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Float"), Color.white, false, false);
+            gearshiftBuff = Buffs.AddNewBuff("gearshiftBuff", Assets.speedBuffIcon, Color.white, false, false);
+            gearshift45Buff = Buffs.AddNewBuff("gearshift45Buff", Assets.speedBuffIcon, Color.blue, false, false);
+            gearshift100Buff = Buffs.AddNewBuff("gearshift100Buff", Assets.jumpBuffIcon, Color.white, false, false);
+            gearshift100MovespeedBuff = Buffs.AddNewBuff("gearshift100MovespeedBuff", Assets.jumpBuffIcon, Color.blue, true, false);
             dangersenseBuff = Buffs.AddNewBuff("DangerSenseBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
-            dangersense45Buff = Buffs.AddNewBuff("DangerSense45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
-            dangersense100Buff = Buffs.AddNewBuff("DangerSense100Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
+            dangersenseDebuff = Buffs.AddNewBuff("dangersenseDebuff", Assets.lightningBuffIcon, Color.black, false, true);
+            //dangersense45Buff = Buffs.AddNewBuff("DangerSense45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
+            //dangersense100Buff = Buffs.AddNewBuff("DangerSense100Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
             delayAttackDebuff = Buffs.AddNewBuff("delayAttackDebuff", Assets.crippleBuffIcon, Color.green, true, true);
             blackwhipDebuff = Buffs.AddNewBuff("blackwhipDebuff", Assets.crippleBuffIcon, Color.black, false, true);
             healMark = Buffs.AddNewBuff("healMark", Assets.critBuffIcon, Color.green, true, true);

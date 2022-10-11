@@ -99,25 +99,36 @@ namespace DekuMod.SkillStates
                     blastAttack.crit = base.RollCrit();
                     blastAttack.baseDamage = base.damageStat * Modules.StaticValues.detroitDamageCoefficient;
                     blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                    //blastAttack.baseForce = 10f * Weight;
+                    blastAttack.baseForce = 500f;
                     blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                     blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-                    if (Target.healthComponent.body.characterMotor.isGrounded)
+                    if (Target.healthComponent.body.characterMotor)
                     {
-                        EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing3", true);
-                        PlayCrossfade("RightArm, Override", "DetroitSmashUp", "Attack.playbackRate", fireTime, 0.01f);
-                        blastAttack.bonusForce = Vector3.up * 50f;
-                        blastAttack.Fire();
+                        Debug.Log("charactermotor");
+                        if (Target.healthComponent.body.characterMotor.isGrounded)
+                        {
+                            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing3", true);
+                            PlayCrossfade("RightArm, Override", "DetroitSmashUp", "Attack.playbackRate", fireTime, 0.01f);
+                            blastAttack.Fire();
+
+                        }
+                        else if (!Target.healthComponent.body.characterMotor.isGrounded)
+                        {
+                            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
+                            PlayCrossfade("RightArm, Override", "DetroitSmashDown", "Attack.playbackRate", fireTime, 0.01f);
+                            blastAttack.Fire();
+                        }
 
                     }
-                    if (!Target.healthComponent.body.characterMotor.isGrounded)
+                    else if (!Target.healthComponent.body.rigidbody)
                     {
+                        Debug.Log("rigidbody");
                         EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
                         PlayCrossfade("RightArm, Override", "DetroitSmashDown", "Attack.playbackRate", fireTime, 0.01f);
-                        blastAttack.bonusForce = Vector3.down * 50f;
                         blastAttack.Fire();
                     }
+
 
                     EffectManager.SpawnEffect(Modules.Assets.lightningNovaEffectPrefab, new EffectData
                     {
@@ -141,6 +152,7 @@ namespace DekuMod.SkillStates
             }
             else
             {
+                Debug.Log("no target");
                 base.skillLocator.secondary.AddOneStock();
                 this.outer.SetNextStateToMain();
                 return;

@@ -84,6 +84,11 @@ namespace DekuMod.SkillStates
         protected override void OnHitEnemyAuthority()
         {
             base.OnHitEnemyAuthority();
+
+            if (swingIndex == 2)
+            {
+                base.skillLocator.DeductCooldownFromAllSkillsServer(1f);
+            }
         }
 
         protected override void SetNextState()

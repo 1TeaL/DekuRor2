@@ -117,9 +117,6 @@ namespace DekuMod.SkillStates
 					extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, Deku.quirkSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 					break;
 			}
-			base.skillLocator.primary.AddOneStock();
-			base.skillLocator.secondary.AddOneStock();
-			base.skillLocator.utility.AddOneStock();
 
 		}
 

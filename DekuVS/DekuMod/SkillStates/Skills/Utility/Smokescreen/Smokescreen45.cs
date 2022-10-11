@@ -26,13 +26,13 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
 		{
 			base.OnEnter();
+			hasFired = false;
 
 		}
 
 		protected override void DoSkill()
 		{
-			hasFired = false;
-			dekucon = base.GetComponent<DekuController>();
+			base.DoSkill();
 			Ray aimRay = base.GetAimRay();
 			theSpot = aimRay.origin + 0 * aimRay.direction;
 			bool active = NetworkServer.active;

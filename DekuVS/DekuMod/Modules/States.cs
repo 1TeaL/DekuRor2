@@ -60,9 +60,11 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(StLouis45));
             entityStates.Add(typeof(StLouis100));
 
+            entityStates.Add(typeof(GearShift));
+            entityStates.Add(typeof(GearShift45));
+            entityStates.Add(typeof(GearShift100));
+
             entityStates.Add(typeof(DangerSense));
-            entityStates.Add(typeof(DangerSense45));
-            entityStates.Add(typeof(DangerSense100));
             entityStates.Add(typeof(DangerSenseCounter));
 
             entityStates.Add(typeof(ShootStyleBulletStun45));

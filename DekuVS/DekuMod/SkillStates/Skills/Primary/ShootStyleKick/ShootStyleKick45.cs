@@ -320,7 +320,7 @@ namespace DekuMod.SkillStates
 			if (flag)
 			{
 
-				base.PlayAnimation("FullBody, Override", "ShootStyleKickExit", "Attack.playbackRate", duration);
+				base.PlayCrossfade("FullBody, Override", "ShootStyleKickExit", "Attack.playbackRate", duration, 0.01f);
 				this.stopwatch = duration - this.extraDuration;
 				bool flag2 = base.cameraTargetParams;
 				if (flag2)

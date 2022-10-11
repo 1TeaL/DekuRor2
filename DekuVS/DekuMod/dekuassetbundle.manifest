@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3792865083
+CRC: 682114108
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7afa83a959f762a7d571e35d0a60cd0a
+    Hash: 4b196db36c66d939ebd057735fcb5db3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -81,6 +81,7 @@ Assets:
 - Assets/Deku/DekuV2/GUI/stlouis100.png
 - Assets/Deku/DekuV2/VFX/airforce100impact.prefab
 - Assets/Deku/DekuV2/Animations/FinalSmashDash.anim
+- Assets/Deku/DekuV2/VFX/gearshiftAura.prefab
 - Assets/Deku/DekuV2/GUI/lightningwhitegreen.tif
 - Assets/Deku/DekuV2/Animations/FinalSmashBegin.anim
 - Assets/Deku/DekuV2/Animations/DelawareSmash.anim
@@ -110,6 +111,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/DangerSenseParticle.prefab
 - Assets/Deku/DekuV2/Animations/StLouis.anim
 - Assets/Deku/DekuV2/Animations/Jumping.anim
+- Assets/Deku/DekuV2/VFX/gearshiftPierce.prefab
 - Assets/Deku/DekuV2/GUI/oklahoma45.png
 - Assets/Deku/DekuV2/Animations/ShootStyleComboDash.anim
 - Assets/Deku/DekuV2/Assets/matDeku.mat

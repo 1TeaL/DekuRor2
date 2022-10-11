@@ -24,7 +24,7 @@ namespace DekuMod.SkillStates
         private string muzzleString;
 
         public DamageType damageType = DamageType.Generic;
-        public static int maxRicochetCount = 5;
+        public static int maxRicochetCount = Modules.StaticValues.airforceMaxRicochet;
         public static bool resetBouncedObjects = true;
 
 
