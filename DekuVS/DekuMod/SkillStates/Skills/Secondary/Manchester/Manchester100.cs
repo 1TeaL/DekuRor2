@@ -29,6 +29,7 @@ namespace DekuMod.SkillStates
 
         protected DamageType damageType = DamageType.Generic;
         private Vector3 theSpot;
+        private float num;
 
         //private NemforcerGrabController grabController;
 
@@ -45,6 +46,12 @@ namespace DekuMod.SkillStates
             if (base.isAuthority)
             {
                 AkSoundEngine.PostEvent("manchester", this.gameObject);
+            }
+            num = this.moveSpeedStat / 1.5f;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
             }
 
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
@@ -149,12 +156,12 @@ namespace DekuMod.SkillStates
                 base.characterMotor.velocity *= 0.1f;
 
                 BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = slamRadius + (1 + dropTimer / 2) * (moveSpeedStat / 7);
+                blastAttack.radius = slamRadius + (1 + dropTimer / 2) * num;
                 blastAttack.procCoefficient = slamProcCoefficient;
                 blastAttack.position = base.characterBody.footPosition;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (moveSpeedStat / 7) * (1 + dropTimer);
+                blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * num * (1 + dropTimer);
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = slamForce;
                 blastAttack.teamIndex = base.teamComponent.teamIndex;
@@ -170,12 +177,12 @@ namespace DekuMod.SkillStates
 
                 for (int i = 0; i <= 4; i += 1)
                 {
-                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (slamRadius * (1 + dropTimer / 2) * 0.5f));
+                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (slamRadius * (1 + dropTimer / 2) * 0.5f * num));
                     effectPosition.y = base.characterBody.footPosition.y;
                     EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
                     {
                         origin = effectPosition,
-                        scale = slamRadius * (1 + dropTimer / 2) * 0.5f * (moveSpeedStat / 7),
+                        scale = slamRadius * (1 + dropTimer / 2) * 0.5f * num,
                     }, true);
                 }
 

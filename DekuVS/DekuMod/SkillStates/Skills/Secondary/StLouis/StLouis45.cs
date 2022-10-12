@@ -9,13 +9,14 @@ using static RoR2.BlastAttack;
 using DekuMod.Modules.Networking;
 using R2API.Networking.Interfaces;
 using R2API.Networking;
+using System;
 
 namespace DekuMod.SkillStates
 {
     public class StLouis45 : BaseSkill100
     {
         public float baseDuration = 1f;
-        public static float blastRadius = 15f;
+        public static float blastRadius = 10f;
         public static float succForce = 4.5f;
         //private GameObject effectPrefab = Modules.Assets.sEffect;
 
@@ -44,14 +45,14 @@ namespace DekuMod.SkillStates
                 speedattack = 1;
             }
 
-            //EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-            //{
-            //    origin = base.transform.position,
-            //    scale = 1f,
-            //    rotation = Quaternion.LookRotation(aimRay.direction)
-            //}, false);
-            
+            float num = this.moveSpeedStat / 1.25f;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
 
+            blastRadius *= num;
 
             //hasFired = false;
             theSpot = aimRay.origin + range * aimRay.direction;
@@ -71,13 +72,13 @@ namespace DekuMod.SkillStates
 
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = blastRadius * speedattack;
+            blastAttack.radius = blastRadius;
             blastAttack.procCoefficient = 0.2f;
             blastAttack.position = theSpot;
             blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis45DamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis45DamageCoefficient * num;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
@@ -115,14 +116,14 @@ namespace DekuMod.SkillStates
                 EffectManager.SpawnEffect(Modules.Assets.lightningNovaEffectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius * speedattack,
+                    scale = blastRadius,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);
                 EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius * speedattack,
+                    scale = blastRadius,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                 }, true);

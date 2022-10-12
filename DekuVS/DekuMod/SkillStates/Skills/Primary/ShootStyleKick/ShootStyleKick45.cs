@@ -78,8 +78,17 @@ namespace DekuMod.SkillStates
 			duration = baseduration / ((this.attackSpeedStat) / 2);
 			SpeedCoefficient = initialSpeedCoefficient * (this.attackSpeedStat/2);
 			dekucon = base.GetComponent<DekuController>();
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+            this.extraDuration = Math.Max(hitExtraDuration / (num2 + 1f), minExtraDuration);
 
-			base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration/2);
+
+            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration/2);
 			this.animator = base.GetModelAnimator();
 			this.animator.SetBool("attacking", true);
 			base.characterBody.SetAimTimer(duration);
@@ -107,6 +116,8 @@ namespace DekuMod.SkillStates
 				hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == hitboxName);
 				hitBoxGroup2 = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == hitboxName2);
 			}
+
+
 			ChargeSonicBoom chargeSonicBoom = new ChargeSonicBoom();
 			Util.PlaySound(chargeSonicBoom.sound, base.gameObject);
 			this.attack = new OverlapAttack();
@@ -114,7 +125,7 @@ namespace DekuMod.SkillStates
 			this.attack.attacker = base.gameObject;
 			this.attack.inflictor = base.gameObject;
 			this.attack.teamIndex = base.GetTeam();
-			this.attack.damage = base.characterBody.damage * Modules.StaticValues.shootkick45DamageCoefficient * this.moveSpeedStat / 7;
+			this.attack.damage = base.characterBody.damage * Modules.StaticValues.shootkick45DamageCoefficient * num;
 			this.attack.procCoefficient = this.procCoefficient;
 			this.attack.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FireBarrage.hitEffectPrefab;
 			this.attack.forceVector = this.bonusForce;
@@ -138,14 +149,7 @@ namespace DekuMod.SkillStates
 			this.detector.isCrit = false;
 			this.direction = base.GetAimRay().direction.normalized;
 			base.characterDirection.forward = base.characterMotor.velocity.normalized;
-			float num = this.moveSpeedStat;
-			bool isSprinting = base.characterBody.isSprinting;
-			if (isSprinting)
-			{
-				num /= base.characterBody.sprintingSpeedMultiplier;
-			}
-			float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
-			this.extraDuration = Math.Max(hitExtraDuration / (num2 + 1f), minExtraDuration);
+			
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 			base.PlayCrossfade("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", duration, 0.1f);
 

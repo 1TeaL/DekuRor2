@@ -47,7 +47,12 @@ namespace DekuMod.SkillStates
             AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
             base.StartAimMode(duration, true);
 
-
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("FullBody, Override", "ManchesterFlip", "Attack.playbackRate", fireTime, 0.01f);
@@ -55,19 +60,19 @@ namespace DekuMod.SkillStates
             EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
 
             //move up a little
-            base.characterMotor.velocity += Vector3.up * distance;
+            base.characterMotor.velocity += Vector3.up * distance * num;
             base.characterMotor.Motor.ForceUnground();
             //get weight, blast attack after
             GetMaxWeight();
 
             blastAttack = new BlastAttack();
-            blastAttack.radius = blastRadius;
+            blastAttack.radius = blastRadius * num;
             blastAttack.procCoefficient = 1f;
             blastAttack.position = theSpot;
             blastAttack.damageType = DamageType.Shock5s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * num;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force * maxWeight;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

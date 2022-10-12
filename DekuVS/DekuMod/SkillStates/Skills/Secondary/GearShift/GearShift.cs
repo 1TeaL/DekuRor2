@@ -17,6 +17,7 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
+            duration /= attackSpeedStat;
 
 
         }
@@ -24,10 +25,19 @@ namespace DekuMod.SkillStates
         protected override void DoSkill()
         {
             base.DoSkill();
+            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            base.PlayCrossfade("UpperBody, Override", "GearShift", "Attack.playbackRate", duration, 0.01f);
             bool active = NetworkServer.active;
             if (active)
             {
-                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.gearshiftBuff.buffIndex, Modules.StaticValues.gearshiftBuffTimer);
+                float num = this.moveSpeedStat;
+                bool isSprinting = base.characterBody.isSprinting;
+                if (isSprinting)
+                {
+                    num /= base.characterBody.sprintingSpeedMultiplier;
+                }
+
+                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.gearshiftBuff.buffIndex, Modules.StaticValues.gearshiftBuffTimer * num);
 
             }
         }

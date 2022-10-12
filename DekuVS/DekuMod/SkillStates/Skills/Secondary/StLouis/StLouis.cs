@@ -27,6 +27,7 @@ namespace DekuMod.SkillStates
 
         //Indicator
         public HurtBox Target;
+        private float num;
 
         public override void OnEnter()
         {
@@ -48,8 +49,13 @@ namespace DekuMod.SkillStates
             {
                 return;
             }
-
-
+            num = this.moveSpeedStat;
+			bool isSprinting = base.characterBody.isSprinting;
+			if (isSprinting)
+			{
+				num /= base.characterBody.sprintingSpeedMultiplier;
+			}
+            blastRadius *= num;
         }
 
 
@@ -94,7 +100,7 @@ namespace DekuMod.SkillStates
                     blastAttack.damageType = DamageType.Stun1s;
                     blastAttack.attacker = base.gameObject;
                     blastAttack.crit = base.RollCrit();
-                    blastAttack.baseDamage = base.damageStat * Modules.StaticValues.stlouisDamageCoefficient;
+                    blastAttack.baseDamage = base.damageStat * Modules.StaticValues.stlouisDamageCoefficient * num;
                     blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                     blastAttack.baseForce = 500f;
                     blastAttack.bonusForce = GetAimRay().direction * 100f;

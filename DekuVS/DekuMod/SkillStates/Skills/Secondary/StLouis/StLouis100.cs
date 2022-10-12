@@ -30,6 +30,7 @@ namespace DekuMod.SkillStates
 
         //teleporting up
         private GameObject aimSphere;
+        private float num;
         public float radius = 3f;
         private Ray aimRay;
         private float baseDistance = 5f;
@@ -41,11 +42,6 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
             fireTime = duration / 2f;
-            maxDistance = baseDistance * moveSpeedStat;
-            if(maxDistance > 100f)
-            {
-                maxDistance = 100f;
-            }
             hasFired = false;
             theSpot = base.transform.position;
             AkSoundEngine.PostEvent(3709822086, this.gameObject);
@@ -54,6 +50,19 @@ namespace DekuMod.SkillStates
 
             this.aimSphere = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
 
+            num = this.moveSpeedStat /1.5f;
+			bool isSprinting = base.characterBody.isSprinting;
+			if (isSprinting)
+			{
+				num /= base.characterBody.sprintingSpeedMultiplier;
+			}
+            blastRadius *= num;
+
+            maxDistance = baseDistance * num;
+            if (maxDistance > 100f)
+            {
+                maxDistance = 100f;
+            }
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("FullBody, Override", "StLouis100Charge", "Attack.playbackRate",fireTime, 0.01f);
@@ -80,7 +89,7 @@ namespace DekuMod.SkillStates
             blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis100DamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis100DamageCoefficient * num;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force * maxWeight;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
@@ -160,14 +169,14 @@ namespace DekuMod.SkillStates
                 EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius * moveSpeedStat,
+                    scale = blastRadius,
                     rotation = Util.QuaternionSafeLookRotation(Vector3.down)
 
                 }, true);
                 EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
                 {
                     origin = theSpot,
-                    scale = blastRadius * moveSpeedStat,
+                    scale = blastRadius,
                     rotation = Util.QuaternionSafeLookRotation(Vector3.down)
 
                 }, true);
@@ -181,7 +190,7 @@ namespace DekuMod.SkillStates
                     EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
                     {
                         origin = theSpot,
-                        scale = blastRadius * moveSpeedStat,
+                        scale = blastRadius,
                         rotation = rotation
                     }, false);
 
@@ -207,7 +216,7 @@ namespace DekuMod.SkillStates
                 searchOrigin = theSpot,
                 searchDirection = UnityEngine.Random.onUnitSphere,
                 sortMode = BullseyeSearch.SortMode.Distance,
-                maxDistanceFilter = blastRadius * moveSpeedStat,
+                maxDistanceFilter = blastRadius,
                 maxAngleFilter = 360f
             };
 

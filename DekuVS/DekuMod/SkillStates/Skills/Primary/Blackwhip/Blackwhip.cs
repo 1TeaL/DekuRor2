@@ -25,6 +25,7 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
             hasFired = false;
+            duration /= attackSpeedStat;
 
 
         }
@@ -56,7 +57,7 @@ namespace DekuMod.SkillStates
             }, true);
             if (NetworkServer.active)
             {
-                characterBody.AddTimedBuffAuthority(Modules.Buffs.blackwhipBuff.buffIndex, Modules.StaticValues.blackwhipDebuffDuration);
+                characterBody.AddTimedBuffAuthority(Modules.Buffs.blackwhipBuff.buffIndex, Modules.StaticValues.blackwhipDebuffDuration * attackSpeedStat);
             }
 
             if (!dekucon.attachment)

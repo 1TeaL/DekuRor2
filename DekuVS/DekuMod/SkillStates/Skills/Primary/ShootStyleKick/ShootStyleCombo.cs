@@ -11,9 +11,17 @@ namespace DekuMod.SkillStates
         public DekuController dekucon;
         public override void OnEnter()
         {
+
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+
             this.hitboxName = "BigBodyHitbox";
 
-            this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient;
+            this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient * num;
             this.procCoefficient = 1f;
             this.pushForce = 500f;
             if (swingIndex == 2)
