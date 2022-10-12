@@ -104,16 +104,12 @@ If you enjoy my work, support me on Ko-fi!
 
 
 ## Overview
-    Deku's general game plan is that his base form is safe with range and crowd control but with low damage. 
-    Then, when needed, he can use his specials (OFA 100% and 45%) to increase his damage and/or mobility. 
-    When at low health he can rely on his passive increased regen in base form to heal up.
-    Attackspeed and Movespeed scales fairly well with him as most skills do scale with it.
-    Aiming to mitigate the health drain costs in OFA 100% mode can make him powerful.
-    OFA 100% grants negative health regen but Deku's passive still works, meaning at lower hp it balances out.
-    OFA 45% instead only allows direct healing effects rather than health regen but in turn doesn't drain health.
-    One For All allows Deku to cycle between his percentages, upgrading his skills accordingly.
-    Other specials have set abilities- OFA 100% focuses on close range but greater mobility while OFA 45% focuses on mid-range attacks.
-    OFA Quirks grants Deku new functionality for all his base skills with the new Fa Jin Buff.
+    Deku's game plan is to use his base form with skills that have higher utility, good control and plus ultra gain. 
+    OFA 100% and 45% enable him to have higher damage, armor and mobility, limited by health costs.
+    Changing modes also enable him to have more solutions to different situations in combat, lmited by his plus ultra meter.
+    Attackspeed and Movespeed scales fairly well with him as most skills scale with it.
+    OFA 100%'s self-damage is based on your current health, so lower total health will lead to less self-damage. However, 100% skills are based on max health.
+    Power Mode focuses on high damage, Shoot Style Mode focuses on higher mobility for less damage, Quirk mode focuses on buffs and utility at a plus ultra cost.
 
 ## Base Skills
 ### Passive
