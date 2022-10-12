@@ -52,46 +52,34 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
-- 4.0.0
-    - *THE DEKU REWORK!*
+- 4.0.0 - *THE DEKU REWORK!*    
     - *NEW*
     	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
     	    - It's used for Mode switching, Float, Danger Sense, Supers and Going Beyond.
-    	    - At max Plus Ultra, once per stage, prevent death, Going Beyond your limits! For 60 seconds remain in 100% without any health costs and regenerate health as well.
         - Mark passive
-            -  Deku's Shocking attacks apply a heal mark- after 3 hits heal based on damage dealt.
-            -  Deku's Stunning attacks apply a barrier mark- after 3 hits gain barrier based on damage dealt.
-            -  Deku's Freezing and Igniting attacks apply both marks.
+            -  Heal and Barrier marks added based on damage type.
         - Float passive
-            - Holding jump in the air enables deku to float at the cost of plus ultra. Holding down a skill button maintains height.
         - Danger Sense passive
-            - Every 10 seconds, when hit, deku will take reduced damage based on his armor, healing him if the damage is fully negated. Freeze the attacker. If he is not using a skill, he dodges out of the way and shocks nearby enemies as well. Costs 5 plus ultra.
     	- Added 3 modes- each having their own set of skills and a Super. Costs 5 plus ultra.
             - When including the one for all versions, each mode has 10 skills!
-            - Power mode- focused on high damage with his punches.
-    	    - Shoot Style mode- focused on mobility.
-    	    - Quirk mode- focused on the utility quirks deku has. All skills cost plus ultra.
+            - Power mode 
+    	    - Shoot Style mode
+    	    - Quirk mode
     	- Added 3 supers- costs 50 plus ultra.
-            - Power mode- 1,000,000% Detroit Delaware Smash- pulling enemies in with Delaware Smash and then freezing them with a Detroit smash for massive damage.
-            - Shoot Style mode- Final Smash- Dash forward, pulling enemies in and then igniting them with a Final Smash for massive damage.
-            - Quirk mode- Fa Jin- Activate Fa Jin, enabling the use of 100% moves without any health costs as well as boosting damage. 
+            - Power mode- 1,000,000% Detroit Delaware Smash
+            - Shoot Style mode- Final Smash
+            - Quirk mode- Fa Jin
         - New Skills
             - Added Gear Shift! The 2nd user's quirk, enabling the changing of velocity, bending the laws of physics.
-            - Gear shift activates a buff that multiplies the knockback of attacks. 
-            - Gear shift 45% activates a buff that makes attacks pierce enemies and slows them.
-            - Gear shift activates a buff that, ba.
     - *REMOVED*
-    	- Old skills- float, Oklahoma smash, extra skills
+    	- Old skills- float, Oklahoma smash, extra skills, danger sense removed, 
     	- Fa Jin buff mechanic and Fa Jin skill
     	- Health Regen that increases at lower health
      - *CHANGED*
-        - CHANGED
-    	- *NEW*
-    	- *NEW*
-    	- *NEW*
-    	- *NEW*   	
-        - One for all skills no longer give increased damage and attack speed, just increased armor and movespeed.
-    	    - One for all 100% no longer gives negative regen, instead it's self damage every second based on current health, this allows more methods of mitigation
+        - Blackwhip base, 45% and 100% have been reworked.
+    	- Manchester base, 45% and 100% have been reworked.
+        - One for all 45% and 100%no longer give increased damage and attack speed, just increased armor and movespeed.
+    	    - Removed OFA 100%s negative health regen, now it's self-damage instead, allowing more mitigation options. 
 
 
 - Next update(s)
@@ -111,93 +99,188 @@ If you enjoy my work, support me on Ko-fi!
     OFA 100%'s self-damage is based on your current health, so lower total health will lead to less self-damage. However, 100% skills are based on max health.
     Power Mode focuses on high damage, Shoot Style Mode focuses on higher mobility for less damage, Quirk mode focuses on buffs and utility at a plus ultra cost.
 
-## Base Skills
-### Passive
-Deku has innate increased health regen the lower his health is. He has a double jump. He can sprint in any direction.
+## Skills
+### Passives
+<table>
+<thead>
+  <tr>
+    <th>Passive</th>
+    <th>                         </th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Base <br>Abilities</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306847-a364766a-020e-49e7-8eb0-380407601980.png" alt="Image" width="100" height="100"></td>
+    <td>He has a double jump. He can sprint in any direction.<br>Deku has a Plus Ultra meter that builds up through movement and using base form skills. <br>Changing modes, using quirk skills and using supers cost Plus Ultra.<br>At Max Plus Ultra, once a stage, prevent death and Go Beyond, <br>negating health costs as well as heal over time for 60 seconds.</td>
+  </tr>
+  <tr>
+    <td>Marks</td>
+    <td></td>
+    <td>Shocking attacks apply a heal mark- after 3 hits heal based on damage dealt.<br>Stunning attacks apply a barrier mark- after 3 hits gain barrier based on damage dealt.<br>Freezing and Igniting attacks apply both marks.</td>
+  </tr>
+  <tr>
+    <td>Float</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306971-f4657190-44d6-4ec7-b12c-44debe528f53.png" alt="Image" width="100" height="100"></td>
+    <td>Holding jump in the air after 0.5 seconds let's him Float, flying up or slowing his descent while using a skill.<br>Drains Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Danger <br>Sense</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306905-83b436fc-8815-4604-9cb0-528e9ac8fbeb.png" alt="Image" width="100" height="100"></td>
+    <td>Take reduced damage based on your armor every 10 seconds, freezing the attacker for 200% damage. <br>If the damage is fully negated, heal for the damage dealt. <br>If not using a skill, dodge out of the way and shock enemies around you for 200% more damage as well.<br>Costs 5 Plus Ultra.</td>
+  </tr>
+</tbody>
+</table>
 
+## Power Mode Skills
 <table>
 <thead>
   <tr>
     <th>Skill</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>                         </th>
     <th>Description</th>
     <th>Stats</th>
-    <th>Fa Jin Buff</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td>Airforce<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067576-6fe6e0c8-46de-4a85-a189-e51055e05bd0.png" width="100" height="100"></td>
-    <td>Shoot a bullet dealing 2x100% damage.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/168067576-6fe6e0c8-46de-4a85-a189-e51055e05bd0.png" alt="Image" width="100" height="100"></td>
+    <td>Shoot a bullet dealing 2x100% damage. On crit, ricochet to 5 additional enemies.</td>
     <td>Proc: 0.5.</td>
-    <td>Ricochets.</td>
   </tr>
   <tr>
-    <td>Shoot Style<br>Kick<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067698-223582e8-d3dc-402b-a010-ff0f65444a96.png" alt="Image" width="100" height="100"></td>
-    <td>Dash and kick, dealing 300% damage scaling based on movespeed.<br>Resets CD on hit and resetting all cooldowns on kill.</td>
-    <td>Proc: 1.<br>CD: 6s.</td>
-    <td>Freezes enemies. <br>Hits an additional time.</td>
+    <td>Airforce 45%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306876-c746dbad-9bbd-4c19-ac5c-9ee3d6cc3b12.png" alt="Image" width="100" height="100"></td>
+    <td>Shoot 4 bullets with all your fingers, dealing 200% damage each.</td>
+    <td>Proc: 1.<br></td>
   </tr>
   <tr>
-    <td>Danger <br>Sense<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067615-b5de153d-5262-4a82-bc2b-4f78c12500ba.png" alt="Image" width="100" height="100"></td>
-    <td>Activate Danger Sense, when timed properly, dodge and reset the CD.<br>Deal 600% damage to the attacker and stun those around you.<br>Attackspeed increases active window.<br>Total duration of 2 seconds.<br></td>
-    <td>CD: 3s<br>Proc: 2.<br></td>
-    <td>Freezes enemies.<br>Increases active window.</td>
+    <td>Airforce 100%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306882-312b4922-81ee-477d-ae9a-5cc281147f61.png" alt="Image" width="100" height="100"></td>
+    <td>Shoot beams with your fists, stunning and dealing 400% damage.<br>Initially having 20% attackspeed, ramping up to 200%.<br></td>
+    <td>Proc: 1.<br>Cost: 0.5% Max Health</td>
   </tr>
   <tr>
-    <td>Blackwhip<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067593-08e4af78-e6fc-4cc7-a9f0-223fbcf5859a.png" width="100" height="100"></td>
-    <td>Pulls and stuns enemies in front for 5x100% damage. <br>Gain barrier on hit. <br>Attackspeed increases the pull radius and barrier gain.</td>
-    <td>Proc: 0.2.<br>CD: 3s.</td>
-    <td>Doubles barrier gain.</td>
-  </tr>
-  <tr>
-    <td>Manchester <br>Smash<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067679-05e57fc2-dbe1-4b54-b172-6bdd14ce1cd8.png" width="100" height="100"></td>
-    <td>Jump in the air and slam down, dealing 300% damage and gaining barrier on hit, <br>Scales with movespeed.</td>
+    <td>Detroit<br>Smash<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306948-1443a24e-5ff7-4f96-80ce-f35ee2ceb792.png" alt="Image" width="100" height="100"></td>
+    <td>Teleport and punch the target and enemies around, dealing 400% damage. <br>Uppercut them if they are grounded and smash them down if they are in the air.</td>
     <td>Proc: 1.<br>CD: 4s.</td>
-    <td>Extra initial hit.<br>Doubles barrier gain. </td>
   </tr>
   <tr>
-    <td>St Louis <br>Smash<br>Airforce<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067708-e8d13a11-2fdf-4d1b-ac14-19840074f6f6.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 400% damage.<br>Heal on hit, scaling with attackspeed.</td>
-    <td>Proc: 0.2.<br>CD: 4s.<br></td>
-    <td>Doubles range.<br>Doubles healing.</td>
+    <td>Detroit<br>Smash 45%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306950-5733635c-af0a-4b72-8f31-cce4ad9655c0.png" alt="Image" width="100" height="100"></td>
+    <td>Hold to charge a Detroit Smash. <br>When the skill key is released or after some time, <br>teleport and smash nearby enemies, dealing 600% damage.</td>
+    <td>Proc: 1.<br>CD: 4s.</td>
   </tr>
   <tr>
-    <td>Float<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067666-0088e927-cbbe-444a-9168-141d50a01bbe.png" width="100" height="100"></td>
-    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Press the button again to cancel Float.</td>
-    <td>CD: 10s.<br></td>
-    <td>Deal 400% damage <br>around you.</td>
+    <td>Detroit<br>Smash 100%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306953-3567abdc-409a-468b-aca1-ec76412f879d.png" alt="Image" width="100" height="100"></td>
+    <td>Hold to jump forward while charging a Detroit Smash. <br>When the skill key is released or you collide with an enemy, smash nearby enemies, <br>dealing 1000% damage, multiplied by flight time and attackspeed.<br><br></td>
+    <td>Proc: 1.<br>Cost: 15% Max Health</td>
   </tr>
   <tr>
-    <td>Delaware<br>Smash<br>100%<br>Special</td>
+    <td>Delaware<br>Smash<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306943-31c72a0c-c73e-4ae6-afe0-d3633c140fcd.png" alt="Image" width="100" height="100"></td>
+    <td>Hold the button to aim, then release to shoot a Delaware smash, shocking and dealing 600% damage.</td>
+    <td>Proc: 1<br>CD: 4s.<br></td>
+  </tr>
+  <tr>
+    <td>Delaware<br>Smash 45%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/168067646-976990f5-9c1f-4774-9ecc-fd3ecdadf44e.png" alt="Image" width="100" height="100"></td>
-    <td>Send a blast forward, stunning and dealing 600% damage to enemies in front, while sending you backwards as well.<br>Costs 10% of max Health.</td>
-    <td>Proc: 2.<br>CD: 4s.</td>
-    <td>Doubles distance travelled.</td>
+    <td>Send a blast forward, stunning and dealing 900% damage to enemies in front.</td>
+    <td>Proc: 1.<br>CD: 4s.</td>
   </tr>
   <tr>
-    <td>Oklahoma<br>Smash<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067683-0647f5df-585b-437a-9a01-0970aa1a84e7.png" width="100" height="100"></td>
-    <td>Hold the button to spin around, knocking back and dealing 100% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br></td>
-    <td>Proc: 1.<br>CD: 6s.<br></td>
-    <td>Doubles number of hits.<br>AOE is larger.<br>0.4x movespeed.</td>
+    <td>Delaware<br>Smash 100%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306943-31c72a0c-c73e-4ae6-afe0-d3633c140fcd.png" alt="Image" width="100" height="100"></td>
+    <td>Flick your fingers, releasing an intense blast of wind in front,<br>dealing 1200% damage to enemies in front, <br>while sending you backwards as well.<br></td>
+    <td>Proc: 1.<br>Cost: 15% Max Health</td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067651-62ddec46-54d5-48c7-8e4d-6de75a324435.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up a punch that teleports you and stuns enemies, dealing 600% damage. <br>Distance is based on movespeed and attackspeed.</td>
-    <td>Proc: 2.<br>CD: 4s.</td>
-    <td>Doubles everything.</td>
-  </tr>		
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306958-c9638647-3573-45a5-8062-bc827b7d1b84.png" alt="Image" width="100" height="100"></td>
+    <td>Delaware Smash enemies, stunning and grouping them in front of you, dealing 1500% damage,<br>then Detroit Smash all of them, freezing and dealing 1500% damage.<br></td>
+    <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
+  </tr>
 </tbody>
 </table>
+
+## Shoot Style Skills
+<table>
+<thead>
+  <tr>
+    <th>Skill</th>
+    <th>                         </th>
+    <th>Description</th>
+    <th>Stats</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Shoot Style<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png" alt="Image" width="100" height="100"></td>
+    <td>Kick forward, dealing 150% damage, with every 3 hits reducing cooldowns by 1 second and shocking. <br>Dash towards distant targets.</td>
+    <td>Proc: 1</td>
+  </tr>
+  <tr>
+    <td>Shoot Style<br>45%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306821-77c8b99a-f2e0-47ce-911a-e10ddaec7ef1.png" alt="Image" width="100" height="100"></td>
+    <td>Dash and kick, dealing 200% damage scaling based on movespeed.<br>Resets CD on hit and resetting all cooldowns on kill.</td>
+    <td>Proc: 1.<br>CD: 6s.</td>
+  </tr>
+  <tr>
+    <td>Shoot Style<br>100%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306825-2c5cd503-ed2a-49ee-b4f4-85e01f85bcac.png" alt="Image" width="100" height="100"></td>
+    <td>Instantly dash through enemies, after a delay, deal 5x100% damage.<br>Number of hits scale based on attack speed.</td>
+    <td>Proc: 0.1.<br>Cost: 10% Max Health</td>
+  </tr>
+  <tr>
+    <td>StLouis<br>Smash<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png" alt="Image" width="100" height="100"></td>
+    <td>Teleport and kick the target and enemies around forward, dealing 300% damage. <br></td>
+    <td>Proc: 1.<br>CD: 4s.</td>
+  </tr>
+  <tr>
+    <td>StLouis<br>Smash 45%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png" alt="Image" width="100" height="100"></td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, <br>stunning and dealing 200% damage.</td>
+    <td>Proc: 0.2.<br>CD: 4s.</td>
+  </tr>
+  <tr>
+    <td>StLouis<br>Smash 100%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
+    <td>Hold to prep a physics breaking St Louis Smash. <br>Release the skill key to deal a blast of wind pressure and instantaneously teleport up. <br>The blast deals 600% damage.</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health</td>
+  </tr>
+  <tr>
+    <td>Manchester<br>Smash<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306793-ea085c4a-86d8-4bd9-8c0a-a3e3daa47345.png" alt="Image" width="100" height="100"></td>
+    <td>Manchester Smash, damaging nearby enemies for 300% damage, <br>each enemy hit gives an extra second of a 200 armor buff.</td>
+    <td>Proc: 1<br>CD: 4s.<br></td>
+  </tr>
+  <tr>
+    <td>Manchester<br>Smash 45%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306797-00346e67-2a81-457c-ac2c-46ddfc2d46f1.png" alt="Image" width="100" height="100"></td>
+    <td>Manchester Smash, jumping and damaging nearby enemies for 400% damage, <br>Gain 200 armor 3 seconds.</td>
+    <td>Proc: 1.<br>CD: 4s.</td>
+  </tr>
+  <tr>
+    <td>Manchester<br>Smash 100%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306802-dd6527c9-23df-4aca-8ff9-23c1a09327eb.png" alt="Image" width="100" height="100"></td>
+    <td>Manchester Smash, rapidly drop down from the sky. <br>Have 200 armor while falling. Upon landing on the ground, stun enemies and deal 600% damage,<br>multiplied by falling time.</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health</td>
+  </tr>
+  <tr>
+    <td>Detroit<br>Smash<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png" alt="Image" width="100" height="100"></td>
+    <td>Dash forward, stunning and grouping enemies to your front, dealing 10% damage multiple times.<br>Then Final smash all of them, igniting and dealing 1000% damage.</td>
+    <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
+  </tr>
+</tbody>
+</table>
+
 
 
 ## Special Skills
@@ -630,5 +713,65 @@ These stats are prone to change.
 
 
   
-## OG Pictures
+## OG Pictures!
+
+![manchester](https://user-images.githubusercontent.com/93917577/195306793-ea085c4a-86d8-4bd9-8c0a-a3e3daa47345.png)
+![manchester45](https://user-images.githubusercontent.com/93917577/195306797-00346e67-2a81-457c-ac2c-46ddfc2d46f1.png)
+![manchester100](https://user-images.githubusercontent.com/93917577/195306802-dd6527c9-23df-4aca-8ff9-23c1a09327eb.png)
+![oklahoma](https://user-images.githubusercontent.com/93917577/195306806-1a1205d1-22c1-40c3-ae63-475154c0837c.png)
+![oklahoma45](https://user-images.githubusercontent.com/93917577/195306809-71db5145-ffec-4f46-a209-a1cd5df1ec6e.png)
+![oklahoma100](https://user-images.githubusercontent.com/93917577/195306811-431d71d0-fdd0-4840-939c-635d0ead0f65.png)
+![Quirks](https://user-images.githubusercontent.com/93917577/195306814-9d56a9e1-8ff2-4cf1-8d23-695febaeede2.png)
+![quirksprevious](https://user-images.githubusercontent.com/93917577/195306817-498e0615-2ea0-4279-b032-fda5b1346237.png)
+![shootstylekick](https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png)
+![shootstylekick45](https://user-images.githubusercontent.com/93917577/195306821-77c8b99a-f2e0-47ce-911a-e10ddaec7ef1.png)
+![shootstylekick100](https://user-images.githubusercontent.com/93917577/195306825-2c5cd503-ed2a-49ee-b4f4-85e01f85bcac.png)
+![smokescreen](https://user-images.githubusercontent.com/93917577/195306829-9c39e702-4918-45c5-8f4e-5b18877d7c4c.png)
+![stlouis](https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png)
+![stlouis45](https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png)
+![stlouis100](https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png)
+![texDekuIcon](https://user-images.githubusercontent.com/93917577/195306840-9d4aca52-08ca-460a-8877-5ceb26e84ed2.png)
+![ultimate](https://user-images.githubusercontent.com/93917577/195306847-a364766a-020e-49e7-8eb0-380407601980.png)
+![ultimate45](https://user-images.githubusercontent.com/93917577/195306854-3db6d25a-052c-4932-8c6f-58c29bf1a563.png)
+![ultimate100](https://user-images.githubusercontent.com/93917577/195306857-992c1535-853d-4e84-8794-e9bc2f06af66.png)
+![ultimateupgrade](https://user-images.githubusercontent.com/93917577/195306860-9b843ac0-3c03-40f9-b7f5-8869a1c9a75c.png)
+![ultimateupgrade45](https://user-images.githubusercontent.com/93917577/195306863-398028a3-b10d-48f2-b0f8-1d0c0f1d9c83.png)
+![ultimateupgrade100](https://user-images.githubusercontent.com/93917577/195306865-dd2a025b-b28f-4d92-96bc-a39895676ae8.png)
+![45 blank](https://user-images.githubusercontent.com/93917577/195306867-8f275a4e-52d4-4c68-992c-7d3dc8318aa5.png)
+![airforce](https://user-images.githubusercontent.com/93917577/195306872-6cc54878-d7e9-4c2b-86c7-28d131e7040f.png)
+![airforce45](https://user-images.githubusercontent.com/93917577/195306876-c746dbad-9bbd-4c19-ac5c-9ee3d6cc3b12.png)
+![airforce100](https://user-images.githubusercontent.com/93917577/195306882-312b4922-81ee-477d-ae9a-5cc281147f61.png)
+![Airforceskin](https://user-images.githubusercontent.com/93917577/195306886-4d177a15-d22f-43d0-a994-a2b27da16d02.png)
+![blackwhip](https://user-images.githubusercontent.com/93917577/195306889-cbc0b1b6-44ae-49f9-885b-b1d29e9d4009.png)
+![blackwhip45](https://user-images.githubusercontent.com/93917577/195306894-4b435095-4420-4c8d-84ee-c6f59cc12c3e.png)
+![blackwhip100](https://user-images.githubusercontent.com/93917577/195306897-ac65c569-916d-40ae-b2ef-3c083734610b.png)
+![blackwhipshoot](https://user-images.githubusercontent.com/93917577/195306899-e70e104b-c645-4289-9aad-e1395a4117e1.png)
+![DangerSense](https://user-images.githubusercontent.com/93917577/195306905-83b436fc-8815-4604-9cb0-528e9ac8fbeb.png)
+![DangerSense45](https://user-images.githubusercontent.com/93917577/195306910-6ab9b31f-07c3-48f8-a9d1-64fff09b237f.png)
+![DangerSense100](https://user-images.githubusercontent.com/93917577/195306911-09ab4887-cd5e-45b1-abfc-631cd6e72996.png)
+![deku portrait](https://user-images.githubusercontent.com/93917577/195306915-c68ad05e-a962-4d66-94a9-cd0bdc20d60d.png)
+![delaware](https://user-images.githubusercontent.com/93917577/195306943-31c72a0c-c73e-4ae6-afe0-d3633c140fcd.png)
+![detroit](https://user-images.githubusercontent.com/93917577/195306948-1443a24e-5ff7-4f96-80ce-f35ee2ceb792.png)
+![detroit45](https://user-images.githubusercontent.com/93917577/195306950-5733635c-af0a-4b72-8f31-cce4ad9655c0.png)
+![detroit100](https://user-images.githubusercontent.com/93917577/195306953-3567abdc-409a-468b-aca1-ec76412f879d.png)
+![detroitdelawareSmash](https://user-images.githubusercontent.com/93917577/195306958-c9638647-3573-45a5-8062-bc827b7d1b84.png)
+![fajin](https://user-images.githubusercontent.com/93917577/195306963-eddc0a2e-f9a1-49fd-a168-88415b7ba538.png)
+![fajinboost](https://user-images.githubusercontent.com/93917577/195306965-b293cf19-2213-454e-bae5-55a99904d226.png)
+![finalSmash](https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png)
+![fistmodeIcon](https://user-images.githubusercontent.com/93917577/195306969-e968e385-6ec9-40a1-9fd7-208555124140.png)
+![Floatactivate](https://user-images.githubusercontent.com/93917577/195306971-f4657190-44d6-4ec7-b12c-44debe528f53.png)
+![Floatactivate45](https://user-images.githubusercontent.com/93917577/195306979-98ebcf59-59ac-4834-99de-7b6d8280d562.png)
+![Floatactivate100](https://user-images.githubusercontent.com/93917577/195306984-2fe328af-5617-468c-ae6f-691a44b5e49f.png)
+![Floatcancel](https://user-images.githubusercontent.com/93917577/195306985-0d140fcc-84b4-4070-ba17-9c07aad64316.png)
+![GearShift](https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png)
+![gobeyondB](https://user-images.githubusercontent.com/93917577/195306989-8642c7ed-2c47-40eb-aad6-a9412e449f54.png)
+![gobeyondD](https://user-images.githubusercontent.com/93917577/195306991-f0a065ce-cd2a-4d72-baf2-4fc307e7c207.png)
+![goBeyondE](https://user-images.githubusercontent.com/93917577/195306994-ba69bb31-1e8e-41f0-8f71-54cd0f2bcdfe.png)
+![gobeyondG](https://user-images.githubusercontent.com/93917577/195306997-2cf18ac9-0b26-449c-b150-a683c326ea1d.png)
+![gobeyondN](https://user-images.githubusercontent.com/93917577/195307000-a7615830-bc8d-4024-8295-74a27ac33b15.png)
+[goBeyondO](https://user-images.githubusercontent.com/93917577/195306780-271da4a3-5244-4fad-8718-55e66cccf896.png)
+![gobeyondY](https://user-images.githubusercontent.com/93917577/195306789-06a1887f-9ea8-4c13-a770-0dbb78d93656.png)
+![legmodeIcon](https://user-images.githubusercontent.com/93917577/195306790-5e8be721-f6a2-44fc-8e7d-442007355d54.png)
+
+
 
