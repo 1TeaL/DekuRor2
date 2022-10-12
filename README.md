@@ -295,7 +295,8 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Blackwhip<br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Kick forward, dealing 150% damage, with every 3 hits reducing cooldowns by 1 second and shocking. <br>Dash towards distant targets.</td>
+    <td>Activate blackwhip for 10 seconds, restricting their movement 6 seconds (both durations scaling with attackspeed) and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage per tick, healing based on your damage dealt." 
+               <br>Dash towards dista</td>
     <td>Proc: 1</td>
   </tr>
   <tr>
