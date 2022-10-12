@@ -293,61 +293,61 @@ If you enjoy my work, support me on Ko-fi!
 </thead>
 <tbody>
   <tr>
-    <td>Shoot Style<br>Primary</td>
+    <td>Blackwhip<br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png" alt="Image" width="100" height="100"></td>
     <td>Kick forward, dealing 150% damage, with every 3 hits reducing cooldowns by 1 second and shocking. <br>Dash towards distant targets.</td>
     <td>Proc: 1</td>
   </tr>
   <tr>
-    <td>Shoot Style<br>45%<br><br>Primary</td>
+    <td>Blackwhip<br>45%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306821-77c8b99a-f2e0-47ce-911a-e10ddaec7ef1.png" alt="Image" width="100" height="100"></td>
     <td>Dash and kick, dealing 200% damage scaling based on movespeed.<br>Resets CD on hit and resetting all cooldowns on kill.</td>
     <td>Proc: 1.<br>CD: 6s.</td>
   </tr>
   <tr>
-    <td>Shoot Style<br>100%<br><br>Primary</td>
+    <td>Blackwhip<br>100%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306825-2c5cd503-ed2a-49ee-b4f4-85e01f85bcac.png" alt="Image" width="100" height="100"></td>
     <td>Instantly dash through enemies, after a delay, deal 5x100% damage.<br>Number of hits scale based on attack speed.</td>
     <td>Proc: 0.1.<br>Cost: 10% Max Health</td>
   </tr>
   <tr>
-    <td>StLouis<br>Smash<br><br>Secondary</td>
+    <td>Gear<br>Shift<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png" alt="Image" width="100" height="100"></td>
     <td>Teleport and kick the target and enemies around forward, dealing 300% damage. <br></td>
     <td>Proc: 1.<br>CD: 4s.</td>
   </tr>
   <tr>
-    <td>StLouis<br>Smash 45%<br><br>Secondary</td>
+    <td>Gear<br>Shift<br>45%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png" alt="Image" width="100" height="100"></td>
     <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, <br>stunning and dealing 200% damage.</td>
     <td>Proc: 0.2.<br>CD: 4s.</td>
   </tr>
   <tr>
-    <td>StLouis<br>Smash 100%<br><br>Secondary</td>
+    <td>Gear<br>Shift<br>100%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
     <td>Hold to prep a physics breaking St Louis Smash. <br>Release the skill key to deal a blast of wind pressure and instantaneously teleport up. <br>The blast deals 600% damage.</td>
     <td>Proc: 1.<br>Cost: 15% Max Health</td>
   </tr>
   <tr>
-    <td>Manchester<br>Smash<br><br>Utility</td>
+    <td>Smokescreen<br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306793-ea085c4a-86d8-4bd9-8c0a-a3e3daa47345.png" alt="Image" width="100" height="100"></td>
     <td>Manchester Smash, damaging nearby enemies for 300% damage, <br>each enemy hit gives an extra second of a 200 armor buff.</td>
     <td>Proc: 1<br>CD: 4s.<br></td>
   </tr>
   <tr>
-    <td>Manchester<br>Smash 45%<br><br>Utility</td>
+    <td>Smokescreen<br> 45%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306797-00346e67-2a81-457c-ac2c-46ddfc2d46f1.png" alt="Image" width="100" height="100"></td>
     <td>Manchester Smash, jumping and damaging nearby enemies for 400% damage, <br>Gain 200 armor 3 seconds.</td>
     <td>Proc: 1.<br>CD: 4s.</td>
   </tr>
   <tr>
-    <td>Manchester<br>Smash 100%<br><br>Utility</td>
+    <td>Smokescreen<br> 100%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306802-dd6527c9-23df-4aca-8ff9-23c1a09327eb.png" alt="Image" width="100" height="100"></td>
     <td>Manchester Smash, rapidly drop down from the sky. <br>Have 200 armor while falling. Upon landing on the ground, stun enemies and deal 600% damage,<br>multiplied by falling time.</td>
     <td>Proc: 1.<br>Cost: 15% Max Health</td>
   </tr>
   <tr>
-    <td>Detroit<br>Smash<br>Utility</td>
+    <td>Fa Jin<br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png" alt="Image" width="100" height="100"></td>
     <td>Dash forward, stunning and grouping enemies to your front, dealing 10% damage multiple times.<br>Then Final smash all of them, igniting and dealing 1000% damage.</td>
     <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
