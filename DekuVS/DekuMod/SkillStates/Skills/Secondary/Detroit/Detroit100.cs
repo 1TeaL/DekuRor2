@@ -138,7 +138,7 @@ namespace DekuMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			totalDuration += Time.fixedDeltaTime/4;
+			totalDuration += Time.fixedDeltaTime;
 
 			if(base.fixedAge > fireTime)
 			{
@@ -208,7 +208,7 @@ namespace DekuMod.SkillStates
 					blastAttack.position = base.transform.position;
 					blastAttack.attacker = base.gameObject;
 					blastAttack.crit = base.RollCrit();
-					blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (moveSpeedStat / 7) * (1+totalDuration);
+					blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (attackSpeedStat) * (1+totalDuration);
 					blastAttack.falloffModel = BlastAttack.FalloffModel.None;
 					blastAttack.baseForce = force;
 					blastAttack.teamIndex = base.teamComponent.teamIndex;

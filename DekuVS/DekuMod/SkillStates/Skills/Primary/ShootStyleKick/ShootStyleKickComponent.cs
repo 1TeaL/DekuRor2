@@ -19,6 +19,7 @@ namespace DekuMod.SkillStates
     public class ShootStyleKickComponent : MonoBehaviour
 	{
 		public CharacterBody charbody;
+		public CharacterBody dekucharbody;
 		public float numberOfHits;
 		public float currentNumber;
 		public float timer;
@@ -47,13 +48,13 @@ namespace DekuMod.SkillStates
 					{
 						currentNumber += 1;
 						timer -= 0.1f;
-						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.up, 2f, damage).Send(NetworkDestination.Server);
+						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.up, 2f, damage, dekucharbody.masterObjectId).Send(NetworkDestination.Server);
 					}
 					else if (currentNumber == numberOfHits)
 					{
 						AkSoundEngine.PostEvent("impactsfx", charbody.gameObject);
 						currentNumber += 1;
-						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f, damage).Send(NetworkDestination.Server);
+						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f, damage, dekucharbody.masterObjectId).Send(NetworkDestination.Server);
 					}
 					else if (currentNumber > numberOfHits)
 					{

@@ -13,12 +13,14 @@ namespace DekuMod.Modules.Networking
     {
         //Network these ones.
         NetworkInstanceId netID;
+        NetworkInstanceId dekunetID;
         Vector3 direction;
         private float force;
         private float damage;
 
         //Don't network these.
         GameObject bodyObj;
+        GameObject dekubodyObj;
         private BullseyeSearch search;
         private List<HurtBox> trackingTargets;
         private GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
@@ -28,12 +30,13 @@ namespace DekuMod.Modules.Networking
 
         }
 
-        public PeformShootStyleKickAttackNetworkRequest(NetworkInstanceId netID, Vector3 direction, float force, float damage)
+        public PeformShootStyleKickAttackNetworkRequest(NetworkInstanceId netID, Vector3 direction, float force, float damage, NetworkInstanceId dekunetID)
         {
             this.netID = netID;
             this.direction = direction;
             this.force = force;
             this.damage = damage;
+            this.dekunetID = dekunetID;
         }
 
         public void Deserialize(NetworkReader reader)
@@ -63,13 +66,17 @@ namespace DekuMod.Modules.Networking
                 CharacterMaster charMaster = masterobject.GetComponent<CharacterMaster>();
                 CharacterBody charBody = charMaster.GetBody();
                 bodyObj = charBody.gameObject;
+                GameObject dekumasterobject = Util.FindNetworkObject(netID);
+                CharacterMaster dekucharMaster = dekumasterobject.GetComponent<CharacterMaster>();
+                CharacterBody dekucharBody = dekucharMaster.GetBody();
+                dekubodyObj = dekucharBody.gameObject;
 
                 //Damage target and stun
-                DamageTargets(charBody);
+                DamageTargets(charBody, dekucharBody);
             }
         }
 
-        private void DamageTargets(CharacterBody charBody)
+        private void DamageTargets(CharacterBody charBody, CharacterBody dekucharBody)
         {
 
             if (charBody.healthComponent && charBody.healthComponent.body)
@@ -91,12 +98,12 @@ namespace DekuMod.Modules.Networking
 
                 DamageInfo damageInfo = new DamageInfo
                 {
-                    attacker = bodyObj,
+                    attacker = dekubodyObj,
                     damage = damage,
                     position = charBody.transform.position,
-                    procCoefficient = 1f,
+                    procCoefficient = 0.1f,
                     damageType = DamageType.Stun1s,
-                    crit = charBody.RollCrit(),
+                    crit = dekucharBody.RollCrit(),
 
                 };
 

@@ -13,7 +13,6 @@ namespace DekuMod.Modules
             string desc = "Deku is a multi-option, high risk survivor that can change his skills and boost his stats but with detrimental health regen and health costs.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > He scales with attackspeed and movespeed on multiple of his skills" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > The Plus Ultra Meter in the middle increases as you walk and use base skills, it is used for specific skills and for Going Beyond." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Once a stage, when you're about to die and have max meter, instead you Go Beyond, allowing you to stay in 100% form with no health costs as well as healing for 60 seconds." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Base form focuses on control, as well as allowing him to build up Plus Ultra Meter." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > OFA 100% focuses on pure power at the cost of self-damage." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > OFA 45% is a mid ground between 100% and base, with no health regeneration." + Environment.NewLine + Environment.NewLine;
@@ -67,7 +66,8 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "FIST100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot beams with your fists, stunning and dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage</style>, initially having 20% attackspeed, ramping up to 200%." 
                 + Helpers.Damage($" Costs {100f * StaticValues.airforce100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "LEG100PRIMARY_NAME", "Shoot Style 100%");
-            LanguageAPI.Add(prefix + "LEG100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Instantly dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>." 
+            LanguageAPI.Add(prefix + "LEG100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Instantly dash through enemies, after a delay, deal <style=cIsDamage>5x{100f * StaticValues.shootkick100DamageCoefficient}% damage</style>." +
+                $" Number of hits scales based on attackspeed." 
                 + Helpers.Damage($" Costs {100f * StaticValues.shootkick100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100PRIMARY_NAME", "Blackwhip 100%");
             LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies towards you for, restricting their movements for {StaticValues.blackwhipDebuffDuration} seconds, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style>." 
@@ -111,16 +111,16 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "FIST45SECONDARY_NAME", "Detroit Smash 45%");
             LanguageAPI.Add(prefix + "FIST45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to charge a Detroit Smash. When the skill key is released or after some time, teleport and smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.detroit45DamageCoefficient}% - {3 * 100f * StaticValues.detroit45DamageCoefficient}% damage</style>" + ".");
             LanguageAPI.Add(prefix + "LEG45SECONDARY_NAME", "St Louis Smash 45%");
-            LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing <style=cIsDamage>{100f * StaticValues.stlouis45DamageCoefficient}% damage</style>" + ".");
+            LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing <style=cIsDamage>{100f * StaticValues.stlouis45DamageCoefficient}% damage</style>" + ".");
             LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Gear Shift 45%");
             LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate gear shift for {StaticValues.gearshift45BuffTimer} seconds. <style=cIsDamage>Attacks slow enemies and pierce through them for {100f * StaticValues.gearshift45DamageCoefficient}% of the damage</style>."
                 + Helpers.Passive($" Costs {StaticValues.skill45PlusUltraSpend} of plus ultra") + ".");
 
             LanguageAPI.Add(prefix + "FIST100SECONDARY_NAME", "Detroit Smash 100%");
-            LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to jump forward while charging a Detroit Smash. When the skill key is released or you collide with an enemy, smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.detroit100DamageCoefficient}% damage, multiplied by flight time and movespeed</style>." 
+            LanguageAPI.Add(prefix + "FIST100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to jump forward while charging a Detroit Smash. When the skill key is released or you collide with an enemy, smash nearby enemies, dealing <style=cIsDamage>{100f * StaticValues.detroit100DamageCoefficient}% damage, multiplied by flight time and attackspeed</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.detroit100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "LEG100SECONDARY_NAME", "St Louis Smash 100%");
-            LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to prep a physics breaking St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>5x{100f * StaticValues.stlouis100DamageCoefficient}% damage</style>." 
+            LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to prep a physics breaking St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>{100f * StaticValues.stlouis100DamageCoefficient}% damage</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.stlouis100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Gear Shift 100%");
             LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Overdrive gear shift for {StaticValues.gearshift100BuffTimer} seconds. <style=cIsDamage>Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed</style>." + Environment.NewLine +
@@ -161,7 +161,7 @@ namespace DekuMod.Modules
                 + Helpers.Passive($" Costs {StaticValues.skillPlusUltraSpend} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST45UTILITY_NAME", "Delaware Smash 45%");
-            LanguageAPI.Add(prefix + "FIST45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Flick your fingers, releasing a blast of wind in front, dealing <style=cIsDamage>{100f * StaticValues.delaware45DamageCoefficient}% damage</style>" + ".");
+            LanguageAPI.Add(prefix + "FIST45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Flick your fingers, releasing a blast of wind in front, stunning and dealing <style=cIsDamage>{100f * StaticValues.delaware45DamageCoefficient}% damage</style>" + ".");
             LanguageAPI.Add(prefix + "LEG45UTILITY_NAME", "Manchester Smash 45%");
             LanguageAPI.Add(prefix + "LEG45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Manchester Smash, jumping and damaging nearby enemies for <style=cIsDamage>{100f * StaticValues.manchester45DamageCoefficient}% damage</style>. Gain {StaticValues.manchesterArmor} armor for {StaticValues.manchester45BuffDuration} seconds" + ".");
             LanguageAPI.Add(prefix + "QUIRK45UTILITY_NAME", "Smokescreen 45%");
@@ -172,7 +172,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "FIST100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Flick your fingers, releasing an intense blast of wind in front, sending you flying backwards and dealing <style=cIsDamage>{100f * StaticValues.delaware100DamageCoefficient}% damage</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.delaware100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "LEG100UTILITY_NAME", "Manchester Smash 100%");
-            LanguageAPI.Add(prefix + "LEG100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Manchester Smash, rapidly drop down from the sky. Have {StaticValues.manchesterArmor} armor while falling. Upon landing on the ground, stun enemies and deal <style=cIsDamage>5x{100f * StaticValues.manchester100DamageCoefficient}% damage</style>, scaling with the time before landing" 
+            LanguageAPI.Add(prefix + "LEG100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Manchester Smash, rapidly drop down from the sky. Have {StaticValues.manchesterArmor} armor while falling. Upon landing on the ground, stun enemies and deal <style=cIsDamage>{100f * StaticValues.manchester100DamageCoefficient}% damage</style>, multiplied by falling time." 
                 + Helpers.Damage($" Costs {100f * StaticValues.manchester100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100UTILITY_NAME", "Smokescreen 100%");
             LanguageAPI.Add(prefix + "QUIRK100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Crippling.</style> Release a blinding smokescreen, making yourself invisible for {StaticValues.smokescreen100Duration} seconds. The smokescreen also deals <style=cIsDamage>{100f * StaticValues.smokescreenDamageCoefficient}% damage</style> to enemies as well." 
@@ -220,10 +220,10 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "SPECIAL_NAME", "One For All");
             LanguageAPI.Add(prefix + "SPECIAL_DESCRIPTION", $"Cycle between One For All 45% and 100%, upgrading your skills and stats. This skill activates 45%.");
             LanguageAPI.Add(prefix + "SPECIAL2_NAME", "OFA 45%");
-            LanguageAPI.Add(prefix + "SPECIAL2_DESCRIPTION", $"Push your body to its limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 45% moves, " 
+            LanguageAPI.Add(prefix + "SPECIAL2_DESCRIPTION", $"Push your body to its limits, boosting Armor, Movespeed, gain unique 45% moves, " 
                 + Helpers.Damage("disabling Health Regen") + ".");
             LanguageAPI.Add(prefix + "SPECIAL3_NAME", "OFA 100%");
-            LanguageAPI.Add(prefix + "SPECIAL3_DESCRIPTION", $"Go beyond your limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 100% moves, " + Helpers.Damage($"taking {100f * StaticValues.ofaHealthCost}% of CURRENT health as damage every second and Self-Damage from every move") + ".");
+            LanguageAPI.Add(prefix + "SPECIAL3_DESCRIPTION", $"Go beyond your limits, boosting Armor, Movespeed, gain unique 100% moves, " + Helpers.Damage($"taking {100f * StaticValues.ofaHealthCost}% of CURRENT health as damage every second and Self-Damage from every move") + ".");
             LanguageAPI.Add(prefix + "SPECIAL4_NAME", "OFA Quirks");
             LanguageAPI.Add(prefix + "SPECIAL4_DESCRIPTION", $"Unlock your additional quirks. This skill grants the Fa Jin buff. Moving increases the buff up to 200 stacks. Gain up to 2x damage at 50 stacks. Every move gives 10 stacks and will consume 50 stacks if able. However, if a move uses 50 stacks it has additional effects. <style=cIsUtility>In general all moves will stun and bypass armor, have double the movement, double the radius and range</style>.");
           
@@ -251,23 +251,23 @@ namespace DekuMod.Modules
             #region Extra
             //modes
             LanguageAPI.Add(prefix + "FISTEXTRA_NAME", "Power mode");
-            LanguageAPI.Add(prefix + "FISTEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Power based." 
+            LanguageAPI.Add(prefix + "FISTEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Power based. Reset your Cooldowns." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             LanguageAPI.Add(prefix + "LEGEXTRA_NAME", "Shoot Style mode");
-            LanguageAPI.Add(prefix + "LEGEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Shoot Style based." 
+            LanguageAPI.Add(prefix + "LEGEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Shoot Style based. Reset your Cooldowns." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             LanguageAPI.Add(prefix + "QUIRKEXTRA_NAME", "Quirk mode");
-            LanguageAPI.Add(prefix + "QUIRKEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Quirk based." 
+            LanguageAPI.Add(prefix + "QUIRKEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Quirk based. Reset your Cooldowns." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             //supers
             LanguageAPI.Add(prefix + "FISTSPECIAL_NAME", "1,000,000% Detroit Delaware Smash");
             LanguageAPI.Add(prefix + "FISTSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Delaware Smash enemies, stunning and grouping them in front of you, dealing <style=cIsDamage>{100f * StaticValues.detroitdelawareSmashDamageCoefficient}% damage</style>, then Detroit Smash all of them, freezing and dealing <style=cIsDamage>{100f * StaticValues.detroitdelawareSmashDamageCoefficient}% damage</style>." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             LanguageAPI.Add(prefix + "LEGSPECIAL_NAME", "Final Smash");
-            LanguageAPI.Add(prefix + "LEGSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash forward, stunning and grouping enemies to your front, dealing <style=cIsDamage>{100f * StaticValues.finalsmashDamageCoefficient}% damage</style>, then Final Smash all of them, igniting and dealing damage ." 
+            LanguageAPI.Add(prefix + "LEGSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash forward, stunning and grouping enemies to your front, dealing <style=cIsDamage>{100f * StaticValues.finalsmashDamageCoefficient}% damage multiple times</style>, then Final Smash all of them, <style=cIsDamage> igniting and dealing{100f * StaticValues.finalsmashSmashDamageCoefficient}% damage</style>." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             LanguageAPI.Add(prefix + "QUIRKSPECIAL_NAME", "Fa Jin");
-            LanguageAPI.Add(prefix + "QUIRKSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Use your stored energy with Fa Jin, granting {StaticValues.fajinDamageMultiplier}x damage and disabling all health costs for {StaticValues.fajinDuration} seconds." 
+            LanguageAPI.Add(prefix + "QUIRKSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Use your stored plus ultra with Fa Jin, granting {StaticValues.fajinDamageMultiplier}x damage and disabling all health costs for {StaticValues.fajinDuration} seconds." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             //gobeyond
             LanguageAPI.Add(prefix + "GOBEYOND_NAME", "GO BEYOND!");
@@ -276,7 +276,7 @@ namespace DekuMod.Modules
 
             #region Keywords
             LanguageAPI.Add(prefix + "KEYWORD_PASSIVE", $"<style=cKeywordName>Plus Ultra Meter</style>" 
-                + "Deku has a" + Helpers.Passive(" meter that builds up through movement and using base form skills. Changing modes, using quirk skills and using supers cost energy") + "." 
+                + "Deku has a" + Helpers.Passive(" meter that builds up through movement and using base form skills. Changing modes, using quirk skills and using supers cost plus ultra. At Max Plus Ultra, once a stage, prevent death and Go Beyond, negating health costs as well as heal over time for 60 seconds") + "." 
                 + Environment.NewLine
                 + Environment.NewLine
             + $"<style=cKeywordName>Marks</style>" 
@@ -286,14 +286,15 @@ namespace DekuMod.Modules
                 + Environment.NewLine
                 + Environment.NewLine
             + $"<style=cKeywordName>Float</style>" 
-                + "<style=cIsUtility>Holding jump in the air after 1 second let's him Float, flying up or slowing descent if using a skill</style>." 
-                + Helpers.Passive(" Drains energy")
+                + "<style=cIsUtility>Holding jump in the air after 0.5 seconds let's him Float, flying up or slowing his descent while using a skill</style>." 
+                + Helpers.Passive(" Drains plus ultra")
                 + Environment.NewLine
                 + Environment.NewLine
             + $"<style=cKeywordName>Danger Sense</style>"
                 + $"<style=cIsUtility>Take reduced damage based on your armor every 10 seconds</style>, <style=cIsDamage>freezing the attacker for {100f * StaticValues.dangersenseDamageCoefficient}% damage</style>." 
                 + Helpers.Passive(" If the damage is fully negated, heal for the damage dealt.")
-                + $" If not using a skill, <style=cIsUtility>dodge out of the way</style> and <style=cIsDamage>shock enemies around you for {100f * StaticValues.dangersenseDamageCoefficient}% damage</style> as well.");
+                + $" If not using a skill, <style=cIsUtility>dodge out of the way</style> and <style=cIsDamage>shock enemies around you for {100f * StaticValues.dangersenseDamageCoefficient}% more damage</style> as well." 
+                + Helpers.Passive($" Costs {StaticValues.dangersensePlusUltraSpend} plus ultra") + ".");
 
             #endregion
 

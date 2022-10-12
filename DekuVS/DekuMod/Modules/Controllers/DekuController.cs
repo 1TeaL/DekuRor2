@@ -155,90 +155,102 @@ namespace DekuMod.Modules.Survivors
                     //dangersense base
                     if (self.body.HasBuff(Buffs.dangersenseBuff.buffIndex))
                     {
-                        self.body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 0, -1);
-                        self.body.ApplyBuff(Buffs.dangersenseDebuff.buffIndex, 1, StaticValues.dangersenseBuffTimer);
-
-                        damageInfo.force = Vector3.zero;
-                        damageInfo.damage -= self.body.armor;
-                        if(damageInfo.damage < 0f)
+                        if(energySystem.currentPlusUltra > StaticValues.dangersensePlusUltraSpend)
                         {
-                            self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
-                            damageInfo.damage = 0f;
-                        }
+                            energySystem.SpendPlusUltra(StaticValues.dangersensePlusUltraSpend);
 
-                        //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
+                            self.body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 0, -1);
+                            self.body.ApplyBuff(Buffs.dangersenseDebuff.buffIndex, 1, StaticValues.dangersenseBuffTimer);
 
-                        var dekucon = self.body.gameObject.GetComponent<DekuController>();
-                        //dekucon.countershouldflip = true;
-
-                        var damageInfo2 = new DamageInfo();
-
-                        damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
-                        damageInfo2.position = damageInfo.attacker.transform.position;
-                        damageInfo2.force = Vector3.zero;
-                        damageInfo2.damageColorIndex = DamageColorIndex.Default;
-                        damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                        damageInfo2.attacker = self.body.gameObject;
-                        damageInfo2.inflictor = self.body.gameObject;
-                        damageInfo2.damageType = DamageType.Freeze2s;
-                        damageInfo2.procCoefficient = 1f;
-                        damageInfo2.procChainMask = default(ProcChainMask);
-
-                        if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
-                            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
-                        {
-                            damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
-                        }
-
-                        Vector3 enemyPos = damageInfo.attacker.transform.position;
-                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                        {
-                            origin = self.body.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
-
-                        }, true);
-
-                        if (!self.body.inputBank.skill1.down && !self.body.inputBank.skill2.down && !self.body.inputBank.skill3.down)
-                        {
-                            new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
-
-                            blastAttack = new BlastAttack();
-                            blastAttack.radius = dangersenseBlastRadius;
-                            blastAttack.procCoefficient = dangersenseprocCoefficient;
-                            blastAttack.position = self.transform.position;
-                            blastAttack.attacker = base.gameObject;
-                            blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                            blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
-                            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                            blastAttack.baseForce = force;
-                            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                            blastAttack.damageType = DamageType.Shock5s;
-                            blastAttack.attackerFiltering = AttackerFiltering.Default;
-
-
-                            blastAttack.Fire();
-
-                            for (int i = 0; i <= 5; i++)
+                            damageInfo.force = Vector3.zero;
+                            damageInfo.damage -= self.body.armor;
+                            if (damageInfo.damage < 0f)
                             {
-                                this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                                float num = 60f;
-                                Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
-                                float num2 = 0.01f;
-                                rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                                rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+                                self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
+                                damageInfo.damage = 0f;
+                            }
 
-                                EffectData effectData = new EffectData
+                            //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
+
+                            var dekucon = self.body.gameObject.GetComponent<DekuController>();
+                            //dekucon.countershouldflip = true;
+
+                            var damageInfo2 = new DamageInfo();
+
+                            damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
+                            damageInfo2.position = damageInfo.attacker.transform.position;
+                            damageInfo2.force = Vector3.zero;
+                            damageInfo2.damageColorIndex = DamageColorIndex.Default;
+                            damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                            damageInfo2.attacker = self.body.gameObject;
+                            damageInfo2.inflictor = self.body.gameObject;
+                            damageInfo2.damageType = DamageType.Freeze2s;
+                            damageInfo2.procCoefficient = 1f;
+                            damageInfo2.procChainMask = default(ProcChainMask);
+
+                            if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
+                                != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+                            {
+                                damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+                            }
+
+                            Vector3 enemyPos = damageInfo.attacker.transform.position;
+                            EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                            {
+                                origin = self.body.transform.position,
+                                scale = 1f,
+                                rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
+
+                            }, true);
+
+                            if (!self.body.inputBank.skill1.down && !self.body.inputBank.skill2.down && !self.body.inputBank.skill3.down)
+                            {
+                                new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
+
+                                blastAttack = new BlastAttack();
+                                blastAttack.radius = dangersenseBlastRadius;
+                                blastAttack.procCoefficient = dangersenseprocCoefficient;
+                                blastAttack.position = self.transform.position;
+                                blastAttack.attacker = base.gameObject;
+                                blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                                blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
+                                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                                blastAttack.baseForce = force;
+                                blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                                blastAttack.damageType = DamageType.Shock5s;
+                                blastAttack.attackerFiltering = AttackerFiltering.Default;
+
+
+                                blastAttack.Fire();
+
+                                for (int i = 0; i <= 5; i++)
                                 {
-                                    scale = 1f,
-                                    origin = self.body.corePosition + this.randRelPos,
-                                    rotation = rotation
+                                    this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+                                    float num = 60f;
+                                    Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
+                                    float num2 = 0.01f;
+                                    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+                                    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
 
-                                };
-                                EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                                    EffectData effectData = new EffectData
+                                    {
+                                        scale = 1f,
+                                        origin = self.body.corePosition + this.randRelPos,
+                                        rotation = rotation
+
+                                    };
+                                    EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+                                }
+
                             }
 
                         }
+                        else
+                        {
+                            Chat.AddMessage($"You need {StaticValues.dangersensePlusUltraSpend} plus ultra.");
+                            energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
+                        }
+                        
 
 
                     }

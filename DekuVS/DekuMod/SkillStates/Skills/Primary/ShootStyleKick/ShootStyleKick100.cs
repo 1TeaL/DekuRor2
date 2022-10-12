@@ -161,6 +161,7 @@ namespace DekuMod.SkillStates
                         {
                             shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.AddComponent<ShootStyleKickComponent>();
                             shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
+                            shootStyleKickComponent.dekucharbody = characterBody;
                             shootStyleKickComponent.numberOfHits = numberOfHits;
                             shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient;
                         }

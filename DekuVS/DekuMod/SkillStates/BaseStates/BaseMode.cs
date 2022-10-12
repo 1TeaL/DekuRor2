@@ -53,6 +53,10 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
         {
             base.OnExit();
+			base.skillLocator.primary.AddOneStock();
+			base.skillLocator.secondary.AddOneStock();
+			base.skillLocator.utility.AddOneStock();
+
 			base.skillLocator.DeductCooldownFromAllSkillsServer(dekucon.skillCDTimer);
 			dekucon.skillCDTimer = 0f;
 		}

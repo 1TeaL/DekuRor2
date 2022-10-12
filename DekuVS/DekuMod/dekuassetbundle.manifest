@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 682114108
+CRC: 3540204008
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4b196db36c66d939ebd057735fcb5db3
+    Hash: 8780bd084e50a5eeb88b94633c4a6240
   TypeTreeHash:
     serializedVersion: 2
     Hash: 899cae2a3e2cadcc2f0b24230bf2ee13
@@ -81,6 +81,7 @@ Assets:
 - Assets/Deku/DekuV2/GUI/stlouis100.png
 - Assets/Deku/DekuV2/VFX/airforce100impact.prefab
 - Assets/Deku/DekuV2/Animations/FinalSmashDash.anim
+- Assets/Deku/DekuV2/GUI/GearShift.png
 - Assets/Deku/DekuV2/VFX/gearshiftAura.prefab
 - Assets/Deku/DekuV2/GUI/lightningwhitegreen.tif
 - Assets/Deku/DekuV2/Animations/FinalSmashBegin.anim
@@ -200,7 +201,6 @@ Assets:
 - Assets/Deku/DekuV2/VFX/Material/windlineblack.mat
 - Assets/Deku/DekuV2/GUI/blackwhipshoot.png
 - Assets/Deku/DekuV2/GUI/gobeyondY.png
-- Assets/Deku/DekuV2/GUI/detroitdelawareSmash.PNG
 - Assets/Deku/DekuV2/Animations/StLouis100Smash.anim
 - Assets/Deku/DekuV2/GUI/delaware.png
 - Assets/Deku/DekuV2/Animations/DetroitDelawareDetroit.anim
@@ -229,6 +229,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/blackwhipshootGhost.prefab
 - Assets/Deku/DekuV2/GUI/texDekuIcon.png
 - Assets/Deku/DekuV2/Animations/Entrance.anim
+- Assets/Deku/DekuV2/Animations/GearShift.anim
 - Assets/Deku/DekuV2/GUI/smokescreen.png
 - Assets/Deku/DekuV2/Animations/DetroitDelawareFull.anim
 - Assets/Deku/DekuV2/VFX/Textures/SparkParticleblackwhip.tif
@@ -251,6 +252,7 @@ Assets:
 - Assets/Deku/DekuV2/VFX/spin.prefab
 - Assets/Deku/DekuV2/VFX/Textures/dangersenseparticle.tif
 - Assets/Deku/DekuV2/VFX/blackwhipeffect.prefab
+- Assets/Deku/DekuV2/GUI/detroitdelawareSmash.png
 - Assets/Deku/DekuV2/VFX/windringbig.prefab
 - Assets/Deku/DekuV2/Animations/DekuLeftArmMask.mask
 - Assets/Deku/DekuV2/Animations/Detroit100Charging.anim

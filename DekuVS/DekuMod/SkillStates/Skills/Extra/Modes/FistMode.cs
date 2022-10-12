@@ -121,7 +121,6 @@ namespace DekuMod.SkillStates
 					break;
 			}
 
-
 		}
 
 		public override void FixedUpdate()

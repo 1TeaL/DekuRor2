@@ -15,6 +15,7 @@ namespace DekuMod.Modules
         //dangersense
         internal const float dangersenseDamageCoefficient = 2f;
         internal const int dangersenseBuffTimer = 10;
+        internal static float dangersensePlusUltraSpend = 5f;
         //float
         internal const float floatForceEnergyFraction = 0.01f;
         internal const float floatSpeed = 1f;
@@ -29,7 +30,7 @@ namespace DekuMod.Modules
         internal static float skill45PlusUltraSpend = 5f;
         internal static float skill100PlusUltraSpend = 5f;
         internal static float specialPlusUltraSpend = 50f;
-        internal static float modePlusUltraSpend = 5f;
+        internal static float modePlusUltraSpend = 10f;
         internal static float goBeyondBuffGain = 1f;
         internal static int goBeyondBuffDuration = 60;
 
@@ -85,9 +86,9 @@ namespace DekuMod.Modules
 
         //Utility
         //delaware
-        internal const float delawareDamageCoefficient = 4f;
-        internal const float delaware45DamageCoefficient = 6f;
-        internal const float delaware100DamageCoefficient = 8f;
+        internal const float delawareDamageCoefficient = 6f;
+        internal const float delaware45DamageCoefficient = 9f;
+        internal const float delaware100DamageCoefficient = 12f;
         internal const float delaware100HealthCostFraction = 0.15f;
         //manchester
         internal const float manchesterArmor = 200f;
