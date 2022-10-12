@@ -58,6 +58,14 @@ If you enjoy my work, support me on Ko-fi!
     	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
     	    - It is used for Mode switching, Float, Danger Sense, Supers and Going Beyond.
     	    - At max Plus Ultra, once per stage, prevent death, Going Beyond your limits! For 60 seconds remain in 100% without any health costs and heal as well.
+        - Mark passive
+            -  Deku's Shocking attacks apply a heal mark- after 3 hits heal based on damage dealt.
+            -  Deku's Stunning attacks apply a barrier mark- after 3 hits gain barrier based on damage dealt.
+            -  Deku's Freezing and Igniting attacks apply both marks.
+        - Float passive
+            - Holding jump in the air enables deku to float at the cost of plus ultra. Holding down a skill button maintains height.
+        - Danger Sense passive
+            - Every 10 seconds, when hit, deku will take reduced damage based on his armor, healing him if the damage is fully negated. Freeze the attacker. If he is not using a skill, he dodges out of the way and shocks nearby enemies as well. Costs 5 plus ultra.
     	- Added 3 modes- each having their own set of skills and a Super. Costs 5 plus ultra.
             - When including the one for all versions, each mode has 10 skills!
             - Power mode- focused on high damage with his punches.
@@ -66,7 +74,7 @@ If you enjoy my work, support me on Ko-fi!
     	- Added 3 supers- costs 50 plus ultra.
             - Power mode- 1,000,000% Detroit Delaware Smash- pulling enemies in with Delaware Smash and then freezing them with a Detroit smash for massive damage.
             - Shoot Style mode- Final Smash- Dash forward, pulling enemies in and then igniting them with a Final Smash for massive damage.
-            - Quirk mode- Fa Jin- pulling enemies in with Delaware Smash and then freezing them with a Detroit smash for massive damage
+            - Quirk mode- Fa Jin- Activate Fa Jin, enabling the use of 100% moves without any health costs as well as boosting damage.
 
     - *REMOVED*
     	- *NEW*
