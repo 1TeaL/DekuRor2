@@ -77,13 +77,22 @@ If you enjoy my work, support me on Ko-fi!
             - Quirk mode- Fa Jin- Activate Fa Jin, enabling the use of 100% moves without any health costs as well as boosting damage. 
         - New Skills
             - Added Gear Shift! The 2nd user's quirk, enabling the changing of velocity, bending the laws of physics.
-            - Activating Gear shift activates a buff that multiplies the knockback of attacks. 
-            - Activating Gear shift 45% activates a buff that makes attacks pierce enemies and slows them.
-            - Activating Gear shift activates a buff that, ba.
+            - Gear shift activates a buff that multiplies the knockback of attacks. 
+            - Gear shift 45% activates a buff that makes attacks pierce enemies and slows them.
+            - Gear shift activates a buff that, ba.
     - *REMOVED*
-    	- *NEW*
-    - *CHANGED*
+    	- Old skills- float, Oklahoma smash, extra skills
+    	- Fa Jin buff mechanic and Fa Jin skill
+    	- Health Regen that increases at lower health
+     - *CHANGED*
         - CHANGED
+    	- *NEW*
+    	- *NEW*
+    	- *NEW*
+    	- *NEW*   	
+        - One for all skills no longer give increased damage and attack speed, just increased armor and movespeed.
+    	    - One for all 100% no longer gives negative regen, instead it's self damage every second based on current health, this allows more methods of mitigation
+
 
 - Next update(s)
     -  Balance changes
