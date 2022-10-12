@@ -56,8 +56,8 @@ If you enjoy my work, support me on Ko-fi!
     - *THE DEKU REWORK!*
     - *NEW*
     	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
-    	    - It is used for Mode switching, Float, Danger Sense, Supers and Going Beyond.
-    	    - At max Plus Ultra, once per stage, prevent death, Going Beyond your limits! For 60 seconds remain in 100% without any health costs and heal as well.
+    	    - It's used for Mode switching, Float, Danger Sense, Supers and Going Beyond.
+    	    - At max Plus Ultra, once per stage, prevent death, Going Beyond your limits! For 60 seconds remain in 100% without any health costs and regenerate health as well.
         - Mark passive
             -  Deku's Shocking attacks apply a heal mark- after 3 hits heal based on damage dealt.
             -  Deku's Stunning attacks apply a barrier mark- after 3 hits gain barrier based on damage dealt.
@@ -74,10 +74,16 @@ If you enjoy my work, support me on Ko-fi!
     	- Added 3 supers- costs 50 plus ultra.
             - Power mode- 1,000,000% Detroit Delaware Smash- pulling enemies in with Delaware Smash and then freezing them with a Detroit smash for massive damage.
             - Shoot Style mode- Final Smash- Dash forward, pulling enemies in and then igniting them with a Final Smash for massive damage.
-            - Quirk mode- Fa Jin- Activate Fa Jin, enabling the use of 100% moves without any health costs as well as boosting damage.
-
+            - Quirk mode- Fa Jin- Activate Fa Jin, enabling the use of 100% moves without any health costs as well as boosting damage. 
+        - New Skills
+            - Added Gear Shift! The 2nd user's quirk, enabling the changing of velocity, bending the laws of physics.
+            - Activating Gear shift activates a buff that multiplies the knockback of attacks. 
+            - Activating Gear shift 45% activates a buff that makes attacks pierce enemies and slows them.
+            - Activating Gear shift activates a buff that, ba.
     - *REMOVED*
     	- *NEW*
+    - *CHANGED*
+        - CHANGED
 
 - Next update(s)
     -  Balance changes
