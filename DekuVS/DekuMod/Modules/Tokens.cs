@@ -124,7 +124,7 @@ namespace DekuMod.Modules
                 + Helpers.Damage($" Costs {100f * StaticValues.stlouis100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Gear Shift 100%");
             LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Overdrive gear shift for {StaticValues.gearshift100BuffTimer} seconds. <style=cIsDamage>Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed</style>." + Environment.NewLine +
-                $" <style=cIsUtility>The initial threshold is {StaticValues.gearshift100Threshold} movespeed, doubling for each subsequent threshold</style>."
+                $" <style=cIsUtility>Overdrive gear shift for the next 5 attacks. Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed. The thresholds are in increments of 15 movespeed. The initial threshold is {StaticValues.gearshift100Threshold} movespeed, doubling for each subsequent threshold</style>."
                 + Helpers.Damage($" Costs {100f * StaticValues.gearshift100HealthCostFraction}% of max health")
                 + Helpers.Passive($" Costs {StaticValues.skill100PlusUltraSpend} of plus ultra") + ".");
 
@@ -251,13 +251,13 @@ namespace DekuMod.Modules
             #region Extra
             //modes
             LanguageAPI.Add(prefix + "FISTEXTRA_NAME", "Power mode");
-            LanguageAPI.Add(prefix + "FISTEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Power based. Reset your Cooldowns." 
+            LanguageAPI.Add(prefix + "FISTEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Power based" 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             LanguageAPI.Add(prefix + "LEGEXTRA_NAME", "Shoot Style mode");
-            LanguageAPI.Add(prefix + "LEGEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Shoot Style based. Reset your Cooldowns." 
+            LanguageAPI.Add(prefix + "LEGEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Shoot Style based." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             LanguageAPI.Add(prefix + "QUIRKEXTRA_NAME", "Quirk mode");
-            LanguageAPI.Add(prefix + "QUIRKEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Quirk based. Reset your Cooldowns." 
+            LanguageAPI.Add(prefix + "QUIRKEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Quirk based." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             //supers
             LanguageAPI.Add(prefix + "FISTSPECIAL_NAME", "1,000,000% Detroit Delaware Smash");
