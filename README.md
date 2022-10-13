@@ -201,7 +201,7 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Detroit<br>Smash<br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306958-c9638647-3573-45a5-8062-bc827b7d1b84.png" alt="Image" width="100" height="100"></td>
-    <td>Delaware Smash enemies, stunning and grouping them in front of you, dealing 1500% damage,<br>then Detroit Smash all of them, freezing and dealing 1500% damage.<br></td>
+    <td>Delaware Smash enemies, stunning and grouping them in front of you, dealing 10% damage multiple times, <br>then Detroit Smash all of them, freezing and dealing 1500% damage.<br></td>
     <td>Proc: 1.<br>Cost: 50 Plus Ultra.</td>
   </tr>
 </tbody>
@@ -263,7 +263,7 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Manchester<br>Smash 45%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306797-00346e67-2a81-457c-ac2c-46ddfc2d46f1.png" alt="Image" width="100" height="100"></td>
-    <td>Manchester Smash, jumping and damaging nearby enemies for 400% damage, <br>Gain 200 armor 3 seconds.</td>
+    <td>Manchester Smash, jumping and damaging nearby enemies for 400% damage, <br>Gain 200 armor 4 seconds.</td>
     <td>Proc: 1.<br>CD: 4s.</td>
   </tr>
   <tr>
