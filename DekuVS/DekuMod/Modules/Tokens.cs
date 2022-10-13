@@ -74,29 +74,6 @@ namespace DekuMod.Modules
                 + Helpers.Damage($" Costs {100f * StaticValues.blackwhip100HealthCostFraction}% of max health.") 
                 + Helpers.Passive($" Costs {StaticValues.skill100PlusUltraSpend} of plus ultra") + ".");
             
-
-
-            //LanguageAPI.Add(prefix + "PRIMARY3_NAME", "Danger Sense");
-            //LanguageAPI.Add(prefix + "PRIMARY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, stun and deal <style=cIsDamage>{100f * StaticValues.dangersenseDamageCoefficient}% damage</style>, to the attacker and enemies around Deku. Timing window scales with attackspeed. Total duration is 2 seconds</style>." + Helpers.Passive(" Fa Jin buff freezes and increases the timing window") + ".");
-
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_NAME", "Shoot Style Full Cowling 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY_DESCRIPTION", $"Dash through enemies, hitting enemies behind for <style=cIsDamage>{100f * StaticValues.shootbulletDamageCoefficient}% damage scaling by attackspeed</style>." + Helpers.Damage(" Costs 1% of max Health") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY2_NAME", "Airforce 45%");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot 4 bullets with all your fingers, dealing <style=cIsDamage>{100f * StaticValues.airforce45DamageCoefficient}% damage each</style>.");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY3_NAME", "Fa Jin");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY3_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Charge up kinetic energy, dealing <style=cIsDamage>{100f* StaticValues.fajinDamageCoefficient}% damage</style>." + Helpers.Passive(" Grants 10 stacks of Fa Jin. Does not consume Fa Jin") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY4_NAME", "Fa Jin Mastered");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY4_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Charge up kinetic energy, dealing <style=cIsDamage>{100f * StaticValues.fajinDamageCoefficient}% damage</style>." + Helpers.Passive(" Grants 10 stacks of Fa Jin. Does not consume Fa Jin") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY5_NAME", "Airforce 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY5_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Shoot beams with your fists, stunning and dealing <style=cIsDamage>{100f * StaticValues.airforce100DamageCoefficient}% damage</style>, initially having 20% attackspeed, ramping up to 200%." + Helpers.Damage(" Costs 1% of max Health") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY6_NAME", "Shoot Style Kick 45%");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY6_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, dealing <style=cIsDamage>{100f * StaticValues.shootkick45DamageCoefficient}% damage, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill.");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY7_NAME", "Shoot Style Kick 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY7_DESCRIPTION", $"<style=cIsDamage>Freezing. Agile.</style> Dash and kick, freezing and dealing <style=cIsDamage>{100f * StaticValues.shootkick100DamageCoefficient}% damage twice, scaling with movespeed</style>, resetting the cooldown on hit and resetting all cooldowns on kill." + Helpers.Damage(" Costs 1% of max Health") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY8_NAME", "Danger Sense 45%");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY8_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, stun and deal <style=cIsDamage>{100f * StaticValues.dangersenseDamageCoefficient}% damage</style> to the attacker and enemies around Deku. Timing window scales with attackspeed. Total duration is 1.5 seconds</style>." );
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY9_NAME", "Danger Sense 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDPRIMARY9_DESCRIPTION", $"<style=cIsDamage>Freezing. Agile.</style> Activate Danger Sense, when timed properly, dodge, reset CD, freeze and deal <style=cIsDamage>{100f * StaticValues.dangersenseDamageCoefficient}% damage</style>, to the attacker and enemies around Deku. Timing window scales with attackspeed. Total duration is 1 second</style>." + Helpers.Damage(" Costs 5% of max Health") + ".");
             #endregion
 
             #region Secondary
@@ -105,7 +82,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEGSECONDARY_NAME", "St Louis Smash");
             LanguageAPI.Add(prefix + "LEGSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Shocking.</style> Teleport and kick the target and enemies around, dealing <style=cIsDamage>{100f * StaticValues.stlouisDamageCoefficient}% damage</style>, sending them forward" + ".");
             LanguageAPI.Add(prefix + "QUIRKSECONDARY_NAME", "Gear Shift");
-            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate gear shift for {StaticValues.gearshiftBuffTimer} seconds. <style=cIsDamage>The knockback of attacks are multiplied by {StaticValues.gearshiftForceBoost}x</style>." 
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate gear shift for {StaticValues.gearshiftBuffTimer} seconds. <style=cIsUtility> Movespeed is increased by {StaticValues.gearshiftMovespeedBoost}x</style>. <style=cIsDamage>Attacks apply additional knockback based on your aim</style>." 
                 + Helpers.Passive($" Costs {StaticValues.skillPlusUltraSpend} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST45SECONDARY_NAME", "Detroit Smash 45%");
@@ -113,7 +90,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEG45SECONDARY_NAME", "St Louis Smash 45%");
             LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing <style=cIsDamage>{100f * StaticValues.stlouis45DamageCoefficient}% damage</style>" + ".");
             LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Gear Shift 45%");
-            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Activate gear shift for {StaticValues.gearshift45BuffTimer} seconds. <style=cIsDamage>Attacks slow enemies and pierce through them for {100f * StaticValues.gearshift45DamageCoefficient}% of the damage</style>."
+            LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate gear shift transmission for {StaticValues.gearshift45BuffTimer} seconds. <style=cIsDamage>Attacks slow enemies and pierce through them for {100f * StaticValues.gearshift45DamageCoefficient}% of the damage</style>."
                 + Helpers.Passive($" Costs {StaticValues.skill45PlusUltraSpend} of plus ultra") + ".");
 
             LanguageAPI.Add(prefix + "FIST100SECONDARY_NAME", "Detroit Smash 100%");
@@ -123,32 +100,11 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEG100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to prep a physics breaking St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>{100f * StaticValues.stlouis100DamageCoefficient}% damage</style>." 
                 + Helpers.Damage($" Costs {100f * StaticValues.stlouis100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100SECONDARY_NAME", "Gear Shift 100%");
-            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. </style> Overdrive gear shift for {StaticValues.gearshift100BuffTimer} seconds. <style=cIsDamage>Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed</style>." + Environment.NewLine +
-                $" <style=cIsUtility>Overdrive gear shift for the next 5 attacks. Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed. The thresholds are in increments of 15 movespeed. The initial threshold is {StaticValues.gearshift100Threshold} movespeed, doubling for each subsequent threshold</style>."
+            LanguageAPI.Add(prefix + "QUIRK100SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Overdrive gear shift for the next {StaticValues.gearshift100BuffAttacks} attacks. <style=cIsDamage>Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed</style>." +
+                $" <style=cIsUtility>The thresholds are in increments of {StaticValues.gearshift100Threshold} movespeed</style>."
                 + Helpers.Damage($" Costs {100f * StaticValues.gearshift100HealthCostFraction}% of max health")
                 + Helpers.Passive($" Costs {StaticValues.skill100PlusUltraSpend} of plus ultra") + ".");
 
-
-
-            //LanguageAPI.Add(prefix + "SECONDARY2_NAME", "Manchester Smash");
-            //LanguageAPI.Add(prefix + "SECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Jump in the air and slam down, dealing <style=cIsDamage>{100f * StaticValues.manchesterDamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed</style>." + Helpers.Passive(" Fa Jin buff hits and pulls enemies when you jump as well as doubling barrier gain") + ".");
-            //LanguageAPI.Add(prefix + "SECONDARY3_NAME", "St Louis Smash Airforce");
-            //LanguageAPI.Add(prefix + "SECONDARY3_DESCRIPTION", $"<style=cIsDamage>Agile.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing <style=cIsDamage>{100f * StaticValues.stlouisDamageCoefficient}% damage and healing on hit, scaling with attackspeed</style>." + Helpers.Passive(" Fa Jin buff doubles the range and health gain") + ".");
-
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_NAME", "Detroit Smash 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroit100DamageCoefficient}% increasing infinitely</style>. " + Helpers.Damage("Costs 10% of max Health")+".");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY2_NAME", "Blackwhip 45%");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY2_DESCRIPTION", $"<style=cIsDamage>Stunning. </style> Blackwhip enemies, pulling them right in front of you, stunning and dealing <style=cIsDamage>5x{100f * StaticValues.blackwhip45DamageCoefficient}%</style> and gaining barrier on hit, scaling with attackspeed.");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY3_NAME", "Blackwhip Combo");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Hit enemies in front of you and shoot blackwhip, dealing <style=cIsDamage>{100f * StaticValues.blackwhipshootDamageCoefficient}%</style>. Tapping pulls you forward while Holding pulls enemies towards you</style>." + Helpers.Passive(" Fa Jin buff makes blackwhip stuns, shoot multiple times and have a larger melee hitbox") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY4_NAME", "Blackwhip 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY4_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Blackwhip enemies, pulling them right in front of you, stunning and dealing <style=cIsDamage>3x{100f * StaticValues.blackwhip100DamageCoefficient}%</style> and gaining barrier on hit, scaling with attackspeed." + Helpers.Damage("Costs 10% of max Health") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY5_NAME", "Manchester Smash 45%");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY5_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Jump in the air and slam down, dealing <style=cIsDamage>{100f * StaticValues.manchester45DamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed. Radius scales with movespeed.");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY6_NAME", "Manchester Smash 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY6_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Jump in the air and slam down, dealing <style=cIsDamage>2x{100f * StaticValues.manchester100DamageCoefficient}%</style> and gaining barrier on hit, scaling with movespeed. Hits and pulls enemies when you jump as well. Radius scales with movespeed." + Helpers.Damage("Costs 10% of max Health") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY7_NAME", "St Louis Smash Airforce 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDSECONDARY7_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, stunning and dealing <style=cIsDamage>{100f * StaticValues.stlouis100DamageCoefficient}% damage. On hit, create an additional blast and heal, scaling with attackspeed</style>." + Helpers.Damage("Costs 10% of max Health") + ".");
             #endregion
 
             #region Utility
@@ -179,41 +135,6 @@ namespace DekuMod.Modules
                 + Helpers.Damage($" Costs {100f * StaticValues.smokescreen100HealthCostFraction}% of max health.")
                 + Helpers.Passive($" Costs {StaticValues.skill100PlusUltraSpend} of plus ultra") + ".");
           
-
-
-            //LanguageAPI.Add(prefix + "UTILITY_NAME", "Float");
-            //LanguageAPI.Add(prefix + "UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. Press the button to cancel Float</style>." + Helpers.Passive(" Fa Jin buff causes a blast of wind to damage enemies around you as you jump as well") + ".");
-            //LanguageAPI.Add(prefix + "UTILITY2_NAME", "Oklahoma Smash");
-            //LanguageAPI.Add(prefix + "UTILITY2_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold the button to spin around, knocking back and dealing <style=cIsDamage>{100f * StaticValues.oklahomaDamageCoefficient}% damage</style> around you multiple times. While active, triple armor at the cost of movespeed</style>." + Helpers.Passive(" Fa Jin buff doubles the number of hits, speed, and AOE") + ".");
-            //LanguageAPI.Add(prefix + "UTILITY3_NAME", "Detroit Smash");
-            //LanguageAPI.Add(prefix + "UTILITY3_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}%</style>, range scales based on attackspeed and movespeed</style>." + Helpers.Passive(" Fa Jin buff doubles everything") + ".");
-
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY_NAME", "Delaware Smash 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Delaware Smash, dealing <style=cIsDamage>{100f * StaticValues.delaware100DamageCoefficient}% damage</style> in an AOE, sending yourself backwards</style>. " + Helpers.Damage("Costs 10% of max Health")+".");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY2_NAME", "St Louis Smash 45%");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY2_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> St Louis Smash, stunning enemies in front, dealing <style=cIsDamage>{100f * StaticValues.stlouis45DamageCoefficient}% damage</style>.");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY3_NAME", "Smokescreen");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY3_DESCRIPTION", $"<style=cIsDamage>Slowing.</style> Release a smokescreen, going invisible for 4 seconds and dealing <style=cIsDamage>{100f * StaticValues.smokescreenDamageCoefficient}% damage</style> around you</style>." + Helpers.Passive(" Fa Jin buff makes nearby allies invisible as well") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY4_NAME", "Float 45%");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY4_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. Press the button to cancel Float</style>.");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY5_NAME", "Float 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY5_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Jump, dealing <style=cIsDamage>{100f * StaticValues.floatDamageCoefficient}% damage</style> and float in the air, disabling gravity, changing your special to Delaware Smash 100%. Press the button to cancel Float</style>.");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY6_NAME", "Oklahoma Smash 45%");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY6_DESCRIPTION", $"<style=cIsDamage>Slowing. Agile.</style> Hold the button to spin around, knocking back and dealing <style=cIsDamage>{100f * StaticValues.oklahoma45DamageCoefficient}% damage around you multiple times. While active, triple armor at the cost of movespeed</style>.");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY7_NAME", "Oklahoma Smash 100%");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY7_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Hold the button to spin around, knocking back and dealing <style=cIsDamage>{100f * StaticValues.oklahoma100DamageCoefficient}% damage around you multiple times. While active, triple armor at the cost of movespeed</style>." + Helpers.Damage("Costs 10% of max Health") + ".");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY8_NAME", "Detroit Smash");
-            //LanguageAPI.Add(prefix + "BOOSTEDUTILITY8_DESCRIPTION", $"<style=cIsDamage>Stunning. Agile.</style> Charge a Detroit Smash, instantly dashing and dealing <style=cIsDamage>{100f * StaticValues.detroit45DamageCoefficient} to {300f * StaticValues.detroit45DamageCoefficient}% damage</style>, range scales based on attackspeed and movespeed</style>.");
-            //LanguageAPI.Add(prefix + "FLOATCANCEL_NAME", "Float Cancel"); 
-            //LanguageAPI.Add(prefix + "FLOATCANCEL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Float to the ground, enabling gravity, reverting your special</style>.");
-            ////LanguageAPI.Add(prefix + "FLOATCANCEL45_NAME", "Float 45% Cancel");
-            ////LanguageAPI.Add(prefix + "FLOATCANCEL45_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Float to the ground, enabling gravity, reverting your special</style>.");
-            ////LanguageAPI.Add(prefix + "FLOATCANCEL100_NAME", "Float 100% Cancel");
-            ////LanguageAPI.Add(prefix + "FLOATCANCEL100_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Float to the ground, enabling gravity, reverting your special</style>.");
-            //LanguageAPI.Add(prefix + "FLOATSPECIAL_NAME", "Delaware Smash 100%");
-            //LanguageAPI.Add(prefix + "FLOATSPECIAL_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Delaware Smash, dealing <style=cIsDamage>{100f * StaticValues.delawareDamageCoefficient}% damage in an AOE, sending yourself backwards</style>. " + Helpers.Passive(" Fa Jin buff doubles the distance travelled") + "." + Helpers.Damage("Costs 10% of max Health") + ".");
-            ////LanguageAPI.Add(prefix + "FLOATSPECIAL45_NAME", "Delaware Smash 45%");
-            ////LanguageAPI.Add(prefix + "FLOATSPECIAL45_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Delaware Smash, dealing <style=cIsDamage>{100f * StaticValues.delaware45DamageCoefficient}% damage in an AOE, sending yourself backwards</style>. ");
             #endregion
 
             #region Special
@@ -231,10 +152,10 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_NAME", "OFA down");
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL_DESCRIPTION", $"Return yourself back to your limits.");
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL2_NAME", "OFA 45%");
-            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL2_DESCRIPTION", $"Push your body to its limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 45% moves, " 
+            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL2_DESCRIPTION", $"Push your body to its limits, boosting Armor, Movespeed, gain unique 45% moves, " 
                 + Helpers.Damage("disabling Health Regen") + ". This skill goes to 100%.");
             LanguageAPI.Add(prefix + "BOOSTEDSPECIAL3_NAME", "OFA 100%");
-            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL3_DESCRIPTION", $"Go beyond your limits, boosting Armor, Movespeed, Damage, Attackspeed, gain unique 100% moves, " 
+            LanguageAPI.Add(prefix + "BOOSTEDSPECIAL3_DESCRIPTION", $"Go beyond your limits, boosting Armor, Movespeed,  gain unique 100% moves, " 
                 + Helpers.Damage($"taking {100f * StaticValues.ofaHealthCost}% of CURRENT health as damage every second and Self-Damage from every move") + ". This skill returns yourself back to your limits.");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL_NAME", "One For All Mastered");
             LanguageAPI.Add(prefix + "SCEPTERSPECIAL_DESCRIPTION", $"Cycle between Mastered One For All 45% and 100%, upgrading your skills and stats as well as granting lifesteal. This skill goes to 45%.");
@@ -261,10 +182,10 @@ namespace DekuMod.Modules
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             //supers
             LanguageAPI.Add(prefix + "FISTSPECIAL_NAME", "1,000,000% Detroit Delaware Smash");
-            LanguageAPI.Add(prefix + "FISTSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Delaware Smash enemies, stunning and grouping them in front of you, dealing <style=cIsDamage>{100f * StaticValues.detroitdelawareSmashDamageCoefficient}% damage</style>, then Detroit Smash all of them, freezing and dealing <style=cIsDamage>{100f * StaticValues.detroitdelawareSmashDamageCoefficient}% damage</style>." 
+            LanguageAPI.Add(prefix + "FISTSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile. Freezing.</style> Delaware Smash enemies, stunning and grouping them in front of you, dealing <style=cIsDamage>{100f * StaticValues.detroitdelawareSmashDamageCoefficient}% damage</style>, then Detroit Smash all of them, freezing and dealing <style=cIsDamage>{100f * StaticValues.detroitdelawareSmashDamageCoefficient}% damage</style>." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             LanguageAPI.Add(prefix + "LEGSPECIAL_NAME", "Final Smash");
-            LanguageAPI.Add(prefix + "LEGSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash forward, stunning and grouping enemies to your front, dealing <style=cIsDamage>{100f * StaticValues.finalsmashDamageCoefficient}% damage multiple times</style>, then Final Smash all of them, <style=cIsDamage> igniting and dealing{100f * StaticValues.finalsmashSmashDamageCoefficient}% damage</style>." 
+            LanguageAPI.Add(prefix + "LEGSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile. Igniting.</style> Dash forward, stunning and grouping enemies to your front, dealing <style=cIsDamage>{100f * StaticValues.finalsmashDamageCoefficient}% damage multiple times</style>, then Final Smash all of them,<style=cIsDamage> igniting and dealing {100f * StaticValues.finalsmashSmashDamageCoefficient}% damage</style>." 
                 + Helpers.Passive($" Costs {StaticValues.modePlusUltraSpend} of plus ultra") + ".");
             LanguageAPI.Add(prefix + "QUIRKSPECIAL_NAME", "Fa Jin");
             LanguageAPI.Add(prefix + "QUIRKSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Use your stored plus ultra with Fa Jin, granting {StaticValues.fajinDamageMultiplier}x damage and disabling all health costs for {StaticValues.fajinDuration} seconds." 

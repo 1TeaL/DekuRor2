@@ -18,7 +18,7 @@ namespace DekuMod.Modules
         internal static float dangersensePlusUltraSpend = 5f;
         //float
         internal const float floatForceEnergyFraction = 0.01f;
-        internal const float floatSpeed = 1f;
+        internal const float floatSpeed = 3f;
 
 
         //Energy
@@ -33,6 +33,7 @@ namespace DekuMod.Modules
         internal static float modePlusUltraSpend = 5f;
         internal static float goBeyondBuffGain = 1f;
         internal static int goBeyondBuffDuration = 60;
+        internal static float goBeyondThreshold = 95f;
 
         //Primary
         //airforce
@@ -51,7 +52,7 @@ namespace DekuMod.Modules
         internal const float blackwhipRange = 20f;
         internal const int blackwhipDebuffDuration = 10;
         internal const int blackwhipTargets = 10;
-        internal const float blackwhip45DamageCoefficient = 3f;
+        internal const float blackwhip45DamageCoefficient = 6f;
         internal const float blackwhip100DamageCoefficient = 6f;
         internal const float blackwhip100PullRange = 70f;
         internal const float blackwhip100HealthCostFraction = 0.10f;
@@ -65,7 +66,7 @@ namespace DekuMod.Modules
         internal const float detroitDamageCoefficient = 4f;
         internal const float detroitRange = 5f;
         internal const float detroit45DamageCoefficient = 6f;
-        internal const float detroit100DamageCoefficient = 10f;
+        internal const float detroit100DamageCoefficient = 8f;
         internal const float detroit100HealthCostFraction = 0.15f;
         //stlouis
         internal const float stlouisDamageCoefficient = 3f;
@@ -76,6 +77,7 @@ namespace DekuMod.Modules
         //gearshift
         internal const int gearshiftBuffTimer = 10;
         internal const float gearshiftForceBoost = 10f;
+        internal const float gearshiftMovespeedBoost = 1.2f;
         internal const int gearshift45BuffTimer = 10;
         internal const float gearshift45DamageCoefficient = 0.5f;
         internal const int gearshift100BuffAttacks = 5;
@@ -119,13 +121,11 @@ namespace DekuMod.Modules
         //fist
         internal const float detroitdelawareDamageCoefficient = 0.1f;
         internal const float detroitdelawareSmashDamageCoefficient = 15f;
-        internal const float detroitdelawareBlastRadius = 5f;
-        internal const float detroitdelawareRange = 30f;
+        internal const float detroitdelawareBlastRadius = 30f;
         //leg
         internal const float finalsmashDamageCoefficient = 0.3f;
         internal const float finalsmashSmashDamageCoefficient = 15f;
-        internal const float finalsmashBlastRadius = 5f;
-        internal const float finalsmashRange = 20f;
+        internal const float finalsmashBlastRadius = 15f;
         //quirk
         internal const float fajinDuration = 10f;
         internal const float fajinDamageMultiplier = 1.5f;

@@ -10,6 +10,7 @@ using System.Linq;
 using DekuMod.Modules.Networking;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
+using System;
 
 namespace DekuMod.SkillStates
 {
@@ -46,8 +47,16 @@ namespace DekuMod.SkillStates
             dekucon = base.GetComponent<DekuController>();
             energySystem = base.GetComponent<EnergySystem>();
 
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float num2 = (1f + (num / (base.characterBody.baseMoveSpeed) - 1f));
+
             timer = 0f;
-            blastRadius = baseBlastRadius * attackSpeedStat;
+            blastRadius = baseBlastRadius * num2;
             fireInterval = baseFireInterval / attackSpeedStat;
             speedCoefficient = basespeedCoefficient * moveSpeedStat;
             animChange = false;

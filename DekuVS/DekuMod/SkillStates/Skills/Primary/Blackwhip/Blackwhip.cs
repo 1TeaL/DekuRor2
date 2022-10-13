@@ -7,6 +7,7 @@ using System.Linq;
 using DekuMod.Modules.Networking;
 using R2API.Networking.Interfaces;
 using R2API.Networking;
+using System;
 
 namespace DekuMod.SkillStates
 {
@@ -26,8 +27,7 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             hasFired = false;
             duration /= attackSpeedStat;
-
-
+            theSpot = base.transform.position;
         }
 
         protected override void DoSkill()
@@ -39,7 +39,6 @@ namespace DekuMod.SkillStates
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 
-            theSpot = aimRay.origin + 0.5f * attackSpeedStat * blastRadius * aimRay.direction;
             if (base.isAuthority)
             {
                 AkSoundEngine.PostEvent("blackwhipvoice", this.gameObject);
@@ -57,7 +56,7 @@ namespace DekuMod.SkillStates
             }, true);
             if (NetworkServer.active)
             {
-                characterBody.AddTimedBuffAuthority(Modules.Buffs.blackwhipBuff.buffIndex, Modules.StaticValues.blackwhipDebuffDuration * attackSpeedStat);
+                characterBody.AddTimedBuffAuthority(Modules.Buffs.blackwhipBuff.buffIndex, Modules.StaticValues.blackwhipDebuffDuration);
             }
 
             if (!dekucon.attachment)

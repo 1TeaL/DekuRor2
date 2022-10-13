@@ -13,12 +13,10 @@ namespace DekuMod.SkillStates
 
 	public class Smokescreen100 : BaseQuirk100
 	{
-		public static float baseDuration = 4f;
 		public static float radius = 15f;
 
 		public Vector3 theSpot;
 		public CharacterBody body;
-		private float duration;
 		public bool hasFired;
 		private BlastAttack blastAttack;
 		private GameObject smokeprefab = Modules.Assets.smokeEffect;
@@ -28,16 +26,30 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
 		{
 			base.OnEnter();
+            hasFired = false;
+            theSpot = base.transform.position;
 
-		}
+            blastAttack = new BlastAttack();
+
+            blastAttack.position = base.transform.position;
+            blastAttack.baseDamage = this.damageStat * Modules.StaticValues.smokescreenDamageCoefficient;
+            blastAttack.baseForce = 20f * maxWeight;
+            blastAttack.damageType = DamageType.SlowOnHit;
+            blastAttack.radius = radius;
+            blastAttack.attacker = base.gameObject;
+            blastAttack.inflictor = base.gameObject;
+            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+            blastAttack.crit = base.RollCrit();
+            blastAttack.procChainMask = default(ProcChainMask);
+            blastAttack.procCoefficient = 1f;
+            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+            blastAttack.damageColorIndex = DamageColorIndex.Default;
+            blastAttack.attackerFiltering = AttackerFiltering.Default;
+        }
 
 		protected override void DoSkill()
 		{
-			this.duration = baseDuration;
-			hasFired = false;
-			dekucon = base.GetComponent<DekuController>();
-			Ray aimRay = base.GetAimRay();
-			theSpot = aimRay.origin + 0 * aimRay.direction;
+			base.DoSkill();
 			bool active = NetworkServer.active;
 			if (active)
 			{
@@ -70,24 +82,7 @@ namespace DekuMod.SkillStates
 			//	this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
 			//}
 
-			GetMaxWeight();
 
-			blastAttack = new BlastAttack();
-
-			blastAttack.position = base.transform.position;
-			blastAttack.baseDamage = this.damageStat * Modules.StaticValues.smokescreenDamageCoefficient;
-			blastAttack.baseForce = 100f * maxWeight;
-			blastAttack.damageType = DamageType.SlowOnHit;
-			blastAttack.radius = radius;
-			blastAttack.attacker = base.gameObject;
-			blastAttack.inflictor = base.gameObject;
-			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-			blastAttack.crit = base.RollCrit();
-			blastAttack.procChainMask = default(ProcChainMask);
-			blastAttack.procCoefficient = 1f;
-			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-			blastAttack.damageColorIndex = DamageColorIndex.Default;
-			blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 		}
 
@@ -154,10 +149,15 @@ namespace DekuMod.SkillStates
             if (!hasFired && base.fixedAge > 0.1f && base.isAuthority)
             {
 				hasFired = true;
-				blastAttack.position = base.transform.position;
-				blastAttack.Fire();
+
+                GetMaxWeight();
+                blastAttack.position = base.transform.position;
+                blastAttack.baseForce = 20f * maxWeight;
+                blastAttack.Fire();
 				Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
+
 				this.outer.SetNextStateToMain();
+				return;
 			}
 
 		}

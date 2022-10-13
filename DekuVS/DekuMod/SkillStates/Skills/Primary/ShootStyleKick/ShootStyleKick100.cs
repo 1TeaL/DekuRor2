@@ -23,11 +23,10 @@ namespace DekuMod.SkillStates
         public float previousMass;
         private string muzzleString;
 
-        private float movespeed;
         public static float duration;
         public int numberOfHits; 
         public static float baseDuration = 0.5f;
-        public static float initialSpeedCoefficient = 20f;
+        public static float initialSpeedCoefficient = 8f;
         public static float finalSpeedCoefficient = 1f;
         public static float SpeedCoefficient;
         public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
@@ -53,12 +52,6 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             this.animator = base.GetModelAnimator();
 
-            movespeed = this.moveSpeedStat / 1.5f;
-            bool isSprinting = base.characterBody.isSprinting;
-            if (isSprinting)
-            {
-                movespeed /= base.characterBody.sprintingSpeedMultiplier;
-            }
 
             if (base.isAuthority && base.inputBank && base.characterDirection)
             {
@@ -171,7 +164,7 @@ namespace DekuMod.SkillStates
                             shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
                             shootStyleKickComponent.dekucharbody = characterBody;
                             shootStyleKickComponent.numberOfHits = numberOfHits;
-                            shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient * movespeed;
+                            shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient;
                         }
 
                     }

@@ -28,23 +28,21 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            if (dekucon && base.isAuthority)
-            {
-                Target = dekucon.GetTrackingTarget();
-            }
-
-            if (!Target)
-            {
-                energySystem.currentPlusUltra += Modules.StaticValues.skill45PlusUltraSpend;
-                return;
-            }
         }
 
         protected override void DoSkill()
         {
             base.DoSkill();
 
-
+            if (dekucon && base.isAuthority)
+            {
+                Target = dekucon.GetTrackingTarget();
+            }
+            if (!Target)
+            {
+                energySystem.currentPlusUltra += Modules.StaticValues.skill45PlusUltraSpend;
+                return;
+            }
             if (base.characterBody)
             {
                 base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;

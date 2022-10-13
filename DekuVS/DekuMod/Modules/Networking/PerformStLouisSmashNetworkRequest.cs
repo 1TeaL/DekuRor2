@@ -79,18 +79,12 @@ namespace DekuMod.Modules.Networking
                 Weight = enemycharBody.rigidbody.mass;
             }
 
-            float num = dekucharBody.moveSpeed;
-            bool isSprinting = dekucharBody.isSprinting;
-            if (isSprinting)
-            {
-                num /= dekucharBody.sprintingSpeedMultiplier;
-            }
 
 
             DamageInfo damageInfo = new DamageInfo
             {
                 attacker = bodyObj,
-                damage = dekucharBody.damage * Modules.StaticValues.stlouisDamageCoefficient * num,
+                damage = dekucharBody.damage * Modules.StaticValues.stlouisDamageCoefficient,
                 position = enemycharBody.transform.position,
                 procCoefficient = 1f,
                 damageType = DamageType.Shock5s,

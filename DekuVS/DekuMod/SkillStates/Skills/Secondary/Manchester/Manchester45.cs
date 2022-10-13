@@ -36,12 +36,6 @@ namespace DekuMod.SkillStates
             this.modelTransform = base.GetModelTransform();
             this.flyVector = Vector3.up;
             this.hasDropped = false; 
-            float num = this.moveSpeedStat /1.25f;
-            bool isSprinting = base.characterBody.isSprinting;
-            if (isSprinting)
-            {
-                num /= base.characterBody.sprintingSpeedMultiplier;
-            }
             dekucon = base.GetComponent<DekuController>();
 
 
@@ -66,12 +60,12 @@ namespace DekuMod.SkillStates
 
 
             BlastAttack blastAttack = new BlastAttack();
-            blastAttack.radius = slamRadius * num;
+            blastAttack.radius = slamRadius;
             blastAttack.procCoefficient = slamProcCoefficient;
             blastAttack.position = base.characterBody.footPosition;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = base.RollCrit();
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * num;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = slamForce;
             blastAttack.teamIndex = base.teamComponent.teamIndex;
@@ -80,7 +74,7 @@ namespace DekuMod.SkillStates
 
             for (int i = 0; i <= 4; i += 1)
             {
-                Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (slamRadius * 0.5f * num));
+                Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (slamRadius * 0.5f));
                 effectPosition.y = base.characterBody.footPosition.y;
                 EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
                 {

@@ -5,6 +5,7 @@ using ExtraSkillSlots;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using Random = UnityEngine.Random;
@@ -26,17 +27,20 @@ namespace DekuMod.SkillStates
         protected override void DoSkill()
         {
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            base.PlayCrossfade("UpperBody, Override", "GearShift", "Attack.playbackRate", duration, 0.01f); 
-            float num = this.moveSpeedStat/1.5f;
+            base.PlayCrossfade("FullBody, Override", "GearShift", "Attack.playbackRate", duration, 0.01f);
+            float num = this.moveSpeedStat;
             bool isSprinting = base.characterBody.isSprinting;
             if (isSprinting)
             {
                 num /= base.characterBody.sprintingSpeedMultiplier;
             }
+            int num2 = (int)Math.Round(1f + (num / (7f * 1.5f) - 1f));
+
             bool active = NetworkServer.active;
             if (active)
             {
-                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.gearshift100Buff.buffIndex, Modules.StaticValues.gearshift100BuffTimer * num);
+                int buffstacks = Modules.StaticValues.gearshift100BuffAttacks * num2;
+                base.characterBody.ApplyBuff(Modules.Buffs.gearshift100Buff.buffIndex, buffstacks);
 
             }
 

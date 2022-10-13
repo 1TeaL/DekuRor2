@@ -14,6 +14,7 @@ using System.Security.Permissions;
 using UnityEngine;
 using EmotesAPI;
 using R2API.Networking.Interfaces;
+using static UnityEngine.ParticleSystem.PlaybackState;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -52,7 +53,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "3.2.2";
+        public const string MODVERSION = "4.0.0";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -98,8 +99,7 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<PerformDetroitSmashNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PeformShootStyleKickAttackNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformStLouisSmashNetworkRequest>();
-            NetworkingAPI.RegisterMessageType<PerformBlackwhip100NetworkRequest>();
-            NetworkingAPI.RegisterMessageType<PerformBlackwhip100NetworkRequest>();
+            NetworkingAPI.RegisterMessageType<PerformBlackwhipPullNetworkRequest>();
             NetworkingAPI.RegisterMessageType<ForceCounterState>();
 
             NetworkingAPI.RegisterMessageType<PerformDetroitDelawareNetworkRequest>();
@@ -181,7 +181,18 @@ namespace DekuMod
                             //gearshift buff
                             if (damageInfo.damage > 0 && body.HasBuff(Buffs.gearshiftBuff))
                             {
-                                damageInfo.force *= StaticValues.gearshiftForceBoost;
+                                float Weight = 1f;
+
+                                if (victimBody.characterMotor)
+                                {
+                                    Weight = victimBody.characterMotor.mass;
+                                }
+                                else if (victimBody.rigidbody)
+                                {
+                                    Weight = victimBody.rigidbody.mass;
+                                }
+
+                                victimBody.healthComponent.TakeDamageForce(body.inputBank.aimDirection * StaticValues.gearshiftForceBoost * (Weight), true, true);
                             }
                             //gearshift45 buff
                             if (damageInfo.damage > 0 && damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift45Buff))
@@ -192,7 +203,7 @@ namespace DekuMod
                                     aimVector = body.inputBank.aimDirection,
                                     origin = damageInfo.position,
                                     damage = StaticValues.gearshift45DamageCoefficient * damageInfo.damage,
-                                    damageColorIndex = DamageColorIndex.WeakPoint,
+                                    damageColorIndex = DamageColorIndex.Fragile,
                                     damageType = damageInfo.damageType |= DamageType.SlowOnHit,
                                     falloffModel = BulletAttack.FalloffModel.DefaultBullet,
                                     maxDistance = 10f,
@@ -229,12 +240,15 @@ namespace DekuMod
                             //gearshift100 buff
                             if (damageInfo.damage > 0 && damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift100Buff))
                             {
+                                int gearshiftBuffCount = body.GetBuffCount(Buffs.gearshift100Buff.buffIndex);
+                                body.ApplyBuff(Buffs.gearshift100Buff.buffIndex, gearshiftBuffCount - 1);
+
                                 var damageInfo2 = new DamageInfo();
 
                                 damageInfo2.damage = damageInfo.damage;
                                 damageInfo2.position = victimBody.transform.position;
-                                damageInfo2.force = Vector3.zero;
-                                damageInfo2.damageColorIndex = DamageColorIndex.Fragile;
+                                damageInfo2.force = damageInfo.force;
+                                damageInfo2.damageColorIndex = DamageColorIndex.WeakPoint;
                                 damageInfo2.crit = body.RollCrit();
                                 damageInfo2.attacker = body.gameObject;
                                 damageInfo2.inflictor = body.gameObject;
@@ -263,7 +277,7 @@ namespace DekuMod
 
                                     }, true);
                                     number++;
-                                    threshold *= 2f;
+                                    threshold += StaticValues.gearshift100Threshold;
                                 }
                             }
                             //blackwhip debuff
@@ -361,10 +375,10 @@ namespace DekuMod
                         EnergySystem energysys = self.gameObject.GetComponent<EnergySystem>();
 
                         bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
-                        if (!flag 
-                            && damageInfo.damage > self.body.healthComponent.health 
-                            && energysys.currentPlusUltra == energysys.maxPlusUltra 
-                            && !self.body.HasBuff(Modules.Buffs.goBeyondBuffUsed))
+                        if (!flag
+                            && damageInfo.damage > self.body.healthComponent.health
+                            && energysys.currentPlusUltra > StaticValues.goBeyondThreshold
+                            && !self.body.HasBuff(Buffs.goBeyondBuffUsed))
                         {
                             energysys.currentPlusUltra -= energysys.currentPlusUltra;
                             damageInfo.rejected = true;
@@ -393,6 +407,11 @@ namespace DekuMod
 
                 if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                 {
+                    if (self.HasBuff(Buffs.gearshiftBuff))
+                    {
+                        self.moveSpeed *= StaticValues.gearshiftMovespeedBoost;
+                    }
+
                     if (self.HasBuff(Buffs.manchesterBuff))
                     {
                         self.armor += StaticValues.manchesterArmor;

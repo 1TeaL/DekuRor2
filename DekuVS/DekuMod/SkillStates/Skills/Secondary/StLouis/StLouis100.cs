@@ -30,7 +30,6 @@ namespace DekuMod.SkillStates
 
         //teleporting up
         private GameObject aimSphere;
-        private float num;
         public float radius = 3f;
         private Ray aimRay;
         private float baseDistance = 5f;
@@ -50,15 +49,8 @@ namespace DekuMod.SkillStates
 
             this.aimSphere = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
 
-            num = this.moveSpeedStat /1.5f;
-			bool isSprinting = base.characterBody.isSprinting;
-			if (isSprinting)
-			{
-				num /= base.characterBody.sprintingSpeedMultiplier;
-			}
-            blastRadius *= num;
 
-            maxDistance = baseDistance * num;
+            maxDistance = baseDistance * moveSpeedStat;
             if (maxDistance > 100f)
             {
                 maxDistance = 100f;
@@ -89,7 +81,7 @@ namespace DekuMod.SkillStates
             blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis100DamageCoefficient * num;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis100DamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force * maxWeight;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

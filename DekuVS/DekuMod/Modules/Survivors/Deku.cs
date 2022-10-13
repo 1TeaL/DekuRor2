@@ -125,7 +125,7 @@ namespace DekuMod.Modules.Survivors
             bodyColor = Color.green,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Deku"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            damage = 12f,
+            damage = 10f,
             healthGrowth = 19f,
             healthRegen = 1f,
             jumpCount = 2,

@@ -16,7 +16,7 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="1943384016" Language="SFX" Hash="1615666874">
+		<SoundBank Id="1943384016" Language="SFX" Hash="1444985117">
 			<ObjectPath>\SoundBanks\Default Work Unit\Deku</ObjectPath>
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>

@@ -1,11 +1,23 @@
+# DekuRor2
+Deku mod for Ror2
+Go beyond!
+
 ## Deku
-Adds Deku from My Hero Academia, a high risk survivor which can boost his stats and skills, in exchange for health regen and even health costs for his skills. 
-#### Multiplayer works (hopefully). Standalone and Classic Items Ancient Scepter support.
+Adds Deku from My Hero Academia, a multiple quirk using survivor which can access numerous skills at a cost.
+#### Multiplayer works (hopefully). Standalone Ancient Scepter support.
+#### CustomEmotesAPI support!
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. 
 #### <a href="https://ko-fi.com/tealpopcorn"><img src="https://user-images.githubusercontent.com/93917577/160220529-efed5020-90ac-467e-98f2-27b5c162d744.png"> </a>
 If you enjoy my work, support me on Ko-fi!
 ## Popcorn Factory
-<b>Check out other mods from the Popcorn Factory team!</b>
+<details>
+<summary>Check out other mods from the Popcorn Factory team!</summary>	
+<div>
+    <a href="https://thunderstore.io/package/PopcornFactory/DarthVaderMod/">
+      <img width="130" src="https://user-images.githubusercontent.com/93917577/180753359-4906ca0b-6ce5-4ff7-9962-bdec3329682c.png"/>
+      <p>Darth Vader Mod</p>
+    </a>
+</div>
 <div>
     <a href="https://thunderstore.io/package/PopcornFactory/ShigarakiMod/">
         <img src="https://user-images.githubusercontent.com/93917577/168004591-39480a52-c7fe-4962-997f-cd9460bb4d4a.png"><br>
@@ -36,134 +48,317 @@ If you enjoy my work, support me on Ko-fi!
         <p>Wisp Mod (Popcorn Factory Team)</p>
     </a>
 </div>
+</details>
 
 ## Latest Changelog, Next update(s)
 
-- 3.2.2
-    - Properly added classic item's scepter compatibility.
-    - Increased blast radius of delaware smash to more match the effect.
-- 3.2.1
-    - Fixed delaware smash description. Fixed infinite 45% and 100% descriptions.
-    - Added Classic Item's scepter compatibility.
-    - Float cancel now waits for 10 seconds before ending the skill if you haven't touched the ground.
-- 3.2.0
-    - Fixed animation timings with attacks to properly scale with attackspeed.
-    - Removed OFA 45% and 100% as they are basically irrelevant.
-    - NEW ICONS! (Courtesy of Mr.Bones- in the making of RoRified Deku skin as well).
+- 4.0.0 - *THE DEKU REWORK!*    
+    - *NEW*
+    	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
+    	    - It's used for Mode switching, Float, Danger Sense, Supers and Going Beyond.
+        - Mark passive
+            -  Heal and Barrier marks added based on damage type.
+        - Float passive
+        - Danger Sense passive
+    	- Added 3 modes- each having their own set of skills and a Super. Costs 5 plus ultra.
+            - When including the one for all versions, each mode has 10 skills!
+            - Power mode 
+    	    - Shoot Style mode
+    	    - Quirk mode
+    	- Added 3 supers- costs 50 plus ultra.
+            - Power mode- 1,000,000% Detroit Delaware Smash
+            - Shoot Style mode- Final Smash
+            - Quirk mode- Fa Jin
+        - New Skills
+            - Added Gear Shift! The 2nd user's quirk, enabling the changing of velocity, bending the laws of physics.
+    - *REMOVED*
+    	- Old skills- float, Oklahoma smash, extra skills, danger sense removed, 
+    	- Fa Jin buff mechanic and Fa Jin skill
+    	- Health Regen that increases at lower health
+     - *CHANGED*
+        - Blackwhip base, 45% and 100% have been reworked.
+    	- Manchester base, 45% and 100% have been reworked.
+        - One for all 45% and 100%no longer give increased damage and attack speed, just increased armor and movespeed.
+    	    - Removed OFA 100%s negative health regen, now it's self-damage instead, allowing more mitigation options. 
+    	- Changed health from 150 + 30 per level to 144 + 19 per level 
+
 
 - Next update(s)
-    -  Further skill reworks, balance changes
+    -  Balance changes
+    -  Bug fixes
+    -  More icons
 
-<img src="https://user-images.githubusercontent.com/93917577/168006847-fb5312bf-6ba3-486b-b9a9-44460377d5d8.png">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030126209281032272/unknown.png" width="400">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030131285743652905/unknown.png" width="400">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030132342670508093/unknown.png" width="400">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030134285170122843/unknown.png" width="400">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030137288761540658/unknown.png" width="400">
 
-## Known Issues
-Pulling enemies with blackwhip is based on heaviest enemy so lighter enemies will be sent flying.
-
-Pulling enemies with blackwhip combo is fixed so some enemies will be pulled more than others.
-
-There may be crashes when using float or manchester? can't replicate it consistently.
-
-Body effects like invisibility don't show up.
-
+## Known Issues 
 
 
 ## Overview
-    Deku's general game plan is that his base form is safe with range and crowd control but with low damage. 
-    Then, when needed, he can use his specials (OFA 100% and 45%) to increase his damage and/or mobility. 
-    When at low health he can rely on his passive increased regen in base form to heal up.
-    Attackspeed and Movespeed scales fairly well with him as most skills do scale with it.
-    Aiming to mitigate the health drain costs in OFA 100% mode can make him powerful.
-    OFA 100% grants negative health regen but Deku's passive still works, meaning at lower hp it balances out.
-    OFA 45% instead only allows direct healing effects rather than health regen but in turn doesn't drain health.
-    One For All allows Deku to cycle between his percentages, upgrading his skills accordingly.
-    Other specials have set abilities- OFA 100% focuses on close range but greater mobility while OFA 45% focuses on mid-range attacks.
-    OFA Quirks grants Deku new functionality for all his base skills with the new Fa Jin Buff.
 
-## Base Skills
-### Passive
-Deku has innate increased health regen the lower his health is. He has a double jump. He can sprint in any direction.
+- Deku's game plan is to use his base form with skills that have higher utility, good control and plus ultra gain. 
+- OFA 100% and 45% enable him to have higher damage, armor and mobility, limited by health costs.
+- Changing modes also enable him to have more solutions to different situations in combat, limited by his plus ultra meter.
+- Attackspeed and Movespeed scales fairly well with him as most skills scale with it.
+- OFA 100%'s self-damage is based on your current health, so lower total health will lead to less self-damage. However, 100% skills are based on max health.
+- Power Mode focuses on high damage, Shoot Style Mode focuses on higher mobility for less damage, Quirk mode focuses on buffs and utility at a plus ultra cost.
 
+## Skills
+### Passives
+<table>
+<thead>
+  <tr>
+    <th>Passive</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Base <br>Abilities</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306847-a364766a-020e-49e7-8eb0-380407601980.png" alt="Image" width="100" height="100"></td>
+    <td>He has a double jump. He can sprint in any direction.<br>Deku has a Plus Ultra meter that builds up through movement and using base form skills. <br>Changing modes, using quirk skills and using supers cost Plus Ultra.<br>At Max Plus Ultra, once a stage, prevent death and Go Beyond, <br>negating health costs as well as heal over time for 60 seconds.</td>
+  </tr>
+  <tr>
+    <td>Marks</td>
+    <td></td>
+    <td>Shocking attacks apply a heal mark- after 3 hits heal based on damage dealt.<br>Stunning attacks apply a barrier mark- after 3 hits gain barrier based on damage dealt.<br>Freezing and Igniting attacks apply both marks.</td>
+  </tr>
+  <tr>
+    <td>Float</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306971-f4657190-44d6-4ec7-b12c-44debe528f53.png" alt="Image" width="100" height="100"></td>
+    <td>Holding jump in the air after 0.5 seconds let's him Float, flying up or slowing his descent while using a skill.<br>Drains Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Danger <br>Sense</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306905-83b436fc-8815-4604-9cb0-528e9ac8fbeb.png" alt="Image" width="100" height="100"></td>
+    <td>Take reduced damage based on your armor every 10 seconds, freezing the attacker for 200% damage. <br>If the damage is fully negated, heal for the damage dealt. <br>If not using a skill, dodge out of the way and shock enemies around you for 200% more damage as well.<br>Costs 5 Plus Ultra.</td>
+  </tr>
+</tbody>
+</table>
+
+## Power Mode Skills
 <table>
 <thead>
   <tr>
     <th>Skill</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th>Description</th>
     <th>Stats</th>
-    <th>Fa Jin Buff</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td>Airforce<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067576-6fe6e0c8-46de-4a85-a189-e51055e05bd0.png" width="100" height="100"></td>
-    <td>Shoot a bullet dealing 2x100% damage.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/168067576-6fe6e0c8-46de-4a85-a189-e51055e05bd0.png" alt="Image" width="100" height="100"></td>
+    <td>Shoot a bullet dealing 2x100% damage. On crit, ricochet to 5 additional enemies.</td>
     <td>Proc: 0.5.</td>
-    <td>Ricochets.</td>
   </tr>
   <tr>
-    <td>Shoot Style<br>Kick<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067698-223582e8-d3dc-402b-a010-ff0f65444a96.png" alt="Image" width="100" height="100"></td>
-    <td>Dash and kick, dealing 300% damage scaling based on movespeed.<br>Resets CD on hit and resetting all cooldowns on kill.</td>
-    <td>Proc: 1.<br>CD: 6s.</td>
-    <td>Freezes enemies. <br>Hits an additional time.</td>
+    <td>Airforce 45%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306876-c746dbad-9bbd-4c19-ac5c-9ee3d6cc3b12.png" alt="Image" width="100" height="100"></td>
+    <td>Shoot 4 bullets with all your fingers, dealing 200% damage each.</td>
+    <td>Proc: 1.<br></td>
   </tr>
   <tr>
-    <td>Danger <br>Sense<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067615-b5de153d-5262-4a82-bc2b-4f78c12500ba.png" alt="Image" width="100" height="100"></td>
-    <td>Activate Danger Sense, when timed properly, dodge and reset the CD.<br>Deal 600% damage to the attacker and stun those around you.<br>Attackspeed increases active window.<br>Total duration of 2 seconds.<br></td>
-    <td>CD: 3s<br>Proc: 2.<br></td>
-    <td>Freezes enemies.<br>Increases active window.</td>
+    <td>Airforce 100%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306882-312b4922-81ee-477d-ae9a-5cc281147f61.png" alt="Image" width="100" height="100"></td>
+    <td>Shoot beams with your fists, stunning and dealing 400% damage.<br>Initially having 20% attackspeed, ramping up to 200%.<br></td>
+    <td>Proc: 1.<br>Cost: 0.5% Max Health.</td>
   </tr>
   <tr>
-    <td>Blackwhip<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067593-08e4af78-e6fc-4cc7-a9f0-223fbcf5859a.png" width="100" height="100"></td>
-    <td>Pulls and stuns enemies in front for 5x100% damage. <br>Gain barrier on hit. <br>Attackspeed increases the pull radius and barrier gain.</td>
-    <td>Proc: 0.2.<br>CD: 3s.</td>
-    <td>Doubles barrier gain.</td>
-  </tr>
-  <tr>
-    <td>Manchester <br>Smash<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067679-05e57fc2-dbe1-4b54-b172-6bdd14ce1cd8.png" width="100" height="100"></td>
-    <td>Jump in the air and slam down, dealing 300% damage and gaining barrier on hit, <br>Scales with movespeed.</td>
+    <td>Detroit<br>Smash<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306948-1443a24e-5ff7-4f96-80ce-f35ee2ceb792.png" alt="Image" width="100" height="100"></td>
+    <td>Teleport and punch the target and enemies around, dealing 400% damage. <br>Uppercut them if they are grounded and smash them down if they are in the air.</td>
     <td>Proc: 1.<br>CD: 4s.</td>
-    <td>Extra initial hit.<br>Doubles barrier gain. </td>
   </tr>
   <tr>
-    <td>St Louis <br>Smash<br>Airforce<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067708-e8d13a11-2fdf-4d1b-ac14-19840074f6f6.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 400% damage.<br>Heal on hit, scaling with attackspeed.</td>
-    <td>Proc: 0.2.<br>CD: 4s.<br></td>
-    <td>Doubles range.<br>Doubles healing.</td>
+    <td>Detroit<br>Smash 45%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306950-5733635c-af0a-4b72-8f31-cce4ad9655c0.png" alt="Image" width="100" height="100"></td>
+    <td>Hold to charge a Detroit Smash. <br>When the skill key is released or after some time, <br>teleport and smash nearby enemies, dealing 600% damage.</td>
+    <td>Proc: 1.<br>CD: 4s.</td>
   </tr>
   <tr>
-    <td>Float<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067666-0088e927-cbbe-444a-9168-141d50a01bbe.png" width="100" height="100"></td>
-    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Press the button again to cancel Float.</td>
-    <td>CD: 10s.<br></td>
-    <td>Deal 400% damage <br>around you.</td>
+    <td>Detroit<br>Smash 100%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306953-3567abdc-409a-468b-aca1-ec76412f879d.png" alt="Image" width="100" height="100"></td>
+    <td>Hold to jump forward while charging a Detroit Smash. <br>When the skill key is released or you collide with an enemy, smash nearby enemies, <br>dealing 1000% damage, multiplied by flight time and attackspeed.<br><br></td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
   </tr>
   <tr>
-    <td>Delaware<br>Smash<br>100%<br>Special</td>
+    <td>Delaware<br>Smash<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306943-31c72a0c-c73e-4ae6-afe0-d3633c140fcd.png" alt="Image" width="100" height="100"></td>
+    <td>Hold the button to aim, then release to shoot a Delaware smash, shocking and dealing 600% damage.</td>
+    <td>Proc: 1<br>CD: 4s.<br></td>
+  </tr>
+  <tr>
+    <td>Delaware<br>Smash 45%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/168067646-976990f5-9c1f-4774-9ecc-fd3ecdadf44e.png" alt="Image" width="100" height="100"></td>
-    <td>Send a blast forward, stunning and dealing 600% damage to enemies in front, while sending you backwards as well.<br>Costs 10% of max Health.</td>
-    <td>Proc: 2.<br>CD: 4s.</td>
-    <td>Doubles distance travelled.</td>
+    <td>Send a blast forward, stunning and dealing 900% damage to enemies in front.</td>
+    <td>Proc: 1.<br>CD: 4s.</td>
   </tr>
   <tr>
-    <td>Oklahoma<br>Smash<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067683-0647f5df-585b-437a-9a01-0970aa1a84e7.png" width="100" height="100"></td>
-    <td>Hold the button to spin around, knocking back and dealing 100% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br></td>
-    <td>Proc: 1.<br>CD: 6s.<br></td>
-    <td>Doubles number of hits.<br>AOE is larger.<br>0.4x movespeed.</td>
+    <td>Delaware<br>Smash 100%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306943-31c72a0c-c73e-4ae6-afe0-d3633c140fcd.png" alt="Image" width="100" height="100"></td>
+    <td>Flick your fingers, releasing an intense blast of wind in front,<br>dealing 1200% damage to enemies in front, <br>while sending you backwards as well.<br></td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067651-62ddec46-54d5-48c7-8e4d-6de75a324435.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up a punch that teleports you and stuns enemies, dealing 600% damage. <br>Distance is based on movespeed and attackspeed.</td>
-    <td>Proc: 2.<br>CD: 4s.</td>
-    <td>Doubles everything.</td>
-  </tr>		
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306958-c9638647-3573-45a5-8062-bc827b7d1b84.png" alt="Image" width="100" height="100"></td>
+    <td>Delaware Smash enemies, stunning and grouping them in front of you, dealing 10% damage multiple times, <br>then Detroit Smash all of them, freezing and dealing 1500% damage.<br></td>
+    <td>Proc: 1.<br>Cost: 50 Plus Ultra.</td>
+  </tr>
+</tbody>
+</table>
+
+## Shoot Style Skills
+<table>
+<thead>
+  <tr>
+    <th>Skill</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>Description</th>
+    <th>Stats</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Shoot Style<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png" alt="Image" width="100" height="100"></td>
+    <td>Kick forward, dealing 150% damage, with every 3 hits reducing cooldowns by 1 second and shocking. <br>Dash towards distant targets.</td>
+    <td>Proc: 1</td>
+  </tr>
+  <tr>
+    <td>Shoot Style<br>45%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306821-77c8b99a-f2e0-47ce-911a-e10ddaec7ef1.png" alt="Image" width="100" height="100"></td>
+    <td>Dash and kick, dealing 200% damage scaling based on movespeed.<br>Resets CD on hit and resetting all cooldowns on kill.</td>
+    <td>Proc: 1.<br>CD: 6s.</td>
+  </tr>
+  <tr>
+    <td>Shoot Style<br>100%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306825-2c5cd503-ed2a-49ee-b4f4-85e01f85bcac.png" alt="Image" width="100" height="100"></td>
+    <td>Instantly dash through enemies, after a delay, deal 5x100% damage.<br>Number of hits scale based on attack speed.</td>
+    <td>Proc: 0.1.<br>Cost: 10% Max Health.</td>
+  </tr>
+  <tr>
+    <td>StLouis<br>Smash<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png" alt="Image" width="100" height="100"></td>
+    <td>Teleport and kick the target and enemies around forward, dealing 300% damage. <br></td>
+    <td>Proc: 1.<br>CD: 4s.</td>
+  </tr>
+  <tr>
+    <td>StLouis<br>Smash 45%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png" alt="Image" width="100" height="100"></td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, <br>stunning and dealing 200% damage.</td>
+    <td>Proc: 0.2.<br>CD: 4s.</td>
+  </tr>
+  <tr>
+    <td>StLouis<br>Smash 100%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
+    <td>Hold to prep a physics breaking St Louis Smash. <br>Release the skill key to deal a blast of wind pressure and instantaneously teleport up. <br>The blast deals 600% damage.</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
+  </tr>
+  <tr>
+    <td>Manchester<br>Smash<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306793-ea085c4a-86d8-4bd9-8c0a-a3e3daa47345.png" alt="Image" width="100" height="100"></td>
+    <td>Manchester Smash, damaging nearby enemies for 300% damage, <br>each enemy hit gives an extra second of a 200 armor buff.</td>
+    <td>Proc: 1<br>CD: 4s.<br></td>
+  </tr>
+  <tr>
+    <td>Manchester<br>Smash 45%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306797-00346e67-2a81-457c-ac2c-46ddfc2d46f1.png" alt="Image" width="100" height="100"></td>
+    <td>Manchester Smash, jumping and damaging nearby enemies for 400% damage, <br>Gain 200 armor 4 seconds.</td>
+    <td>Proc: 1.<br>CD: 4s.</td>
+  </tr>
+  <tr>
+    <td>Manchester<br>Smash 100%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306802-dd6527c9-23df-4aca-8ff9-23c1a09327eb.png" alt="Image" width="100" height="100"></td>
+    <td>Manchester Smash, rapidly drop down from the sky. <br>Have 200 armor while falling. Upon landing on the ground, stun enemies and deal 600% damage,<br>multiplied by falling time.</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
+  </tr>
+  <tr>
+    <td>Detroit<br>Smash<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png" alt="Image" width="100" height="100"></td>
+    <td>Dash forward, stunning and grouping enemies to your front, dealing 20% damage multiple times.<br>Then Final smash all of them, igniting and dealing 1500% damage.</td>
+    <td>Proc: 1.<br>Cost: 50 Plus Ultra.</td>
+  </tr>
+</tbody>
+</table>
+
+## Quirk Skills
+<table>
+<thead>
+  <tr>
+    <th>Skill</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>Description</th>
+    <th>Stats</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Blackwhip<br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306889-cbc0b1b6-44ae-49f9-885b-b1d29e9d4009.png" alt="Image" width="100" height="100"></td>
+    <td>Activate blackwhip for 10 seconds, <br>initially restricting nearby enemies' movement for 6 seconds,<br>dealing 10% damage per tick, <br>healing based on your damage dealt. </td>
+    <td>Proc: 0.<br>Cost: 10 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Blackwhip<br>45%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306894-4b435095-4420-4c8d-84ee-c6f59cc12c3e.png" alt="Image" width="100" height="100"></td>
+    <td>Blackwhip towards the target, dashing towards them, <br>stunning and dealing 600% damage. <br>Enemies hit have their movement restricted for 6 seconds.</td>
+    <td>Proc: 1.<br>Cost: 10 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Blackwhip<br>100%<br><br>Primary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306897-ac65c569-916d-40ae-b2ef-3c083734610b.png" alt="Image" width="100" height="100"></td>
+    <td>Blackwhip enemies towards you for, <br>restricting their movement for 6 seconds, <br>stunning and dealing 600% damage.</td>
+    <td>Proc: 1.<br>Cost: 10% Max Health and 5 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Gear<br>Shift<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
+    <td>Activate gear shift for 10 seconds. <br>Gain 1.2x movespeed.<br>Attacks apply additional knockback based on your aim.</td>
+    <td>Cost: 10 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Gear<br>Shift<br>45%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
+    <td>Activate gear shift transmission for 10 seconds. <br>Attacks slow enemies and pierce through them for 50% of the damage.</td>
+    <td>Proc: 0.<br>Cost: 10 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Gear<br>Shift<br>100%<br><br>Secondary</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
+    <td>Overdrive gear shift for the next 5 attacks. <br>Attacks bend the laws of physics,<br>dealing multiple times their damage based on your movespeed. <br>The thresholds are in increments of 15 movespeed. </td>
+    <td>Proc: 0.<br>Cost: 15% Max Health and 5 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Smokescreen<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306829-9c39e702-4918-45c5-8f4e-5b18877d7c4c.png" alt="Image" width="100" height="100"></td>
+    <td>Release a smokescreen, <br>making teammates and yourself go invisible for 6 seconds.</td>
+    <td>Cost: 10 Plus Ultra.<br></td>
+  </tr>
+  <tr>
+    <td>Smokescreen<br> 45%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306829-9c39e702-4918-45c5-8f4e-5b18877d7c4c.png" alt="Image" width="100" height="100"></td>
+    <td>Release a smokescreen, make yourself go invisible for 10 seconds.</td>
+    <td>Cost: 10 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Smokescreen<br> 100%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306829-9c39e702-4918-45c5-8f4e-5b18877d7c4c.png" alt="Image" width="100" height="100"></td>
+    <td>Release a blinding smokescreen, making yourself invisible for 6 seconds. <br>The smokescreen also deals 600% damage to enemies as well.</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health and 5 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Fa Jin<br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306963-eddc0a2e-f9a1-49fd-a168-88415b7ba538.png" alt="Image" width="100" height="100"></td>
+    <td>Use your stored plus ultra with Fa Jin,<br>grant 1.5x damage and disabling all health cost for 10 seconds.</td>
+    <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
+  </tr>
 </tbody>
 </table>
 
@@ -179,6 +374,21 @@ Deku has innate increased health regen the lower his health is. He has a double 
 </thead>
 <tbody>
   <tr>
+    <td>Power Mode</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306969-e968e385-6ec9-40a1-9fd7-208555124140.png" alt="Image" width="100" height="100"></td>
+    <td>Change your skills to Power based. Costs 5 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Shoot Style Mode</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306790-5e8be721-f6a2-44fc-8e7d-442007355d54.png" alt="Image" width="100" height="100"></td>
+    <td>Change your skills to Shoot Style based. Costs 5 Plus Ultra.</td>
+  </tr>
+  <tr>
+    <td>Quirk Mode</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306814-9d56a9e1-8ff2-4cf1-8d23-695febaeede2.png" alt="Image" width="100" height="100"></td>
+    <td>Change your skills to Quirk based. Costs 5 Plus Ultra.</td>
+  </tr>
+  <tr>
     <td>One For All</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/168067731-4d091c5f-86dd-4bed-b70d-279029c37869.png" alt="Image" width="100" height="100"></td>
     <td>Cycle between One For All 45% and 100%, upgrading your selected skills.<br>Boosts stats corresponding to the % of One For All. <br>This skill activates 45%.</td>
@@ -191,7 +401,7 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>OFA 45%</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/168067732-6079b49a-ae31-498c-8514-0e92a9aa87f8.png" alt="Image" width="100" height="100"></td>
-    <td>Push your body to its limits, gaining unique 45% moves.<br>Boosts Attackspeed(1.25x), Damage(1.5x), Movespeed(1.25x), and Armor(2.5x) but disabling all Health Regen.</td>
+    <td>Push your body to its limits, gaining unique 45% moves.<br>Boosts Movespeed(1.25x), and Armor(2.5x) but disabling all Health Regen.</td>
   </tr>
   <tr>
     <td>Infinite 45%</td>
@@ -201,220 +411,43 @@ Deku has innate increased health regen the lower his health is. He has a double 
   <tr>
     <td>OFA 100%</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/168067737-77ed0308-ea3b-4da7-b829-260985ffa65f.png" alt="Image" width="100" height="100"></td>
-    <td>Go Beyond your limits, gaining unique 100% moves.<br>Boosts Attackspeed(1.5x), Damage(2x), Movespeed(1.5x), and Armor(5x) but causes Negative Regen. <br>Passive still works.</td>
+    <td>Go Beyond your limits, gaining unique 100% moves.<br>Movespeed(1.5x), and Armor(5x) but lose 10% current health per second and skills cost health too.</td>
   </tr>
   <tr>
     <td>Infinite<br>100%</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/168067750-ce34c044-5612-46df-91d3-5699804f058d.png" alt="Image" width="100" height="100"></td>
     <td>Ancient scepter version grants the same effects but also 10% lifesteal.</td>
   </tr>
-  <tr>
-    <td>OFA <br>Quirks</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067696-87464032-08df-46b9-bf2f-ba3c5e521524.png" alt="Image" width="100" height="100"></td>
-    <td>Unlock your additional quirks. This skill grants the Fa Jin buff.<br>Moving increases the buff up to 100 stacks. Gain up to 2x damage at 50 stacks.<br>Every move consumes 50 stacks. However, if a move uses 50 stacks it acts as if it were 100% without recoil.<br>In general all moves will stun and bypass armor, have double the movement, radius and range. </td>
-  </tr>
-  <tr>
-    <td>Mastered<br>OFA<br>Quirks</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067694-0db5b103-628b-48c8-9e17-9bc3e3bcf866.png" alt="Image" width="100" height="100"></td>
-    <td>Ancient Scepter doubles Fa Jin buff gain as well as upgrading the Fa Jin primary skill.</td>
-  </tr>
 </tbody>
 </table>
 
-## 45% and 100% versions of the base skills
-
-<table>
-<thead>
-  <tr>
-    <th>Skill</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-    <th>Description</th>
-    <th>Stats</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Airforce <br>45%<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067584-80ff7703-c15b-43e0-9dd5-8d143d552631.png" alt="Image" width="100" height="100"></td>
-    <td>Shoot 4 bullets with all your fingers, dealing 125% damage each.</td>
-    <td>Proc: 0.25.</td>
-  </tr>
-  <tr>
-    <td>Airforce <br>100%<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067586-8c69d624-9f96-424f-930e-91e42f7aa186.png" alt="Image" width="100" height="100"></td>
-    <td>Shoot beams with your fists, stunning and dealing 200% damage.<br>Initially having 20% attackspeed, ramping up to 200%.<br>Costs 1% of max Health.</td>
-    <td>Proc: 1.</td>
-  </tr>
-  <tr>
-    <td>Shoot Style<br>Kick 45%<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067701-5ab7c613-ab8a-4d30-88af-b9de985aa989.png" alt="Image" width="100" height="100"></td>
-    <td>Dash and kick, dealing 300% damage scaling based on movespeed.<br>Resets CD on hit and resetting all cooldowns on kill.</td>
-    <td>Proc: 1.<br>CD: 6s.</td>
-  </tr>
-  <tr>
-    <td>Shoot Style<br>Kick 100%<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067704-0c0efb75-1fe5-4d5d-a32c-f26ed2232fe5.png" alt="Image" width="100" height="100"></td>
-    <td>Dash and kick, dealing 2x100% damage scaling based on movespeed.<br> Freezes every 4th hit.<br>Resets CD on hit and resetting all cooldowns on kill.<br>Costs 1% of max Health.</td>
-    <td>Proc: 1.<br>CD: 6s.</td>
-  </tr>
-<tr>
-  <tr>
-    <td>Danger <br>Sense <br>45%<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067620-a8db0925-75c0-4b58-b836-a68400f2f27c.png" alt="Image" width="100" height="100"></td>
-    <td>Activate Danger Sense, when timed properly, dodge and reset the CD<br>Deal 600% damage to the attacker and stun those around you.<br>Attackspeed increases active window.<br>Total duration of 1.5 second.<br>Costs 5% of max health.<br></td>
-    <td>CD: 1s<br>Proc: 2.<br></td>
-  </tr>
-  <tr>
-    <td>Danger <br>Sense <br>100%<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067624-64bd815a-0a0d-4bbb-bff9-5605e372f649.png" alt="Image" width="100" height="100"></td>
-    <td>Activate Danger Sense, when timed properly, dodge and reset the CD<br>Deal 600% damage to the attacker and freeze those around you.<br>Attackspeed increases active window.<br>Total duration of 1 second.<br>Costs 5% of max health.<br></td>
-    <td>CD: 1s<br>Proc: 2.<br></td>
-  </tr>
-  <tr>
-    <td>Blackwhip<br>45%<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067596-5bbdb57b-292d-459c-b589-341a2d2504e4.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip enemies, pulling them right in front of you, stunning and dealing 5x100% damage. <br>Gain barrier on hit.<br>Attackspeed increases the pull radius and barrier gain.</td>
-    <td>Proc: 0.5.<br>CD: 4s.</td>
-  </tr>
-  <tr>
-    <td>Blackwhip<br>100%<br>Secondary<br></td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067599-a3851c3a-27a9-4206-8e13-a020b24ebe86.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip enemies, pulling them right in front of you, stunning and dealing 3x200% damage. <br>Gain barrier on hit.<br>Attackspeed increases the pull radius and barrier gain.</td>
-    <td>Proc: 1.<br>CD: 5s.</td>
-  </tr>
-  <tr>
-    <td>Manchester <br>Smash<br>45%<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067680-41ce2da7-d430-4593-bf88-a6f27f618da5.png" alt="Image" width="100" height="100"></td>
-    <td>Jump in the air and slam down, dealing 300% damage.<br>Gain barrier on hit.<br>Movespeed increases damage and barrier gain.</td>
-    <td>Proc: 1.<br>CD: 4s.</td>
-  </tr>
-  <tr>
-    <td>Manchester <br>Smash<br>100%<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067682-7c2ab2e3-ae07-4fe8-92e2-f66d208f0828.png" alt="Image" width="100" height="100"></td>
-    <td>Jump in the air, dealing 300% and slam down, dealing 300% damage. <br>Gain barrier on each hit.<br>Movespeed increases damage and barrier gain.<br>Costs 10% of max Health.</td>
-    <td>Proc: 1.<br>CD: 5s.</td>
-  </tr>
-  <tr>
-    <td>St Louis <br>Smash<br>Airforce<br>45%<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067713-9b1ef895-9beb-4625-8a18-4a05424126cc.png" alt="Image" width="100" height="100"></td>
-    <td>Hit enemies in front of you, stunning and pushing them, dealing 600% damage.</td>
-    <td>Proc: 1.<br>CD: 5s.</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>St Louis <br>Smash<br>Airforce<br>100%<br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067716-2c815c85-4d5e-46a8-aba2-4c1a04aa1c44.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing 400% damage.<br>Heal on hit, scaling with attackspeed.</td>
-    <td>Proc: 0.2.<br>CD: 6s.<br></td>
-    <td></td>
-  </tr>
-  <tr>
-    <tr>
-    <td>Float 45%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067667-a7e733be-9a82-4baa-b273-3980921dc9bb.png" alt="Image" width="100" height="100"></td>
-    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Press the button again to cancel Float.</td>
-    <td>CD: 10s.<br></td>
-  </tr>
-  <tr>
-    <td>Float 100%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067671-0bab5cc6-4593-4436-9f29-083957d2efca.png" alt="Image" width="100" height="100"></td>
-    <td>Jump and float in the air, disabling gravity, changing your special to Delaware Smash 100%. <br>Deal 400% damage around you as you jump.<br>Press the button again to cancel Float.<br>Costs 10% of max health.</td>
-    <td>CD: 10s.<br></td>
-  </tr>
-  <tr>
-    <td>Oklahoma<br>Smash <br>45%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067687-42ea0a61-4488-4845-94b4-cc1fa8cbf244.png" alt="Image" width="100" height="100"></td>
-    <td>Hold the button to spin around, knocking back and dealing 300% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br></td>
-    <td>Proc: 1.<br>CD: 6s.<br></td>
-  </tr>
-  <tr>
-    <td>Oklahoma<br>Smash<br>100%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067691-4dd74130-8244-46fe-96c6-cd3178c67c66.png" alt="Image" width="100" height="100"></td>
-    <td>Hold the button to spin around, knocking back and dealing 200% damage multiple times around you.<br>3x armor while activated but 0.2x movespeed.<br>Costs 10% of max health<br></td>
-    <td>Proc: 1.<br>CD: 6s.<br></td>
-  </tr>
-  <tr>
-    <td>Detroit<br>Smash<br>45%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067654-7c6debc3-ed7d-416f-9f5c-bcf5240358f3.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up a punch that teleports you and stuns enemies, dealing 600%-1800% damage. <br></td>
-    <td>Proc: 2.<br>CD: 4s.</td>
-  </tr>
-  <tr>
-    <td>Detroit<br>Smash<br>100%<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067657-1b40d327-372d-4e5a-846e-cd29ee69fd8b.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up a punch that teleports you and stuns enemies, dealing 600% damage, charging infinitely. <br>Costs 10% of max Health.</td>
-    <td>Proc: 3.<br>CD: 4s.</td>
-  </tr>
-</tbody>
-</table>
-
-
-## All specific special boosted skills
-
-<table>
-<thead>  
-  <tr>
-    <td>OfA Quirks Skills</td>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-    <td>Description</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Fa Jin</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067658-213b99f5-edac-4ce5-98d5-7cbe0067ee5d.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 25 stacks of Fa Jin.<br></td>
-    <td>Proc: 1.</td>
-    <td>Doesn't <br>consume<br>Fa Jin.</td>
-  </tr>
-  <tr>
-    <td>Fa Jin Mastered</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067663-1969cdbe-a2df-4e9e-840e-4648e0722ae0.png" alt="Image" width="100" height="100"></td>
-    <td>Charge up kinetic energy, dealing 50% damage multiple times around you, granting 50 stacks of Fa Jin.<br></td>
-    <td>Proc: 1.</td>
-    <td>Doesn't <br>consume<br>Fa Jin.</td>
-  </tr>
-  <tr>
-    <td>Blackwhip Combo</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067607-d0dac492-232e-4f43-b030-c816de5f7a93.png" alt="Image" width="100" height="100"></td>
-    <td>Hit enemies in front of you and shoot blackwhip, dealing 400% damage each.<br>Tapping the skill pulls you forward while Holding the skill pulls enemies towards you.</td>
-    <td>Proc: 1.</td>
-    <td>Shoot 3 times<br>Increased melee hitbox. </td>
-  </tr>
-  <tr>
-    <td>Smokescreen</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067705-07a68f9a-3b75-4a16-9cd6-6c7c4f96ea3a.png" alt="Image" width="100" height="100"></td>
-    <td>Release a smokescreen, going invisible and dealing 100% damage to enemies around you.</td>
-    <td>Proc: 1.</td>
-    <td>Turn nearby allies invisible as well. </td>
-  </tr>
-</tbody>
-</table>
 
 ## Numbers
-##### Armor = 15 +0.5 per level
+##### Armor = 15 + 0.5 per level
 ##### Damage = 10 + 2 per level
-##### Regen = 1 + 0.2 per level (note: increases the lower his health is)
-##### Health = 150 + 30 per level
+##### Regen = 1 + 0.2 per level 
+##### Health = 144 + 19 per level
 ##### Movespeed = 7
-
 These stats are prone to change.
 
+
 ## Future plans
-##### Better animations (I animated them myself and they are not great- TCoolDzn is helping me big thanks to him!).
+##### Better animations.
 ##### Still more Alt skills (tried to use loader hook code for blackwhip and..yea, similarly might try to implement artificer's hover for float).
 ##### Code clean-up (lots of leftover code that I commented out).
 ##### Alt skins 
 
-
 ## Credits
-##### Big thanks to TCoolDzn for the 3D Model, future models and animations.
+##### Big thanks to Mr.Bones for icons and unique skins.
+##### Big thanks to TCoolDzn for the 3D Model and animations.
+##### Smash sounds, JoJo sounds.
 ##### HenryMod for the template.
-##### Ganondorf for networked suck code for blackwhip.
+##### Ganondorf for some networking.
 ##### Enforcer/Nemesis Enforcer mod for nemesis enforcer passive code, heatcrash and shotgun code.
 ##### EggSkills for the alternate artificer utility, used for detroit smash.
 ##### MinerUnearthed for partial utility/alt utility code for blackwhip and delaware smash.
 ##### Ninja for partial utility code for st louis smash.
 ##### Daredevil for bounce code for shoot style kick.
-##### Sett for haymaker code for st louis smash 45%.
-##### TTGL for crit ricochet orb code for airforce fa jin buff.
+##### TTGL for crit ricochet orb code for airforce crit buff.
+
+### Rest of Changelog on Github

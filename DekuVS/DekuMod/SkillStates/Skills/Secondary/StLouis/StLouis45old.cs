@@ -54,7 +54,7 @@ namespace DekuMod.SkillStates
 				}
                 for (int i = 0; i <= 20; i++)
                 {
-                    float num = 60f;
+                float num = 60f;
                 Quaternion rotation = Util.QuaternionSafeLookRotation(base.characterDirection.forward.normalized);
                 float num2 = 0.01f;
                 rotation.x += UnityEngine.Random.Range(-num2, num2) * num;

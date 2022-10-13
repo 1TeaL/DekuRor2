@@ -66,7 +66,8 @@ namespace DekuMod.Modules.Networking
                 CharacterMaster charMaster = masterobject.GetComponent<CharacterMaster>();
                 CharacterBody charBody = charMaster.GetBody();
                 bodyObj = charBody.gameObject;
-                GameObject dekumasterobject = Util.FindNetworkObject(netID);
+
+                GameObject dekumasterobject = Util.FindNetworkObject(dekunetID);
                 CharacterMaster dekucharMaster = dekumasterobject.GetComponent<CharacterMaster>();
                 CharacterBody dekucharBody = dekucharMaster.GetBody();
                 dekubodyObj = dekucharBody.gameObject;
@@ -99,6 +100,7 @@ namespace DekuMod.Modules.Networking
                 DamageInfo damageInfo = new DamageInfo
                 {
                     attacker = dekubodyObj,
+                    inflictor = dekubodyObj,
                     damage = damage,
                     position = charBody.transform.position,
                     procCoefficient = 0.1f,
@@ -106,6 +108,7 @@ namespace DekuMod.Modules.Networking
                     crit = dekucharBody.RollCrit(),
 
                 };
+                Chat.AddMessage(damageInfo.attacker.name);
 
                 charBody.healthComponent.TakeDamageForce(direction * force * (Weight), true, true);
                 charBody.healthComponent.TakeDamage(damageInfo);

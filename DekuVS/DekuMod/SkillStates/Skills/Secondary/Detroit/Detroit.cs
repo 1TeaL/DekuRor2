@@ -105,7 +105,6 @@ namespace DekuMod.SkillStates
 
                     if (Target.healthComponent.body.characterMotor)
                     {
-                        Debug.Log("charactermotor");
                         if (Target.healthComponent.body.characterMotor.isGrounded)
                         {
                             EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing3", true);
@@ -123,7 +122,6 @@ namespace DekuMod.SkillStates
                     }
                     else if (!Target.healthComponent.body.rigidbody)
                     {
-                        Debug.Log("rigidbody");
                         EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
                         PlayCrossfade("RightArm, Override", "DetroitSmashDown", "Attack.playbackRate", fireTime, 0.01f);
                         blastAttack.Fire();

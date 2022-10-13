@@ -45,14 +45,7 @@ namespace DekuMod.SkillStates
                 speedattack = 1;
             }
 
-            float num = this.moveSpeedStat / 1.25f;
-            bool isSprinting = base.characterBody.isSprinting;
-            if (isSprinting)
-            {
-                num /= base.characterBody.sprintingSpeedMultiplier;
-            }
 
-            blastRadius *= num;
 
             //hasFired = false;
             theSpot = aimRay.origin + range * aimRay.direction;
@@ -78,7 +71,7 @@ namespace DekuMod.SkillStates
             blastAttack.damageType = DamageType.Stun1s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis45DamageCoefficient * num;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.stlouis45DamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

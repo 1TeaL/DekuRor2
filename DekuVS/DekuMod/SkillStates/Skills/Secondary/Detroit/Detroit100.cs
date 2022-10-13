@@ -25,7 +25,7 @@ namespace DekuMod.SkillStates
 		private float baseFireTime = 0.2f;
 		private float fireTime;
 		private float totalDuration;
-		private float hitradius = 15f;
+		private float hitradius = 5f;
 		private float damageCoefficient = Modules.StaticValues.detroit100DamageCoefficient;
 		private float procCoefficient = 1f;
 		private float force = 1f;
@@ -138,7 +138,7 @@ namespace DekuMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			totalDuration += Time.fixedDeltaTime;
+			totalDuration += Time.fixedDeltaTime/4;
 
 			if(base.fixedAge > fireTime)
 			{
@@ -147,6 +147,16 @@ namespace DekuMod.SkillStates
 
         }
 
+		public override void Update()
+		{
+			base.Update();
+			//indicator update
+			if (this.areaIndicator)
+            {
+                this.areaIndicator.transform.localScale = Vector3.one * this.hitradius * (attackSpeedStat) * (1 + totalDuration);
+                this.areaIndicator.transform.localPosition = base.transform.position;
+            }
+        }
 
 		public void Loop()
 		{
@@ -164,9 +174,6 @@ namespace DekuMod.SkillStates
 				//this.direction = base.GetAimRay().direction.normalized;
 				//base.characterDirection.forward = this.direction;
 
-				//indicator update
-				this.areaIndicator.transform.localScale = Vector3.one * this.hitradius * (1+totalDuration);
-				this.areaIndicator.transform.localPosition = base.transform.position;
 
 				base.characterBody.isSprinting = true;
 				base.characterDirection.moveVector = this.idealDirection;
@@ -197,14 +204,14 @@ namespace DekuMod.SkillStates
 						EffectManager.SpawnEffect(this.blastEffectPrefab, new EffectData
 						{
 							origin = base.characterBody.corePosition,
-							scale = this.hitradius ,
+							scale = this.hitradius,
 							rotation = rotation
 						}, false);
 					}
 
 					BlastAttack blastAttack = new BlastAttack();
-					blastAttack.radius = hitradius * totalDuration;
-					blastAttack.procCoefficient = procCoefficient;
+					blastAttack.radius = hitradius * totalDuration * (attackSpeedStat);
+                    blastAttack.procCoefficient = procCoefficient;
 					blastAttack.position = base.transform.position;
 					blastAttack.attacker = base.gameObject;
 					blastAttack.crit = base.RollCrit();
