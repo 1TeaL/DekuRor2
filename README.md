@@ -295,39 +295,38 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Blackwhip<br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Activate blackwhip for 10 seconds, restricting their movement 6 seconds (both durations scaling with attackspeed) and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage per tick, healing based on your damage dealt." 
-               <br>Dash towards dista</td>
-    <td>Proc: 1</td>
+    <td>Activate blackwhip for 10 seconds, initially restricting nearby enemies' movement for 6 seconds (both durations scaling with attackspeed) and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage per tick, healing based on your damage dealt. </td>
+    <td>Proc: 0</td>
   </tr>
   <tr>
     <td>Blackwhip<br>45%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306821-77c8b99a-f2e0-47ce-911a-e10ddaec7ef1.png" alt="Image" width="100" height="100"></td>
-    <td>Dash and kick, dealing 200% damage scaling based on movespeed.<br>Resets CD on hit and resetting all cooldowns on kill.</td>
-    <td>Proc: 1.<br>CD: 6s.</td>
+    <td>Blackwhip towards the target, dashing towards them, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip45DamageCoefficient}% damage. Enemies hit have their movement restricted for 6 seconds (scaling with attackspeed).</td>
+    <td>Proc: 1.<br>Cost: 5 Plus Ultra</td>
   </tr>
   <tr>
     <td>Blackwhip<br>100%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306825-2c5cd503-ed2a-49ee-b4f4-85e01f85bcac.png" alt="Image" width="100" height="100"></td>
-    <td>Instantly dash through enemies, after a delay, deal 5x100% damage.<br>Number of hits scale based on attack speed.</td>
-    <td>Proc: 0.1.<br>Cost: 10% Max Health</td>
+    <td>Blackwhip enemies towards you for, restricting their movement for 6 seconds (scaling with attackspeed), stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style>.</td>
+    <td>Proc: 1.<br>Cost: 10% Max Health and 5 Plus Ultra</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png" alt="Image" width="100" height="100"></td>
-    <td>Teleport and kick the target and enemies around forward, dealing 300% damage. <br></td>
-    <td>Proc: 1.<br>CD: 4s.</td>
+    <td>Activate gear shift for 10 seconds (scaling with movespeed). The knockback of attacks are multiplied by 10x.</td>
+    <td>Cost: 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>45%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, <br>stunning and dealing 200% damage.</td>
-    <td>Proc: 0.2.<br>CD: 4s.</td>
+    <td>Activate gear shift for 10 seconds (scaling with movespeed). Attacks slow enemies and pierce through them for 50% of the damage.</td>
+    <td>Proc: 0.<br>Cost: 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>100%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
-    <td>Hold to prep a physics breaking St Louis Smash. <br>Release the skill key to deal a blast of wind pressure and instantaneously teleport up. <br>The blast deals 600% damage.</td>
-    <td>Proc: 1.<br>Cost: 15% Max Health</td>
+    <td>Overdrive gear shift for the next 5 attacks (scaling with movespeed). Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed. The initial threshold is {StaticValues.gearshift100Threshold} movespeed, increasing by the same amount for each subsequent threshold.</td>
+    <td>Proc: 0.<br>Cost: 15% Max Health and 5 Plus Ultra</td>
   </tr>
   <tr>
     <td>Smokescreen<br>Utility</td>
