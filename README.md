@@ -160,7 +160,7 @@ If you enjoy my work, support me on Ko-fi!
     <td>Airforce 100%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306882-312b4922-81ee-477d-ae9a-5cc281147f61.png" alt="Image" width="100" height="100"></td>
     <td>Shoot beams with your fists, stunning and dealing 400% damage.<br>Initially having 20% attackspeed, ramping up to 200%.<br></td>
-    <td>Proc: 1.<br>Cost: 0.5% Max Health</td>
+    <td>Proc: 1.<br>Cost: 0.5% Max Health.</td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br><br>Secondary</td>
@@ -178,7 +178,7 @@ If you enjoy my work, support me on Ko-fi!
     <td>Detroit<br>Smash 100%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306953-3567abdc-409a-468b-aca1-ec76412f879d.png" alt="Image" width="100" height="100"></td>
     <td>Hold to jump forward while charging a Detroit Smash. <br>When the skill key is released or you collide with an enemy, smash nearby enemies, <br>dealing 1000% damage, multiplied by flight time and attackspeed.<br><br></td>
-    <td>Proc: 1.<br>Cost: 15% Max Health</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
   </tr>
   <tr>
     <td>Delaware<br>Smash<br><br>Utility</td>
@@ -196,13 +196,13 @@ If you enjoy my work, support me on Ko-fi!
     <td>Delaware<br>Smash 100%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306943-31c72a0c-c73e-4ae6-afe0-d3633c140fcd.png" alt="Image" width="100" height="100"></td>
     <td>Flick your fingers, releasing an intense blast of wind in front,<br>dealing 1200% damage to enemies in front, <br>while sending you backwards as well.<br></td>
-    <td>Proc: 1.<br>Cost: 15% Max Health</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306958-c9638647-3573-45a5-8062-bc827b7d1b84.png" alt="Image" width="100" height="100"></td>
     <td>Delaware Smash enemies, stunning and grouping them in front of you, dealing 1500% damage,<br>then Detroit Smash all of them, freezing and dealing 1500% damage.<br></td>
-    <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
+    <td>Proc: 1.<br>Cost: 50 Plus Ultra.</td>
   </tr>
 </tbody>
 </table>
@@ -234,7 +234,7 @@ If you enjoy my work, support me on Ko-fi!
     <td>Shoot Style<br>100%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306825-2c5cd503-ed2a-49ee-b4f4-85e01f85bcac.png" alt="Image" width="100" height="100"></td>
     <td>Instantly dash through enemies, after a delay, deal 5x100% damage.<br>Number of hits scale based on attack speed.</td>
-    <td>Proc: 0.1.<br>Cost: 10% Max Health</td>
+    <td>Proc: 0.1.<br>Cost: 10% Max Health.</td>
   </tr>
   <tr>
     <td>StLouis<br>Smash<br><br>Secondary</td>
@@ -252,7 +252,7 @@ If you enjoy my work, support me on Ko-fi!
     <td>StLouis<br>Smash 100%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
     <td>Hold to prep a physics breaking St Louis Smash. <br>Release the skill key to deal a blast of wind pressure and instantaneously teleport up. <br>The blast deals 600% damage.</td>
-    <td>Proc: 1.<br>Cost: 15% Max Health</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
   </tr>
   <tr>
     <td>Manchester<br>Smash<br><br>Utility</td>
@@ -270,13 +270,13 @@ If you enjoy my work, support me on Ko-fi!
     <td>Manchester<br>Smash 100%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306802-dd6527c9-23df-4aca-8ff9-23c1a09327eb.png" alt="Image" width="100" height="100"></td>
     <td>Manchester Smash, rapidly drop down from the sky. <br>Have 200 armor while falling. Upon landing on the ground, stun enemies and deal 600% damage,<br>multiplied by falling time.</td>
-    <td>Proc: 1.<br>Cost: 15% Max Health</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
   </tr>
   <tr>
     <td>Detroit<br>Smash<br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png" alt="Image" width="100" height="100"></td>
-    <td>Dash forward, stunning and grouping enemies to your front, dealing 10% damage multiple times.<br>Then Final smash all of them, igniting and dealing 1000% damage.</td>
-    <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
+    <td>Dash forward, stunning and grouping enemies to your front, dealing 20% damage multiple times.<br>Then Final smash all of them, igniting and dealing 1500% damage.</td>
+    <td>Proc: 1.<br>Cost: 50 Plus Ultra.</td>
   </tr>
 </tbody>
 </table>
@@ -295,61 +295,61 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Blackwhip<br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Activate blackwhip for 10 seconds, initially restricting nearby enemies' movement for 6 seconds (both durations scaling with attackspeed) and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage per tick, healing based on your damage dealt. </td>
+    <td>Activate blackwhip for 10 seconds, initially restricting nearby enemies' movement for 6 seconds and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage per tick, healing based on your damage dealt. </td>
     <td>Proc: 0</td>
   </tr>
   <tr>
     <td>Blackwhip<br>45%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306821-77c8b99a-f2e0-47ce-911a-e10ddaec7ef1.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip towards the target, dashing towards them, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip45DamageCoefficient}% damage. Enemies hit have their movement restricted for 6 seconds (scaling with attackspeed).</td>
-    <td>Proc: 1.<br>Cost: 5 Plus Ultra</td>
+    <td>Blackwhip towards the target, dashing towards them, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip45DamageCoefficient}% damage. Enemies hit have their movement restricted for 6 seconds.</td>
+    <td>Proc: 1.<br>Cost: 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Blackwhip<br>100%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306825-2c5cd503-ed2a-49ee-b4f4-85e01f85bcac.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip enemies towards you for, restricting their movement for 6 seconds (scaling with attackspeed), stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style>.</td>
-    <td>Proc: 1.<br>Cost: 10% Max Health and 5 Plus Ultra</td>
+    <td>Blackwhip enemies towards you for, restricting their movement for 6 seconds, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style>.</td>
+    <td>Proc: 1.<br>Cost: 10% Max Health and 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift for 10 seconds (scaling with movespeed). The knockback of attacks are multiplied by 10x.</td>
+    <td>Activate gear shift for 10 seconds. The knockback of attacks are multiplied by 10x.</td>
     <td>Cost: 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>45%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift for 10 seconds (scaling with movespeed). Attacks slow enemies and pierce through them for 50% of the damage.</td>
+    <td>Activate gear shift for 10 seconds. Attacks slow enemies and pierce through them for 50% of the damage.</td>
     <td>Proc: 0.<br>Cost: 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>100%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
-    <td>Overdrive gear shift for the next 5 attacks (scaling with movespeed). Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed. The initial threshold is {StaticValues.gearshift100Threshold} movespeed, increasing by the same amount for each subsequent threshold.</td>
-    <td>Proc: 0.<br>Cost: 15% Max Health and 5 Plus Ultra</td>
+    <td>Overdrive gear shift for the next 5 attacks. Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed. The thresholds are in increments of 15 movespeed. </td>
+    <td>Proc: 0.<br>Cost: 15% Max Health and 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Smokescreen<br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306793-ea085c4a-86d8-4bd9-8c0a-a3e3daa47345.png" alt="Image" width="100" height="100"></td>
-    <td>Manchester Smash, damaging nearby enemies for 300% damage, <br>each enemy hit gives an extra second of a 200 armor buff.</td>
-    <td>Proc: 1<br>CD: 4s.<br></td>
+    <td>Release a smokescreen, making teammates and yourself go invisible for {StaticValues.smokescreenDuration} seconds.</td>
+    <td>Cost: 5 Plus Ultra.<br></td>
   </tr>
   <tr>
     <td>Smokescreen<br> 45%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306797-00346e67-2a81-457c-ac2c-46ddfc2d46f1.png" alt="Image" width="100" height="100"></td>
-    <td>Manchester Smash, jumping and damaging nearby enemies for 400% damage, <br>Gain 200 armor 3 seconds.</td>
-    <td>Proc: 1.<br>CD: 4s.</td>
+    <td>Release a smokescreen, make yourself go invisible for {StaticValues.smokescreen45Duration} seconds.</td>
+    <td>Cost: 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Smokescreen<br> 100%<br><br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306802-dd6527c9-23df-4aca-8ff9-23c1a09327eb.png" alt="Image" width="100" height="100"></td>
-    <td>Manchester Smash, rapidly drop down from the sky. <br>Have 200 armor while falling. Upon landing on the ground, stun enemies and deal 600% damage,<br>multiplied by falling time.</td>
-    <td>Proc: 1.<br>Cost: 15% Max Health</td>
+    <td>Release a blinding smokescreen, making yourself invisible for {StaticValues.smokescreen100Duration} seconds. The smokescreen also deals <style=cIsDamage>{100f * StaticValues.smokescreenDamageCoefficient}% damage</style> to enemies as well.</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health and 5 Plus Ultra.</td>
   </tr>
-  <tr>
+<tr>
     <td>Fa Jin<br>Utility</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png" alt="Image" width="100" height="100"></td>
-    <td>Dash forward, stunning and grouping enemies to your front, dealing 10% damage multiple times.<br>Then Final smash all of them, igniting and dealing 1000% damage.</td>
+    <td>Use your stored plus ultra with Fa Jin, grant 1.5x damage and disabling all health cost for 10 seconds.</td>
     <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
   </tr>
 </tbody>
