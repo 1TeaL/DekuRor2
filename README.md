@@ -88,18 +88,23 @@ If you enjoy my work, support me on Ko-fi!
     -  Bug fixes
     -  More icons
 
-<img src="https://user-images.githubusercontent.com/93917577/168006847-fb5312bf-6ba3-486b-b9a9-44460377d5d8.png">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030126209281032272/unknown.png" width="400">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030131285743652905/unknown.png" width="400">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030132342670508093/unknown.png" width="400">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030134285170122843/unknown.png" width="400">
+<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030137288761540658/unknown.png" width="400">
 
 ## Known Issues 
 
 
 ## Overview
-    Deku's game plan is to use his base form with skills that have higher utility, good control and plus ultra gain. 
-    OFA 100% and 45% enable him to have higher damage, armor and mobility, limited by health costs.
-    Changing modes also enable him to have more solutions to different situations in combat, lmited by his plus ultra meter.
-    Attackspeed and Movespeed scales fairly well with him as most skills scale with it.
-    OFA 100%'s self-damage is based on your current health, so lower total health will lead to less self-damage. However, 100% skills are based on max health.
-    Power Mode focuses on high damage, Shoot Style Mode focuses on higher mobility for less damage, Quirk mode focuses on buffs and utility at a plus ultra cost.
+
+- Deku's game plan is to use his base form with skills that have higher utility, good control and plus ultra gain. 
+- OFA 100% and 45% enable him to have higher damage, armor and mobility, limited by health costs.
+- Changing modes also enable him to have more solutions to different situations in combat, limited by his plus ultra meter.
+- Attackspeed and Movespeed scales fairly well with him as most skills scale with it.
+- OFA 100%'s self-damage is based on your current health, so lower total health will lead to less self-damage. However, 100% skills are based on max health.
+- Power Mode focuses on high damage, Shoot Style Mode focuses on higher mobility for less damage, Quirk mode focuses on buffs and utility at a plus ultra cost.
 
 ## Skills
 ### Passives
@@ -315,7 +320,7 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Gear<br>Shift<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift for 10 seconds. <br>Gain 1.2x movespeed.<br>The knockback of attacks are multiplied by 10x.</td>
+    <td>Activate gear shift for 10 seconds. <br>Gain 1.2x movespeed.<br>Attacks apply additional knockback based on your aim.</td>
     <td>Cost: 10 Plus Ultra.</td>
   </tr>
   <tr>
@@ -423,8 +428,30 @@ If you enjoy my work, support me on Ko-fi!
 ##### Regen = 1 + 0.2 per level 
 ##### Health = 144 + 19 per level
 ##### Movespeed = 7
-
 These stats are prone to change.
+
+
+## Future plans
+##### Better animations.
+##### Still more Alt skills (tried to use loader hook code for blackwhip and..yea, similarly might try to implement artificer's hover for float).
+##### Code clean-up (lots of leftover code that I commented out).
+##### Alt skins 
+
+## Credits
+##### Big thanks to Mr.Bones for icons and unique skins.
+##### Big thanks to TCoolDzn for the 3D Model and animations.
+##### Smash sounds, JoJo sounds.
+##### HenryMod for the template.
+##### Ganondorf for some networking.
+##### Enforcer/Nemesis Enforcer mod for nemesis enforcer passive code, heatcrash and shotgun code.
+##### EggSkills for the alternate artificer utility, used for detroit smash.
+##### MinerUnearthed for partial utility/alt utility code for blackwhip and delaware smash.
+##### Ninja for partial utility code for st louis smash.
+##### Daredevil for bounce code for shoot style kick.
+##### TTGL for crit ricochet orb code for airforce crit buff.
+
+### Rest of Changelog on Github
+
 <details>
 <summary>Click to expand previous patch notes:</summary>
 
@@ -603,24 +630,6 @@ These stats are prone to change.
 	- released	
 	
 </details>
-
-## Future plans
-##### Better animations.
-##### Still more Alt skills (tried to use loader hook code for blackwhip and..yea, similarly might try to implement artificer's hover for float).
-##### Code clean-up (lots of leftover code that I commented out).
-##### Alt skins 
-
-## Credits
-##### Big thanks to TCoolDzn for the 3D Model and animations.
-##### Smash sounds, JoJo sounds.
-##### HenryMod for the template.
-##### Ganondorf for networked suck code for blackwhip.
-##### Enforcer/Nemesis Enforcer mod for nemesis enforcer passive code, heatcrash and shotgun code.
-##### EggSkills for the alternate artificer utility, used for detroit smash.
-##### MinerUnearthed for partial utility/alt utility code for blackwhip and delaware smash.
-##### Ninja for partial utility code for st louis smash.
-##### Daredevil for bounce code for shoot style kick.
-##### TTGL for crit ricochet orb code for airforce crit buff.
 
 
   
