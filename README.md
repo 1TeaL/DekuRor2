@@ -80,15 +80,17 @@ If you enjoy my work, support me on Ko-fi!
     	- Manchester base, 45% and 100% have been reworked.
         - One for all 45% and 100%no longer give increased damage and attack speed, just increased armor and movespeed.
     	    - Removed OFA 100%s negative health regen, now it's self-damage instead, allowing more mitigation options. 
+    	- Changed health from 150 + 30 per level to 144 + 19 per level 
 
 
 - Next update(s)
     -  Balance changes
     -  Bug fixes
+    -  More icons
 
 <img src="https://user-images.githubusercontent.com/93917577/168006847-fb5312bf-6ba3-486b-b9a9-44460377d5d8.png">
 
-## Known Issues
+## Known Issues 
 
 
 ## Overview
@@ -105,7 +107,7 @@ If you enjoy my work, support me on Ko-fi!
 <thead>
   <tr>
     <th>Passive</th>
-    <th>                         </th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th>Description</th>
   </tr>
 </thead>
@@ -212,7 +214,7 @@ If you enjoy my work, support me on Ko-fi!
 <thead>
   <tr>
     <th>Skill</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th>Description</th>
     <th>Stats</th>
   </tr>
@@ -286,7 +288,7 @@ If you enjoy my work, support me on Ko-fi!
 <thead>
   <tr>
     <th>Skill</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th>Description</th>
     <th>Stats</th>
   </tr>
@@ -294,62 +296,62 @@ If you enjoy my work, support me on Ko-fi!
 <tbody>
   <tr>
     <td>Blackwhip<br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png" alt="Image" width="100" height="100"></td>
-    <td>Activate blackwhip for 10 seconds, initially restricting nearby enemies' movement for 6 seconds and dealing <style=cIsDamage>{100f * StaticValues.blackwhipDamageCoefficient}% damage per tick, healing based on your damage dealt. </td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306889-cbc0b1b6-44ae-49f9-885b-b1d29e9d4009.png" alt="Image" width="100" height="100"></td>
+    <td>Activate blackwhip for 10 seconds, <br>initially restricting nearby enemies' movement for 6 seconds,<br>dealing 10% damage per tick, <br>healing based on your damage dealt. </td>
     <td>Proc: 0.<br>Cost: 10 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Blackwhip<br>45%<br><br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306821-77c8b99a-f2e0-47ce-911a-e10ddaec7ef1.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip towards the target, dashing towards them, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip45DamageCoefficient}% damage. Enemies hit have their movement restricted for 6 seconds.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306894-4b435095-4420-4c8d-84ee-c6f59cc12c3e.png" alt="Image" width="100" height="100"></td>
+    <td>Blackwhip towards the target, dashing towards them, <br>stunning and dealing 600% damage. <br>Enemies hit have their movement restricted for 6 seconds.</td>
     <td>Proc: 1.<br>Cost: 10 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Blackwhip<br>100%<br><br>Primary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306825-2c5cd503-ed2a-49ee-b4f4-85e01f85bcac.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip enemies towards you for, restricting their movement for 6 seconds, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style>.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306897-ac65c569-916d-40ae-b2ef-3c083734610b.png" alt="Image" width="100" height="100"></td>
+    <td>Blackwhip enemies towards you for, <br>restricting their movement for 6 seconds, <br>stunning and dealing 600% damage.</td>
     <td>Proc: 1.<br>Cost: 10% Max Health and 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift for 10 seconds. The knockback of attacks are multiplied by 10x.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
+    <td>Activate gear shift for 10 seconds. <br>Gain 1.2x movespeed.<br>The knockback of attacks are multiplied by 10x.</td>
     <td>Cost: 10 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>45%<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift for 10 seconds. Attacks slow enemies and pierce through them for 50% of the damage.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
+    <td>Activate gear shift transmission for 10 seconds. <br>Attacks slow enemies and pierce through them for 50% of the damage.</td>
     <td>Proc: 0.<br>Cost: 10 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>100%<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
-    <td>Overdrive gear shift for the next 5 attacks. Attacks bend the laws of physics, dealing multiple times their damage based on your movespeed. The thresholds are in increments of 15 movespeed. </td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
+    <td>Overdrive gear shift for the next 5 attacks. <br>Attacks bend the laws of physics,<br>dealing multiple times their damage based on your movespeed. <br>The thresholds are in increments of 15 movespeed. </td>
     <td>Proc: 0.<br>Cost: 15% Max Health and 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Smokescreen<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306793-ea085c4a-86d8-4bd9-8c0a-a3e3daa47345.png" alt="Image" width="100" height="100"></td>
-    <td>Release a smokescreen, making teammates and yourself go invisible for {StaticValues.smokescreenDuration} seconds.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306829-9c39e702-4918-45c5-8f4e-5b18877d7c4c.png" alt="Image" width="100" height="100"></td>
+    <td>Release a smokescreen, <br>making teammates and yourself go invisible for 6 seconds.</td>
     <td>Cost: 10 Plus Ultra.<br></td>
   </tr>
   <tr>
     <td>Smokescreen<br> 45%<br><br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306797-00346e67-2a81-457c-ac2c-46ddfc2d46f1.png" alt="Image" width="100" height="100"></td>
-    <td>Release a smokescreen, make yourself go invisible for {StaticValues.smokescreen45Duration} seconds.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306829-9c39e702-4918-45c5-8f4e-5b18877d7c4c.png" alt="Image" width="100" height="100"></td>
+    <td>Release a smokescreen, make yourself go invisible for 10 seconds.</td>
     <td>Cost: 10 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Smokescreen<br> 100%<br><br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306802-dd6527c9-23df-4aca-8ff9-23c1a09327eb.png" alt="Image" width="100" height="100"></td>
-    <td>Release a blinding smokescreen, making yourself invisible for {StaticValues.smokescreen100Duration} seconds. The smokescreen also deals <style=cIsDamage>{100f * StaticValues.smokescreenDamageCoefficient}% damage</style> to enemies as well.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306829-9c39e702-4918-45c5-8f4e-5b18877d7c4c.png" alt="Image" width="100" height="100"></td>
+    <td>Release a blinding smokescreen, making yourself invisible for 6 seconds. <br>The smokescreen also deals 600% damage to enemies as well.</td>
     <td>Proc: 1.<br>Cost: 15% Max Health and 5 Plus Ultra.</td>
   </tr>
-<tr>
+  <tr>
     <td>Fa Jin<br>Utility</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png" alt="Image" width="100" height="100"></td>
-    <td>Use your stored plus ultra with Fa Jin, grant 1.5x damage and disabling all health cost for 10 seconds.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306963-eddc0a2e-f9a1-49fd-a168-88415b7ba538.png" alt="Image" width="100" height="100"></td>
+    <td>Use your stored plus ultra with Fa Jin,<br>grant 1.5x damage and disabling all health cost for 10 seconds.</td>
     <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
   </tr>
 </tbody>
@@ -368,17 +370,17 @@ If you enjoy my work, support me on Ko-fi!
 <tbody>
   <tr>
     <td>Power Mode</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067731-4d091c5f-86dd-4bed-b70d-279029c37869.png" alt="Image" width="100" height="100"></td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306969-e968e385-6ec9-40a1-9fd7-208555124140.png" alt="Image" width="100" height="100"></td>
     <td>Change your skills to Power based. Costs 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Shoot Style Mode</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067731-4d091c5f-86dd-4bed-b70d-279029c37869.png" alt="Image" width="100" height="100"></td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306790-5e8be721-f6a2-44fc-8e7d-442007355d54.png" alt="Image" width="100" height="100"></td>
     <td>Change your skills to Shoot Style based. Costs 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Quirk Mode</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067731-4d091c5f-86dd-4bed-b70d-279029c37869.png" alt="Image" width="100" height="100"></td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306814-9d56a9e1-8ff2-4cf1-8d23-695febaeede2.png" alt="Image" width="100" height="100"></td>
     <td>Change your skills to Quirk based. Costs 5 Plus Ultra.</td>
   </tr>
   <tr>
@@ -417,7 +419,7 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Numbers
 ##### Armor = 15 + 0.5 per level
-##### Damage = 12 + 2.4 per level
+##### Damage = 10 + 2 per level
 ##### Regen = 1 + 0.2 per level 
 ##### Health = 144 + 19 per level
 ##### Movespeed = 7
@@ -668,6 +670,7 @@ These stats are prone to change.
 ![fajinboost](https://user-images.githubusercontent.com/93917577/195306965-b293cf19-2213-454e-bae5-55a99904d226.png)
 ![finalSmash](https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png)
 ![fistmodeIcon](https://user-images.githubusercontent.com/93917577/195306969-e968e385-6ec9-40a1-9fd7-208555124140.png)
+![legmodeIcon](https://user-images.githubusercontent.com/93917577/195306790-5e8be721-f6a2-44fc-8e7d-442007355d54.png)
 ![Floatactivate](https://user-images.githubusercontent.com/93917577/195306971-f4657190-44d6-4ec7-b12c-44debe528f53.png)
 ![Floatactivate45](https://user-images.githubusercontent.com/93917577/195306979-98ebcf59-59ac-4834-99de-7b6d8280d562.png)
 ![Floatactivate100](https://user-images.githubusercontent.com/93917577/195306984-2fe328af-5617-468c-ae6f-691a44b5e49f.png)
@@ -680,7 +683,6 @@ These stats are prone to change.
 ![gobeyondN](https://user-images.githubusercontent.com/93917577/195307000-a7615830-bc8d-4024-8295-74a27ac33b15.png)
 [goBeyondO](https://user-images.githubusercontent.com/93917577/195306780-271da4a3-5244-4fad-8718-55e66cccf896.png)
 ![gobeyondY](https://user-images.githubusercontent.com/93917577/195306789-06a1887f-9ea8-4c13-a770-0dbb78d93656.png)
-![legmodeIcon](https://user-images.githubusercontent.com/93917577/195306790-5e8be721-f6a2-44fc-8e7d-442007355d54.png)
 
 
 
