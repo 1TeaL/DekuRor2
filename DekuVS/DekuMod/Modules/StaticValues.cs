@@ -26,11 +26,11 @@ namespace DekuMod.Modules
         internal static float regenPlusUltraRate = 8f;
         internal static float basePlusUltraGain = 1f;
         internal static float skillPlusUltraGain = 2f;
-        internal static float skillPlusUltraSpend = 5f;
-        internal static float skill45PlusUltraSpend = 5f;
+        internal static float skillPlusUltraSpend = 10f;
+        internal static float skill45PlusUltraSpend = 10f;
         internal static float skill100PlusUltraSpend = 5f;
         internal static float specialPlusUltraSpend = 50f;
-        internal static float modePlusUltraSpend = 10f;
+        internal static float modePlusUltraSpend = 5f;
         internal static float goBeyondBuffGain = 1f;
         internal static int goBeyondBuffDuration = 60;
 
@@ -78,8 +78,8 @@ namespace DekuMod.Modules
         internal const float gearshiftForceBoost = 10f;
         internal const int gearshift45BuffTimer = 10;
         internal const float gearshift45DamageCoefficient = 0.5f;
-        internal const int gearshift100BuffTimer = 10;
-        internal const float gearshift100Threshold = 10f;
+        internal const int gearshift100BuffAttacks = 5;
+        internal const float gearshift100Threshold = 15f;
         internal const float gearshift100HealthCostFraction = 0.25f;
         //Secondary damage
         internal const float blackwhipshootDamageCoefficient = 4f;
@@ -94,13 +94,13 @@ namespace DekuMod.Modules
         internal const float manchesterArmor = 200f;
         internal const float manchesterDamageCoefficient = 3f;
         internal const float manchester45DamageCoefficient = 4f;
-        internal const int manchester45BuffDuration = 3;
+        internal const int manchester45BuffDuration = 4;
         internal const float manchester100DamageCoefficient = 6f;
         internal const float manchester100HealthCostFraction = 0.15f;
         //smokescreen
-        internal const float smokescreenDuration = 4f;
-        internal const float smokescreen45Duration = 8f;
-        internal const float smokescreen100Duration = 8f;
+        internal const float smokescreenDuration = 6f;
+        internal const float smokescreen45Duration = 10f;
+        internal const float smokescreen100Duration = 6f;
         internal const float smokescreenDamageCoefficient = 6f;
         internal const float smokescreen100HealthCostFraction = 0.25f;
         //Utility damage
@@ -117,13 +117,13 @@ namespace DekuMod.Modules
 
         //Special
         //fist
-        internal const float detroitdelawareDamageCoefficient = 0.2f;
+        internal const float detroitdelawareDamageCoefficient = 0.1f;
         internal const float detroitdelawareSmashDamageCoefficient = 15f;
         internal const float detroitdelawareBlastRadius = 5f;
         internal const float detroitdelawareRange = 30f;
         //leg
-        internal const float finalsmashDamageCoefficient = 0.1f;
-        internal const float finalsmashSmashDamageCoefficient = 10f;
+        internal const float finalsmashDamageCoefficient = 0.3f;
+        internal const float finalsmashSmashDamageCoefficient = 15f;
         internal const float finalsmashBlastRadius = 5f;
         internal const float finalsmashRange = 20f;
         //quirk
