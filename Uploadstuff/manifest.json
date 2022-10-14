@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "4.0.0",
+    "version_number": "4.0.1",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "Go Beyond! 4.0.0- THE DEKU REWORK! Added Plus Ultra Meter, extraskillslots, a bunch of new skills, and more!",
+    "description": "Go Beyond! 4.0.0- THE DEKU REWORK! Added Plus Ultra Meter, extraskillslots, a bunch of new skills, and more! 4.0.1- fixed on-hits",
     "dependencies": [
          "tristanmcpherson-R2API-4.4.1",
 	 "KingEnderBrine-ExtraSkillSlots-1.5.1"

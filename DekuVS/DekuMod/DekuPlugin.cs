@@ -53,7 +53,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "4.0.0";
+        public const string MODVERSION = "4.0.1";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -166,6 +166,8 @@ namespace DekuMod
 
         private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo damageInfo, GameObject victim)
         {
+            orig.Invoke(self, damageInfo, victim);
+
             var attacker = damageInfo.attacker;
             if (attacker)
             {
@@ -173,13 +175,13 @@ namespace DekuMod
                 var victimBody = victim.GetComponent<CharacterBody>();
                 if (body && victimBody)
                 {
-                    if (body && victimBody)
+                    if (body && victimBody && damageInfo.damage > 0)
                     {
                         //deku mark system
                         if(body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                         {
                             //gearshift buff
-                            if (damageInfo.damage > 0 && body.HasBuff(Buffs.gearshiftBuff))
+                            if (body.HasBuff(Buffs.gearshiftBuff))
                             {
                                 float Weight = 1f;
 
@@ -195,7 +197,7 @@ namespace DekuMod
                                 victimBody.healthComponent.TakeDamageForce(body.inputBank.aimDirection * StaticValues.gearshiftForceBoost * (Weight), true, true);
                             }
                             //gearshift45 buff
-                            if (damageInfo.damage > 0 && damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift45Buff))
+                            if (damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift45Buff))
                             {
                                 var bulletAttack = new BulletAttack
                                 {
@@ -238,7 +240,7 @@ namespace DekuMod
 
                             }
                             //gearshift100 buff
-                            if (damageInfo.damage > 0 && damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift100Buff))
+                            if (damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift100Buff))
                             {
                                 int gearshiftBuffCount = body.GetBuffCount(Buffs.gearshift100Buff.buffIndex);
                                 body.ApplyBuff(Buffs.gearshift100Buff.buffIndex, gearshiftBuffCount - 1);
@@ -281,13 +283,13 @@ namespace DekuMod
                                 }
                             }
                             //blackwhip debuff
-                            if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.ClayGoo)
+                            if (damageInfo.damageType == DamageType.ClayGoo)
                             {
                                 victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhipDebuffDuration);
                                 
                             }
                             //heal and armor mark for freeze
-                            if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.Freeze2s)
+                            if (damageInfo.damageType == DamageType.Freeze2s)
                             {
                                 if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
                                 {
@@ -299,7 +301,7 @@ namespace DekuMod
                                 }
                             }
                             //heal and armor mark for ignite
-                            if (damageInfo.damage > 0 && damageInfo.damageType == DamageType.IgniteOnHit)
+                            if (damageInfo.damageType == DamageType.IgniteOnHit)
                             {
                                 if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
                                 {
