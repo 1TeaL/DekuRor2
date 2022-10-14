@@ -52,6 +52,7 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 4.0.3 - Fixed version number internally.
 - 4.0.2 - Bug fixes/balance changes
     - Fixed smokescreen being stuck
     - Buffed marks so all hits heal/gain barrier and the 3rd hit will remove it.
