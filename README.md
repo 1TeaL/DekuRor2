@@ -52,6 +52,7 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 4.0.1 - Fixed on-hit effects not working.
 - 4.0.0 - *THE DEKU REWORK!*    
     - *NEW*
     	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
