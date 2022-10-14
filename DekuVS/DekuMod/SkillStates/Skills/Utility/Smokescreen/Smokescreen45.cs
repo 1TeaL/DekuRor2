@@ -72,7 +72,8 @@ namespace DekuMod.SkillStates
 			base.OnExit();
 		}
         public override void FixedUpdate()
-		{
+        {
+            base.FixedUpdate();
             if (!hasFired && base.fixedAge > 0.1f && base.isAuthority)
             {
 				hasFired = true;
@@ -80,8 +81,9 @@ namespace DekuMod.SkillStates
 				blastAttack.position = base.transform.position;
 				blastAttack.Fire();
 				this.outer.SetNextStateToMain();
+                return;
 
-			}
+            }
 
 		}
 
