@@ -1,174 +1,119 @@
-﻿using DekuMod.Modules.Survivors;
+﻿using DekuMod.Modules.Networking;
+using DekuMod.Modules.Survivors;
 using EntityStates;
-using RoR2.Skills;
+using HG;
+using R2API.Networking.Interfaces;
 using RoR2;
-using UnityEngine.Networking;
-using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
+using UnityEngine.Networking;
+using Random = UnityEngine.Random;
 using EntityStates.Bandit2;
 
 namespace DekuMod.SkillStates
 {
+    public class Smokescreen100 : BaseQuirk100
+    {
 
-	public class Smokescreen100 : BaseQuirk100
-	{
-		public static float radius = 15f;
-
-		public Vector3 theSpot;
-		public CharacterBody body;
-		public bool hasFired;
-		private BlastAttack blastAttack;
-		private GameObject smokeprefab = Modules.Assets.smokeEffect;
-		private GameObject smokebigprefab = Modules.Assets.smokebigEffect;
-        private float maxWeight;
+        public static float duration = 0.5f;
+        public static float radius = 15f;
 
         public override void OnEnter()
-		{
-			base.OnEnter();
-            hasFired = false;
-            theSpot = base.transform.position;
+        {
+            base.OnEnter();
+            duration /= attackSpeedStat;
 
-            blastAttack = new BlastAttack();
 
-            blastAttack.position = base.transform.position;
-            blastAttack.baseDamage = this.damageStat * Modules.StaticValues.smokescreenDamageCoefficient;
-            blastAttack.baseForce = 20f * maxWeight;
-            blastAttack.damageType = DamageType.SlowOnHit;
-            blastAttack.radius = radius;
-            blastAttack.attacker = base.gameObject;
-            blastAttack.inflictor = base.gameObject;
-            blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.crit = base.RollCrit();
-            blastAttack.procChainMask = default(ProcChainMask);
-            blastAttack.procCoefficient = 1f;
-            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-            blastAttack.damageColorIndex = DamageColorIndex.Default;
-            blastAttack.attackerFiltering = AttackerFiltering.Default;
         }
 
-		protected override void DoSkill()
-		{
-			base.DoSkill();
-			bool active = NetworkServer.active;
-			if (active)
-			{
-				base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreen100Duration);
-				base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreen100Duration);
-			}
-
-			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
-			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
-
-			if (base.isAuthority)
-			{
-				Vector3 effectPosition = base.characterBody.corePosition;
-				effectPosition.y = base.characterBody.corePosition.y;
-				EffectManager.SpawnEffect(this.smokebigprefab, new EffectData
-				{
-					origin = effectPosition,
-					scale = radius,
-					rotation = Quaternion.LookRotation(Vector3.down)
-				}, true);
-
-			}
-
-
-			//float radiusSqr = radius * radius;
-			//Vector3 position = base.transform.position;
-
-			//if (NetworkServer.active)
-			//{
-			//	this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
-			//}
-
-
-
-		}
-
-		protected override void DontDoSkill()
-		{
-			base.DontDoSkill();
-			skillLocator.utility.AddOneStock();
-		}
-		public void GetMaxWeight()
-		{
-			Ray aimRay = base.GetAimRay();
-			BullseyeSearch search = new BullseyeSearch
-			{
-
-				teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-				filterByLoS = false,
-				searchOrigin = theSpot,
-				searchDirection = UnityEngine.Random.onUnitSphere,
-				sortMode = BullseyeSearch.SortMode.Distance,
-				maxDistanceFilter = radius,
-				maxAngleFilter = 360f
-			};
-
-			search.RefreshCandidates();
-			search.FilterOutGameObject(base.gameObject);
-
-
-
-			List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-			foreach (HurtBox singularTarget in target)
-			{
-				if (singularTarget)
-				{
-					if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-					{
-						if (singularTarget.healthComponent.body.characterMotor)
-						{
-							if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
-							{
-								maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
-							}
-						}
-						else if (singularTarget.healthComponent.body.rigidbody)
-						{
-							if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
-							{
-								maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
-							}
-						}
-					}
-				}
-			}
-		}
-
-
-		public override void OnExit()
+        protected override void DoSkill()
         {
+            base.DoSkill();
 
-			base.OnExit();
-		}
+            bool active = NetworkServer.active;
+            if (active)
+            {
+                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreen100Duration);
+                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreen100Duration);
+            }
+
+
+            Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
+
+            EffectManager.SpawnEffect(Modules.Assets.smokebigEffect, new EffectData
+            {
+                origin = base.transform.position,
+                scale = radius,
+                rotation = Quaternion.LookRotation(Vector3.up)
+            }, true);
+
+            Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
+
+
+            BlastAttack blastAttack = new BlastAttack();
+            blastAttack.radius = radius;
+            blastAttack.procCoefficient = 1f;
+            blastAttack.position = base.characterBody.footPosition;
+            blastAttack.attacker = base.gameObject;
+            blastAttack.crit = base.RollCrit();
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.smokescreenDamageCoefficient;
+            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+            blastAttack.baseForce = 3000f;
+            blastAttack.teamIndex = base.teamComponent.teamIndex;
+            blastAttack.damageType = DamageType.CrippleOnHit;
+            blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+            blastAttack.Fire();
+
+        }
+        protected override void DontDoSkill()
+        {
+            base.DontDoSkill();
+            skillLocator.utility.AddOneStock();
+        }
+        private void BuffTeam(IEnumerable<TeamComponent> recipients, float radiusSqr, Vector3 currentPosition)
+        {
+            bool flag = !NetworkServer.active;
+            if (!flag)
+            {
+                foreach (TeamComponent teamComponent in recipients)
+                {
+                    bool flag2 = (teamComponent.transform.position - currentPosition).sqrMagnitude <= radiusSqr;
+                    if (flag2)
+                    {
+                        CharacterBody body = teamComponent.body;
+                        bool flag3 = body;
+                        if (flag3)
+                        {
+                            body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreenDuration);
+                            body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreenDuration);
+
+                        }
+                    }
+                }
+            }
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if (!hasFired && base.fixedAge > 0.1f && base.isAuthority)
+            if (base.fixedAge >= duration && base.isAuthority)
             {
-				hasFired = true;
-
-                GetMaxWeight();
-                blastAttack.position = base.transform.position;
-                blastAttack.baseForce = 20f * maxWeight;
-                blastAttack.Fire();
-				Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
-
-				this.outer.SetNextStateToMain();
-				return;
-			}
-
-		}
-
+                this.outer.SetNextStateToMain();
+                return;
+            }
+            
+        }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;
         }
-
-
     }
 }

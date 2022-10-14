@@ -378,7 +378,7 @@ namespace DekuMod.Modules.Networking
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Death;
         }
     }
 }

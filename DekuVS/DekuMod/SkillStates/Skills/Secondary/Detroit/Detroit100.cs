@@ -138,7 +138,7 @@ namespace DekuMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			totalDuration += Time.fixedDeltaTime/4;
+			totalDuration += Time.fixedDeltaTime;
 
 			if(base.fixedAge > fireTime)
 			{

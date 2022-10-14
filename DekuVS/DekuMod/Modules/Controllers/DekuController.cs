@@ -153,7 +153,7 @@ namespace DekuMod.Modules.Survivors
                 if (!flag && damageInfo.damage > 0f)
                 {
                     //dangersense base
-                    if (self.body.HasBuff(Buffs.dangersenseBuff.buffIndex))
+                    if (self.body.HasBuff(Buffs.dangersenseBuff.buffIndex) && !self.body.HasBuff(RoR2Content.Buffs.HiddenInvincibility))
                     {
                         if(energySystem.currentPlusUltra > StaticValues.dangersensePlusUltraSpend)
                         {

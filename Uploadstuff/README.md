@@ -52,6 +52,12 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 4.0.4 - Bug fixes/balance changes
+    - Fixed smokescreen being stuck properly. Added health cost to smokescreen.
+    - lowered height gain from float.
+    - made it so 1,000,000% detroit delaware smash and final smash shouldn't be as interruptable anymore, same with gobeyond.
+    - Buffed multiplier provided by duration for Detroit Smash 100%.
+- 4.0.3 - Fixed version number internally.
 - 4.0.2 - Bug fixes/balance changes
     - Fixed smokescreen being stuck
     - Buffed marks so all hits heal/gain barrier and the 3rd hit will remove it.

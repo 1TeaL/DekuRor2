@@ -18,7 +18,7 @@ namespace DekuMod.Modules
         internal static float dangersensePlusUltraSpend = 5f;
         //float
         internal const float floatForceEnergyFraction = 0.01f;
-        internal const float floatSpeed = 3f;
+        internal const float floatSpeed = 1f;
 
 
         //Energy

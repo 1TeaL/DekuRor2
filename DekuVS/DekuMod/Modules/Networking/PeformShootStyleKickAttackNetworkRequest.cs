@@ -104,11 +104,10 @@ namespace DekuMod.Modules.Networking
                     damage = damage,
                     position = charBody.transform.position,
                     procCoefficient = 0.1f,
-                    damageType = DamageType.Stun1s,
+                    damageType = DamageType.Generic,
                     crit = dekucharBody.RollCrit(),
 
                 };
-                Chat.AddMessage(damageInfo.attacker.name);
 
                 charBody.healthComponent.TakeDamageForce(direction * force * (Weight), true, true);
                 charBody.healthComponent.TakeDamage(damageInfo);

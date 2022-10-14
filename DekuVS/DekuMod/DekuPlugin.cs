@@ -53,7 +53,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "4.0.1";
+        public const string MODVERSION = "4.0.4";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -175,7 +175,7 @@ namespace DekuMod
                 var victimBody = victim.GetComponent<CharacterBody>();
                 if (body && victimBody)
                 {
-                    if (body && victimBody && damageInfo.damage > 0)
+                    if (body && victimBody && damageInfo.damage > 0 && (damageInfo.damageType & DamageType.DoT) != DamageType.DoT)
                     {
                         //deku mark system
                         if(body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")

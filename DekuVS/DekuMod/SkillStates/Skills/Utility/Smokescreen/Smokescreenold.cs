@@ -1,207 +1,80 @@
-﻿using DekuMod.Modules.Survivors;
+﻿using DekuMod.Modules.Networking;
+using DekuMod.Modules.Survivors;
 using EntityStates;
-using RoR2.Skills;
+using HG;
+using R2API.Networking.Interfaces;
 using RoR2;
-using UnityEngine.Networking;
-using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
+using UnityEngine.Networking;
+using Random = UnityEngine.Random;
 using EntityStates.Bandit2;
 
 namespace DekuMod.SkillStates
 {
+    public class Smokescreenold : BaseQuirk45
+    {
 
-	public class Smokescreenold : BaseQuirk
-	{
-		public static float baseDuration = 4f;
-		public static float radius = 15f;
+        public static float duration = 0.5f;
+        public static float radius = 15f;
 
-		public Vector3 theSpot;
-		public CharacterBody body;
-		private float duration;
-		public bool hasFired;
-		private BlastAttack blastAttack;
-		private GameObject smokeprefab = Modules.Assets.smokeEffect;
-		private GameObject smokebigprefab = Modules.Assets.smokebigEffect;
-		public BuffDef buffdef = RoR2Content.Buffs.Cloak;
-		public BuffDef buffdef2 = RoR2Content.Buffs.CloakSpeed;
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            duration /= attackSpeedStat;
 
 
-		public override void OnEnter()
-		{
-			base.OnEnter();
-			this.duration = baseDuration;
-			hasFired = false;
-			dekucon = base.GetComponent<DekuController>();
-			Ray aimRay = base.GetAimRay();
-			theSpot = aimRay.origin + 0 * aimRay.direction;
+        }
+
+        protected override void DoSkill()
+        {
+            base.DoSkill();
+
             bool active = NetworkServer.active;
             if (active)
             {
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
-			}
-
-			Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
-			//base.PlayAnimation("FullBody, Override", "OFA","Attack.playbackRate", 1f);
-
-			//if (base.isAuthority)
-			//{
-			//	Vector3 effectPosition = base.characterBody.corePosition;
-			//	effectPosition.y = base.characterBody.corePosition.y;
-			//	EffectManager.SpawnEffect(this.smokebigprefab, new EffectData
-			//	{
-			//		origin = effectPosition,
-			//		scale = radius,
-			//		rotation = Quaternion.LookRotation(Vector3.down)
-			//	}, true);
-
-			//}
-			//if (base.isAuthority)
-			//{
-			//	Vector3 effectPosition = base.characterBody.corePosition;
-			//	effectPosition.y = base.characterBody.corePosition.y;
-			//	EffectManager.SpawnEffect(this.smokeprefab, new EffectData
-			//	{
-			//		origin = effectPosition,
-			//		scale = radius,
-			//		rotation = Quaternion.LookRotation(Vector3.up)
-			//	}, true);
-
-			//}
-			
-
-			//EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-			//{
-			//	origin = base.transform.position,
-			//	scale = 1f,
-			//	rotation = Quaternion.LookRotation(aimRay.direction)
-			//}, false);
-
-
-			//float radiusSqr = radius * radius;
-			//Vector3 position = base.transform.position;
-
-			//if (NetworkServer.active)
-			//{
-			//	this.BuffTeam(TeamComponent.GetTeamMembers(TeamIndex.Player), radiusSqr, position);
-			//}
-			
-
-			blastAttack = new BlastAttack();
-
-			blastAttack.position = base.transform.position;
-			blastAttack.baseDamage = this.damageStat * Modules.StaticValues.smokescreenDamageCoefficient;
-			blastAttack.baseForce = 1600f;
-			blastAttack.damageType = DamageType.SlowOnHit;
-			blastAttack.radius = Smokescreen.radius;
-			blastAttack.attacker = base.gameObject;
-			blastAttack.inflictor = base.gameObject;
-			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-			blastAttack.crit = base.RollCrit();
-			blastAttack.procChainMask = default(ProcChainMask);
-			blastAttack.procCoefficient = 1f;
-			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-			blastAttack.damageColorIndex = DamageColorIndex.Default;
-			blastAttack.attackerFiltering = AttackerFiltering.Default;
-
-		}
-
-
-		private void BuffTeam(IEnumerable<TeamComponent> recipients, float radiusSqr, Vector3 currentPosition)
-		{
-			bool flag = !NetworkServer.active;
-			if (!flag)
-			{
-				foreach (TeamComponent teamComponent in recipients)
-				{
-					bool flag2 = (teamComponent.transform.position - currentPosition).sqrMagnitude <= radiusSqr;
-					if (flag2)
-					{
-						CharacterBody body = teamComponent.body;
-						bool flag3 = body;
-						if (flag3)
-						{
-							body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-							body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
-
-						}
-					}
-				}
-			}
-		}
-
-		public override void OnExit()
-        {
-			//dekucon.wardTrue = false;
-			//UnityEngine.Object.Destroy(this.affixHauntedWard);
-			//this.affixHauntedWard = null;
-			Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
-
-			//base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0f);
-			base.OnExit();
-		}
-        public override void FixedUpdate()
-		{
-
-            //if (dekucon.isMaxPower)
-            //{
-            //    SmokescreenSearch();
-
-            //}
-            if (!hasFired)
-            {
-				hasFired = true;
-				blastAttack.position = base.transform.position;
-				blastAttack.Fire();
-
+                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, Modules.StaticValues.smokescreenDuration);
+                base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, Modules.StaticValues.smokescreenDuration);
             }
 
-			this.outer.SetNextStateToMain();
-		}
+            Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
 
+            EffectManager.SpawnEffect(Modules.Assets.smokeEffect, new EffectData
+            {
+                origin = base.transform.position,
+                scale = radius,
+                rotation = Quaternion.LookRotation(Vector3.up)
+            }, true);
 
-		public override InterruptPriority GetMinimumInterruptPriority()
-		{
-			return InterruptPriority.Frozen;
-		}
+            Util.PlaySound(StealthMode.exitStealthSound, base.gameObject);
 
-		//public void SmokescreenSearch()
-		//{
-		//	Ray aimRay = base.GetAimRay();
-		//	BullseyeSearch search = new BullseyeSearch
-		//	{
+        }
+        protected override void DontDoSkill()
+        {
+            base.DontDoSkill();
+            skillLocator.utility.AddOneStock();
+        }
 
-		//		teamMaskFilter = TeamMask.AllExcept(TeamIndex.Monster),
-		//		filterByLoS = false,
-		//		searchOrigin = base.transform.position,
-		//		searchDirection = UnityEngine.Random.onUnitSphere,
-		//		sortMode = BullseyeSearch.SortMode.Distance,
-		//		maxDistanceFilter = radius * fajin,
-		//		maxAngleFilter = 360f
-		//	};
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
 
-		//	search.RefreshCandidates();
-		//	search.FilterOutGameObject(base.gameObject);
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
 
+            if (base.fixedAge >= duration && base.isAuthority)
+            {
+                this.outer.SetNextStateToMain();
+                return;
+            }
 
-		//	, 
-		//	List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-		//	foreach (HurtBox singularTarget in target)
-		//	{
-		//		if (singularTarget)
-		//		{
-		//			if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-		//			{
-		//				//bool active = NetworkServer.active;
-		//				//if (active)
-		//				//{
-		//					singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-		//					singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
-  //                      //}
-  //                  }
-  //              }
-		//	}
-		//}
-	}
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
+        }
+    }
 }
