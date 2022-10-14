@@ -7,11 +7,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using EntityStates.Bandit2;
+using System;
 
 namespace DekuMod.SkillStates
 {
 
-	public class Smokescreen45 : BaseQuirk45
+	public class Smokescreen45 : BaseQuirk45  
 	{
 		public static float radius = 15f;
 
@@ -27,14 +28,13 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 			hasFired = false;
-
+			theSpot = base.transform.position;
 		}
 
 		protected override void DoSkill()
 		{
 			base.DoSkill();
 			Ray aimRay = base.GetAimRay();
-			theSpot = aimRay.origin + 0 * aimRay.direction;
 			bool active = NetworkServer.active;
 			if (active)
 			{
@@ -69,7 +69,6 @@ namespace DekuMod.SkillStates
 
 		public override void OnExit()
         {
-
 			base.OnExit();
 		}
         public override void FixedUpdate()
@@ -87,47 +86,47 @@ namespace DekuMod.SkillStates
 		}
 
 
-		public override InterruptPriority GetMinimumInterruptPriority()
-		{
-			return InterruptPriority.Frozen;
-		}
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
+        }
 
-		//public void SmokescreenSearch()
-		//{
-		//	Ray aimRay = base.GetAimRay();
-		//	BullseyeSearch search = new BullseyeSearch
-		//	{
+        //public void SmokescreenSearch()
+        //{
+        //	Ray aimRay = base.GetAimRay();
+        //	BullseyeSearch search = new BullseyeSearch
+        //	{
 
-		//		teamMaskFilter = TeamMask.AllExcept(TeamIndex.Monster),
-		//		filterByLoS = false,
-		//		searchOrigin = base.transform.position,
-		//		searchDirection = UnityEngine.Random.onUnitSphere,
-		//		sortMode = BullseyeSearch.SortMode.Distance,
-		//		maxDistanceFilter = radius * fajin,
-		//		maxAngleFilter = 360f
-		//	};
+        //		teamMaskFilter = TeamMask.AllExcept(TeamIndex.Monster),
+        //		filterByLoS = false,
+        //		searchOrigin = base.transform.position,
+        //		searchDirection = UnityEngine.Random.onUnitSphere,
+        //		sortMode = BullseyeSearch.SortMode.Distance,
+        //		maxDistanceFilter = radius * fajin,
+        //		maxAngleFilter = 360f
+        //	};
 
-		//	search.RefreshCandidates();
-		//	search.FilterOutGameObject(base.gameObject);
+        //	search.RefreshCandidates();
+        //	search.FilterOutGameObject(base.gameObject);
 
 
-		//	, 
-		//	List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-		//	foreach (HurtBox singularTarget in target)
-		//	{
-		//		if (singularTarget)
-		//		{
-		//			if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-		//			{
-		//				//bool active = NetworkServer.active;
-		//				//if (active)
-		//				//{
-		//					singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
-		//					singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
-  //                      //}
-  //                  }
-  //              }
-		//	}
-		//}
-	}
+        //	, 
+        //	List<HurtBox> target = search.GetResults().ToList<HurtBox>();
+        //	foreach (HurtBox singularTarget in target)
+        //	{
+        //		if (singularTarget)
+        //		{
+        //			if (singularTarget.healthComponent && singularTarget.healthComponent.body)
+        //			{
+        //				//bool active = NetworkServer.active;
+        //				//if (active)
+        //				//{
+        //					singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, duration);
+        //					singularTarget.healthComponent.body.AddTimedBuffAuthority(RoR2Content.Buffs.CloakSpeed.buffIndex, duration);
+        //                      //}
+        //                  }
+        //              }
+        //	}
+        //}
+    }
 }

@@ -336,10 +336,10 @@ namespace DekuMod
                                 if (buffCount < 4)
                                 {
                                     victimBody.ApplyBuff(Buffs.healMark.buffIndex, buffCount + 1);
+                                    body.healthComponent.Heal(damageInfo.damage * StaticValues.healMarkCoefficient, default(ProcChainMask), true);
                                 }
                                 else if (buffCount >= 4)
                                 {
-                                    body.healthComponent.Heal(damageInfo.damage * StaticValues.healMarkCoefficient, default(ProcChainMask), true);
                                     victimBody.ApplyBuff(Buffs.healMark.buffIndex, 0);
                                 }
                             }
@@ -351,10 +351,10 @@ namespace DekuMod
                                 if (buffCount < 4)
                                 {
                                     victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, buffCount + 1);
+                                    body.healthComponent.AddBarrierAuthority(damageInfo.damage * StaticValues.barrierMarkCoefficient);
                                 }
                                 else if (buffCount >= 4)
                                 {
-                                    body.healthComponent.AddBarrierAuthority(damageInfo.damage* StaticValues.barrierMarkCoefficient);
                                     victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 0);
                                 }
                             }

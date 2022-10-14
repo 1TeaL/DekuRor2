@@ -394,7 +394,7 @@ namespace DekuMod.Modules.Survivors
                                     }
                                     else
                                     {
-                                        body.characterMotor.velocity.y = StaticValues.floatSpeed;
+                                        body.characterMotor.velocity.y += StaticValues.floatSpeed;
                                     }
                                 }
                                 else if (body.characterMotor.velocity.y > 0)
@@ -406,7 +406,7 @@ namespace DekuMod.Modules.Survivors
                                     }
                                     else
                                     {
-                                        body.characterMotor.velocity.y = StaticValues.floatSpeed;
+                                        body.characterMotor.velocity.y += StaticValues.floatSpeed;
                                     }
                                 }                                
                             }

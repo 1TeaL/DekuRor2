@@ -52,6 +52,10 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 4.0.2 - Bug fixes/balance changes
+    - Fixed smokescreen being stuck
+    - Buffed marks so all hits heal/gain barrier and the 3rd hit will remove it.
+    - Made float be able to gain height rather than a set height, fixes subsequent jumps not gaining as much height.
 - 4.0.1 - Fixed on-hit effects not working.
 - 4.0.0 - *THE DEKU REWORK!*    
     - *NEW*

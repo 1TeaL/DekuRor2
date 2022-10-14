@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using EntityStates.Bandit2;
+using System;
 
 namespace DekuMod.SkillStates
 {
@@ -26,14 +27,12 @@ namespace DekuMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
-        }
+            hasFired = false;
+			theSpot = base.transform.position;
+		}
 
 		protected override void DoSkill()
 		{
-			hasFired = false;
-			dekucon = base.GetComponent<DekuController>();
-			Ray aimRay = base.GetAimRay();
-			theSpot = aimRay.origin + 0 * aimRay.direction;
 			bool active = NetworkServer.active;
 			if (active)
 			{
@@ -109,10 +108,10 @@ namespace DekuMod.SkillStates
 		}
 
 
-		public override InterruptPriority GetMinimumInterruptPriority()
-		{
-			return InterruptPriority.Frozen;
-		}
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
+        }
 
-	}
+    }
 }

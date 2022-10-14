@@ -163,11 +163,11 @@ namespace DekuMod.SkillStates
 		}
 
 
-		public override InterruptPriority GetMinimumInterruptPriority()
-		{
-			return InterruptPriority.Frozen;
-		}
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
+        }
 
-		
-	}
+
+    }
 }
