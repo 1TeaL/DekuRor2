@@ -52,6 +52,25 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 4.0.5 - Balance changes/bug fixes
+    - Fixed stunning attacks not applying the barrier mark.
+    - Swapped Manchester Smash and St Louis Smash skill slots- previously manchester was a secondary, made it utility but felt more apt for it to fit on the secondary slot.
+    - Reworked/reverted Manchester Smash 45% to the original jump up and slam down, but now dealing damage on the jump and slam as well. This is to push shoot style more into that lower damage but more hits style.
+    - Buffed Manchester Smash 100% damage from 600% -> 3x400%, similarly having more hits thus more procs.
+    - Nerfed movespeed scaling on Shoot Style Kick 45%- was doing way too much damage.
+    - Changed the barrier gain on barrier mark from 10% of damage dealt -> 1% of max health.
+    - Made 1,000,000% detroit delaware smash and final smash not affect the teleport bosses. Also noted known issue that they can bug out, causing deku to be stuck in animation for longer than normal.
+- 4.0.4 - Bug fixes/balance changes
+    - Fixed smokescreen being stuck properly. Added health cost to smokescreen.
+    - lowered height gain from float.
+    - made it so 1,000,000% detroit delaware smash and final smash shouldn't be as interruptable anymore, same with gobeyond.
+    - Buffed multiplier provided by duration for Detroit Smash 100%.
+- 4.0.3 - Fixed version number internally.
+- 4.0.2 - Bug fixes/balance changes
+    - Fixed smokescreen being stuck
+    - Buffed marks so all hits heal/gain barrier and the 3rd hit will remove it.
+    - Made float be able to gain height rather than a set height, fixes subsequent jumps not gaining as much height.
+- 4.0.1 - Fixed on-hit effects not working.
 - 4.0.0 - *THE DEKU REWORK!*    
     - *NEW*
     	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
@@ -95,7 +114,7 @@ If you enjoy my work, support me on Ko-fi!
 <img src="https://cdn.discordapp.com/attachments/399901440023330816/1030137288761540658/unknown.png" width="400">
 
 ## Known Issues 
-
+1,000,000% Detroit Delaware Smash and Final Smash can bug out some times, causing Deku to be stuck for a bit.
 
 ## Overview
 
@@ -125,7 +144,7 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Marks</td>
     <td></td>
-    <td>Shocking attacks apply a heal mark- after 3 hits heal based on damage dealt.<br>Stunning attacks apply a barrier mark- after 3 hits gain barrier based on damage dealt.<br>Freezing and Igniting attacks apply both marks.</td>
+    <td>Shocking attacks apply a heal mark that on hit heals based on 10% damage dealt.<br>Stunning attacks apply a barrier mark that on hit gains barrier based on 1% max health.<br>Freezing and Igniting attacks apply both marks.</td>
   </tr>
   <tr>
     <td>Float</td>
@@ -206,7 +225,7 @@ If you enjoy my work, support me on Ko-fi!
     <td>Proc: 1.<br>Cost: 15% Max Health.</td>
   </tr>
   <tr>
-    <td>Detroit<br>Smash<br>Utility</td>
+    <td>1,000,000%<br>Detroit Delaware<br>Smash<br>Super</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306958-c9638647-3573-45a5-8062-bc827b7d1b84.png" alt="Image" width="100" height="100"></td>
     <td>Delaware Smash enemies, stunning and grouping them in front of you, dealing 10% damage multiple times, <br>then Detroit Smash all of them, freezing and dealing 1500% damage.<br></td>
     <td>Proc: 1.<br>Cost: 50 Plus Ultra.</td>
@@ -243,46 +262,46 @@ If you enjoy my work, support me on Ko-fi!
     <td>Instantly dash through enemies, after a delay, deal 5x100% damage.<br>Number of hits scale based on attack speed.</td>
     <td>Proc: 0.1.<br>Cost: 10% Max Health.</td>
   </tr>
-  <tr>
-    <td>StLouis<br>Smash<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png" alt="Image" width="100" height="100"></td>
-    <td>Teleport and kick the target and enemies around forward, dealing 300% damage. <br></td>
-    <td>Proc: 1.<br>CD: 4s.</td>
-  </tr>
-  <tr>
-    <td>StLouis<br>Smash 45%<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png" alt="Image" width="100" height="100"></td>
-    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, <br>stunning and dealing 200% damage.</td>
-    <td>Proc: 0.2.<br>CD: 4s.</td>
-  </tr>
-  <tr>
-    <td>StLouis<br>Smash 100%<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
-    <td>Hold to prep a physics breaking St Louis Smash. <br>Release the skill key to deal a blast of wind pressure and instantaneously teleport up. <br>The blast deals 600% damage.</td>
-    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
-  </tr>
-  <tr>
-    <td>Manchester<br>Smash<br><br>Utility</td>
+<tr>
+    <td>Manchester<br>Smash<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306793-ea085c4a-86d8-4bd9-8c0a-a3e3daa47345.png" alt="Image" width="100" height="100"></td>
     <td>Manchester Smash, damaging nearby enemies for 300% damage, <br>each enemy hit gives an extra second of a 200 armor buff.</td>
     <td>Proc: 1<br>CD: 4s.<br></td>
   </tr>
   <tr>
-    <td>Manchester<br>Smash 45%<br><br>Utility</td>
+    <td>Manchester<br>Smash 45%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306797-00346e67-2a81-457c-ac2c-46ddfc2d46f1.png" alt="Image" width="100" height="100"></td>
-    <td>Manchester Smash, jumping and damaging nearby enemies for 400% damage, <br>Gain 200 armor 4 seconds.</td>
+    <td>Manchester Smash, jumping and slamming down, damaging nearby enemies for 2x250% damage, <br>Gain 200 armor 4 seconds.</td>
     <td>Proc: 1.<br>CD: 4s.</td>
   </tr>
   <tr>
-    <td>Manchester<br>Smash 100%<br><br>Utility</td>
+    <td>Manchester<br>Smash 100%<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306802-dd6527c9-23df-4aca-8ff9-23c1a09327eb.png" alt="Image" width="100" height="100"></td>
-    <td>Manchester Smash, rapidly drop down from the sky. <br>Have 200 armor while falling. Upon landing on the ground, stun enemies and deal 600% damage,<br>multiplied by falling time.</td>
+    <td>Manchester Smash, rapidly drop down from the sky. <br>Have 200 armor while falling. Upon landing on the ground, stun enemies and deal 3x400% damage,<br>multiplied by falling time.</td>
     <td>Proc: 1.<br>Cost: 15% Max Health.</td>
   </tr>
   <tr>
-    <td>Detroit<br>Smash<br>Utility</td>
+    <td>StLouis<br>Smash<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png" alt="Image" width="100" height="100"></td>
+    <td>Teleport and kick the target and enemies around forward, dealing 300% damage. <br></td>
+    <td>Proc: 1.<br>CD: 4s.</td>
+  </tr>
+  <tr>
+    <td>StLouis<br>Smash 45%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306832-f33171b9-26f8-4328-9265-de9acd373684.png" alt="Image" width="100" height="100"></td>
+    <td>St Louis Smash, kicking multiple blasts of air pressure in front of you, <br>stunning and dealing 200% damage.</td>
+    <td>Proc: 0.2.<br>CD: 4s.</td>
+  </tr>
+  <tr>
+    <td>StLouis<br>Smash 100%<br><br>Utility</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306838-c9cee5fa-7bd7-4fc5-8f96-30ce1f88c94b.png" alt="Image" width="100" height="100"></td>
+    <td>Hold to prep a physics breaking St Louis Smash. <br>Release the skill key to deal a blast of wind pressure and instantaneously teleport up. <br>The blast deals 600% damage.</td>
+    <td>Proc: 1.<br>Cost: 15% Max Health.</td>
+  </tr>  
+  <tr>
+    <td>Final<br>Smash<br>Super</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306967-af854c45-3afd-4687-be68-6a6e91d782f2.png" alt="Image" width="100" height="100"></td>
-    <td>Dash forward, stunning and grouping enemies to your front, dealing 20% damage multiple times.<br>Then Final smash all of them, igniting and dealing 1500% damage.</td>
+    <td>Dash forward, stunning and grouping enemies to your front, dealing 30% damage multiple times.<br>Then Final smash all of them, igniting and dealing 1500% damage.</td>
     <td>Proc: 1.<br>Cost: 50 Plus Ultra.</td>
   </tr>
 </tbody>
