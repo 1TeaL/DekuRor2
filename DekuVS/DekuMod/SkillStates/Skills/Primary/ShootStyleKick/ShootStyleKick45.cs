@@ -125,7 +125,7 @@ namespace DekuMod.SkillStates
 			this.attack.attacker = base.gameObject;
 			this.attack.inflictor = base.gameObject;
 			this.attack.teamIndex = base.GetTeam();
-			this.attack.damage = base.characterBody.damage * Modules.StaticValues.shootkick45DamageCoefficient * num;
+			this.attack.damage = base.characterBody.damage * Modules.StaticValues.shootkick45DamageCoefficient * num2;
 			this.attack.procCoefficient = this.procCoefficient;
 			this.attack.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FireBarrage.hitEffectPrefab;
 			this.attack.forceVector = this.bonusForce;

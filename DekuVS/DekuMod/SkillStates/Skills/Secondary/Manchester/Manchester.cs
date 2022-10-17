@@ -26,7 +26,6 @@ namespace DekuMod.SkillStates
         private BlastAttack blastAttack;
         private bool hasFired;
         public Vector3 theSpot;
-        public int buffDuration;
 
         protected DamageType damageType = DamageType.Stun1s;
 
@@ -36,7 +35,6 @@ namespace DekuMod.SkillStates
             Ray aimRay = base.GetAimRay();
             this.duration = this.baseDuration / attackSpeedStat;
             fireTime = duration / 2f;
-            buffDuration = 0;
 
             hasFired = false;
             theSpot = base.transform.position;
@@ -76,12 +74,18 @@ namespace DekuMod.SkillStates
         
         }
 
-        protected virtual void OnHitEnemyAuthority()
+
+        protected virtual void OnHitEnemyAuthority(BlastAttack.Result result)
         {
             AkSoundEngine.PostEvent("shootstyledashcombosfx", this.gameObject);
-            
-            //base.healthComponent.Heal(((healthComponent.fullCombinedHealth / 20)), default(ProcChainMask), true);
+            foreach (BlastAttack.HitPoint hitpoint in result.hitPoints)
+            {
 
+                if (!hitpoint.hurtBox.healthComponent.body.HasBuff(Modules.Buffs.barrierMark.buffIndex))
+                {
+                    hitpoint.hurtBox.healthComponent.body.ApplyBuff(Modules.Buffs.barrierMark.buffIndex, 1, -1);
+                }
+            }
         }
 
         public override void OnExit()
@@ -108,10 +112,11 @@ namespace DekuMod.SkillStates
                         scale = blastRadius,
                     }, true);
                 }
-                if (blastAttack.Fire().hitCount > 0)
+                BlastAttack.Result result = blastAttack.Fire();
+                if (result.hitCount > 0)
                 {
-                    this.OnHitEnemyAuthority();
-                    base.characterBody.ApplyBuff(Modules.Buffs.manchesterBuff.buffIndex, 1, buffDuration);                    
+                    this.OnHitEnemyAuthority(result);
+                    base.characterBody.ApplyBuff(Modules.Buffs.manchesterBuff.buffIndex, 1, result.hitCount + 1);
                 }
             }
 
@@ -148,7 +153,6 @@ namespace DekuMod.SkillStates
             List<HurtBox> target = search.GetResults().ToList<HurtBox>();
             foreach (HurtBox singularTarget in target)
             {
-                buffDuration += 1;
                 if (singularTarget)
                 {
                     if (singularTarget.healthComponent && singularTarget.healthComponent.body)

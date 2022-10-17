@@ -53,7 +53,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "4.0.4";
+        public const string MODVERSION = "4.0.5";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -329,7 +329,7 @@ namespace DekuMod
                                 }
                             }
 
-                            //heal after 3 hits, based on damage dealt
+                            //heal each hit based on damage, after buffcount is 4 remove
                             if (victimBody.HasBuff(Buffs.healMark.buffIndex))
                             {
                                 int buffCount = victimBody.GetBuffCount(Buffs.healMark.buffIndex);
@@ -344,14 +344,14 @@ namespace DekuMod
                                 }
                             }
 
-                            //barrier after 3 hits, based on damage dealt
+                            //gain barrier each hit based on maxhealth, after buffcount is 4 remove
                             if (victimBody.HasBuff(Buffs.barrierMark.buffIndex))
                             {
                                 int buffCount = victimBody.GetBuffCount(Buffs.barrierMark.buffIndex);
                                 if (buffCount < 4)
                                 {
                                     victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, buffCount + 1);
-                                    body.healthComponent.AddBarrierAuthority(damageInfo.damage * StaticValues.barrierMarkCoefficient);
+                                    body.healthComponent.AddBarrierAuthority(body.healthComponent.combinedHealth * StaticValues.barrierMarkCoefficient);
                                 }
                                 else if (buffCount >= 4)
                                 {

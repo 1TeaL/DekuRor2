@@ -156,7 +156,7 @@ namespace DekuMod.SkillStates
                 blastAttack.crit = base.RollCrit();
                 blastAttack.baseDamage = base.characterBody.damage * damageCoefficient  * (1 + dropTimer);
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = slamForce;
+                blastAttack.baseForce = slamForce * (1 + dropTimer);
                 blastAttack.teamIndex = base.teamComponent.teamIndex;
                 blastAttack.damageType = damageType;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
@@ -164,9 +164,9 @@ namespace DekuMod.SkillStates
                 if (blastAttack.Fire().hitCount > 0)
                 {
                     this.OnHitEnemyAuthority();
-
+                    blastAttack.Fire();
+                    blastAttack.Fire();
                 }
-
 
                 for (int i = 0; i <= 4; i += 1)
                 {

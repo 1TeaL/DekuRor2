@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates
 	public class LegSuper : BaseSpecial
     {
         public float timer;
-        public float baseFireInterval = 0.3f;
+        public float baseFireInterval = 0.2f;
         public float fireTime = 0.5f;
         private float duration = 4.5f;
         public static float exitDuration = 4f;
@@ -167,8 +167,11 @@ namespace DekuMod.SkillStates
                                 maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
                             }
                         }
-                        new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
-                        singularTarget.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
+                        if (!singularTarget.healthComponent.body.isChampion)
+                        {
+                            new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
+                            singularTarget.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
+                        }
                     }
                 }
             }

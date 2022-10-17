@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using EntityStates.VagrantMonster;
+using R2API.Networking;
 using RoR2;
 using System;
 using UnityEngine;
@@ -55,7 +56,6 @@ namespace DekuMod.SkillStates
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                 blastAttack.damageType = DamageType.Stun1s;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
-                BlastAttack.Result result = blastAttack.Fire();
 
                 EffectData effectData = new EffectData();
                 {
@@ -67,20 +67,28 @@ namespace DekuMod.SkillStates
                 EffectManager.SpawnEffect(explosionPrefab, effectData, true);
 
                 //base.characterMotor.velocity = -Distance * aimRay.direction * moveSpeedStat / 7;
-
-                Compacted?.Invoke(result.hitCount);
+                BlastAttack.Result result = blastAttack.Fire();
+                if (result.hitCount > 0)
+                {
+                    this.OnHitEnemyAuthority(result);
+                }
             }
         }
 
+        protected virtual void OnHitEnemyAuthority(BlastAttack.Result result)
+        {
+            foreach (BlastAttack.HitPoint hitpoint in result.hitPoints)
+            {
+
+                if (!hitpoint.hurtBox.healthComponent.body.HasBuff(Modules.Buffs.barrierMark.buffIndex))
+                {
+                    hitpoint.hurtBox.healthComponent.body.ApplyBuff(Modules.Buffs.barrierMark.buffIndex, 1, -1);
+                }
+            }
+
+        }
         public override void OnExit()
         {
-            //if (NetworkServer.active)
-            //{
-            //    base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
-            //    base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, 0.5f);
-            //}
-
-            //base.characterMotor.velocity *= 0.7f;
 
             base.OnExit();
         }

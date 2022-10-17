@@ -28,7 +28,7 @@ namespace DekuMod.SkillStates
 		private float hitradius = 5f;
 		private float damageCoefficient = Modules.StaticValues.detroit100DamageCoefficient;
 		private float procCoefficient = 1f;
-		private float force = 1f;
+		private float force = 1000f;
 		private Vector3 direction;
 		private Animator animator;
 
@@ -217,7 +217,7 @@ namespace DekuMod.SkillStates
 					blastAttack.crit = base.RollCrit();
 					blastAttack.baseDamage = base.characterBody.damage * damageCoefficient * (attackSpeedStat) * (1+totalDuration);
 					blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-					blastAttack.baseForce = force;
+					blastAttack.baseForce = force * (1 + totalDuration);
 					blastAttack.teamIndex = base.teamComponent.teamIndex;
 					blastAttack.damageType = damageType;
 					blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;

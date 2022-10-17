@@ -4,14 +4,9 @@ namespace DekuMod.Modules
 {
     internal static class StaticValues
     {
-        internal static string descriptionText = "Deku is high risk survivor that hurts himself to power up his skills.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine
-             + "< ! > Airforce shoots a single enemy, when powered up turns into Delaware Smash, having AOE and launching you backwards." + Environment.NewLine + Environment.NewLine
-             + "< ! > Detroit smash is a chargeable punch that lunges you forward; when powered up turns it into St. Louis Smash, granting larger AOE." + Environment.NewLine + Environment.NewLine
-             + "< ! > Blackwhip allows him to move through the environment and grapple on to enemies; when powered up lets him pull multiple enemies towards him." + Environment.NewLine + Environment.NewLine
-             + "< ! > One for All 100% enables Deku to use one powered up skill at cost of a percentage of his health." + Environment.NewLine + Environment.NewLine;
         //Passive
         internal static float healMarkCoefficient = 0.1f;
-        internal static float barrierMarkCoefficient = 0.1f;
+        internal static float barrierMarkCoefficient = 0.01f;
         //dangersense
         internal const float dangersenseDamageCoefficient = 2f;
         internal const int dangersenseBuffTimer = 10;
@@ -95,9 +90,9 @@ namespace DekuMod.Modules
         //manchester
         internal const float manchesterArmor = 200f;
         internal const float manchesterDamageCoefficient = 3f;
-        internal const float manchester45DamageCoefficient = 4f;
+        internal const float manchester45DamageCoefficient = 2.5f;
         internal const int manchester45BuffDuration = 4;
-        internal const float manchester100DamageCoefficient = 6f;
+        internal const float manchester100DamageCoefficient = 4f;
         internal const float manchester100HealthCostFraction = 0.15f;
         //smokescreen
         internal const float smokescreenDuration = 6f;

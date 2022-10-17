@@ -5,12 +5,13 @@ using UnityEngine.Networking;
 using EntityStates;
 using DekuMod.Modules.Survivors;
 using System.Collections.Generic;
+using R2API.Networking;
 
 namespace DekuMod.SkillStates
 {
     public class Manchester45 : BaseSkill45
     {
-        public static float jumpDuration = 0.8f;
+        public static float jumpDuration = 1f;
         public static float dropForce = 7f;
 
         public static float slamRadius = 5f;
@@ -27,6 +28,7 @@ namespace DekuMod.SkillStates
         protected DamageType damageType = DamageType.Stun1s;
         public DekuController dekucon;
         private float maxWeight;
+        private BlastAttack blastAttack;
 
         //private NemforcerGrabController grabController;
 
@@ -37,7 +39,7 @@ namespace DekuMod.SkillStates
             this.flyVector = Vector3.up;
             this.hasDropped = false; 
             dekucon = base.GetComponent<DekuController>();
-
+            jumpDuration /= attackSpeedStat;
 
             base.characterMotor.disableAirControlUntilCollision = true;
 
@@ -59,13 +61,13 @@ namespace DekuMod.SkillStates
             base.characterMotor.Motor.RebuildCollidableLayers();
 
 
-            BlastAttack blastAttack = new BlastAttack();
+            blastAttack = new BlastAttack();
             blastAttack.radius = slamRadius;
             blastAttack.procCoefficient = slamProcCoefficient;
             blastAttack.position = base.characterBody.footPosition;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = base.RollCrit();
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchester45DamageCoefficient;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = slamForce;
             blastAttack.teamIndex = base.teamComponent.teamIndex;
@@ -83,14 +85,14 @@ namespace DekuMod.SkillStates
                 }, true);
             }
 
-            if (blastAttack.Fire().hitCount > 0)
-            {
-                this.OnHitEnemyAuthority();
-            }
-
             if (NetworkServer.active)
             {
                 base.characterBody.AddTimedBuffAuthority(Modules.Buffs.manchesterBuff.buffIndex, Modules.StaticValues.manchester45BuffDuration);
+            }
+            BlastAttack.Result result = blastAttack.Fire();
+            if (result.hitCount > 0)
+            {
+                this.OnHitEnemyAuthority(result);
             }
         }
 
@@ -101,10 +103,17 @@ namespace DekuMod.SkillStates
 
             if (this.slamIndicatorInstance) this.UpdateSlamIndicator();
         }
-        protected virtual void OnHitEnemyAuthority()
+        protected virtual void OnHitEnemyAuthority(BlastAttack.Result result)
         {
             AkSoundEngine.PostEvent("delawaresfx", this.gameObject);
-            
+            foreach (BlastAttack.HitPoint hitpoint in result.hitPoints)
+            {             
+
+                if (!hitpoint.hurtBox.healthComponent.body.HasBuff(Modules.Buffs.barrierMark.buffIndex))
+                {
+                    hitpoint.hurtBox.healthComponent.body.ApplyBuff(Modules.Buffs.barrierMark.buffIndex, 1, -1);
+                }
+            }
             //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 10) * (this.moveSpeedStat / 7));
 
         }
@@ -112,16 +121,62 @@ namespace DekuMod.SkillStates
         {
             base.FixedUpdate();
 
-            base.characterMotor.rootMotion += this.flyVector * ((1f * this.moveSpeedStat) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / jumpDuration) * Time.fixedDeltaTime);
-            base.characterMotor.velocity.y = 0f;           
 
-
-            if (base.fixedAge > jumpDuration && base.isAuthority)
+            if (!this.hasDropped)
             {
+                base.characterMotor.rootMotion += this.flyVector * ((1f * this.moveSpeedStat) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / jumpDuration) * Time.fixedDeltaTime);
+                base.characterMotor.velocity.y = 0f;
+            }
+
+            if (base.fixedAge >= (0.25f * jumpDuration) && !this.slamIndicatorInstance)
+            {
+                this.CreateIndicator();
+            }
+
+            if (base.fixedAge >= jumpDuration && !this.hasDropped)
+            {
+                this.StartDrop();
+            }
+
+            if (this.hasDropped && base.isAuthority && !base.characterMotor.disableAirControlUntilCollision)
+            {
+                this.LandingImpact();
                 this.outer.SetNextStateToMain();
             }
         }
 
+        private void CreateIndicator()
+        {
+            if (EntityStates.Huntress.ArrowRain.areaIndicatorPrefab)
+            {
+                this.downRay = new Ray
+                {
+                    direction = Vector3.down,
+                    origin = base.transform.position
+                };
+
+                this.slamIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(EntityStates.Huntress.ArrowRain.areaIndicatorPrefab).transform;
+                this.slamIndicatorInstance.localScale = Vector3.one * slamRadius;
+
+                this.slamCenterIndicatorInstance = UnityEngine.Object.Instantiate<GameObject>(EntityStates.Huntress.ArrowRain.areaIndicatorPrefab).transform;
+                this.slamCenterIndicatorInstance.localScale = (Vector3.one * slamRadius) / 3f;
+            }
+        }
+
+        private void StartDrop()
+        {
+            this.hasDropped = true;
+
+            base.characterMotor.disableAirControlUntilCollision = true;
+            base.characterMotor.velocity.y = -dropForce;
+            base.PlayCrossfade("FullBody, Override", "ManchesterFlip", "Attack.playbackRate", jumpDuration, 0.01f);
+
+            //bool active = NetworkServer.active;
+            //if (active)
+            //{
+            //    base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+            //}
+        }
 
         private void UpdateSlamIndicator()
         {
@@ -143,6 +198,37 @@ namespace DekuMod.SkillStates
 
                     this.slamCenterIndicatorInstance.transform.position = raycastHit.point;
                     this.slamCenterIndicatorInstance.transform.up = raycastHit.normal;
+                }
+            }
+        }
+
+        private void LandingImpact()
+        {
+
+            if (base.isAuthority)
+            {
+                Ray aimRay = base.GetAimRay();
+                base.characterMotor.velocity *= 0.1f;
+
+                blastAttack.position = base.characterBody.footPosition;
+
+                BlastAttack.Result result = blastAttack.Fire();
+                if (result.hitCount > 0)
+                {
+                    this.OnHitEnemyAuthority(result);
+                }
+
+
+
+                for (int i = 0; i <= 4; i += 1)
+                {
+                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * 8f);
+                    effectPosition.y = base.characterBody.footPosition.y;
+                    EffectManager.SpawnEffect(EntityStates.LemurianBruiserMonster.SpawnState.spawnEffectPrefab, new EffectData
+                    {
+                        origin = effectPosition,
+                        scale = slamRadius / 6,
+                    }, true);
                 }
             }
         }

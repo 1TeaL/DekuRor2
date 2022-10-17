@@ -166,8 +166,11 @@ namespace DekuMod.SkillStates
 							}
 						}
 
-						new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
-						singularTarget.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
+                        if (!singularTarget.healthComponent.body.isChampion)
+                        {
+                            new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
+                            singularTarget.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
+                        }
 						
 					}
 				}
