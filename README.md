@@ -13,9 +13,15 @@ If you enjoy my work, support me on Ko-fi!
 <details>
 <summary>Check out other mods from the Popcorn Factory team!</summary>	
 <div>
+    <a href="https://thunderstore.io/package/PopcornFactory/Rimuru_Tempest_Mod/">
+      <img width="130" src="https://cdn.discordapp.com/attachments/399901440023330816/1033003173759164467/unknown.png"/>
+      <p>Rimuru Tempest Mod (Popcorn Factory Team)</p>
+    </a>
+</div>
+<div>
     <a href="https://thunderstore.io/package/PopcornFactory/DarthVaderMod/">
       <img width="130" src="https://user-images.githubusercontent.com/93917577/180753359-4906ca0b-6ce5-4ff7-9962-bdec3329682c.png"/>
-      <p>Darth Vader Mod</p>
+      <p>Darth Vader Mod (Popcorn Factory Team)</p>
     </a>
 </div>
 <div>
