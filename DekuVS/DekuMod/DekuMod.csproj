@@ -53,8 +53,20 @@
     <Reference Include="MMHOOK_RoR2">
       <HintPath>bin\Debug\netstandard2.0\MMHOOK_RoR2.dll</HintPath>
     </Reference>
-    <Reference Include="R2API">
-      <HintPath>bin\Debug\netstandard2.0\R2API.dll</HintPath>
+    <Reference Include="R2API.Core">
+      <HintPath>..\libs\R2API.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Language">
+      <HintPath>..\libs\R2API.Language.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Networking">
+      <HintPath>..\libs\R2API.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Prefab">
+      <HintPath>..\libs\R2API.Prefab.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Sound">
+      <HintPath>..\libs\R2API.Sound.dll</HintPath>
     </Reference>
     <Reference Include="ScrollableLobbyUI">
       <HintPath>bin\Debug\netstandard2.0\ScrollableLobbyUI.dll</HintPath>

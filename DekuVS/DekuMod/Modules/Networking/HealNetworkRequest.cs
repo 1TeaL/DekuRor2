@@ -44,16 +44,12 @@ namespace DekuMod.Modules.Networking
         {
             if (NetworkServer.active)
             {
-                if (NetworkServer.active)
-                {
-                    GameObject masterobject = Util.FindNetworkObject(netID);
-                    CharacterMaster charMaster = masterobject.GetComponent<CharacterMaster>();
-                    CharacterBody charBody = charMaster.GetBody();
-                    bodyObj = charBody.gameObject;
+                GameObject masterobject = Util.FindNetworkObject(netID);
+                CharacterMaster charMaster = masterobject.GetComponent<CharacterMaster>();
+                CharacterBody charBody = charMaster.GetBody();
+                bodyObj = charBody.gameObject;
 
-                    charBody.healthComponent.Heal(healthPercentage, new ProcChainMask(), true);
-                }
-
+                charBody.healthComponent.Heal(healthPercentage, new ProcChainMask(), true);
             }
             
 

@@ -9,6 +9,7 @@ using R2API.Networking;
 using static RoR2.CameraTargetParams;
 using System.Linq;
 using System.Collections.Generic;
+using RoR2.Skills;
 
 namespace DekuMod.Modules.Networking
 {
@@ -102,15 +103,19 @@ namespace DekuMod.Modules.Networking
 				}
 			}
 
-			
-			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle1SkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle2SkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycledownSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle2scepterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycledownscepterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle1scepterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Deku.goBeyondSkillDef7, GenericSkill.SkillOverridePriority.Contextual);
+			SkillDef specialSkillDef = characterBody.skillLocator.special.skillDef;
 
+            base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, specialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+
+   //         base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle1SkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle2SkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycledownSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle2scepterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycledownscepterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.ofacycle1scepterSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+			base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Deku.goBeyondSkillDef8, GenericSkill.SkillOverridePriority.Contextual);
 
 
 			switch (base.skillLocator.primary.skillNameToken)

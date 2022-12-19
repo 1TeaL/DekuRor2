@@ -11,7 +11,7 @@ namespace DekuMod.SkillStates
 {
     public class Manchester45 : BaseSkill45
     {
-        public static float jumpDuration = 1f;
+        public static float jumpDuration = 0.7f;
         public static float dropForce = 7f;
 
         public static float slamRadius = 5f;
