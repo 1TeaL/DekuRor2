@@ -13,6 +13,7 @@ namespace DekuMod.SkillStates
 {
     public class StLouis : BaseSkillState
     {
+        private float num3;
         public DekuController dekucon;
         public EnergySystem energySystem;
         public bool hasTeleported;
@@ -35,6 +36,16 @@ namespace DekuMod.SkillStates
             this.fireTime = this.duration / 3f;
             hasFired = false;
             hasTeleported = false;
+
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+            num3 = num2 + 1f;
+
 
             dekucon = base.GetComponent<DekuController>();
             energySystem = base.GetComponent<EnergySystem>();
@@ -92,7 +103,7 @@ namespace DekuMod.SkillStates
                     blastAttack.damageType = DamageType.Stun1s;
                     blastAttack.attacker = base.gameObject;
                     blastAttack.crit = base.RollCrit();
-                    blastAttack.baseDamage = base.damageStat * Modules.StaticValues.stlouisDamageCoefficient;
+                    blastAttack.baseDamage = base.damageStat * Modules.StaticValues.stlouisDamageCoefficient * num3;
                     blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                     blastAttack.baseForce = 500f;
                     blastAttack.bonusForce = GetAimRay().direction * 100f;

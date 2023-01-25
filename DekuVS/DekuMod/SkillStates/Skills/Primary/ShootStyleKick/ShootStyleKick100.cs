@@ -1,4 +1,5 @@
-﻿using DekuMod.Modules.Networking;
+﻿using DekuMod.Modules;
+using DekuMod.Modules.Networking;
 using DekuMod.Modules.Survivors;
 using EntityStates;
 using EntityStates.Merc;
@@ -45,6 +46,7 @@ namespace DekuMod.SkillStates
         public Vector3 origin;
         public Vector3 final;
         private Vector3 theSpot;
+        private float num3;
         private readonly BullseyeSearch search = new BullseyeSearch();
 
         public override void OnEnter()
@@ -52,6 +54,14 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             this.animator = base.GetModelAnimator();
 
+            float move = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                move /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float move2 = (move / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+            num3 = move2 + 1f;
 
             if (base.isAuthority && base.inputBank && base.characterDirection)
             {
@@ -79,7 +89,7 @@ namespace DekuMod.SkillStates
             base.OnEnter();
 
             duration = baseDuration / this.attackSpeedStat;
-            numberOfHits = Mathf.RoundToInt(5 * attackSpeedStat);
+            numberOfHits = Mathf.RoundToInt(StaticValues.shootkick100NumberOFHits * num3);
 
 
             if (base.isAuthority)
@@ -164,7 +174,7 @@ namespace DekuMod.SkillStates
                             shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
                             shootStyleKickComponent.dekucharbody = characterBody;
                             shootStyleKickComponent.numberOfHits = numberOfHits;
-                            shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient;
+                            shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient * num3;
                         }
 
                     }

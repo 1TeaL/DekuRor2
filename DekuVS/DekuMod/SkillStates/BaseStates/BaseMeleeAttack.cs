@@ -73,6 +73,7 @@ namespace DekuMod.SkillStates.BaseStates
                 hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == this.hitboxName);
             }
 
+
             this.PlayAttackAnimation();
 
             this.attack = new OverlapAttack();
@@ -80,7 +81,7 @@ namespace DekuMod.SkillStates.BaseStates
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
             this.attack.teamIndex = base.GetTeam();
-            this.attack.damage = this.damageCoefficient * this.damageStat * base.moveSpeedStat/7f;
+            this.attack.damage = this.damageCoefficient * this.damageStat;
             this.attack.procCoefficient = this.procCoefficient;
             this.attack.hitEffectPrefab = this.hitEffectPrefab;
             this.attack.forceVector = this.bonusForce;

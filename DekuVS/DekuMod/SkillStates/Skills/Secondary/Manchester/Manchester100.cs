@@ -29,6 +29,7 @@ namespace DekuMod.SkillStates
 
         protected DamageType damageType = DamageType.Generic;
         private Vector3 theSpot;
+        private float num3;
 
         //private NemforcerGrabController grabController;
 
@@ -37,6 +38,15 @@ namespace DekuMod.SkillStates
             base.OnEnter();
             this.modelTransform = base.GetModelTransform();
             this.flyVector = Vector3.up;
+
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+            num3 = num2 + 1f;
 
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("FullBody, Override", "ManchesterFlip", "Attack.playbackRate", 0.5f, 0.01f);
@@ -134,7 +144,7 @@ namespace DekuMod.SkillStates
         {
             if (this.slamIndicatorInstance)
             {
-                this.slamIndicatorInstance.transform.localScale = Vector3.one * slamRadius * (1 + dropTimer/2);
+                this.slamIndicatorInstance.transform.localScale = Vector3.one * slamRadius * (1 + dropTimer/2) * num3;
                 this.slamIndicatorInstance.transform.localPosition = base.transform.position;
             }
         }
@@ -149,12 +159,12 @@ namespace DekuMod.SkillStates
                 base.characterMotor.velocity *= 0.1f;
 
                 BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = slamRadius + (1 + dropTimer);
+                blastAttack.radius = slamRadius + (1 + dropTimer/2) * num3;
                 blastAttack.procCoefficient = slamProcCoefficient;
                 blastAttack.position = base.characterBody.footPosition;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * damageCoefficient  * (1 + dropTimer);
+                blastAttack.baseDamage = base.characterBody.damage * damageCoefficient  * (1 + dropTimer/2)* num3;
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = slamForce * (1 + dropTimer);
                 blastAttack.teamIndex = base.teamComponent.teamIndex;
@@ -175,7 +185,7 @@ namespace DekuMod.SkillStates
                     EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
                     {
                         origin = effectPosition,
-                        scale = slamRadius * (1 + dropTimer) * 0.5f,
+                        scale = slamRadius * (1 + dropTimer/2) * num3,
                     }, true);
                 }
 

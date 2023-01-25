@@ -85,7 +85,8 @@ namespace DekuMod.SkillStates
                 num /= base.characterBody.sprintingSpeedMultiplier;
             }
             float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
-            this.extraDuration = Math.Max(hitExtraDuration / (num2 + 1f), minExtraDuration);
+			float num3 = num2 + 1f;
+            this.extraDuration = Math.Max(hitExtraDuration / (num3), minExtraDuration);
 
 
             base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration/2);
@@ -125,7 +126,7 @@ namespace DekuMod.SkillStates
 			this.attack.attacker = base.gameObject;
 			this.attack.inflictor = base.gameObject;
 			this.attack.teamIndex = base.GetTeam();
-			this.attack.damage = base.characterBody.damage * Modules.StaticValues.shootkick45DamageCoefficient * num2;
+			this.attack.damage = base.characterBody.damage * Modules.StaticValues.shootkick45DamageCoefficient * (num3);
 			this.attack.procCoefficient = this.procCoefficient;
 			this.attack.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FireBarrage.hitEffectPrefab;
 			this.attack.forceVector = this.bonusForce;

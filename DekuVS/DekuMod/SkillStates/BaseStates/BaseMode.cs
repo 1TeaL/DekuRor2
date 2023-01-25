@@ -17,33 +17,10 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
 			dekucon = base.GetComponent<DekuController>();
 			energySystem = base.GetComponent<EnergySystem>();
-			if(energySystem.currentPlusUltra > Modules.StaticValues.modePlusUltraSpend)
-			{
-				DoSkill();
-				energySystem.SpendPlusUltra(Modules.StaticValues.modePlusUltraSpend);
-			}
-			else
-			{
-				DontDoSkill();
-			}
 
 
 		}
 
-		protected virtual void DoSkill()
-		{
-
-		}
-		protected virtual void DontDoSkill()
-		{
-            if (base.isAuthority)
-			{
-				Chat.AddMessage($"You need {Modules.StaticValues.modePlusUltraSpend} plus ultra.");
-				energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
-				this.outer.SetNextStateToMain();
-				return;
-			}
-		}
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -53,9 +30,6 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
         {
             base.OnExit();
-			base.skillLocator.primary.AddOneStock();
-			base.skillLocator.secondary.AddOneStock();
-			base.skillLocator.utility.AddOneStock();
 
 			base.skillLocator.DeductCooldownFromAllSkillsServer(dekucon.skillCDTimer);
 			dekucon.skillCDTimer = 0f;

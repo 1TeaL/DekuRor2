@@ -161,8 +161,16 @@ namespace DekuMod.SkillStates
 		public override void OnExit()
         {
             base.OnExit();
-			blastAttack.Fire();
+
+            if (base.isAuthority)
+            {
+                AkSoundEngine.PostEvent("ofavoice", this.gameObject);
+                AkSoundEngine.PostEvent("ofasfx", this.gameObject);
+            }
+
+            blastAttack.Fire();
 			if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
+
 
 
 			if (base.GetAimAnimator()) base.GetAimAnimator().enabled = true;

@@ -12,7 +12,7 @@ namespace DekuMod.SkillStates
     public class Manchester45 : BaseSkill45
     {
         public static float jumpDuration = 0.7f;
-        public static float dropForce = 7f;
+        public static float dropForce = 20f;
 
         public static float slamRadius = 5f;
         public static float slamProcCoefficient = 1f;
@@ -29,6 +29,7 @@ namespace DekuMod.SkillStates
         public DekuController dekucon;
         private float maxWeight;
         private BlastAttack blastAttack;
+        private float num3;
 
         //private NemforcerGrabController grabController;
 
@@ -40,6 +41,17 @@ namespace DekuMod.SkillStates
             this.hasDropped = false; 
             dekucon = base.GetComponent<DekuController>();
             jumpDuration /= attackSpeedStat;
+
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+            num3 = num2 + 1f;
+            dropForce *= num3;
+            slamForce *= num3;
 
             base.characterMotor.disableAirControlUntilCollision = true;
 
@@ -67,7 +79,7 @@ namespace DekuMod.SkillStates
             blastAttack.position = base.characterBody.footPosition;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = base.RollCrit();
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchester45DamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchester45DamageCoefficient * num3;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = slamForce;
             blastAttack.teamIndex = base.teamComponent.teamIndex;
@@ -124,7 +136,7 @@ namespace DekuMod.SkillStates
 
             if (!this.hasDropped)
             {
-                base.characterMotor.rootMotion += this.flyVector * ((1f * this.moveSpeedStat) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / jumpDuration) * Time.fixedDeltaTime);
+                base.characterMotor.rootMotion += this.flyVector * ((dropForce) * EntityStates.Mage.FlyUpState.speedCoefficientCurve.Evaluate(base.fixedAge / jumpDuration) * Time.fixedDeltaTime);
                 base.characterMotor.velocity.y = 0f;
             }
 

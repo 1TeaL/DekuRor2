@@ -36,6 +36,16 @@ namespace DekuMod.SkillStates
             this.duration = this.baseDuration / attackSpeedStat;
             fireTime = duration / 2f;
 
+
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+            float num3 = num2 + 1f;
+
             hasFired = false;
             theSpot = base.transform.position;
             if (base.isAuthority)
@@ -64,7 +74,7 @@ namespace DekuMod.SkillStates
             blastAttack.damageType = DamageType.Shock5s;
             blastAttack.attacker = base.gameObject;
             blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient;
+            blastAttack.baseDamage = base.characterBody.damage * Modules.StaticValues.manchesterDamageCoefficient * num3;
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force * maxWeight;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

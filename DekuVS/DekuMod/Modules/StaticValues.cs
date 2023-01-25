@@ -41,6 +41,7 @@ namespace DekuMod.Modules
         internal const float shootkickDamageCoefficient = 1.5f;
         internal const float shootkick45DamageCoefficient = 2f;
         internal const float shootkick100DamageCoefficient = 1f;
+        internal const float shootkick100NumberOFHits = 4;
         internal const float shootkick100HealthCostFraction = 0.1f;
         //blackwhip
         internal const float blackwhipDamageCoefficient = 0.1f;
