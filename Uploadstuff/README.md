@@ -58,13 +58,24 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
-- 4.0.6 - Balance changes/bug fixes
+- 4.0.5 - Balance changes/bug fixes
     - Fixed Ancient scepter with Deku as it was including the old Extra Quirks skill.
     - Changing modes no longer cost plus ultra as it was a bit limiting, especially with using extra quirks as they already costed plus ultra. Also, they no longer refresh cooldowns when you switch- the cost before was to limit people refreshing cooldowns, now, similar to using OFA, an internal timer is checked based on how long you are in a specific mode, and cooldowns are reduced based on that. 
     - Most Shoot Style attacks now scale with movespeed.
     - Fixed math behind Shoot Style kick 45%, before was doing little damage.
     - Manchester Smash 45% is now faster, jumping and landing before both took 1 seconds -> 0.7 seconds each.
-
+    - Fixed stunning attacks not applying the barrier mark.
+    - Swapped Manchester Smash and St Louis Smash skill slots- previously manchester was a secondary, made it utility but felt more apt for it to fit on the secondary slot.
+    - Reworked/reverted Manchester Smash 45% to the original jump up and slam down, but now dealing damage on the jump and slam as well. This is to push shoot style more into that lower damage but more hits style.
+    - Buffed Manchester Smash 100% damage from 600% -> 3x400%, similarly having more hits thus more procs.
+    - Nerfed movespeed scaling on Shoot Style Kick 45%- was doing way too much damage.
+    - Changed the barrier gain on barrier mark from 10% of damage dealt -> 1% of max health.
+    - Made 1,000,000% detroit delaware smash and final smash not affect the teleport bosses. Also noted known issue that they can bug out, causing deku to be stuck in animation for longer than normal.
+- 4.0.4 - Bug fixes/balance changes
+    - Fixed smokescreen being stuck properly. Added health cost to smokescreen.
+    - lowered height gain from float.
+    - made it so 1,000,000% detroit delaware smash and final smash shouldn't be as interruptable anymore, same with gobeyond.
+    - Buffed multiplier provided by duration for Detroit Smash 100%.
 - Next update(s)
     -  Balance changes
     -  Bug fixes

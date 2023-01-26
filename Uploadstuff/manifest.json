@@ -1,8 +1,8 @@
 {
     "name": "DekuMod",
-    "version_number": "4.0.6,
+    "version_number": "4.0.5",
     "website_url": "https://github.com/1TeaL/DekuRor2",
-    "description": "Go Beyond! 4.0.0- THE DEKU REWORK! Added Plus Ultra Meter, extraskillslots, a bunch of new skills, and more! 4.0.6- bug fixes, balance changes",
+    "description": "Go Beyond! 4.0.0- THE DEKU REWORK! Added Plus Ultra Meter, extraskillslots, a bunch of new skills, and more! 4.0.5- bug fixes, balance changes",
     "dependencies": [
          "RiskofThunder-R2API_Core-5.0.4",
          "RiskofThunder-R2API_Language-1.0.0",
