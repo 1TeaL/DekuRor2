@@ -80,7 +80,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "4.0.5";
+        public const string MODVERSION = "4.0.6";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
