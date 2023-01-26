@@ -17,7 +17,7 @@ If you enjoy my work, support me on Ko-fi!
       <img width="130" src="https://cdn.discordapp.com/attachments/399901440023330816/1033003173759164467/unknown.png"/>
       <p>Rimuru Tempest Mod (Popcorn Factory Team)</p>
     </a>
-</div>
+</div>	
 <div>
     <a href="https://thunderstore.io/package/PopcornFactory/DarthVaderMod/">
       <img width="130" src="https://user-images.githubusercontent.com/93917577/180753359-4906ca0b-6ce5-4ff7-9962-bdec3329682c.png"/>
@@ -58,55 +58,12 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
-- 4.0.5 - Balance changes/bug fixes
-    - Fixed stunning attacks not applying the barrier mark.
-    - Swapped Manchester Smash and St Louis Smash skill slots- previously manchester was a secondary, made it utility but felt more apt for it to fit on the secondary slot.
-    - Reworked/reverted Manchester Smash 45% to the original jump up and slam down, but now dealing damage on the jump and slam as well. This is to push shoot style more into that lower damage but more hits style.
-    - Buffed Manchester Smash 100% damage from 600% -> 3x400%, similarly having more hits thus more procs.
-    - Nerfed movespeed scaling on Shoot Style Kick 45%- was doing way too much damage.
-    - Changed the barrier gain on barrier mark from 10% of damage dealt -> 1% of max health.
-    - Made 1,000,000% detroit delaware smash and final smash not affect the teleport bosses. Also noted known issue that they can bug out, causing deku to be stuck in animation for longer than normal.
-- 4.0.4 - Bug fixes/balance changes
-    - Fixed smokescreen being stuck properly. Added health cost to smokescreen.
-    - lowered height gain from float.
-    - made it so 1,000,000% detroit delaware smash and final smash shouldn't be as interruptable anymore, same with gobeyond.
-    - Buffed multiplier provided by duration for Detroit Smash 100%.
-- 4.0.3 - Fixed version number internally.
-- 4.0.2 - Bug fixes/balance changes
-    - Fixed smokescreen being stuck
-    - Buffed marks so all hits heal/gain barrier and the 3rd hit will remove it.
-    - Made float be able to gain height rather than a set height, fixes subsequent jumps not gaining as much height.
-- 4.0.1 - Fixed on-hit effects not working.
-- 4.0.0 - *THE DEKU REWORK!*    
-    - *NEW*
-    	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
-    	    - It's used for Mode switching, Float, Danger Sense, Supers and Going Beyond.
-        - Mark passive
-            -  Heal and Barrier marks added based on damage type.
-        - Float passive
-        - Danger Sense passive
-    	- Added 3 modes- each having their own set of skills and a Super. Costs 5 plus ultra.
-            - When including the one for all versions, each mode has 10 skills!
-            - Power mode 
-    	    - Shoot Style mode
-    	    - Quirk mode
-    	- Added 3 supers- costs 50 plus ultra.
-            - Power mode- 1,000,000% Detroit Delaware Smash
-            - Shoot Style mode- Final Smash
-            - Quirk mode- Fa Jin
-        - New Skills
-            - Added Gear Shift! The 2nd user's quirk, enabling the changing of velocity, bending the laws of physics.
-    - *REMOVED*
-    	- Old skills- float, Oklahoma smash, extra skills, danger sense removed, 
-    	- Fa Jin buff mechanic and Fa Jin skill
-    	- Health Regen that increases at lower health
-     - *CHANGED*
-        - Blackwhip base, 45% and 100% have been reworked.
-    	- Manchester base, 45% and 100% have been reworked.
-        - One for all 45% and 100%no longer give increased damage and attack speed, just increased armor and movespeed.
-    	    - Removed OFA 100%s negative health regen, now it's self-damage instead, allowing more mitigation options. 
-    	- Changed health from 150 + 30 per level to 144 + 19 per level 
-
+- 4.0.6 - Balance changes/bug fixes
+    - Fixed Ancient scepter with Deku as it was including the old Extra Quirks skill.
+    - Changing modes no longer cost plus ultra as it was a bit limiting, especially with using extra quirks as they already costed plus ultra. Also, they no longer refresh cooldowns when you switch- the cost before was to limit people refreshing cooldowns, now, similar to using OFA, an internal timer is checked based on how long you are in a specific mode, and cooldowns are reduced based on that. 
+    - Most Shoot Style attacks now scale with movespeed.
+    - Fixed math behind Shoot Style kick 45%, before was doing little damage.
+    - Manchester Smash 45% is now faster, jumping and landing before both took 1 seconds -> 0.7 seconds each.
 
 - Next update(s)
     -  Balance changes
@@ -480,6 +437,56 @@ These stats are prone to change.
 <details>
 <summary>Click to expand previous patch notes:</summary>
 
+
+- 4.0.5 - Balance changes/bug fixes
+    - Fixed stunning attacks not applying the barrier mark.
+    - Swapped Manchester Smash and St Louis Smash skill slots- previously manchester was a secondary, made it utility but felt more apt for it to fit on the secondary slot.
+    - Reworked/reverted Manchester Smash 45% to the original jump up and slam down, but now dealing damage on the jump and slam as well. This is to push shoot style more into that lower damage but more hits style.
+    - Buffed Manchester Smash 100% damage from 600% -> 3x400%, similarly having more hits thus more procs.
+    - Nerfed movespeed scaling on Shoot Style Kick 45%- was doing way too much damage.
+    - Changed the barrier gain on barrier mark from 10% of damage dealt -> 1% of max health.
+    - Made 1,000,000% detroit delaware smash and final smash not affect the teleport bosses. Also noted known issue that they can bug out, causing deku to be stuck in animation for longer than normal.
+- 4.0.4 - Bug fixes/balance changes
+    - Fixed smokescreen being stuck properly. Added health cost to smokescreen.
+    - lowered height gain from float.
+    - made it so 1,000,000% detroit delaware smash and final smash shouldn't be as interruptable anymore, same with gobeyond.
+    - Buffed multiplier provided by duration for Detroit Smash 100%.
+- 4.0.3 - Fixed version number internally.
+- 4.0.2 - Bug fixes/balance changes
+    - Fixed smokescreen being stuck
+    - Buffed marks so all hits heal/gain barrier and the 3rd hit will remove it.
+    - Made float be able to gain height rather than a set height, fixes subsequent jumps not gaining as much height.
+- 4.0.1 - Fixed on-hit effects not working.
+- 4.0.0 - *THE DEKU REWORK!*    
+    - *NEW*
+    	- The Plus Ultra Meter- a meter has been added that increases based on movement and base skill usage.
+    	    - It's used for Mode switching, Float, Danger Sense, Supers and Going Beyond.
+        - Mark passive
+            -  Heal and Barrier marks added based on damage type.
+        - Float passive
+        - Danger Sense passive
+    	- Added 3 modes- each having their own set of skills and a Super. Costs 5 plus ultra.
+            - When including the one for all versions, each mode has 10 skills!
+            - Power mode 
+    	    - Shoot Style mode
+    	    - Quirk mode
+    	- Added 3 supers- costs 50 plus ultra.
+            - Power mode- 1,000,000% Detroit Delaware Smash
+            - Shoot Style mode- Final Smash
+            - Quirk mode- Fa Jin
+        - New Skills
+            - Added Gear Shift! The 2nd user's quirk, enabling the changing of velocity, bending the laws of physics.
+    - *REMOVED*
+    	- Old skills- float, Oklahoma smash, extra skills, danger sense removed, 
+    	- Fa Jin buff mechanic and Fa Jin skill
+    	- Health Regen that increases at lower health
+     - *CHANGED*
+        - Blackwhip base, 45% and 100% have been reworked.
+    	- Manchester base, 45% and 100% have been reworked.
+        - One for all 45% and 100%no longer give increased damage and attack speed, just increased armor and movespeed.
+    	    - Removed OFA 100%s negative health regen, now it's self-damage instead, allowing more mitigation options. 
+    	- Changed health from 150 + 30 per level to 144 + 19 per level 
+	
 - 3.2.0
     - Fixed animation timings with attacks to properly scale with attackspeed.
     - Removed OFA 45% and 100% as they are basically irrelevant.
