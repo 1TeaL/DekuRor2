@@ -58,6 +58,8 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef fistExtraSkillDef;
         internal static SkillDef legExtraSkillDef;
         internal static SkillDef quirkExtraSkillDef;
+        internal static SkillDef cycleExtraSkillDef;
+        internal static SkillDef typeExtraSkillDef;
 
         //GoBeyond skills
         internal static SkillDef goBeyondSkillDef1;
@@ -255,7 +257,6 @@ namespace DekuMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, fistPrimarySkillDef);
 
             #endregion
 
@@ -285,12 +286,6 @@ namespace DekuMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_SHOCKING" }
 
             }) ;
-
-
-            Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]
-            {
-                fistSecondarySkillDef,
-            });
             #endregion
 
             #region Utility
@@ -318,11 +313,6 @@ namespace DekuMod.Modules.Survivors
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_SHOCKING" }
 
-            });
-
-            Skills.AddUtilitySkills(this.bodyPrefab, new SkillDef[]
-            {
-                fistUtilitySkillDef,
             });
             #endregion
 
@@ -352,11 +342,6 @@ namespace DekuMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE"}
             });
             
-
-            Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
-            {
-                ofacycle1SkillDef,
-            });
             
             #endregion
 
@@ -434,6 +419,54 @@ namespace DekuMod.Modules.Survivors
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
+            cycleExtraSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "CYCLEEXTRA_NAME",
+                skillNameToken = prefix + "CYCLEEXTRA_NAME",
+                skillDescriptionToken = prefix + "CYCLEEXTRA_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Quirks"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.CycleMode)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+            typeExtraSkillDef = Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "TYPEEXTRA_NAME",
+                skillNameToken = prefix + "TYPEEXTRA_NAME",
+                skillDescriptionToken = prefix + "TYPEEXTRA_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Quirks"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.TypeMode)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
             fistSpecialSkillDef = Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "FISTSPECIAL_NAME",
@@ -458,10 +491,6 @@ namespace DekuMod.Modules.Survivors
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_AGILE" , "KEYWORD_FREEZING"}
             });
-            Modules.Skills.AddFirstExtraSkill(bodyPrefab, fistExtraSkillDef);
-            Modules.Skills.AddSecondExtraSkill(bodyPrefab, legExtraSkillDef);
-            Modules.Skills.AddThirdExtraSkill(bodyPrefab, quirkExtraSkillDef);
-            Modules.Skills.AddFourthExtraSkill(bodyPrefab, fistSpecialSkillDef);
             #endregion
 
 
@@ -2216,6 +2245,47 @@ namespace DekuMod.Modules.Survivors
             //});
             #endregion
 
+
+
+            #region Adding Skills
+
+            Modules.Skills.AddPrimarySkill(bodyPrefab, fistPrimarySkillDef);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, legPrimarySkillDef);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, quirkPrimarySkillDef);
+
+
+            Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]
+            {
+                fistSecondarySkillDef,
+                legSecondarySkillDef,
+                quirkSecondarySkillDef,
+            });
+
+            Skills.AddUtilitySkills(this.bodyPrefab, new SkillDef[]
+            {
+                fistUtilitySkillDef,
+                legUtilitySkillDef,
+                quirkUtilitySkillDef,
+            });
+
+            Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
+            {
+                ofacycle1SkillDef,
+            });
+
+            Skills.AddFirstExtraSkill(bodyPrefab, fistSpecialSkillDef);
+            Skills.AddFirstExtraSkill(bodyPrefab, fistExtraSkillDef);
+
+            Skills.AddSecondExtraSkill(bodyPrefab, legSpecialSkillDef);
+            Skills.AddSecondExtraSkill(bodyPrefab, legExtraSkillDef);
+
+            Skills.AddThirdExtraSkill(bodyPrefab, quirkSpecialSkillDef);
+            Skills.AddThirdExtraSkill(bodyPrefab, quirkExtraSkillDef);
+
+            Skills.AddFourthExtraSkill(bodyPrefab, cycleExtraSkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, typeExtraSkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, fistSpecialSkillDef);
+            #endregion
 
         }
         #region ScepterSkills

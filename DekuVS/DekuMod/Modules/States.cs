@@ -103,6 +103,13 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(FistSuper));
             entityStates.Add(typeof(LegSuper));
             entityStates.Add(typeof(QuirkSuper));
+            
+            //modes
+            entityStates.Add(typeof(FistMode));
+            entityStates.Add(typeof(LegMode));
+            entityStates.Add(typeof(QuirkMode));
+            entityStates.Add(typeof(CycleMode));
+            entityStates.Add(typeof(TypeMode));
 
             //ofa
             entityStates.Add(typeof(OFAcycle1));

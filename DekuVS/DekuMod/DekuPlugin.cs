@@ -465,6 +465,7 @@ namespace DekuMod
                     if (fajin)
                     {
                         self.damage *= StaticValues.fajinDamageMultiplier;
+                        self.moveSpeed *= StaticValues.fajinDamageMultiplier;
 
                     }
 

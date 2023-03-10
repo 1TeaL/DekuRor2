@@ -172,11 +172,15 @@ namespace DekuMod.Modules
             #region Extra
             //modes
             LanguageAPI.Add(prefix + "FISTEXTRA_NAME", "Power mode");
-            LanguageAPI.Add(prefix + "FISTEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Power based, dealing more damage." );
+            LanguageAPI.Add(prefix + "FISTEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Power based, dealing more damage. Changes your 4th extra slot ability as well." );
             LanguageAPI.Add(prefix + "LEGEXTRA_NAME", "Shoot Style mode");
-            LanguageAPI.Add(prefix + "LEGEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Shoot Style based, focused on mobility with movespeed increasing damage for most skills." );
+            LanguageAPI.Add(prefix + "LEGEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Shoot Style based, focused on mobility with movespeed increasing damage for most skills. Changes your 4th extra slot ability as well." );
             LanguageAPI.Add(prefix + "QUIRKEXTRA_NAME", "Quirk mode");
-            LanguageAPI.Add(prefix + "QUIRKEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Quirk based, focused on buffs and utility." );
+            LanguageAPI.Add(prefix + "QUIRKEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Quirk based, focused on buffs and utility. Changes your 4th extra slot ability as well." );
+            LanguageAPI.Add(prefix + "CYCLEEXTRA_NAME", "Cycle mode");
+            LanguageAPI.Add(prefix + "CYCLEEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Cycle your skills between fist, leg and quirk based.");
+            LanguageAPI.Add(prefix + "TYPEEXTRA_NAME", "Type mode");
+            LanguageAPI.Add(prefix + "TYPEEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Cycle your skills to another skill of the same type.");
             //supers
             LanguageAPI.Add(prefix + "FISTSPECIAL_NAME", "1,000,000% Detroit Delaware Smash");
             LanguageAPI.Add(prefix + "FISTSPECIAL_DESCRIPTION", $"<style=cIsDamage>Agile. Freezing.</style> Delaware Smash enemies, stunning and grouping them in front of you, dealing <style=cIsDamage>{100f * StaticValues.detroitdelawareSmashDamageCoefficient}% damage</style>, then Detroit Smash all of them, freezing and dealing <style=cIsDamage>{100f * StaticValues.detroitdelawareSmashDamageCoefficient}% damage</style>." 
