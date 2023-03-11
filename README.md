@@ -302,7 +302,7 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Blackwhip<br>45%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306894-4b435095-4420-4c8d-84ee-c6f59cc12c3e.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip towards the target, dashing towards them, <br>stunning and dealing 600% damage. <br>Enemies hit have their movement restricted for 6 seconds.</td>
+    <td>Blackwhip towards the target or terrain, dashing towards them, <br>stunning and dealing 600% damage. <br>Enemies hit have their movement restricted for 6 seconds.</td>
     <td>Proc: 1.<br>Cost: 10 Plus Ultra.</td>
   </tr>
   <tr>
