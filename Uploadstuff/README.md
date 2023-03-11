@@ -286,7 +286,7 @@ If you enjoy my work, support me on Ko-fi!
 <thead>
   <tr>
     <th>Skill</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>                        </th>
     <th>Description</th>
     <th>Stats</th>
   </tr>
@@ -307,24 +307,24 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Blackwhip<br>100%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306897-ac65c569-916d-40ae-b2ef-3c083734610b.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip enemies towards you for, <br>restricting their movement for 6 seconds, <br>stunning and dealing 600% damage.</td>
+    <td>Blackwhip enemies towards you for, <br>restricting their movement for 6 seconds, <br>stunning and dealing 600% damage.<br><br>Tether to the target, draining plus ultra constantly until reactivated.<br>When the target gets too far, blackwhip them towards you.</td>
     <td>Proc: 1.<br>Cost: 10% Max Health and 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift for 10 seconds. <br>Gain 1.2x movespeed.<br>Attacks apply additional knockback based on your aim.</td>
-    <td>Cost: 10 Plus Ultra.</td>
+    <td>Activate gear shift, constantly draining plus ultra until reactivation.<br>Gain 1.2x movespeed.<br>Attacks apply additional knockback based on your aim.</td>
+    <td>Cost: Constant Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>45%<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift transmission for 10 seconds. <br>Attacks slow enemies and pierce through them for 50% of the damage.</td>
-    <td>Proc: 0.<br>Cost: 10 Plus Ultra.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/224486622-9c70a5b8-5c9b-4de7-8cb5-d7f26aa00e71.png" alt="Image" width="100" height="100"></td>
+    <td>Activate gear shift transmission, constantly draining plus ultra until<br>reactivation.<br>Attacks slow enemies and pierce through them for 50% of the damage.</td>
+    <td>Proc: 0.<br>Cost: Constant Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>100%<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/224486624-3cb36041-5a23-422d-aa83-82c98e5b31b1.png" alt="Image" width="100" height="100"></td>
     <td>Overdrive gear shift for the next 5 attacks. <br>Attacks bend the laws of physics,<br>dealing multiple times their damage based on your movespeed. <br>The thresholds are in increments of 15 movespeed. </td>
     <td>Proc: 0.<br>Cost: 15% Max Health and 5 Plus Ultra.</td>
   </tr>
@@ -351,65 +351,6 @@ If you enjoy my work, support me on Ko-fi!
     <td><img src="https://user-images.githubusercontent.com/93917577/195306963-eddc0a2e-f9a1-49fd-a168-88415b7ba538.png" alt="Image" width="100" height="100"></td>
     <td>Use your stored plus ultra with Fa Jin,<br>grant 1.5x damage and disabling all health cost for 10 seconds.</td>
     <td>Proc: 1.<br>Cost: 50 Plus Ultra</td>
-  </tr>
-</tbody>
-</table>
-
-
-## Special Skills
-<table>
-<thead>
-  <tr>
-    <th>Skill</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Power Mode</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306969-e968e385-6ec9-40a1-9fd7-208555124140.png" alt="Image" width="100" height="100"></td>
-    <td>Change your skills to Power based. Costs 5 Plus Ultra.</td>
-  </tr>
-  <tr>
-    <td>Shoot Style Mode</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306790-5e8be721-f6a2-44fc-8e7d-442007355d54.png" alt="Image" width="100" height="100"></td>
-    <td>Change your skills to Shoot Style based. Costs 5 Plus Ultra.</td>
-  </tr>
-  <tr>
-    <td>Quirk Mode</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306814-9d56a9e1-8ff2-4cf1-8d23-695febaeede2.png" alt="Image" width="100" height="100"></td>
-    <td>Change your skills to Quirk based. Costs 5 Plus Ultra.</td>
-  </tr>
-  <tr>
-    <td>One For All</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067731-4d091c5f-86dd-4bed-b70d-279029c37869.png" alt="Image" width="100" height="100"></td>
-    <td>Cycle between One For All 45% and 100%, upgrading your selected skills.<br>Boosts stats corresponding to the % of One For All. <br>This skill activates 45%.</td>
-  </tr>
-  <tr>
-    <td>Mastered<br>One For All</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067740-bd057f96-c09f-4768-b1b9-2c8371828f8e.png" alt="Image" width="100" height="100"></td>
-    <td>Ancient scepter grants the same effects but also 5% lifesteal at 45% and 10% lifesteal at 100%.</td>
-  </tr>
-  <tr>
-    <td>OFA 45%</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067732-6079b49a-ae31-498c-8514-0e92a9aa87f8.png" alt="Image" width="100" height="100"></td>
-    <td>Push your body to its limits, gaining unique 45% moves.<br>Boosts Movespeed(1.25x), and Armor(2.5x) but disabling all Health Regen.</td>
-  </tr>
-  <tr>
-    <td>Infinite 45%</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067744-04145ec6-f3af-42ce-a84a-9986a259f90d.png" alt="Image" width="100" height="100"></td>
-    <td>Ancient scepter version grants the same effects but also 5% lifesteal.</td>
-  </tr>
-  <tr>
-    <td>OFA 100%</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067737-77ed0308-ea3b-4da7-b829-260985ffa65f.png" alt="Image" width="100" height="100"></td>
-    <td>Go Beyond your limits, gaining unique 100% moves.<br>Movespeed(1.5x), and Armor(5x) but lose 10% current health per second and skills cost health too.</td>
-  </tr>
-  <tr>
-    <td>Infinite<br>100%</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/168067750-ce34c044-5612-46df-91d3-5699804f058d.png" alt="Image" width="100" height="100"></td>
-    <td>Ancient scepter version grants the same effects but also 10% lifesteal.</td>
   </tr>
 </tbody>
 </table>
