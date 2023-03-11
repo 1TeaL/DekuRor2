@@ -73,27 +73,11 @@ If you enjoy my work, support me on Ko-fi!
     	- Blackwhip 100%'s original effect of pulling enemies towards you is still there, and this effect will activate when the current enemy is too far away as well, pulling multiple people along with them.
     	- Blackwhip 100% will now last forever until reactivation, but drain energy constantly.
     	- Gear shift and Gear shift 45% will now last forever until reactivation, but drain energy constantly.
-    	- Float will now have a limited height gain.
+    	- Float has limited height gain after 3 seconds.
+    	- Fa Jin has a new visual effect to match the Anime. Fa Jin also gives 1.5x movespeed too.
 
-- 4.0.5 - Balance changes/bug fixes
-    - Fixed Ancient scepter with Deku as it was including the old Extra Quirks skill.
-    - Changing modes no longer cost plus ultra as it was a bit limiting, especially with using extra quirks as they already costed plus ultra. Also, they no longer refresh cooldowns when you switch- the cost before was to limit people refreshing cooldowns, now, similar to using OFA, an internal timer is checked based on how long you are in a specific mode, and cooldowns are reduced based on that. 
-    - Most Shoot Style attacks now scale with movespeed.
-    - Fixed math behind Shoot Style kick 45%, before was doing little damage.
-    - Manchester Smash 45% is now faster, jumping and landing before both took 1 seconds -> 0.7 seconds each.
-    - Fixed stunning attacks not applying the barrier mark.
-    - Swapped Manchester Smash and St Louis Smash skill slots- previously manchester was a secondary, made it utility but felt more apt for it to fit on the secondary slot.
-    - Reworked/reverted Manchester Smash 45% to the original jump up and slam down, but now dealing damage on the jump and slam as well. This is to push shoot style more into that lower damage but more hits style.
-    - Buffed Manchester Smash 100% damage from 600% -> 3x400%, similarly having more hits thus more procs.
-    - Nerfed movespeed scaling on Shoot Style Kick 45%- was doing way too much damage.
-    - Changed the barrier gain on barrier mark from 10% of damage dealt -> 1% of max health.
-    - Made 1,000,000% detroit delaware smash and final smash not affect the teleport bosses. Also noted known issue that they can bug out, causing deku to be stuck in animation for longer than normal.
-- 4.0.4 - Bug fixes/balance changes
-    - Fixed smokescreen being stuck properly. Added health cost to smokescreen.
-    - lowered height gain from float.
-    - made it so 1,000,000% detroit delaware smash and final smash shouldn't be as interruptable anymore, same with gobeyond.
-    - Buffed multiplier provided by duration for Detroit Smash 100%.
 - Next update(s)
+    -  Skill reworks
     -  Balance changes
     -  Bug fixes
     -  More icons
@@ -303,7 +287,7 @@ If you enjoy my work, support me on Ko-fi!
 <thead>
   <tr>
     <th>Skill</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>                        </th>
     <th>Description</th>
     <th>Stats</th>
   </tr>
@@ -324,24 +308,24 @@ If you enjoy my work, support me on Ko-fi!
   <tr>
     <td>Blackwhip<br>100%<br><br>Primary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306897-ac65c569-916d-40ae-b2ef-3c083734610b.png" alt="Image" width="100" height="100"></td>
-    <td>Blackwhip enemies towards you for, <br>restricting their movement for 6 seconds, <br>stunning and dealing 600% damage.</td>
+    <td>Blackwhip enemies towards you for, <br>restricting their movement for 6 seconds, <br>stunning and dealing 600% damage.<br><br>Tether to the target, draining plus ultra constantly until reactivated.<br>When the target gets too far, blackwhip them towards you.</td>
     <td>Proc: 1.<br>Cost: 10% Max Health and 5 Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br><br>Secondary</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift for 10 seconds. <br>Gain 1.2x movespeed.<br>Attacks apply additional knockback based on your aim.</td>
-    <td>Cost: 10 Plus Ultra.</td>
+    <td>Activate gear shift, constantly draining plus ultra until reactivation.<br>Gain 1.2x movespeed.<br>Attacks apply additional knockback based on your aim.</td>
+    <td>Cost: Constant Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>45%<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
-    <td>Activate gear shift transmission for 10 seconds. <br>Attacks slow enemies and pierce through them for 50% of the damage.</td>
-    <td>Proc: 0.<br>Cost: 10 Plus Ultra.</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/224486622-9c70a5b8-5c9b-4de7-8cb5-d7f26aa00e71.png" alt="Image" width="100" height="100"></td>
+    <td>Activate gear shift transmission, constantly draining plus ultra until<br>reactivation.<br>Attacks slow enemies and pierce through them for 50% of the damage.</td>
+    <td>Proc: 0.<br>Cost: Constant Plus Ultra.</td>
   </tr>
   <tr>
     <td>Gear<br>Shift<br>100%<br><br>Secondary</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png" alt="Image" width="100" height="100"></td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/224486624-3cb36041-5a23-422d-aa83-82c98e5b31b1.png" alt="Image" width="100" height="100"></td>
     <td>Overdrive gear shift for the next 5 attacks. <br>Attacks bend the laws of physics,<br>dealing multiple times their damage based on your movespeed. <br>The thresholds are in increments of 15 movespeed. </td>
     <td>Proc: 0.<br>Cost: 15% Max Health and 5 Plus Ultra.</td>
   </tr>
@@ -371,7 +355,6 @@ If you enjoy my work, support me on Ko-fi!
   </tr>
 </tbody>
 </table>
-
 
 ## Special Skills
 <table>
@@ -466,7 +449,24 @@ These stats are prone to change.
 <summary>Click to expand previous patch notes:</summary>
 
 
-
+- 4.0.5 - Balance changes/bug fixes
+    - Fixed Ancient scepter with Deku as it was including the old Extra Quirks skill.
+    - Changing modes no longer cost plus ultra as it was a bit limiting, especially with using extra quirks as they already costed plus ultra. Also, they no longer refresh cooldowns when you switch- the cost before was to limit people refreshing cooldowns, now, similar to using OFA, an internal timer is checked based on how long you are in a specific mode, and cooldowns are reduced based on that. 
+    - Most Shoot Style attacks now scale with movespeed.
+    - Fixed math behind Shoot Style kick 45%, before was doing little damage.
+    - Manchester Smash 45% is now faster, jumping and landing before both took 1 seconds -> 0.7 seconds each.
+    - Fixed stunning attacks not applying the barrier mark.
+    - Swapped Manchester Smash and St Louis Smash skill slots- previously manchester was a secondary, made it utility but felt more apt for it to fit on the secondary slot.
+    - Reworked/reverted Manchester Smash 45% to the original jump up and slam down, but now dealing damage on the jump and slam as well. This is to push shoot style more into that lower damage but more hits style.
+    - Buffed Manchester Smash 100% damage from 600% -> 3x400%, similarly having more hits thus more procs.
+    - Nerfed movespeed scaling on Shoot Style Kick 45%- was doing way too much damage.
+    - Changed the barrier gain on barrier mark from 10% of damage dealt -> 1% of max health.
+    - Made 1,000,000% detroit delaware smash and final smash not affect the teleport bosses. Also noted known issue that they can bug out, causing deku to be stuck in animation for longer than normal.
+- 4.0.4 - Bug fixes/balance changes
+    - Fixed smokescreen being stuck properly. Added health cost to smokescreen.
+    - lowered height gain from float.
+    - made it so 1,000,000% detroit delaware smash and final smash shouldn't be as interruptable anymore, same with gobeyond.
+    - Buffed multiplier provided by duration for Detroit Smash 100%.
 - 4.0.3 - Fixed version number internally.
 - 4.0.2 - Bug fixes/balance changes
     - Fixed smokescreen being stuck
@@ -733,6 +733,8 @@ These stats are prone to change.
 ![Floatactivate100](https://user-images.githubusercontent.com/93917577/195306984-2fe328af-5617-468c-ae6f-691a44b5e49f.png)
 ![Floatcancel](https://user-images.githubusercontent.com/93917577/195306985-0d140fcc-84b4-4070-ba17-9c07aad64316.png)
 ![GearShift](https://user-images.githubusercontent.com/93917577/195306987-12d7dcbf-b6a1-49c6-a288-499619c9f71b.png)
+![GearShift45](https://user-images.githubusercontent.com/93917577/224486622-9c70a5b8-5c9b-4de7-8cb5-d7f26aa00e71.png)
+![GearShift100](https://user-images.githubusercontent.com/93917577/224486624-3cb36041-5a23-422d-aa83-82c98e5b31b1.png)
 ![gobeyondB](https://user-images.githubusercontent.com/93917577/195306989-8642c7ed-2c47-40eb-aad6-a9412e449f54.png)
 ![gobeyondD](https://user-images.githubusercontent.com/93917577/195306991-f0a065ce-cd2a-4d72-baf2-4fc307e7c207.png)
 ![goBeyondE](https://user-images.githubusercontent.com/93917577/195306994-ba69bb31-1e8e-41f0-8f71-54cd0f2bcdfe.png)
