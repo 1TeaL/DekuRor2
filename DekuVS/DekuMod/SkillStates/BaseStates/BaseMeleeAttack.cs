@@ -48,6 +48,7 @@ namespace DekuMod.SkillStates.BaseStates
         private Vector3 storedVelocity;
 
         public EnergySystem energySystem;
+        const string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
         public override void OnEnter()
         {
             base.OnEnter();
@@ -205,11 +206,34 @@ namespace DekuMod.SkillStates.BaseStates
 
             if (this.stopwatch >= (this.duration - this.earlyExitTime) && base.isAuthority)
             {
-                if (base.inputBank.skill1.down)
+                if (base.skillLocator.primary.skillNameToken == prefix + "LEGPRIMARY_NAME")
                 {
-                    if (!this.hasFired) this.FireAttack();
-                    this.SetNextState();
-                    return;
+                    if (base.inputBank.skill1.down)
+                    {
+                        if (!this.hasFired) this.FireAttack();
+                        this.SetNextState();
+                        return;
+                    }
+                }
+                else
+                if (base.skillLocator.secondary.skillNameToken == prefix + "LEGPRIMARY_NAME")
+                {
+                    if (base.inputBank.skill2.down)
+                    {
+                        if (!this.hasFired) this.FireAttack();
+                        this.SetNextState();
+                        return;
+                    }
+                }
+                else
+                if (base.skillLocator.utility.skillNameToken == prefix + "LEGPRIMARY_NAME")
+                {
+                    if (base.inputBank.skill3.down)
+                    {
+                        if (!this.hasFired) this.FireAttack();
+                        this.SetNextState();
+                        return;
+                    }
                 }
             }
 

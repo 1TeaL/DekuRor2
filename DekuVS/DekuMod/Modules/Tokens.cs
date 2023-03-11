@@ -70,7 +70,9 @@ namespace DekuMod.Modules
                 $" Number of hits scales based on movespeed." 
                 + Helpers.Damage($" Costs {100f * StaticValues.shootkick100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "QUIRK100PRIMARY_NAME", "Blackwhip 100%");
-            LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies towards you for, restricting their movements for {StaticValues.blackwhipDebuffDuration} seconds, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style>." 
+            LanguageAPI.Add(prefix + "QUIRK100PRIMARY_DESCRIPTION", $"<style=cIsDamage>Stunning.</style> Blackwhip enemies towards you for, restricting their movements for {StaticValues.blackwhipDebuffDuration} seconds, stunning and dealing <style=cIsDamage>{100f * StaticValues.blackwhip100DamageCoefficient}% damage</style>. " +
+                $"The Target will be tethered to you. Separating more than {StaticValues.blackwhip100AttachRange}m away will result in Blackwhip 100% being used again in the Target's direction." 
+                + Helpers.Passive($" Constantly drains plus ultra until reactivated.")  
                 + Helpers.Damage($" Costs {100f * StaticValues.blackwhip100HealthCostFraction}% of max health.") 
                 + Helpers.Passive($" Costs {StaticValues.skill100PlusUltraSpend} of plus ultra") + ".");
             
@@ -82,7 +84,8 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEGSECONDARY_NAME", "Manchester Smash");
             LanguageAPI.Add(prefix + "LEGSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Manchester Smash, damaging nearby enemies for <style=cIsDamage>{100f * StaticValues.manchesterDamageCoefficient}% damage, scaling with movespeed</style>, each enemy hit gives an extra second of a {StaticValues.manchesterArmor} armor buff" + ".");
             LanguageAPI.Add(prefix + "QUIRKSECONDARY_NAME", "Gear Shift");
-            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate gear shift for {StaticValues.gearshiftBuffTimer} seconds. <style=cIsUtility> Movespeed is increased by {StaticValues.gearshiftMovespeedBoost}x</style>. <style=cIsDamage>Attacks apply additional knockback based on your aim</style>." 
+            LanguageAPI.Add(prefix + "QUIRKSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate gear shift for {StaticValues.gearshiftBuffTimer} seconds. <style=cIsUtility> Movespeed is increased by {StaticValues.gearshiftMovespeedBoost}x</style>. <style=cIsDamage>Attacks apply additional knockback based on your aim</style>."
+                + Helpers.Passive($" Constantly drains plus ultra until reactivated.")
                 + Helpers.Passive($" Costs {StaticValues.skillPlusUltraSpend} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST45SECONDARY_NAME", "Detroit Smash 45%");
@@ -91,6 +94,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "LEG45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Manchester Smash, jumping and slamming down, stunning and damaging nearby enemies for <style=cIsDamage>2x{100f * StaticValues.manchester45DamageCoefficient}% damage, scaling with movespeed</style>. Gain {StaticValues.manchesterArmor} armor for {StaticValues.manchester45BuffDuration} seconds" + ".");
             LanguageAPI.Add(prefix + "QUIRK45SECONDARY_NAME", "Gear Shift 45%");
             LanguageAPI.Add(prefix + "QUIRK45SECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate gear shift transmission for {StaticValues.gearshift45BuffTimer} seconds. <style=cIsDamage>Attacks slow enemies and pierce through them for {100f * StaticValues.gearshift45DamageCoefficient}% of the damage</style>."
+                + Helpers.Passive($" Constantly drains plus ultra until reactivated.")
                 + Helpers.Passive($" Costs {StaticValues.skill45PlusUltraSpend} of plus ultra") + ".");
 
             LanguageAPI.Add(prefix + "FIST100SECONDARY_NAME", "Detroit Smash 100%");
@@ -178,7 +182,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "QUIRKEXTRA_NAME", "Quirk mode");
             LanguageAPI.Add(prefix + "QUIRKEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Change your skills to Quirk based, focused on buffs and utility. Changes your 4th extra slot ability as well." );
             LanguageAPI.Add(prefix + "CYCLEEXTRA_NAME", "Cycle mode");
-            LanguageAPI.Add(prefix + "CYCLEEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Cycle your skills between fist, leg and quirk based.");
+            LanguageAPI.Add(prefix + "CYCLEEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Cycle your skills from fist to leg to quirk based.");
             LanguageAPI.Add(prefix + "TYPEEXTRA_NAME", "Type mode");
             LanguageAPI.Add(prefix + "TYPEEXTRA_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Cycle your skills to another skill of the same type.");
             //supers

@@ -424,7 +424,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "CYCLEEXTRA_NAME",
                 skillNameToken = prefix + "CYCLEEXTRA_NAME",
                 skillDescriptionToken = prefix + "CYCLEEXTRA_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Quirks"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("cyclemodeIcon"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.CycleMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -448,7 +448,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "TYPEEXTRA_NAME",
                 skillNameToken = prefix + "TYPEEXTRA_NAME",
                 skillDescriptionToken = prefix + "TYPEEXTRA_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Quirks"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("typemodeIcon"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.TypeMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -847,7 +847,7 @@ namespace DekuMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" , "KEYWORD_FREEZING"}
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
 
             });
             Deku.quirk45SecondarySkillDef = Skills.CreateSkillDef(new SkillDefInfo
@@ -855,7 +855,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "QUIRK45SECONDARY_NAME",
                 skillNameToken = prefix + "QUIRK45SECONDARY_NAME",
                 skillDescriptionToken = prefix + "QUIRK45SECONDARY_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("GearShift"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("GearShift45"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GearShift45)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -872,7 +872,7 @@ namespace DekuMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" , "KEYWORD_SHOCKING" }
+                keywordTokens = new string[] { "KEYWORD_AGILE"}
 
             });
             Deku.quirk100SecondarySkillDef = Skills.CreateSkillDef(new SkillDefInfo
@@ -880,7 +880,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "QUIRK100SECONDARY_NAME",
                 skillNameToken = prefix + "QUIRK100SECONDARY_NAME",
                 skillDescriptionToken = prefix + "QUIRK100SECONDARY_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("GearShift"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("GearShift100"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GearShift100)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,

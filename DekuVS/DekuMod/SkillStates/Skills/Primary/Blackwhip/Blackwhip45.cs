@@ -7,6 +7,8 @@ using System.Linq;
 using RoR2.Audio;
 using System;
 using R2API.Networking;
+using DekuMod.Modules;
+using DekuMod.Modules.Survivors;
 
 namespace DekuMod.SkillStates
 {
@@ -25,6 +27,8 @@ namespace DekuMod.SkillStates
         public static float dashSpeed = 100f;
         public static float hopForce = 10f;
         public static float damageCoefficient = Modules.StaticValues.blackwhip45DamageCoefficient;
+
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -51,13 +55,7 @@ namespace DekuMod.SkillStates
             if (flag2)
             {
                 this.targetIsValid = true;
-                EffectManager.SpawnEffect(Modules.Assets.blackwhipTrail, new EffectData
-                {
-                    origin = base.transform.position,
-                    scale = 1f,
-                    rotation = Quaternion.LookRotation(base.transform.position - Target.gameObject.transform.position),
 
-                }, true);
             }
             HitBoxGroup hitBoxGroup = null;
             Transform modelTransform = base.GetModelTransform();
@@ -102,6 +100,24 @@ namespace DekuMod.SkillStates
                 if (Target)
                 {
                     this.storedPosition = Target.transform.position;
+                    dekucon.enemyBody = Target.healthComponent.body;
+                    dekucon.blackwhipTimer = 1f;
+                    characterBody.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 1, 1);
+                }
+                else
+                {
+
+                    RaycastHit raycastHit;
+                    bool raycast = Physics.Raycast(base.GetAimRay(), out raycastHit, 100f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
+                    if (raycast)
+                    {
+                        this.storedPosition = raycastHit.point;
+                        dekucon.storedPos = raycastHit.point;
+                        dekucon.blackwhipAttachWorld = true;
+                        dekucon.blackwhipTimer = 1f;
+                        characterBody.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 1, 1);
+                        
+                    }
                 }
                 bool flag2 = base.isAuthority && this.targetIsValid;
                 if (flag2)
@@ -156,6 +172,9 @@ namespace DekuMod.SkillStates
 
             
         }
+
+
+
         public override void OnExit()
         {
             base.OnExit();
@@ -163,6 +182,7 @@ namespace DekuMod.SkillStates
             base.characterMotor.velocity *= 0.1f;
             base.GetModelAnimator().SetBool("attacking", false);
             base.PlayAnimation("Fullbody, Override", "BufferEmpty");
+            
         }
         public override InterruptPriority GetMinimumInterruptPriority()
         {

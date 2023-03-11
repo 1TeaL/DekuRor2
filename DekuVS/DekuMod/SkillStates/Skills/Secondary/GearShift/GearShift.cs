@@ -1,6 +1,7 @@
 ﻿using DekuMod.Modules.Networking;
 using DekuMod.Modules.Survivors;
 using EntityStates;
+using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using UnityEngine;
@@ -30,7 +31,14 @@ namespace DekuMod.SkillStates
             bool active = NetworkServer.active;
             if (active)
             {
-                base.characterBody.AddTimedBuffAuthority(Modules.Buffs.gearshiftBuff.buffIndex, Modules.StaticValues.gearshiftBuffTimer);
+                if(characterBody.HasBuff(Modules.Buffs.gearshiftBuff))
+                {
+                    base.characterBody.ApplyBuff(Modules.Buffs.gearshiftBuff.buffIndex, 0);
+                }
+                else if (!characterBody.HasBuff(Modules.Buffs.gearshiftBuff))
+                {
+                    base.characterBody.ApplyBuff(Modules.Buffs.gearshiftBuff.buffIndex, 1);
+                }
 
             }
         }

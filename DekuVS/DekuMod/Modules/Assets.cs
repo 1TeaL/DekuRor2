@@ -96,6 +96,7 @@ namespace DekuMod.Modules
         internal static GameObject blackwhip;
         internal static GameObject blackwhipTrail;
         internal static GameObject blackwhipbullet;
+        internal static GameObject blackwhipLineRenderer;
         internal static GameObject blackwhipforward;
         internal static GameObject detroitEffect;
         internal static GameObject detroitweakEffect;
@@ -110,6 +111,11 @@ namespace DekuMod.Modules
         internal static GameObject airforce100impactEffect;
         internal static GameObject gobeyondPulseEffect;
         internal static GameObject gearshiftPierceEffect;
+
+
+        //Materials
+        public static Material blackwhipDebuffMaterial;
+
 
         //sword swing
         internal static GameObject dekuKickEffect;
@@ -187,6 +193,9 @@ namespace DekuMod.Modules
             blackwhipforward = LoadEffect("blackwhipforward");
             blackwhip = LoadEffect("blackwhipeffect");
             blackwhipTrail = LoadEffect("blackwhipTrail");
+            blackwhipLineRenderer = mainAssetBundle.LoadAsset<GameObject>("blackwhipLineRenderer");
+            //blackwhip debuff effect
+            blackwhipDebuffMaterial = mainAssetBundle.LoadAsset<Material>("blackwhipbullet");
             impactEffect = LoadEffect("impact");
             windringEffect = LoadEffect("windringBig");
             blackwhipbullet = LoadEffect("blackwhipshootGhost");

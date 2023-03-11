@@ -62,6 +62,13 @@ namespace DekuMod.Modules.Survivors
         //blackwhip
         public NetworkedBodyAttachment attachment;
         public SiphonNearbyController siphonNearbyController;
+        public GameObject blackwhipLineEffect;
+        public LineRenderer blackwhipLineRenderer;
+        public CharacterBody enemyBody;
+        public Vector3 storedPos;
+        public bool blackwhipAttachWorld;
+        public float blackwhipTimer;
+        public bool blackwhipActivated;
 
         //OFA 
         public float ofaHurtTimer;
@@ -271,7 +278,47 @@ namespace DekuMod.Modules.Survivors
             skillCDTimer = 0f;
         }
 
+        public void Update()
+        {
 
+            if (blackwhipTimer > 0f)
+            {
+                if (enemyBody)
+                {
+                    MakeLine();
+                }
+                else
+                {
+                    if (blackwhipAttachWorld)
+                    {
+                        MakeLine();
+                    }
+                }
+            }
+            else
+            {
+                if (blackwhipLineEffect)
+                {
+                    Destroy(blackwhipLineEffect);
+                }
+                blackwhipAttachWorld = false;
+            }
+
+            if(blackwhipLineEffect && blackwhipLineRenderer)
+            {
+                if (blackwhipTimer > 0f)
+                {
+                    if (enemyBody)
+                    {
+                        LineVec(enemyBody.transform.position);
+                    }
+                    else if (blackwhipAttachWorld)
+                    {
+                        LineVec(storedPos);
+                    }
+                }
+            }
+        }
         public void FixedUpdate()
         {
             //indicator
@@ -289,6 +336,55 @@ namespace DekuMod.Modules.Survivors
 
             //skill CD timer
             skillCDTimer += Time.fixedDeltaTime;
+
+            //blackwhip timer
+            if (!blackwhipActivated)
+            {
+                blackwhipTimer -= Time.fixedDeltaTime;
+            }
+            else if(blackwhipActivated)
+            {
+                energySystem.SpendPlusUltra(StaticValues.blackwhip100EnergyFraction);
+                if (energySystem.currentPlusUltra < 5f)
+                {
+
+                    if (body.HasBuff(Buffs.blackwhipBuff.buffIndex))
+                    {
+                        body.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 0);
+                    }
+                    blackwhipActivated = false;
+                    Chat.AddMessage($"Deactivated blackwhip 100%.");
+
+                }
+            }
+            //blackwhip 100% attach
+            if (enemyBody && blackwhipActivated)
+            {
+                Vector3 startPos = body.transform.position;
+                Vector3 endPos = enemyBody.transform.position;
+                float Distance = Vector3.Distance(startPos, endPos);
+
+
+                if (Distance > StaticValues.blackwhip100AttachRange)
+                {
+                    new PerformBlackwhipPullNetworkRequest(body.masterObjectId, startPos, (endPos - startPos).normalized, 0f).Send(NetworkDestination.Clients);
+                }
+                
+            }
+            else if(!enemyBody)
+            {
+                if (blackwhipLineEffect)
+                {
+                    Destroy(blackwhipLineEffect);
+                }
+                blackwhipAttachWorld = false;
+                blackwhipActivated = false;
+
+                if (body.HasBuff(Buffs.blackwhipBuff.buffIndex))
+                {
+                    body.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 0);
+                }
+            }
 
             //gearshift
             if (body.HasBuff(Buffs.gearshift100Buff.buffIndex))
@@ -317,6 +413,13 @@ namespace DekuMod.Modules.Survivors
                 }
                 if (body.HasBuff(Buffs.gearshiftBuff.buffIndex))
                 {
+                    energySystem.SpendPlusUltra(StaticValues.gearshiftEnergyFraction);
+
+                    if (energySystem.currentPlusUltra < 5f)
+                    {
+                        body.ApplyBuff(Buffs.gearshiftBuff.buffIndex, 0);
+                        Chat.AddMessage($"Deactivated gearshift.");
+                    }
                     if (GEARSHIFTIN.isStopped)
                     {
                         GEARSHIFTIN.Play();
@@ -332,6 +435,13 @@ namespace DekuMod.Modules.Survivors
 
                 if (body.HasBuff(Buffs.gearshift45Buff.buffIndex))
                 {
+                    energySystem.SpendPlusUltra(StaticValues.gearshiftEnergyFraction);
+
+                    if (energySystem.currentPlusUltra < 5f)
+                    {
+                        body.ApplyBuff(Buffs.gearshift45Buff.buffIndex, 0);
+                        Chat.AddMessage($"Deactivated gearshift 45%.");
+                    }
                     if (GEARSHIFTOUT.isStopped)
                     {
                         GEARSHIFTOUT.Play();
@@ -394,7 +504,14 @@ namespace DekuMod.Modules.Survivors
                                     }
                                     else
                                     {
-                                        body.characterMotor.velocity.y += StaticValues.floatSpeed;
+                                        if(stopwatch < 3f)
+                                        {
+                                            body.characterMotor.velocity.y = StaticValues.floatSpeed;
+                                        }
+                                        else
+                                        {
+                                            body.characterMotor.velocity.y = 0f;
+                                        }
                                     }
                                 }
                                 else if (body.characterMotor.velocity.y > 0)
@@ -406,7 +523,14 @@ namespace DekuMod.Modules.Survivors
                                     }
                                     else
                                     {
-                                        body.characterMotor.velocity.y += StaticValues.floatSpeed;
+                                        if (stopwatch < 3f)
+                                        {
+                                            body.characterMotor.velocity.y = StaticValues.floatSpeed;
+                                        }
+                                        else
+                                        {
+                                            body.characterMotor.velocity.y = 0f;
+                                        }
                                     }
                                 }                                
                             }
@@ -610,7 +734,38 @@ namespace DekuMod.Modules.Survivors
 
         }
 
-        
+
+        //blackwhip line renderer effect
+        public void MakeLine()
+        {
+            if (!blackwhipLineEffect)
+            {
+                blackwhipLineEffect = UnityEngine.Object.Instantiate(Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+                blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
+            }
+        }
+        public void LineVec(Vector3 linkedBodyPos)
+        {
+            Vector3 startPos = child.FindChild("RHand").transform.position;
+            Vector3 endPos = linkedBodyPos;
+            int interVal = (int)Mathf.Abs(Vector3.Distance(endPos, startPos));
+            if (interVal <= 0)
+            {
+                interVal = 2;
+            }
+            Vector3[] numberofpositions = new Vector3[interVal];
+            for (int i = 0; i < numberofpositions.Length; i++)
+            {
+                numberofpositions[i] = Vector3.Lerp(startPos, endPos, (float)i / interVal);
+                numberofpositions[i].z = Mathf.Lerp(startPos.z, endPos.z, (float)i / interVal);
+
+
+            }
+            blackwhipLineRenderer.positionCount = interVal;
+            blackwhipLineRenderer.SetPositions(numberofpositions);
+
+        }
+
         public void PlayGobeyondLoop()
         {
             if (body.hasEffectiveAuthority)

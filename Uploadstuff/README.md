@@ -58,24 +58,24 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
-- 4.0.5 - Balance changes/bug fixes
-    - Fixed Ancient scepter with Deku as it was including the old Extra Quirks skill.
-    - Changing modes no longer cost plus ultra as it was a bit limiting, especially with using extra quirks as they already costed plus ultra. Also, they no longer refresh cooldowns when you switch- the cost before was to limit people refreshing cooldowns, now, similar to using OFA, an internal timer is checked based on how long you are in a specific mode, and cooldowns are reduced based on that. 
-    - Most Shoot Style attacks now scale with movespeed.
-    - Fixed math behind Shoot Style kick 45%, before was doing little damage.
-    - Manchester Smash 45% is now faster, jumping and landing before both took 1 seconds -> 0.7 seconds each.
-    - Fixed stunning attacks not applying the barrier mark.
-    - Swapped Manchester Smash and St Louis Smash skill slots- previously manchester was a secondary, made it utility but felt more apt for it to fit on the secondary slot.
-    - Reworked/reverted Manchester Smash 45% to the original jump up and slam down, but now dealing damage on the jump and slam as well. This is to push shoot style more into that lower damage but more hits style.
-    - Buffed Manchester Smash 100% damage from 600% -> 3x400%, similarly having more hits thus more procs.
-    - Nerfed movespeed scaling on Shoot Style Kick 45%- was doing way too much damage.
-    - Changed the barrier gain on barrier mark from 10% of damage dealt -> 1% of max health.
-    - Made 1,000,000% detroit delaware smash and final smash not affect the teleport bosses. Also noted known issue that they can bug out, causing deku to be stuck in animation for longer than normal.
-- 4.0.4 - Bug fixes/balance changes
-    - Fixed smokescreen being stuck properly. Added health cost to smokescreen.
-    - lowered height gain from float.
-    - made it so 1,000,000% detroit delaware smash and final smash shouldn't be as interruptable anymore, same with gobeyond.
-    - Buffed multiplier provided by duration for Detroit Smash 100%.
+
+- 4.1.0- Loadout REWORK and Skill Changes
+    - Loadout REWORK
+    	- Added all skills to be chosen on loadout. This is to enable more flexibility for Deku. 
+    	- All mode specials are available on Extra skill slots 1,2 and 3.
+    	- 2 New skills added on Extra skill slot 4- Cycle mode and Type Mode:
+    		- Cycle mode cycles the skills in the order of Fist->Shoot Style->Quirk->Fist etc.
+    		- Type mode cycle skills to another skill of the same type. 	 
+		- Old skills will still be available as well.
+    - Skill Changes
+    	- Blackwhip 45% effect change- now you have a line tether to the enemy change. 
+    	- Blackwhip 45% can now also attach to the terrain and you will travel towards it.
+    	- Blackwhip 100% will also tether to the 'Target' for 20 seconds. While tethered, if the target were to go further than 30m away from you, they will be pulled towards you.
+    	- Blackwhip 100%'s original effect of pulling enemies towards you is still there, and this effect will activate when the current enemy is too far away as well, pulling multiple people along with them.
+    	- Blackwhip 100% will now last forever until reactivation, but drain energy constantly.
+    	- Gear shift and Gear shift 45% will now last forever until reactivation, but drain energy constantly.
+    	- Float has limited height gain after 3 seconds.
+    	- Fa Jin has a new visual effect to match the Anime. Fa Jin also gives 1.5x movespeed too.
 - Next update(s)
     -  Balance changes
     -  Bug fixes

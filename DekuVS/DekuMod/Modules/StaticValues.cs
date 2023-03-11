@@ -13,7 +13,7 @@ namespace DekuMod.Modules
         internal static float dangersensePlusUltraSpend = 5f;
         //float
         internal const float floatForceEnergyFraction = 0.01f;
-        internal const float floatSpeed = 1f;
+        internal const float floatSpeed = 7f;
 
 
         //Energy
@@ -45,13 +45,17 @@ namespace DekuMod.Modules
         internal const float shootkick100HealthCostFraction = 0.1f;
         //blackwhip
         internal const float blackwhipDamageCoefficient = 0.1f;
+        internal const float blackwhipLineMaxHeight = 0.2f;
         internal const float blackwhipRange = 20f;
         internal const int blackwhipDebuffDuration = 10;
         internal const int blackwhipTargets = 10;
         internal const float blackwhip45DamageCoefficient = 6f;
         internal const float blackwhip100DamageCoefficient = 6f;
+        internal const int blackwhipAttachDuration = 2;
+        internal const float blackwhip100AttachRange = 30f;
         internal const float blackwhip100PullRange = 70f;
         internal const float blackwhip100HealthCostFraction = 0.10f;
+        internal const float blackwhip100EnergyFraction = 0.02f;
 
 
         internal const float shootbulletDamageCoefficient = 2f;
@@ -71,14 +75,15 @@ namespace DekuMod.Modules
         internal const float stlouis100DamageCoefficient = 6f;
         internal const float stlouis100HealthCostFraction = 0.15f;
         //gearshift
-        internal const int gearshiftBuffTimer = 10;
+        internal const int gearshiftBuffTimer = 2;
         internal const float gearshiftForceBoost = 10f;
         internal const float gearshiftMovespeedBoost = 1.2f;
-        internal const int gearshift45BuffTimer = 10;
+        internal const int gearshift45BuffTimer = 2;
         internal const float gearshift45DamageCoefficient = 0.5f;
         internal const int gearshift100BuffAttacks = 5;
         internal const float gearshift100Threshold = 15f;
         internal const float gearshift100HealthCostFraction = 0.25f;
+        internal const float gearshiftEnergyFraction = 0.015f;
         //Secondary damage
         internal const float blackwhipshootDamageCoefficient = 4f;
 

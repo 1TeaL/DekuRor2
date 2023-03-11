@@ -80,7 +80,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "4.0.5";
+        public const string MODVERSION = "4.1.0";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -151,6 +151,7 @@ namespace DekuMod
         {
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
+            On.RoR2.CharacterModel.UpdateOverlays += CharacterModel_UpdateOverlays;
             On.RoR2.CharacterBody.OnDeathStart += CharacterBody_OnDeathStart;
             On.RoR2.CharacterModel.Awake += CharacterModel_Awake;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_OnDamageDealt;
@@ -551,6 +552,35 @@ namespace DekuMod
                 AkSoundEngine.PostEvent("dekuEntrance", self.gameObject);
             }
 
+        }
+
+        private void CharacterModel_UpdateOverlays(On.RoR2.CharacterModel.orig_UpdateOverlays orig, CharacterModel self)
+        {
+            orig(self);
+
+            if (self)
+            {
+                if (self.body)
+                {
+                    this.OverlayFunction(Modules.Assets.blackwhipDebuffMaterial, self.body.HasBuff(Modules.Buffs.blackwhipDebuff), self);
+                }
+            }
+        }
+
+
+        private void OverlayFunction(Material overlayMaterial, bool condition, CharacterModel model)
+        {
+            if (model.activeOverlayCount >= CharacterModel.maxOverlays)
+            {
+                return;
+            }
+            if (condition)
+            {
+                Material[] array = model.currentOverlays;
+                int num = model.activeOverlayCount;
+                model.activeOverlayCount = num + 1;
+                array[num] = overlayMaterial;
+            }
         }
 
     }
