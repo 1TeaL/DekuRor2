@@ -59,6 +59,12 @@ If you enjoy my work, support me on Ko-fi!
 ## Latest Changelog, Next update(s)
 
 
+- 4.1.1- Bug fixes/Skill changes
+    - Improved priority of OFA skills so it can be used on top of other skills a bit better
+    - Wind effect for Detroit Smash 45% and 100% was using Smokescreen's purple particle- changed back to white.  
+    - Float- no longer limits the height gain even when you jump- particularly double jump.
+    - Improved Detroit 1,000,000% and Final Smash code for less issues- attack speed also instead scales the damage only rather than increasing the number of ticks before the final hit.
+    - Improved Manchester Smash and Manchester Smash 45% damage radius 
 - 4.1.0- Loadout REWORK and Skill Changes
     - Loadout REWORK
     	- Added all skills to be chosen on loadout. This is to enable more flexibility for Deku. 

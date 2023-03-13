@@ -506,7 +506,7 @@ namespace DekuMod.Modules.Survivors
                                     {
                                         if(stopwatch < 3f)
                                         {
-                                            body.characterMotor.velocity.y = StaticValues.floatSpeed;
+                                            body.characterMotor.velocity.y += 1f;
                                         }
                                         else
                                         {

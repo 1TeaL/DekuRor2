@@ -14,7 +14,7 @@ namespace DekuMod.SkillStates
         public static float jumpDuration = 0.7f;
         public static float dropForce = 20f;
 
-        public static float slamRadius = 5f;
+        public static float slamRadius = 7f;
         public static float slamProcCoefficient = 1f;
         public static float slamForce = 10f;
 

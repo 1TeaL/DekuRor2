@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates
         public float fireTime;
         //private GameObject effectPrefab = Modules.Assets.sEffect;
 
-        public static float blastRadius = 4f;
+        public static float blastRadius = 6f;
         public float distance = 7f;
         public float maxWeight;
         public float force = 5f;

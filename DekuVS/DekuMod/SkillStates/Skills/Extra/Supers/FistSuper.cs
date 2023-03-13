@@ -10,6 +10,7 @@ using R2API.Networking.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using EntityStates.Merc;
+using DekuMod.Modules;
 
 namespace DekuMod.SkillStates
 {
@@ -35,8 +36,6 @@ namespace DekuMod.SkillStates
 		private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
         private EffectData effectData1;
 		private EffectData effectData2;
-		private BullseyeSearch search;
-        private List<HurtBox> target;
 
         public override void OnEnter()
 		{
@@ -44,8 +43,7 @@ namespace DekuMod.SkillStates
 			dekucon = base.GetComponent<DekuController>();
 			energySystem = base.GetComponent<EnergySystem>();
 			blastRadius = baseBlastRadius * attackSpeedStat;
-			fireInterval = baseFireInterval / attackSpeedStat;
-			animChange = false;
+			fireInterval = baseFireInterval;
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
 			this.muzzleString = "RHand";
 
@@ -80,103 +78,52 @@ namespace DekuMod.SkillStates
 				rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z)),
 			};
 
-			if (energySystem.currentPlusUltra > Modules.StaticValues.specialPlusUltraSpend)
-			{
-				energySystem.SpendPlusUltra(Modules.StaticValues.specialPlusUltraSpend);
+            if (energySystem.currentPlusUltra > Modules.StaticValues.specialPlusUltraSpend)
+            {
+                energySystem.SpendPlusUltra(Modules.StaticValues.specialPlusUltraSpend);
 
-				if (NetworkServer.active)
-				{
-					base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
-				}
-
-
-				if (base.isAuthority)
-				{
-					base.StartAimMode(0.5f + this.duration, false);
-					GetMaxWeight();
+                if (NetworkServer.active)
+                {
+                    base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, duration);
+                }
 
 
-					EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
-					EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
-
-
-					EffectManager.SpawnEffect(Modules.Projectiles.delawareTracer, effectData2, true);
-
-
-					PlayCrossfade("FullBody, Override", "DetroitDelawareFull", "Attack.playbackRate", fireTime, 0.01f);
-
-					AkSoundEngine.PostEvent("delawaredetroitvoice", this.gameObject);
-					
-				}
-
-			}
-			else
-			{
                 if (base.isAuthority)
-				{
-					Chat.AddMessage($"You need {Modules.StaticValues.specialPlusUltraSpend} plus ultra.");
-					energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
-					this.outer.SetNextStateToMain();
-					return;
+                {
+                    base.StartAimMode(0.5f + this.duration, false);
+                    new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId).Send(NetworkDestination.Clients);
 
-				}
-			}
+
+                    EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
+                    EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
+
+
+                    EffectManager.SpawnEffect(Modules.Projectiles.delawareTracer, effectData2, true);
+
+
+                    PlayCrossfade("FullBody, Override", "DetroitDelawareFull", "Attack.playbackRate", fireTime, 0.01f);
+
+                    AkSoundEngine.PostEvent("delawaredetroitvoice", this.gameObject);
+
+                }
+
+            }
+            else
+            {
+                if (base.isAuthority)
+                {
+                    Chat.AddMessage($"You need {Modules.StaticValues.specialPlusUltraSpend} plus ultra.");
+                    energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
+                    this.outer.SetNextStateToMain();
+                    return;
+
+                }
+            }
+
 
 		}
 
-
-		public void GetMaxWeight()
-		{
-			Ray aimRay = base.GetAimRay();
-			search = new BullseyeSearch
-			{
-
-				teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-				filterByLoS = false,
-				searchOrigin = theSpot,
-				searchDirection = UnityEngine.Random.onUnitSphere,
-				sortMode = BullseyeSearch.SortMode.Distance,
-				maxDistanceFilter = blastRadius,
-				maxAngleFilter = 360f
-			};
-
-			search.RefreshCandidates();
-			search.FilterOutGameObject(base.gameObject);
-
-
-			target = search.GetResults().ToList<HurtBox>();
-			foreach (HurtBox singularTarget in target)
-			{
-				if (singularTarget)
-				{
-					if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-					{
-						if (singularTarget.healthComponent.body.characterMotor)
-						{
-							if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
-							{
-								maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
-							}
-						}
-						else if (singularTarget.healthComponent.body.rigidbody)
-						{
-							if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
-							{
-								maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
-							}
-						}
-
-                        if (!singularTarget.healthComponent.body.isChampion)
-                        {
-                            new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId,
-                            singularTarget.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
-                        }
-						
-					}
-				}
-			}
-		}
-		public override void FixedUpdate()
+        public override void FixedUpdate()
 		{
 			base.FixedUpdate();
 
@@ -186,8 +133,10 @@ namespace DekuMod.SkillStates
 				if (base.isAuthority && timer > fireInterval)
 				{
 					timer = 0f;
-					GetMaxWeight();
-				}
+
+                    new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId).Send(NetworkDestination.Clients);
+
+                }
 				else
 				{
 					timer += Time.fixedDeltaTime;
@@ -207,9 +156,9 @@ namespace DekuMod.SkillStates
 			}
 
             if (base.fixedAge > duration && base.isAuthority)
-			{
-				GetMaxWeight();
-				blastAttack.Fire();
+            {
+                new PerformDetroitDelawareNetworkRequest(base.characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                blastAttack.Fire();
 				AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 
 				EffectManager.SpawnEffect(Modules.Assets.detroitEffect, effectData2, true);

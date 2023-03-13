@@ -80,7 +80,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "4.1.0";
+        public const string MODVERSION = "4.1.1";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -230,7 +230,7 @@ namespace DekuMod
                                 var bulletAttack = new BulletAttack
                                 {
                                     bulletCount = 1,
-                                    aimVector = body.inputBank.aimDirection,
+                                    aimVector = body.characterDirection.forward,
                                     origin = damageInfo.position,
                                     damage = StaticValues.gearshift45DamageCoefficient * damageInfo.damage,
                                     damageColorIndex = DamageColorIndex.Fragile,
@@ -262,7 +262,7 @@ namespace DekuMod
                                 {
                                     origin = damageInfo.position,
                                     scale = 1f,
-                                    rotation = Quaternion.LookRotation(body.inputBank.aimDirection) 
+                                    rotation = Quaternion.LookRotation(body.characterDirection.forward) 
 
                                 }, true);
 

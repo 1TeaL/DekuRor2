@@ -57,7 +57,7 @@ namespace DekuMod.SkillStates
 
             timer = 0f;
             blastRadius = baseBlastRadius * num2;
-            fireInterval = baseFireInterval / attackSpeedStat;
+            fireInterval = baseFireInterval;
             speedCoefficient = basespeedCoefficient * moveSpeedStat;
             animChange = false;
             Ray aimRay = base.GetAimRay();
@@ -94,7 +94,7 @@ namespace DekuMod.SkillStates
 
                 if (base.isAuthority)
                 {
-                    GetMaxWeight();
+                    new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId).Send(NetworkDestination.Clients);
 
 
                     base.characterMotor.useGravity = false;
@@ -126,56 +126,6 @@ namespace DekuMod.SkillStates
         }
 
 
-        public void GetMaxWeight()
-        {
-            Ray aimRay = base.GetAimRay();
-            search = new BullseyeSearch
-            {
-
-                teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam()),
-                filterByLoS = false,
-                searchOrigin = base.transform.position,
-                searchDirection = UnityEngine.Random.onUnitSphere,
-                sortMode = BullseyeSearch.SortMode.Distance,
-                maxDistanceFilter = blastRadius,
-                maxAngleFilter = 360f
-            };
-
-            search.RefreshCandidates();
-            search.FilterOutGameObject(base.gameObject);
-
-
-
-            target = search.GetResults().ToList<HurtBox>();
-            foreach (HurtBox singularTarget in target)
-            {
-                if (singularTarget)
-                {
-                    if (singularTarget.healthComponent && singularTarget.healthComponent.body)
-                    {
-                        if (singularTarget.healthComponent.body.characterMotor)
-                        {
-                            if (singularTarget.healthComponent.body.characterMotor.mass > maxWeight)
-                            {
-                                maxWeight = singularTarget.healthComponent.body.characterMotor.mass;
-                            }
-                        }
-                        else if (singularTarget.healthComponent.body.rigidbody)
-                        {
-                            if (singularTarget.healthComponent.body.rigidbody.mass > maxWeight)
-                            {
-                                maxWeight = singularTarget.healthComponent.body.rigidbody.mass;
-                            }
-                        }
-                        if (!singularTarget.healthComponent.body.isChampion)
-                        {
-                            new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId,
-                            singularTarget.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
-                        }
-                    }
-                }
-            }
-        }
         private void CreateBlinkEffect(Vector3 origin)
         {
             EffectData effectData = new EffectData();
@@ -191,8 +141,8 @@ namespace DekuMod.SkillStates
             if (timer > fireInterval && base.isAuthority)
             {
                 timer = 0;
-                GetMaxWeight();
-                
+                new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId).Send(NetworkDestination.Clients);
+
             }
             else
             {
@@ -252,7 +202,7 @@ namespace DekuMod.SkillStates
             if (base.fixedAge > duration && base.isAuthority)
 			{
                 blastAttack.position = base.transform.position;
-                GetMaxWeight();
+                new PerformFinalSmashNetworkRequest(base.characterBody.masterObjectId).Send(NetworkDestination.Clients);
 
                 blastAttack.Fire();
 
