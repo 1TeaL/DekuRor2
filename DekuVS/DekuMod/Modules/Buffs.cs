@@ -21,7 +21,6 @@ namespace DekuMod.Modules
         internal static BuffDef kickBuff;
         internal static BuffDef floatBuff;
         internal static BuffDef fajinBuff;
-        internal static BuffDef blackwhipBuff;
 
         //go beyond
         internal static BuffDef goBeyondBuff;
@@ -58,7 +57,7 @@ namespace DekuMod.Modules
             ofaBuff = Buffs.AddNewBuff("DekuOFABuff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightninggreen"), Color.white, false, false);
             supaofaBuff = Buffs.AddNewBuff("DekuInfiniteOFABuff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningwhitegreen"), Color.white, false, false);
             kickBuff = Buffs.AddNewBuff("DekuKickBuff", Assets.mainAssetBundle.LoadAsset<Sprite>("kickCount"), Color.white, true, false);
-            blackwhipBuff = Buffs.AddNewBuff("blackwhipBuff", Assets.crippleBuffIcon, Color.white, false, false);
+            //blackwhipBuff = Buffs.AddNewBuff("blackwhipBuff", Assets.crippleBuffIcon, Color.white, false, false);
             ofaBuff45 = Buffs.AddNewBuff("DekuOFA45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningblue"), Color.white, false, false);
             supaofaBuff45 = Buffs.AddNewBuff("DekuInfiniteOFA45Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningwhiteblue"), Color.white, false, false);
             goBeyondBuff = Buffs.AddNewBuff("goBeyondBuff", Assets.healBuffIcon, Color.green, false, false);

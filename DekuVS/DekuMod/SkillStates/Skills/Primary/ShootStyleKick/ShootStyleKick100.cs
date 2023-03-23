@@ -88,7 +88,7 @@ namespace DekuMod.SkillStates
 
             base.OnEnter();
 
-            duration = baseDuration / this.attackSpeedStat;
+            duration = baseDuration;
             numberOfHits = Mathf.RoundToInt(StaticValues.shootkick100NumberOFHits * num3);
 
 
@@ -161,23 +161,22 @@ namespace DekuMod.SkillStates
                         singularTarget.healthComponent.body.ApplyBuff(Modules.Buffs.delayAttackDebuff.buffIndex, numberOfHits + buffcount);
                     }
                     ShootStyleKickComponent shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.GetComponent<ShootStyleKickComponent>();
-                    if (base.isAuthority)
+                    
+                    if (shootStyleKickComponent)
                     {
-                        if (shootStyleKickComponent)
-                        {
-                            shootStyleKickComponent.numberOfHits += numberOfHits;
-                            shootStyleKickComponent.timer = 0;
-                        }
-                        if (!shootStyleKickComponent)
-                        {
-                            shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.AddComponent<ShootStyleKickComponent>();
-                            shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
-                            shootStyleKickComponent.dekucharbody = characterBody;
-                            shootStyleKickComponent.numberOfHits = numberOfHits;
-                            shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient * num3;
-                        }
-
+                        shootStyleKickComponent.numberOfHits += numberOfHits;
+                        shootStyleKickComponent.timer = 0;
                     }
+                    if (!shootStyleKickComponent)
+                    {
+                        shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.AddComponent<ShootStyleKickComponent>();
+                        shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
+                        shootStyleKickComponent.dekucharbody = characterBody;
+                        shootStyleKickComponent.numberOfHits = numberOfHits;
+                        shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient * num3 * attackSpeedStat;
+                    }
+
+                    
                     
                 }
             }

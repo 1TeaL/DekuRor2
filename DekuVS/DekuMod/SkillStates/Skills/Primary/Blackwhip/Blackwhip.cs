@@ -26,7 +26,6 @@ namespace DekuMod.SkillStates
         {
             base.OnEnter();
             hasFired = false;
-            duration /= attackSpeedStat;
             theSpot = base.transform.position;
         }
 
@@ -54,15 +53,15 @@ namespace DekuMod.SkillStates
                 rotation = Quaternion.LookRotation(aimRay.direction),
 
             }, true);
-            if (NetworkServer.active)
-            {
-                characterBody.AddTimedBuffAuthority(Modules.Buffs.blackwhipBuff.buffIndex, Modules.StaticValues.blackwhipDebuffDuration);
-            }
+
+            //characterBody.ApplyBuff(Modules.Buffs.blackwhipBuff.buffIndex, 1, Modules.StaticValues.blackwhipDebuffDuration);
+            dekucon.blackwhipSiphonTimer += Modules.StaticValues.blackwhipDebuffDuration;
+            
 
             if (!dekucon.attachment)
             {
                 dekucon.attachment = UnityEngine.Object.Instantiate<GameObject>(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BodyAttachments/SiphonNearbyBodyAttachment")).GetComponent<NetworkedBodyAttachment>();
-                dekucon.attachment.AttachToGameObjectAndSpawn(base.gameObject, null);
+                dekucon.attachment.AttachToGameObjectAndSpawn(base.gameObject, "siphon");
             }
             if (!dekucon.siphonNearbyController)
             {

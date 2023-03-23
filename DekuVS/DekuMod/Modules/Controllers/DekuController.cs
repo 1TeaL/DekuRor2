@@ -60,6 +60,7 @@ namespace DekuMod.Modules.Survivors
 
 
         //blackwhip
+        public float blackwhipSiphonTimer;
         public NetworkedBodyAttachment attachment;
         public SiphonNearbyController siphonNearbyController;
         public GameObject blackwhipLineEffect;
@@ -302,19 +303,20 @@ namespace DekuMod.Modules.Survivors
                     Destroy(blackwhipLineEffect);
                 }
                 blackwhipAttachWorld = false;
+                enemyBody = null;
             }
 
             if(blackwhipLineEffect && blackwhipLineRenderer)
             {
                 if (blackwhipTimer > 0f)
                 {
-                    if (enemyBody)
-                    {
-                        LineVec(enemyBody.transform.position);
-                    }
-                    else if (blackwhipAttachWorld)
+                    if (blackwhipAttachWorld)
                     {
                         LineVec(storedPos);
+                    }
+                    else if (enemyBody)
+                    {
+                        LineVec(enemyBody.transform.position);
                     }
                 }
             }
@@ -342,16 +344,11 @@ namespace DekuMod.Modules.Survivors
             {
                 blackwhipTimer -= Time.fixedDeltaTime;
             }
-            else if(blackwhipActivated)
+            else if (blackwhipActivated)
             {
                 energySystem.SpendPlusUltra(StaticValues.blackwhip100EnergyFraction);
                 if (energySystem.currentPlusUltra < 5f)
                 {
-
-                    if (body.HasBuff(Buffs.blackwhipBuff.buffIndex))
-                    {
-                        body.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 0);
-                    }
                     blackwhipActivated = false;
                     Chat.AddMessage($"Deactivated blackwhip 100%.");
 
@@ -369,9 +366,9 @@ namespace DekuMod.Modules.Survivors
                 {
                     new PerformBlackwhipPullNetworkRequest(body.masterObjectId, startPos, (endPos - startPos).normalized, 0f).Send(NetworkDestination.Clients);
                 }
-                
+
             }
-            else if(!enemyBody)
+            else if (!enemyBody)
             {
                 if (blackwhipLineEffect)
                 {
@@ -379,11 +376,6 @@ namespace DekuMod.Modules.Survivors
                 }
                 blackwhipAttachWorld = false;
                 blackwhipActivated = false;
-
-                if (body.HasBuff(Buffs.blackwhipBuff.buffIndex))
-                {
-                    body.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 0);
-                }
             }
 
             //gearshift
@@ -456,12 +448,22 @@ namespace DekuMod.Modules.Survivors
                 }
 
             }
-            //blackwhip
+            //blackwhip base
             if (this.siphonNearbyController)
             {
                 this.siphonNearbyController.NetworkmaxTargets = (body.healthComponent.alive ? StaticValues.blackwhipTargets : 0);
             }
-            if (body.HasBuff(Buffs.blackwhipBuff.buffIndex))
+            if(blackwhipSiphonTimer > 0f)
+            {
+                blackwhipSiphonTimer -= Time.fixedDeltaTime;
+            }
+            if (blackwhipSiphonTimer < 0f)
+            {
+                this.DestroyAttachment();
+            }
+
+            //blackwhip buff effect
+            if (blackwhipSiphonTimer > 0f || blackwhipTimer > 0f)
             {
                 if (BLACKWHIP.isStopped)
                 {
@@ -469,9 +471,8 @@ namespace DekuMod.Modules.Survivors
                 }
 
             }
-            else if (!body.HasBuff(Buffs.blackwhipBuff.buffIndex))
+            else if (blackwhipSiphonTimer < 0f && blackwhipTimer < 0f)
             {
-                this.DestroyAttachment();
                 if (BLACKWHIP.isPlaying)
                 {
                     BLACKWHIP.Stop();
@@ -486,68 +487,57 @@ namespace DekuMod.Modules.Survivors
                 {
                     if (energySystem.currentPlusUltra > 5f)
                     {
-                        if (!body.inputBank.sprint.justPressed)
+                        if (body.inputBank.jump.down)
                         {
-                            if (body.inputBank.jump.down)
-                            {
-                                if (NetworkServer.active)
-                                {
-                                    body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 1);
-                                }
+                            body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 1);                            
 
-                                if (body.characterMotor.velocity.y <= 0)
+                            if (body.characterMotor.velocity.y <= 0)
+                            {
+                                energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
+                                if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
                                 {
-                                    energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
-                                    if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
+                                    body.characterMotor.velocity.y = 0f;
+                                }
+                                else
+                                {
+                                    if(stopwatch < 3f)
                                     {
-                                        body.characterMotor.velocity.y = 0f;
+                                        body.characterMotor.velocity.y += 1f;
                                     }
                                     else
                                     {
-                                        if(stopwatch < 3f)
-                                        {
-                                            body.characterMotor.velocity.y += 1f;
-                                        }
-                                        else
-                                        {
-                                            body.characterMotor.velocity.y = 0f;
-                                        }
+                                        body.characterMotor.velocity.y = 0f;
                                     }
                                 }
-                                else if (body.characterMotor.velocity.y > 0)
+                            }
+                            else if (body.characterMotor.velocity.y > 0)
+                            {
+                                energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
+                                if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
                                 {
-                                    energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
-                                    if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
+                                    body.characterMotor.velocity.y = 0f;
+                                }
+                                else
+                                {
+                                    if (stopwatch < 3f)
                                     {
-                                        body.characterMotor.velocity.y = 0f;
+                                        body.characterMotor.velocity.y = StaticValues.floatSpeed;
                                     }
                                     else
                                     {
-                                        if (stopwatch < 3f)
-                                        {
-                                            body.characterMotor.velocity.y = StaticValues.floatSpeed;
-                                        }
-                                        else
-                                        {
-                                            body.characterMotor.velocity.y = 0f;
-                                        }
+                                        body.characterMotor.velocity.y = 0f;
                                     }
-                                }                                
-                            }
-                            //else if (!body.inputBank.jump.down)
-                            //{
-                            //    if (NetworkServer.active)
-                            //    {
-                            //        body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 0);
-                            //    }
-                            //}
+                                }
+                            }                                
                         }
-                        else if (body.inputBank.sprint.wasDown)
-                        {
-                            energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction * 2);
-                            Vector3 aimRay = body.inputBank.GetAimRay().direction;
-                            body.characterMotor.velocity = aimRay * body.moveSpeed;
-                        }
+                        //else if (!body.inputBank.jump.down)
+                        //{
+                        //    if (NetworkServer.active)
+                        //    {
+                        //        body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 0);
+                        //    }
+                        //}
+                        
 
 
                     }

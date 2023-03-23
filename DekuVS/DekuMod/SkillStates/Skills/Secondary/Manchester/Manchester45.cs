@@ -11,12 +11,13 @@ namespace DekuMod.SkillStates
 {
     public class Manchester45 : BaseSkill45
     {
-        public static float jumpDuration = 0.7f;
-        public static float dropForce = 20f;
+        public  float basejumpDuration = 0.7f;
+        private float jumpDuration;
+        public  float dropForce = 20f;
 
-        public static float slamRadius = 7f;
-        public static float slamProcCoefficient = 1f;
-        public static float slamForce = 10f;
+        public  float slamRadius = 7f;
+        public  float slamProcCoefficient = 1f;
+        public  float slamForce = 10f;
 
         private bool hasDropped;
         private Vector3 flyVector = Vector3.zero;
@@ -40,7 +41,7 @@ namespace DekuMod.SkillStates
             this.flyVector = Vector3.up;
             this.hasDropped = false; 
             dekucon = base.GetComponent<DekuController>();
-            jumpDuration /= attackSpeedStat;
+            jumpDuration = basejumpDuration/attackSpeedStat;
 
             float num = this.moveSpeedStat;
             bool isSprinting = base.characterBody.isSprinting;

@@ -14,7 +14,8 @@ namespace DekuMod.SkillStates
 {
     public class Blackwhip45 : BaseQuirk45
     {
-
+        private RaycastHit raycastHit;
+        private bool raycast;
         public HurtBox Target;
         private bool targetIsValid;
         private OverlapAttack attack;
@@ -42,8 +43,11 @@ namespace DekuMod.SkillStates
             {
                 Target = dekucon.GetTrackingTarget();
             }
-            if (!Target)
-            {
+
+            
+            raycast = Physics.Raycast(base.GetAimRay(), out raycastHit, 100f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
+            if (!Target && !raycast)
+            {                
                 energySystem.currentPlusUltra += Modules.StaticValues.skill45PlusUltraSpend;
                 return;
             }
@@ -51,11 +55,14 @@ namespace DekuMod.SkillStates
             {
                 base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
             }
-            bool flag2 = this.Target && this.Target.healthComponent && this.Target.healthComponent.alive;
-            if (flag2)
+            if (this.Target && this.Target.healthComponent && this.Target.healthComponent.alive)
             {
                 this.targetIsValid = true;
 
+            }
+            else if(raycast)
+            {
+                this.targetIsValid = true;
             }
             HitBoxGroup hitBoxGroup = null;
             Transform modelTransform = base.GetModelTransform();
@@ -101,26 +108,19 @@ namespace DekuMod.SkillStates
                 {
                     this.storedPosition = Target.transform.position;
                     dekucon.enemyBody = Target.healthComponent.body;
-                    dekucon.blackwhipTimer = 1f;
-                    characterBody.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 1, 1);
+                    dekucon.blackwhipTimer += 1f;
                 }
-                else
+                if (raycast)
                 {
+                    this.storedPosition = raycastHit.point;
+                    dekucon.storedPos = raycastHit.point;
+                    dekucon.blackwhipAttachWorld = true;
+                    dekucon.enemyBody = null;
+                    dekucon.blackwhipTimer += 1f;
 
-                    RaycastHit raycastHit;
-                    bool raycast = Physics.Raycast(base.GetAimRay(), out raycastHit, 100f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
-                    if (raycast)
-                    {
-                        this.storedPosition = raycastHit.point;
-                        dekucon.storedPos = raycastHit.point;
-                        dekucon.blackwhipAttachWorld = true;
-                        dekucon.blackwhipTimer = 1f;
-                        characterBody.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 1, 1);
-                        
-                    }
                 }
-                bool flag2 = base.isAuthority && this.targetIsValid;
-                if (flag2)
+
+                if (base.isAuthority && this.targetIsValid)
                 {
                     Vector3 velocity = (this.storedPosition - base.transform.position).normalized * dashSpeed;
                     base.characterMotor.velocity = velocity;
@@ -163,7 +163,7 @@ namespace DekuMod.SkillStates
                         }
                     }
                 }
-                else
+                else 
                 {
                     this.outer.SetNextStateToMain();
                 }

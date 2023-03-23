@@ -14,11 +14,11 @@ namespace DekuMod.SkillStates
 {
     public class Manchester100 : BaseSkill100
     {
-        public static float dropForce = 80f;
+        public  float dropForce = 80f;
         public float dropTimer;
-        public static float slamRadius = 8f;
-        public static float slamProcCoefficient = 1f;
-        public static float slamForce = 1000f;
+        public  float slamRadius = 8f;
+        public  float slamProcCoefficient = 1f;
+        public  float slamForce = 1000f;
         private float damageCoefficient = Modules.StaticValues.manchester100DamageCoefficient;
 
         private bool hasDropped;

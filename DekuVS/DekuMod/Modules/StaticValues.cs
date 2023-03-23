@@ -21,8 +21,8 @@ namespace DekuMod.Modules
         internal static float regenPlusUltraRate = 8f;
         internal static float basePlusUltraGain = 1f;
         internal static float skillPlusUltraGain = 2f;
-        internal static float skillPlusUltraSpend = 10f;
-        internal static float skill45PlusUltraSpend = 10f;
+        internal static float skillPlusUltraSpend = 5f;
+        internal static float skill45PlusUltraSpend = 5f;
         internal static float skill100PlusUltraSpend = 5f;
         internal static float specialPlusUltraSpend = 50f;
         internal static float modePlusUltraSpend = 5f;

@@ -21,7 +21,6 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            duration /= attackSpeedStat;
 
 
         }

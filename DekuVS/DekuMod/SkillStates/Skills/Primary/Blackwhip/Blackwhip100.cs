@@ -82,19 +82,11 @@ namespace DekuMod.SkillStates
                             dekucon.enemyBody = Target.healthComponent.body;
                             dekucon.blackwhipTimer = StaticValues.blackwhipAttachDuration;
                             dekucon.blackwhipActivated = true;
-                            if(!characterBody.HasBuff(Buffs.blackwhipBuff.buffIndex))
-                            {
-                                characterBody.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 1);
-                            }
                         }
                     }
                     else if (dekucon.blackwhipActivated)
                     {
                         dekucon.blackwhipActivated = false;
-                        if (characterBody.HasBuff(Buffs.blackwhipBuff.buffIndex))
-                        {
-                            characterBody.ApplyBuff(Buffs.blackwhipBuff.buffIndex, 0);
-                        }
                     }
                 }
 

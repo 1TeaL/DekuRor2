@@ -13,6 +13,12 @@ If you enjoy my work, support me on Ko-fi!
 <details>
 <summary>Check out other mods from the Popcorn Factory team!</summary>
 <div>
+    <a href="https://thunderstore.io/package/PopcornFactory/Arsonist_Mod/">
+      <img width="130" src="https://cdn.discordapp.com/attachments/928130606662049892/1088442099432706068/PopcornFactory-Arsonist_Mod-1.png"/>
+      <p>Arsonist Mod (Popcorn Factory Team)</p>
+    </a>
+</div>	
+<div>
     <a href="https://thunderstore.io/package/PopcornFactory/Rimuru_Tempest_Mod/">
       <img width="130" src="https://cdn.discordapp.com/attachments/399901440023330816/1033003173759164467/unknown.png"/>
       <p>Rimuru Tempest Mod (Popcorn Factory Team)</p>
@@ -59,6 +65,13 @@ If you enjoy my work, support me on Ko-fi!
 ## Latest Changelog, Next update(s)
 
 
+- 4.1.2- Bug fixes/Skill changes
+    - Changed all quirk skills to cost 5 instead to reduce the price for toggling a skill off.
+    - Fixed Float not giving the float buff 
+    - Shoot Style Kick 100%- no longer scales duration by attackspeed as you could just travel no where without movespeed. Attackspeed now increases damage instead.
+    - Fixed Blackwhip not attaching to enemies and dealing damage/healing. It also now adds 10 seconds to it's duration each time you activate it. 
+    - Fixed Blackwhip 45% not travelling to walls.
+    - Fixed Manchester 45% duration not being reduced further and further after each use.
 - 4.1.1- Bug fixes/Skill changes
     - Improved priority of OFA skills so it can be used on top of other skills a bit better
     - Wind effect for Detroit Smash 45% and 100% was using Smokescreen's purple particle- changed back to white.  
