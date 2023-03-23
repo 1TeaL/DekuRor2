@@ -58,6 +58,12 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 4.1.2- Bug fixes/Skill changes
+    - Changed all quirk skills to cost 5 instead to reduce the price for toggling a skill off.
+    - Fixed Float not giving the float buff 
+    - Shoot Style Kick 100%- no longer scales duration by attackspeed as you could just travel no where without movespeed. Attackspeed now increases damage instead.
+    - Fixed Blackwhip not attaching to enemies and dealing damage/healing.
+    - Fixed Blackwhip 45% not travelling to walls.
 - 4.1.1- Bug fixes/Skill changes
     - Improved priority of OFA skills so it can be used on top of other skills a bit better
     - Wind effect for Detroit Smash 45% and 100% was using Smokescreen's purple particle- changed back to white.  
