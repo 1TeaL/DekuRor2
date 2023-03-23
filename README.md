@@ -11,7 +11,13 @@ Adds Deku from My Hero Academia, a multiple quirk using survivor which can acces
 If you enjoy my work, support me on Ko-fi!
 ## Popcorn Factory
 <details>
-<summary>Check out other mods from the Popcorn Factory team!</summary>	
+<summary>Check out other mods from the Popcorn Factory team!</summary>
+<div>
+    <a href="https://thunderstore.io/package/PopcornFactory/Arsonist_Mod/">
+      <img width="130" src="https://cdn.discordapp.com/attachments/928130606662049892/1088442099432706068/PopcornFactory-Arsonist_Mod-1.png"/>
+      <p>Arsonist Mod (Popcorn Factory Team)</p>
+    </a>
+</div>	
 <div>
     <a href="https://thunderstore.io/package/PopcornFactory/Rimuru_Tempest_Mod/">
       <img width="130" src="https://cdn.discordapp.com/attachments/399901440023330816/1033003173759164467/unknown.png"/>
