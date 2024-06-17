@@ -273,12 +273,10 @@ namespace DekuMod.Modules.Survivors
         internal override void InitializeCharacter()
         {
             base.InitializeCharacter();
-            bool scepterInstalled = DekuPlugin.scepterInstalled |DekuPlugin.fallbackScepter;
-            if (scepterInstalled)
-            {
-                Deku.CreateScepterSkills();
-            }
+
             bodyPrefab.AddComponent<DekuController>();
+            bodyPrefab.AddComponent<DekuUI>();
+            bodyPrefab.AddComponent<EnergySystem>();
         }
 
         //internal override void InitializeUnlockables()
@@ -2452,27 +2450,8 @@ namespace DekuMod.Modules.Survivors
             //    requiredStock = 1,
             //    stockToConsume = 1,
             //});
-            if (DekuPlugin.scepterInstalled)
-            {
-                RegisterAncientScepterStandalone(ofacycle1scepterSkillDef);
-            }
-            else if (DekuPlugin.fallbackScepter)
-            {
-                RegisterTILERScepter(ofacycle1scepterSkillDef);
-            }
         }
         #endregion
-        private static void RegisterAncientScepterStandalone(SkillDef skill1)
-        {
-            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(skill1, instance.fullBodyName, SkillSlot.Special, 0);
-            //AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(skill2, instance.fullBodyName, SkillSlot.Special, 1);
-        }
-
-        private static void RegisterTILERScepter(SkillDef skill1)
-        {
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(skill1, instance.fullBodyName, SkillSlot.Special, ofacycleSkillDef);
-            //ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(skill2, instance.fullBodyName, SkillSlot.Special, fajinSkillDef);
-        }
 
         internal override void InitializeSkins()
         {

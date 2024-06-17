@@ -62,7 +62,7 @@ namespace DekuMod.Modules.Survivors
         //blackwhip
         public float blackwhipSiphonTimer;
         public NetworkedBodyAttachment attachment;
-        public SiphonNearbyController siphonNearbyController;
+        //public SiphonNearbyController siphonNearbyController;
         public GameObject blackwhipLineEffect;
         public LineRenderer blackwhipLineRenderer;
         public CharacterBody enemyBody;
@@ -104,42 +104,43 @@ namespace DekuMod.Modules.Survivors
         //skill cd
         public float skillCDTimer;
 
-        public void Awake()
+        public void Start()
         {
+            energySystem = gameObject.GetComponent<EnergySystem>();
             body = gameObject.GetComponent<CharacterBody>();
             child = GetComponentInChildren<ChildLocator>();
             indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
             inputBank = gameObject.GetComponent<InputBankTest>();
             if (child)
             {
-                GOBEYOND = child.FindChild("goBeyondAura").GetComponent<ParticleSystem>();
-                LARM = child.FindChild("lArmAura").GetComponent<ParticleSystem>();
-                RARM = child.FindChild("rArmAura").GetComponent<ParticleSystem>();
-                LLEG = child.FindChild("lLegAura").GetComponent<ParticleSystem>();
-                RLEG = child.FindChild("rLegAura").GetComponent<ParticleSystem>();
-                OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
-                OFAeye = child.FindChild("OFAlightningeye").GetComponent<ParticleSystem>();
-                FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
-                DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
-                WINDRING = child.FindChild("windRing").GetComponent<ParticleSystem>();
-                BLACKWHIP = child.FindChild("blackwhipAura").GetComponent<ParticleSystem>();
-                GEARSHIFTIN = child.FindChild("gearshiftAuraIn").GetComponent<ParticleSystem>();
-                GEARSHIFTOUT = child.FindChild("gearshiftAuraOut").GetComponent<ParticleSystem>();
+                //GOBEYOND = child.FindChild("goBeyondAura").GetComponent<ParticleSystem>();
+                //LARM = child.FindChild("lArmAura").GetComponent<ParticleSystem>();
+                //RARM = child.FindChild("rArmAura").GetComponent<ParticleSystem>();
+                //LLEG = child.FindChild("lLegAura").GetComponent<ParticleSystem>();
+                //RLEG = child.FindChild("rLegAura").GetComponent<ParticleSystem>();
+                //OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
+                //OFAeye = child.FindChild("OFAlightningeye").GetComponent<ParticleSystem>();
+                //FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
+                //DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
+                //WINDRING = child.FindChild("windRing").GetComponent<ParticleSystem>();
+                //BLACKWHIP = child.FindChild("blackwhipAura").GetComponent<ParticleSystem>();
+                //GEARSHIFTIN = child.FindChild("gearshiftAuraIn").GetComponent<ParticleSystem>();
+                //GEARSHIFTOUT = child.FindChild("gearshiftAuraOut").GetComponent<ParticleSystem>();
             }
-            GOBEYOND.Stop();
-            LARM.Stop();
-            RARM.Stop();
-            LLEG.Stop();
-            RLEG.Stop();
-            OFA.Stop();
-            OFAeye.Stop();
-            OFA.Stop();
-            FAJIN.Stop();
-            DANGERSENSE.Stop();
-            WINDRING.Stop();
-            BLACKWHIP.Stop();
-            GEARSHIFTIN.Stop();
-            GEARSHIFTOUT.Stop();
+            //GOBEYOND.Stop();
+            //LARM.Stop();
+            //RARM.Stop();
+            //LLEG.Stop();
+            //RLEG.Stop();
+            //OFA.Stop();
+            //OFAeye.Stop();
+            //OFA.Stop();
+            //FAJIN.Stop();
+            //DANGERSENSE.Stop();
+            //WINDRING.Stop();
+            //BLACKWHIP.Stop();
+            //GEARSHIFTIN.Stop();
+            //GEARSHIFTOUT.Stop();
 
             StopGobeyondLoop();
 
@@ -147,6 +148,9 @@ namespace DekuMod.Modules.Survivors
             //stopwatch = 0f;
 
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            goBeyondUsed = false;
+            goBeyondOFAGiven = false;
+            skillCDTimer = 0f;
         }
 
 
@@ -256,7 +260,6 @@ namespace DekuMod.Modules.Survivors
                         else
                         {
                             Chat.AddMessage($"You need {StaticValues.dangersensePlusUltraSpend} plus ultra.");
-                            energySystem.TriggerGlow(0.3f, 0.3f, Color.black);
                         }
                         
 
@@ -270,17 +273,10 @@ namespace DekuMod.Modules.Survivors
             orig.Invoke(self, damageInfo);
         }
 
-        public void Start()
-        {
-            energySystem = gameObject.AddComponent<EnergySystem>();
-
-            goBeyondUsed = false;
-            goBeyondOFAGiven = false;
-            skillCDTimer = 0f;
-        }
 
         public void Update()
         {
+
 
             if (blackwhipTimer > 0f)
             {
@@ -378,357 +374,357 @@ namespace DekuMod.Modules.Survivors
                 blackwhipActivated = false;
             }
 
-            //gearshift
-            if (body.HasBuff(Buffs.gearshift100Buff.buffIndex))
-            {
-                int gearshiftMovespeed = (int)Math.Round(body.moveSpeed);
-                if (NetworkServer.active)
-                {
-                    body.SetBuffCount(Buffs.gearshift100MovespeedBuff.buffIndex, gearshiftMovespeed);
-                }
+            ////gearshift
+            //if (body.HasBuff(Buffs.gearshift100Buff.buffIndex))
+            //{
+            //    int gearshiftMovespeed = (int)Math.Round(body.moveSpeed);
+            //    if (NetworkServer.active)
+            //    {
+            //        body.SetBuffCount(Buffs.gearshift100MovespeedBuff.buffIndex, gearshiftMovespeed);
+            //    }
 
 
-                if (GEARSHIFTIN.isStopped)
-                {
-                    GEARSHIFTIN.Play();
-                }
-                if (GEARSHIFTOUT.isStopped)
-                {
-                    GEARSHIFTOUT.Play();
-                }
-            }
-            else if (!body.HasBuff(Buffs.gearshift100Buff.buffIndex))
-            {
-                if (NetworkServer.active)
-                {
-                    body.SetBuffCount(Buffs.gearshift100MovespeedBuff.buffIndex, 0);
-                }
-                if (body.HasBuff(Buffs.gearshiftBuff.buffIndex))
-                {
-                    energySystem.SpendPlusUltra(StaticValues.gearshiftEnergyFraction);
+            //    if (GEARSHIFTIN.isStopped)
+            //    {
+            //        GEARSHIFTIN.Play();
+            //    }
+            //    if (GEARSHIFTOUT.isStopped)
+            //    {
+            //        GEARSHIFTOUT.Play();
+            //    }
+            //}
+            //else if (!body.HasBuff(Buffs.gearshift100Buff.buffIndex))
+            //{
+            //    if (NetworkServer.active)
+            //    {
+            //        body.SetBuffCount(Buffs.gearshift100MovespeedBuff.buffIndex, 0);
+            //    }
+            //    if (body.HasBuff(Buffs.gearshiftBuff.buffIndex))
+            //    {
+            //        energySystem.SpendPlusUltra(StaticValues.gearshiftEnergyFraction);
 
-                    if (energySystem.currentPlusUltra < 5f)
-                    {
-                        body.ApplyBuff(Buffs.gearshiftBuff.buffIndex, 0);
-                        Chat.AddMessage($"Deactivated gearshift.");
-                    }
-                    if (GEARSHIFTIN.isStopped)
-                    {
-                        GEARSHIFTIN.Play();
-                    }
-                }
-                else if (!body.HasBuff(Buffs.gearshiftBuff.buffIndex))
-                {
-                    if (GEARSHIFTIN.isPlaying)
-                    {
-                        GEARSHIFTIN.Stop();
-                    }
-                }
+            //        if (energySystem.currentPlusUltra < 5f)
+            //        {
+            //            body.ApplyBuff(Buffs.gearshiftBuff.buffIndex, 0);
+            //            Chat.AddMessage($"Deactivated gearshift.");
+            //        }
+            //        if (GEARSHIFTIN.isStopped)
+            //        {
+            //            GEARSHIFTIN.Play();
+            //        }
+            //    }
+            //    else if (!body.HasBuff(Buffs.gearshiftBuff.buffIndex))
+            //    {
+            //        if (GEARSHIFTIN.isPlaying)
+            //        {
+            //            GEARSHIFTIN.Stop();
+            //        }
+            //    }
 
-                if (body.HasBuff(Buffs.gearshift45Buff.buffIndex))
-                {
-                    energySystem.SpendPlusUltra(StaticValues.gearshiftEnergyFraction);
+            //    if (body.HasBuff(Buffs.gearshift45Buff.buffIndex))
+            //    {
+            //        energySystem.SpendPlusUltra(StaticValues.gearshiftEnergyFraction);
 
-                    if (energySystem.currentPlusUltra < 5f)
-                    {
-                        body.ApplyBuff(Buffs.gearshift45Buff.buffIndex, 0);
-                        Chat.AddMessage($"Deactivated gearshift 45%.");
-                    }
-                    if (GEARSHIFTOUT.isStopped)
-                    {
-                        GEARSHIFTOUT.Play();
-                    }
-                }
-                else if (!body.HasBuff(Buffs.gearshift45Buff.buffIndex))
-                {
-                    if (GEARSHIFTOUT.isPlaying)
-                    {
-                        GEARSHIFTOUT.Stop();
-                    }
-                }
+            //        if (energySystem.currentPlusUltra < 5f)
+            //        {
+            //            body.ApplyBuff(Buffs.gearshift45Buff.buffIndex, 0);
+            //            Chat.AddMessage($"Deactivated gearshift 45%.");
+            //        }
+            //        if (GEARSHIFTOUT.isStopped)
+            //        {
+            //            GEARSHIFTOUT.Play();
+            //        }
+            //    }
+            //    else if (!body.HasBuff(Buffs.gearshift45Buff.buffIndex))
+            //    {
+            //        if (GEARSHIFTOUT.isPlaying)
+            //        {
+            //            GEARSHIFTOUT.Stop();
+            //        }
+            //    }
 
-            }
-            //blackwhip base
-            if (this.siphonNearbyController)
-            {
-                this.siphonNearbyController.NetworkmaxTargets = (body.healthComponent.alive ? StaticValues.blackwhipTargets : 0);
-            }
-            if(blackwhipSiphonTimer > 0f)
-            {
-                blackwhipSiphonTimer -= Time.fixedDeltaTime;
-            }
-            if (blackwhipSiphonTimer < 0f)
-            {
-                this.DestroyAttachment();
-            }
+            //}
+            ////blackwhip base
+            //if (this.siphonNearbyController)
+            //{
+            //    this.siphonNearbyController.NetworkmaxTargets = (body.healthComponent.alive ? StaticValues.blackwhipTargets : 0);
+            //}
+            //if(blackwhipSiphonTimer > 0f)
+            //{
+            //    blackwhipSiphonTimer -= Time.fixedDeltaTime;
+            //}
+            //if (blackwhipSiphonTimer < 0f)
+            //{
+            //    this.DestroyAttachment();
+            //}
 
-            //blackwhip buff effect
-            if (blackwhipSiphonTimer > 0f || blackwhipTimer > 0f)
-            {
-                if (BLACKWHIP.isStopped)
-                {
-                    BLACKWHIP.Play();
-                }
+            ////blackwhip buff effect
+            //if (blackwhipSiphonTimer > 0f || blackwhipTimer > 0f)
+            //{
+            //    if (BLACKWHIP.isStopped)
+            //    {
+            //        BLACKWHIP.Play();
+            //    }
 
-            }
-            else if (blackwhipSiphonTimer < 0f && blackwhipTimer < 0f)
-            {
-                if (BLACKWHIP.isPlaying)
-                {
-                    BLACKWHIP.Stop();
-                }
-            }
+            //}
+            //else if (blackwhipSiphonTimer < 0f && blackwhipTimer < 0f)
+            //{
+            //    if (BLACKWHIP.isPlaying)
+            //    {
+            //        BLACKWHIP.Stop();
+            //    }
+            //}
 
-            //float
-            if (!body.characterMotor.isGrounded)
-            {
-                stopwatch += Time.fixedDeltaTime;
-                if (stopwatch > 0.5f)
-                {
-                    if (energySystem.currentPlusUltra > 5f)
-                    {
-                        if (body.inputBank.jump.down)
-                        {
-                            body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 1);                            
+            ////float
+            //if (!body.characterMotor.isGrounded)
+            //{
+            //    stopwatch += Time.fixedDeltaTime;
+            //    if (stopwatch > 0.5f)
+            //    {
+            //        if (energySystem.currentPlusUltra > 5f)
+            //        {
+            //            if (body.inputBank.jump.down)
+            //            {
+            //                body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 1);                            
 
-                            if (body.characterMotor.velocity.y <= 0)
-                            {
-                                energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
-                                if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
-                                {
-                                    body.characterMotor.velocity.y = 0f;
-                                }
-                                else
-                                {
-                                    if(stopwatch < 3f)
-                                    {
-                                        body.characterMotor.velocity.y += 1f;
-                                    }
-                                    else
-                                    {
-                                        body.characterMotor.velocity.y = 0f;
-                                    }
-                                }
-                            }
-                            else if (body.characterMotor.velocity.y > 0)
-                            {
-                                energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
-                                if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
-                                {
-                                    body.characterMotor.velocity.y = 0f;
-                                }
-                                else
-                                {
-                                    if (stopwatch < 3f)
-                                    {
-                                        body.characterMotor.velocity.y = StaticValues.floatSpeed;
-                                    }
-                                    else
-                                    {
-                                        body.characterMotor.velocity.y = 0f;
-                                    }
-                                }
-                            }
+            //                if (body.characterMotor.velocity.y <= 0)
+            //                {
+            //                    energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
+            //                    if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
+            //                    {
+            //                        body.characterMotor.velocity.y = 0f;
+            //                    }
+            //                    else
+            //                    {
+            //                        if(stopwatch < 3f)
+            //                        {
+            //                            body.characterMotor.velocity.y += 1f;
+            //                        }
+            //                        else
+            //                        {
+            //                            body.characterMotor.velocity.y = 0f;
+            //                        }
+            //                    }
+            //                }
+            //                else if (body.characterMotor.velocity.y > 0)
+            //                {
+            //                    energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
+            //                    if (body.inputBank.skill1.down || body.inputBank.skill2.down || body.inputBank.skill3.down)
+            //                    {
+            //                        body.characterMotor.velocity.y = 0f;
+            //                    }
+            //                    else
+            //                    {
+            //                        if (stopwatch < 3f)
+            //                        {
+            //                            body.characterMotor.velocity.y = StaticValues.floatSpeed;
+            //                        }
+            //                        else
+            //                        {
+            //                            body.characterMotor.velocity.y = 0f;
+            //                        }
+            //                    }
+            //                }
 
-                            //move in the direction you're moving at a normal speed
-                            if (body.inputBank.moveVector != Vector3.zero)
-                            {
-                                energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
-                                //characterBody.characterMotor.velocity = characterBody.inputBank.moveVector * (characterBody.moveSpeed);
-                                body.characterMotor.rootMotion += body.inputBank.moveVector * body.moveSpeed * Time.fixedDeltaTime;
-                                //characterBody.characterMotor.disableAirControlUntilCollision = false;
-                            }
-                        }
-                        //else if (!body.inputBank.jump.down)
-                        //{
-                        //    if (NetworkServer.active)
-                        //    {
-                        //        body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 0);
-                        //    }
-                        //}
+            //                //move in the direction you're moving at a normal speed
+            //                if (body.inputBank.moveVector != Vector3.zero)
+            //                {
+            //                    energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
+            //                    //characterBody.characterMotor.velocity = characterBody.inputBank.moveVector * (characterBody.moveSpeed);
+            //                    body.characterMotor.rootMotion += body.inputBank.moveVector * body.moveSpeed * Time.fixedDeltaTime;
+            //                    //characterBody.characterMotor.disableAirControlUntilCollision = false;
+            //                }
+            //            }
+            //            //else if (!body.inputBank.jump.down)
+            //            //{
+            //            //    if (NetworkServer.active)
+            //            //    {
+            //            //        body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 0);
+            //            //    }
+            //            //}
                         
 
 
-                    }
+            //        }
 
-                }
-            }
-            else if (body.characterMotor.isGrounded)
-            {
-                stopwatch = 0f;
-                if (NetworkServer.active)
-                {
-                    body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 0);
-                }
-            }
+            //    }
+            //}
+            //else if (body.characterMotor.isGrounded)
+            //{
+            //    stopwatch = 0f;
+            //    if (NetworkServer.active)
+            //    {
+            //        body.ApplyBuff(Modules.Buffs.floatBuff.buffIndex, 0);
+            //    }
+            //}
 
-            //ofabuff self damage and eye particle
-            if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.supaofaBuff))
-            {
-                if (ofaHurtTimer > 1f)
-                {
-                    ofaHurtTimer = 0f;
-                    if (body.hasEffectiveAuthority)
-                    {
-                        new SpendHealthNetworkRequest(body.masterObjectId, StaticValues.ofaHealthCost * body.healthComponent.health).Send(NetworkDestination.Clients);
-                    }
-                }
-                else
-                {
-                    ofaHurtTimer += Time.fixedDeltaTime;
-                }
+            ////ofabuff self damage and eye particle
+            //if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.supaofaBuff))
+            //{
+            //    if (ofaHurtTimer > 1f)
+            //    {
+            //        ofaHurtTimer = 0f;
+            //        if (body.hasEffectiveAuthority)
+            //        {
+            //            new SpendHealthNetworkRequest(body.masterObjectId, StaticValues.ofaHealthCost * body.healthComponent.health).Send(NetworkDestination.Clients);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        ofaHurtTimer += Time.fixedDeltaTime;
+            //    }
 
-                if (OFAeye.isStopped)
-                {
-                    OFAeye.Play();
-                }
-            }
-            else
-            {
-                OFAeye.Stop();
-            }
-            //go beyond healing and one use and particle
-            if (body.HasBuff(Buffs.goBeyondBuff))
-            {
-                body.skillLocator.special.RemoveAllStocks();
-                if (goBeyondTimer > 1f)
-                {
-                    if (body.hasEffectiveAuthority)
-                    {
-                        new HealNetworkRequest(body.masterObjectId, body.healthComponent.fullCombinedHealth * StaticValues.gobeyondHealCoefficient).Send(NetworkDestination.Clients);
-                    }
-                    goBeyondTimer = 0f;
-                }
-                else
-                {
-                    goBeyondTimer += Time.fixedDeltaTime;
-                }
+            //    if (OFAeye.isStopped)
+            //    {
+            //        OFAeye.Play();
+            //    }
+            //}
+            //else
+            //{
+            //    OFAeye.Stop();
+            //}
+            ////go beyond healing and one use and particle
+            //if (body.HasBuff(Buffs.goBeyondBuff))
+            //{
+            //    body.skillLocator.special.RemoveAllStocks();
+            //    if (goBeyondTimer > 1f)
+            //    {
+            //        if (body.hasEffectiveAuthority)
+            //        {
+            //            new HealNetworkRequest(body.masterObjectId, body.healthComponent.fullCombinedHealth * StaticValues.gobeyondHealCoefficient).Send(NetworkDestination.Clients);
+            //        }
+            //        goBeyondTimer = 0f;
+            //    }
+            //    else
+            //    {
+            //        goBeyondTimer += Time.fixedDeltaTime;
+            //    }
 
-                if(goBeyondBuffTimer > 59f)
-                {
-                    body.AddBuff(Modules.Buffs.goBeyondBuffUsed);
-                    if (!goBeyondUsed)
-                    {
-                        goBeyondUsed = true; 
-                        if (NetworkServer.active)
-                        {
-                            body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1);
-                        }
-                    }
-                }
-                else
-                {
-                    goBeyondBuffTimer += Time.fixedDeltaTime;
-                }
-            }
-            else if (!body.HasBuff(Buffs.goBeyondBuff))
-            {
-                //give ofa after gobeyond is used, once only
-                if (body.HasBuff(Buffs.goBeyondBuffUsed))
-                {
-                    if (!goBeyondOFAGiven)
-                    {
-                        goBeyondOFAGiven = true;
-                        if (NetworkServer.active)
-                        {
-                            body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1, -1);
-                        }
-                    }
-                }
-            }
-            //danger sense and particle
-            if (!body.HasBuff(Buffs.dangersenseDebuff))
-            {
-                if (NetworkServer.active)
-                {
-                    body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 1, -1);
-                }
-            }
-            if (body.HasBuff(Buffs.dangersenseBuff))
-            {
-                if (DANGERSENSE.isStopped)
-                {
-                    DANGERSENSE.Play();
-                }
-            }
-            else 
-            {
-                DANGERSENSE.Stop();
-            }
-            //fajin particle
-            if (body.HasBuff(Buffs.fajinBuff))
-            {
-                if (FAJIN.isStopped)
-                {
-                    FAJIN.Play();
-                }
-            }
-            else
-            {
-                FAJIN.Stop();
-            }
-            //ofa particle
-            if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.ofaBuff45) || body.HasBuff(Buffs.supaofaBuff) || body.HasBuff(Buffs.supaofaBuff45))
-            {
-                if (OFA.isStopped)
-                {
-                    OFA.Play();
-                }
-            }
-            else
-            {
-                OFA.Stop();
-            }
+            //    if(goBeyondBuffTimer > 59f)
+            //    {
+            //        body.AddBuff(Modules.Buffs.goBeyondBuffUsed);
+            //        if (!goBeyondUsed)
+            //        {
+            //            goBeyondUsed = true; 
+            //            if (NetworkServer.active)
+            //            {
+            //                body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1);
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        goBeyondBuffTimer += Time.fixedDeltaTime;
+            //    }
+            //}
+            //else if (!body.HasBuff(Buffs.goBeyondBuff))
+            //{
+            //    //give ofa after gobeyond is used, once only
+            //    if (body.HasBuff(Buffs.goBeyondBuffUsed))
+            //    {
+            //        if (!goBeyondOFAGiven)
+            //        {
+            //            goBeyondOFAGiven = true;
+            //            if (NetworkServer.active)
+            //            {
+            //                body.ApplyBuff(Buffs.ofaBuff.buffIndex, 1, -1);
+            //            }
+            //        }
+            //    }
+            //}
+            ////danger sense and particle
+            //if (!body.HasBuff(Buffs.dangersenseDebuff))
+            //{
+            //    if (NetworkServer.active)
+            //    {
+            //        body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 1, -1);
+            //    }
+            //}
+            //if (body.HasBuff(Buffs.dangersenseBuff))
+            //{
+            //    if (DANGERSENSE.isStopped)
+            //    {
+            //        DANGERSENSE.Play();
+            //    }
+            //}
+            //else 
+            //{
+            //    DANGERSENSE.Stop();
+            //}
+            ////fajin particle
+            //if (body.HasBuff(Buffs.fajinBuff))
+            //{
+            //    if (FAJIN.isStopped)
+            //    {
+            //        FAJIN.Play();
+            //    }
+            //}
+            //else
+            //{
+            //    FAJIN.Stop();
+            //}
+            ////ofa particle
+            //if (body.HasBuff(Buffs.ofaBuff) || body.HasBuff(Buffs.ofaBuff45) || body.HasBuff(Buffs.supaofaBuff) || body.HasBuff(Buffs.supaofaBuff45))
+            //{
+            //    if (OFA.isStopped)
+            //    {
+            //        OFA.Play();
+            //    }
+            //}
+            //else
+            //{
+            //    OFA.Stop();
+            //}
 
-            if (energySystem.currentPlusUltra >= 90f)
-            {
-                if (RLEG.isStopped)
-                {
-                    RLEG.Play();
-                }
-                if (LLEG.isStopped)
-                {
-                    LLEG.Play();
-                }
-            }
-            else if (energySystem.currentPlusUltra >= 50f && energySystem.currentPlusUltra < 90f)
-            {
-                if (RARM.isStopped)
-                {
-                    RARM.Play();
-                }
-                if (LARM.isStopped)
-                {
-                    LARM.Play();
-                }
-                if (RLEG.isPlaying)
-                {
-                    RLEG.Stop();
-                }
-                if (LLEG.isPlaying)
-                {
-                    LLEG.Stop();
-                }
-            }
-            else if (energySystem.currentPlusUltra < 50f)
-            {
-                if (RLEG.isPlaying)
-                {
-                    RLEG.Stop();
-                }
-                if (LLEG.isPlaying)
-                {
-                    LLEG.Stop();
-                }
-                if (RARM.isPlaying)
-                {
-                    RARM.Stop();
-                }
-                if (LARM.isPlaying)
-                {
-                    LARM.Stop();
-                }
-            }
+            //if (energySystem.currentPlusUltra >= 90f)
+            //{
+            //    if (RLEG.isStopped)
+            //    {
+            //        RLEG.Play();
+            //    }
+            //    if (LLEG.isStopped)
+            //    {
+            //        LLEG.Play();
+            //    }
+            //}
+            //else if (energySystem.currentPlusUltra >= 50f && energySystem.currentPlusUltra < 90f)
+            //{
+            //    if (RARM.isStopped)
+            //    {
+            //        RARM.Play();
+            //    }
+            //    if (LARM.isStopped)
+            //    {
+            //        LARM.Play();
+            //    }
+            //    if (RLEG.isPlaying)
+            //    {
+            //        RLEG.Stop();
+            //    }
+            //    if (LLEG.isPlaying)
+            //    {
+            //        LLEG.Stop();
+            //    }
+            //}
+            //else if (energySystem.currentPlusUltra < 50f)
+            //{
+            //    if (RLEG.isPlaying)
+            //    {
+            //        RLEG.Stop();
+            //    }
+            //    if (LLEG.isPlaying)
+            //    {
+            //        LLEG.Stop();
+            //    }
+            //    if (RARM.isPlaying)
+            //    {
+            //        RARM.Stop();
+            //    }
+            //    if (LARM.isPlaying)
+            //    {
+            //        LARM.Stop();
+            //    }
+            //}
 
 
         }
@@ -798,25 +794,25 @@ namespace DekuMod.Modules.Survivors
             return this.trackingTarget;
         }
 
-        private void OnEnable()
-        {
-            this.indicator.active = true;
-        }
+        //private void OnEnable()
+        //{
+        //    //this.indicator.active = true;
+        //}
 
-        private void OnDisable()
-        {
-            this.indicator.active = false;
-            this.DestroyAttachment();
-        }
-        private void DestroyAttachment()
-        {
-            if (this.attachment)
-            {
-                UnityEngine.Object.Destroy(this.attachment.gameObject);
-            }
-            this.attachment = null;
-            this.siphonNearbyController = null;
-        }
+        //private void OnDisable()
+        //{
+        //    //this.indicator.active = false;
+        //    this.DestroyAttachment();
+        //}
+        //private void DestroyAttachment()
+        //{
+        //    if (this.attachment)
+        //    {
+        //        UnityEngine.Object.Destroy(this.attachment.gameObject);
+        //    }
+        //    this.attachment = null;
+        //    this.siphonNearbyController = null;
+        //}
 
         private void OnDestroy()
         {

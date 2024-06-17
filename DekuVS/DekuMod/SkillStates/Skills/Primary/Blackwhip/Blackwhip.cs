@@ -63,13 +63,13 @@ namespace DekuMod.SkillStates
                 dekucon.attachment = UnityEngine.Object.Instantiate<GameObject>(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BodyAttachments/SiphonNearbyBodyAttachment")).GetComponent<NetworkedBodyAttachment>();
                 dekucon.attachment.AttachToGameObjectAndSpawn(base.gameObject, "siphon");
             }
-            if (!dekucon.siphonNearbyController)
-            {
-                dekucon.siphonNearbyController = dekucon.attachment.GetComponent<SiphonNearbyController>();
-                dekucon.siphonNearbyController.damagePerSecondCoefficient = Modules.StaticValues.blackwhipDamageCoefficient;
-                dekucon.siphonNearbyController.Networkradius = Modules.StaticValues.blackwhipRange;
-                dekucon.siphonNearbyController.NetworkmaxTargets =  Modules.StaticValues.blackwhipTargets;
-            }
+            //if (!dekucon.siphonNearbyController)
+            //{
+            //    dekucon.siphonNearbyController = dekucon.attachment.GetComponent<SiphonNearbyController>();
+            //    dekucon.siphonNearbyController.damagePerSecondCoefficient = Modules.StaticValues.blackwhipDamageCoefficient;
+            //    dekucon.siphonNearbyController.Networkradius = Modules.StaticValues.blackwhipRange;
+            //    dekucon.siphonNearbyController.NetworkmaxTargets =  Modules.StaticValues.blackwhipTargets;
+            //}
             ApplyDebuff();
 
         }

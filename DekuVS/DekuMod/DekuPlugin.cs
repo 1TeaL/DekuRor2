@@ -53,9 +53,9 @@ namespace DekuMod
 
 
     [BepInDependency("com.KingEnderBrine.ExtraSkillSlots", BepInDependency.DependencyFlags.HardDependency)]
-    [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
+    //[BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
+    //[BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     //[R2APISubmoduleDependency(new string[]
@@ -76,8 +76,8 @@ namespace DekuMod
         //   this shouldn't even have to be said
 
         //ancient scepters
-        public static bool scepterInstalled = false;
-        public static bool fallbackScepter = false;
+        //public static bool scepterInstalled = false;
+        //public static bool fallbackScepter = false;
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
@@ -98,15 +98,7 @@ namespace DekuMod
             instance = this;
             DekuCharacterBody = null;
             DekuPlugin.instance = this;
-            bool flag = Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");
-            if (flag)
-            {
-                DekuPlugin.scepterInstalled = true;
-            }
-            if (Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems"))
-            {
-                DekuPlugin.fallbackScepter = true;
-            }
+            
             // load assets and read config
             Modules.Assets.Initialize();
             Modules.Config.ReadConfig();

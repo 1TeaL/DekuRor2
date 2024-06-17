@@ -124,7 +124,7 @@ namespace DekuMod.Modules
 
         //UI
         public static GameObject banditCrosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bandit2/Bandit2CrosshairPrepRevolver.prefab").WaitForCompletion();
-
+        public static GameObject dekuCustomUI; 
 
 
         // networked hit sounds
@@ -186,6 +186,8 @@ namespace DekuMod.Modules
                 Debug.LogError("There is no AssetBundle to load assets from.");
                 return;
             }
+
+            dekuCustomUI = Assets.mainAssetBundle.LoadAsset<GameObject>("dekuCustomUI");
 
             airforceEffect = LoadEffect("windbullet");
             airforce45Effect = LoadEffect("windbullet45");

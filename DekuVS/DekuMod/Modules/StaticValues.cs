@@ -17,6 +17,7 @@ namespace DekuMod.Modules
 
 
         //Energy
+        internal static float baseRegenPlusUltra = 0.05f;
         internal static float maxPlusUltra = 100f;
         internal static float regenPlusUltraRate = 8f;
         internal static float basePlusUltraGain = 1f;

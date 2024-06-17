@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reflection;
 using RoR2;
+using RoR2.CharacterAI;
 using RoR2.UI;
 using TMPro;
 using UnityEngine;
@@ -7,263 +9,182 @@ using UnityEngine.UI;
 
 namespace DekuMod.Modules.Survivors
 {
-    public class EnergySystem : MonoBehaviour
+    public class DekuUI : MonoBehaviour
     {
         public CharacterBody characterBody;
+        private CharacterMaster characterMaster;
 
         //UI plusUltraMeter
-        public GameObject CustomUIObject;
-        public RectTransform plusUltraMeter;
-        public RectTransform plusUltraMeterGlowRect;
-        public Image plusUltraMeterGlowBackground;
-        public HGTextMeshProUGUI plusUltraNumber;
+        private GameObject RoRHUDObject;
+        public GameObject plusUltraBar;
+        public Image plusUltraFilling;
+        public GameObject plusUltraFilled1;
+        public GameObject plusUltraFilled2;
+        public GameObject plusUltraFilled3;
+
+        private bool Initialized;
+        public bool baseAIPresent;
+
         public Animator anim;
 
-        //Energy system
-        public float maxPlusUltra;
-        public float currentPlusUltra;
-        public float regenPlusUltra;
-        public float plusUltraGain;
-        public bool SetActiveTrue;
-        public float plusUltraTimer;
 
-        //Energy bar glow
-        private enum GlowState
+        #region Hook
+        public void Hook()
         {
-            STOP,
-            FLASH,
-            DECAY
+            //On.RoR2.CameraRigController.Update += CameraRigController_Update;
+            On.RoR2.UI.HUD.Update += HUD_Update;
         }
-        private float decayConst;
-        private float flashConst;
-        private float glowStopwatch;
-        private Color targetColor;
-        private Color originalColor;
-        private Color currentColor;
-        private GlowState state;
-        //bools to stop energy regen after skill used
-        private bool ifEnergyUsed;
-        private float energyDecayTimer;
-        private bool ifEnergyRegenAllowed;
 
-        public void Awake()
+        public void Unhook()
         {
-            characterBody = gameObject.GetComponent<CharacterBody>();
-            anim = GetComponentInChildren<Animator>();
+            //On.RoR2.CameraRigController.Update -= CameraRigController_Update;
+            On.RoR2.UI.HUD.Update -= HUD_Update;
         }
+
+        private void HUD_Update(On.RoR2.UI.HUD.orig_Update orig, HUD self)
+        {
+            orig(self);
+            if (!RoRHUDObject)
+            {
+                RoRHUDObject = self.gameObject;
+            }
+        }
+
+        #endregion
 
         public void Start()
         {
-
-            //Energy
-            maxPlusUltra = StaticValues.maxPlusUltra;
-            currentPlusUltra = 0f;
-            regenPlusUltra = StaticValues.regenPlusUltraRate;
-            plusUltraGain = StaticValues.basePlusUltraGain;
-            ifEnergyRegenAllowed = true;
+            baseAIPresent = false;
+            characterBody = gameObject.GetComponent<CharacterBody>();
+            anim = GetComponentInChildren<Animator>();
+            characterMaster = characterBody.master;
 
             //UI objects 
-            CustomUIObject = UnityEngine.Object.Instantiate(Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("dekuCustomUI"));
-            CustomUIObject.SetActive(false);
-            SetActiveTrue = false;
-
-            plusUltraMeter = CustomUIObject.transform.GetChild(0).GetComponent<RectTransform>();
-            plusUltraMeterGlowBackground = CustomUIObject.transform.GetChild(1).GetComponent<Image>();
-            plusUltraMeterGlowRect = CustomUIObject.transform.GetChild(1).GetComponent<RectTransform>();
-
-            //setup the UI element for the min/max
-            plusUltraNumber = this.CreateLabel(CustomUIObject.transform, "plusUltraNumber", $"{(int)currentPlusUltra} / {maxPlusUltra}", new Vector2(0, -110), 24f);
+            Initialized = false;
+            BaseAI baseAI = characterMaster.GetComponent<BaseAI>();
+            baseAIPresent = baseAI;
+            Hook();
 
 
-            // Start timer on 1f to turn off the timer.
-            state = GlowState.STOP;
-            decayConst = 1f;
-            flashConst = 1f;
-            glowStopwatch = 1f;
-            originalColor = new Color(1f, 1f, 1f, 0f);
-            targetColor = new Color(1f, 1f, 1f, 1f);
-            currentColor = originalColor;
+            //For some reason on goboo's first spawn the master is just not there. However subsequent spawns work.
+            // Disable the UI in this event.
+            // Besides, there should never be a UI element related to a non-existant master on screen if the attached master/charbody does not exist.
+            if (!characterMaster) baseAIPresent = true; // Disable UI Just in case.
 
+            try
+            {
+                InitializeUI();
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.Log("Deku - NRE on UI Initialization, trying again.");
+            }
         }
 
-        //Creates the label.
-        private HGTextMeshProUGUI CreateLabel(Transform parent, string name, string text, Vector2 position, float textScale)
+        public void InitializeUI()
         {
-            GameObject gameObject = new GameObject(name);
-            gameObject.transform.parent = parent;
-            gameObject.AddComponent<CanvasRenderer>();
-            RectTransform rectTransform = gameObject.AddComponent<RectTransform>();
-            HGTextMeshProUGUI hgtextMeshProUGUI = gameObject.AddComponent<HGTextMeshProUGUI>();
-            hgtextMeshProUGUI.enabled = true;
-            hgtextMeshProUGUI.text = text;
-            hgtextMeshProUGUI.fontSize = textScale;
-            hgtextMeshProUGUI.color = new Color(0f, 1f, 0.8f, 1f);
-            hgtextMeshProUGUI.alignment = TextAlignmentOptions.Center;
-            hgtextMeshProUGUI.enableWordWrapping = false;
-            rectTransform.localPosition = Vector2.zero;
-            rectTransform.anchorMin = Vector2.zero;
-            rectTransform.anchorMax = Vector2.one;
-            rectTransform.localScale = Vector3.one;
-            rectTransform.sizeDelta = Vector2.zero;
-            rectTransform.anchoredPosition = position;
-            return hgtextMeshProUGUI;
+            if (!Initialized && !baseAIPresent)
+            {
+                InitializePlusUltraMeter();
+                //Now we need to initialize everything inside the canvas to variables we can control.
+
+                Initialized = true;
+            }
         }
 
-        private void CalculateEnergyStats()
+        private void InitializePlusUltraMeter()
         {
-            //Energy updates
-            if (characterBody.HasBuff(Buffs.goBeyondBuff.buffIndex))
+
+            if (RoRHUDObject && !plusUltraBar)
             {
-                currentPlusUltra += StaticValues.goBeyondBuffGain;
+                plusUltraBar = UnityEngine.GameObject.Instantiate(Modules.Assets.dekuCustomUI, RoRHUDObject.transform.GetChild(0).GetChild(7).GetChild(2).GetChild(2).GetChild(0));
             }
 
-            if (ifEnergyRegenAllowed)
-            {
-                if (anim)
-                {
-                    if (anim.GetBool("isMoving"))
-                    {
-                        if (!characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff))
-                        {
-                            plusUltraTimer += Time.fixedDeltaTime;
-                            if (plusUltraTimer >= regenPlusUltra / characterBody.moveSpeed)
-                            {
-                                currentPlusUltra += StaticValues.basePlusUltraGain;
-                                plusUltraTimer = 0f;
-                            }
+            plusUltraFilling = plusUltraBar.transform.GetChild(1).GetComponent<Image>();
+            plusUltraFilled1 = plusUltraBar.transform.GetChild(2).gameObject;
+            plusUltraFilled2 = plusUltraBar.transform.GetChild(3).gameObject;
+            plusUltraFilled3 = plusUltraBar.transform.GetChild(4).gameObject;
 
-                        }
-                    }
-                }
-            }
-
-            if (ifEnergyUsed)
-            {
-                if (energyDecayTimer > 1f)
-                {
-                    energyDecayTimer = 0f;
-                    ifEnergyRegenAllowed = true;
-                    ifEnergyUsed = false;
-                }
-                else
-                {
-                    ifEnergyRegenAllowed = false;
-                    energyDecayTimer += Time.fixedDeltaTime;
-                }
-            }
-
-            if (currentPlusUltra > maxPlusUltra)
-            {
-                currentPlusUltra = maxPlusUltra;
-            }
-            if (currentPlusUltra < 0f)
-            {
-                currentPlusUltra = 0f;
-            }
-
-            if (plusUltraNumber)
-            {
-                plusUltraNumber.SetText($"{(int)currentPlusUltra} / {maxPlusUltra}");
-            }
-
-            if (plusUltraMeter)
-            {
-                // 2f because meter is too small probably.
-                // Logarithmically scale.
-                float linear = currentPlusUltra / maxPlusUltra;
-                float logVal = Mathf.Log10(((maxPlusUltra / StaticValues.maxPlusUltra) * 10f) + 1) * (currentPlusUltra / maxPlusUltra);
-                plusUltraMeter.localScale = new Vector3(2.0f * linear, 0.05f, 1f);
-                plusUltraMeterGlowRect.localScale = new Vector3(2.3f * linear, 0.1f, 1f);
-            }
-
-            //Chat.AddMessage($"{currentPlusUltra}/{maxPlusUltra}");
-            //particles
-
+            plusUltraFilled1.SetActive(false);
+            plusUltraFilled2.SetActive(false);
+            plusUltraFilled3.SetActive(false);
         }
 
         public void FixedUpdate()
         {
-            CalculateEnergyStats();
 
-            if (characterBody.hasAuthority && !SetActiveTrue)
-            {
-                CustomUIObject.SetActive(true);
-                SetActiveTrue = true;
-            }
         }
-
+                
+         
         public void Update()
         {
-            if (state != GlowState.STOP)
+
+            if (characterBody.hasEffectiveAuthority)
             {
-                glowStopwatch += Time.deltaTime;
-                float lerpFraction;
-                switch (state)
+                if (!Initialized)
                 {
-                    // Lerp to target color
-                    case GlowState.FLASH:
-
-                        lerpFraction = glowStopwatch / flashConst;
-                        currentColor = Color.Lerp(originalColor, targetColor, lerpFraction);
-
-                        if (glowStopwatch > flashConst)
-                        {
-                            state = GlowState.DECAY;
-                            glowStopwatch = 0f;
-                        }
-                        break;
-
-                    //Lerp back to original color;
-                    case GlowState.DECAY:
-                        //Linearlly lerp.
-                        lerpFraction = glowStopwatch / decayConst;
-                        currentColor = Color.Lerp(targetColor, originalColor, lerpFraction);
-
-                        if (glowStopwatch > decayConst)
-                        {
-                            state = GlowState.STOP;
-                            glowStopwatch = 0f;
-                        }
-                        break;
-                    case GlowState.STOP:
-                        //State does nothing.
-                        break;
+                    try
+                    {
+                        InitializeUI();
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Debug.Log("Deku - NRE on UI Initialization, trying again.");    
+                    }
                 }
+
             }
+        }        
 
-            plusUltraMeterGlowBackground.color = currentColor;
-        }
-
-        public void GainPlusUltra(float Energy)
+        public void UpdatePlusUltraMeter(float plusUltraAmount)
         {
-            if (ifEnergyRegenAllowed)
+            if (!plusUltraFilling)
             {
-                currentPlusUltra += Energy;
-                TriggerGlow(0.3f, 0.3f, Color.white);
+                return;
             }
-        }
 
-        public void SpendPlusUltra(float Energy)
-        {
-            ifEnergyUsed = true;
-            currentPlusUltra -= Energy;
-            TriggerGlow(0.3f, 0.3f, Color.green);
-        }
+            if(plusUltraAmount > StaticValues.maxPlusUltra)
+            {
+                plusUltraAmount = StaticValues.maxPlusUltra;
+            }
+            plusUltraFilling.fillAmount = plusUltraAmount/StaticValues.maxPlusUltra;
 
-        public void TriggerGlow(float newDecayTimer, float newFlashTimer, Color newStartingColor)
-        {
-            decayConst = newDecayTimer;
-            flashConst = newFlashTimer;
-            originalColor = new Color(newStartingColor.r, newStartingColor.g, newStartingColor.b, 0f);
-            targetColor = newStartingColor;
-            glowStopwatch = 0f;
-            state = GlowState.FLASH;
-        }
+            if(plusUltraAmount/StaticValues.maxPlusUltra >= 1 / 3f)
+            {
+                plusUltraFilled1.SetActive(true);
 
+            }
+            else
+            {
+                plusUltraFilled1.SetActive(false);
+            }
+
+            if (plusUltraAmount / StaticValues.maxPlusUltra >= 2 / 3f)
+            {
+                plusUltraFilled2.SetActive(true);
+
+            }
+            else
+            {
+                plusUltraFilled2.SetActive(false);
+            }
+
+            if (plusUltraAmount / StaticValues.maxPlusUltra >= 3 / 3f)
+            {
+                plusUltraFilled3.SetActive(true);
+
+            }
+            else
+            {
+                plusUltraFilled3.SetActive(false);
+            }
+
+        }
 
         public void OnDestroy()
         {
-            Destroy(CustomUIObject);
+            Destroy(plusUltraBar);
+            Unhook();
         }
     }
 }
