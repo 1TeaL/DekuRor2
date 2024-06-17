@@ -65,9 +65,6 @@ namespace DekuMod.SkillStates
                 case 1:
                     returnVal = "Swing2";
                     break;
-                case 2:
-                    returnVal = "Swing3";
-                    break;
             }
 
             return returnVal;

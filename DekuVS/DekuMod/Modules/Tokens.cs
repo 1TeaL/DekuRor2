@@ -16,8 +16,8 @@ namespace DekuMod.Modules
             desc = desc + "< ! > Base form focuses on control, as well as allowing him to build up Plus Ultra Meter." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > OFA 100% focuses on pure power at the cost of self-damage." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > OFA 45% is a mid ground between 100% and base, with no health regeneration." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Deku's can switch his skills between 3 loadouts- Power, Shoot Style, Quirks." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Deku's 4th extra skill depends on his loadout, and costs 50 Plus Ultra Meter." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Deku's can switch his skills between 3 loadouts- Power, Shoot Style, Quirks, he can also cycle skills between the 3 loadouts or within the same loadout." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Deku's 4th extra skill depends on his loadout, and costs 50 Plus Ultra Meter. He can also run all super skills in the 1st, 2nd and 3rd slots as well." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Ancient Scepter will give 10% Lifesteal for OFA 100% and 5% Lifesteal for OFA 45%." + Environment.NewLine + Environment.NewLine;
 
 

@@ -20,6 +20,7 @@ namespace DekuMod.Modules
 
         internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string namePrefix, UnlockableDef unlockableDef, float sortPosition)
         {
+            string tokenPrefix = DekuPlugin.developerPrefix + "_" + namePrefix + "_BODY_";
             string fullNameString = DekuPlugin.developerPrefix + "_" + namePrefix + "_BODY_NAME";
             string fullDescString = DekuPlugin.developerPrefix + "_" + namePrefix + "_BODY_DESCRIPTION";
             string fullOutroString = DekuPlugin.developerPrefix + "_" + namePrefix + "_BODY_OUTRO_FLAVOR";
@@ -35,6 +36,7 @@ namespace DekuMod.Modules
             survivorDef.mainEndingEscapeFailureFlavorToken = fullFailureString;
             survivorDef.desiredSortPosition = sortPosition;
             survivorDef.unlockableDef = unlockableDef;
+            survivorDef.cachedName = tokenPrefix;
 
             survivorDefinitions.Add(survivorDef);
         }

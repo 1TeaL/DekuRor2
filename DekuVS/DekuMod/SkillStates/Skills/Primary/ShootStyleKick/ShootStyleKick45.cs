@@ -8,6 +8,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 using DekuMod.Modules.Survivors;
+using TMPro;
 
 namespace DekuMod.SkillStates
 {
@@ -69,6 +70,7 @@ namespace DekuMod.SkillStates
 		protected DamageType damageType = DamageType.ResetCooldownsOnKill | DamageType.Generic;
 		public DekuController dekucon;
         private BlastAttack blastAttack;
+
 
         public override void OnEnter()
 		{
@@ -160,7 +162,8 @@ namespace DekuMod.SkillStates
 			}
 			AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
 
-		}
+
+        }
 
 		private void RecalculateRollSpeed()
 		{
@@ -315,12 +318,29 @@ namespace DekuMod.SkillStates
 
 			//base.PlayAnimation("FullBody, Override", "Backflip", "Roll.playbackRate", RollBounce.duration * 0.9f);
 			base.characterBody.SetAimTimer(2f);
-			//base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, ShootStyleKick45.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
-			//base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, ShootStyleKick452.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
+            //base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, ShootStyleKick45.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
+            //base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, ShootStyleKick452.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
 
-			//AkSoundEngine.PostEvent("impactsfx", this.gameObject);
+            //AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 
-			base.skillLocator.primary.AddOneStock();
+            //check inputs
+            if (base.IsKeyDownAuthority())
+            {
+                if (this.inputBank.skill1.down)
+                {
+                    base.skillLocator.primary.AddOneStock();
+                }
+                else
+                if (this.inputBank.skill2.down)
+                {
+                    base.skillLocator.secondary.AddOneStock();
+                }
+                else if (this.inputBank.skill3.down)
+                {
+                    base.skillLocator.utility.AddOneStock();
+                }
+
+            }
 			bool flag = !this.hasHopped;
 			if (flag)
 			{

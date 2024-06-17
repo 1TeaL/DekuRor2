@@ -528,7 +528,16 @@ namespace DekuMod.Modules.Survivors
                                         body.characterMotor.velocity.y = 0f;
                                     }
                                 }
-                            }                                
+                            }
+
+                            //move in the direction you're moving at a normal speed
+                            if (body.inputBank.moveVector != Vector3.zero)
+                            {
+                                energySystem.SpendPlusUltra(StaticValues.floatForceEnergyFraction);
+                                //characterBody.characterMotor.velocity = characterBody.inputBank.moveVector * (characterBody.moveSpeed);
+                                body.characterMotor.rootMotion += body.inputBank.moveVector * body.moveSpeed * Time.fixedDeltaTime;
+                                //characterBody.characterMotor.disableAirControlUntilCollision = false;
+                            }
                         }
                         //else if (!body.inputBank.jump.down)
                         //{

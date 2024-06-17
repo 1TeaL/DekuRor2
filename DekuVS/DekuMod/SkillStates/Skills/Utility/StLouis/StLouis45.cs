@@ -83,7 +83,6 @@ namespace DekuMod.SkillStates
             blastAttack.falloffModel = BlastAttack.FalloffModel.None;
             blastAttack.baseForce = force;
             blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-            blastAttack.damageType = damageType;
             blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
         }

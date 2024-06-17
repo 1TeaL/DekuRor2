@@ -15,6 +15,7 @@ using UnityEngine;
 using EmotesAPI;
 using R2API.Networking.Interfaces;
 using static UnityEngine.ParticleSystem.PlaybackState;
+using static RoR2.Console;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -93,6 +94,7 @@ namespace DekuMod
 
         private void Awake()
         {
+            Log.Init(Logger);
             instance = this;
             DekuCharacterBody = null;
             DekuPlugin.instance = this;

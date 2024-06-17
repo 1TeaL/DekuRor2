@@ -137,16 +137,128 @@ namespace DekuMod.Modules.Survivors
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal static Material dekuMat = Modules.Assets.CreateMaterial("matDeku");
+        internal static Material matArmL = Modules.Assets.CreateHopooMaterial("matArmL");
+        internal static Material matArmR = Modules.Assets.CreateHopooMaterial("matArmR");
+        internal static Material matBelt = Modules.Assets.CreateHopooMaterial("matBelt");
+        internal static Material matBody = Modules.Assets.CreateHopooMaterial("matBody");
+        internal static Material matEyes = Modules.Assets.CreateHopooMaterial("matEyes");
+        internal static Material matFace = Modules.Assets.CreateHopooMaterial("matFace");
+        internal static Material matGoldenButtons = Modules.Assets.CreateHopooMaterial("matGoldenButtons");
+        internal static Material matGranCape = Modules.Assets.CreateHopooMaterial("matGranCape");
+        internal static Material matGranMantle = Modules.Assets.CreateHopooMaterial("matGranMantle");
+        internal static Material matHair = Modules.Assets.CreateHopooMaterial("matHair");
+        internal static Material matHands = Modules.Assets.CreateHopooMaterial("matHands");
+        internal static Material matHood = Modules.Assets.CreateHopooMaterial("matHood");
+        internal static Material matLegs = Modules.Assets.CreateHopooMaterial("matLegs");
+        internal static Material matMask = Modules.Assets.CreateHopooMaterial("matMask");
+        internal static Material matMidGauntlet = Modules.Assets.CreateHopooMaterial("matMidGauntlet");
+        internal static Material matShoes = Modules.Assets.CreateHopooMaterial("matShoes");
+        internal static Material matWristband = Modules.Assets.CreateHopooMaterial("matWristband");
+
         internal override int mainRendererIndex { get; set; } = 0;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
                 new CustomRendererInfo
                 {
-                    childName = "Model",
-                    material = dekuMat
-                }};
-
+                    childName = "ArmL",
+                    material = matArmL
+                },
+                new CustomRendererInfo
+                {
+                    childName = "ArmR",
+                    material = matArmR
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Belt",
+                    material = matBelt
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Body",
+                    material = matBody
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Eyes",
+                    material = matEyes
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Face",
+                    material = matFace      
+                },
+                new CustomRendererInfo
+                {
+                    childName = "GoldenButtons",
+                    material = matGoldenButtons
+                },
+                new CustomRendererInfo
+                {
+                    childName = "GranCape",
+                    material = matGranCape
+                },
+                new CustomRendererInfo
+                {
+                    childName = "GranMantle",
+                    material = matGranMantle
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Hair",
+                    material = matHair
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Hands",
+                    material = matHands
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Hood",
+                    material = matHood
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Legs",
+                    material = matLegs
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Mask",
+                    material = matMask
+                },
+                new CustomRendererInfo
+                {
+                    childName = "MidGauntletL",
+                    material = matMidGauntlet
+                },
+                new CustomRendererInfo
+                {
+                    childName = "MidGauntletR",
+                    material = matMidGauntlet
+                },
+                new CustomRendererInfo
+                {
+                    childName = "MidGauntlets",
+                    material = matMidGauntlet
+                },
+                new CustomRendererInfo
+                {
+                    childName = "NeckFace",
+                    material = matFace
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Shoes",
+                    material = matShoes
+                },
+                new CustomRendererInfo
+                {
+                    childName = "Wristband",
+                    material = matWristband
+                },
+        };
 
 
         internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
@@ -186,24 +298,24 @@ namespace DekuMod.Modules.Survivors
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
 
-            Transform SmashHitboxTransform = childLocator.FindChild("SmashHitbox");
-            Modules.Prefabs.SetupHitbox(model, SmashHitboxTransform, "SwordHitbox");
+            //Transform SmashHitboxTransform = childLocator.FindChild("SmashHitbox");
+            //Modules.Prefabs.SetupHitbox(model, SmashHitboxTransform, "SwordHitbox");
 
 
-            Transform ModelHitboxTransform = childLocator.FindChild("ModelHitbox");
-            Modules.Prefabs.SetupHitbox(model, ModelHitboxTransform, "ModelHitbox");
+            //Transform ModelHitboxTransform = childLocator.FindChild("ModelHitbox");
+            //Modules.Prefabs.SetupHitbox(model, ModelHitboxTransform, "ModelHitbox");
 
-            Transform BigModelHitboxTransform = childLocator.FindChild("BigModelHitbox");
-            Modules.Prefabs.SetupHitbox(model, BigModelHitboxTransform, "BigModelHitbox");
+            //Transform BigModelHitboxTransform = childLocator.FindChild("BigModelHitbox");
+            //Modules.Prefabs.SetupHitbox(model, BigModelHitboxTransform, "BigModelHitbox");
 
-            Transform BodyHitboxTransform = childLocator.FindChild("BodyHitbox");
-            Modules.Prefabs.SetupHitbox(model, BodyHitboxTransform, "BodyHitbox");
+            //Transform BodyHitboxTransform = childLocator.FindChild("BodyHitbox");
+            //Modules.Prefabs.SetupHitbox(model, BodyHitboxTransform, "BodyHitbox");
 
-            Transform BlackwhiphitboxTransform = childLocator.FindChild("Blackwhip");
-            Modules.Prefabs.SetupHitbox(model, BlackwhiphitboxTransform, "Blackwhip");
+            //Transform BlackwhiphitboxTransform = childLocator.FindChild("Blackwhip");
+            //Modules.Prefabs.SetupHitbox(model, BlackwhiphitboxTransform, "Blackwhip");
 
-            Transform BigBodyHitboxTransform = childLocator.FindChild("BigBodyHitbox");
-            Modules.Prefabs.SetupHitbox(model, BigBodyHitboxTransform, "BigBodyHitbox");
+            //Transform BigBodyHitboxTransform = childLocator.FindChild("BigBodyHitbox");
+            //Modules.Prefabs.SetupHitbox(model, BigBodyHitboxTransform, "BigBodyHitbox");
         }
 
 
@@ -2385,12 +2497,21 @@ namespace DekuMod.Modules.Survivors
 
             defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
             {
-
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Body"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("ArmL"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
-                }
+                },
+                new SkinDef.MeshReplacement
+                {
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("ArmR"),
+                    renderer = defaultRenderers[instance.mainRendererIndex].renderer
+                },
+                new SkinDef.MeshReplacement
+                {
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("ArmL"),
+                    renderer = defaultRenderers[instance.mainRendererIndex].renderer
+                },
             };
 
             skins.Add(defaultSkin);
