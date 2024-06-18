@@ -7,17 +7,36 @@ using UnityEngine;
 using EntityStates;
 using System.Runtime.CompilerServices;
 using AncientScepter;
+using DekuMod.SkillStates.Might;
 
 namespace DekuMod.Modules.Survivors
 {
-    
-    
+
+
     internal class Deku : SurvivorBase
     {
 
         public static bool scepterInstalled = false;
 
         internal override string bodyName { get; set; } = "Deku";
+
+        //Might Mode Skills
+        internal static SkillDef mightPrimarySkillDef;
+        internal static SkillDef mightSecondarySkillDef;
+        internal static SkillDef mightUtilitySkillDef;
+        internal static SkillDef mightSpecialSkillDef;
+
+        //Shoot Style Mode Skills
+        internal static SkillDef shootPrimarySkillDef;
+        internal static SkillDef shootSecondarySkillDef;
+        internal static SkillDef shootUtilitySkillDef;
+        internal static SkillDef shootSpecialSkillDef;
+
+        //Quirk Combo Mode Skills
+        internal static SkillDef quirkPrimarySkillDef;
+        internal static SkillDef quirkSecondarySkillDef;
+        internal static SkillDef quirkUtilitySkillDef;
+        internal static SkillDef quirkSpecialSkillDef;
 
         //Primary skills
         internal static SkillDef fistPrimarySkillDef;
@@ -26,7 +45,7 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef legPrimarySkillDef;
         internal static SkillDef leg45PrimarySkillDef;
         internal static SkillDef leg100PrimarySkillDef;
-        internal static SkillDef quirkPrimarySkillDef;
+        //internal static SkillDef quirkPrimarySkillDef;
         internal static SkillDef quirk45PrimarySkillDef;
         internal static SkillDef quirk100PrimarySkillDef;
         //Secondary skills
@@ -36,7 +55,7 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef legSecondarySkillDef;
         internal static SkillDef leg45SecondarySkillDef;
         internal static SkillDef leg100SecondarySkillDef;
-        internal static SkillDef quirkSecondarySkillDef;
+        //internal static SkillDef quirkSecondarySkillDef;
         internal static SkillDef quirk45SecondarySkillDef;
         internal static SkillDef quirk100SecondarySkillDef;
         //Utility skills
@@ -46,13 +65,13 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef legUtilitySkillDef;
         internal static SkillDef leg45UtilitySkillDef;
         internal static SkillDef leg100UtilitySkillDef;
-        internal static SkillDef quirkUtilitySkillDef;
+        //internal static SkillDef quirkUtilitySkillDef;
         internal static SkillDef quirk45UtilitySkillDef;
         internal static SkillDef quirk100UtilitySkillDef;
         //Special skills
         internal static SkillDef fistSpecialSkillDef;
         internal static SkillDef legSpecialSkillDef;
-        internal static SkillDef quirkSpecialSkillDef;
+        //internal static SkillDef quirkSpecialSkillDef;
 
         //Extra skills
         internal static SkillDef fistExtraSkillDef;
@@ -296,24 +315,13 @@ namespace DekuMod.Modules.Survivors
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
 
-            //Transform SmashHitboxTransform = childLocator.FindChild("SmashHitbox");
-            //Modules.Prefabs.SetupHitbox(model, SmashHitboxTransform, "SwordHitbox");
 
+            Transform KickHitboxTransform = childLocator.FindChild("KickHitbox");
+            Modules.Prefabs.SetupHitbox(model, KickHitboxTransform, "KickHitbox");
 
-            //Transform ModelHitboxTransform = childLocator.FindChild("ModelHitbox");
-            //Modules.Prefabs.SetupHitbox(model, ModelHitboxTransform, "ModelHitbox");
+            Transform SmashRushHitboxTransform = childLocator.FindChild("SmashRushHitbox");
+            Modules.Prefabs.SetupHitbox(model, SmashRushHitboxTransform, "SmashRushHitbox");
 
-            //Transform BigModelHitboxTransform = childLocator.FindChild("BigModelHitbox");
-            //Modules.Prefabs.SetupHitbox(model, BigModelHitboxTransform, "BigModelHitbox");
-
-            //Transform BodyHitboxTransform = childLocator.FindChild("BodyHitbox");
-            //Modules.Prefabs.SetupHitbox(model, BodyHitboxTransform, "BodyHitbox");
-
-            //Transform BlackwhiphitboxTransform = childLocator.FindChild("Blackwhip");
-            //Modules.Prefabs.SetupHitbox(model, BlackwhiphitboxTransform, "Blackwhip");
-
-            //Transform BigBodyHitboxTransform = childLocator.FindChild("BigBodyHitbox");
-            //Modules.Prefabs.SetupHitbox(model, BigBodyHitboxTransform, "BigBodyHitbox");
         }
 
 
@@ -335,6 +343,113 @@ namespace DekuMod.Modules.Survivors
             skillloc.passiveSkill.skillDescriptionToken = prefix + "PASSIVE_DESCRIPTION";
             skillloc.passiveSkill.icon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimate");
             skillloc.passiveSkill.keywordToken = prefix + "KEYWORD_PASSIVE";
+            #endregion
+
+            #region MightMode Skills
+
+            mightPrimarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTPRIMARY_NAME",
+                skillNameToken = prefix + "MIGHTPRIMARY_NAME",
+                skillDescriptionToken = prefix + "MIGHTPRIMARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(SmashRushStart)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            mightSecondarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTSECONDARY_NAME",
+                skillNameToken = prefix + "MIGHTSECONDARY_NAME",
+                skillDescriptionToken = prefix + "MIGHTSECONDARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(DelawareSmash)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 5,
+                baseRechargeInterval = 4F,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            mightUtilitySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTUTILITY_NAME",
+                skillNameToken = prefix + "MIGHTUTILITY_NAME",
+                skillDescriptionToken = prefix + "MIGHTUTILITY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(CounterSmash)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            mightSpecialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTSPECIAL_NAME",
+                skillNameToken = prefix + "MIGHTSPECIAL_NAME",
+                skillDescriptionToken = prefix + "MIGHTSPECIAL_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.Might.SmashRushStart)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
             #endregion
 
             #region Primary
@@ -405,7 +520,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "FISTUTILITY_NAME",
                 skillDescriptionToken = prefix + "FISTUTILITY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("delaware"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.DelawareSmash)),
+                activationState = new SerializableEntityStateType(typeof(DelawareSmash)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
@@ -463,7 +578,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "FISTEXTRA_NAME",
                 skillDescriptionToken = prefix + "FISTEXTRA_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("fistmodeIcon"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.FistMode)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.MightMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
@@ -487,7 +602,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "LEGEXTRA_NAME",
                 skillDescriptionToken = prefix + "LEGEXTRA_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("legmodeIcon"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.LegMode)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.ShootStyleMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
@@ -511,7 +626,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "QUIRKEXTRA_NAME",
                 skillDescriptionToken = prefix + "QUIRKEXTRA_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Quirks"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.QuirkMode)),
+                activationState = new SerializableEntityStateType(typeof(SkillStates.QuirkComboMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
@@ -2358,100 +2473,49 @@ namespace DekuMod.Modules.Survivors
 
 
             #region Adding Skills
-
-            Modules.Skills.AddPrimarySkill(bodyPrefab, fistPrimarySkillDef);
-            Modules.Skills.AddPrimarySkill(bodyPrefab, legPrimarySkillDef);
-            Modules.Skills.AddPrimarySkill(bodyPrefab, quirkPrimarySkillDef);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, mightPrimarySkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, fistPrimarySkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, legPrimarySkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, quirkPrimarySkillDef);
 
 
             Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]
             {
-                fistSecondarySkillDef,
-                legSecondarySkillDef,
-                quirkSecondarySkillDef,
+                mightSecondarySkillDef,
+                //fistSecondarySkillDef,
+                //legSecondarySkillDef,
+                //quirkSecondarySkillDef,
             });
 
             Skills.AddUtilitySkills(this.bodyPrefab, new SkillDef[]
             {
-                fistUtilitySkillDef,
-                legUtilitySkillDef,
-                quirkUtilitySkillDef,
+                mightUtilitySkillDef,
+                //fistUtilitySkillDef,
+                //legUtilitySkillDef,
+                //quirkUtilitySkillDef,
             });
 
             Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
             {
-                ofacycle1SkillDef,
+                mightSpecialSkillDef,
+                //ofacycle1SkillDef,
             });
 
-            Skills.AddFirstExtraSkill(bodyPrefab, fistSpecialSkillDef);
-            Skills.AddFirstExtraSkill(bodyPrefab, fistExtraSkillDef);
+            //Skills.AddFirstExtraSkill(bodyPrefab, fistSpecialSkillDef);
+            //Skills.AddFirstExtraSkill(bodyPrefab, fistExtraSkillDef);
 
-            Skills.AddSecondExtraSkill(bodyPrefab, legSpecialSkillDef);
-            Skills.AddSecondExtraSkill(bodyPrefab, legExtraSkillDef);
+            //Skills.AddSecondExtraSkill(bodyPrefab, legSpecialSkillDef);
+            //Skills.AddSecondExtraSkill(bodyPrefab, legExtraSkillDef);
 
-            Skills.AddThirdExtraSkill(bodyPrefab, quirkSpecialSkillDef);
-            Skills.AddThirdExtraSkill(bodyPrefab, quirkExtraSkillDef);
+            //Skills.AddThirdExtraSkill(bodyPrefab, quirkSpecialSkillDef);
+            //Skills.AddThirdExtraSkill(bodyPrefab, quirkExtraSkillDef);
 
-            Skills.AddFourthExtraSkill(bodyPrefab, cycleExtraSkillDef);
-            Skills.AddFourthExtraSkill(bodyPrefab, typeExtraSkillDef);
-            Skills.AddFourthExtraSkill(bodyPrefab, fistSpecialSkillDef);
+            //Skills.AddFourthExtraSkill(bodyPrefab, cycleExtraSkillDef);
+            //Skills.AddFourthExtraSkill(bodyPrefab, typeExtraSkillDef);
+            //Skills.AddFourthExtraSkill(bodyPrefab, fistSpecialSkillDef);
             #endregion
 
         }
-        #region ScepterSkills
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static void CreateScepterSkills()
-        {
-            string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
-            ofacycle1scepterSkillDef = Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "SCEPTERSPECIAL_NAME",
-                skillNameToken = prefix + "SCEPTERSPECIAL_NAME",
-                skillDescriptionToken = prefix + "SCEPTERSPECIAL_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ultimateupgrade"),
-                activationState = new SerializableEntityStateType(typeof(SkillStates.OFAcycle1scepter)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 1f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = false,
-                interruptPriority = InterruptPriority.Any,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-            });
-
-            //SkillDef fajinscepterDef = Skills.CreateSkillDef(new SkillDefInfo
-            //{
-            //    skillName = prefix + "SCEPTERSPECIAL4_NAME",
-            //    skillNameToken = prefix + "SCEPTERSPECIAL4_NAME",
-            //    skillDescriptionToken = prefix + "SCEPTERSPECIAL4_DESCRIPTION",
-            //    skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Quirks"),
-            //    activationState = new SerializableEntityStateType(typeof(SkillStates.Fajinstatescepter)),
-            //    activationStateMachineName = "Weapon",
-            //    baseMaxStock = 1,
-            //    baseRechargeInterval = 1f,
-            //    beginSkillCooldownOnSkillEnd = false,
-            //    canceledFromSprinting = false,
-            //    forceSprintDuringState = false,
-            //    fullRestockOnAssign = false,
-            //    interruptPriority = InterruptPriority.Any,
-            //    resetCooldownTimerOnUse = false,
-            //    isCombatSkill = true,
-            //    mustKeyPress = true,
-            //    cancelSprintingOnActivation = false,
-            //    rechargeStock = 1,
-            //    requiredStock = 1,
-            //    stockToConsume = 1,
-            //});
-        }
-        #endregion
 
         internal override void InitializeSkins()
         {

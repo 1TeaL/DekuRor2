@@ -1,20 +1,47 @@
-﻿//using System;
-//using EntityStates;
-//using DekuMod.Modules;
+﻿using System;
+using EntityStates;
+using DekuMod.Modules;
+using DekuMod.Modules.Survivors;
 
-//namespace DekuMod.SkillStates.BaseStates
-//{
+namespace DekuMod.SkillStates.BaseStates
+{
 
-//	public class BaseHenrySkillState : BaseSkillState
-//	{
+	public class BaseDekuSkillState : BaseSkillState
+	{
+		public int level;
+        public DekuController dekucon;
+        public EnergySystem energySystem;
 
-//		public override void OnEnter()
-//		{
-//			//this.henryController = base.GetComponent<DekuController>();
-//			base.OnEnter();
-//		}
+        public override void OnEnter()
+		{
+			base.OnEnter();
+            dekucon = base.GetComponent<DekuController>();
+            energySystem = base.GetComponent<EnergySystem>();
+            if (characterBody.level >= 20)
+            {
+                level = 2;
+            }
+            else if (characterBody.level >= 10)
+            {
+                level = 1;
+            }
+            else
+            {
+                level = 0;
+            }
 
-//		// Token: 0x040001A9 RID: 425
-//		//protected DekuController henryController;
-//	}
-//}
+            //for easy copy paste
+            switch (level)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
+
+        }
+
+	}
+}

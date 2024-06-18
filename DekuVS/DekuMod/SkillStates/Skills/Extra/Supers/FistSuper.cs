@@ -98,7 +98,7 @@ namespace DekuMod.SkillStates
                     EffectManager.SimpleMuzzleFlash(muzzlePrefab, base.gameObject, this.muzzleString, false);
 
 
-                    EffectManager.SpawnEffect(Modules.Projectiles.delawareTracer, effectData2, true);
+                    //EffectManager.SpawnEffect(Modules.Projectiles.delawareTracer, effectData2, true);
 
 
                     PlayCrossfade("FullBody, Override", "DetroitDelawareFull", "Attack.playbackRate", fireTime, 0.01f);

@@ -133,13 +133,13 @@ namespace DekuMod.SkillStates
                     Ray aimRay = base.GetAimRay();
                     base.AddRecoil(-1f * Airforce100.recoil, -2f * Airforce100.recoil, -0.5f * Airforce100.recoil, 0.5f * Airforce100.recoil);
 
-                    EffectManager.SpawnEffect(Modules.Projectiles.airforce100Tracer, new EffectData
-                    {
-                        origin = FindModelChild(this.muzzleString).position,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(aimRay.direction)
+                    //EffectManager.SpawnEffect(Modules.Projectiles.airforce100Tracer, new EffectData
+                    //{
+                    //    origin = FindModelChild(this.muzzleString).position,
+                    //    scale = 1f,
+                    //    rotation = Quaternion.LookRotation(aimRay.direction)
 
-                    }, true);
+                    //}, true);
 
                     bulletAttack = new BulletAttack();
                     bulletAttack.bulletCount = (uint)(1U);

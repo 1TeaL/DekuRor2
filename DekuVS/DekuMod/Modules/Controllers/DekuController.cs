@@ -207,17 +207,17 @@ namespace DekuMod.Modules.Survivors
                             }
 
                             Vector3 enemyPos = damageInfo.attacker.transform.position;
-                            EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                            {
-                                origin = self.body.transform.position,
-                                scale = 1f,
-                                rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
+                            //EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                            //{
+                            //    origin = self.body.transform.position,
+                            //    scale = 1f,
+                            //    rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
 
-                            }, true);
+                            //}, true);
 
                             if (!self.body.inputBank.skill1.down && !self.body.inputBank.skill2.down && !self.body.inputBank.skill3.down)
                             {
-                                new ForceCounterState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
+                                new ForceDangerSenseState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
 
                                 blastAttack = new BlastAttack();
                                 blastAttack.radius = dangersenseBlastRadius;

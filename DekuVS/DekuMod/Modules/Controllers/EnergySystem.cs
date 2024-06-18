@@ -19,6 +19,8 @@ namespace DekuMod.Modules.Survivors
         public float regenPlusUltra;
         public float plusUltraGain;
         public float plusUltraTimer;
+        public float plusUltraRate;
+        public float plusUltraBoostTimer;
 
         //bools to stop energy regen after skill used
         private bool ifEnergyUsed;
@@ -51,23 +53,33 @@ namespace DekuMod.Modules.Survivors
                 currentPlusUltra += StaticValues.goBeyondBuffGain;
             }
 
+            if(plusUltraBoostTimer > 0f)
+            {
+                plusUltraBoostTimer -= Time.fixedDeltaTime;
+                plusUltraRate = StaticValues.bonusPlusUltraRate;
+            }
+            else if(plusUltraBoostTimer <= 0f)
+            {
+                plusUltraRate = 1f;
+            }
+
             if (ifEnergyRegenAllowed)
             {
-                if (characterBody.characterMotor.velocity != Vector3.zero)
-                {
-                    if (!characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff))
-                    {
-                        plusUltraTimer += Time.fixedDeltaTime;
-                        if (plusUltraTimer >= regenPlusUltra / characterBody.moveSpeed)
-                        {
-                            currentPlusUltra += StaticValues.basePlusUltraGain;
-                            plusUltraTimer = 0f;
-                        }
+                //if (characterBody.characterMotor.velocity != Vector3.zero)
+                //{
+                //    if (!characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff) || !characterBody.HasBuff(Modules.Buffs.ofaBuff))
+                //    {
+                //        plusUltraTimer += Time.fixedDeltaTime;
+                //        if (plusUltraTimer >= regenPlusUltra / characterBody.moveSpeed)
+                //        {
+                //            currentPlusUltra += StaticValues.basePlusUltraGain;
+                //            plusUltraTimer = 0f;
+                //        }
 
-                    }
-                }
+                //    }
+                //}
 
-                currentPlusUltra += StaticValues.basePlusUltraGain * Time.fixedDeltaTime;
+                currentPlusUltra += StaticValues.basePlusUltraGain * plusUltraRate * Time.fixedDeltaTime;
                 
             }
 

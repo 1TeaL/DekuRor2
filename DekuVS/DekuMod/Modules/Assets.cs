@@ -94,6 +94,7 @@ namespace DekuMod.Modules
         //public static GameObject multEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Toolbot/OmniExplosionVFXToolbotQuick.prefab").WaitForCompletion();
 
         //own effects
+        internal static GameObject delawareBullet;
         internal static GameObject blackwhip;
         internal static GameObject blackwhipTrail;
         internal static GameObject blackwhipbullet;
@@ -116,6 +117,7 @@ namespace DekuMod.Modules
 
         //Materials
         public static Material blackwhipDebuffMaterial;
+        public static Material fullCowlingMaterial;
 
 
         //sword swing
@@ -189,6 +191,7 @@ namespace DekuMod.Modules
 
             dekuCustomUI = Assets.mainAssetBundle.LoadAsset<GameObject>("dekuCustomUI");
 
+            delawareBullet = LoadEffect("delawareBullet");
             airforceEffect = LoadEffect("windbullet");
             airforce45Effect = LoadEffect("windbullet45");
             delawareEffect = LoadEffect("delaware");
@@ -198,8 +201,8 @@ namespace DekuMod.Modules
             blackwhip = LoadEffect("blackwhipeffect");
             blackwhipTrail = LoadEffect("blackwhipTrail");
             blackwhipLineRenderer = mainAssetBundle.LoadAsset<GameObject>("blackwhipLineRenderer");
-            //blackwhip debuff effect
-            blackwhipDebuffMaterial = mainAssetBundle.LoadAsset<Material>("blackwhipbullet");
+
+
             impactEffect = LoadEffect("impact");
             windringEffect = LoadEffect("windringBig");
             blackwhipbullet = LoadEffect("blackwhipshootGhost");
@@ -210,10 +213,15 @@ namespace DekuMod.Modules
             gobeyondPulseEffect = LoadEffect("goBeyondPulse");
             gearshiftPierceEffect = LoadEffect("gearshiftPierce");
 
-            //sword swing
             dekuKickEffect = Assets.LoadEffect("DekuKickEffect", true);
             dekuHitImpactEffect = Assets.LoadEffect("ImpactDekuKick");            
             kickHitSoundEvent = CreateNetworkSoundEventDef("shootstyedashcomboimpact");
+
+
+            //Materials
+            blackwhipDebuffMaterial = mainAssetBundle.LoadAsset<Material>("blackwhipbullet");
+            fullCowlingMaterial = UnityEngine.GameObject.Instantiate<Material>(RoR2.LegacyResourcesAPI.Load<Material>("Materials/matEnergyShield"));
+            fullCowlingMaterial.SetColor("_TintColor", new Color(27/255f, 1f, 213/255f));
 
             //blackwhipbullet = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
 
@@ -485,7 +493,7 @@ namespace DekuMod.Modules
             if (emissionColor != null)
             {
                 tempMat.SetColor("_EmColor", (Color)emissionColor);
-                tempMat.SetFloat("_EmPower", 1);
+                tempMat.SetFloat("_EmPower", 2);
             }
 
             //set this keyword in unity if you want your model to show backfaces

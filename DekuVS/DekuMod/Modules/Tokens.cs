@@ -120,8 +120,8 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "QUIRKUTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style>. Release a smokescreen, making teammates and yourself go invisible for {StaticValues.smokescreenDuration} seconds" + "." 
                 + Helpers.Passive($" Costs {StaticValues.skillPlusUltraSpend} of plus ultra") + ".");
             
-            LanguageAPI.Add(prefix + "FIST45UTILITY_NAME", "Delaware Smash 45%");
-            LanguageAPI.Add(prefix + "FIST45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Flick your fingers, releasing a blast of wind in front, stunning and dealing <style=cIsDamage>{100f * StaticValues.delaware45DamageCoefficient}% damage</style>" + ".");
+            //LanguageAPI.Add(prefix + "FIST45UTILITY_NAME", "Delaware Smash 45%");
+            //LanguageAPI.Add(prefix + "FIST45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> Flick your fingers, releasing a blast of wind in front, stunning and dealing <style=cIsDamage>{100f * StaticValues.delaware45DamageCoefficient}% damage</style>" + ".");
             LanguageAPI.Add(prefix + "LEG45UTILITY_NAME", "St Louis Smash 45%");
             LanguageAPI.Add(prefix + "LEG45UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile. Stunning.</style> St Louis Smash, kicking multiple blasts of air pressure in front of you, dealing <style=cIsDamage>{100f * StaticValues.stlouis45DamageCoefficient}% damage, scaling with movespeed</style>" + ".");
             LanguageAPI.Add(prefix + "QUIRK45UTILITY_NAME", "Smokescreen 45%");
@@ -129,8 +129,8 @@ namespace DekuMod.Modules
                 + Helpers.Passive($" Costs {StaticValues.skill45PlusUltraSpend} of plus ultra") + ".");
             
             LanguageAPI.Add(prefix + "FIST100UTILITY_NAME", "Delaware Smash 100%");
-            LanguageAPI.Add(prefix + "FIST100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Flick your fingers, releasing an intense blast of wind in front, sending you flying backwards and dealing <style=cIsDamage>{100f * StaticValues.delaware100DamageCoefficient}% damage</style>." 
-                + Helpers.Damage($" Costs {100f * StaticValues.delaware100HealthCostFraction}% of max health") + ".");
+            //LanguageAPI.Add(prefix + "FIST100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Flick your fingers, releasing an intense blast of wind in front, sending you flying backwards and dealing <style=cIsDamage>{100f * StaticValues.delaware100DamageCoefficient}% damage</style>." 
+            //    + Helpers.Damage($" Costs {100f * StaticValues.delaware100HealthCostFraction}% of max health") + ".");
             LanguageAPI.Add(prefix + "LEG100UTILITY_NAME", "St Louis Smash 100%");
             LanguageAPI.Add(prefix + "LEG100UTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold to prep a physics breaking St Louis Smash. Release the skill key to deal a blast of wind pressure and instantaneously teleport up. The blast deals <style=cIsDamage>{100f * StaticValues.stlouis100DamageCoefficient}% damage, scaling with movespeed</style>."
                 + Helpers.Damage($" Costs {100f * StaticValues.stlouis100HealthCostFraction}% of max health") + ".");             

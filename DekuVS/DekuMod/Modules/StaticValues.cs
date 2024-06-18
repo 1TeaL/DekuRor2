@@ -17,6 +17,8 @@ namespace DekuMod.Modules
 
 
         //Energy
+        internal static float plusUltraHealthCost = 0.1f;
+        internal static float bonusPlusUltraRate = 2f;
         internal static float baseRegenPlusUltra = 0.05f;
         internal static float maxPlusUltra = 100f;
         internal static float regenPlusUltraRate = 8f;
@@ -30,6 +32,28 @@ namespace DekuMod.Modules
         internal static float goBeyondBuffGain = 1f;
         internal static int goBeyondBuffDuration = 60;
         internal static float goBeyondThreshold = 95f;
+
+        //Might Mode
+        //Primary
+        internal const float smashRushDistance = 3f;
+        internal const float smashRushDamageCoefficient = 3f;
+        //Secondary
+        internal const float delawareChargeThreshold = 2f;
+        internal const float delawareChargeMultiplier = 3f;
+        internal const float delawareDamageCoefficient = 3f;
+        internal const float delawareDamageCoefficient1 = 2f;
+        internal const float delawareDamageCoefficient2 = 10f;
+        internal const float delawareCharge1 = 0.7f;
+        internal const float delawareCharge2 = 0.4f;
+        //Utility
+        internal const float counterDamageReduction = 0.5f;
+        internal const float counterDuration = 3f;
+        internal const int counterBuffDuration = 5;
+        internal const float counterBuffAttackspeed = 3f;
+        internal const float counterRadius = 3f;
+        internal const float counterBuffArmor = 200f;
+        internal const float counterDamageCoefficient = 6f;
+        //Special
 
         //Primary
         //airforce
@@ -90,10 +114,6 @@ namespace DekuMod.Modules
 
         //Utility
         //delaware
-        internal const float delawareDamageCoefficient = 6f;
-        internal const float delaware45DamageCoefficient = 9f;
-        internal const float delaware100DamageCoefficient = 12f;
-        internal const float delaware100HealthCostFraction = 0.15f;
         //manchester
         internal const float manchesterArmor = 200f;
         internal const float manchesterDamageCoefficient = 3f;

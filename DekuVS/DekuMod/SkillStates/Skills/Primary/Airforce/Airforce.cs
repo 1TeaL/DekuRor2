@@ -66,13 +66,13 @@ namespace DekuMod.SkillStates
                 base.AddRecoil(-1f * Airforce.recoil, -2f * Airforce.recoil, -0.5f * Airforce.recoil, 0.5f * Airforce.recoil);
 
 
-                EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                {
-                    origin = FindModelChild(this.muzzleString).position,
-                    scale = 1f,
-                    rotation = Quaternion.LookRotation(aimRay.direction)
+                //EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                //{
+                //    origin = FindModelChild(this.muzzleString).position,
+                //    scale = 1f,
+                //    rotation = Quaternion.LookRotation(aimRay.direction)
 
-                }, true);
+                //}, true);
                 
 
                 bool hasHit = false;

@@ -16,7 +16,7 @@ namespace DekuMod.SkillStates
         private string rMuzzleString = "RHand";
         internal Vector3 moveVec;
 		//private GameObject explosionPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
-		private GameObject explosionPrefab = Modules.Projectiles.detroitweakTracer;
+		private GameObject explosionPrefab /*Modules.Projectiles.detroitweakTracer*/;
 		private float baseForce = 1000f;
 
 		public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");

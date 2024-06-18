@@ -97,15 +97,15 @@ namespace DekuMod.SkillStates
                         }
 
                         Vector3 enemyPos = damageInfo.attacker.transform.position;
-                        EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                        {
-                            origin = self.body.transform.position,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
+                        //EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                        //{
+                        //    origin = self.body.transform.position,
+                        //    scale = 1f,
+                        //    rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
 
-                        }, true);
+                        //}, true);
 
-                        new ForceCounterState(self.body.masterObjectId, enemyPos).Send(R2API.Networking.NetworkDestination.Clients);
+                        new ForceDangerSenseState(self.body.masterObjectId, enemyPos).Send(R2API.Networking.NetworkDestination.Clients);
                         //if (self.body.characterMotor && self.body.characterDirection)
                         //{
                         //    Debug.Log("pluginmove");

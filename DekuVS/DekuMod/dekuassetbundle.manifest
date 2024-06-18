@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3421406157
+CRC: 1724870134
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 88d57330ee5db0e5da7dd2f976e94f62
+    Hash: 8f8de59eab17dc44c32c2d23c584680d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: da48316de2c8f3aaa0f992da1fcb555b
+    Hash: a9d6fa89e33a7d9e4bb0047084e33490
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -15,7 +15,11 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 33
   Script: {instanceID: 0}
 - Class: 43
   Script: {instanceID: 0}
@@ -83,6 +87,7 @@ Assets:
 - Assets/DekuFinalForm/Assets/Materials/matArmL.mat
 - Assets/DekuFinalForm/VFX/blackwhipLineRenderer.prefab
 - Assets/DekuFinalForm/VFX/Material/dangersense.mat
+- Assets/DekuFinalForm/Assets/Materials/Eye Emission.png
 - Assets/DekuFinalForm/VFX/ImpactDekuKick.prefab
 - Assets/DekuFinalForm/GUI/ultimateupgrade45.png
 - Assets/DekuFinalForm/VFX/blackwhipeffect 1.prefab
@@ -158,6 +163,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/goBeyondPulse.prefab
 - Assets/DekuFinalForm/GUI/Floatcancel.png
 - Assets/DekuFinalForm/GUI/lightningwhiteblue.tif
+- Assets/DekuFinalForm/VFX/delawareBullet.prefab
 - Assets/DekuFinalForm/Assets/Materials/matArmR.mat
 - Assets/DekuFinalForm/VFX/windring.prefab
 - Assets/DekuFinalForm/VFX/smoke.prefab

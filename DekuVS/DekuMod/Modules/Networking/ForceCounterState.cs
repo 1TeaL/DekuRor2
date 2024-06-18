@@ -12,22 +12,25 @@ namespace DekuMod.Modules.Networking
     public class ForceCounterState : INetMessage
     {
         NetworkInstanceId IDNet;
-        Vector3 enemyPos;
+        int level;
+        Vector3 enemyPos;                   
 
         public ForceCounterState()
         {
 
         }
 
-        public ForceCounterState(NetworkInstanceId IDNet, Vector3 enemyPos)
+        public ForceCounterState(NetworkInstanceId IDNet, int level, Vector3 enemyPos)
         {
             this.IDNet = IDNet;
-            this.enemyPos = enemyPos;       
+            this.level = level;
+            this.enemyPos = enemyPos;
         }
 
         public void Deserialize(NetworkReader reader)
         {
             enemyPos = reader.ReadVector3();
+            level = reader.ReadInt32();
             IDNet = reader.ReadNetworkId();
         }
 
@@ -58,9 +61,10 @@ namespace DekuMod.Modules.Networking
                 {
                     if (statemachine.customName == "Body")
                     {
-                        statemachine.SetState(new DangerSenseCounter
+                        statemachine.SetState(new SkillStates.Might.CounterFollowUp
                         {
-                            enemyPosition = enemyPos,
+                            level = level,
+                            enemyPos = enemyPos,
                         });
                     }
                 }
@@ -70,7 +74,7 @@ namespace DekuMod.Modules.Networking
 
         public void Serialize(NetworkWriter writer)
         {
-            writer.Write(enemyPos);
+            writer.Write(level);
             writer.Write(IDNet);
         }
     }

@@ -35,8 +35,8 @@ namespace DekuMod.SkillStates
 		private float stopwatch;
 		private OverlapAttack detector;
 		private OverlapAttack attack;
-		protected string hitboxName2 = "BigModelHitbox";
-		protected string hitboxName = "BigBodyHitbox";
+		protected string hitboxName2 = "SmashRushHitbox";
+		protected string hitboxName = "SmashRushHitbox";
 		protected float procCoefficient = 1f;
 		protected float pushForce = 500f;
 		protected Vector3 bonusForce = new Vector3(10f, 400f, 0f);

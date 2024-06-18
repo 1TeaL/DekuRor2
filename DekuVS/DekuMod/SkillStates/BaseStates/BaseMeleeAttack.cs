@@ -8,11 +8,11 @@ using UnityEngine.Networking;
 
 namespace DekuMod.SkillStates.BaseStates
 {
-    public class BaseMeleeAttack : BaseSkillState
+    public class BaseMeleeAttack : BaseDekuSkillState
     {
         public int swingIndex;
 
-        protected string hitboxName = "BigBodyHitbox";
+        protected string hitboxName = "SmashRushHitbox";
 
         protected DamageType damageType = DamageType.Generic;
         protected float damageCoefficient = 3.5f;
@@ -204,37 +204,43 @@ namespace DekuMod.SkillStates.BaseStates
                 this.FireAttack();
             }
 
-            if (this.stopwatch >= (this.duration - this.earlyExitTime) && base.isAuthority)
+            if (this.stopwatch >= (this.duration * this.earlyExitTime) && base.isAuthority)
             {
-                if (base.skillLocator.primary.skillNameToken == prefix + "LEGPRIMARY_NAME")
+                if (base.IsKeyDownAuthority())
                 {
-                    if (base.inputBank.skill1.down)
-                    {
-                        if (!this.hasFired) this.FireAttack();
-                        this.SetNextState();
-                        return;
-                    }
+                    if (!this.hasFired) this.FireAttack();
+                    this.SetNextState();
+                    return;
                 }
-                else
-                if (base.skillLocator.secondary.skillNameToken == prefix + "LEGPRIMARY_NAME")
-                {
-                    if (base.inputBank.skill2.down)
-                    {
-                        if (!this.hasFired) this.FireAttack();
-                        this.SetNextState();
-                        return;
-                    }
-                }
-                else
-                if (base.skillLocator.utility.skillNameToken == prefix + "LEGPRIMARY_NAME")
-                {
-                    if (base.inputBank.skill3.down)
-                    {
-                        if (!this.hasFired) this.FireAttack();
-                        this.SetNextState();
-                        return;
-                    }
-                }
+                //if (base.skillLocator.primary.skillNameToken == prefix + "LEGPRIMARY_NAME")
+                //{
+                //    if (base.inputBank.skill1.down)
+                //    {
+                //        if (!this.hasFired) this.FireAttack();
+                //        this.SetNextState();
+                //        return;
+                //    }
+                //}
+                //else
+                //if (base.skillLocator.secondary.skillNameToken == prefix + "LEGPRIMARY_NAME")
+                //{
+                //    if (base.inputBank.skill2.down)
+                //    {
+                //        if (!this.hasFired) this.FireAttack();
+                //        this.SetNextState();
+                //        return;
+                //    }
+                //}
+                //else
+                //if (base.skillLocator.utility.skillNameToken == prefix + "LEGPRIMARY_NAME")
+                //{
+                //    if (base.inputBank.skill3.down)
+                //    {
+                //        if (!this.hasFired) this.FireAttack();
+                //        this.SetNextState();
+                //        return;
+                //    }
+                //}
             }
 
             if (this.stopwatch >= this.duration && base.isAuthority)

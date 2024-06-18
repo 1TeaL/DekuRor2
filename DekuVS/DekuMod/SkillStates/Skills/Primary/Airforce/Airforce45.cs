@@ -75,14 +75,14 @@ namespace DekuMod.SkillStates
                 {
                     float damage = Modules.StaticValues.airforce45DamageCoefficient * damageStat;
 
-                    GameObject tracerEffect = Modules.Projectiles.airforce45Tracer;
+                    //GameObject tracerEffect = Modules.Projectiles.airforce45Tracer;
 
-                    if (levelHasChanged)
-                    {
-                        levelHasChanged = false;
+                    //if (levelHasChanged)
+                    //{
+                    //    levelHasChanged = false;
 
-                        enlargeTracer(ref tracerEffect);
-                    }
+                    //    enlargeTracer(ref tracerEffect);
+                    //}
 
 
                     Ray aimRay = GetAimRay();
@@ -92,13 +92,13 @@ namespace DekuMod.SkillStates
                     float force = 100;
                     baserotation = Quaternion.LookRotation(aimRay.direction);
 
-                    EffectManager.SpawnEffect(Modules.Projectiles.airforce45Tracer, new EffectData
-                    {
-                        origin = FindModelChild(muzzleString).position,
-                        scale = 1f,
-                        rotation = baserotation
+                    //EffectManager.SpawnEffect(Modules.Projectiles.airforce45Tracer, new EffectData
+                    //{
+                    //    origin = FindModelChild(muzzleString).position,
+                    //    scale = 1f,
+                    //    rotation = baserotation
 
-                    }, false);
+                    //}, false);
     
                     BulletAttack bulletAttack = new BulletAttack
                     {

@@ -15,7 +15,7 @@ namespace DekuMod.SkillStates
         private string rMuzzleString = "RHand";
         internal Vector3 moveVec;
 		//private GameObject explosionPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
-		private GameObject explosionPrefab = Modules.Projectiles.detroitTracer;
+		private GameObject explosionPrefab /* Modules.Projectiles.detroitTracer*/;
 		private float baseForce = 600f;
 		public float procCoefficient = 3f;
 

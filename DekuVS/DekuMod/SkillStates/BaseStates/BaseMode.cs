@@ -1,4 +1,5 @@
 ﻿using DekuMod.Modules.Survivors;
+using DekuMod.SkillStates.BaseStates;
 using EntityStates;
 using RoR2;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.Networking;
 namespace DekuMod.SkillStates
 {
 
-	public class BaseMode : BaseSkillState
+	public class BaseMode : BaseDekuSkillState
 	{
 		public DekuController dekucon;
 		public EnergySystem energySystem;

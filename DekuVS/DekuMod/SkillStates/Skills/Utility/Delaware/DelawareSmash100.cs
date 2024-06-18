@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates
         private float duration;
         public static event Action<int> Compacted;
         //public static GameObject explosionPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/MageLightningBombExplosion");
-        public static GameObject explosionPrefab = Modules.Projectiles.delawareTracer;
+        public static GameObject explosionPrefab;
 
         public override void OnEnter()
         {
@@ -68,7 +68,7 @@ namespace DekuMod.SkillStates
                 blastAttack.position = theSpot;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = this.damageStat * Modules.StaticValues.delaware100DamageCoefficient;
+                //blastAttack.baseDamage = this.damageStat * Modules.StaticValues.delaware100DamageCoefficient;
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                 blastAttack.baseForce = 600f;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

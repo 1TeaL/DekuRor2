@@ -122,6 +122,7 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<PerformStLouisSmashNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformBlackwhipPullNetworkRequest>();
             NetworkingAPI.RegisterMessageType<ForceCounterState>();
+            NetworkingAPI.RegisterMessageType<ForceDangerSenseState>();
 
             NetworkingAPI.RegisterMessageType<PerformDetroitDelawareNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformFinalSmashNetworkRequest>();
@@ -202,6 +203,9 @@ namespace DekuMod
                         //deku mark system
                         if(body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                         {
+                            EnergySystem energySys = body.GetComponent<EnergySystem>();
+                            energySys.plusUltraBoostTimer = 2f;
+
                             //gearshift buff
                             if (body.HasBuff(Buffs.gearshiftBuff))
                             {
@@ -431,6 +435,15 @@ namespace DekuMod
 
                 if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                 {
+                    if (self.HasBuff(Buffs.counterAttackBuff))
+                    {
+                        self.attackSpeed *= StaticValues.counterBuffAttackspeed;
+                    }
+                    if (self.HasBuff(Buffs.counterBuff))
+                    {
+                        self.armor += StaticValues.counterBuffArmor;
+                    }
+
                     if (self.HasBuff(Buffs.gearshiftBuff))
                     {
                         self.moveSpeed *= StaticValues.gearshiftMovespeedBoost;
@@ -557,6 +570,7 @@ namespace DekuMod
                 if (self.body)
                 {
                     this.OverlayFunction(Modules.Assets.blackwhipDebuffMaterial, self.body.HasBuff(Modules.Buffs.blackwhipDebuff), self);
+                    this.OverlayFunction(Modules.Assets.fullCowlingMaterial, self.body.HasBuff(Modules.Buffs.counterAttackBuff), self);
                 }
             }
         }

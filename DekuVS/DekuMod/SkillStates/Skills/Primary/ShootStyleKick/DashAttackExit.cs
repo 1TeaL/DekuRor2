@@ -13,7 +13,7 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
         {
 
-            this.hitboxName = "BigBodyHitbox";
+            this.hitboxName = "SmashRushHitbox";
 
             this.damageType = DamageType.Generic;
             this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient;

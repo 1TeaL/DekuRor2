@@ -37,13 +37,13 @@ namespace DekuMod.SkillStates
                 }
 
                 Vector3 enemyPos = damageInfo.attacker.transform.position;
-                EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                {
-                    origin = body.transform.position,
-                    scale = 1f,
-                    rotation = Quaternion.LookRotation(enemyPos - body.transform.position)
+                //EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+                //{
+                //    origin = body.transform.position,
+                //    scale = 1f,
+                //    rotation = Quaternion.LookRotation(enemyPos - body.transform.position)
 
-                }, true);
+                //}, true);
 
 
                 EntityStateMachine[] stateMachines = body.gameObject.GetComponents<EntityStateMachine>();

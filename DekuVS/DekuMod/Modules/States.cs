@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using DekuMod.SkillStates.BaseStates;
 using DekuMod.Modules.Networking;
+using DekuMod.SkillStates.Might;
 
 namespace DekuMod.Modules
 {
@@ -26,6 +27,15 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(GoBeyond));
             entityStates.Add(typeof(GoBeyondState));
             entityStates.Add(typeof(GoBeyondEmptySkill));
+
+            //Might Mode
+            entityStates.Add(typeof(SmashRushStart));
+            entityStates.Add(typeof(SmashRushCombo));
+            entityStates.Add(typeof(SmashDash));
+            entityStates.Add(typeof(SmashDashExit));
+            entityStates.Add(typeof(DelawareSmash));
+            entityStates.Add(typeof(CounterSmash));
+            entityStates.Add(typeof(CounterFollowUp));
 
             //primary
             entityStates.Add(typeof(Airforce));
@@ -77,7 +87,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(ShootStyleKick100));
 
             //utility
-            entityStates.Add(typeof(DelawareSmash));
+            //entityStates.Add(typeof(DelawareSmash));
             entityStates.Add(typeof(DelawareSmash45));
             entityStates.Add(typeof(DelawareSmash100));
 
@@ -105,9 +115,9 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(QuirkSuper));
             
             //modes
-            entityStates.Add(typeof(FistMode));
-            entityStates.Add(typeof(LegMode));
-            entityStates.Add(typeof(QuirkMode));
+            entityStates.Add(typeof(MightMode));
+            entityStates.Add(typeof(ShootStyleMode));
+            entityStates.Add(typeof(QuirkComboMode));
             entityStates.Add(typeof(CycleMode));
             entityStates.Add(typeof(TypeMode));
 
@@ -128,7 +138,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(Fajinstate));
             entityStates.Add(typeof(Fajinstatescepter));
             entityStates.Add(typeof(Fajinscepter));
-            entityStates.Add(typeof(BlackwhipShoot));
+            //entityStates.Add(typeof(BlackwhipShoot));
         }
     }
 }

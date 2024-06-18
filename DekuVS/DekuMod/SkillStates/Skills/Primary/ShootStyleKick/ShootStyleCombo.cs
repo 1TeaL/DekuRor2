@@ -13,7 +13,7 @@ namespace DekuMod.SkillStates
         {
 
 
-            this.hitboxName = "BigBodyHitbox";
+            this.hitboxName = "SmashRushHitbox";
 
             this.damageCoefficient = Modules.StaticValues.shootkickDamageCoefficient;
             this.procCoefficient = 1f;
