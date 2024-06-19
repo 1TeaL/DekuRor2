@@ -22,6 +22,8 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(BaseQuirk100));
             entityStates.Add(typeof(BaseSpecial));
             entityStates.Add(typeof(BaseMode));
+            entityStates.Add(typeof(BaseDekuSkillState));
+            entityStates.Add(typeof(BaseMeleeAttack));
 
             //go beyond
             entityStates.Add(typeof(GoBeyond));
@@ -36,13 +38,13 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(DelawareSmash));
             entityStates.Add(typeof(CounterSmash));
             entityStates.Add(typeof(CounterFollowUp));
+            entityStates.Add(typeof(MightSuper));
 
             //primary
             entityStates.Add(typeof(Airforce));
             entityStates.Add(typeof(Airforce45));
             entityStates.Add(typeof(Airforce100));
 
-            entityStates.Add(typeof(BaseMeleeAttack));
             entityStates.Add(typeof(ShootStyleKick));
             entityStates.Add(typeof(DashAttack));
             entityStates.Add(typeof(DashAttackExit));

@@ -207,7 +207,7 @@ namespace DekuMod.SkillStates.Might
 
         public void Fire()
         {
-            AddRecoil(-3f * recoilAmplitude, -4f * recoilAmplitude, -0.5f * recoilAmplitude, 0.5f * recoilAmplitude);
+            //AddRecoil(-3f * recoilAmplitude, -4f * recoilAmplitude, -0.5f * recoilAmplitude, 0.5f * recoilAmplitude);
                       
 
 
@@ -227,8 +227,8 @@ namespace DekuMod.SkillStates.Might
                     weapon = gameObject,
                     origin = base.GetAimRay().origin,
                     aimVector = base.GetAimRay().direction,
-                    minSpread = 3f,
-                    maxSpread = 6f,
+                    minSpread = 0f,
+                    maxSpread = 0f,
                     force = force,
                     falloffModel = BulletAttack.FalloffModel.None,
                     //tracerEffectPrefab = Modules.Assets.bandittracerEffectPrefab,
@@ -251,10 +251,22 @@ namespace DekuMod.SkillStates.Might
                 switch (level)
                 {
                     case 0:
-                        bulletAttack.tracerEffectPrefab = Assets.delawareBullet;
+                        EffectManager.SpawnEffect(Modules.Assets.delawareBullet, new EffectData
+                        {
+                            origin = FindModelChild(muzzleName).position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                        }, true);
                         break;
                     case 1:
-                        bulletAttack.tracerEffectPrefab = Assets.delawareBullet;
+                        EffectManager.SpawnEffect(Modules.Assets.delawareBullet, new EffectData
+                        {
+                            origin = FindModelChild(muzzleName).position,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                        }, true);
                         break;
                     case 2:
                         //bulletAttack.tracerEffectPrefab = Assets.delawareBullet;

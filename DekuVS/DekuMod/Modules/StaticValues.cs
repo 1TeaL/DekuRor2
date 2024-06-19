@@ -17,7 +17,12 @@ namespace DekuMod.Modules
 
 
         //Energy
+        internal static float super1Cost = 33f;
+        internal static float super2Cost = 66f;
+        internal static float super3Cost = 100f;
         internal static float plusUltraHealthCost = 0.1f;
+        internal static float plusUltraHealthCost2 = 0.3f;
+        internal static float plusUltraHealthCost3 = 0.6f;
         internal static float bonusPlusUltraRate = 2f;
         internal static float baseRegenPlusUltra = 0.05f;
         internal static float maxPlusUltra = 100f;
@@ -54,6 +59,15 @@ namespace DekuMod.Modules
         internal const float counterBuffArmor = 200f;
         internal const float counterDamageCoefficient = 6f;
         //Special
+        internal const float detroitForce = 10000f;
+        internal const float detroitForce2 = 20000f;
+        internal const float detroitForce3 = 10000f;
+        internal const float detroitRadius = 20f;
+        internal const float detroitRadius2 = 30f;
+        internal const float detroitRadius3 = 30f;
+        internal const float detroitDamageCoefficient = 5f;
+        internal const float detroitDamageCoefficient2 = 5f;
+        internal const float detroitDamageCoefficient3 = 10f;
 
         //Primary
         //airforce
@@ -88,7 +102,6 @@ namespace DekuMod.Modules
 
         //Secondary
         //detroit
-        internal const float detroitDamageCoefficient = 4f;
         internal const float detroitRange = 5f;
         internal const float detroit45DamageCoefficient = 6f;
         internal const float detroit100DamageCoefficient = 8f;

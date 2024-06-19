@@ -8750,6 +8750,10 @@ MonoBehaviour:
     transform: {fileID: 506612785885237696}
   - name: KickHitbox
     transform: {fileID: 1024871425405580807}
+  - name: LFinger
+    transform: {fileID: 7320721098857414555}
+  - name: RFinger
+    transform: {fileID: 5708965562382402246}
 --- !u!1 &7302542605336016592
 GameObject:
   m_ObjectHideFlags: 0

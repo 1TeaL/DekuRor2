@@ -103,13 +103,18 @@ namespace DekuMod.Modules.Survivors
 
         //skill cd
         public float skillCDTimer;
+        
+        public void Awake()
+        {
+            indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
+
+        }
 
         public void Start()
         {
             energySystem = gameObject.GetComponent<EnergySystem>();
             body = gameObject.GetComponent<CharacterBody>();
             child = GetComponentInChildren<ChildLocator>();
-            indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
             inputBank = gameObject.GetComponent<InputBankTest>();
             if (child)
             {
@@ -794,16 +799,16 @@ namespace DekuMod.Modules.Survivors
             return this.trackingTarget;
         }
 
-        //private void OnEnable()
-        //{
-        //    //this.indicator.active = true;
-        //}
+        private void OnEnable()
+        {
+            this.indicator.active = true;
+        }
 
-        //private void OnDisable()
-        //{
-        //    //this.indicator.active = false;
-        //    this.DestroyAttachment();
-        //}
+        private void OnDisable()
+        {
+            this.indicator.active = false;
+            //this.DestroyAttachment();
+        }
         //private void DestroyAttachment()
         //{
         //    if (this.attachment)

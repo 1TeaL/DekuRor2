@@ -17,7 +17,7 @@ namespace DekuMod.SkillStates
 			base.OnEnter();
 			dekucon = base.GetComponent<DekuController>();
 			energySystem = base.GetComponent<EnergySystem>();
-			energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
+			//energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
 
 
 		}

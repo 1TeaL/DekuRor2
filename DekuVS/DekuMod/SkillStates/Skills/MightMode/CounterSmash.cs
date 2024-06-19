@@ -54,14 +54,14 @@ namespace DekuMod.SkillStates.Might
                 this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
 
                 TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                temporaryOverlay.duration = 0.3f;
+                temporaryOverlay.duration = 1f;
                 temporaryOverlay.animateShaderAlpha = true;
                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                 temporaryOverlay.destroyComponentOnEnd = true;
                 temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
                 temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
                 TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                temporaryOverlay2.duration = 0.3f;
+                temporaryOverlay2.duration = 1f;
                 temporaryOverlay2.animateShaderAlpha = true;
                 temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                 temporaryOverlay2.destroyComponentOnEnd = true;
@@ -137,13 +137,30 @@ namespace DekuMod.SkillStates.Might
                     break;
                 case DangerState.CHECKCOUNTER:
 
+                    TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                    temporaryOverlay.duration = 1f;
+                    temporaryOverlay.animateShaderAlpha = true;
+                    temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                    temporaryOverlay.destroyComponentOnEnd = true;
+                    temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                    temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+                    TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                    temporaryOverlay2.duration = 1f;
+                    temporaryOverlay2.animateShaderAlpha = true;
+                    temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                    temporaryOverlay2.destroyComponentOnEnd = true;
+                    temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+                    temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+
                     if (!base.IsKeyDownAuthority())
                     {
+                        base.characterBody.ApplyBuff(Modules.Buffs.counterBuff.buffIndex, 0);
                         this.outer.SetNextStateToMain();
                         return;
                     }
                     if (fixedAge >= StaticValues.counterDuration)
                     {
+                        base.characterBody.ApplyBuff(Modules.Buffs.counterBuff.buffIndex, 0);
                         this.animator.SetBool("releaseCounter", true);
                         this.outer.SetNextStateToMain();
                         return;

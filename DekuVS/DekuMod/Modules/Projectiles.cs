@@ -60,13 +60,13 @@ namespace DekuMod.Modules
             //}
             //Modules.Effects.AddEffect(airforce100Tracer);
 
-            //airforce45Tracer = Modules.Assets.airforce45Effect;
+            //delawareBullet = Modules.Assets.airforce45Effect;
 
-            //if (!airforce45Tracer.GetComponent<EffectComponent>()) airforce45Tracer.AddComponent<EffectComponent>();
-            //if (!airforce45Tracer.GetComponent<VFXAttributes>()) airforce45Tracer.AddComponent<VFXAttributes>();
-            //if (!airforce45Tracer.GetComponent<NetworkIdentity>()) airforce45Tracer.AddComponent<NetworkIdentity>();
+            //if (!delawareBullet.GetComponent<EffectComponent>()) delawareBullet.AddComponent<EffectComponent>();
+            //if (!delawareBullet.GetComponent<VFXAttributes>()) delawareBullet.AddComponent<VFXAttributes>();
+            //if (!delawareBullet.GetComponent<NetworkIdentity>()) delawareBullet.AddComponent<NetworkIdentity>();
 
-            //foreach (LineRenderer i in airforce45Tracer.GetComponentsInChildren<LineRenderer>())
+            //foreach (LineRenderer i in delawareBullet.GetComponentsInChildren<LineRenderer>())
             //{
             //    if (i)
             //    {
@@ -78,7 +78,7 @@ namespace DekuMod.Modules
 
             //    }
             //}
-            //Modules.Effects.AddEffect(airforce45Tracer);
+            //Modules.Effects.AddEffect(delawareBullet);
 
             //blackwhipTracer = Modules.Assets.blackwhipbullet;
 

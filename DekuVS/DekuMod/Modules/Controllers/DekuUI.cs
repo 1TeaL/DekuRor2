@@ -21,6 +21,7 @@ namespace DekuMod.Modules.Survivors
         public GameObject plusUltraFilled1;
         public GameObject plusUltraFilled2;
         public GameObject plusUltraFilled3;
+        public GameObject plusUltraGlow;
 
         private bool Initialized;
         public bool baseAIPresent;
@@ -100,11 +101,13 @@ namespace DekuMod.Modules.Survivors
                 plusUltraBar = UnityEngine.GameObject.Instantiate(Modules.Assets.dekuCustomUI, RoRHUDObject.transform.GetChild(0).GetChild(7).GetChild(2).GetChild(2).GetChild(0));
             }
 
-            plusUltraFilling = plusUltraBar.transform.GetChild(1).GetComponent<Image>();
-            plusUltraFilled1 = plusUltraBar.transform.GetChild(2).gameObject;
-            plusUltraFilled2 = plusUltraBar.transform.GetChild(3).gameObject;
-            plusUltraFilled3 = plusUltraBar.transform.GetChild(4).gameObject;
+            plusUltraGlow = plusUltraBar.transform.GetChild(0).gameObject;
+            plusUltraFilling = plusUltraBar.transform.GetChild(2).GetComponent<Image>();
+            plusUltraFilled1 = plusUltraBar.transform.GetChild(3).gameObject;
+            plusUltraFilled2 = plusUltraBar.transform.GetChild(4).gameObject;
+            plusUltraFilled3 = plusUltraBar.transform.GetChild(5).gameObject;
 
+            plusUltraGlow.SetActive(false);
             plusUltraFilled1.SetActive(false);
             plusUltraFilled2.SetActive(false);
             plusUltraFilled3.SetActive(false);

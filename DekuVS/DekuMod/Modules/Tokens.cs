@@ -42,7 +42,14 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", 
             Helpers.Passive("[Plus Ultra Meter] [Marks] [Float] [Danger Sense]") +"." + Environment.NewLine
             + "<style=cIsUtility>He has a double jump. He can sprint in any direction. </style>");
-             #endregion
+            #endregion
+
+            #region Might Mode
+            LanguageAPI.Add(prefix + "MIGHTPRIMARY_NAME", "Smash Rush");
+            LanguageAPI.Add(prefix + "MIGHTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Smash enemies in front of you. If far away, dash towards them. " + Environment.NewLine +
+                $"Enhanced: " + Environment.NewLine +
+                $"Mastered: " + " .");
+            #endregion
 
             #region Primary
             LanguageAPI.Add(prefix + "FISTPRIMARY_NAME", "Airforce");

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1724870134
+CRC: 2009844536
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8f8de59eab17dc44c32c2d23c584680d
+    Hash: 9e3c3e5e0d6f4643b9b4c9a8cb5ee296
   TypeTreeHash:
     serializedVersion: 2
     Hash: a9d6fa89e33a7d9e4bb0047084e33490
@@ -98,6 +98,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/gearshiftPierce.prefab
 - Assets/DekuFinalForm/Assets/Materials/UpscaledMask.jpg
 - Assets/DekuFinalForm/GUI/oklahoma45.png
+- Assets/DekuFinalForm/GUI/dekuBevelRectangleWhite.png
 - Assets/DekuFinalForm/GUI/ultimate45.png
 - Assets/DekuFinalForm/VFX/Material/windspikering.mat
 - Assets/DekuFinalForm/GUI/detroit45.png
@@ -160,6 +161,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/eyeAuraWorld.prefab
 - Assets/DekuFinalForm/VFX/goBeyondAura.prefab
 - Assets/DekuFinalForm/GUI/shootstylekick100.png
+- Assets/DekuFinalForm/VFX/speedLines.prefab
 - Assets/DekuFinalForm/VFX/goBeyondPulse.prefab
 - Assets/DekuFinalForm/GUI/Floatcancel.png
 - Assets/DekuFinalForm/GUI/lightningwhiteblue.tif
@@ -223,6 +225,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/spin.prefab
 - Assets/DekuFinalForm/Animations/Armature_Idle.anim
 - Assets/DekuFinalForm/Assets/Materials/UpscaledBodyLessSaturated.jpg
+- Assets/DekuFinalForm/VFX/windBlow.prefab
 - Assets/DekuFinalForm/VFX/Textures/dangersenseparticle.tif
 - Assets/DekuFinalForm/VFX/blackwhipeffect.prefab
 - Assets/DekuFinalForm/GUI/detroitdelawareSmash.PNG

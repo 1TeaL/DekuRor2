@@ -57,10 +57,21 @@ namespace DekuMod.Modules.Survivors
             {
                 plusUltraBoostTimer -= Time.fixedDeltaTime;
                 plusUltraRate = StaticValues.bonusPlusUltraRate;
+
+                if(dekuUICon != null)
+                {
+                    dekuUICon.plusUltraGlow.SetActive(true);
+                }
+
             }
-            else if(plusUltraBoostTimer <= 0f)
+            else if (plusUltraBoostTimer <= 0f)
             {
                 plusUltraRate = 1f;
+                if (dekuUICon != null)
+                {
+                    dekuUICon.plusUltraGlow.SetActive(false);
+                }
+
             }
 
             if (ifEnergyRegenAllowed)
@@ -116,20 +127,22 @@ namespace DekuMod.Modules.Survivors
 
         public void FixedUpdate()
         {
+            dekuUICon = gameObject.GetComponent<DekuUI>();
             CalculateEnergyStats();
+
         }
 
         public void Update()
         {
         }
 
-        public void GainPlusUltra(float Energy)
-        {
-            if (ifEnergyRegenAllowed)
-            {
-                currentPlusUltra += Energy;
-            }
-        }
+        //public void GainPlusUltra(float Energy)
+        //{
+        //    if (ifEnergyRegenAllowed)
+        //    {
+        //        currentPlusUltra += Energy;
+        //    }
+        //}
 
         public void SpendPlusUltra(float Energy)
         {

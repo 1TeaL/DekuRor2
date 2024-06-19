@@ -90,17 +90,6 @@ namespace DekuMod.SkillStates
             this.idealDirection = base.inputBank.aimDirection;
 			Ray aimRay = base.GetAimRay();
 			base.StartAimMode(aimRay, 2f, true);
-			//bool flag = base.inputBank;
-			//if (flag)
-			//{
-			//    Vector2 vector = Util.Vector3XZToVector2XY(base.inputBank.moveVector);
-			//    bool flag2 = vector != Vector2.zero;
-			//    if (flag2)
-			//    {
-			//        vector.Normalize();
-			//        this.idealDirection = (base.characterMotor.moveDirection.normalized + new Vector3(vector.x, 0f, vector.y).normalized).normalized;
-			//    }
-			//}
 		}
 
         private Vector3 GetIdealVelocity()

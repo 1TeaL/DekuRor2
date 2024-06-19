@@ -54,7 +54,6 @@ namespace DekuMod.SkillStates.BaseStates
             base.OnEnter();
 
             energySystem = base.GetComponent<EnergySystem>();
-            energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
 
             this.duration = this.baseDuration / this.attackSpeedStat;
             this.earlyExitTime = this.baseEarlyExitTime / this.attackSpeedStat;

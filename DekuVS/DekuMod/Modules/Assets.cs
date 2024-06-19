@@ -191,7 +191,17 @@ namespace DekuMod.Modules
 
             dekuCustomUI = Assets.mainAssetBundle.LoadAsset<GameObject>("dekuCustomUI");
 
+            Material bulletMat = null;
             delawareBullet = LoadEffect("delawareBullet");
+
+
+            if (!delawareBullet.GetComponent<EffectComponent>()) delawareBullet.AddComponent<EffectComponent>();
+            if (!delawareBullet.GetComponent<VFXAttributes>()) delawareBullet.AddComponent<VFXAttributes>();
+            if (!delawareBullet.GetComponent<NetworkIdentity>()) delawareBullet.AddComponent<NetworkIdentity>();
+
+            Modules.Effects.AddEffect(delawareBullet);
+
+
             airforceEffect = LoadEffect("windbullet");
             airforce45Effect = LoadEffect("windbullet45");
             delawareEffect = LoadEffect("delaware");
@@ -369,7 +379,7 @@ namespace DekuMod.Modules
             newEffect.AddComponent<NetworkIdentity>();
             newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
             var effect = newEffect.AddComponent<EffectComponent>();
-            effect.applyScale = false;
+            effect.applyScale = true;
             effect.effectIndex = EffectIndex.Invalid;
             effect.parentToReferencedTransform = parentToTransform;
             effect.positionAtReferencedTransform = true;
@@ -493,7 +503,7 @@ namespace DekuMod.Modules
             if (emissionColor != null)
             {
                 tempMat.SetColor("_EmColor", (Color)emissionColor);
-                tempMat.SetFloat("_EmPower", 2);
+                tempMat.SetFloat("_EmPower", 5);
             }
 
             //set this keyword in unity if you want your model to show backfaces

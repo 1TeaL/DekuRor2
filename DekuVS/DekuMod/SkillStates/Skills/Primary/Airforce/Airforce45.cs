@@ -75,7 +75,7 @@ namespace DekuMod.SkillStates
                 {
                     float damage = Modules.StaticValues.airforce45DamageCoefficient * damageStat;
 
-                    //GameObject tracerEffect = Modules.Projectiles.airforce45Tracer;
+                    //GameObject tracerEffect = Modules.Projectiles.delawareBullet;
 
                     //if (levelHasChanged)
                     //{
@@ -92,7 +92,7 @@ namespace DekuMod.SkillStates
                     float force = 100;
                     baserotation = Quaternion.LookRotation(aimRay.direction);
 
-                    //EffectManager.SpawnEffect(Modules.Projectiles.airforce45Tracer, new EffectData
+                    //EffectManager.SpawnEffect(Modules.Projectiles.delawareBullet, new EffectData
                     //{
                     //    origin = FindModelChild(muzzleString).position,
                     //    scale = 1f,
@@ -136,16 +136,16 @@ namespace DekuMod.SkillStates
                     bulletAttack.bulletCount = 1;
                     bulletAttack.Fire();
                     //bulletAttack.aimVector = aimRay.direction;
-                    //tracerEffectPrefab = Modules.Projectiles.airforce45Tracer;
+                    //tracerEffectPrefab = Modules.Projectiles.delawareBullet;
                     //bulletAttack.aimVector = aimRay.direction + 1f * Vector3.right;
-                    //tracerEffectPrefab = Modules.Projectiles.airforce45Tracer;
+                    //tracerEffectPrefab = Modules.Projectiles.delawareBullet;
                     //bulletAttack.Fire();
 
                     //bulletAttack.aimVector = aimRay.direction + 2f * Vector3.left;
-                    //tracerEffectPrefab = Modules.Projectiles.airforce45Tracer;
+                    //tracerEffectPrefab = Modules.Projectiles.delawareBullet;
                     //bulletAttack.Fire();
                     //bulletAttack.aimVector = aimRay.direction + 3f * Vector3.right;
-                    //tracerEffectPrefab = Modules.Projectiles.airforce45Tracer;
+                    //tracerEffectPrefab = Modules.Projectiles.delawareBullet;
                     //bulletAttack.Fire();
 
                     uint secondShot = (uint)Mathf.CeilToInt(bulletCount / 2f) - 1;

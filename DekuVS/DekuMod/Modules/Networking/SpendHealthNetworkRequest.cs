@@ -49,7 +49,7 @@ namespace DekuMod.Modules.Networking
             bodyObj = charBody.gameObject;
 
             //deal health damage
-            if (!charBody.HasBuff(Modules.Buffs.goBeyondBuff) && !charBody.HasBuff(Modules.Buffs.fajinBuff))
+            if (!charBody.HasBuff(Modules.Buffs.goBeyondBuff) /*&& !charBody.HasBuff(Modules.Buffs.fajinBuff)*/)
             {
                 if (NetworkServer.active && charBody.healthComponent)
                 {
