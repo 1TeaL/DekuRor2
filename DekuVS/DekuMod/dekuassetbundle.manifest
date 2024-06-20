@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2009844536
+CRC: 4003300497
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9e3c3e5e0d6f4643b9b4c9a8cb5ee296
+    Hash: d1c46567a48d95301472591124285a51
   TypeTreeHash:
     serializedVersion: 2
     Hash: a9d6fa89e33a7d9e4bb0047084e33490
@@ -59,6 +59,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/DekuFinalForm/Assets/Mesh/Shoes.mesh
 - Assets/DekuFinalForm/GUI/airforce45.png
 - Assets/DekuFinalForm/VFX/fajinRingEffect.prefab
 - Assets/DekuFinalForm/GUI/armorblue.tif
@@ -71,20 +72,26 @@ Assets:
 - Assets/DekuFinalForm/GUI/lightningwhitegreen.tif
 - Assets/DekuFinalForm/GUI/fistmodeIcon.png
 - Assets/DekuFinalForm/GUI/legmodeIcon.png
+- Assets/DekuFinalForm/Assets/Mesh/Body.mesh
 - Assets/DekuFinalForm/Assets/Materials/matGranMantle.mat
+- Assets/DekuFinalForm/Assets/Mesh/GoldenButtons.mesh
 - Assets/DekuFinalForm/VFX/Material/windline.mat
 - Assets/DekuFinalForm/Assets/Materials/UpscaledHood.jpg
 - Assets/DekuFinalForm/VFX/trail.prefab
 - Assets/DekuFinalForm/VFX/Material/blackwhipspark.mat
+- Assets/DekuFinalForm/Assets/Materials/black Square.png
 - Assets/DekuFinalForm/Assets/Materials/matHands.mat
 - Assets/DekuFinalForm/VFX/detroit.prefab
 - Assets/DekuFinalForm/GUI/ultimateupgrade.png
 - Assets/DekuFinalForm/Assets/Materials/matLegs.mat
 - Assets/DekuFinalForm/VFX/limbAuraWorld.prefab
 - Assets/DekuFinalForm/VFX/Material/yellow.mat
+- Assets/DekuFinalForm/Assets/Mesh/ArmL.mesh
+- Assets/DekuFinalForm/Assets/Mesh/Eyes.mesh
 - Assets/DekuFinalForm/Assets/Materials/T_pl01_101_hood_D.png
 - Assets/DekuFinalForm/GUI/GearShift100.png
 - Assets/DekuFinalForm/Assets/Materials/matArmL.mat
+- Assets/DekuFinalForm/Assets/Mesh/Neck.mesh
 - Assets/DekuFinalForm/VFX/blackwhipLineRenderer.prefab
 - Assets/DekuFinalForm/VFX/Material/dangersense.mat
 - Assets/DekuFinalForm/Assets/Materials/Eye Emission.png
@@ -110,6 +117,7 @@ Assets:
 - Assets/DekuFinalForm/GUI/ultimate100.png
 - Assets/DekuFinalForm/GUI/airforce.png
 - Assets/DekuFinalForm/VFX/forwardHuricane.prefab
+- Assets/DekuFinalForm/Assets/Mesh/GranCape.mesh
 - Assets/DekuFinalForm/VFX/blackwhipAura.prefab
 - Assets/DekuFinalForm/GUI/manchester45.png
 - Assets/DekuFinalForm/Blender/DekuFinal.fbx
@@ -118,23 +126,27 @@ Assets:
 - Assets/DekuFinalForm/Assets/mdlDeku.prefab
 - Assets/DekuFinalForm/GUI/Floatactivate45.png
 - Assets/DekuFinalForm/GUI/ultimate.png
+- Assets/DekuFinalForm/VFX/leftEyeRibbonParticle.prefab
 - Assets/DekuFinalForm/VFX/blackwhipline.prefab
 - Assets/DekuFinalForm/VFX/Material/blackwhip.mat
 - Assets/DekuFinalForm/GUI/goBeyondE.png
 - Assets/DekuFinalForm/GUI/KickCount.tif
 - Assets/DekuFinalForm/GUI/dekuPlusUltraSegmentFill.png
+- Assets/DekuFinalForm/Assets/Materials/Eye texture.png
 - Assets/DekuFinalForm/GUI/lightninggreen.tif
 - Assets/DekuFinalForm/GUI/manchester100.png
 - Assets/DekuFinalForm/GUI/armorgreen.tif
 - Assets/DekuFinalForm/GUI/lightningblue.tif
 - Assets/DekuFinalForm/GUI/manchester.png
 - Assets/DekuFinalForm/Animations/animDisplay.controller
+- Assets/DekuFinalForm/Assets/Mesh/Belt.mesh
 - Assets/DekuFinalForm/Assets/Materials/matBody.mat
 - Assets/DekuFinalForm/GUI/45 blank.png
 - Assets/DekuFinalForm/GUI/Counter.tif
 - Assets/DekuFinalForm/GUI/dekuPlusUltraSegment.png
 - Assets/DekuFinalForm/VFX/impact.prefab
 - Assets/DekuFinalForm/VFX/Material/blackwhipbullet.mat
+- Assets/DekuFinalForm/Assets/Mesh/MidGauntlets.mesh
 - Assets/DekuFinalForm/GUI/Float.tif
 - Assets/DekuFinalForm/VFX/detroitweak.prefab
 - Assets/DekuFinalForm/GUI/oklahoma100.png
@@ -150,6 +162,7 @@ Assets:
 - Assets/DekuFinalForm/GUI/blackwhip100.png
 - Assets/DekuFinalForm/GUI/gobeyondD.png
 - Assets/DekuFinalForm/VFX/OFA lightning.prefab
+- Assets/DekuFinalForm/Assets/Mesh/ArmR.mesh
 - Assets/DekuFinalForm/GUI/finalSmash.png
 - Assets/DekuFinalForm/VFX/smokebig.prefab
 - Assets/DekuFinalForm/GUI/gobeyondB.png
@@ -171,6 +184,8 @@ Assets:
 - Assets/DekuFinalForm/VFX/smoke.prefab
 - Assets/DekuFinalForm/Assets/Materials/matShoes.mat
 - Assets/DekuFinalForm/VFX/limbAura.prefab
+- Assets/DekuFinalForm/Assets/Mesh/Mask.mesh
+- Assets/DekuFinalForm/Assets/Mesh/Wristband.mesh
 - Assets/DekuFinalForm/VFX/DekuKickEffect.prefab
 - Assets/DekuFinalForm/VFX/Material/windlineblack.mat
 - Assets/DekuFinalForm/GUI/blackwhipshoot.png
@@ -184,6 +199,7 @@ Assets:
 - Assets/DekuFinalForm/Assets/Materials/Beta-Arms.png
 - Assets/DekuFinalForm/VFX/Material/blackwhipblack.mat
 - Assets/DekuFinalForm/GUI/airforce100.png
+- Assets/DekuFinalForm/Assets/Mesh/GranMantle.mesh
 - Assets/DekuFinalForm/Assets/dekuCustomUI.prefab
 - Assets/DekuFinalForm/GUI/Floatactivate.png
 - Assets/DekuFinalForm/VFX/Material/DekuOFAMat.mat
@@ -191,17 +207,23 @@ Assets:
 - Assets/DekuFinalForm/VFX/windbullet.prefab
 - Assets/DekuFinalForm/Assets/Materials/UpScaledCape_Backpack.jpg
 - Assets/DekuFinalForm/VFX/blackwhipforward.prefab
+- Assets/DekuFinalForm/Assets/Mesh/MidGauntletR.mesh
 - Assets/DekuFinalForm/GUI/shootstylekick.png
 - Assets/DekuFinalForm/GUI/shootstylekick45.png
 - Assets/DekuFinalForm/Assets/Materials/matMask.mat
 - Assets/DekuFinalForm/VFX/OFA lightning eye.prefab
+- Assets/DekuFinalForm/Assets/Mesh/Legs.mesh
 - Assets/DekuFinalForm/Assets/Materials/AirForce.png
 - Assets/DekuFinalForm/Assets/DekuDisplay.prefab
 - Assets/DekuFinalForm/VFX/Material/white.mat
+- Assets/DekuFinalForm/Assets/Mesh/Hair.mesh
 - Assets/DekuFinalForm/GUI/DangerSense45.png
 - Assets/DekuFinalForm/VFX/blackwhipshootGhost.prefab
 - Assets/DekuFinalForm/GUI/texDekuIcon.png
 - Assets/DekuFinalForm/Animations/DanceMoves.anim
+- Assets/DekuFinalForm/Assets/Mesh/MidGauntletL.mesh
+- Assets/DekuFinalForm/Assets/Materials/Eye texture Emission.png
+- Assets/DekuFinalForm/Assets/Mesh/Face.mesh
 - Assets/DekuFinalForm/GUI/smokescreen.png
 - Assets/DekuFinalForm/VFX/Textures/SparkParticleblackwhip.tif
 - Assets/DekuFinalForm/Assets/Materials/matWristband.mat
@@ -218,6 +240,7 @@ Assets:
 - Assets/DekuFinalForm/Assets/Materials/Blank.mat
 - Assets/DekuFinalForm/GUI/gobeyondN.png
 - Assets/DekuFinalForm/GUI/gobeyondG.png
+- Assets/DekuFinalForm/Assets/Materials/matEyesParticle.mat
 - Assets/DekuFinalForm/Assets/Materials/matHood.mat
 - Assets/DekuFinalForm/GUI/detroit100.png
 - Assets/DekuFinalForm/Assets/Materials/matBelt.mat
@@ -232,6 +255,10 @@ Assets:
 - Assets/DekuFinalForm/VFX/windringbig.prefab
 - Assets/DekuFinalForm/Assets/Materials/T_pl01_100_eye_D.png
 - Assets/DekuFinalForm/Assets/Materials/matMidGauntlet.mat
+- Assets/DekuFinalForm/Assets/Materials/matEyesBlack.mat
+- Assets/DekuFinalForm/Assets/Mesh/Hood.mesh
 - Assets/DekuFinalForm/Assets/humanoidDeku.prefab
 - Assets/DekuFinalForm/GUI/cyclemodeIcon.png
+- Assets/DekuFinalForm/VFX/leftEyeParticle.prefab
+- Assets/DekuFinalForm/Assets/Mesh/Hands.mesh
 Dependencies: []

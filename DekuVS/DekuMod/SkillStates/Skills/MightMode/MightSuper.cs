@@ -105,6 +105,9 @@ namespace DekuMod.SkillStates.Might
             blastPosition = characterBody.corePosition;
 			blastType = DamageType.Stun1s;
 			blastForce = StaticValues.detroitForce2;
+            //indicator
+            this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+            this.areaIndicator.SetActive(true);
 
             //play animation of slam punch
         }
@@ -253,9 +256,9 @@ namespace DekuMod.SkillStates.Might
 
                     if(totalDuration > 1f)
                     {
-                        blastRadius *= totalDuration;
-                        blastDamage *= totalDuration;
-                        blastForce *= totalDuration;
+                        blastAttack.radius *= totalDuration;
+                        blastAttack.baseDamage *= totalDuration;
+                        blastAttack.baseForce *= totalDuration;
                     }
 
 
@@ -279,7 +282,7 @@ namespace DekuMod.SkillStates.Might
 
                     AkSoundEngine.PostEvent("detroitexitsfx", base.gameObject);
 
-                    blastPosition = base.transform.position;
+                    blastAttack.position = base.transform.position;
                     if (blastAttack.Fire().hitCount > 0)
                     {
                         this.OnHitEnemyAuthority();
@@ -304,10 +307,30 @@ namespace DekuMod.SkillStates.Might
         {
             base.Update();
             //indicator update
-            if (this.areaIndicator)
+            switch (state)
             {
-                this.areaIndicator.transform.localScale = Vector3.one * blastRadius * (attackSpeedStat) * (1 + totalDuration);
-                this.areaIndicator.transform.localPosition = base.transform.position;
+                case superState.SUPER1:
+                    if (this.areaIndicator)
+                    {
+                        this.areaIndicator.transform.localScale = Vector3.one * blastRadius * (attackSpeedStat);
+                        this.areaIndicator.transform.localPosition = blastPosition;
+                    }
+                    break;
+                case superState.SUPER2:
+                    if (this.areaIndicator)
+                    {
+                        this.areaIndicator.transform.localScale = Vector3.one * blastRadius * (attackSpeedStat);
+                        this.areaIndicator.transform.localPosition = blastPosition;
+                    }
+                    break;
+                case superState.SUPER3:
+                    if (this.areaIndicator)
+                    {
+                        this.areaIndicator.transform.localScale = Vector3.one * blastRadius * (attackSpeedStat) * (1 + totalDuration);
+                        this.areaIndicator.transform.localPosition = base.transform.position;
+                    }
+                    break;
+
             }
         }
 

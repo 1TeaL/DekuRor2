@@ -58,7 +58,7 @@ namespace DekuMod.Modules.Survivors
                 plusUltraBoostTimer -= Time.fixedDeltaTime;
                 plusUltraRate = StaticValues.bonusPlusUltraRate;
 
-                if(dekuUICon != null)
+                if(dekuUICon.plusUltraGlow != null)
                 {
                     dekuUICon.plusUltraGlow.SetActive(true);
                 }
@@ -67,7 +67,7 @@ namespace DekuMod.Modules.Survivors
             else if (plusUltraBoostTimer <= 0f)
             {
                 plusUltraRate = 1f;
-                if (dekuUICon != null)
+                if (dekuUICon.plusUltraGlow!= null)
                 {
                     dekuUICon.plusUltraGlow.SetActive(false);
                 }

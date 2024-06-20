@@ -31,7 +31,7 @@ namespace DekuMod.SkillStates
         private bool reducerFlipFlop;
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
 
-        public DangerSenseComponent dangercon;
+        //public DangerSenseComponent dangercon;
 
         public enum DangerState {STARTBUFF, CHECKFLIP, END };
         public DangerState state;

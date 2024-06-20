@@ -4,6 +4,7 @@ using System;
 using DekuMod.SkillStates.BaseStates;
 using DekuMod.Modules.Networking;
 using DekuMod.SkillStates.Might;
+using DekuMod.SkillStates.ShootStyle;
 
 namespace DekuMod.Modules
 {
@@ -40,8 +41,14 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(CounterFollowUp));
             entityStates.Add(typeof(MightSuper));
 
-            //primary
+            //Shoot Style Mode
             entityStates.Add(typeof(Airforce));
+            entityStates.Add(typeof(SanDiegoSmash));
+            entityStates.Add(typeof(OklahomaSmash));
+
+            //Blackwhip Mode
+
+            //primary
             entityStates.Add(typeof(Airforce45));
             entityStates.Add(typeof(Airforce100));
 
@@ -85,7 +92,6 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(ShootStyleDashAttack45));
             entityStates.Add(typeof(ShootStyleDash100));
             entityStates.Add(typeof(ShootStyleDashAttack100));
-            entityStates.Add(typeof(ShootStyleKick45));
             entityStates.Add(typeof(ShootStyleKick100));
 
             //utility

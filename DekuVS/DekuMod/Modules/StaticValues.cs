@@ -50,9 +50,10 @@ namespace DekuMod.Modules
         internal const float delawareDamageCoefficient2 = 10f;
         internal const float delawareCharge1 = 0.7f;
         internal const float delawareCharge2 = 0.4f;
+        internal const float delawareDistance = 20f;
         //Utility
         internal const float counterDamageReduction = 0.5f;
-        internal const float counterDuration = 3f;
+        internal const float counterDuration = 5f;
         internal const int counterBuffDuration = 5;
         internal const float counterBuffAttackspeed = 3f;
         internal const float counterRadius = 3f;
@@ -64,15 +65,30 @@ namespace DekuMod.Modules
         internal const float detroitForce3 = 10000f;
         internal const float detroitRadius = 20f;
         internal const float detroitRadius2 = 30f;
-        internal const float detroitRadius3 = 30f;
+        internal const float detroitRadius3 = 10f;
         internal const float detroitDamageCoefficient = 5f;
         internal const float detroitDamageCoefficient2 = 5f;
-        internal const float detroitDamageCoefficient3 = 10f;
+        internal const float detroitDamageCoefficient3 = 5f;
+
+        //Shoot Style Mode
+        //Primary
+        internal const float airforceDamageCoefficient = 1f;
+        internal const int airforceMaxRicochet = 5;
+        //Secondary
+        internal const float stlouis45DamageCoefficient = 2f;
+        //Utility
+        internal const float oklahomaSpeedCoefficient = 30f;
+        internal const float oklahomaDamageCoefficient = 3f;
+        //Special
+
+        //Blackwhip Mode
+        //Primary
+        //Secondary
+        //Utility
+        //Special
 
         //Primary
         //airforce
-        internal const float airforceDamageCoefficient = 1f;
-        internal const int airforceMaxRicochet = 5;
         internal const float airforce45DamageCoefficient = 2f;
         internal const float airforce100DamageCoefficient = 4f;
         internal const float airforce100HealthCostFraction = 0.005f;
@@ -109,7 +125,6 @@ namespace DekuMod.Modules
         //stlouis
         internal const float stlouisDamageCoefficient = 3f;
         internal const float stlouisRange = 5f;
-        internal const float stlouis45DamageCoefficient = 2f;
         internal const float stlouis100DamageCoefficient = 6f;
         internal const float stlouis100HealthCostFraction = 0.15f;
         //gearshift
@@ -148,7 +163,7 @@ namespace DekuMod.Modules
         internal const float shootbulletstun45DamageCoefficient = 3f;
         internal const float shootbulletstun100DamageCoefficient = 1f;
         internal const float floatDamageCoefficient = 4f;
-        internal const float oklahomaDamageCoefficient = 1f;
+        //internal const float oklahomaDamageCoefficient = 1f;
         internal const float oklahoma45DamageCoefficient = 3f;
         internal const float oklahoma100DamageCoefficient = 2f;
 

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using EntityStates;
 using System.Runtime.CompilerServices;
-using AncientScepter;
 using EntityStates.Mage;
 using System.Diagnostics;
 using UnityEngine.Networking;

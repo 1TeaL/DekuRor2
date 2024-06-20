@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using RoR2.Orbs;
 using static RoR2.BulletAttack;
 
-namespace DekuMod.SkillStates
+namespace DekuMod.SkillStates.ShootStyle
 {
     public class Airforce : BaseSkill
     {
@@ -17,7 +17,7 @@ namespace DekuMod.SkillStates
         public static float recoil = 1f;
         public static float range = 200f;
 
-        public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/tracerhuntresssnipe"); 
+        public static GameObject tracerEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/Tracers/tracerhuntresssnipe");
         private float duration;
         private float fireTime;
         private bool hasFired;
@@ -31,16 +31,16 @@ namespace DekuMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = Airforce.baseDuration / this.attackSpeedStat;
-            this.fireTime = 0.2f * this.duration;
-            base.characterBody.SetAimTimer(this.duration);
-            this.muzzleString = "LFinger";
+            duration = baseDuration / attackSpeedStat;
+            fireTime = 0.2f * duration;
+            characterBody.SetAimTimer(duration);
+            muzzleString = "LFinger";
 
             hasFired = false;
 
-            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             //base.PlayCrossfade("LeftArm, Override", "FingerFlick","Attack.playbackRate",this.duration, this.fireTime);
-            base.PlayAnimation("LeftArm, Override", "FingerFlick", "Attack.playbackRate", this.duration);
+            PlayAnimation("LeftArm, Override", "FingerFlick", "Attack.playbackRate", duration);
             //PlayAnimation("FullBody, Override", "GoBeyond", "Attack.playbackRate", duration);
 
 
@@ -53,17 +53,17 @@ namespace DekuMod.SkillStates
 
         private void Fire()
         {
-            base.characterBody.AddSpreadBloom(1f);
-            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-            if (base.isAuthority)
+            characterBody.AddSpreadBloom(1f);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, gameObject, muzzleString, false);
+            if (isAuthority)
             {
-                AkSoundEngine.PostEvent("airforcesfx", this.gameObject);
+                AkSoundEngine.PostEvent("airforcesfx", gameObject);
             }
 
-            if (base.isAuthority)
+            if (isAuthority)
             {
-                Ray aimRay = base.GetAimRay();
-                base.AddRecoil(-1f * Airforce.recoil, -2f * Airforce.recoil, -0.5f * Airforce.recoil, 0.5f * Airforce.recoil);
+                Ray aimRay = GetAimRay();
+                AddRecoil(-1f * recoil, -2f * recoil, -0.5f * recoil, 0.5f * recoil);
 
 
                 //EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
@@ -73,7 +73,7 @@ namespace DekuMod.SkillStates
                 //    rotation = Quaternion.LookRotation(aimRay.direction)
 
                 //}, true);
-                
+
 
                 bool hasHit = false;
                 Vector3 hitPoint = Vector3.zero;
@@ -82,23 +82,23 @@ namespace DekuMod.SkillStates
 
                 var bulletAttack = new BulletAttack
                 {
-                    bulletCount = (uint)(2U),
+                    bulletCount = 2U,
                     aimVector = aimRay.direction,
                     origin = aimRay.origin,
-                    damage = Modules.StaticValues.airforceDamageCoefficient * this.damageStat,
+                    damage = Modules.StaticValues.airforceDamageCoefficient * damageStat,
                     damageColorIndex = DamageColorIndex.Default,
                     damageType = damageType,
-                    falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                    maxDistance = Airforce.range,
-                    force = Airforce.force,
+                    falloffModel = FalloffModel.DefaultBullet,
+                    maxDistance = range,
+                    force = force,
                     hitMask = LayerIndex.CommonMasks.bullet,
                     minSpread = 0f,
                     maxSpread = 0f,
-                    isCrit = base.RollCrit(),
-                    owner = base.gameObject,
+                    isCrit = RollCrit(),
+                    owner = gameObject,
                     muzzleName = muzzleString,
                     smartCollision = false,
-                    procChainMask = default(ProcChainMask),
+                    procChainMask = default,
                     procCoefficient = procCoefficient,
                     radius = 0.5f,
                     sniper = false,
@@ -115,13 +115,13 @@ namespace DekuMod.SkillStates
                 {
                     bulletAttack.hitCallback = delegate (BulletAttack bulletAttackRef, ref BulletHit hitInfo)
                     {
-                        var result = BulletAttack.defaultHitCallback(bulletAttackRef, ref hitInfo);
+                        var result = defaultHitCallback(bulletAttackRef, ref hitInfo);
                         if (hitInfo.hitHurtBox)
                         {
                             hasHit = true;
                             hitPoint = hitInfo.point;
                             hitDistance = hitInfo.distance;
-            
+
                             hitHealthComponent = hitInfo.hitHurtBox.healthComponent;
                             //hitHealthComponent.body.AddBuff();
 
@@ -129,9 +129,9 @@ namespace DekuMod.SkillStates
                         return result;
                     };
                 }
-                bulletAttack.filterCallback = delegate (BulletAttack bulletAttackRef, ref BulletAttack.BulletHit info)
+                bulletAttack.filterCallback = delegate (BulletAttack bulletAttackRef, ref BulletHit info)
                 {
-                    return (!info.entityObject || info.entityObject != bulletAttack.owner) && BulletAttack.defaultFilterCallback(bulletAttackRef, ref info);
+                    return (!info.entityObject || info.entityObject != bulletAttack.owner) && defaultFilterCallback(bulletAttackRef, ref info);
                 };
                 bulletAttack.Fire();
                 if (hasHit)
@@ -142,11 +142,11 @@ namespace DekuMod.SkillStates
                         critRicochetOrb.bouncesRemaining = maxRicochetCount - 1;
                         critRicochetOrb.resetBouncedObjects = resetBouncedObjects;
                         critRicochetOrb.damageValue = bulletAttack.damage;
-                        critRicochetOrb.isCrit = base.RollCrit();
-                        critRicochetOrb.teamIndex = TeamComponent.GetObjectTeam(base.gameObject);
+                        critRicochetOrb.isCrit = RollCrit();
+                        critRicochetOrb.teamIndex = TeamComponent.GetObjectTeam(gameObject);
                         critRicochetOrb.damageType = bulletAttack.damageType;
-                        critRicochetOrb.attacker = base.gameObject;
-                        critRicochetOrb.attackerBody = base.characterBody;
+                        critRicochetOrb.attacker = gameObject;
+                        critRicochetOrb.attackerBody = characterBody;
                         critRicochetOrb.procCoefficient = bulletAttack.procCoefficient;
                         critRicochetOrb.duration = 0.2f;
                         critRicochetOrb.bouncedObjects = new List<HealthComponent>();
@@ -165,23 +165,23 @@ namespace DekuMod.SkillStates
                 }
 
             }
-            
+
         }
 
         public override void FixedUpdate()
         {
-            base.FixedUpdate(); 
+            base.FixedUpdate();
 
-            if (base.fixedAge >= this.fireTime && !this.hasFired)
+            if (fixedAge >= fireTime && !hasFired)
             {
                 hasFired = true;
-                this.Fire();
+                Fire();
             }
 
 
-            if (base.fixedAge >= this.duration && base.isAuthority)
+            if (fixedAge >= duration && isAuthority)
             {
-                this.outer.SetNextStateToMain();
+                outer.SetNextStateToMain();
                 return;
             }
         }
