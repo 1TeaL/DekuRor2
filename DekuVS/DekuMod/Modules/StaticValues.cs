@@ -24,7 +24,7 @@ namespace DekuMod.Modules
         internal static float plusUltraHealthCost2 = 0.3f;
         internal static float plusUltraHealthCost3 = 0.6f;
         internal static float bonusPlusUltraRate = 2f;
-        internal static float baseRegenPlusUltra = 0.05f;
+        internal static float baseRegenPlusUltra = 1/50f;
         internal static float maxPlusUltra = 100f;
         internal static float regenPlusUltraRate = 8f;
         internal static float basePlusUltraGain = 1f;
@@ -80,6 +80,21 @@ namespace DekuMod.Modules
         internal const float oklahomaSpeedCoefficient = 30f;
         internal const float oklahomaDamageCoefficient = 3f;
         //Special
+        internal const int stlouisTotalHits = 5;
+        internal const int stlouisTotalHits3 = 5;
+        internal const float stlouisDistance2 = 10f;
+        internal const float stlouisDuration = 1f;
+        internal const float stlouisDuration2 = 1f;
+        internal const float stlouisDuration3 = 1f;
+        internal const float stlouisRadius = 5f;
+        internal const float stlouisRadius2 = 5f;
+        internal const float stlouisRadius3 = 5f;
+        internal const float stlouisDamageCoefficient = 3f;
+        internal const float stlouisDamageCoefficient2 = 3f;
+        internal const float stlouisDamageCoefficient3 = 3f;
+        internal const float stlouisDamageForce = 0f;
+        internal const float stlouisDamageForce2 = 0f;
+        internal const float stlouisDamageForce3 = 0f;
 
         //Blackwhip Mode
         //Primary
@@ -123,8 +138,7 @@ namespace DekuMod.Modules
         internal const float detroit100DamageCoefficient = 8f;
         internal const float detroit100HealthCostFraction = 0.15f;
         //stlouis
-        internal const float stlouisDamageCoefficient = 3f;
-        internal const float stlouisRange = 5f;
+        //internal const float stlouisDamageCoefficient = 3f;
         internal const float stlouis100DamageCoefficient = 6f;
         internal const float stlouis100HealthCostFraction = 0.15f;
         //gearshift

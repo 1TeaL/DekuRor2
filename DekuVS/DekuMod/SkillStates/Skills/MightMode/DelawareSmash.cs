@@ -192,7 +192,7 @@ namespace DekuMod.SkillStates.Might
                                     Fire();
                                     break;
                             }
-                            base.characterMotor.velocity = -StaticValues.delawareDistance * base.GetAimRay().direction * moveSpeedStat;
+                            base.characterMotor.velocity = -StaticValues.stlouisDistance2 * (-base.GetAimRay().direction)* moveSpeedStat;
                         }
                         this.outer.SetNextStateToMain();
                     }

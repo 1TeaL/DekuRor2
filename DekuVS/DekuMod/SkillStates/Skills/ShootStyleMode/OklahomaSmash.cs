@@ -15,7 +15,6 @@ namespace DekuMod.SkillStates
 {
     public class OklahomaSmash : BaseDekuSkillState
     {
-        public HurtBox Target;
         private Animator animator;
         private CharacterModel characterModel;
         private Ray aimRay;
@@ -30,7 +29,6 @@ namespace DekuMod.SkillStates
         private float travelTimer;
 
         private Vector3 dashDirection;
-        private Vector3 targetPosition;
         private Vector3 direction;
         private Transform modelTransform;
         private OverlapAttack attack;
@@ -124,77 +122,61 @@ namespace DekuMod.SkillStates
         {
             base.FixedUpdate();
             RecalculateRollSpeed();
-            if (dekucon && base.isAuthority)
-            {
-                Target = dekucon.GetTrackingTarget();
-            }
-
-            if (Target)
-            {
-                targetPosition = Target.transform.position;
-            }
 
             //dash/slide in direction, after that release the button for a dashing attack towards the target
             
             if (base.fixedAge <= dashDuration)
             {
                 dashDirection = direction.normalized * rollSpeed;
+                base.characterMotor.velocity = dashDirection;
+                base.characterDirection.forward = base.characterMotor.velocity.normalized;
             }
             if(base.fixedAge > dashDuration)
             {
                 if (!base.IsKeyDownAuthority())
                 {
-                    if (Target)
+
+                    if (base.isAuthority)
                     {
+                        dashDirection = base.GetAimRay().direction;
 
-                        if (base.isAuthority && Target)
-                        {
-                            dashDirection = (targetPosition).normalized * initialSpeedCoefficient;
-                            base.characterDirection.forward = base.characterMotor.velocity.normalized;
+                        base.characterMotor.velocity = dashDirection * SpeedCoefficient;
+                        base.characterDirection.forward = base.characterMotor.velocity.normalized;
 
-                            travelTimer += Time.fixedDeltaTime;
-                            if (travelTimer > maxTravelTime)
-                            {
-                                this.outer.SetNextStateToMain();
-                            }
-                            else
-                            {
-                                //travel until you hit something
-                                this.attack.forceVector = base.characterMotor.velocity.normalized * 1000f;
-                                if (this.attack.Fire(this.HitResults))
-                                {
-                                    if (this.HitResults.Count > 0)
-                                    {
-                                        foreach (HurtBox hurtBox in this.HitResults)
-                                        {
-                                            bool flag6 = hurtBox.healthComponent && hurtBox.healthComponent.health > 0f;
-                                            if (flag6)
-                                            {
-                                            }
-                                        }
-                                        this.outer.SetNextStateToMain();
-                                        return;
-                                    }
-                                    else
-                                    {
-                                        this.outer.SetNextStateToMain();
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                        else
+                        travelTimer += Time.fixedDeltaTime;
+                        if (travelTimer > maxTravelTime)
                         {
                             this.outer.SetNextStateToMain();
                         }
-
-
-                        
+                        else
+                        {
+                            //travel until you hit something
+                            this.attack.forceVector = base.characterMotor.velocity.normalized * 1000f;
+                            if (this.attack.Fire(this.HitResults))
+                            {
+                                if (this.HitResults.Count > 0)
+                                {
+                                    base.characterMotor.velocity = Vector3.zero;
+                                    base.characterDirection.forward = base.characterMotor.velocity.normalized;
+                                    foreach (HurtBox hurtBox in this.HitResults)
+                                    {
+                                        bool flag6 = hurtBox.healthComponent && hurtBox.healthComponent.health > 0f;
+                                        if (flag6)
+                                        {
+                                        }
+                                    }
+                                    this.outer.SetNextStateToMain();
+                                    return;
+                                }
+                                else
+                                {
+                                    this.outer.SetNextStateToMain();
+                                    return;
+                                }
+                            }
+                        }
                     }
-                    else
-                    {
-                        dashDirection = direction.normalized * rollSpeed;
-                    }
+
                 } 
                 else if (base.IsKeyDownAuthority())
                 {
@@ -206,8 +188,6 @@ namespace DekuMod.SkillStates
                 }
             }
 
-            base.characterMotor.velocity = dashDirection;
-            base.characterDirection.forward = base.characterMotor.velocity.normalized;
 
 
         }

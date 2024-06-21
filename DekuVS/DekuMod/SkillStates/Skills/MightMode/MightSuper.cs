@@ -41,6 +41,7 @@ namespace DekuMod.SkillStates.Might
         private EffectData effectData;
         private EffectData effectData2;
         private Animator animator;
+        private float duration;
 
         public override void OnEnter()
 		{
@@ -89,8 +90,10 @@ namespace DekuMod.SkillStates.Might
 			//set in front of deku exactly
 			blastPosition = characterBody.corePosition + (characterDirection.forward * (StaticValues.detroitRadius * attackSpeedStat * 0.5f));
             blastForce = StaticValues.detroitForce;
-
-			//play animation of quick punch
+            duration = 1f;
+            this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+            this.areaIndicator.SetActive(true);
+            //play animation of quick punch
 
         }
         protected override void BackwardSuper()
@@ -108,7 +111,7 @@ namespace DekuMod.SkillStates.Might
             //indicator
             this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
-
+            duration = 1f;
             //play animation of slam punch
         }
         protected override void ForwardSuper()
@@ -167,7 +170,7 @@ namespace DekuMod.SkillStates.Might
 
                         AkSoundEngine.PostEvent("impactsfx", this.gameObject);
                     }
-                    if (base.fixedAge > 1f)
+                    if (base.fixedAge > duration)
 					{
 						this.outer.SetNextStateToMain();
 						return;
@@ -184,7 +187,7 @@ namespace DekuMod.SkillStates.Might
 
                         AkSoundEngine.PostEvent("impactsfx", this.gameObject);
                     }
-                    if (base.fixedAge > 1f)
+                    if (base.fixedAge > duration)
                     {
                         this.outer.SetNextStateToMain();
                         return;

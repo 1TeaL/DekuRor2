@@ -22,7 +22,7 @@ namespace DekuMod.SkillStates
         public float duration;
         public float fireTime;
 
-        private float blastRadius = Modules.StaticValues.stlouisRange;
+        private float blastRadius = Modules.StaticValues.stlouisRadius;
 
         private BlastAttack blastAttack;
 
