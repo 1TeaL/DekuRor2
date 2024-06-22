@@ -38,6 +38,11 @@ namespace DekuMod.Modules
         internal static int goBeyondBuffDuration = 60;
         internal static float goBeyondThreshold = 95f;
 
+        //passive
+        internal static float blackwhipPullDistance = 5f;
+        internal static float blackwhipPullSpeed = 10f;
+        internal static float blackwhipPullDuration = 0.4f;
+
         //Might Mode
         //Primary
         internal const float smashRushDistance = 3f;
@@ -76,6 +81,11 @@ namespace DekuMod.Modules
         internal const int airforceMaxRicochet = 5;
         //Secondary
         internal const float stlouis45DamageCoefficient = 2f;
+        internal const float blastDashDamageCoefficient = 4f;
+        internal const float blastDashSpeed = 20f;
+        internal const float blastDashForce = 2000f;
+        internal const float blastDashRadius = 10f;
+        internal const float blastDashDuration = 0.6f;
         //Utility
         internal const float oklahomaSpeedCoefficient = 30f;
         internal const float oklahomaDamageCoefficient = 3f;
@@ -98,9 +108,23 @@ namespace DekuMod.Modules
 
         //Blackwhip Mode
         //Primary
+        internal const float blackwhipStrikeRange = 40f;
+        internal const float blackwhipStrikeDamage = 2f;
+        internal const float blackwhipStrikeForce = 2f;
+        internal const float blackwhipProc = 0.5f;
         //Secondary
+        internal const float pinpointRange = 50f;
+        internal const float pinpointRadius = 10f;
+        internal const float pinpointDamageCoefficient = 6f;
+        internal const float pinpointDuration = 1f;
+        internal const int blackwhipDebuffDuration = 4;
+        internal const float blackwhipDebuffMultiplier = 0.1f;
         //Utility
+        internal static int blackwhipOverlayDuration = 10;
+        internal static float blackwhipDodgeDuration = 0.3f;
+        internal static float blackwhipDodgeSpeed = 5f;
         //Special
+        internal static float whipDuration1 = 0.6f;
 
         //Primary
         //airforce
@@ -116,8 +140,8 @@ namespace DekuMod.Modules
         //blackwhip
         internal const float blackwhipDamageCoefficient = 0.1f;
         internal const float blackwhipLineMaxHeight = 0.2f;
-        internal const float blackwhipRange = 20f;
-        internal const int blackwhipDebuffDuration = 10;
+        //internal const float blackwhipRange = 20f;
+        //internal const int blackwhipDebuffDuration = 10;
         internal const int blackwhipTargets = 10;
         internal const float blackwhip45DamageCoefficient = 6f;
         internal const float blackwhip100DamageCoefficient = 6f;

@@ -6,10 +6,11 @@ using DekuMod.SkillStates.Orbs;
 using System.Collections.Generic;
 using RoR2.Orbs;
 using static RoR2.BulletAttack;
+using DekuMod.SkillStates.BaseStates;
 
 namespace DekuMod.SkillStates.ShootStyle
 {
-    public class Airforce : BaseSkill
+    public class Airforce : BaseDekuSkillState
     {
         public static float procCoefficient = 0.5f;
         public static float baseDuration = 0.5f;

@@ -26,6 +26,9 @@ namespace DekuMod.Modules
         internal static BuffDef goBeyondBuff;
         internal static BuffDef goBeyondBuffUsed;
 
+        //blackwhip
+        internal static BuffDef overlayBuff;
+
         //armor buff 
         internal static BuffDef manchesterBuff;
         internal static BuffDef oklahomaBuff;
@@ -71,6 +74,8 @@ namespace DekuMod.Modules
             gearshift45Buff = Buffs.AddNewBuff("gearshift45 Buff", Assets.speedBuffIcon, Color.blue, false, false);
             gearshift100Buff = Buffs.AddNewBuff("gearshift100 Buff", Assets.jumpBuffIcon, Color.white, true, false);
             gearshift100MovespeedBuff = Buffs.AddNewBuff("gearshift100Movespeed Buff", Assets.jumpBuffIcon, Color.blue, true, false);
+
+            overlayBuff = Buffs.AddNewBuff("Blackwhip Overlay Buff", Assets.jumpBuffIcon, Color.black, false, false);
 
             counterBuff = Buffs.AddNewBuff("Counter Buff", Assets.shieldBuffIcon, Color.cyan, false, false);
             counterAttackBuff = Buffs.AddNewBuff("Counter Buff", Assets.shieldBuffIcon, Color.cyan, false, false);

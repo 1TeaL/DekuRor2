@@ -5,6 +5,7 @@ using DekuMod.SkillStates.BaseStates;
 using DekuMod.Modules.Networking;
 using DekuMod.SkillStates.Might;
 using DekuMod.SkillStates.ShootStyle;
+using DekuMod.SkillStates.BlackWhip;
 
 namespace DekuMod.Modules
 {
@@ -43,10 +44,16 @@ namespace DekuMod.Modules
 
             //Shoot Style Mode
             entityStates.Add(typeof(Airforce));
-            entityStates.Add(typeof(SanDiegoSmash));
+            entityStates.Add(typeof(BlastDash));
             entityStates.Add(typeof(OklahomaSmash));
+            entityStates.Add(typeof(ShootStyleSuper));
 
             //Blackwhip Mode
+            entityStates.Add(typeof(BlackwhipStrike));
+            entityStates.Add(typeof(BlackwhipPull));
+            entityStates.Add(typeof(PinPointFocus));
+            entityStates.Add(typeof(BlackwhipOverlay));
+            entityStates.Add(typeof(BlackwhipDodge));
 
             //primary
             entityStates.Add(typeof(Airforce45));
@@ -58,7 +65,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(ShootStyleCombo));
             entityStates.Add(typeof(ShootStylePrimary));
 
-            entityStates.Add(typeof(Blackwhip));
+            //entityStates.Add(typeof(Blackwhip));
             entityStates.Add(typeof(Blackwhip45));
             entityStates.Add(typeof(Blackwhip100));
 

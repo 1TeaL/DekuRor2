@@ -192,7 +192,7 @@ namespace DekuMod.SkillStates.Might
                                     Fire();
                                     break;
                             }
-                            base.characterMotor.velocity = -StaticValues.stlouisDistance2 * (-base.GetAimRay().direction)* moveSpeedStat;
+                            base.characterMotor.velocity = StaticValues.stlouisDistance2 * (-base.GetAimRay().direction)* moveSpeedStat;
                         }
                         this.outer.SetNextStateToMain();
                     }
@@ -238,6 +238,7 @@ namespace DekuMod.SkillStates.Might
                     HitEffectNormal = true,
                     radius = radius,
                     maxDistance = range,
+                    hitMask = LayerIndex.CommonMasks.bullet,
                     stopperMask = LayerIndex.noCollision.mask,
                     procCoefficient = 1f,
                     damage = damage,

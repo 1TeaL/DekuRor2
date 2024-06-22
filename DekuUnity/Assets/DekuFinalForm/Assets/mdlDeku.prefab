@@ -27818,6 +27818,10 @@ MonoBehaviour:
     transform: {fileID: 7320721098857414555}
   - name: RFinger
     transform: {fileID: 5708965562382402246}
+  - name: LHand
+    transform: {fileID: 5875110892486637082}
+  - name: RHand
+    transform: {fileID: 2550275340935208446}
 --- !u!1 &7302542605336016592
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ using EmotesAPI;
 using R2API.Networking.Interfaces;
 using static UnityEngine.ParticleSystem.PlaybackState;
 using static RoR2.Console;
+using R2API;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -30,6 +31,7 @@ namespace DekuMod
     [BepInDependency("com.bepis.r2api.language", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.bepis.r2api.prefab", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.bepis.r2api.networking", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.bepis.r2api.damagetype", BepInDependency.DependencyFlags.HardDependency)]
 
     //don't need 
     //[BepInDependency("com.bepis.r2api.loadout", BepInDependency.DependencyFlags.HardDependency)]
@@ -81,7 +83,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "4.1.2";
+        public const string MODVERSION = "5.0.0";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -102,6 +104,7 @@ namespace DekuMod
             // load assets and read config
             Modules.Assets.Initialize();
             Modules.Config.ReadConfig();
+            Modules.Damage.SetupModdedDamage(); //setup modded damage
             Modules.States.RegisterStates(); // register states for networking
             Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
             Modules.Projectiles.RegisterProjectiles(); // add and register custom projectiles
@@ -123,6 +126,8 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<PerformBlackwhipPullNetworkRequest>();
             NetworkingAPI.RegisterMessageType<ForceCounterState>();
             NetworkingAPI.RegisterMessageType<ForceDangerSenseState>();
+            NetworkingAPI.RegisterMessageType<TakeDamageForceRequest>();
+            NetworkingAPI.RegisterMessageType<SetDodgeStateMachine>();
 
             NetworkingAPI.RegisterMessageType<PerformDetroitDelawareNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformFinalSmashNetworkRequest>();
@@ -203,6 +208,13 @@ namespace DekuMod
                         //deku mark system
                         if(body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                         {
+
+                            //vulnerability modded damage
+                            if (DamageAPI.HasModdedDamageType(damageInfo, Modules.Damage.blackwhipImmobilise))
+                            {
+                                victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, victimBody.GetBuffCount(Buffs.blackwhipDebuff) + StaticValues.blackwhipDebuffDuration);
+                            }
+
                             EnergySystem energySys = body.GetComponent<EnergySystem>();
                             energySys.plusUltraBoostTimer = 2f;
 
@@ -430,7 +442,8 @@ namespace DekuMod
             {
                 if (self.HasBuff(Buffs.blackwhipDebuff))
                 {
-                    self.moveSpeed = 0f;
+                    self.moveSpeed *= StaticValues.blackwhipDebuffMultiplier;
+                    self.attackSpeed *= StaticValues.blackwhipDebuffMultiplier;
                 }
 
                 if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")

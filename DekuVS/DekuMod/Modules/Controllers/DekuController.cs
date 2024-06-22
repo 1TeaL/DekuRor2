@@ -102,7 +102,8 @@ namespace DekuMod.Modules.Survivors
 
         //skill cd
         public float skillCDTimer;
-        
+        private float buttonCooler;
+
         public void Awake()
         {
             indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
@@ -151,175 +152,196 @@ namespace DekuMod.Modules.Survivors
             //anim = GetComponentInChildren<Animator>();
             //stopwatch = 0f;
 
-            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             goBeyondUsed = false;
             goBeyondOFAGiven = false;
             skillCDTimer = 0f;
         }
 
 
-        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
-        {
-            //dangersense
-            if (damageInfo != null && damageInfo.attacker && 
-                damageInfo.attacker.GetComponent<CharacterBody>() && 
-                damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
-            {
-                bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
-                if (!flag && damageInfo.damage > 0f)
-                {
-                    //dangersense base
-                    if (self.body.HasBuff(Buffs.dangersenseBuff.buffIndex) && !self.body.HasBuff(RoR2Content.Buffs.HiddenInvincibility))
-                    {
-                        if(energySystem.currentPlusUltra > StaticValues.dangersensePlusUltraSpend)
-                        {
-                            energySystem.SpendPlusUltra(StaticValues.dangersensePlusUltraSpend);
+        //private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        //{
+        //    //dangersense
+        //    if (damageInfo != null && damageInfo.attacker && 
+        //        damageInfo.attacker.GetComponent<CharacterBody>() && 
+        //        damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
+        //    {
+        //        bool flag = (damageInfo.damageType & DamageType.BypassArmor) > DamageType.Generic;
+        //        if (!flag && damageInfo.damage > 0f)
+        //        {
+        //            //dangersense base
+        //            if (self.body.HasBuff(Buffs.dangersenseBuff.buffIndex) && !self.body.HasBuff(RoR2Content.Buffs.HiddenInvincibility))
+        //            {
+        //                if(energySystem.currentPlusUltra > StaticValues.dangersensePlusUltraSpend)
+        //                {
+        //                    energySystem.SpendPlusUltra(StaticValues.dangersensePlusUltraSpend);
 
-                            self.body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 0, -1);
-                            self.body.ApplyBuff(Buffs.dangersenseDebuff.buffIndex, 1, StaticValues.dangersenseBuffTimer);
+        //                    self.body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 0, -1);
+        //                    self.body.ApplyBuff(Buffs.dangersenseDebuff.buffIndex, 1, StaticValues.dangersenseBuffTimer);
 
-                            damageInfo.force = Vector3.zero;
-                            damageInfo.damage -= self.body.armor;
-                            if (damageInfo.damage < 0f)
-                            {
-                                self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
-                                damageInfo.damage = 0f;
-                            }
+        //                    damageInfo.force = Vector3.zero;
+        //                    damageInfo.damage -= self.body.armor;
+        //                    if (damageInfo.damage < 0f)
+        //                    {
+        //                        self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
+        //                        damageInfo.damage = 0f;
+        //                    }
 
-                            //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
+        //                    //Debug.Log("hookhasbuff"+self.body.HasBuff(Modules.Buffs.dangersenseBuff.buffIndex));
 
-                            var dekucon = self.body.gameObject.GetComponent<DekuController>();
-                            //dekucon.countershouldflip = true;
+        //                    var dekucon = self.body.gameObject.GetComponent<DekuController>();
+        //                    //dekucon.countershouldflip = true;
 
-                            var damageInfo2 = new DamageInfo();
+        //                    var damageInfo2 = new DamageInfo();
 
-                            damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
-                            damageInfo2.position = damageInfo.attacker.transform.position;
-                            damageInfo2.force = Vector3.zero;
-                            damageInfo2.damageColorIndex = DamageColorIndex.Default;
-                            damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                            damageInfo2.attacker = self.body.gameObject;
-                            damageInfo2.inflictor = self.body.gameObject;
-                            damageInfo2.damageType = DamageType.Freeze2s;
-                            damageInfo2.procCoefficient = 1f;
-                            damageInfo2.procChainMask = default(ProcChainMask);
+        //                    damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
+        //                    damageInfo2.position = damageInfo.attacker.transform.position;
+        //                    damageInfo2.force = Vector3.zero;
+        //                    damageInfo2.damageColorIndex = DamageColorIndex.Default;
+        //                    damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+        //                    damageInfo2.attacker = self.body.gameObject;
+        //                    damageInfo2.inflictor = self.body.gameObject;
+        //                    damageInfo2.damageType = DamageType.Freeze2s;
+        //                    damageInfo2.procCoefficient = 1f;
+        //                    damageInfo2.procChainMask = default(ProcChainMask);
 
-                            if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
-                                != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
-                            {
-                                damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
-                            }
+        //                    if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
+        //                        != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+        //                    {
+        //                        damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+        //                    }
 
-                            Vector3 enemyPos = damageInfo.attacker.transform.position;
-                            //EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
-                            //{
-                            //    origin = self.body.transform.position,
-                            //    scale = 1f,
-                            //    rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
+        //                    Vector3 enemyPos = damageInfo.attacker.transform.position;
+        //                    //EffectManager.SpawnEffect(Modules.Projectiles.airforceTracer, new EffectData
+        //                    //{
+        //                    //    origin = self.body.transform.position,
+        //                    //    scale = 1f,
+        //                    //    rotation = Quaternion.LookRotation(enemyPos - self.body.transform.position)
 
-                            //}, true);
+        //                    //}, true);
 
-                            if (!self.body.inputBank.skill1.down && !self.body.inputBank.skill2.down && !self.body.inputBank.skill3.down)
-                            {
-                                new ForceDangerSenseState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
+        //                    if (!self.body.inputBank.skill1.down && !self.body.inputBank.skill2.down && !self.body.inputBank.skill3.down)
+        //                    {
+        //                        new ForceDangerSenseState(self.body.masterObjectId, enemyPos).Send(NetworkDestination.Clients);
 
-                                blastAttack = new BlastAttack();
-                                blastAttack.radius = dangersenseBlastRadius;
-                                blastAttack.procCoefficient = dangersenseprocCoefficient;
-                                blastAttack.position = self.transform.position;
-                                blastAttack.attacker = base.gameObject;
-                                blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
-                                blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
-                                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                                blastAttack.baseForce = force;
-                                blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                                blastAttack.damageType = DamageType.Shock5s;
-                                blastAttack.attackerFiltering = AttackerFiltering.Default;
+        //                        blastAttack = new BlastAttack();
+        //                        blastAttack.radius = dangersenseBlastRadius;
+        //                        blastAttack.procCoefficient = dangersenseprocCoefficient;
+        //                        blastAttack.position = self.transform.position;
+        //                        blastAttack.attacker = base.gameObject;
+        //                        blastAttack.crit = Util.CheckRoll(self.body.crit, self.body.master);
+        //                        blastAttack.baseDamage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
+        //                        blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+        //                        blastAttack.baseForce = force;
+        //                        blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+        //                        blastAttack.damageType = DamageType.Shock5s;
+        //                        blastAttack.attackerFiltering = AttackerFiltering.Default;
 
 
-                                blastAttack.Fire();
+        //                        blastAttack.Fire();
 
-                                for (int i = 0; i <= 5; i++)
-                                {
-                                    this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                                    float num = 60f;
-                                    Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
-                                    float num2 = 0.01f;
-                                    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
-                                    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
+        //                        for (int i = 0; i <= 5; i++)
+        //                        {
+        //                            this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
+        //                            float num = 60f;
+        //                            Quaternion rotation = Util.QuaternionSafeLookRotation(self.body.characterDirection.forward.normalized);
+        //                            float num2 = 0.01f;
+        //                            rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
+        //                            rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
 
-                                    EffectData effectData = new EffectData
-                                    {
-                                        scale = 1f,
-                                        origin = self.body.corePosition + this.randRelPos,
-                                        rotation = rotation
+        //                            EffectData effectData = new EffectData
+        //                            {
+        //                                scale = 1f,
+        //                                origin = self.body.corePosition + this.randRelPos,
+        //                                rotation = rotation
 
-                                    };
-                                    EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
-                                }
+        //                            };
+        //                            EffectManager.SpawnEffect(this.effectPrefab, effectData, true);
+        //                        }
 
-                            }
+        //                    }
 
-                        }
-                        else
-                        {
-                            Chat.AddMessage($"You need {StaticValues.dangersensePlusUltraSpend} plus ultra.");
-                        }
+        //                }
+        //                else
+        //                {
+        //                    Chat.AddMessage($"You need {StaticValues.dangersensePlusUltraSpend} plus ultra.");
+        //                }
                         
 
 
-                    }
+        //            }
 
-                }
+        //        }
 
 
-            }
-            orig.Invoke(self, damageInfo);
-        }
+        //    }
+        //    orig.Invoke(self, damageInfo);
+        //}
 
 
         public void Update()
         {
 
-
-            if (blackwhipTimer > 0f)
+            //sprint to shunpo
+            if(body.HasBuff(Buffs.overlayBuff))
             {
-                if (enemyBody)
+
+                if (buttonCooler > 0f)
                 {
-                    MakeLine();
+                    buttonCooler -= Time.deltaTime  * body.attackSpeed;
+
                 }
-                else
+                if (buttonCooler <= 0f)
                 {
-                    if (blackwhipAttachWorld)
+                    if (inputBank.sprint.justPressed)
                     {
-                        MakeLine();
+                        //energy cost- same as getsuga
+
+                        new SetDodgeStateMachine(body.masterObjectId).Send(NetworkDestination.Clients);
+                        buttonCooler += 1f;
+
                     }
                 }
-            }
-            else
-            {
-                if (blackwhipLineEffect)
-                {
-                    Destroy(blackwhipLineEffect);
-                }
-                blackwhipAttachWorld = false;
-                enemyBody = null;
             }
 
-            if(blackwhipLineEffect && blackwhipLineRenderer)
-            {
-                if (blackwhipTimer > 0f)
-                {
-                    if (blackwhipAttachWorld)
-                    {
-                        LineVec(storedPos);
-                    }
-                    else if (enemyBody)
-                    {
-                        LineVec(enemyBody.transform.position);
-                    }
-                }
-            }
+            //if (blackwhipTimer > 0f)
+            //{
+            //    if (enemyBody)
+            //    {
+            //        MakeLine();
+            //    }
+            //    else
+            //    {
+            //        if (blackwhipAttachWorld)
+            //        {
+            //            MakeLine();
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    if (blackwhipLineEffect)
+            //    {
+            //        Destroy(blackwhipLineEffect);
+            //    }
+            //    blackwhipAttachWorld = false;
+            //    enemyBody = null;
+            //}
+
+            //if(blackwhipLineEffect && blackwhipLineRenderer)
+            //{
+            //    if (blackwhipTimer > 0f)
+            //    {
+            //        if (blackwhipAttachWorld)
+            //        {
+            //            LineVec(storedPos);
+            //        }
+            //        else if (enemyBody)
+            //        {
+            //            LineVec(enemyBody.transform.position);
+            //        }
+            //    }
+            //}
         }
         public void FixedUpdate()
         {
@@ -340,43 +362,43 @@ namespace DekuMod.Modules.Survivors
             skillCDTimer += Time.fixedDeltaTime;
 
             //blackwhip timer
-            if (!blackwhipActivated)
-            {
-                blackwhipTimer -= Time.fixedDeltaTime;
-            }
-            else if (blackwhipActivated)
-            {
-                energySystem.SpendPlusUltra(StaticValues.blackwhip100EnergyFraction);
-                if (energySystem.currentPlusUltra < 5f)
-                {
-                    blackwhipActivated = false;
-                    Chat.AddMessage($"Deactivated blackwhip 100%.");
+            //if (!blackwhipActivated)
+            //{
+            //    blackwhipTimer -= Time.fixedDeltaTime;
+            //}
+            //else if (blackwhipActivated)
+            //{
+            //    energySystem.SpendPlusUltra(StaticValues.blackwhip100EnergyFraction);
+            //    if (energySystem.currentPlusUltra < 5f)
+            //    {
+            //        blackwhipActivated = false;
+            //        Chat.AddMessage($"Deactivated blackwhip 100%.");
 
-                }
-            }
-            //blackwhip 100% attach
-            if (enemyBody && blackwhipActivated)
-            {
-                Vector3 startPos = body.transform.position;
-                Vector3 endPos = enemyBody.transform.position;
-                float Distance = Vector3.Distance(startPos, endPos);
+            //    }
+            //}
+            ////blackwhip 100% attach
+            //if (enemyBody && blackwhipActivated)
+            //{
+            //    Vector3 startPos = body.transform.position;
+            //    Vector3 endPos = enemyBody.transform.position;
+            //    float Distance = Vector3.Distance(startPos, endPos);
 
 
-                if (Distance > StaticValues.blackwhip100AttachRange)
-                {
-                    new PerformBlackwhipPullNetworkRequest(body.masterObjectId, startPos, (endPos - startPos).normalized, 0f).Send(NetworkDestination.Clients);
-                }
+            //    if (Distance > StaticValues.blackwhip100AttachRange)
+            //    {
+            //        new PerformBlackwhipPullNetworkRequest(body.masterObjectId, startPos, (endPos - startPos).normalized, 0f).Send(NetworkDestination.Clients);
+            //    }
 
-            }
-            else if (!enemyBody)
-            {
-                if (blackwhipLineEffect)
-                {
-                    Destroy(blackwhipLineEffect);
-                }
-                blackwhipAttachWorld = false;
-                blackwhipActivated = false;
-            }
+            //}
+            //else if (!enemyBody)
+            //{
+            //    if (blackwhipLineEffect)
+            //    {
+            //        Destroy(blackwhipLineEffect);
+            //    }
+            //    blackwhipAttachWorld = false;
+            //    blackwhipActivated = false;
+            //}
 
             ////gearshift
             //if (body.HasBuff(Buffs.gearshift100Buff.buffIndex))
@@ -735,35 +757,35 @@ namespace DekuMod.Modules.Survivors
 
 
         //blackwhip line renderer effect
-        public void MakeLine()
-        {
-            if (!blackwhipLineEffect)
-            {
-                blackwhipLineEffect = UnityEngine.Object.Instantiate(Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
-                blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
-            }
-        }
-        public void LineVec(Vector3 linkedBodyPos)
-        {
-            Vector3 startPos = child.FindChild("RHand").transform.position;
-            Vector3 endPos = linkedBodyPos;
-            int interVal = (int)Mathf.Abs(Vector3.Distance(endPos, startPos));
-            if (interVal <= 0)
-            {
-                interVal = 2;
-            }
-            Vector3[] numberofpositions = new Vector3[interVal];
-            for (int i = 0; i < numberofpositions.Length; i++)
-            {
-                numberofpositions[i] = Vector3.Lerp(startPos, endPos, (float)i / interVal);
-                numberofpositions[i].z = Mathf.Lerp(startPos.z, endPos.z, (float)i / interVal);
+        //public void MakeLine()
+        //{
+        //    if (!blackwhipLineEffect)
+        //    {
+        //        blackwhipLineEffect = UnityEngine.Object.Instantiate(Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+        //        blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
+        //    }
+        //}
+        //public void LineVec(Vector3 linkedBodyPos)
+        //{
+        //    Vector3 startPos = child.FindChild("RHand").transform.position;
+        //    Vector3 endPos = linkedBodyPos;
+        //    int interVal = (int)Mathf.Abs(Vector3.Distance(endPos, startPos));
+        //    if (interVal <= 0)
+        //    {
+        //        interVal = 2;
+        //    }
+        //    Vector3[] numberofpositions = new Vector3[interVal];
+        //    for (int i = 0; i < numberofpositions.Length; i++)
+        //    {
+        //        numberofpositions[i] = Vector3.Lerp(startPos, endPos, (float)i / interVal);
+        //        numberofpositions[i].z = Mathf.Lerp(startPos.z, endPos.z, (float)i / interVal);
 
 
-            }
-            blackwhipLineRenderer.positionCount = interVal;
-            blackwhipLineRenderer.SetPositions(numberofpositions);
+        //    }
+        //    blackwhipLineRenderer.positionCount = interVal;
+        //    blackwhipLineRenderer.SetPositions(numberofpositions);
 
-        }
+        //}
 
         public void PlayGobeyondLoop()
         {

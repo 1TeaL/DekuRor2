@@ -451,6 +451,110 @@ namespace DekuMod.Modules.Survivors
             });
             #endregion
 
+            #region Shoot Style Mode Skills
+
+            shootPrimarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTPRIMARY_NAME",
+                skillNameToken = prefix + "MIGHTPRIMARY_NAME",
+                skillDescriptionToken = prefix + "MIGHTPRIMARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(SmashRushStart)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            shootSecondarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTSECONDARY_NAME",
+                skillNameToken = prefix + "MIGHTSECONDARY_NAME",
+                skillDescriptionToken = prefix + "MIGHTSECONDARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(DelawareSmash)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 3,
+                baseRechargeInterval = 4F,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            shootUtilitySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTUTILITY_NAME",
+                skillNameToken = prefix + "MIGHTUTILITY_NAME",
+                skillDescriptionToken = prefix + "MIGHTUTILITY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(CounterSmash)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+
+            shootSpecialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTSPECIAL_NAME",
+                skillNameToken = prefix + "MIGHTSPECIAL_NAME",
+                skillDescriptionToken = prefix + "MIGHTSPECIAL_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(MightSuper)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+            #endregion
 
             #region Go Beyond Skills
             goBeyondSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
