@@ -10,17 +10,24 @@ namespace DekuMod.SkillStates
 
 	public class BaseMode : BaseDekuSkillState
 	{
-		public DekuController dekucon;
-		public EnergySystem energySystem;
 
         public override void OnEnter()
 		{
 			base.OnEnter();
-			dekucon = base.GetComponent<DekuController>();
-			energySystem = base.GetComponent<EnergySystem>();
 
 
-		}
+            if (energySystem.currentPlusUltra > Modules.StaticValues.super1Cost)
+            {
+                energySystem.SpendPlusUltra(Modules.StaticValues.super1Cost);
+				SwitchAttack();
+            }
+
+        }
+
+		protected virtual void SwitchAttack()
+        {
+
+        }
 
 		public override void FixedUpdate()
 		{

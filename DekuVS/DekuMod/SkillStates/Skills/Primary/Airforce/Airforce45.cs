@@ -2,11 +2,12 @@
 using UnityEngine;
 using EntityStates;
 using DekuMod.Modules.Survivors;
+using DekuMod.SkillStates.BaseStates;
 
 namespace DekuMod.SkillStates
 {
 
-    public class Airforce45 : BaseSkill45
+    public class Airforce45 : BaseDekuSkillState
     {
 
         public static float procCoefficient = 0.25f;

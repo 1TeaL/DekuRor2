@@ -8,6 +8,9 @@ using EntityStates;
 using System.Runtime.CompilerServices;
 using DekuMod.SkillStates.Might;
 using UnityEngine.XR;
+using DekuMod.SkillStates.ShootStyle;
+using DekuMod.SkillStates;
+using DekuMod.SkillStates.BlackWhip;
 
 namespace DekuMod.Modules.Survivors
 {
@@ -32,53 +35,18 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef shootUtilitySkillDef;
         internal static SkillDef shootSpecialSkillDef;
 
-        //Quirk Combo Mode Skills
-        internal static SkillDef quirkPrimarySkillDef;
-        internal static SkillDef quirkSecondarySkillDef;
-        internal static SkillDef quirkUtilitySkillDef;
-        internal static SkillDef quirkSpecialSkillDef;
+        //Black Whip Mode Skills
+        internal static SkillDef blackwhipPrimarySkillDef;
+        internal static SkillDef blackwhipSecondarySkillDef;
+        internal static SkillDef blackwhipUtilitySkillDef;
+        internal static SkillDef blackwhipSpecialSkillDef;
 
-        //Primary skills
-        internal static SkillDef fistPrimarySkillDef;
-        internal static SkillDef fist45PrimarySkillDef;
-        internal static SkillDef fist100PrimarySkillDef;
-        internal static SkillDef legPrimarySkillDef;
-        internal static SkillDef leg45PrimarySkillDef;
-        internal static SkillDef leg100PrimarySkillDef;
-        //internal static SkillDef quirkPrimarySkillDef;
-        internal static SkillDef quirk45PrimarySkillDef;
-        internal static SkillDef quirk100PrimarySkillDef;
-        //Secondary skills
-        internal static SkillDef fistSecondarySkillDef;
-        internal static SkillDef fist45SecondarySkillDef;
-        internal static SkillDef fist100SecondarySkillDef;
-        internal static SkillDef legSecondarySkillDef;
-        internal static SkillDef leg45SecondarySkillDef;
-        internal static SkillDef leg100SecondarySkillDef;
-        //internal static SkillDef quirkSecondarySkillDef;
-        internal static SkillDef quirk45SecondarySkillDef;
-        internal static SkillDef quirk100SecondarySkillDef;
-        //Utility skills
-        internal static SkillDef fistUtilitySkillDef;
-        internal static SkillDef fist45UtilitySkillDef;
-        internal static SkillDef fist100UtilitySkillDef;
-        internal static SkillDef legUtilitySkillDef;
-        internal static SkillDef leg45UtilitySkillDef;
-        internal static SkillDef leg100UtilitySkillDef;
-        //internal static SkillDef quirkUtilitySkillDef;
-        internal static SkillDef quirk45UtilitySkillDef;
-        internal static SkillDef quirk100UtilitySkillDef;
-        //Special skills
-        internal static SkillDef fistSpecialSkillDef;
-        internal static SkillDef legSpecialSkillDef;
-        //internal static SkillDef quirkSpecialSkillDef;
 
         //Extra skills
-        internal static SkillDef fistExtraSkillDef;
-        internal static SkillDef legExtraSkillDef;
-        internal static SkillDef quirkExtraSkillDef;
-        internal static SkillDef cycleExtraSkillDef;
-        internal static SkillDef typeExtraSkillDef;
+        internal static SkillDef mightModeSkillDef;
+        internal static SkillDef shootstyleModeSkillDef;
+        internal static SkillDef blackwhipModeSkillDef;
+        internal static SkillDef blackwhipPullSkillDef;
 
         //GoBeyond skills
         internal static SkillDef goBeyondSkillDef1;
@@ -90,44 +58,6 @@ namespace DekuMod.Modules.Survivors
         internal static SkillDef goBeyondSkillDef7;
         internal static SkillDef goBeyondSkillDef8;
 
-
-        internal static SkillDef secondaryboostSkillDef;
-        internal static SkillDef utilityboostSkillDef;
-        internal static SkillDef primaryboost45SkillDef;
-        internal static SkillDef secondaryboost45SkillDef;
-        internal static SkillDef utilityboost45SkillDef;
-        internal static SkillDef ofadownSkillDef;
-        internal static SkillDef primaryfajinSkillDef;
-        internal static SkillDef primaryfajinscepterSkillDef;
-        internal static SkillDef secondaryfajinSkillDef;
-        internal static SkillDef utilityfajinSkillDef;
-        internal static SkillDef airforce100SkillDef;
-        internal static SkillDef shootstylekick45SkillDef;
-        internal static SkillDef shootstylekick100SkillDef;
-        internal static SkillDef dangersense45SkillDef;
-        internal static SkillDef dangersense100SkillDef;
-        internal static SkillDef blackwhip100SkillDef;
-        internal static SkillDef manchester45SkillDef;
-        internal static SkillDef manchester100SkillDef;
-        internal static SkillDef stlouis100SkillDef;
-        internal static SkillDef float45SkillDef;
-        internal static SkillDef float100SkillDef;
-        internal static SkillDef floatcancelSkillDef;
-        internal static SkillDef floatcancel45SkillDef;
-        internal static SkillDef floatcancel100SkillDef;
-        internal static SkillDef floatdelawareSkillDef;
-        internal static SkillDef floatdelaware45SkillDef;
-        internal static SkillDef oklahoma45SkillDef;
-        internal static SkillDef oklahoma100SkillDef;
-        internal static SkillDef detroit45SkillDef;
-        internal static SkillDef ofacycle1SkillDef;
-        internal static SkillDef ofacycle2SkillDef;
-        internal static SkillDef ofacycleSkillDef;
-        internal static SkillDef ofacycle1scepterSkillDef;
-        internal static SkillDef ofacycle2scepterSkillDef;
-        internal static SkillDef ofacycledownSkillDef;
-        internal static SkillDef ofacycledownscepterSkillDef;
-        internal static SkillDef fajinSkillDef;
 
 
         internal override GameObject bodyPrefab { get; set; }
@@ -330,10 +260,10 @@ namespace DekuMod.Modules.Survivors
         internal override void InitializeSkills()
         {
             Skills.CreateSkillFamilies(bodyPrefab);
-            //Modules.Skills.CreateFirstExtraSkillFamily(bodyPrefab);
-            //Modules.Skills.CreateSecondExtraSkillFamily(bodyPrefab);
-            //Modules.Skills.CreateThirdExtraSkillFamily(bodyPrefab);
-            //Modules.Skills.CreateFourthExtraSkillFamily(bodyPrefab);
+            Modules.Skills.CreateFirstExtraSkillFamily(bodyPrefab);
+            Modules.Skills.CreateSecondExtraSkillFamily(bodyPrefab);
+            Modules.Skills.CreateThirdExtraSkillFamily(bodyPrefab);
+            Modules.Skills.CreateFourthExtraSkillFamily(bodyPrefab);
 
             string prefix = DekuPlugin.developerPrefix +"_DEKU_BODY_";
 
@@ -389,7 +319,7 @@ namespace DekuMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Any,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
@@ -415,7 +345,7 @@ namespace DekuMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Any,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
@@ -440,7 +370,7 @@ namespace DekuMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Any,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
@@ -456,11 +386,11 @@ namespace DekuMod.Modules.Survivors
             shootPrimarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
 
-                skillName = prefix + "MIGHTPRIMARY_NAME",
-                skillNameToken = prefix + "MIGHTPRIMARY_NAME",
-                skillDescriptionToken = prefix + "MIGHTPRIMARY_DESCRIPTION",
+                skillName = prefix + "SHOOTSTYLEPRIMARY_NAME",
+                skillNameToken = prefix + "SHOOTSTYLEPRIMARY_NAME",
+                skillDescriptionToken = prefix + "SHOOTSTYLEPRIMARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
-                activationState = new SerializableEntityStateType(typeof(SmashRushStart)),
+                activationState = new SerializableEntityStateType(typeof(Airforce)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -482,11 +412,11 @@ namespace DekuMod.Modules.Survivors
             shootSecondarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
 
-                skillName = prefix + "MIGHTSECONDARY_NAME",
-                skillNameToken = prefix + "MIGHTSECONDARY_NAME",
-                skillDescriptionToken = prefix + "MIGHTSECONDARY_DESCRIPTION",
+                skillName = prefix + "SHOOTSTYLESECONDARY_NAME",
+                skillNameToken = prefix + "SHOOTSTYLESECONDARY_NAME",
+                skillDescriptionToken = prefix + "SHOOTSTYLESECONDARY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
-                activationState = new SerializableEntityStateType(typeof(DelawareSmash)),
+                activationState = new SerializableEntityStateType(typeof(BlastDash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
                 baseRechargeInterval = 4F,
@@ -494,7 +424,7 @@ namespace DekuMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Any,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
@@ -508,11 +438,11 @@ namespace DekuMod.Modules.Survivors
             shootUtilitySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
 
-                skillName = prefix + "MIGHTUTILITY_NAME",
-                skillNameToken = prefix + "MIGHTUTILITY_NAME",
-                skillDescriptionToken = prefix + "MIGHTUTILITY_DESCRIPTION",
+                skillName = prefix + "SHOOTSTYLEUTILITY_NAME",
+                skillNameToken = prefix + "SHOOTSTYLEUTILITY_NAME",
+                skillDescriptionToken = prefix + "SHOOTSTYLEUTILITY_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
-                activationState = new SerializableEntityStateType(typeof(CounterSmash)),
+                activationState = new SerializableEntityStateType(typeof(OklahomaSmash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 4f,
@@ -520,7 +450,7 @@ namespace DekuMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Any,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
@@ -533,11 +463,11 @@ namespace DekuMod.Modules.Survivors
             shootSpecialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
 
-                skillName = prefix + "MIGHTSPECIAL_NAME",
-                skillNameToken = prefix + "MIGHTSPECIAL_NAME",
-                skillDescriptionToken = prefix + "MIGHTSPECIAL_DESCRIPTION",
+                skillName = prefix + "SHOOTSTYLESPECIAL_NAME",
+                skillNameToken = prefix + "SHOOTSTYLESPECIAL_NAME",
+                skillDescriptionToken = prefix + "SHOOTSTYLESPECIAL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
-                activationState = new SerializableEntityStateType(typeof(MightSuper)),
+                activationState = new SerializableEntityStateType(typeof(ShootStyleSuper)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
@@ -545,7 +475,7 @@ namespace DekuMod.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = false,
-                interruptPriority = EntityStates.InterruptPriority.Any,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
@@ -554,6 +484,114 @@ namespace DekuMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1,
             });
+            #endregion
+
+            #region Black Whip Mode Skills
+
+            blackwhipPrimarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "BLACKWHIPSTYLEPRIMARY_NAME",
+                skillNameToken = prefix + "BLACKWHIPSTYLEPRIMARY_NAME",
+                skillDescriptionToken = prefix + "BLACKWHIPSTYLEPRIMARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(BlackwhipStrike)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            blackwhipSecondarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "BLACKWHIPSTYLESECONDARY_NAME",
+                skillNameToken = prefix + "BLACKWHIPSTYLESECONDARY_NAME",
+                skillDescriptionToken = prefix + "BLACKWHIPSTYLESECONDARY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(PinPointFocus)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 3,
+                baseRechargeInterval = 4F,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            blackwhipUtilitySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "BLACKWHIPSTYLEUTILITY_NAME",
+                skillNameToken = prefix + "BLACKWHIPSTYLEUTILITY_NAME",
+                skillDescriptionToken = prefix + "BLACKWHIPSTYLEUTILITY_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(BlackwhipOverlay)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+
+            blackwhipSpecialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "BLACKWHIPSTYLESPECIAL_NAME",
+                skillNameToken = prefix + "BLACKWHIPSTYLESPECIAL_NAME",
+                skillDescriptionToken = prefix + "BLACKWHIPSTYLESPECIAL_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(BlackwhipSuper)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+            #endregion
+
+            #region Extra Skills
             #endregion
 
             #region Go Beyond Skills
@@ -748,45 +786,30 @@ namespace DekuMod.Modules.Survivors
 
             #region Adding Skills
             Modules.Skills.AddPrimarySkill(bodyPrefab, mightPrimarySkillDef);
-            //Modules.Skills.AddPrimarySkill(bodyPrefab, fistPrimarySkillDef);
-            //Modules.Skills.AddPrimarySkill(bodyPrefab, legPrimarySkillDef);
-            //Modules.Skills.AddPrimarySkill(bodyPrefab, quirkPrimarySkillDef);
 
 
             Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]
             {
                 mightSecondarySkillDef,
-                //fistSecondarySkillDef,
-                //legSecondarySkillDef,
-                //quirkSecondarySkillDef,
             });
 
             Skills.AddUtilitySkills(this.bodyPrefab, new SkillDef[]
             {
                 mightUtilitySkillDef,
-                //fistUtilitySkillDef,
-                //legUtilitySkillDef,
-                //quirkUtilitySkillDef,
             });
 
             Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
             {
                 mightSpecialSkillDef,
-                //ofacycle1SkillDef,
             });
 
-            //Skills.AddFirstExtraSkill(bodyPrefab, mightPrimarySkillDef);
-            ////Skills.AddFirstExtraSkill(bodyPrefab, fistExtraSkillDef);
+            Skills.AddFirstExtraSkill(bodyPrefab, mightPrimarySkillDef);
 
-            //Skills.AddSecondExtraSkill(bodyPrefab, mightPrimarySkillDef);
-            ////Skills.AddSecondExtraSkill(bodyPrefab, legExtraSkillDef);
+            Skills.AddSecondExtraSkill(bodyPrefab, mightPrimarySkillDef);
 
-            //Skills.AddThirdExtraSkill(bodyPrefab, mightPrimarySkillDef);
-            ////Skills.AddThirdExtraSkill(bodyPrefab, quirkExtraSkillDef);
+            Skills.AddThirdExtraSkill(bodyPrefab, mightPrimarySkillDef);
 
-            //Skills.AddFourthExtraSkill(bodyPrefab, mightPrimarySkillDef);
-            //Skills.AddFourthExtraSkill(bodyPrefab, typeExtraSkillDef);
-            //Skills.AddFourthExtraSkill(bodyPrefab, fistSpecialSkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, mightPrimarySkillDef);
             #endregion
 
         }

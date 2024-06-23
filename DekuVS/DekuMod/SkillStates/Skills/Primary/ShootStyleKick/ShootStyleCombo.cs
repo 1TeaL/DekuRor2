@@ -109,10 +109,10 @@ namespace DekuMod.SkillStates
                 float num2 = Vector3.Distance(base.transform.position, Target.transform.position);
                 if (num2 >= num)
                 {
-                    this.outer.SetNextState(new DashAttack
-                    {
+                    //this.outer.SetNextState(new DashAttack
+                    //{
 
-                    });
+                    //});
                 }
                 else
                 {

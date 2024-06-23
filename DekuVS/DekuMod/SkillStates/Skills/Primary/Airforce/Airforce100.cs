@@ -9,10 +9,11 @@ using UnityEngine.Networking;
 using R2API.Networking;
 using DekuMod.Modules.Networking;
 using R2API.Networking.Interfaces;
+using DekuMod.SkillStates.BaseStates;
 
 namespace DekuMod.SkillStates
 {
-    public class Airforce100 : BaseSkill100
+    public class Airforce100 : BaseDekuSkillState
     {
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.4f;

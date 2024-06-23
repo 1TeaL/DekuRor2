@@ -16,12 +16,12 @@ namespace DekuMod.Modules
         internal static void RegisterStates()
         {
             //base skills
-            entityStates.Add(typeof(BaseSkill));
-            entityStates.Add(typeof(BaseSkill45));
-            entityStates.Add(typeof(BaseSkill100));
-            entityStates.Add(typeof(BaseQuirk));
-            entityStates.Add(typeof(BaseQuirk45));
-            entityStates.Add(typeof(BaseQuirk100));
+            //entityStates.Add(typeof(BaseSkill));
+            //entityStates.Add(typeof(BaseDekuSkillState));
+            //entityStates.Add(typeof(BaseDekuSkillState));
+            //entityStates.Add(typeof(BaseQuirk));
+            //entityStates.Add(typeof(BaseQuirk45));
+            //entityStates.Add(typeof(BaseQuirk100));
             entityStates.Add(typeof(BaseSpecial));
             entityStates.Add(typeof(BaseMode));
             entityStates.Add(typeof(BaseDekuSkillState));
@@ -54,105 +54,107 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(PinPointFocus));
             entityStates.Add(typeof(BlackwhipOverlay));
             entityStates.Add(typeof(BlackwhipDodge));
+            entityStates.Add(typeof(BlackwhipSuper));
 
-            //primary
-            entityStates.Add(typeof(Airforce45));
-            entityStates.Add(typeof(Airforce100));
-
-            entityStates.Add(typeof(ShootStyleKick));
-            entityStates.Add(typeof(DashAttack));
-            entityStates.Add(typeof(DashAttackExit));
-            entityStates.Add(typeof(ShootStyleCombo));
-            entityStates.Add(typeof(ShootStylePrimary));
-
-            //entityStates.Add(typeof(Blackwhip));
-            entityStates.Add(typeof(Blackwhip45));
-            entityStates.Add(typeof(Blackwhip100));
-
-            entityStates.Add(typeof(ShootStyleBullet));
-            entityStates.Add(typeof(ShootStyleDash));
-            entityStates.Add(typeof(ShootStyleDashAttack));
-            entityStates.Add(typeof(ShootStyleBulletStun));
-
-
-            //secondary
-            entityStates.Add(typeof(Detroit));
-            entityStates.Add(typeof(Detroit45));
-            entityStates.Add(typeof(Detroit100));
-            entityStates.Add(typeof(DetroitRelease));
-            entityStates.Add(typeof(Detroit100Release));
-
-            entityStates.Add(typeof(StLouis));
-            entityStates.Add(typeof(StLouis45));
-            entityStates.Add(typeof(StLouis100));
-
-            entityStates.Add(typeof(GearShift));
-            entityStates.Add(typeof(GearShift45));
-            entityStates.Add(typeof(GearShift100));
-
-            entityStates.Add(typeof(DangerSense));
-            entityStates.Add(typeof(DangerSenseCounter));
-
-            entityStates.Add(typeof(ShootStyleBulletStun45));
-            entityStates.Add(typeof(ShootStyleBulletStun100));
-            entityStates.Add(typeof(ShootStyleDash45));
-            entityStates.Add(typeof(ShootStyleDashAttack45));
-            entityStates.Add(typeof(ShootStyleDash100));
-            entityStates.Add(typeof(ShootStyleDashAttack100));
-            entityStates.Add(typeof(ShootStyleKick100));
-
-            //utility
-            //entityStates.Add(typeof(DelawareSmash));
-            entityStates.Add(typeof(DelawareSmash45));
-            entityStates.Add(typeof(DelawareSmash100));
-
-            entityStates.Add(typeof(Manchester));
-            entityStates.Add(typeof(Manchester45));
-            entityStates.Add(typeof(Manchester100));
-
-            entityStates.Add(typeof(Smokescreen));
-            entityStates.Add(typeof(Smokescreen45));
-            entityStates.Add(typeof(Smokescreen100));
-
-            entityStates.Add(typeof(Float));
-            entityStates.Add(typeof(Float45));
-            entityStates.Add(typeof(Float100));
-            entityStates.Add(typeof(FloatCancel));
-            entityStates.Add(typeof(FloatCancel45));
-            entityStates.Add(typeof(FloatCancel100));
-            entityStates.Add(typeof(Oklahoma));
-            entityStates.Add(typeof(Oklahoma45));
-            entityStates.Add(typeof(Oklahoma100));
-
-            //special
-            entityStates.Add(typeof(FistSuper));
-            entityStates.Add(typeof(LegSuper));
-            entityStates.Add(typeof(QuirkSuper));
-            
             //modes
             entityStates.Add(typeof(MightMode));
             entityStates.Add(typeof(ShootStyleMode));
-            entityStates.Add(typeof(QuirkComboMode));
-            entityStates.Add(typeof(CycleMode));
-            entityStates.Add(typeof(TypeMode));
+            entityStates.Add(typeof(BlackwhipMode));
 
-            //ofa
-            entityStates.Add(typeof(OFAcycle1));
-            entityStates.Add(typeof(OFAcycle1scepter));
-            entityStates.Add(typeof(OFAcycle2));
-            entityStates.Add(typeof(OFAcycle2scepter));
-            entityStates.Add(typeof(OFAcycledown));
+            //primary
+            //entityStates.Add(typeof(Airforce45));
+            //entityStates.Add(typeof(Airforce100));
 
-            entityStates.Add(typeof(OFAstate));
-            entityStates.Add(typeof(OFAstatescepter));
-            entityStates.Add(typeof(OFAstate45));
-            entityStates.Add(typeof(OFAstatescepter45));
-            entityStates.Add(typeof(OFAdown));
+            //entityStates.Add(typeof(ShootStyleKick));
+            //entityStates.Add(typeof(DashAttack));
+            //entityStates.Add(typeof(DashAttackExit));
+            //entityStates.Add(typeof(ShootStyleCombo));
+            //entityStates.Add(typeof(ShootStylePrimary));
 
-            //extra
-            entityStates.Add(typeof(Fajinstate));
-            entityStates.Add(typeof(Fajinstatescepter));
-            entityStates.Add(typeof(Fajinscepter));
+            ////entityStates.Add(typeof(Blackwhip));
+            //entityStates.Add(typeof(Blackwhip45));
+            //entityStates.Add(typeof(Blackwhip100));
+
+            //entityStates.Add(typeof(ShootStyleBullet));
+            //entityStates.Add(typeof(ShootStyleDash));
+            //entityStates.Add(typeof(ShootStyleDashAttack));
+            //entityStates.Add(typeof(ShootStyleBulletStun));
+
+
+            ////secondary
+            //entityStates.Add(typeof(Detroit));
+            //entityStates.Add(typeof(Detroit45));
+            //entityStates.Add(typeof(Detroit100));
+            //entityStates.Add(typeof(DetroitRelease));
+            //entityStates.Add(typeof(Detroit100Release));
+
+            //entityStates.Add(typeof(StLouis));
+            //entityStates.Add(typeof(StLouis45));
+            //entityStates.Add(typeof(StLouis100));
+
+            //entityStates.Add(typeof(GearShift));
+            //entityStates.Add(typeof(GearShift45));
+            //entityStates.Add(typeof(GearShift100));
+
+            //entityStates.Add(typeof(DangerSense));
+            //entityStates.Add(typeof(DangerSenseCounter));
+
+            //entityStates.Add(typeof(ShootStyleBulletStun45));
+            //entityStates.Add(typeof(ShootStyleBulletStun100));
+            //entityStates.Add(typeof(ShootStyleDash45));
+            //entityStates.Add(typeof(ShootStyleDashAttack45));
+            //entityStates.Add(typeof(ShootStyleDash100));
+            //entityStates.Add(typeof(ShootStyleDashAttack100));
+            //entityStates.Add(typeof(ShootStyleKick100));
+
+            ////utility
+            ////entityStates.Add(typeof(DelawareSmash));
+            //entityStates.Add(typeof(DelawareSmash45));
+            //entityStates.Add(typeof(DelawareSmash100));
+
+            //entityStates.Add(typeof(Manchester));
+            //entityStates.Add(typeof(Manchester45));
+            //entityStates.Add(typeof(Manchester100));
+
+            //entityStates.Add(typeof(Smokescreen));
+            //entityStates.Add(typeof(Smokescreen45));
+            //entityStates.Add(typeof(Smokescreen100));
+
+            //entityStates.Add(typeof(Float));
+            //entityStates.Add(typeof(Float45));
+            //entityStates.Add(typeof(Float100));
+            //entityStates.Add(typeof(FloatCancel));
+            //entityStates.Add(typeof(FloatCancel45));
+            //entityStates.Add(typeof(FloatCancel100));
+            //entityStates.Add(typeof(Oklahoma));
+            //entityStates.Add(typeof(Oklahoma45));
+            //entityStates.Add(typeof(Oklahoma100));
+
+            //special
+            //entityStates.Add(typeof(FistSuper));
+            //entityStates.Add(typeof(LegSuper));
+            //entityStates.Add(typeof(QuirkSuper));
+
+            //entityStates.Add(typeof(CycleMode));
+            //entityStates.Add(typeof(TypeMode));
+
+            ////ofa
+            //entityStates.Add(typeof(OFAcycle1));
+            //entityStates.Add(typeof(OFAcycle1scepter));
+            //entityStates.Add(typeof(OFAcycle2));
+            //entityStates.Add(typeof(OFAcycle2scepter));
+            //entityStates.Add(typeof(OFAcycledown));
+
+            //entityStates.Add(typeof(OFAstate));
+            //entityStates.Add(typeof(OFAstatescepter));
+            //entityStates.Add(typeof(OFAstate45));
+            //entityStates.Add(typeof(OFAstatescepter45));
+            //entityStates.Add(typeof(OFAdown));
+
+            ////extra
+            //entityStates.Add(typeof(Fajinstate));
+            //entityStates.Add(typeof(Fajinstatescepter));
+            //entityStates.Add(typeof(Fajinscepter));
             //entityStates.Add(typeof(BlackwhipShoot));
         }
     }

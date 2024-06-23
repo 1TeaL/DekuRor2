@@ -8,10 +8,11 @@ using RoR2.Orbs;
 using static RoR2.BulletAttack;
 using DekuMod.Modules;
 using R2API;
+using DekuMod.SkillStates.BaseStates;
 
 namespace DekuMod.SkillStates.BlackWhip
 {
-    public class PinPointFocus : BaseSkill
+    public class PinPointFocus : BaseDekuSkillState
     {
         public static float procCoefficient = 1f;
         public static float baseDuration = StaticValues.pinpointDuration;

@@ -139,6 +139,12 @@ namespace DekuMod.SkillStates.BlackWhip
                     }
                 }
             }
+            else
+            {
+                SmallHop(characterMotor, StaticValues.blackwhipPullSpeed * (moveSpeedStat/7f) * (fixedAge/10f + 1));
+                this.outer.SetNextStateToMain();
+                return;
+            }
         }
 
         public override void Update()

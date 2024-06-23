@@ -44,6 +44,10 @@ namespace DekuMod.Modules
         internal static float blackwhipPullDuration = 0.4f;
 
         //Might Mode
+        internal const float mightBuffMultiplier = 2f;
+        internal const int mightBuffDuration = 10;
+        internal const float mightSwitchRadius = 20f;
+        internal const float mightSwitchDamage = 4f;
         //Primary
         internal const float smashRushDistance = 3f;
         internal const float smashRushDamageCoefficient = 3f;
@@ -71,9 +75,9 @@ namespace DekuMod.Modules
         internal const float detroitRadius = 20f;
         internal const float detroitRadius2 = 30f;
         internal const float detroitRadius3 = 10f;
-        internal const float detroitDamageCoefficient = 5f;
-        internal const float detroitDamageCoefficient2 = 5f;
-        internal const float detroitDamageCoefficient3 = 5f;
+        internal const float detroitDamageCoefficient = 6f;
+        internal const float detroitDamageCoefficient2 = 6f;
+        internal const float detroitDamageCoefficient3 = 6f;
 
         //Shoot Style Mode
         //Primary
@@ -124,7 +128,20 @@ namespace DekuMod.Modules
         internal static float blackwhipDodgeDuration = 0.3f;
         internal static float blackwhipDodgeSpeed = 5f;
         //Special
-        internal static float whipDuration1 = 0.6f;
+        internal static float blackwhipOverdriveDuration = 0.6f;
+        internal static float blackwhipOverdriveDamage = 4f;
+        internal static float blackwhipOverdriveRange = 60f;
+        internal static float blackwhipOverdriveAngle = 180f;
+        internal static float blackwhipOverdriveDuration2 = 1f;
+        internal static float blackwhipOverdriveDamage2 = 6f;
+        internal static float blackwhipOverdriveRange2 = 20f;
+        internal static float blackwhipOverdriveRadius2 = 30f;
+        internal static float blackwhipOverdriveAngle2 = 360f;
+        internal static float blackwhipOverdriveDuration3 = 1f;
+        internal static float blackwhipOverdriveRange3 = 5f;
+        internal static float blackwhipOverdriveAngle3 = 360f;
+        internal static float blackwhipOverdriveDamage3 = 10f;
+        internal static float blackwhipOverdriveForce3 = 15000f;
 
         //Primary
         //airforce

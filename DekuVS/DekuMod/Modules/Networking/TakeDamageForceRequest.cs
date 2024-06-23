@@ -46,6 +46,7 @@ namespace DekuMod.Modules.Networking
             direction = reader.ReadVector3();
             force = reader.ReadSingle();
             damage = reader.ReadSingle();
+            charnetID = reader.ReadNetworkId();
         }
 
         public void Serialize(NetworkWriter writer)
@@ -54,6 +55,7 @@ namespace DekuMod.Modules.Networking
             writer.Write(direction);
             writer.Write(force);
             writer.Write(damage);
+            writer.Write(charnetID);
         }
 
         public void OnReceived()

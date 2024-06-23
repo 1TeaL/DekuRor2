@@ -84,6 +84,8 @@ namespace DekuMod.SkillStates.BlackWhip
                     {
                         blackwhipComponent = singularTarget.healthComponent.body.gameObject.AddComponent<BlackwhipComponent>();
                         blackwhipComponent.totalDuration = duration;
+                        blackwhipComponent.moveDirection = moveDirection;
+                        blackwhipComponent.pushDamage = true;
 
                     }
 

@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using DekuMod.Modules.Survivors;
 using static RoR2.BlastAttack;
+using DekuMod.SkillStates.BaseStates;
 
 namespace DekuMod.SkillStates
 {
-    public class StLouis100old : BaseSkill100
+    public class StLouis100old : BaseDekuSkillState
     {
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
         private GameObject effectPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");

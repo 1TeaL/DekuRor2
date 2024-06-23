@@ -1,275 +1,275 @@
-﻿using DekuMod.Modules;
-using DekuMod.Modules.Networking;
-using DekuMod.Modules.Survivors;
-using EntityStates;
-using EntityStates.Merc;
-using R2API.Networking;
-using R2API.Networking.Interfaces;
-using R2API.Utils;
-using RoR2;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.Networking;
+﻿//using DekuMod.Modules;
+//using DekuMod.Modules.Networking;
+//using DekuMod.Modules.Survivors;
+//using EntityStates;
+//using EntityStates.Merc;
+//using R2API.Networking;
+//using R2API.Networking.Interfaces;
+//using R2API.Utils;
+//using RoR2;
+//using System.Collections.Generic;
+//using System.Linq;
+//using UnityEngine;
+//using UnityEngine.Networking;
 
-namespace DekuMod.SkillStates
-{
-    [R2APISubmoduleDependency(new string[]
-    {
-        "NetworkingAPI"
-    })]
-    public class ShootStyleKick100 : BaseSkill100
-    {
+//namespace DekuMod.SkillStates
+//{
+//    [R2APISubmoduleDependency(new string[]
+//    {
+//        "NetworkingAPI"
+//    })]
+//    public class ShootStyleKick100 : BaseDekuSkillState
+//    {
 
-        public float previousMass;
-        private string muzzleString;
+//        public float previousMass;
+//        private string muzzleString;
 
-        public static float duration;
-        public int numberOfHits; 
-        public static float baseDuration = 0.5f;
-        public static float initialSpeedCoefficient = 8f;
-        public static float finalSpeedCoefficient = 1f;
-        public static float SpeedCoefficient;
-        public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
-        public static float procCoefficient = 1f;
-        private Animator animator;
+//        public static float duration;
+//        public int numberOfHits; 
+//        public static float baseDuration = 0.5f;
+//        public static float initialSpeedCoefficient = 8f;
+//        public static float finalSpeedCoefficient = 1f;
+//        public static float SpeedCoefficient;
+//        public static float dodgeFOV = EntityStates.Commando.DodgeState.dodgeFOV;
+//        public static float procCoefficient = 1f;
+//        private Animator animator;
 
-        //private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
-        //public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerMageIceLaser");
-        private Transform modelTransform;
-        private CharacterModel characterModel;
-        private float rollSpeed;
-        private Vector3 forwardDirection;
-        private Vector3 previousPosition;
+//        //private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
+//        //public static GameObject tracerEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("prefabs/effects/tracers/tracersmokeline/TracerMageIceLaser");
+//        private Transform modelTransform;
+//        private CharacterModel characterModel;
+//        private float rollSpeed;
+//        private Vector3 forwardDirection;
+//        private Vector3 previousPosition;
 
-        //checking location for networking
-        public Vector3 origin;
-        public Vector3 final;
-        private Vector3 theSpot;
-        private float num3;
-        private readonly BullseyeSearch search = new BullseyeSearch();
+//        //checking location for networking
+//        public Vector3 origin;
+//        public Vector3 final;
+//        private Vector3 theSpot;
+//        private float num3;
+//        private readonly BullseyeSearch search = new BullseyeSearch();
 
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            this.animator = base.GetModelAnimator();
+//        public override void OnEnter()
+//        {
+//            base.OnEnter();
+//            this.animator = base.GetModelAnimator();
 
-            float move = this.moveSpeedStat;
-            bool isSprinting = base.characterBody.isSprinting;
-            if (isSprinting)
-            {
-                move /= base.characterBody.sprintingSpeedMultiplier;
-            }
-            float move2 = (move / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
-            num3 = move2 + 1f;
+//            float move = this.moveSpeedStat;
+//            bool isSprinting = base.characterBody.isSprinting;
+//            if (isSprinting)
+//            {
+//                move /= base.characterBody.sprintingSpeedMultiplier;
+//            }
+//            float move2 = (move / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+//            num3 = move2 + 1f;
 
-            if (base.isAuthority && base.inputBank && base.characterDirection)
-            {
-                this.forwardDirection = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
-            }
+//            if (base.isAuthority && base.inputBank && base.characterDirection)
+//            {
+//                this.forwardDirection = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
+//            }
 
-            Vector3 rhs = base.characterDirection ? base.characterDirection.forward : this.forwardDirection;
-            Vector3 rhs2 = Vector3.Cross(Vector3.up, rhs);
+//            Vector3 rhs = base.characterDirection ? base.characterDirection.forward : this.forwardDirection;
+//            Vector3 rhs2 = Vector3.Cross(Vector3.up, rhs);
 
-            float num = Vector3.Dot(this.forwardDirection, rhs);
-            float num2 = Vector3.Dot(this.forwardDirection, rhs2);
+//            float num = Vector3.Dot(this.forwardDirection, rhs);
+//            float num2 = Vector3.Dot(this.forwardDirection, rhs2);
 
-            this.RecalculateRollSpeed();
+//            this.RecalculateRollSpeed();
 
-            if (base.characterMotor && base.characterDirection)
-            {
-                base.characterMotor.velocity.y = 0f;
-                base.characterMotor.velocity = this.forwardDirection * this.rollSpeed;
-            }
+//            if (base.characterMotor && base.characterDirection)
+//            {
+//                base.characterMotor.velocity.y = 0f;
+//                base.characterMotor.velocity = this.forwardDirection * this.rollSpeed;
+//            }
 
-            Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
-            this.previousPosition = base.transform.position - b;
-
-
-            base.OnEnter();
-
-            duration = baseDuration;
-            numberOfHits = Mathf.RoundToInt(StaticValues.shootkick100NumberOFHits * num3);
+//            Vector3 b = base.characterMotor ? base.characterMotor.velocity : Vector3.zero;
+//            this.previousPosition = base.transform.position - b;
 
 
-            if (base.isAuthority)
-            {
-                AkSoundEngine.PostEvent("shootstyedashvoice", this.gameObject);
-            }
-            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
-            //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
-            //base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
-            this.animator.SetBool("attacking", true);
-            base.PlayCrossfade("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", duration, 0.1f);
+//            base.OnEnter();
 
-            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
-
-            this.muzzleString = "LFoot";
-            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
-            EffectManager.SimpleMuzzleFlash(Modules.Assets.muzzleflashMageLightningLargePrefab, base.gameObject, this.muzzleString, false);
-
-            base.characterMotor.useGravity = false;
-            this.previousMass = base.characterMotor.mass;
-            base.characterMotor.mass = 0f;
+//            duration = baseDuration;
+//            numberOfHits = Mathf.RoundToInt(StaticValues.shootkick100NumberOFHits * num3);
 
 
-            origin = base.transform.position;
-            if (base.isAuthority)
-            {
-                new SpendHealthNetworkRequest(characterBody.masterObjectId, Modules.StaticValues.shootkick100HealthCostFraction * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
-            }
+//            if (base.isAuthority)
+//            {
+//                AkSoundEngine.PostEvent("shootstyedashvoice", this.gameObject);
+//            }
+//            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
+//            //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
+//            //base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
+//            this.animator.SetBool("attacking", true);
+//            base.PlayCrossfade("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", duration, 0.1f);
 
-        }
-        private void RecalculateRollSpeed()
-        {
-            this.rollSpeed = this.moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, base.fixedAge / duration);
-        }
-        private void CreateBlinkEffect(Vector3 origin)
-        {
-            EffectData effectData = new EffectData();
-            effectData.rotation = Util.QuaternionSafeLookRotation(this.forwardDirection);
-            effectData.origin = origin;
-            EffectManager.SpawnEffect(EvisDash.blinkPrefab, effectData, false);
-        }
+//            base.characterBody.AddTimedBuffAuthority(RoR2Content.Buffs.HiddenInvincibility.buffIndex, baseDuration);
 
-        public void ApplyComponent()
-        {
-            theSpot = Vector3.Lerp(origin,final, 0.5f);
+//            this.muzzleString = "LFoot";
+//            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
+//            EffectManager.SimpleMuzzleFlash(Modules.Assets.muzzleflashMageLightningLargePrefab, base.gameObject, this.muzzleString, false);
 
-            search.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
-            search.filterByLoS = false;
-            search.searchOrigin = theSpot;
-            search.searchDirection = UnityEngine.Random.onUnitSphere;
-            search.sortMode = BullseyeSearch.SortMode.Distance;
-            search.maxDistanceFilter = (final-origin).magnitude/2;
-            search.maxAngleFilter = 360f;
+//            base.characterMotor.useGravity = false;
+//            this.previousMass = base.characterMotor.mass;
+//            base.characterMotor.mass = 0f;
+
+
+//            origin = base.transform.position;
+//            if (base.isAuthority)
+//            {
+//                new SpendHealthNetworkRequest(characterBody.masterObjectId, Modules.StaticValues.shootkick100HealthCostFraction * characterBody.healthComponent.fullHealth).Send(NetworkDestination.Clients);
+//            }
+
+//        }
+//        private void RecalculateRollSpeed()
+//        {
+//            this.rollSpeed = this.moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, base.fixedAge / duration);
+//        }
+//        private void CreateBlinkEffect(Vector3 origin)
+//        {
+//            EffectData effectData = new EffectData();
+//            effectData.rotation = Util.QuaternionSafeLookRotation(this.forwardDirection);
+//            effectData.origin = origin;
+//            EffectManager.SpawnEffect(EvisDash.blinkPrefab, effectData, false);
+//        }
+
+//        public void ApplyComponent()
+//        {
+//            theSpot = Vector3.Lerp(origin,final, 0.5f);
+
+//            search.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
+//            search.filterByLoS = false;
+//            search.searchOrigin = theSpot;
+//            search.searchDirection = UnityEngine.Random.onUnitSphere;
+//            search.sortMode = BullseyeSearch.SortMode.Distance;
+//            search.maxDistanceFilter = (final-origin).magnitude/2;
+//            search.maxAngleFilter = 360f;
             
 
-            search.RefreshCandidates();
-            search.FilterOutGameObject(base.gameObject);
+//            search.RefreshCandidates();
+//            search.FilterOutGameObject(base.gameObject);
 
 
 
-            List<HurtBox> target = search.GetResults().ToList<HurtBox>();
-            foreach (HurtBox singularTarget in target)
-            {
-                if (singularTarget.healthComponent.body && singularTarget.healthComponent)
-                {
-                    int buffcount = singularTarget.healthComponent.body.GetBuffCount(Modules.Buffs.delayAttackDebuff.buffIndex);
-                    if (NetworkServer.active)
-                    {
-                        singularTarget.healthComponent.body.ApplyBuff(Modules.Buffs.delayAttackDebuff.buffIndex, numberOfHits + buffcount);
-                    }
-                    ShootStyleKickComponent shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.GetComponent<ShootStyleKickComponent>();
+//            List<HurtBox> target = search.GetResults().ToList<HurtBox>();
+//            foreach (HurtBox singularTarget in target)
+//            {
+//                if (singularTarget.healthComponent.body && singularTarget.healthComponent)
+//                {
+//                    int buffcount = singularTarget.healthComponent.body.GetBuffCount(Modules.Buffs.delayAttackDebuff.buffIndex);
+//                    if (NetworkServer.active)
+//                    {
+//                        singularTarget.healthComponent.body.ApplyBuff(Modules.Buffs.delayAttackDebuff.buffIndex, numberOfHits + buffcount);
+//                    }
+//                    ShootStyleKickComponent shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.GetComponent<ShootStyleKickComponent>();
                     
-                    if (shootStyleKickComponent)
-                    {
-                        shootStyleKickComponent.numberOfHits += numberOfHits;
-                        shootStyleKickComponent.timer = 0;
-                    }
-                    if (!shootStyleKickComponent)
-                    {
-                        shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.AddComponent<ShootStyleKickComponent>();
-                        shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
-                        shootStyleKickComponent.dekucharbody = characterBody;
-                        shootStyleKickComponent.numberOfHits = numberOfHits;
-                        shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient * num3 * attackSpeedStat;
-                    }
+//                    if (shootStyleKickComponent)
+//                    {
+//                        shootStyleKickComponent.numberOfHits += numberOfHits;
+//                        shootStyleKickComponent.timer = 0;
+//                    }
+//                    if (!shootStyleKickComponent)
+//                    {
+//                        shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.AddComponent<ShootStyleKickComponent>();
+//                        shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
+//                        shootStyleKickComponent.dekucharbody = characterBody;
+//                        shootStyleKickComponent.numberOfHits = numberOfHits;
+//                        shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.shootkick100DamageCoefficient * num3 * attackSpeedStat;
+//                    }
 
                     
                     
-                }
-            }
-        }
+//                }
+//            }
+//        }
 
-        public override void OnExit()
-        {
-            Ray aimRay = base.GetAimRay();
-            this.animator.SetBool("attacking", false);
-            base.PlayCrossfade("FullBody, Override", "ShootStyleKickAuto", 0.01f);
-            Util.PlaySound(EvisDash.endSoundString, base.gameObject);
+//        public override void OnExit()
+//        {
+//            Ray aimRay = base.GetAimRay();
+//            this.animator.SetBool("attacking", false);
+//            base.PlayCrossfade("FullBody, Override", "ShootStyleKickAuto", 0.01f);
+//            Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 
-            base.characterMotor.mass = this.previousMass;
-            base.characterMotor.useGravity = true;
-            base.characterMotor.velocity = Vector3.zero;
+//            base.characterMotor.mass = this.previousMass;
+//            base.characterMotor.useGravity = true;
+//            base.characterMotor.velocity = Vector3.zero;
 
-            if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
-            base.characterMotor.disableAirControlUntilCollision = false;
-            base.characterMotor.velocity.y = 0;
+//            if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
+//            base.characterMotor.disableAirControlUntilCollision = false;
+//            base.characterMotor.velocity.y = 0;
 
-            final = base.transform.position;
-            ApplyComponent();
+//            final = base.transform.position;
+//            ApplyComponent();
 
-            base.OnExit();
-        }
+//            base.OnExit();
+//        }
 
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
+//        public override void FixedUpdate()
+//        {
+//            base.FixedUpdate();
 
-            this.RecalculateRollSpeed();
-            this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
+//            this.RecalculateRollSpeed();
+//            this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
 
-            if (base.characterDirection) base.characterDirection.forward = this.forwardDirection;
-            if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, base.fixedAge / duration);
+//            if (base.characterDirection) base.characterDirection.forward = this.forwardDirection;
+//            if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, base.fixedAge / duration);
 
-            Vector3 normalized = (base.transform.position - this.previousPosition).normalized;
-            if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-            {
-                Vector3 vector = normalized * this.rollSpeed;
-                float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
-                vector = this.forwardDirection * d;
-                vector.y = 0f;
+//            Vector3 normalized = (base.transform.position - this.previousPosition).normalized;
+//            if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
+//            {
+//                Vector3 vector = normalized * this.rollSpeed;
+//                float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
+//                vector = this.forwardDirection * d;
+//                vector.y = 0f;
 
-                base.characterMotor.velocity = vector;
-            }
-            this.previousPosition = base.transform.position;
+//                base.characterMotor.velocity = vector;
+//            }
+//            this.previousPosition = base.transform.position;
 
-            if (this.modelTransform)
-            {
-                TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                temporaryOverlay.duration = 0.6f;
-                temporaryOverlay.animateShaderAlpha = true;
-                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                temporaryOverlay.destroyComponentOnEnd = true;
-                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-                temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-                TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                temporaryOverlay2.duration = 0.7f;
-                temporaryOverlay2.animateShaderAlpha = true;
-                temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                temporaryOverlay2.destroyComponentOnEnd = true;
-                temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-                temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-            }
+//            if (this.modelTransform)
+//            {
+//                TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+//                temporaryOverlay.duration = 0.6f;
+//                temporaryOverlay.animateShaderAlpha = true;
+//                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+//                temporaryOverlay.destroyComponentOnEnd = true;
+//                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+//                temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+//                TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+//                temporaryOverlay2.duration = 0.7f;
+//                temporaryOverlay2.animateShaderAlpha = true;
+//                temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+//                temporaryOverlay2.destroyComponentOnEnd = true;
+//                temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+//                temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+//            }
 
-            if (base.isAuthority && base.fixedAge >= duration)
-            {
-                this.outer.SetNextStateToMain();
-                return;
-            }
-        }
+//            if (base.isAuthority && base.fixedAge >= duration)
+//            {
+//                this.outer.SetNextStateToMain();
+//                return;
+//            }
+//        }
 
         
 
-        public override void OnSerialize(NetworkWriter writer)
-        {
-            base.OnSerialize(writer);
-            writer.Write(this.forwardDirection);
-        }
+//        public override void OnSerialize(NetworkWriter writer)
+//        {
+//            base.OnSerialize(writer);
+//            writer.Write(this.forwardDirection);
+//        }
 
-        public override void OnDeserialize(NetworkReader reader)
-        {
-            base.OnDeserialize(reader);
-            this.forwardDirection = reader.ReadVector3();
-        }
+//        public override void OnDeserialize(NetworkReader reader)
+//        {
+//            base.OnDeserialize(reader);
+//            this.forwardDirection = reader.ReadVector3();
+//        }
 
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.Skill;
-        }
+//        public override InterruptPriority GetMinimumInterruptPriority()
+//        {
+//            return InterruptPriority.Skill;
+//        }
 
 
-    }
-}
+//    }
+//}

@@ -128,6 +128,7 @@ namespace DekuMod
             NetworkingAPI.RegisterMessageType<ForceDangerSenseState>();
             NetworkingAPI.RegisterMessageType<TakeDamageForceRequest>();
             NetworkingAPI.RegisterMessageType<SetDodgeStateMachine>();
+            NetworkingAPI.RegisterMessageType<BlackwhipImmobilizeRequest>();
 
             NetworkingAPI.RegisterMessageType<PerformDetroitDelawareNetworkRequest>();
             NetworkingAPI.RegisterMessageType<PerformFinalSmashNetworkRequest>();
@@ -219,183 +220,183 @@ namespace DekuMod
                             energySys.plusUltraBoostTimer = 2f;
 
                             //gearshift buff
-                            if (body.HasBuff(Buffs.gearshiftBuff))
-                            {
-                                float Weight = 1f;
+                            //if (body.HasBuff(Buffs.gearshiftBuff))
+                            //{
+                            //    float Weight = 1f;
 
-                                if (victimBody.characterMotor)
-                                {
-                                    Weight = victimBody.characterMotor.mass;
-                                }
-                                else if (victimBody.rigidbody)
-                                {
-                                    Weight = victimBody.rigidbody.mass;
-                                }
+                            //    if (victimBody.characterMotor)
+                            //    {
+                            //        Weight = victimBody.characterMotor.mass;
+                            //    }
+                            //    else if (victimBody.rigidbody)
+                            //    {
+                            //        Weight = victimBody.rigidbody.mass;
+                            //    }
 
-                                victimBody.healthComponent.TakeDamageForce(body.inputBank.aimDirection * StaticValues.gearshiftForceBoost * (Weight), true, true);
-                            }
-                            //gearshift45 buff
-                            if (damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift45Buff))
-                            {
-                                var bulletAttack = new BulletAttack
-                                {
-                                    bulletCount = 1,
-                                    aimVector = body.characterDirection.forward,
-                                    origin = damageInfo.position,
-                                    damage = StaticValues.gearshift45DamageCoefficient * damageInfo.damage,
-                                    damageColorIndex = DamageColorIndex.Fragile,
-                                    damageType = damageInfo.damageType |= DamageType.SlowOnHit,
-                                    falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                                    maxDistance = 10f,
-                                    force = 500f,
-                                    hitMask = LayerIndex.CommonMasks.bullet,
-                                    minSpread = 0f,
-                                    maxSpread = 0f,
-                                    isCrit = body.RollCrit(),
-                                    owner = body.gameObject,
-                                    smartCollision = false,
-                                    procChainMask = default(ProcChainMask),
-                                    procCoefficient = 0,
-                                    radius = 1.5f,
-                                    sniper = true,
-                                    stopperMask = LayerIndex.world.collisionMask,
-                                    weapon = null,
-                                    spreadPitchScale = 0f,
-                                    spreadYawScale = 0f,
-                                    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                                    hitEffectPrefab = Modules.Assets.dekuHitImpactEffect,
+                            //    victimBody.healthComponent.TakeDamageForce(body.inputBank.aimDirection * StaticValues.gearshiftForceBoost * (Weight), true, true);
+                            //}
+                            ////gearshift45 buff
+                            //if (damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift45Buff))
+                            //{
+                            //    var bulletAttack = new BulletAttack
+                            //    {
+                            //        bulletCount = 1,
+                            //        aimVector = body.characterDirection.forward,
+                            //        origin = damageInfo.position,
+                            //        damage = StaticValues.gearshift45DamageCoefficient * damageInfo.damage,
+                            //        damageColorIndex = DamageColorIndex.Fragile,
+                            //        damageType = damageInfo.damageType |= DamageType.SlowOnHit,
+                            //        falloffModel = BulletAttack.FalloffModel.DefaultBullet,
+                            //        maxDistance = 10f,
+                            //        force = 500f,
+                            //        hitMask = LayerIndex.CommonMasks.bullet,
+                            //        minSpread = 0f,
+                            //        maxSpread = 0f,
+                            //        isCrit = body.RollCrit(),
+                            //        owner = body.gameObject,
+                            //        smartCollision = false,
+                            //        procChainMask = default(ProcChainMask),
+                            //        procCoefficient = 0,
+                            //        radius = 1.5f,
+                            //        sniper = true,
+                            //        stopperMask = LayerIndex.world.collisionMask,
+                            //        weapon = null,
+                            //        spreadPitchScale = 0f,
+                            //        spreadYawScale = 0f,
+                            //        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
+                            //        hitEffectPrefab = Modules.Assets.dekuHitImpactEffect,
 
-                                };
-                                bulletAttack.Fire();
+                            //    };
+                            //    bulletAttack.Fire();
 
-                                EffectManager.SpawnEffect(Modules.Assets.gearshiftPierceEffect, new EffectData
-                                {
-                                    origin = damageInfo.position,
-                                    scale = 1f,
-                                    rotation = Quaternion.LookRotation(body.characterDirection.forward) 
+                            //    EffectManager.SpawnEffect(Modules.Assets.gearshiftPierceEffect, new EffectData
+                            //    {
+                            //        origin = damageInfo.position,
+                            //        scale = 1f,
+                            //        rotation = Quaternion.LookRotation(body.characterDirection.forward) 
 
-                                }, true);
+                            //    }, true);
 
-                            }
-                            //gearshift100 buff
-                            if (damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift100Buff))
-                            {
-                                int gearshiftBuffCount = body.GetBuffCount(Buffs.gearshift100Buff.buffIndex);
-                                body.ApplyBuff(Buffs.gearshift100Buff.buffIndex, gearshiftBuffCount - 1);
+                            //}
+                            ////gearshift100 buff
+                            //if (damageInfo.procCoefficient > 0 && body.HasBuff(Buffs.gearshift100Buff))
+                            //{
+                            //    int gearshiftBuffCount = body.GetBuffCount(Buffs.gearshift100Buff.buffIndex);
+                            //    body.ApplyBuff(Buffs.gearshift100Buff.buffIndex, gearshiftBuffCount - 1);
 
-                                var damageInfo2 = new DamageInfo();
+                            //    var damageInfo2 = new DamageInfo();
 
-                                damageInfo2.damage = damageInfo.damage;
-                                damageInfo2.position = victimBody.transform.position;
-                                damageInfo2.force = damageInfo.force;
-                                damageInfo2.damageColorIndex = DamageColorIndex.WeakPoint;
-                                damageInfo2.crit = body.RollCrit();
-                                damageInfo2.attacker = body.gameObject;
-                                damageInfo2.inflictor = body.gameObject;
-                                damageInfo2.damageType = damageInfo.damageType;
-                                damageInfo2.procCoefficient = 0f;
-                                damageInfo2.procChainMask = default(ProcChainMask);
+                            //    damageInfo2.damage = damageInfo.damage;
+                            //    damageInfo2.position = victimBody.transform.position;
+                            //    damageInfo2.force = damageInfo.force;
+                            //    damageInfo2.damageColorIndex = DamageColorIndex.WeakPoint;
+                            //    damageInfo2.crit = body.RollCrit();
+                            //    damageInfo2.attacker = body.gameObject;
+                            //    damageInfo2.inflictor = body.gameObject;
+                            //    damageInfo2.damageType = damageInfo.damageType;
+                            //    damageInfo2.procCoefficient = 0f;
+                            //    damageInfo2.procChainMask = default(ProcChainMask);
 
-                                float number = 0f;
-                                float threshold = StaticValues.gearshift100Threshold;
-                                while(body.moveSpeed >= threshold)
-                                {
-                                    AkSoundEngine.PostEvent("detroitexitsfx", body.gameObject);
+                            //    float number = 0f;
+                            //    float threshold = StaticValues.gearshift100Threshold;
+                            //    while(body.moveSpeed >= threshold)
+                            //    {
+                            //        AkSoundEngine.PostEvent("detroitexitsfx", body.gameObject);
 
-                                    if (victimBody.gameObject.GetComponent<CharacterBody>().baseNameToken
-                                        != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && body != null)
-                                    {
-                                        victimBody.healthComponent.TakeDamage(damageInfo2);
-                                    }
+                            //        if (victimBody.gameObject.GetComponent<CharacterBody>().baseNameToken
+                            //            != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && body != null)
+                            //        {
+                            //            victimBody.healthComponent.TakeDamage(damageInfo2);
+                            //        }
 
-                                    Vector3 enemyPos = victimBody.transform.position;
-                                    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
-                                    {
-                                        origin = enemyPos + ((body.transform.position - enemyPos) * number),
-                                        scale = 1f,
-                                        rotation = Quaternion.LookRotation((enemyPos - body.transform.position))
+                            //        Vector3 enemyPos = victimBody.transform.position;
+                            //        EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                            //        {
+                            //            origin = enemyPos + ((body.transform.position - enemyPos) * number),
+                            //            scale = 1f,
+                            //            rotation = Quaternion.LookRotation((enemyPos - body.transform.position))
 
-                                    }, true);
-                                    number++;
-                                    threshold += StaticValues.gearshift100Threshold;
-                                }
-                            }
+                            //        }, true);
+                            //        number++;
+                            //        threshold += StaticValues.gearshift100Threshold;
+                            //    }
+                            //}
                             //blackwhip debuff
-                            if (damageInfo.damageType == DamageType.ClayGoo)
-                            {
-                                victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhipDebuffDuration);
+                            //if (damageInfo.damageType == DamageType.ClayGoo)
+                            //{
+                            //    victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhipDebuffDuration);
                                 
-                            }
+                            //}
                             //heal and armor mark for freeze
-                            if (damageInfo.damageType == DamageType.Freeze2s)
-                            {
-                                if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
-                                {
-                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
-                                }
-                                if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
-                                {
-                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
-                                }
-                            }
-                            //heal and armor mark for ignite
-                            if (damageInfo.damageType == DamageType.IgniteOnHit)
-                            {
-                                if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
-                                {
-                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
-                                }
-                                if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
-                                {
-                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
-                                }
-                            }
-                            //heal mark for shock
-                            if (damageInfo.damageType == DamageType.Shock5s)
-                            {
-                                if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
-                                {
-                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
-                                }
-                            }
-                            //armor mark for stun
-                            if (damageInfo.damageType == DamageType.Stun1s)
-                            {
-                                if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
-                                {
-                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
-                                }
-                            }
+                            //if (damageInfo.damageType == DamageType.Freeze2s)
+                            //{
+                            //    if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
+                            //    }
+                            //    if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
+                            //    }
+                            //}
+                            ////heal and armor mark for ignite
+                            //if (damageInfo.damageType == DamageType.IgniteOnHit)
+                            //{
+                            //    if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
+                            //    }
+                            //    if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
+                            //    }
+                            //}
+                            ////heal mark for shock
+                            //if (damageInfo.damageType == DamageType.Shock5s)
+                            //{
+                            //    if (!victimBody.HasBuff(Buffs.healMark.buffIndex))
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.healMark.buffIndex, 1, -1);
+                            //    }
+                            //}
+                            ////armor mark for stun
+                            //if (damageInfo.damageType == DamageType.Stun1s)
+                            //{
+                            //    if (!victimBody.HasBuff(Buffs.barrierMark.buffIndex))
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 1, -1);
+                            //    }
+                            //}
 
-                            //heal each hit based on damage, after buffcount is 4 remove
-                            if (victimBody.HasBuff(Buffs.healMark.buffIndex))
-                            {
-                                int buffCount = victimBody.GetBuffCount(Buffs.healMark.buffIndex);
-                                if (buffCount < 4)
-                                {
-                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, buffCount + 1);
-                                    body.healthComponent.Heal(damageInfo.damage * StaticValues.healMarkCoefficient, default(ProcChainMask), true);
-                                }
-                                else if (buffCount >= 4)
-                                {
-                                    victimBody.ApplyBuff(Buffs.healMark.buffIndex, 0);
-                                }
-                            }
+                            ////heal each hit based on damage, after buffcount is 4 remove
+                            //if (victimBody.HasBuff(Buffs.healMark.buffIndex))
+                            //{
+                            //    int buffCount = victimBody.GetBuffCount(Buffs.healMark.buffIndex);
+                            //    if (buffCount < 4)
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.healMark.buffIndex, buffCount + 1);
+                            //        body.healthComponent.Heal(damageInfo.damage * StaticValues.healMarkCoefficient, default(ProcChainMask), true);
+                            //    }
+                            //    else if (buffCount >= 4)
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.healMark.buffIndex, 0);
+                            //    }
+                            //}
 
-                            //gain barrier each hit based on maxhealth, after buffcount is 4 remove
-                            if (victimBody.HasBuff(Buffs.barrierMark.buffIndex))
-                            {
-                                int buffCount = victimBody.GetBuffCount(Buffs.barrierMark.buffIndex);
-                                if (buffCount < 4)
-                                {
-                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, buffCount + 1);
-                                    body.healthComponent.AddBarrierAuthority(body.healthComponent.combinedHealth * StaticValues.barrierMarkCoefficient);
-                                }
-                                else if (buffCount >= 4)
-                                {
-                                    victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 0);
-                                }
-                            }
+                            ////gain barrier each hit based on maxhealth, after buffcount is 4 remove
+                            //if (victimBody.HasBuff(Buffs.barrierMark.buffIndex))
+                            //{
+                            //    int buffCount = victimBody.GetBuffCount(Buffs.barrierMark.buffIndex);
+                            //    if (buffCount < 4)
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, buffCount + 1);
+                            //        body.healthComponent.AddBarrierAuthority(body.healthComponent.combinedHealth * StaticValues.barrierMarkCoefficient);
+                            //    }
+                            //    else if (buffCount >= 4)
+                            //    {
+                            //        victimBody.ApplyBuff(Buffs.barrierMark.buffIndex, 0);
+                            //    }
+                            //}
 
                         }
                     }
@@ -456,24 +457,28 @@ namespace DekuMod
                     {
                         self.armor += StaticValues.counterBuffArmor;
                     }
-
-                    if (self.HasBuff(Buffs.gearshiftBuff))
+                    if (self.HasBuff(Buffs.mightBuff))
                     {
-                        self.moveSpeed *= StaticValues.gearshiftMovespeedBoost;
+                        self.damage *= StaticValues.mightBuffMultiplier;
                     }
 
-                    if (self.HasBuff(Buffs.manchesterBuff))
-                    {
-                        self.armor += StaticValues.manchesterArmor;
-                    }
+                    //if (self.HasBuff(Buffs.gearshiftBuff))
+                    //{
+                    //    self.moveSpeed *= StaticValues.gearshiftMovespeedBoost;
+                    //}
 
-                    bool floatbuff = self.HasBuff(Buffs.floatBuff);
-                    if (floatbuff)
-                    {
-                        self.moveSpeed *= 1.5f;
-                        self.acceleration *= 2f;
+                    //if (self.HasBuff(Buffs.manchesterBuff))
+                    //{
+                    //    self.armor += StaticValues.manchesterArmor;
+                    //}
 
-                    }
+                    //bool floatbuff = self.HasBuff(Buffs.floatBuff);
+                    //if (floatbuff)
+                    //{
+                    //    self.moveSpeed *= 1.5f;
+                    //    self.acceleration *= 2f;
+
+                    //}
 
                     bool goBeyond = self.HasBuff(Buffs.goBeyondBuff);
                     if (goBeyond)
@@ -482,53 +487,53 @@ namespace DekuMod
                         self.moveSpeed *= 1.5f;
                     }
 
-                    bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
-                    if (fajin)
-                    {
-                        self.damage *= StaticValues.fajinDamageMultiplier;
-                        self.moveSpeed *= StaticValues.fajinDamageMultiplier;
+                    //bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
+                    //if (fajin)
+                    //{
+                    //    self.damage *= StaticValues.fajinDamageMultiplier;
+                    //    self.moveSpeed *= StaticValues.fajinDamageMultiplier;
 
-                    }
+                    //}
 
-                    bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
+                    //bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
 
-                    if (ofa)
-                    {
-                        self.armor *= 5f;
-                        self.moveSpeed *= 1.5f;
-                        self.regen -= (self.levelRegen * (self.level - 1));              
-                    }
+                    //if (ofa)
+                    //{
+                    //    self.armor *= 5f;
+                    //    self.moveSpeed *= 1.5f;
+                    //    self.regen -= (self.levelRegen * (self.level - 1));              
+                    //}
 
 
-                    bool supaofa = self.HasBuff(Modules.Buffs.supaofaBuff);
-                    if (supaofa)
-                    {
-                        self.armor *= 5f;
-                        self.moveSpeed *= 1.5f;
-                    }
+                    //bool supaofa = self.HasBuff(Modules.Buffs.supaofaBuff);
+                    //if (supaofa)
+                    //{
+                    //    self.armor *= 5f;
+                    //    self.moveSpeed *= 1.5f;
+                    //}
                          
 
-                    bool ofa45 = self.HasBuff(Modules.Buffs.ofaBuff45);
-                    if (ofa45)
-                    {
-                        self.armor *= 2.5f;
-                        self.moveSpeed *= 1.2f;
-                        self.regen -= (1 + (self.levelRegen * (self.level - 1)));
-                    }
+                    //bool ofa45 = self.HasBuff(Modules.Buffs.ofaBuff45);
+                    //if (ofa45)
+                    //{
+                    //    self.armor *= 2.5f;
+                    //    self.moveSpeed *= 1.2f;
+                    //    self.regen -= (1 + (self.levelRegen * (self.level - 1)));
+                    //}
 
-                    bool supaofa45 = self.HasBuff(Modules.Buffs.supaofaBuff45);
-                    if (supaofa45)
-                    {
-                        self.armor *= 2.5f;
-                        self.moveSpeed *= 1.25f;
-                        self.regen -= (1 + (self.levelRegen * (self.level - 1)));
-                    }
+                    //bool supaofa45 = self.HasBuff(Modules.Buffs.supaofaBuff45);
+                    //if (supaofa45)
+                    //{
+                    //    self.armor *= 2.5f;
+                    //    self.moveSpeed *= 1.25f;
+                    //    self.regen -= (1 + (self.levelRegen * (self.level - 1)));
+                    //}
 
 
-                    if (self.HasBuff(Modules.Buffs.oklahomaBuff))
-                    {
-                        self.armor *= 3f;
-                    }
+                    //if (self.HasBuff(Modules.Buffs.oklahomaBuff))
+                    //{
+                    //    self.armor *= 3f;
+                    //}
 
                 }
 
@@ -549,18 +554,18 @@ namespace DekuMod
         private void GlobalEventManager_OnDamageDealt(DamageReport report)
         {
             bool flag = !report.attacker || !report.attackerBody;
-            if (!flag && report.attackerBody.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && report.attackerBody.HasBuff(Modules.Buffs.supaofaBuff))
-            {
-                CharacterBody attackerBody = report.attackerBody;
-                attackerBody.healthComponent.Heal(report.damageDealt * 0.1f, default(ProcChainMask), true);
+            //if (!flag && report.attackerBody.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && report.attackerBody.HasBuff(Modules.Buffs.supaofaBuff))
+            //{
+            //    CharacterBody attackerBody = report.attackerBody;
+            //    attackerBody.healthComponent.Heal(report.damageDealt * 0.1f, default(ProcChainMask), true);
 
-            }
-            if (!flag && report.attackerBody.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && report.attackerBody.HasBuff(Modules.Buffs.supaofaBuff45))
-            {
-                CharacterBody attackerBody = report.attackerBody;
-                attackerBody.healthComponent.Heal(report.damageDealt * 0.05f, default(ProcChainMask), true);
+            //}
+            //if (!flag && report.attackerBody.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && report.attackerBody.HasBuff(Modules.Buffs.supaofaBuff45))
+            //{
+            //    CharacterBody attackerBody = report.attackerBody;
+            //    attackerBody.healthComponent.Heal(report.damageDealt * 0.05f, default(ProcChainMask), true);
 
-            }
+            //}
         }
 
 

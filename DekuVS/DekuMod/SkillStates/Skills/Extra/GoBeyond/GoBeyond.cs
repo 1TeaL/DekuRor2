@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 using R2API.Networking;
 using System.Collections.Generic;
 using System.Linq;
+using RoR2.Skills;
 
 namespace DekuMod.SkillStates
 {
@@ -35,6 +36,15 @@ namespace DekuMod.SkillStates
 
 		public float FOV = 20f;
 
+        public SkillDef skilldef1;
+        public SkillDef skilldef2;
+        public SkillDef skilldef3;
+        public SkillDef skilldef4;
+        public SkillDef skilldef5;
+        public SkillDef skilldef6;
+        public SkillDef skilldef7;
+        public SkillDef skilldef8;
+
         public override void OnEnter()
 		{
 			base.OnEnter();
@@ -47,25 +57,34 @@ namespace DekuMod.SkillStates
 			bool active = NetworkServer.active;
 			if (active)
 			{
-				if (base.characterBody.HasBuff(Modules.Buffs.ofaBuff))
-				{
-					base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
-				}
-				if (base.characterBody.HasBuff(Modules.Buffs.supaofaBuff))
-				{
-					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff);
-				}
-				if (base.characterBody.HasBuff(Modules.Buffs.ofaBuff45))
-				{
-					base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff45);
-				}
-				if (base.characterBody.HasBuff(Modules.Buffs.supaofaBuff45))
-				{
-					base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff45);
-				}
+				//if (base.characterBody.HasBuff(Modules.Buffs.ofaBuff))
+				//{
+				//	base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff);
+				//}
+				//if (base.characterBody.HasBuff(Modules.Buffs.supaofaBuff))
+				//{
+				//	base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff);
+				//}
+				//if (base.characterBody.HasBuff(Modules.Buffs.ofaBuff45))
+				//{
+				//	base.characterBody.RemoveBuff(Modules.Buffs.ofaBuff45);
+				//}
+				//if (base.characterBody.HasBuff(Modules.Buffs.supaofaBuff45))
+				//{
+				//	base.characterBody.RemoveBuff(Modules.Buffs.supaofaBuff45);
+				//}
 			}
 
-			extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, Deku.goBeyondSkillDef1, GenericSkill.SkillOverridePriority.Contextual);
+            skilldef1 = extraskillLocator.extraFirst.skillDef;
+            skilldef2 = extraskillLocator.extraSecond.skillDef;
+            skilldef3 = extraskillLocator.extraThird.skillDef;
+            skilldef4 = extraskillLocator.extraFourth.skillDef;
+            skilldef5 = characterBody.skillLocator.primary.skillDef;
+            skilldef6 = characterBody.skillLocator.secondary.skillDef;
+            skilldef7 = characterBody.skillLocator.utility.skillDef;
+            skilldef8 = characterBody.skillLocator.special.skillDef;
+
+            extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, Deku.goBeyondSkillDef1, GenericSkill.SkillOverridePriority.Contextual);
 			extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, Deku.goBeyondSkillDef2, GenericSkill.SkillOverridePriority.Contextual);
 			extraskillLocator.extraThird.UnsetSkillOverride(extraskillLocator.extraThird, Deku.goBeyondSkillDef3, GenericSkill.SkillOverridePriority.Contextual);
 			extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, Deku.goBeyondSkillDef4, GenericSkill.SkillOverridePriority.Contextual);
@@ -75,14 +94,14 @@ namespace DekuMod.SkillStates
 			base.skillLocator.special.UnsetSkillOverride(base.skillLocator.special, Deku.goBeyondSkillDef8, GenericSkill.SkillOverridePriority.Contextual);
 
 
-			extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, Deku.fistExtraSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			extraskillLocator.extraSecond.SetSkillOverride(extraskillLocator.extraSecond, Deku.legExtraSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, Deku.quirkExtraSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, Deku.fistSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fist100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fist100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fist100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-			base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Deku.ofacycledownSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//extraskillLocator.extraFirst.SetSkillOverride(extraskillLocator.extraFirst, Deku.fistExtraSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//extraskillLocator.extraSecond.SetSkillOverride(extraskillLocator.extraSecond, Deku.legExtraSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//extraskillLocator.extraThird.SetSkillOverride(extraskillLocator.extraThird, Deku.quirkExtraSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, Deku.fistSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fist100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fist100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fist100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+			//base.skillLocator.special.SetSkillOverride(base.skillLocator.special, Deku.ofacycledownSkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
 
 			this.animator = base.GetModelAnimator();

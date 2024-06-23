@@ -2,125 +2,96 @@
 using EntityStates;
 using RoR2;
 using ExtraSkillSlots;
+using RoR2.Skills;
+using AK.Wwise;
+using DekuMod.Modules;
 
 namespace DekuMod.SkillStates
 {
 
 	public class MightMode : BaseMode
 	{
-		public DekuController dekucon;
-		const string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
-		private ExtraSkillLocator extraskillLocator;
 
-		public override void OnEnter()
+        public SkillDef skilldef1;
+        public SkillDef skilldef2;
+        public SkillDef skilldef3;
+        public SkillDef skilldef4;
+
+        private bool isSwitch;
+        private bool hasFired;
+        private float duration;
+        private BlastAttack blastAttack;
+
+        public override void OnEnter()
 		{
 			base.OnEnter();
 
-            dekucon = base.GetComponent<DekuController>();
-            extraskillLocator = base.GetComponent<ExtraSkillLocator>();
+            skilldef1 = characterBody.skillLocator.primary.skillDef;
+            skilldef2 = characterBody.skillLocator.secondary.skillDef;
+            skilldef3 = characterBody.skillLocator.utility.skillDef;
+            skilldef4 = characterBody.skillLocator.special.skillDef;
 
 
-            switch (base.skillLocator.primary.skillNameToken)
-            {
-                case prefix + "LEGPRIMARY_NAME":
-                    base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.legPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fistPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "LEG45PRIMARY_NAME":
-                    base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.leg45PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fist45PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "LEG100PRIMARY_NAME":
-                    base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.leg100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fist100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRKPRIMARY_NAME":
-                    base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.quirkPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fistPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRK45PRIMARY_NAME":
-                    base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.quirk45PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fist45PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRK100PRIMARY_NAME":
-                    base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, Deku.quirk100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.fist100PrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-            }
-            switch (base.skillLocator.secondary.skillNameToken)
-            {
-                case prefix + "LEGSECONDARY_NAME":
-                    base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.legSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fistSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "LEG45SECONDARY_NAME":
-                    base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.leg45SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fist45SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "LEG100SECONDARY_NAME":
-                    base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.leg100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fist100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRKSECONDARY_NAME":
-                    base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.quirkSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fistSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRK45SECONDARY_NAME":
-                    base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.quirk45SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fist45SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRK100SECONDARY_NAME":
-                    base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, Deku.quirk100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.fist100SecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-            }
-            switch (base.skillLocator.utility.skillNameToken)
-            {
-                case prefix + "LEGUTILITY_NAME":
-                    base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.legUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fistUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "LEG45UTILITY_NAME":
-                    base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.leg45UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fist45UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "LEG100UTILITY_NAME":
-                    base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.leg100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fist100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRKUTILITY_NAME":
-                    base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.quirkUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fistUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRK45UTILITY_NAME":
-                    base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.quirk45UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fist45UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRK100UTILITY_NAME":
-                    base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, Deku.quirk100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.fist100UtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-            }
+            base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, skilldef1, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.mightPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
-            switch (extraskillLocator.extraFourth.skillNameToken)
+            base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, skilldef2, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.mightSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+            base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, skilldef3, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.mightUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+            base.skillLocator.special.UnsetSkillOverride(base.skillLocator.utility, skilldef4, GenericSkill.SkillOverridePriority.Contextual);
+            base.skillLocator.special.SetSkillOverride(base.skillLocator.utility, Deku.mightSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+            if (isSwitch)
             {
-                case prefix + "LEGSPECIAL_NAME":
-                    extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, Deku.legSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, Deku.fistSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
-                case prefix + "QUIRKSPECIAL_NAME":
-                    extraskillLocator.extraFourth.UnsetSkillOverride(extraskillLocator.extraFourth, Deku.quirkSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    extraskillLocator.extraFourth.SetSkillOverride(extraskillLocator.extraFourth, Deku.fistSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-                    break;
+                base.skillLocator.ResetSkills();
             }
 
         }
 
+        protected override void SwitchAttack()
+        {
+            base.SwitchAttack();
+            isSwitch = true;
 
-		public override void FixedUpdate()
+            duration = 0.5f;
+        }
+
+        public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			this.outer.SetNextStateToMain();
+
+            if(isSwitch)
+            {
+                if(base.fixedAge > duration)
+                {
+
+                    //blast attack
+                    blastAttack = new BlastAttack();
+                    blastAttack.procCoefficient = 1f;
+                    blastAttack.attacker = base.gameObject;
+                    blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
+                    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                    blastAttack.baseForce = 1000f;
+                    blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                    blastAttack.damageType = DamageType.Generic;
+                    blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+                    blastAttack.radius = StaticValues.mightSwitchRadius * attackSpeedStat;
+                    blastAttack.baseDamage = damageStat * StaticValues.mightSwitchDamage * attackSpeedStat;
+                    blastAttack.position = characterBody.corePosition + base.GetAimRay().direction * 3f;
+                    blastAttack.baseForce = 10000f;
+
+                    this.outer.SetNextStateToMain();
+                    return;
+                }
+            }
+            else
+            {
+                this.outer.SetNextStateToMain();
+                return;
+            }
 			
 		}
 		public override InterruptPriority GetMinimumInterruptPriority()

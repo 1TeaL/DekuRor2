@@ -27,8 +27,9 @@ namespace DekuMod.SkillStates.BlackWhip
         public float totalDuration;
         public float elapsedTime;
         private float segments = 20;
-        Vector3 moveDirection;
+        public Vector3 moveDirection;
         public bool hasFired;
+        public bool pushDamage;
 
         public void Start()
 		{
@@ -81,7 +82,14 @@ namespace DekuMod.SkillStates.BlackWhip
             if(timer > duration && !hasFired)
             {
                 hasFired = true;
-                new TakeDamageForceRequest(charbody.masterObjectId, moveDirection, StaticValues.blackwhipStrikeForce, dekucharbody.damage * StaticValues.blackwhipStrikeDamage, dekucharbody.masterObjectId);
+                if (pushDamage)
+                {
+                    new TakeDamageForceRequest(charbody.masterObjectId, moveDirection, StaticValues.blackwhipStrikeForce, dekucharbody.damage * StaticValues.blackwhipStrikeDamage, dekucharbody.masterObjectId);
+                }
+                else
+                {
+                    new BlackwhipImmobilizeRequest(charbody.masterObjectId, StaticValues.blackwhipOverdriveDamage * dekucharbody.damage, dekucharbody.masterObjectId);
+                }
             }
             if(timer > totalDuration)
             {
