@@ -84,8 +84,7 @@ namespace DekuMod.Modules.Survivors
         public float maxTrackingAngle = 15f;
         public float trackerUpdateFrequency = 10f;
         private Indicator indicator;
-        private HurtBox trackingTarget;
-        public HurtBox Target;
+        public HurtBox trackingTarget;
         private float trackerUpdateStopwatch;
         private InputBankTest inputBank;
         private readonly BullseyeSearch search = new BullseyeSearch();
@@ -114,7 +113,7 @@ namespace DekuMod.Modules.Survivors
         {
             energySystem = gameObject.GetComponent<EnergySystem>();
             body = gameObject.GetComponent<CharacterBody>();
-            child = GetComponentInChildren<ChildLocator>();
+            child = gameObject.GetComponent<ModelLocator>().modelTransform.GetComponent<ChildLocator>();
             inputBank = gameObject.GetComponent<InputBankTest>();
             if (child)
             {
@@ -282,7 +281,7 @@ namespace DekuMod.Modules.Survivors
         public void Update()
         {
 
-            //sprint to shunpo
+            //sprint to black whip dodge
             if(body.HasBuff(Buffs.overlayBuff))
             {
 
@@ -294,8 +293,7 @@ namespace DekuMod.Modules.Survivors
                 if (buttonCooler <= 0f)
                 {
                     if (inputBank.sprint.justPressed)
-                    {
-                        //energy cost- same as getsuga
+                    {                       
 
                         new SetDodgeStateMachine(body.masterObjectId).Send(NetworkDestination.Clients);
                         buttonCooler += 1f;

@@ -101,6 +101,7 @@
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\D3D11.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVODownsample2.compute" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\ScalableAO.hlsl" />
+     <None Include="Assets\DekuFinalForm\Assets\Materials\Panner.shader" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Shaders\Tiles.shader" />
      <None Include="Assets\HenryUnityProject\ProjectSettings\ProjectVersion.txt" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Shaders\Refraction.shader" />

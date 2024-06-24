@@ -36,7 +36,8 @@ namespace DekuMod.SkillStates.BlackWhip
 			charbody = this.gameObject.GetComponent<CharacterBody>();
             //effectObj = UnityEngine.Object.Instantiate<GameObject>(Modules.Assets.detroitEffect, charbody.footPosition, Quaternion.LookRotation(Vector3.up));
             //effectObj.transform.parent = charbody.gameObject.transform;
-            child = charbody.gameObject.GetComponent<ChildLocator>();
+
+            child = dekucharbody.gameObject.GetComponent<ModelLocator>().modelTransform.GetComponent<ChildLocator>();
             blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
             blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
             duration = totalDuration * (2/3f);
@@ -47,17 +48,17 @@ namespace DekuMod.SkillStates.BlackWhip
             if (elapsedTime < duration)
             {
                 elapsedTime += Time.deltaTime; // Increment the elapsed time
-                float t = Mathf.Clamp01(elapsedTime / duration); // Calculate the interpolation factor (0 to 1)
-                int currentSegments = Mathf.FloorToInt(t * segments); // Calculate the current number of segments
+            }
+            float t = Mathf.Clamp01(elapsedTime / duration); // Calculate the interpolation factor (0 to 1)
+            int currentSegments = Mathf.FloorToInt(t * segments); // Calculate the current number of segments
 
-                for (int i = 0; i <= currentSegments; i++)
-                {
-                    Vector3 startPoint = child.FindChild("RHand").transform.position;
-                    Vector3 endPoint = charbody.corePosition;
-                    float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
-                    Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2, endPoint); // Calculate Bezier point
-                    blackwhipLineRenderer.SetPosition(i, pointOnCurve); // Set the position of the segment
-                }
+            for (int i = 0; i <= currentSegments; i++)
+            {
+                Vector3 startPoint = child.FindChild("RHand").transform.position;
+                Vector3 endPoint = charbody.corePosition;
+                float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
+                Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2, endPoint); // Calculate Bezier point
+                blackwhipLineRenderer.SetPosition(i, pointOnCurve); // Set the position of the segment
             }
         }
 

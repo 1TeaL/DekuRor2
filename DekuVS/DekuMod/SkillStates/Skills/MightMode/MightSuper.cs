@@ -371,6 +371,8 @@ namespace DekuMod.SkillStates.Might
         public override void OnExit()
         {
             base.OnExit();
+            base.characterBody.characterMotor.useGravity = true;
+            base.characterBody.inputBank.enabled = true;
             if (areaIndicator)
             {
                 this.areaIndicator.SetActive(false);

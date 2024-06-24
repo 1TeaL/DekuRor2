@@ -42,14 +42,23 @@ namespace DekuMod.SkillStates.BlackWhip
             base.FixedUpdate();
             if (base.fixedAge > fireTime && !hasFired)
             {
-                hasFired = true;
-                moveDirection = characterBody.inputBank.moveVector;
-                ApplyComponent(moveDirection.normalized);
+                if(characterBody.inputBank.moveVector != Vector3.zero)
+                {
+                    moveDirection = characterBody.inputBank.moveVector;
+                    ApplyComponent(moveDirection.normalized);
+                    hasFired = true;
+                }
+            }
+            if(base.fixedAge > duration)
+            {
+                this.outer.SetNextStateToMain();
+                return;
             }
         }
 
         public void ApplyComponent(Vector3 moveDirection)
         {
+            search = new BullseyeSearch();
             search.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
             search.filterByLoS = false;
             search.searchOrigin = base.GetAimRay().origin;
@@ -86,6 +95,7 @@ namespace DekuMod.SkillStates.BlackWhip
                         blackwhipComponent.totalDuration = duration;
                         blackwhipComponent.moveDirection = moveDirection;
                         blackwhipComponent.pushDamage = true;
+                        blackwhipComponent.dekucharbody = characterBody;
 
                     }
 

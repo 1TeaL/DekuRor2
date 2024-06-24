@@ -119,6 +119,12 @@ namespace DekuMod.Modules
         //Materials
         public static Material blackwhipDebuffMaterial;
         public static Material fullCowlingMaterial;
+        public static Material blueblinkingMaterial;
+        public static Material redblinkingMaterial;
+        public static Material whiteblinkingMaterial;
+        public static Material purpleblinkingMaterial;
+        public static Material greenblinkingMaterial;
+        public static Material yellowblinkingMaterial;
 
 
         //sword swing
@@ -230,6 +236,13 @@ namespace DekuMod.Modules
 
 
             //Materials
+            yellowblinkingMaterial = mainAssetBundle.LoadAsset<Material>("yellowBlinkingMat");
+            blueblinkingMaterial = mainAssetBundle.LoadAsset<Material>("blueBlinkingMat");
+            redblinkingMaterial = mainAssetBundle.LoadAsset<Material>("redBlinkingMat");
+            greenblinkingMaterial = mainAssetBundle.LoadAsset<Material>("greenBlinkingMat");
+            whiteblinkingMaterial = mainAssetBundle.LoadAsset<Material>("whiteBlinkingMat");
+            purpleblinkingMaterial = mainAssetBundle.LoadAsset<Material>("purpleBlinkingMat");
+
             blackwhipDebuffMaterial = mainAssetBundle.LoadAsset<Material>("blackwhipbullet");
             fullCowlingMaterial = UnityEngine.GameObject.Instantiate<Material>(RoR2.LegacyResourcesAPI.Load<Material>("Materials/matEnergyShield"));
             fullCowlingMaterial.SetColor("_TintColor", new Color(27/255f, 1f, 213/255f));

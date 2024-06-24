@@ -28,6 +28,7 @@ namespace DekuMod.Modules
 
         //blackwhip
         internal static BuffDef overlayBuff;
+        internal static BuffDef blackwhipCDBuff;
 
         //armor buff 
         //internal static BuffDef manchesterBuff;
@@ -48,7 +49,7 @@ namespace DekuMod.Modules
 
         //debuffs
         internal static BuffDef delayAttackDebuff;
-        internal static BuffDef dangersenseDebuff;
+        //internal static BuffDef dangersenseDebuff;
         internal static BuffDef blackwhipDebuff;
 
         //marks
@@ -78,8 +79,9 @@ namespace DekuMod.Modules
             overlayBuff = Buffs.AddNewBuff("Blackwhip Overlay Buff", Assets.jumpBuffIcon, Color.black, false, false);
             counterBuff = Buffs.AddNewBuff("Counter Buff", Assets.shieldBuffIcon, Color.cyan, false, false);
             counterAttackBuff = Buffs.AddNewBuff("Counter Buff", Assets.shieldBuffIcon, Color.cyan, false, false);
+            blackwhipCDBuff = Buffs.AddNewBuff("Blackwhip CD Buff", Assets.critBuffIcon, Color.black, false, false);
 
-            blackwhipDebuff = Buffs.AddNewBuff("blackwhip DeBuff", Assets.crippleBuffIcon, Color.black, false, true);
+            blackwhipDebuff = Buffs.AddNewBuff("Blackwhip Debuff", Assets.crippleBuffIcon, Color.black, false, true);
             delayAttackDebuff = Buffs.AddNewBuff("delayAttack Debuff", Assets.crippleBuffIcon, Color.green, true, true);
 
             //dangersenseBuff = Buffs.AddNewBuff("DangerSense Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("DangerSense"), Color.white, false, false);

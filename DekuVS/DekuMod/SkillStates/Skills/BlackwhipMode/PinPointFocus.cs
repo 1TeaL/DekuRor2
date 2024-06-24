@@ -16,7 +16,7 @@ namespace DekuMod.SkillStates.BlackWhip
     {
         public static float procCoefficient = 1f;
         public static float baseDuration = StaticValues.pinpointDuration;
-        public static float force = -10000f;
+        public static float force = 0f;
         public static float recoil = 1f;
         public static float range = StaticValues.pinpointRange;
 
@@ -95,7 +95,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 bulletAttack.procCoefficient = procCoefficient;
                 bulletAttack.radius = 2f;
                 bulletAttack.sniper = true;
-                bulletAttack.stopperMask = LayerIndex.noCollision.mask;
+                bulletAttack.stopperMask = 0;//pierce everything
                 bulletAttack.weapon = null;
                 //tracerEffectPrefab = Modules.Projectiles.bulletTracer,
                 bulletAttack.spreadPitchScale = 0f;

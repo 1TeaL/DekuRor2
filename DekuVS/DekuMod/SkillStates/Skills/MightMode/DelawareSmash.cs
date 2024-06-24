@@ -239,7 +239,7 @@ namespace DekuMod.SkillStates.Might
                     radius = radius,
                     maxDistance = range,
                     hitMask = LayerIndex.CommonMasks.bullet,
-                    stopperMask = LayerIndex.noCollision.mask,
+                    stopperMask = LayerIndex.world.mask,
                     procCoefficient = 1f,
                     damage = damage,
                     damageType = damageType,

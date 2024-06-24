@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace DekuMod.Modules
 {
@@ -45,9 +46,9 @@ namespace DekuMod.Modules
 
         //Might Mode
         internal const float mightBuffMultiplier = 2f;
-        internal const int mightBuffDuration = 10;
+        internal const int mightBuffDuration = 6;
         internal const float mightSwitchRadius = 20f;
-        internal const float mightSwitchDamage = 4f;
+        internal const float mightSwitchDamage = 2f;
         //Primary
         internal const float smashRushDistance = 3f;
         internal const float smashRushDamageCoefficient = 3f;
@@ -80,19 +81,26 @@ namespace DekuMod.Modules
         internal const float detroitDamageCoefficient3 = 6f;
 
         //Shoot Style Mode
+        internal const float shootSwitchRadius = 5f;
+        internal const float shootSwitchSlamForce = 1000f;
+        internal const float shootSwitchDropForce = 100f;
+        internal const float shootSwitchHeightStart = 40f;
+        internal const float shootSwitchDamage = 2f;
         //Primary
         internal const float airforceDamageCoefficient = 1f;
         internal const int airforceMaxRicochet = 5;
         //Secondary
         internal const float stlouis45DamageCoefficient = 2f;
-        internal const float blastDashDamageCoefficient = 4f;
+        internal const float blastDashDamageCoefficient = 2f;
         internal const float blastDashSpeed = 20f;
         internal const float blastDashForce = 2000f;
         internal const float blastDashRadius = 10f;
         internal const float blastDashDuration = 0.6f;
         //Utility
-        internal const float oklahomaSpeedCoefficient = 30f;
+        internal const float oklahomaSpeedCoefficient = 10f;
         internal const float oklahomaDamageCoefficient = 3f;
+        internal const float oklahomaDashDuration = 0.5f;
+        internal const float oklahomaDashTotalDuration = 1f;
         //Special
         internal const int stlouisTotalHits = 5;
         internal const int stlouisTotalHits3 = 5;
@@ -111,6 +119,10 @@ namespace DekuMod.Modules
         internal const float stlouisDamageForce3 = 0f;
 
         //Blackwhip Mode
+        internal const int blackwhipCDBuffDuration = 6;
+        internal const float blackwhipCDMultiplier = 0.5f;
+        internal const float blackwhipSwitchRadius = 20f;
+        internal const float blackwhipSwitchDamage = 3f;
         //Primary
         internal const float blackwhipStrikeRange = 40f;
         internal const float blackwhipStrikeDamage = 2f;
@@ -118,31 +130,42 @@ namespace DekuMod.Modules
         internal const float blackwhipProc = 0.5f;
         //Secondary
         internal const float pinpointRange = 50f;
-        internal const float pinpointRadius = 10f;
+        internal const float pinpointRadius = 5f;
         internal const float pinpointDamageCoefficient = 6f;
         internal const float pinpointDuration = 1f;
-        internal const int blackwhipDebuffDuration = 4;
+        internal const int blackwhipDebuffDuration = 2;
         internal const float blackwhipDebuffMultiplier = 0.1f;
         //Utility
         internal static int blackwhipOverlayDuration = 10;
         internal static float blackwhipDodgeDuration = 0.3f;
-        internal static float blackwhipDodgeSpeed = 5f;
+        internal static float blackwhipDodgeSpeed = 4f;
         //Special
         internal static float blackwhipOverdriveDuration = 0.6f;
         internal static float blackwhipOverdriveDamage = 4f;
         internal static float blackwhipOverdriveRange = 60f;
         internal static float blackwhipOverdriveAngle = 180f;
         internal static float blackwhipOverdriveDuration2 = 1f;
-        internal static float blackwhipOverdriveDamage2 = 6f;
+        internal static float blackwhipOverdriveDamage2 = 4f;
         internal static float blackwhipOverdriveRange2 = 20f;
         internal static float blackwhipOverdriveRadius2 = 30f;
         internal static float blackwhipOverdriveAngle2 = 360f;
+        internal static float blackwhipOverdriveForce2 = 15000f;
         internal static float blackwhipOverdriveDuration3 = 1f;
-        internal static float blackwhipOverdriveRange3 = 5f;
+        internal static float blackwhipOverdriveRadius3 = 3f;
+        internal static float blackwhipOverdriveRange3 = 50f;
         internal static float blackwhipOverdriveAngle3 = 360f;
         internal static float blackwhipOverdriveDamage3 = 10f;
         internal static float blackwhipOverdriveForce3 = 15000f;
+        internal static float blackwhipOverdriveSpeed3 = 50f;
 
+        #region Mask Check
+        public static bool Includes(
+            LayerMask mask,
+            int layer)
+        {
+            return (mask.value & 1 << layer) > 0;
+        }
+        #endregion
         //Primary
         //airforce
         internal const float airforce45DamageCoefficient = 2f;
@@ -251,4 +274,5 @@ namespace DekuMod.Modules
 
 
     }
+
 }

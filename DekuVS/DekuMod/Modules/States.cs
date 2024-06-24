@@ -28,7 +28,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(BaseMeleeAttack));
 
             //go beyond
-            entityStates.Add(typeof(GoBeyond));
+            //entityStates.Add(typeof(GoBeyond));
             entityStates.Add(typeof(GoBeyondState));
             entityStates.Add(typeof(GoBeyondEmptySkill));
 

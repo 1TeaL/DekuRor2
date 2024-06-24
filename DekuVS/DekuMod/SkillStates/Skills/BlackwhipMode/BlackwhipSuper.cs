@@ -19,6 +19,8 @@ using EntityStates.Loader;
 using static UnityEngine.UI.Image;
 using UnityEngine.EventSystems;
 using UnityEngine.SocialPlatforms;
+using R2API;
+using System.Net;
 
 namespace DekuMod.SkillStates.BlackWhip
 {
@@ -37,9 +39,9 @@ namespace DekuMod.SkillStates.BlackWhip
         private Transform modelTransform;
         private CharacterModel characterModel;
         private Vector3 theSpot;
-        private readonly BullseyeSearch search = new BullseyeSearch();
         private float duration;
         private float fireTime;
+        public BullseyeSearch search;
 
         private GameObject areaIndicator;
 
@@ -49,17 +51,23 @@ namespace DekuMod.SkillStates.BlackWhip
         private EffectData effectData;
         private EffectData effectData2;
         private Animator animator;
+        private ChildLocator child;
         private float previousMass;
         private float range;
         private float angle;
         private Vector3 moveDirection;
         private bool isMove;
         private Vector3 forwardDirection;
+        private bool isRayCast;
+        private float elapsedTime;
+        private GameObject blackwhipLineEffect;
+        private LineRenderer blackwhipLineRenderer;
 
         public override void OnEnter()
 		{
 			base.OnEnter();
             this.animator = base.GetModelAnimator();
+            child = base.GetModelChildLocator();
             base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
 
 			Ray aimRay = base.GetAimRay();
@@ -94,6 +102,8 @@ namespace DekuMod.SkillStates.BlackWhip
             blastAttack.position = blastPosition;
             blastAttack.baseForce = blastForce;
 
+            DamageAPI.AddModdedDamageType(blastAttack, Damage.blackwhipImmobilise);
+
             effectData = new EffectData
             {
                 scale = blastRadius,
@@ -111,6 +121,7 @@ namespace DekuMod.SkillStates.BlackWhip
 
         public void ApplyComponent()
         {
+            search = new BullseyeSearch();
             search.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
             search.filterByLoS = false;
             search.searchOrigin = blastPosition;
@@ -138,6 +149,7 @@ namespace DekuMod.SkillStates.BlackWhip
                         moveDirection = (singularTarget.healthComponent.body.corePosition - blastPosition).normalized;
                     }
 
+
                     if (blackwhipComponent)
                     {
 
@@ -148,6 +160,7 @@ namespace DekuMod.SkillStates.BlackWhip
                         blackwhipComponent.totalDuration = duration;
                         blackwhipComponent.moveDirection = moveDirection;
                         blackwhipComponent.pushDamage = isMove;
+                        blackwhipComponent.dekucharbody = characterBody;
 
                     }
 
@@ -158,13 +171,14 @@ namespace DekuMod.SkillStates.BlackWhip
         protected override void NeutralSuper()
 		{
 			base.NeutralSuper();
-            //play animation of quick punch
+            //play animation of quick blackwhip infront of him
             range = StaticValues.blackwhipOverdriveRange;
             duration = StaticValues.blackwhipOverdriveDuration;
             fireTime = duration / 2f;
             angle = StaticValues.blackwhipOverdriveAngle;
             isMove = false;
             moveDirection = Vector3.zero;
+            blastPosition = characterBody.corePosition;
         }
 
         protected override void BackwardSuper()
@@ -177,43 +191,58 @@ namespace DekuMod.SkillStates.BlackWhip
             duration = StaticValues.blackwhipOverdriveDuration2;
             blastRadius = StaticValues.blackwhipOverdriveRadius2 * attackSpeedStat;
             blastDamage = StaticValues.blackwhipOverdriveDamage2 * damageStat * attackSpeedStat;
+            blastForce = StaticValues.blackwhipOverdriveForce2 * attackSpeedStat;
+            blastType = DamageType.Stun1s;
             //set around deku
-            blastPosition = characterBody.corePosition + base.GetAimRay().direction * StaticValues.blackwhipOverdriveRange2;
+            blastPosition = characterBody.corePosition;
             //indicator
             this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
             duration = StaticValues.blackwhipOverdriveDuration2;
             fireTime = duration / 2f;
-            //play animation of expanding out and pulling everyone in to spot infront
+            //play animation of arm reaching out and pulling everyone in to spot infront
         }
         protected override void ForwardSuper()
         {
-            if (!dekucon.Target)
-            {
-                this.outer.SetNextStateToMain();
-                return;
-            }
-
             base.ForwardSuper();
 
             isMove = false;
             angle = StaticValues.blackwhipOverdriveAngle3;
             range = StaticValues.blackwhipOverdriveRange3 * attackSpeedStat;
             duration = StaticValues.blackwhipOverdriveDuration3;
-            blastRadius = StaticValues.blackwhipOverdriveRange3 * attackSpeedStat;
+            blastRadius = StaticValues.blackwhipOverdriveRadius3 * attackSpeedStat;
             blastDamage = StaticValues.blackwhipOverdriveDamage3 * damageStat * attackSpeedStat;
             blastForce = StaticValues.blackwhipOverdriveForce3 * attackSpeedStat;
-            blastPosition = dekucon.Target.transform.position;
 
             base.characterMotor.useGravity = false;
             this.previousMass = base.characterMotor.mass;
             base.characterMotor.mass = 0f;
             base.characterMotor.disableAirControlUntilCollision = false;
 
+            if (dekucon.GetTrackingTarget())
+            {
+                blastPosition = dekucon.GetTrackingTarget().transform.position;
+            }
+            else
+            {
+                RaycastHit raycastHit;
+                bool raycast = Physics.Raycast(base.GetAimRay().origin, base.GetAimRay().direction, out raycastHit, blastRadius, LayerIndex.world.mask);
+                
+                if(raycast)
+                {
+                    blastPosition = raycastHit.point;
+                }
+
+            }
+
+            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+            blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
+            Chat.AddMessage("blastPosition" + blastPosition);
+
 
             if (base.isAuthority && base.inputBank && base.characterDirection)
             {
-                this.forwardDirection = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
+                this.forwardDirection = base.GetAimRay().direction;
             }
             ApplyComponent();
 
@@ -245,7 +274,7 @@ namespace DekuMod.SkillStates.BlackWhip
                     if (base.fixedAge > fireTime && !hasFired)
                     {
                         hasFired = true;
-                        ApplyComponent();
+                        blastAttack.Fire();
                     }
 
 
@@ -258,19 +287,34 @@ namespace DekuMod.SkillStates.BlackWhip
                     break;
                 case superState.SUPER3:
 
-                    if(base.isAuthority && base.fixedAge > fireTime && !hasFired)
+                    //characterBody.characterMotor.velocity = Vector3.zero;
+                    //if(base.isAuthority && base.fixedAge > fireTime && !hasFired)
+                    //{
+                    //    hasFired = true;
+                    //    characterBody.characterMotor.Motor.SetPositionAndRotation(blastPosition, Quaternion.LookRotation(forwardDirection));
+                    //    //play animation of pose
+                    //}
+
+                    if (Vector2.Distance(blastPosition, characterBody.corePosition) > 2f)
                     {
-                        hasFired = true;
-                        characterBody.characterMotor.Motor.SetPositionAndRotation(blastPosition + forwardDirection* blastRadius, Quaternion.LookRotation(forwardDirection));
-                        //play animation of pose
+                        Vector3 normalized = (blastPosition - characterBody.corePosition).normalized;
+                        if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
+                        {
+                            Vector3 vector = normalized * moveSpeedStat * attackSpeedStat * StaticValues.blackwhipOverdriveSpeed3;
+
+                            base.characterMotor.velocity = vector;
+                        }
+                    }
+                    else if (Vector2.Distance(blastPosition, characterBody.corePosition) <= 2f)
+                    {
+                        blastAttack.Fire();
+                        this.outer.SetNextStateToMain();
+                        return;
+
                     }
 
+
                     this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
-
-
-                    if (base.characterDirection) base.characterDirection.forward = this.forwardDirection;
-                    if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = Mathf.Lerp(EntityStates.Commando.DodgeState.dodgeFOV, 60f, base.fixedAge / duration);
-
 
                     if (this.modelTransform)
                     {
@@ -290,13 +334,13 @@ namespace DekuMod.SkillStates.BlackWhip
                         temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
                     }
 
-                    if (base.isAuthority && base.fixedAge >= duration)
-                    {
+                    //if (base.isAuthority && base.fixedAge >= duration)
+                    //{
 
-                        blastAttack.Fire();
-                        this.outer.SetNextStateToMain();
-                        return;
-                    }
+                    //    blastAttack.Fire();
+                    //    this.outer.SetNextStateToMain();
+                    //    return;
+                    //}
 
                     break;
 			}
@@ -315,17 +359,34 @@ namespace DekuMod.SkillStates.BlackWhip
             {
                 case superState.SUPER1:
                     
-                    break;
+                break;
                 case superState.SUPER2:
                     if (this.areaIndicator)
                     {
                         this.areaIndicator.transform.localScale = Vector3.one * blastRadius * (attackSpeedStat);
                         this.areaIndicator.transform.localPosition = blastPosition;
                     }
-                    break;
+                break;
                 case superState.SUPER3:
+
+                    if (elapsedTime < fireTime)
+                    {
+                        elapsedTime += Time.deltaTime; // Increment the elapsed time
+                    }
+                    float t = Mathf.Clamp01(elapsedTime / fireTime); // Calculate the interpolation factor (0 to 1)
+
+                    Vector3[] vector3s = new Vector3[2];
+                    Vector3 startPoint = child.FindChild("RHand").transform.position;
+                        
+                    // Lerp from the start point to the end point
+                    Vector3 lerpedPosition = Vector3.Lerp(startPoint, blastPosition, t);
+
+                    vector3s[0] = startPoint;
+                    vector3s[1] = lerpedPosition;
+                    blackwhipLineRenderer.SetPositions(vector3s);
+
                     
-                    break;
+                break;
 
             }
         }
@@ -346,17 +407,20 @@ namespace DekuMod.SkillStates.BlackWhip
             {
                 this.areaIndicator.SetActive(false);
                 EntityState.Destroy(this.areaIndicator);
-                base.characterBody.characterMotor.useGravity = true;
-                base.characterBody.inputBank.enabled = true;
 
             }
-            switch(level)
+            base.characterBody.characterMotor.useGravity = true;
+            base.characterBody.inputBank.enabled = true;
+
+            switch (state)
             {
-                case 0:
+                case superState.SUPER1:
+
                     break;
-                case 1:
+                case superState.SUPER2:
                     break;
-                case 2:
+                case superState.SUPER3:
+
                     Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 
                     base.characterMotor.mass = this.previousMass;
@@ -366,10 +430,19 @@ namespace DekuMod.SkillStates.BlackWhip
                     if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
                     base.characterMotor.disableAirControlUntilCollision = false;
                     base.characterMotor.velocity.y = 0;
+                break;
 
-                    ApplyComponent();
-                    break;
             }
+            //switch (level)
+            //{
+            //    case 0:
+            //        break;
+            //    case 1:
+            //        break;
+            //    case 2:
+
+            //        break;
+            //}
             //if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
         }
         public override InterruptPriority GetMinimumInterruptPriority()

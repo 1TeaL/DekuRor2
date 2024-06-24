@@ -105,14 +105,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 if (base.characterMotor)
                 {
                     float num2;
-                    if (this.startedStateGrounded)
-                    {
-                        num2 = SlideState.forwardSpeedCoefficientCurve.Evaluate(base.fixedAge / num);
-                    }
-                    else
-                    {
-                        num2 = SlideState.jumpforwardSpeedCoefficientCurve.Evaluate(base.fixedAge / num);
-                    }
+                    num2 = SlideState.forwardSpeedCoefficientCurve.Evaluate(base.fixedAge / num);
                     base.characterMotor.rootMotion += num2 * this.moveSpeedStat * attackSpeedStat * this.forwardDirection * Time.fixedDeltaTime * StaticValues.blackwhipDodgeSpeed;
                 }
                 if (base.fixedAge >= num)

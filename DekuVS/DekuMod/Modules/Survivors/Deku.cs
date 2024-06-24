@@ -592,6 +592,103 @@ namespace DekuMod.Modules.Survivors
             #endregion
 
             #region Extra Skills
+
+            mightModeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "MIGHTMODE_NAME",
+                skillNameToken = prefix + "MIGHTMODE_NAME",
+                skillDescriptionToken = prefix + "MIGHTMODE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(MightMode)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+            shootstyleModeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "SHOOTSTYLEMODE_NAME",
+                skillNameToken = prefix + "SHOOTSTYLEMODE_NAME",
+                skillDescriptionToken = prefix + "SHOOTSTYLEMODE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(ShootStyleMode)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+            blackwhipModeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "BLACKWHIPMODE_NAME",
+                skillNameToken = prefix + "BLACKWHIPMODE_NAME",
+                skillDescriptionToken = prefix + "BLACKWHIPMODE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(BlackwhipMode)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+            blackwhipPullSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+
+                skillName = prefix + "BLACKWHIPPULL_NAME",
+                skillNameToken = prefix + "BLACKWHIPPULL_NAME",
+                skillDescriptionToken = prefix + "BLACKWHIPPULL_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                activationState = new SerializableEntityStateType(typeof(BlackwhipPull)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
             #endregion
 
             #region Go Beyond Skills
@@ -803,13 +900,13 @@ namespace DekuMod.Modules.Survivors
                 mightSpecialSkillDef,
             });
 
-            Skills.AddFirstExtraSkill(bodyPrefab, mightPrimarySkillDef);
+            Skills.AddFirstExtraSkill(bodyPrefab, mightModeSkillDef);
 
-            Skills.AddSecondExtraSkill(bodyPrefab, mightPrimarySkillDef);
+            Skills.AddSecondExtraSkill(bodyPrefab, shootstyleModeSkillDef);
 
-            Skills.AddThirdExtraSkill(bodyPrefab, mightPrimarySkillDef);
+            Skills.AddThirdExtraSkill(bodyPrefab, blackwhipModeSkillDef);
 
-            Skills.AddFourthExtraSkill(bodyPrefab, mightPrimarySkillDef);
+            Skills.AddFourthExtraSkill(bodyPrefab, blackwhipPullSkillDef);
             #endregion
 
         }

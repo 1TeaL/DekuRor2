@@ -396,13 +396,14 @@ namespace DekuMod.SkillStates.ShootStyle
                 base.characterBody.inputBank.enabled = true;
 
             }
-            switch(level)
+
+            switch (state)
             {
-                case 0:
+                case superState.SUPER1:
                     break;
-                case 1:
+                case superState.SUPER2:
                     break;
-                case 2:
+                case superState.SUPER3:
                     Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 
                     base.characterMotor.mass = this.previousMass;
@@ -417,6 +418,16 @@ namespace DekuMod.SkillStates.ShootStyle
                     ApplyComponent();
                     break;
             }
+
+            //switch(level)
+            //{
+            //    case 0:
+            //        break;
+            //    case 1:
+            //        break;
+            //    case 2:
+            //        break;
+            //}
             //if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
         }
         public override InterruptPriority GetMinimumInterruptPriority()

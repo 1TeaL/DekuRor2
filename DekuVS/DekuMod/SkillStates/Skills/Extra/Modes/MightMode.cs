@@ -5,11 +5,14 @@ using ExtraSkillSlots;
 using RoR2.Skills;
 using AK.Wwise;
 using DekuMod.Modules;
+using R2API.Networking;
+using UnityEngine;
+using DekuMod.SkillStates.BaseStates;
 
 namespace DekuMod.SkillStates
 {
 
-	public class MightMode : BaseMode
+	public class MightMode : BaseDekuSkillState
 	{
 
         public SkillDef skilldef1;
@@ -18,7 +21,6 @@ namespace DekuMod.SkillStates
         public SkillDef skilldef4;
 
         private bool isSwitch;
-        private bool hasFired;
         private float duration;
         private BlastAttack blastAttack;
 
@@ -32,31 +34,47 @@ namespace DekuMod.SkillStates
             skilldef4 = characterBody.skillLocator.special.skillDef;
 
 
-            base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, skilldef1, GenericSkill.SkillOverridePriority.Contextual);
-            base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.mightPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
 
-            base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, skilldef2, GenericSkill.SkillOverridePriority.Contextual);
-            base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.mightSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-
-            base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, skilldef3, GenericSkill.SkillOverridePriority.Contextual);
-            base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.mightUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
-
-            base.skillLocator.special.UnsetSkillOverride(base.skillLocator.utility, skilldef4, GenericSkill.SkillOverridePriority.Contextual);
-            base.skillLocator.special.SetSkillOverride(base.skillLocator.utility, Deku.mightSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
-
-            if (isSwitch)
+            if(skilldef1 != Deku.mightPrimarySkillDef)
             {
-                base.skillLocator.ResetSkills();
+                base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, skilldef1, GenericSkill.SkillOverridePriority.Contextual);
+                base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.mightPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+                base.skillLocator.secondary.UnsetSkillOverride(base.skillLocator.secondary, skilldef2, GenericSkill.SkillOverridePriority.Contextual);
+                base.skillLocator.secondary.SetSkillOverride(base.skillLocator.secondary, Deku.mightSecondarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+                base.skillLocator.utility.UnsetSkillOverride(base.skillLocator.utility, skilldef3, GenericSkill.SkillOverridePriority.Contextual);
+                base.skillLocator.utility.SetSkillOverride(base.skillLocator.utility, Deku.mightUtilitySkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+                base.skillLocator.special.UnsetSkillOverride(base.skillLocator.utility, skilldef4, GenericSkill.SkillOverridePriority.Contextual);
+                base.skillLocator.special.SetSkillOverride(base.skillLocator.utility, Deku.mightSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+                if (energySystem.currentPlusUltra > Modules.StaticValues.super1Cost)
+                {
+                    energySystem.SpendPlusUltra(Modules.StaticValues.super1Cost);
+                    SwitchAttack();
+                }
             }
+
 
         }
 
-        protected override void SwitchAttack()
+        protected virtual void SwitchAttack()
         {
-            base.SwitchAttack();
             isSwitch = true;
+            base.skillLocator.ResetSkills();
 
             duration = 0.5f;
+            characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);
+
+            if (dekucon.GetTrackingTarget())
+            {
+                characterBody.characterMotor.Motor.SetPositionAndRotation(dekucon.GetTrackingTarget().transform.position, Quaternion.LookRotation(base.GetAimRay().direction));
+            }
+            else
+            {
+                base.characterMotor.velocity = StaticValues.mightSwitchRadius * (base.GetAimRay().direction) * moveSpeedStat;
+            }
         }
 
         public override void FixedUpdate()
@@ -67,14 +85,13 @@ namespace DekuMod.SkillStates
             {
                 if(base.fixedAge > duration)
                 {
-
+                    base.characterMotor.velocity *= 0.1f;
                     //blast attack
                     blastAttack = new BlastAttack();
                     blastAttack.procCoefficient = 1f;
                     blastAttack.attacker = base.gameObject;
                     blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
                     blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                    blastAttack.baseForce = 1000f;
                     blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                     blastAttack.damageType = DamageType.Generic;
                     blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
@@ -82,6 +99,8 @@ namespace DekuMod.SkillStates
                     blastAttack.baseDamage = damageStat * StaticValues.mightSwitchDamage * attackSpeedStat;
                     blastAttack.position = characterBody.corePosition + base.GetAimRay().direction * 3f;
                     blastAttack.baseForce = 10000f;
+
+                    blastAttack.Fire();
 
                     this.outer.SetNextStateToMain();
                     return;

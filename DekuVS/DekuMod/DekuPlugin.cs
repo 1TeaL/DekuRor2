@@ -213,7 +213,7 @@ namespace DekuMod
                             //vulnerability modded damage
                             if (DamageAPI.HasModdedDamageType(damageInfo, Modules.Damage.blackwhipImmobilise))
                             {
-                                victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, victimBody.GetBuffCount(Buffs.blackwhipDebuff) + StaticValues.blackwhipDebuffDuration);
+                                victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, victimBody.GetBuffCount(Buffs.blackwhipDebuff) + StaticValues.blackwhipDebuffDuration);
                             }
 
                             EnergySystem energySys = body.GetComponent<EnergySystem>();
@@ -461,6 +461,11 @@ namespace DekuMod
                     {
                         self.damage *= StaticValues.mightBuffMultiplier;
                     }
+                    if (self.HasBuff(Buffs.blackwhipCDBuff))
+                    {
+                        self.skillLocator.secondary.cooldownScale *= StaticValues.blackwhipCDMultiplier;
+                        self.skillLocator.utility.cooldownScale *= StaticValues.blackwhipCDMultiplier;
+                    }
 
                     //if (self.HasBuff(Buffs.gearshiftBuff))
                     //{
@@ -588,7 +593,10 @@ namespace DekuMod
                 if (self.body)
                 {
                     this.OverlayFunction(Modules.Assets.blackwhipDebuffMaterial, self.body.HasBuff(Modules.Buffs.blackwhipDebuff), self);
-                    this.OverlayFunction(Modules.Assets.fullCowlingMaterial, self.body.HasBuff(Modules.Buffs.counterAttackBuff), self);
+                    this.OverlayFunction(Modules.Assets.redblinkingMaterial, self.body.HasBuff(Modules.Buffs.counterAttackBuff), self);
+                    this.OverlayFunction(Modules.Assets.whiteblinkingMaterial, self.body.HasBuff(Modules.Buffs.overlayBuff), self);
+                    this.OverlayFunction(Modules.Assets.yellowblinkingMaterial, self.body.HasBuff(Modules.Buffs.mightBuff), self);
+                    this.OverlayFunction(Modules.Assets.purpleblinkingMaterial, self.body.HasBuff(Modules.Buffs.blackwhipCDBuff), self);
                 }
             }
         }

@@ -23,9 +23,9 @@ namespace DekuMod.SkillStates
         public static float initialSpeedCoefficient = Modules.StaticValues.oklahomaSpeedCoefficient;
         private float finalSpeedCoefficient = 0.1f;
 
-        private float dashDuration = 1f;
-        private float maxDuration = 2f;
-        private float maxTravelTime = 0.5f;
+        private float dashDuration = StaticValues.oklahomaDashDuration;
+        private float maxDuration = StaticValues.oklahomaDashTotalDuration;
+        private float maxTravelTime = StaticValues.oklahomaDashDuration;
         private float travelTimer;
 
         private Vector3 dashDirection;
@@ -138,7 +138,7 @@ namespace DekuMod.SkillStates
 
                     if (base.isAuthority)
                     {
-                        dashDirection = base.GetAimRay().direction;
+                        dashDirection = base.GetAimRay().direction.normalized;
 
                         base.characterMotor.velocity = dashDirection * SpeedCoefficient;
                         base.characterDirection.forward = base.characterMotor.velocity.normalized;

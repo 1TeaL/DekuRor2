@@ -34,6 +34,7 @@ namespace DekuMod.SkillStates.ShootStyle
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             PlayCrossfade("FullBody, Override", "DelawareSmashBaseCharge", "Attack.playbackRate", 1f, 0.01f);
 
+            blastPosition = characterBody.corePosition;
             blastDamage = StaticValues.blastDashDamageCoefficient * damageStat;
             blastForce = StaticValues.blastDashForce;
             blastRadius = StaticValues.blastDashRadius;
@@ -92,6 +93,8 @@ namespace DekuMod.SkillStates.ShootStyle
             blastAttack.baseDamage = blastDamage;
             blastAttack.position = blastPosition;
             blastAttack.baseForce = blastForce;
+
+            blastAttack.Fire();
             //PlayAnimation("RightArm, Override", "RightArmOut", "Attack.playbackRate", 1f);
 
         }
