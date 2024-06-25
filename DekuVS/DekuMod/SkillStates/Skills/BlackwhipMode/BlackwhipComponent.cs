@@ -26,21 +26,19 @@ namespace DekuMod.SkillStates.BlackWhip
         public float duration;
         public float totalDuration;
         public float elapsedTime;
-        private float segments = 20;
-        public Vector3 moveDirection;
+        //public Vector3 moveDirection;
         public bool hasFired;
-        public bool pushDamage;
+        //public bool pushDamage;
 
         public void Start()
 		{
-			charbody = this.gameObject.GetComponent<CharacterBody>();
             //effectObj = UnityEngine.Object.Instantiate<GameObject>(Modules.Assets.detroitEffect, charbody.footPosition, Quaternion.LookRotation(Vector3.up));
             //effectObj.transform.parent = charbody.gameObject.transform;
 
             child = dekucharbody.gameObject.GetComponent<ModelLocator>().modelTransform.GetComponent<ChildLocator>();
             blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
             blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
-            duration = totalDuration * (2/3f);
+            duration = totalDuration * (0.2f);
         }
 
         public void Update()
@@ -50,56 +48,69 @@ namespace DekuMod.SkillStates.BlackWhip
                 elapsedTime += Time.deltaTime; // Increment the elapsed time
             }
             float t = Mathf.Clamp01(elapsedTime / duration); // Calculate the interpolation factor (0 to 1)
-            int currentSegments = Mathf.FloorToInt(t * segments); // Calculate the current number of segments
+            //int currentSegments = Mathf.FloorToInt(t * segments); // Calculate the current number of segments
 
-            for (int i = 0; i <= currentSegments; i++)
-            {
-                Vector3 startPoint = child.FindChild("RHand").transform.position;
-                Vector3 endPoint = charbody.corePosition;
-                float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
-                Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2, endPoint); // Calculate Bezier point
-                blackwhipLineRenderer.SetPosition(i, pointOnCurve); // Set the position of the segment
-            }
+            Vector3[] vector3s = new Vector3[2];
+            Vector3 startPoint = child.FindChild("RHand").transform.position;
+
+            // Lerp from the start point to the end point
+            Vector3 lerpedPosition = Vector3.Lerp(startPoint, charbody.corePosition, t);
+
+            vector3s[0] = startPoint;
+            vector3s[1] = lerpedPosition;
+            blackwhipLineRenderer.positionCount = vector3s.Length;
+            blackwhipLineRenderer.SetPositions(vector3s);
+
+            //for (int i = 0; i <= currentSegments; i++)
+            //{
+            //    Vector3 startPoint = child.FindChild("RHand").transform.position;
+            //    Vector3 endPoint = charbody.corePosition;
+                //float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
+                //Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2, endPoint); // Calculate Bezier point
+                //blackwhipLineRenderer.startWidth = 1f;
+                //blackwhipLineRenderer.startWidth = 2f;
+                //blackwhipLineRenderer.positionCount = currentSegments;
+                //blackwhipLineRenderer.SetPosition(i, pointOnCurve); // Set the position of the segment
+            //}
         }
 
         // Function to calculate a point on a quadratic Bezier curve
-        Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
-        {
-            float u = 1 - t;
-            float tt = t * t;
-            float uu = u * u;
+        //Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+        //{
+        //    float u = 1 - t;
+        //    float tt = t * t;
+        //    float uu = u * u;
 
-            Vector3 point = uu * p0; // (1 - t)^2 * p0
-            point += 2 * u * t * p1; // 2 * (1 - t) * t * p1
-            point += tt * p2;        // t^2 * p2
+        //    Vector3 point = uu * p0; // (1 - t)^2 * p0
+        //    point += 2 * u * t * p1; // 2 * (1 - t) * t * p1
+        //    point += tt * p2;        // t^2 * p2
 
-            return point;
-        }
+        //    return point;
+        //}
 
 
 
         public void FixedUpdate()
-		{           
-            if(timer > duration && !hasFired)
-            {
-                hasFired = true;
-                if (pushDamage)
-                {
-                    new TakeDamageForceRequest(charbody.masterObjectId, moveDirection, StaticValues.blackwhipStrikeForce, dekucharbody.damage * StaticValues.blackwhipStrikeDamage, dekucharbody.masterObjectId);
-                }
-                else
-                {
-                    new BlackwhipImmobilizeRequest(charbody.masterObjectId, StaticValues.blackwhipOverdriveDamage * dekucharbody.damage, dekucharbody.masterObjectId);
-                }
-            }
+        {
+            timer += Time.fixedDeltaTime;
+            //if (timer > duration && !hasFired)
+            //{
+            //    hasFired = true;
+            //    if (pushDamage)
+            //    {
+            //        Chat.AddMessage("push happened");
+            //        new TakeDamageForceRequest(charbody.masterObjectId, moveDirection, StaticValues.blackwhipStrikeForce, dekucharbody.damage * StaticValues.blackwhipStrikeDamage, dekucharbody.masterObjectId);
+            //    }
+            //    else
+            //    {
+            //        Chat.AddMessage("immobilize happened");
+            //        new BlackwhipImmobilizeRequest(charbody.masterObjectId, StaticValues.blackwhipOverdriveDamage * dekucharbody.damage, dekucharbody.masterObjectId);
+            //    }
+            //}
             if(timer > totalDuration)
             {
                 Destroy(this);
                 Destroy(blackwhipLineEffect);
-            }
-            else
-            {
-                timer += Time.fixedDeltaTime;
             }
             if (charbody.healthComponent.alive)
 			{

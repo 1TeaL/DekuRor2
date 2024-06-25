@@ -54,37 +54,63 @@ namespace DekuMod.SkillStates.BlackWhip
             }
 
             this.aimRay = base.GetAimRay();
-            RaycastHit raycastHit;
-            bool raycast = Physics.Raycast(aimRay.origin, aimRay.direction, out raycastHit, this.maxDistance, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
 
-            if (raycast)
+            RaycastHit raycastHit;
+            bool raycast = Physics.Raycast(aimRay.origin, aimRay.direction, out raycastHit, this.maxDistance, LayerIndex.world.mask);
+
+            if (dekucon.GetTrackingTarget())
             {
                 isRayCast = true;
-                fireTime = (raycastHit.distance/maxDistance) * StaticValues.blackwhipPullDuration;
+
+                isEnemy = true;
+                enemyBody = dekucon.trackingTarget.healthComponent.body;
+
                 this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
                 this.aimSphere.transform.localScale = new Vector3(this.radius, this.radius, this.radius);
 
                 blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
                 blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
+                fireTime = (Vector2.Distance(enemyBody.corePosition, characterBody.corePosition) / maxDistance) * StaticValues.blackwhipPullDuration;
+                this.aimSphere.transform.position = enemyBody.corePosition;
+                this.aimSphere.transform.up = Vector3.up;
+                this.aimSphere.transform.forward = this.aimRay.direction;
+                Chat.AddMessage("enemybody position" + enemyBody.corePosition);
+            }
+            else if (raycast)
+            {
+                isRayCast = true;
 
-                if (StaticValues.Includes(LayerIndex.entityPrecise.mask, raycastHit.collider.gameObject.layer))
-                {
-                    isEnemy = true;
-                    enemyBody = raycastHit.collider.gameObject.GetComponent<CharacterBody>();
-                    this.aimSphere.transform.position = enemyBody.corePosition;
-                    this.aimSphere.transform.up = raycastHit.normal;
-                    this.aimSphere.transform.forward = this.aimRay.direction;
-                    Chat.AddMessage("enemybody position" + enemyBody.corePosition);
-                }
-                else if (StaticValues.Includes(LayerIndex.world.mask, raycastHit.collider.gameObject.layer))
-                {
-                    isWorld = true;
-                    endPoint = raycastHit.point;
-                    this.aimSphere.transform.position = raycastHit.point;
-                    this.aimSphere.transform.up = raycastHit.normal;
-                    this.aimSphere.transform.forward = this.aimRay.direction;
-                    Chat.AddMessage("endPoint" + endPoint);
-                }
+                isWorld = true;
+                endPoint = raycastHit.point;
+
+
+                this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+                this.aimSphere.transform.localScale = new Vector3(this.radius, this.radius, this.radius);
+                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+                blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
+
+                fireTime = (Vector2.Distance(endPoint, characterBody.corePosition) / maxDistance) * StaticValues.blackwhipPullDuration;
+                this.aimSphere.transform.position = raycastHit.point;
+                this.aimSphere.transform.up = raycastHit.normal;
+                this.aimSphere.transform.forward = this.aimRay.direction;
+                Chat.AddMessage("endPoint" + endPoint);
+                //if (StaticValues.Includes(LayerIndex.entityPrecise.mask, raycastHit.collider.gameObject.layer))
+                //{
+                //    isEnemy = true;
+                //    this.aimSphere.transform.position = enemyBody.corePosition;
+                //    this.aimSphere.transform.up = raycastHit.normal;
+                //    this.aimSphere.transform.forward = this.aimRay.direction;
+                //    Chat.AddMessage("enemybody position" + enemyBody.corePosition);
+                //}
+                //else if (StaticValues.Includes(LayerIndex.world.mask, raycastHit.collider.gameObject.layer))
+                //{
+                //    isWorld = true;
+                //    endPoint = raycastHit.point;
+                //    this.aimSphere.transform.position = raycastHit.point;
+                //    this.aimSphere.transform.up = raycastHit.normal;
+                //    this.aimSphere.transform.forward = this.aimRay.direction;
+                //    Chat.AddMessage("endPoint" + endPoint);
+                //}
 
             }
             else
@@ -187,9 +213,10 @@ namespace DekuMod.SkillStates.BlackWhip
 
                 // Lerp from the start point to the end point
                 Vector3 lerpedPosition = Vector3.Lerp(startPoint, endPoint, t);
-
+                
                 vector3s[0] = startPoint;
                 vector3s[1] = lerpedPosition;
+                blackwhipLineRenderer.positionCount = vector3s.Length;
                 blackwhipLineRenderer.SetPositions(vector3s);
                 
             }

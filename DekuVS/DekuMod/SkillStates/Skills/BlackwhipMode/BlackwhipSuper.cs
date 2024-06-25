@@ -55,10 +55,6 @@ namespace DekuMod.SkillStates.BlackWhip
         private float previousMass;
         private float range;
         private float angle;
-        private Vector3 moveDirection;
-        private bool isMove;
-        private Vector3 forwardDirection;
-        private bool isRayCast;
         private float elapsedTime;
         private GameObject blackwhipLineEffect;
         private LineRenderer blackwhipLineRenderer;
@@ -67,7 +63,6 @@ namespace DekuMod.SkillStates.BlackWhip
 		{
 			base.OnEnter();
             this.animator = base.GetModelAnimator();
-            child = base.GetModelChildLocator();
             base.GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
 
 			Ray aimRay = base.GetAimRay();
@@ -127,7 +122,7 @@ namespace DekuMod.SkillStates.BlackWhip
             search.searchOrigin = blastPosition;
             search.searchDirection = base.GetAimRay().direction;
             search.sortMode = BullseyeSearch.SortMode.Distance;
-            search.maxDistanceFilter = range;
+            search.maxDistanceFilter = blastRadius;
             search.maxAngleFilter = angle;
 
 
@@ -141,26 +136,52 @@ namespace DekuMod.SkillStates.BlackWhip
             {
                 if (singularTarget.healthComponent.body && singularTarget.healthComponent)
                 {
-                    //freeze enemies
                     BlackwhipComponent blackwhipComponent = singularTarget.healthComponent.body.gameObject.GetComponent<BlackwhipComponent>();
-
-                    if (isMove)
-                    {
-                        moveDirection = (singularTarget.healthComponent.body.corePosition - blastPosition).normalized;
-                    }
 
 
                     if (blackwhipComponent)
                     {
-
+                        //switch (state)
+                        //{
+                        //    case superState.SUPER1:
+                        //        break;
+                        //    case superState.SUPER2:
+                        //        break;
+                        //    case superState.SUPER3:
+                        //        break;
+                        //}
                     }
                     if (!blackwhipComponent)
                     {
                         blackwhipComponent = singularTarget.healthComponent.body.gameObject.AddComponent<BlackwhipComponent>();
                         blackwhipComponent.totalDuration = duration;
-                        blackwhipComponent.moveDirection = moveDirection;
-                        blackwhipComponent.pushDamage = isMove;
                         blackwhipComponent.dekucharbody = characterBody;
+                        blackwhipComponent.charbody = singularTarget.healthComponent.body;
+
+                        switch (state)
+                        {
+                            case superState.SUPER1:
+                                new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.blackwhipOverdriveDamage * damageStat, characterBody.masterObjectId);
+                                break;
+                            case superState.SUPER2:
+                                break;
+                            case superState.SUPER3:
+                                SetStateOnHurt component = singularTarget.healthComponent.GetComponent<SetStateOnHurt>();
+                                bool flag = component == null;
+                                if (!component)
+                                {
+                                    if (component.canBeFrozen)
+                                    {
+                                        component.SetFrozen(3f);
+                                        bool flag2 = singularTarget.healthComponent.body.characterMotor;
+                                        if (flag2)
+                                        {
+                                            singularTarget.healthComponent.body.characterMotor.velocity = Vector3.zero;
+                                        }
+                                    }
+                                }
+                                break;
+                        }
 
                     }
 
@@ -171,13 +192,12 @@ namespace DekuMod.SkillStates.BlackWhip
         protected override void NeutralSuper()
 		{
 			base.NeutralSuper();
-            //play animation of quick blackwhip infront of him
+            //play animation of quick blackwhip infront of him- immobilize enemies in front of him
             range = StaticValues.blackwhipOverdriveRange;
+            blastRadius = StaticValues.blackwhipOverdriveRange * attackSpeedStat;
             duration = StaticValues.blackwhipOverdriveDuration;
             fireTime = duration / 2f;
             angle = StaticValues.blackwhipOverdriveAngle;
-            isMove = false;
-            moveDirection = Vector3.zero;
             blastPosition = characterBody.corePosition;
         }
 
@@ -185,7 +205,6 @@ namespace DekuMod.SkillStates.BlackWhip
         {
 			base.BackwardSuper();
 
-            isMove = true;
             angle = StaticValues.blackwhipOverdriveAngle2;
             range = StaticValues.blackwhipOverdriveRange2 * attackSpeedStat;
             duration = StaticValues.blackwhipOverdriveDuration2;
@@ -205,8 +224,8 @@ namespace DekuMod.SkillStates.BlackWhip
         protected override void ForwardSuper()
         {
             base.ForwardSuper();
+            child = base.GetModelChildLocator();
 
-            isMove = false;
             angle = StaticValues.blackwhipOverdriveAngle3;
             range = StaticValues.blackwhipOverdriveRange3 * attackSpeedStat;
             duration = StaticValues.blackwhipOverdriveDuration3;
@@ -219,31 +238,32 @@ namespace DekuMod.SkillStates.BlackWhip
             base.characterMotor.mass = 0f;
             base.characterMotor.disableAirControlUntilCollision = false;
 
+            RaycastHit raycastHit;
+            bool raycast = Physics.Raycast(base.GetAimRay().origin, base.GetAimRay().direction, out raycastHit, range, LayerIndex.world.mask);
+
             if (dekucon.GetTrackingTarget())
             {
                 blastPosition = dekucon.GetTrackingTarget().transform.position;
             }
+            else if (raycast)
+            {
+                blastPosition = raycastHit.point;
+            }
             else
             {
-                RaycastHit raycastHit;
-                bool raycast = Physics.Raycast(base.GetAimRay().origin, base.GetAimRay().direction, out raycastHit, blastRadius, LayerIndex.world.mask);
-                
-                if(raycast)
-                {
-                    blastPosition = raycastHit.point;
-                }
-
+                blastPosition = base.GetAimRay().direction * range;
             }
+
 
             blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
             blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
             Chat.AddMessage("blastPosition" + blastPosition);
 
 
-            if (base.isAuthority && base.inputBank && base.characterDirection)
-            {
-                this.forwardDirection = base.GetAimRay().direction;
-            }
+            //if (base.isAuthority && base.inputBank && base.characterDirection)
+            //{
+            //    this.forwardDirection = base.GetAimRay().direction;
+            //}
             ApplyComponent();
 
             //play animation of beginning to jump and fly
@@ -301,7 +321,7 @@ namespace DekuMod.SkillStates.BlackWhip
                         if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
                         {
                             Vector3 vector = normalized * moveSpeedStat * attackSpeedStat * StaticValues.blackwhipOverdriveSpeed3;
-
+                            characterBody.characterDirection.forward = normalized;
                             base.characterMotor.velocity = vector;
                         }
                     }
@@ -313,6 +333,13 @@ namespace DekuMod.SkillStates.BlackWhip
 
                     }
 
+                    if(base.fixedAge > duration)
+                    {
+                        blastAttack.Fire();
+                        this.outer.SetNextStateToMain();
+                        return;
+
+                    }
 
                     this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
