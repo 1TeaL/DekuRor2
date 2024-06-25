@@ -10,6 +10,7 @@ using UnityEngine;
 using static UnityEngine.UI.Image;
 using UnityEngine.Networking;
 using DekuMod.Modules.Networking;
+using R2API.Networking.Interfaces;
 
 namespace DekuMod.SkillStates.BlackWhip
 {
@@ -43,7 +44,7 @@ namespace DekuMod.SkillStates.BlackWhip
             base.FixedUpdate();
             if (base.fixedAge > fireTime && !hasFired && characterBody.inputBank.moveVector != Vector3.zero)
             {
-                moveDirection = characterBody.inputBank.moveVector;
+                moveDirection = characterBody.inputBank.moveVector.normalized;
                 ApplyComponent();
                 hasFired = true;
                 Chat.AddMessage(moveDirection + "movedirection");
@@ -89,7 +90,7 @@ namespace DekuMod.SkillStates.BlackWhip
                     //}
                     BlackwhipComponent blackwhipComponent = singularTarget.healthComponent.body.gameObject.GetComponent<BlackwhipComponent>();
 
-                    new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, moveDirection, StaticValues.blackwhipStrikeForce, damageStat * StaticValues.blackwhipStrikeDamage, characterBody.masterObjectId);
+                    new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, moveDirection, StaticValues.blackwhipStrikeForce, damageStat * StaticValues.blackwhipStrikeDamage, characterBody.masterObjectId).Send(NetworkDestination.Clients);
                     //if (blackwhipComponent)
                     //{
                     //    new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, moveDirection, StaticValues.blackwhipStrikeForce, damageStat * StaticValues.blackwhipStrikeDamage, characterBody.masterObjectId);

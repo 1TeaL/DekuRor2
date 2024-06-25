@@ -42,6 +42,7 @@ namespace DekuMod.SkillStates.BlackWhip
         private float duration;
         private float fireTime;
         public BullseyeSearch search;
+        private CharacterBody enemyBody;
 
         private GameObject areaIndicator;
 
@@ -161,26 +162,27 @@ namespace DekuMod.SkillStates.BlackWhip
                         switch (state)
                         {
                             case superState.SUPER1:
-                                new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.blackwhipOverdriveDamage * damageStat, characterBody.masterObjectId);
+                                new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.blackwhipOverdriveDamage * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
                                 break;
                             case superState.SUPER2:
                                 break;
                             case superState.SUPER3:
-                                SetStateOnHurt component = singularTarget.healthComponent.GetComponent<SetStateOnHurt>();
-                                bool flag = component == null;
-                                if (!component)
-                                {
-                                    if (component.canBeFrozen)
-                                    {
-                                        component.SetFrozen(3f);
-                                        bool flag2 = singularTarget.healthComponent.body.characterMotor;
-                                        if (flag2)
-                                        {
-                                            singularTarget.healthComponent.body.characterMotor.velocity = Vector3.zero;
-                                        }
-                                    }
-                                }
-                                break;
+                                new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, 0f, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                                //SetStateOnHurt component = singularTarget.healthComponent.GetComponent<SetStateOnHurt>();
+                                //bool flag = component == null;
+                                //if (!component)
+                                //{
+                                //    if (component.canBeFrozen && NetworkServer.active)
+                                //    {
+                                //        component.SetFrozen(3f);
+                                //        bool flag2 = singularTarget.healthComponent.body.characterMotor;
+                                //        if (flag2)
+                                //        {
+                                //            singularTarget.healthComponent.body.characterMotor.velocity = Vector3.zero;
+                                //        }
+                                //    }
+                                //}
+                            break;
                         }
 
                     }
@@ -244,6 +246,7 @@ namespace DekuMod.SkillStates.BlackWhip
             if (dekucon.GetTrackingTarget())
             {
                 blastPosition = dekucon.GetTrackingTarget().transform.position;
+                enemyBody = dekucon.trackingTarget.healthComponent.body;
             }
             else if (raycast)
             {
@@ -314,6 +317,17 @@ namespace DekuMod.SkillStates.BlackWhip
                     //    characterBody.characterMotor.Motor.SetPositionAndRotation(blastPosition, Quaternion.LookRotation(forwardDirection));
                     //    //play animation of pose
                     //}
+                    if (enemyBody)
+                    {
+                        if (enemyBody.characterMotor)
+                        {
+                            enemyBody.characterMotor.Motor.SetPosition(blastPosition);
+                        }
+                        else if (enemyBody.rigidbody)
+                        {
+                            enemyBody.rigidbody.MovePosition(blastPosition);
+                        }
+                    }
 
                     if (Vector2.Distance(blastPosition, characterBody.corePosition) > 2f)
                     {

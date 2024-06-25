@@ -28,6 +28,8 @@ namespace DekuMod.SkillStates.BlackWhip
         public float elapsedTime;
         //public Vector3 moveDirection;
         public bool hasFired;
+        private float segments = 20;
+
         //public bool pushDamage;
 
         public void Start()
@@ -48,45 +50,52 @@ namespace DekuMod.SkillStates.BlackWhip
                 elapsedTime += Time.deltaTime; // Increment the elapsed time
             }
             float t = Mathf.Clamp01(elapsedTime / duration); // Calculate the interpolation factor (0 to 1)
-            //int currentSegments = Mathf.FloorToInt(t * segments); // Calculate the current number of segments
+            int currentSegments = Mathf.FloorToInt(t * segments); // Calculate the current number of segments
 
-            Vector3[] vector3s = new Vector3[2];
+            Vector3[] segmentPoints = new Vector3[currentSegments];
             Vector3 startPoint = child.FindChild("RHand").transform.position;
 
             // Lerp from the start point to the end point
-            Vector3 lerpedPosition = Vector3.Lerp(startPoint, charbody.corePosition, t);
+            //Vector3 lerpedPosition = Vector3.Lerp(startPoint, charbody.corePosition, t);
 
-            vector3s[0] = startPoint;
-            vector3s[1] = lerpedPosition;
-            blackwhipLineRenderer.positionCount = vector3s.Length;
-            blackwhipLineRenderer.SetPositions(vector3s);
+            //blackwhipLineRenderer.startWidth = 0.3f;
+            //blackwhipLineRenderer.endWidth = 0.3f;
 
-            //for (int i = 0; i <= currentSegments; i++)
-            //{
-            //    Vector3 startPoint = child.FindChild("RHand").transform.position;
-            //    Vector3 endPoint = charbody.corePosition;
-                //float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
-                //Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2, endPoint); // Calculate Bezier point
-                //blackwhipLineRenderer.startWidth = 1f;
-                //blackwhipLineRenderer.startWidth = 2f;
-                //blackwhipLineRenderer.positionCount = currentSegments;
-                //blackwhipLineRenderer.SetPosition(i, pointOnCurve); // Set the position of the segment
-            //}
+            //vector3s[0] = startPoint;
+            //vector3s[1] = lerpedPosition;
+            //blackwhipLineRenderer.positionCount = vector3s.Length;
+            //blackwhipLineRenderer.SetPositions(vector3s);
+
+            for (int i = 0; i < currentSegments; i++)
+            {
+                //Vector3 startPoint = child.FindChild("RHand").transform.position;
+                Vector3 endPoint = charbody.corePosition;
+                float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
+                Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2 + Vector3.up * 5f, endPoint); // Calculate Bezier point
+
+                segmentPoints[i] = pointOnCurve;
+            }
+
+            blackwhipLineRenderer.startWidth = 0.3f;
+            blackwhipLineRenderer.endWidth = 0.3f;
+
+            blackwhipLineRenderer.positionCount = currentSegments;
+            blackwhipLineRenderer.SetPositions(segmentPoints); // Set the position of the segment
         }
 
         // Function to calculate a point on a quadratic Bezier curve
-        //Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
-        //{
-        //    float u = 1 - t;
-        //    float tt = t * t;
-        //    float uu = u * u;
+        Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+        {
+            float u = 1 - t;
+            float tt = t * t;
+            float uu = u * u;
 
-        //    Vector3 point = uu * p0; // (1 - t)^2 * p0
-        //    point += 2 * u * t * p1; // 2 * (1 - t) * t * p1
-        //    point += tt * p2;        // t^2 * p2
+            Vector3 point = uu * p0; // (1 - t)^2 * p0
+            point += 2 * u * t * p1; // 2 * (1 - t) * t * p1
+            point += tt * p2;        // t^2 * p2
 
-        //    return point;
-        //}
+            return point;
+        }
 
 
 
@@ -107,20 +116,6 @@ namespace DekuMod.SkillStates.BlackWhip
             //        new BlackwhipImmobilizeRequest(charbody.masterObjectId, StaticValues.blackwhipOverdriveDamage * dekucharbody.damage, dekucharbody.masterObjectId);
             //    }
             //}
-            if(timer > totalDuration)
-            {
-                Destroy(this);
-                Destroy(blackwhipLineEffect);
-            }
-            if (charbody.healthComponent.alive)
-			{
-
-			}
-			else if (!charbody)
-			{
-				Destroy(this);
-                Destroy(blackwhipLineEffect);
-            }
 		}
 
 

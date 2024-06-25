@@ -40,8 +40,9 @@ namespace DekuMod.Modules
         internal static float goBeyondThreshold = 95f;
 
         //passive
-        internal static float blackwhipPullDistance = 5f;
-        internal static float blackwhipPullSpeed = 6f;
+        internal static float blackwhipPullDistance = 20f;
+        internal static float blackwhipPullSpeed = 20f;
+        internal static float blackwhipPullHop = 8f;
         internal static float blackwhipPullDuration = 0.4f;
 
         //Might Mode
@@ -126,7 +127,7 @@ namespace DekuMod.Modules
         //Primary
         internal const float blackwhipStrikeRange = 40f;
         internal const float blackwhipStrikeDamage = 2f;
-        internal const float blackwhipStrikeForce = 8f;
+        internal const float blackwhipStrikeForce = 20f;
         internal const float blackwhipProc = 0.5f;
         //Secondary
         internal const float pinpointRange = 50f;
@@ -150,12 +151,12 @@ namespace DekuMod.Modules
         internal static float blackwhipOverdriveRadius2 = 30f;
         internal static float blackwhipOverdriveAngle2 = 360f;
         internal static float blackwhipOverdriveForce2 = 15000f;
-        internal static float blackwhipOverdriveDuration3 = 3f;
+        internal static float blackwhipOverdriveDuration3 = 1f;
         internal static float blackwhipOverdriveRadius3 = 3f;
         internal static float blackwhipOverdriveRange3 = 50f;
         internal static float blackwhipOverdriveAngle3 = 360f;
         internal static float blackwhipOverdriveDamage3 = 10f;
-        internal static float blackwhipOverdriveForce3 = 15000f;
+        internal static float blackwhipOverdriveForce3 = 10000f;
         internal static float blackwhipOverdriveSpeed3 = 10f;
 
         #region Mask Check

@@ -90,11 +90,11 @@ namespace DekuMod.SkillStates.BlackWhip
                 bulletAttack.isCrit = base.RollCrit();
                 bulletAttack.owner = base.gameObject;
                 bulletAttack.muzzleName = muzzleString;
-                bulletAttack.smartCollision = false;
+                bulletAttack.smartCollision = true;
                 bulletAttack.procChainMask = default(ProcChainMask);
                 bulletAttack.procCoefficient = procCoefficient;
                 bulletAttack.radius = 2f;
-                bulletAttack.sniper = true;
+                bulletAttack.sniper = false;
                 bulletAttack.stopperMask = 0;//pierce everything
                 bulletAttack.weapon = null;
                 //tracerEffectPrefab = Modules.Projectiles.bulletTracer,

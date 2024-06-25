@@ -22,6 +22,7 @@ namespace DekuMod.SkillStates.BlackWhip
         public float radius = 1f;
         private Ray aimRay;
         private float baseDistance = StaticValues.blackwhipPullDistance;
+        private float movespeed;
         private float maxDistance;
 
         private bool isRayCast;
@@ -40,7 +41,16 @@ namespace DekuMod.SkillStates.BlackWhip
 
             base.StartAimMode(1f, true);
 
-            maxDistance = baseDistance * moveSpeedStat;
+            float num = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                num /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float num2 = (num / base.characterBody.baseMoveSpeed) * 0.67f;
+            movespeed = num2 + 1f;
+
+            maxDistance = baseDistance * movespeed;
             child = base.GetModelChildLocator();
 
             switch (level)
@@ -134,35 +144,38 @@ namespace DekuMod.SkillStates.BlackWhip
                         //travel until get close enough, then slow down and also play animation change if needed
                         if (isEnemy)
                         {
-                            if (Vector2.Distance(enemyBody.corePosition, characterBody.corePosition) > 2f)
+                            if (Vector2.Distance(enemyBody.corePosition, characterBody.corePosition) > 1f)
                             {
                                 Vector3 normalized = (enemyBody.corePosition - characterBody.corePosition).normalized;
+                                Vector3 moveInput = characterBody.inputBank.moveVector.normalized;
                                 if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
                                 {
-                                    Vector3 vector = normalized * moveSpeedStat * attackSpeedStat * StaticValues.blackwhipPullSpeed;
+                                    Vector3 vector = (normalized * movespeed * StaticValues.blackwhipPullSpeed) + moveInput * movespeed;
 
                                     base.characterMotor.velocity = vector;
                                 }
                             }
                             else
                             {
-                                Vector3 normalized = (enemyBody.corePosition - characterBody.corePosition).normalized;
-                                if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-                                {
-                                    Vector3 vector = normalized * StaticValues.blackwhipPullSpeed;
+                                base.characterMotor.velocity = Vector3.zero;
+                                //Vector3 normalized = (enemyBody.corePosition - characterBody.corePosition).normalized;
+                                //if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
+                                //{
+                                //    Vector3 vector = normalized * StaticValues.blackwhipPullSpeed;
 
-                                    base.characterMotor.velocity = vector;
-                                }
+                                //    base.characterMotor.velocity = vector;
+                                //}
                             }
                         }
                         else if (isWorld)
                         {
-                            if (Vector2.Distance(endPoint, characterBody.corePosition) > 2f)
+                            if (Vector2.Distance(endPoint, characterBody.corePosition) > 1f)
                             {
                                 Vector3 normalized = (endPoint - characterBody.corePosition).normalized;
+                                Vector3 moveInput = characterBody.inputBank.moveVector.normalized;
                                 if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
                                 {
-                                    Vector3 vector = normalized * moveSpeedStat * attackSpeedStat * StaticValues.blackwhipPullSpeed;
+                                    Vector3 vector = (normalized * movespeed * StaticValues.blackwhipPullSpeed) + moveInput * movespeed;
 
                                     base.characterMotor.velocity = vector;
 
@@ -179,7 +192,8 @@ namespace DekuMod.SkillStates.BlackWhip
                 }
                 else
                 {
-                    SmallHop(characterMotor, StaticValues.blackwhipPullSpeed * (moveSpeedStat / 7f) * (fixedAge / 10f + 1));
+                    characterMotor.Motor.ForceUnground();
+                    SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
                     this.outer.SetNextStateToMain();
                     return;
                 }
@@ -221,6 +235,22 @@ namespace DekuMod.SkillStates.BlackWhip
                 
             }
         }
+
+
+        // Function to calculate a point on a quadratic Bezier curve
+        Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+        {
+            float u = 1 - t;
+            float tt = t * t;
+            float uu = u * u;
+
+            Vector3 point = uu * p0; // (1 - t)^2 * p0
+            point += 2 * u * t * p1; // 2 * (1 - t) * t * p1
+            point += tt * p2;        // t^2 * p2
+
+            return point;
+        }
+
         private void UpdateAreaIndicator()
         {
             //if (isAuthority)
