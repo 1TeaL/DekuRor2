@@ -7,6 +7,7 @@ using System;
 using EntityStates.Huntress;
 using DekuMod.Modules;
 using System.Net;
+using Rewired.UI.ControlMapper;
 
 namespace DekuMod.SkillStates.BlackWhip
 {
@@ -24,6 +25,7 @@ namespace DekuMod.SkillStates.BlackWhip
         private float baseDistance = StaticValues.blackwhipPullDistance;
         private float movespeed;
         private float maxDistance;
+        private float initialDistance;
 
         private bool isRayCast;
         private bool isWorld;
@@ -74,6 +76,7 @@ namespace DekuMod.SkillStates.BlackWhip
 
                 isEnemy = true;
                 enemyBody = dekucon.trackingTarget.healthComponent.body;
+                initialDistance = Vector3.Distance(enemyBody.corePosition, characterBody.corePosition);
 
                 this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
                 this.aimSphere.transform.localScale = new Vector3(this.radius, this.radius, this.radius);
@@ -85,6 +88,10 @@ namespace DekuMod.SkillStates.BlackWhip
                 this.aimSphere.transform.up = Vector3.up;
                 this.aimSphere.transform.forward = this.aimRay.direction;
                 Chat.AddMessage("enemybody position" + enemyBody.corePosition);
+                if(isGrounded)
+                {
+                    SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
+                }
             }
             else if (raycast)
             {
@@ -92,6 +99,7 @@ namespace DekuMod.SkillStates.BlackWhip
 
                 isWorld = true;
                 endPoint = raycastHit.point;
+                initialDistance = Vector3.Distance(endPoint, characterBody.corePosition);
 
 
                 this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
@@ -121,7 +129,10 @@ namespace DekuMod.SkillStates.BlackWhip
                 //    this.aimSphere.transform.forward = this.aimRay.direction;
                 //    Chat.AddMessage("endPoint" + endPoint);
                 //}
-
+                if (isGrounded)
+                {
+                    SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
+                }
             }
             else
             {
@@ -146,14 +157,52 @@ namespace DekuMod.SkillStates.BlackWhip
                         {
                             if (Vector2.Distance(enemyBody.corePosition, characterBody.corePosition) > 1f)
                             {
-                                Vector3 normalized = (enemyBody.corePosition - characterBody.corePosition).normalized;
+                                Vector3 directionToGrapple = (enemyBody.corePosition - characterBody.corePosition).normalized;
                                 Vector3 moveInput = characterBody.inputBank.moveVector.normalized;
-                                if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-                                {
-                                    Vector3 vector = (normalized * movespeed * StaticValues.blackwhipPullSpeed) + moveInput * movespeed;
 
-                                    base.characterMotor.velocity = vector;
+                                float currentDistance = Vector3.Distance(enemyBody.corePosition, characterBody.corePosition);
+
+                                // Calculate the target position to maintain the desired distance from the grapple point
+                                Vector3 targetPosition = enemyBody.corePosition - directionToGrapple * initialDistance;
+                                // Calculate the vector to move Deku towards the target position
+                                Vector3 moveToTarget = targetPosition - transform.position;
+                                // Lerp towards the target position to maintain distance smoothly
+
+                                if (moveInput != Vector3.zero)
+                                {
+                                    if(currentDistance < initialDistance)
+                                    {
+                                        initialDistance = currentDistance;
+                                    }
+                                    Vector3 aimDirection = base.inputBank.aimDirection;
+                                    Vector3 normalized = new Vector3(aimDirection.x, 0f, aimDirection.z).normalized;
+                                    float forwardMultiplier = Vector3.Dot(base.inputBank.moveVector, normalized);
+                                    if (forwardMultiplier < 0.1f)
+                                    {
+                                        forwardMultiplier = 0.1f;
+                                    }
+
+                                    // Adjust movement vector with player input
+                                    Vector3 airControl = forwardMultiplier *moveInput * movespeed * StaticValues.blackwhipPullSpeedControl;
+
+                                    // Combine air control with target velocity
+                                    // Lerp towards the target position to maintain distance smoothly
+                                    Vector3 targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
+                                    targetVelocity += airControl;
+                                    base.characterMotor.velocity = targetVelocity;
                                 }
+                                else
+                                {
+                                    Vector3 targetVelocity = directionToGrapple * movespeed * StaticValues.blackwhipPullSpeed;
+                                    base.characterMotor.velocity = targetVelocity;
+
+                                }
+                                //if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
+                                //{
+                                //    Vector3 vector = (normalized * movespeed * StaticValues.blackwhipPullSpeed) + moveInput * movespeed;
+
+                                //    base.characterMotor.velocity = vector;
+                                //}
                             }
                             else
                             {
@@ -171,15 +220,52 @@ namespace DekuMod.SkillStates.BlackWhip
                         {
                             if (Vector2.Distance(endPoint, characterBody.corePosition) > 1f)
                             {
-                                Vector3 normalized = (endPoint - characterBody.corePosition).normalized;
+                                Vector3 directionToGrapple = (endPoint - characterBody.corePosition).normalized;
                                 Vector3 moveInput = characterBody.inputBank.moveVector.normalized;
-                                if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-                                {
-                                    Vector3 vector = (normalized * movespeed * StaticValues.blackwhipPullSpeed) + moveInput * movespeed;
 
-                                    base.characterMotor.velocity = vector;
+                                float currentDistance = Vector3.Distance(endPoint, characterBody.corePosition);
+
+                                // Calculate the target position to maintain the desired distance from the grapple point
+                                Vector3 targetPosition = endPoint - directionToGrapple * initialDistance;
+                                // Calculate the vector to move Deku towards the target position
+                                Vector3 moveToTarget = targetPosition - transform.position;
+                                if (moveInput != Vector3.zero)
+                                {
+                                    if (currentDistance < initialDistance)
+                                    {
+                                        initialDistance = currentDistance;
+                                    }
+                                    Vector3 aimDirection = base.inputBank.aimDirection;
+                                    Vector3 normalized = new Vector3(aimDirection.x, 0f, aimDirection.z).normalized;
+                                    float forwardMultiplier = Vector3.Dot(base.inputBank.moveVector, normalized);
+                                    if (forwardMultiplier < 0.1f)
+                                    {
+                                        forwardMultiplier = 0.1f;
+                                    }
+                                    
+                                    // Adjust movement vector with player input
+                                    Vector3 airControl = forwardMultiplier * moveInput * movespeed * StaticValues.blackwhipPullSpeedControl;
+                                    // Combine air control with target velocity
+                                    // Lerp towards the target position to maintain distance smoothly
+                                    Vector3 targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
+                                    targetVelocity += airControl;
+                                    base.characterMotor.velocity = targetVelocity;
+                                }
+                                else
+                                {
+                                    Vector3 targetVelocity = directionToGrapple * movespeed * StaticValues.blackwhipPullSpeed;
+                                    base.characterMotor.velocity = targetVelocity;
 
                                 }
+
+
+                                //    if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
+                                //    {
+                                //        Vector3 vector = (normalized * movespeed * StaticValues.blackwhipPullSpeed) + moveInput * movespeed;
+
+                                //        base.characterMotor.velocity = vector;
+
+                                //    }
                             }
                             else
                             {
