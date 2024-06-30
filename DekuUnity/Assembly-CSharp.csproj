@@ -55,11 +55,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DekuFinalForm\Assets\Smear.cs" />
+     <Compile Include="Assets\DekuFinalForm\Assets\Smear2.cs" />
      <Compile Include="Assets\HenryUnityProject\Assets\Scripts\ChildLocator.cs" />
      <Compile Include="Assets\HenryUnityProject\Assets\Scripts\DynamicBone.cs" />
      <Compile Include="Assets\HenryUnityProject\Assets\Scripts\DynamicBoneCollider.cs" />
      <Compile Include="Assets\HenryUnityProject\Assets\Scripts\FootstepHandler.cs" />
      <Compile Include="Assets\HenryUnityProject\Assets\Scripts\RagdollController.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDir.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RotateCamera.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_Translate.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoDestructShuriken.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoRotate.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
      <Compile Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Scripts\EditorLabel.cs" />
      <Compile Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Scripts\EnableCameraDepthInForward.cs" />
      <Compile Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Scripts\SoftNormalsToVertexColor.cs" />
@@ -75,23 +87,31 @@
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Debug\Waveform.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVOUpsample.compute" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Distortion.hlsl" />
+     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFX3 Multiply Color.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\ExposureHistogram.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Texture3DLerp.compute" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\DeferredFog.shader" />
+     <None Include="Assets\DekuFinalForm\Assets\SmearShader.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\TemporalAntialiasing.shader" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR Particle Glow.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\FastApproximateAntialiasing.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\SubpixelMorphologicalAntialiasing.shader" />
+     <None Include="Assets\DekuFinalForm\Assets\Smear2.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Dithering.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Bloom.shader" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR Particle Ubershader.shader" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Shaders\Vegetation.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Debug\Vectorscope.compute" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Sampling.hlsl" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_SETTINGS.cginc" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Shaders\LightWrapping.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Lut3DBaker.compute" />
+     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\CartoonFX Free.txt" />
      <None Include="Assets\Nidus\VFX\WobbelShader.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Debug\Waveform.compute" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\PSSL.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Debug\LightMeter.shader" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR.cginc" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\AutoExposure.compute" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVORender.compute" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Texture2DLerp.shader" />
@@ -118,11 +138,14 @@
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\Switch.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\Metal.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Uber.shader" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\Readme Cartoon FX Remaster FREE.txt" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\xRLib.hlsl" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Shaders\VertexColorRounding.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Debug\Overlays.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\PSP2.hlsl" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Prefabs\Texts\_Make your own text effect.txt" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\ScreenSpaceReflections.shader" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_PASSES.cginc" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\DepthOfField.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\DiscardAlpha.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\OpenGL.hlsl" />
@@ -136,7 +159,9 @@
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVODownsample1.compute" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Fog.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\ExposureHistogram.compute" />
+     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\GrainBaker.shader" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR Particle Procedural Ring.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\GaussianDownsample.compute" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Shaders\VertexAnimation.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\ScreenSpaceReflections.hlsl" />
@@ -145,12 +170,14 @@
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\D3D12.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\DepthOfField.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\SubpixelMorphologicalAntialiasing.hlsl" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_URP.cginc" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Shaders\TessellationDisplacement.shader" />
      <None Include="Assets\VFX\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\TesterManual.txt" />
      <None Include="Assets\DekuExtra\OJ2 effects\Pl01\Plusultra\MII_ef_Pl01_pulsultra02b_windscroll02.props.txt" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\Vulkan.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Colors.hlsl" />
+     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR Particle Distortion.shader" />
  <Reference Include="UnityEngine">
  <HintPath>F:/Theodore 3/Unity/2019.4.37f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -790,6 +817,30 @@
     <ProjectReference Include="com.unity.postprocessing.Runtime.csproj">
       <Project>{B3F66FAE-3C5D-D631-35D8-AF09D2C2028F}</Project>
       <Name>com.unity.postprocessing.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXRRuntime.csproj">
+      <Project>{914574F1-4C2F-3603-A89D-E6A9F865161C}</Project>
+      <Name>CFXRRuntime</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXREditor.csproj">
+      <Project>{22B6C237-6836-9893-6F66-916EDB096FC6}</Project>
+      <Name>CFXREditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="ToonyColorsPro.Demo.Editor.csproj">
+      <Project>{0DD69A98-6914-32F8-7FF5-4F6682388A06}</Project>
+      <Name>ToonyColorsPro.Demo.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXRDemo.csproj">
+      <Project>{DEA9BE54-2D88-199A-ECA3-290C56B5B5AF}</Project>
+      <Name>CFXRDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="KinoBloom.Runtime.csproj">
+      <Project>{9A8B333E-D5C2-5775-6C40-ABCC6A61341A}</Project>
+      <Name>KinoBloom.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXR.WelcomeScreen.csproj">
+      <Project>{79CC12DB-0952-DB16-0DC3-ABD48B775878}</Project>
+      <Name>CFXR.WelcomeScreen</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

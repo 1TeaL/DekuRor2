@@ -269,7 +269,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -2.5859847e-29, z: 1.3988809e-14, w: 0.99999994}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -380,11 +380,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1973269318189905557, guid: bf232bd535bc321449615a6c185a9685,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973269318189905557, guid: bf232bd535bc321449615a6c185a9685,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a26d66a53aa405c4da6507da3facc1ed, type: 2}
     - target: {fileID: 7247987450500578778, guid: bf232bd535bc321449615a6c185a9685,
         type: 3}
       propertyPath: m_Name
       value: mdlDeku
       objectReference: {fileID: 0}
+    - target: {fileID: 7599857467243665777, guid: bf232bd535bc321449615a6c185a9685,
+        type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 1562353715}
     - target: {fileID: 8060834769700857696, guid: bf232bd535bc321449615a6c185a9685,
         type: 3}
       propertyPath: m_RootOrder
@@ -393,7 +408,7 @@ PrefabInstance:
     - target: {fileID: 8060834769700857696, guid: bf232bd535bc321449615a6c185a9685,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.52
       objectReference: {fileID: 0}
     - target: {fileID: 8060834769700857696, guid: bf232bd535bc321449615a6c185a9685,
         type: 3}
@@ -493,7 +508,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 50.2
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -518,8 +533,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: -0.0005435232, y: 0.9951441, z: -0.005503892, w: 0.09827297}
-  m_LocalPosition: {x: -0.098, y: 1.8019, z: 0.5021}
+  m_LocalRotation: {x: 0.0870171, y: -0.68385243, z: 0.08265983, w: 0.71968144}
+  m_LocalPosition: {x: 9.195265, y: 1.8725277, z: -0.031997174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -688,6 +703,12 @@ MonoBehaviour:
   m_DistantDisable: 1
   m_ReferenceObject: {fileID: 0}
   m_DistanceToObject: 60
+--- !u!4 &1562353715 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 564957428763161318, guid: bf232bd535bc321449615a6c185a9685,
+    type: 3}
+  m_PrefabInstance: {fileID: 522226572}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1654026000
 GameObject:
   m_ObjectHideFlags: 0
