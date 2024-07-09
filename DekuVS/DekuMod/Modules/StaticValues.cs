@@ -44,7 +44,7 @@ namespace DekuMod.Modules
         internal static float blackwhipPullSpeed = 25f;
         internal static float blackwhipPullSpeedControl = 2f;
         internal static float blackwhipPullHop = 8f;
-        internal static float blackwhipPullDuration = 0.4f;
+        internal static float blackwhipPullDuration = 0.2f;
 
         //Might Mode
         internal const float mightBuffMultiplier = 2f;

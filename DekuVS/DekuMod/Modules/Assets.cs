@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using RoR2.UI;
 using UnityEngine.AddressableAssets;
 using static RoR2.Console;
+using EntityStates.Huntress;
 
 namespace DekuMod.Modules
 {
@@ -15,6 +16,8 @@ namespace DekuMod.Modules
     {
         // the assetbundle to load assets from
         internal static AssetBundle mainAssetBundle;
+
+        internal static List<GameObject> networkObjDefs = new List<GameObject>();
 
         //buffs
         public static Sprite healBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Croco/bdCrocoRegen.asset").WaitForCompletion().iconSprite;
@@ -126,6 +129,9 @@ namespace DekuMod.Modules
         public static Material greenblinkingMaterial;
         public static Material yellowblinkingMaterial;
 
+        //sphere indicators
+        internal static GameObject sphereIndicator;
+        internal static GameObject blackwhipIndicator;
 
         //sword swing
         internal static GameObject dekuKickEffect;
@@ -249,21 +255,31 @@ namespace DekuMod.Modules
 
             //blackwhipbullet = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
 
-            //if (bombExplosionEffect)
-            //{
-            //    ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
-            //    shakeEmitter.amplitudeTimeDecay = true;
-            //    shakeEmitter.duration = 0.5f;
-            //    shakeEmitter.radius = 200f;
-            //    shakeEmitter.scaleShakeRadiusWithLocalScale = false;
 
-            //    shakeEmitter.wave = new Wave
-            //    {
-            //        amplitude = 1f,
-            //        frequency = 40f,
-            //        cycleOffset = 0f
-            //    };
-            //}
+            //warbanner material setup
+            Material warbannerMat = Addressables.LoadAssetAsync<Material>(key: "RoR2/Base/WardOnLevel/matWarbannerSphereIndicator.mat").WaitForCompletion();
+            Material[] warbannerArray = new Material[1];
+            warbannerArray[0] = warbannerMat;
+
+
+            //Creating spheres and adding the material to them
+            sphereIndicator = Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("spherePrefab");
+            //sphereIndicator.AddComponent<NetworkIdentity>();
+            if (!sphereIndicator.GetComponent<NetworkIdentity>()) sphereIndicator.AddComponent<NetworkIdentity>();
+            PrefabAPI.RegisterNetworkPrefab(sphereIndicator);
+
+            blackwhipIndicator = PrefabAPI.InstantiateClone(sphereIndicator, "blackwhipIndicator");
+
+            MeshRenderer blackwhipIndicatorMeshRender = blackwhipIndicator.gameObject.GetComponent<MeshRenderer>();
+            if (!blackwhipIndicatorMeshRender)
+            {
+                Debug.Log("Failed to find Mesh renderer!");
+            }
+            blackwhipIndicatorMeshRender.materials = warbannerArray;
+            blackwhipIndicatorMeshRender.material.SetColor("_TintColor", new Color(27f / 255f, 224f / 255f, 178f / 255f)); 
+            //networkObjDefs.Add(blackwhipIndicator);
+            if (!blackwhipIndicator.GetComponent<NetworkIdentity>()) blackwhipIndicator.AddComponent<NetworkIdentity>();
+            PrefabAPI.RegisterNetworkPrefab(blackwhipIndicator);
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

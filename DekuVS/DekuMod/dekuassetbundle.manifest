@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1089111243
+CRC: 1423572337
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 812e8452a55b1d51347338eecaff7d37
+    Hash: 4b81d47bc58f342f91ecf3226359ba7a
   TypeTreeHash:
     serializedVersion: 2
     Hash: a9d6fa89e33a7d9e4bb0047084e33490
@@ -109,7 +109,9 @@ Assets:
 - Assets/DekuFinalForm/GUI/oklahoma45.png
 - Assets/DekuFinalForm/GUI/dekuBevelRectangleWhite.png
 - Assets/DekuFinalForm/Assets/Materials/yellowBlinkingMat.mat
+- Assets/DekuFinalForm/Blender/DekuFinalAnimationsTest.fbx
 - Assets/DekuFinalForm/GUI/ultimate45.png
+- Assets/DekuFinalForm/Assets/SmearShader.shader
 - Assets/DekuFinalForm/VFX/Material/windspikering.mat
 - Assets/DekuFinalForm/GUI/detroit45.png
 - Assets/DekuFinalForm/VFX/Material/windbullet.mat
@@ -125,6 +127,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/blackwhipAura.prefab
 - Assets/DekuFinalForm/GUI/manchester45.png
 - Assets/DekuFinalForm/Blender/DekuFinal.fbx
+- Assets/DekuFinalForm/Assets/SmearMat.mat
 - Assets/DekuFinalForm/GUI/oklahoma.png
 - Assets/DekuFinalForm/Animations/DekuFinalAvatar.asset
 - Assets/DekuFinalForm/Assets/mdlDeku.prefab
@@ -137,11 +140,13 @@ Assets:
 - Assets/DekuFinalForm/GUI/KickCount.tif
 - Assets/DekuFinalForm/GUI/dekuPlusUltraSegmentFill.png
 - Assets/DekuFinalForm/Assets/Materials/Eye texture.png
+- Assets/DekuFinalForm/Animations/Armature_WalkF.anim
 - Assets/DekuFinalForm/GUI/lightninggreen.tif
 - Assets/DekuFinalForm/GUI/manchester100.png
 - Assets/DekuFinalForm/GUI/armorgreen.tif
 - Assets/DekuFinalForm/GUI/lightningblue.tif
 - Assets/DekuFinalForm/GUI/manchester.png
+- Assets/DekuFinalForm/Blender/VigilanteDekuBegin.blend
 - Assets/DekuFinalForm/Animations/animDisplay.controller
 - Assets/DekuFinalForm/Assets/Mesh/Belt.mesh
 - Assets/DekuFinalForm/Assets/Materials/matBody.mat
@@ -165,6 +170,7 @@ Assets:
 - Assets/DekuFinalForm/GUI/quirksprevious.png
 - Assets/DekuFinalForm/GUI/blackwhip100.png
 - Assets/DekuFinalForm/GUI/gobeyondD.png
+- Assets/DekuFinalForm/Assets/Smear2.shader
 - Assets/DekuFinalForm/VFX/OFA lightning.prefab
 - Assets/DekuFinalForm/Assets/Mesh/ArmR.mesh
 - Assets/DekuFinalForm/GUI/finalSmash.png
@@ -187,6 +193,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/windring.prefab
 - Assets/DekuFinalForm/VFX/smoke.prefab
 - Assets/DekuFinalForm/Assets/Materials/matShoes.mat
+- Assets/DekuFinalForm/Assets/spherePrefab.prefab
 - Assets/DekuFinalForm/VFX/limbAura.prefab
 - Assets/DekuFinalForm/Assets/Mesh/Mask.mesh
 - Assets/DekuFinalForm/Assets/Mesh/Wristband.mesh
@@ -235,6 +242,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/Textures/SparkParticleblackwhip.tif
 - Assets/DekuFinalForm/Assets/Materials/matWristband.mat
 - Assets/DekuFinalForm/Assets/Materials/matFace.mat
+- Assets/DekuFinalForm/Blender/Armature_RunF.anim
 - Assets/DekuFinalForm/VFX/fajinaura.prefab
 - Assets/DekuFinalForm/VFX/blackwhipTrail.prefab
 - Assets/DekuFinalForm/VFX/blackwhip.prefab

@@ -103,6 +103,25 @@ namespace DekuMod.Modules.Survivors
         public float skillCDTimer;
         private float buttonCooler;
 
+        //blackwhip pull
+        public float maxDistance;
+        public GameObject blackwhipReticle;
+
+        private float GetMaxBlackwhipDistance()
+        {
+            float num = body.moveSpeed;
+            bool isSprinting = body.isSprinting;
+            if (isSprinting)
+            {
+                num /= body.sprintingSpeedMultiplier;
+            }
+            float num2 = (num / body.baseMoveSpeed) * 0.67f;
+            float movespeed = num2 + 1f;
+            maxDistance = StaticValues.blackwhipPullDistance * movespeed;
+            return maxDistance;
+
+        }
+
         public void Awake()
         {
             indicator = new Indicator(gameObject, LegacyResourcesAPI.Load<GameObject>("Prefabs/HuntressTrackingIndicator"));
@@ -155,6 +174,14 @@ namespace DekuMod.Modules.Survivors
             goBeyondUsed = false;
             goBeyondOFAGiven = false;
             skillCDTimer = 0f;
+
+
+            if (Assets.blackwhipIndicator)
+            {
+                blackwhipReticle = UnityEngine.Object.Instantiate<GameObject>(Assets.blackwhipIndicator);
+                blackwhipReticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                blackwhipReticle.SetActive(true);
+            }
         }
 
 
@@ -280,9 +307,22 @@ namespace DekuMod.Modules.Survivors
 
         public void Update()
         {
+            //blackwhip reticle
+
+            RaycastHit raycastHit;
+            bool raycast = Physics.Raycast(body.inputBank.aimOrigin, body.inputBank.aimDirection, out raycastHit, GetMaxBlackwhipDistance(), LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
+
+            if (blackwhipReticle && raycast)
+            {
+                //blackwhipReticle.transform.parent = body.transform;
+                blackwhipReticle.transform.position = raycastHit.point;
+                blackwhipReticle.transform.up = raycastHit.normal;
+                blackwhipReticle.transform.forward = body.inputBank.aimDirection;
+            }
+
 
             //sprint to black whip dodge
-            if(body.HasBuff(Buffs.overlayBuff))
+            if (body.HasBuff(Buffs.overlayBuff))
             {
 
                 if (buttonCooler > 0f)

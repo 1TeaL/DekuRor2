@@ -27,6 +27,7 @@ namespace DekuMod.SkillStates.BlackWhip
         private float maxDistance;
         private float initialDistance;
 
+        private bool initiallyGrounded;
         private bool isRayCast;
         private bool isWorld;
         private bool isEnemy;
@@ -91,6 +92,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 if(isGrounded)
                 {
                     SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
+                    initiallyGrounded = true;
                 }
             }
             else if (raycast)
@@ -132,6 +134,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 if (isGrounded)
                 {
                     SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
+                    initiallyGrounded = true;
                 }
             }
             else
@@ -177,9 +180,9 @@ namespace DekuMod.SkillStates.BlackWhip
                                     Vector3 aimDirection = base.inputBank.aimDirection;
                                     Vector3 normalized = new Vector3(aimDirection.x, 0f, aimDirection.z).normalized;
                                     float forwardMultiplier = Vector3.Dot(base.inputBank.moveVector, normalized);
-                                    if (forwardMultiplier < 0.1f)
+                                    if (forwardMultiplier < 0.5f)
                                     {
-                                        forwardMultiplier = 0.1f;
+                                        forwardMultiplier = 0.5f;
                                     }
 
                                     // Adjust movement vector with player input
@@ -189,6 +192,12 @@ namespace DekuMod.SkillStates.BlackWhip
                                     // Lerp towards the target position to maintain distance smoothly
                                     Vector3 targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
                                     targetVelocity += airControl;
+
+                                    if (initiallyGrounded)
+                                    {
+                                        targetVelocity += Vector3.up * movespeed * StaticValues.blackwhipPullSpeedControl;
+                                    }
+
                                     base.characterMotor.velocity = targetVelocity;
                                 }
                                 else
@@ -238,9 +247,9 @@ namespace DekuMod.SkillStates.BlackWhip
                                     Vector3 aimDirection = base.inputBank.aimDirection;
                                     Vector3 normalized = new Vector3(aimDirection.x, 0f, aimDirection.z).normalized;
                                     float forwardMultiplier = Vector3.Dot(base.inputBank.moveVector, normalized);
-                                    if (forwardMultiplier < 0.1f)
+                                    if (forwardMultiplier < 0.5f)
                                     {
-                                        forwardMultiplier = 0.1f;
+                                        forwardMultiplier = 0.5f;
                                     }
                                     
                                     // Adjust movement vector with player input
@@ -249,6 +258,11 @@ namespace DekuMod.SkillStates.BlackWhip
                                     // Lerp towards the target position to maintain distance smoothly
                                     Vector3 targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
                                     targetVelocity += airControl;
+                                    if (initiallyGrounded)
+                                    {
+                                        targetVelocity += Vector3.up * movespeed * StaticValues.blackwhipPullSpeedControl;
+                                    }
+
                                     base.characterMotor.velocity = targetVelocity;
                                 }
                                 else
@@ -276,10 +290,12 @@ namespace DekuMod.SkillStates.BlackWhip
                     }
 
                 }
-                else
+                else if(!base.IsKeyDownAuthority())
                 {
-                    characterMotor.Motor.ForceUnground();
-                    SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
+                    if (base.fixedAge > fireTime)
+                    {
+                        SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
+                    }
                     this.outer.SetNextStateToMain();
                     return;
                 }
@@ -318,7 +334,9 @@ namespace DekuMod.SkillStates.BlackWhip
                 vector3s[1] = lerpedPosition;
                 blackwhipLineRenderer.positionCount = vector3s.Length;
                 blackwhipLineRenderer.SetPositions(vector3s);
-                
+                blackwhipLineRenderer.startWidth = 0.3f;
+                blackwhipLineRenderer.endWidth = 0.3f;
+
             }
         }
 

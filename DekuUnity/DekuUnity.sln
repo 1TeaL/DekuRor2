@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.unity.postprocessing.Editor", "com.unity.postprocessing.Editor.csproj", "{0786EE81-AEF2-BE42-F5D4-E2207CB509C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXR.WelcomeScreen", "CFXR.WelcomeScreen.csproj", "{79CC12DB-0952-DB16-0DC3-ABD48B775878}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXREditor", "CFXREditor.csproj", "{22B6C237-6836-9893-6F66-916EDB096FC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToonyColorsPro.Demo.Editor", "ToonyColorsPro.Demo.Editor.csproj", "{0DD69A98-6914-32F8-7FF5-4F6682388A06}"
@@ -55,10 +53,6 @@ Global
 		{0786EE81-AEF2-BE42-F5D4-E2207CB509C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0786EE81-AEF2-BE42-F5D4-E2207CB509C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0786EE81-AEF2-BE42-F5D4-E2207CB509C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79CC12DB-0952-DB16-0DC3-ABD48B775878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79CC12DB-0952-DB16-0DC3-ABD48B775878}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79CC12DB-0952-DB16-0DC3-ABD48B775878}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79CC12DB-0952-DB16-0DC3-ABD48B775878}.Release|Any CPU.Build.0 = Release|Any CPU
 		{22B6C237-6836-9893-6F66-916EDB096FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{22B6C237-6836-9893-6F66-916EDB096FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22B6C237-6836-9893-6F66-916EDB096FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU

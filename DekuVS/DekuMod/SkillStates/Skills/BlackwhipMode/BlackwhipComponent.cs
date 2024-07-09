@@ -30,6 +30,7 @@ namespace DekuMod.SkillStates.BlackWhip
         public bool hasFired;
         private float segments = 20;
 
+        public int heightDifference;
         //public bool pushDamage;
 
         public void Start()
@@ -41,6 +42,8 @@ namespace DekuMod.SkillStates.BlackWhip
             blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
             blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
             duration = totalDuration * (0.2f);
+
+            heightDifference = UnityEngine.Random.Range(-5, 5);
         }
 
         public void Update()
@@ -71,7 +74,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 //Vector3 startPoint = child.FindChild("RHand").transform.position;
                 Vector3 endPoint = charbody.corePosition;
                 float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
-                Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2 + Vector3.up * 5f, endPoint); // Calculate Bezier point
+                Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2 + Vector3.up * heightDifference, endPoint); // Calculate Bezier point
 
                 segmentPoints[i] = pointOnCurve;
             }
