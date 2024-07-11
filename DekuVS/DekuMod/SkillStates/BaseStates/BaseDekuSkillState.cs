@@ -46,6 +46,7 @@ namespace DekuMod.SkillStates.BaseStates
                     break;
             }
 
+            walkCancelTime = 2f;
         }
 
         public override void Update()

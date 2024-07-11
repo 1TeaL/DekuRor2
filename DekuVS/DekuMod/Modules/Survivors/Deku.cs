@@ -673,7 +673,7 @@ namespace DekuMod.Modules.Survivors
                 skillDescriptionToken = prefix + "BLACKWHIPPULL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(BlackwhipPull)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
