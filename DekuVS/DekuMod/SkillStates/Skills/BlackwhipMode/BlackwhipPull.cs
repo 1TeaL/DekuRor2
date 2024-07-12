@@ -289,12 +289,14 @@ namespace DekuMod.SkillStates.BlackWhip
 
 
                                     // Lerp towards the target position to maintain distance smoothly
-                                    targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
+                                    //targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
+                                    targetVelocity = Vector3.SmoothDamp(characterBody.characterMotor.velocity, moveToTarget * StaticValues.blackwhipPullSpeed * movespeed, ref characterBody.characterMotor.velocity, 0.1f, movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
                                     // Combine air control with target velocity
                                     targetVelocity += airControl;
 
-
-                                    base.characterMotor.velocity = targetVelocity;
+                                    base.characterBody.characterMotor.velocity = targetVelocity;
+                                    //base.characterBody.characterMotor.velocity += airControl;
+                                    //base.characterMotor.velocity = targetVelocity;
                                     //adjust animation based on ascend/descend?
                                 }
                                 //else
@@ -372,12 +374,14 @@ namespace DekuMod.SkillStates.BlackWhip
                                     }
 
                                     // Lerp towards the target position to maintain distance smoothly
-                                    targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
+                                    //targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
+                                    targetVelocity = Vector3.SmoothDamp(characterBody.characterMotor.velocity, moveToTarget * StaticValues.blackwhipPullSpeed * movespeed, ref characterBody.characterMotor.velocity, 0.1f, movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
                                     // Combine air control with target velocity
                                     targetVelocity += airControl;
 
-
-                                    base.characterMotor.velocity = targetVelocity;
+                                    
+                                    base.characterBody.characterMotor.velocity = targetVelocity;
+                                    //base.characterBody.characterMotor.velocity += airControl;
                                     //adjust animation based on ascend/descend?
                                 }
 
