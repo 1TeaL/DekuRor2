@@ -40,8 +40,17 @@ namespace DekuMod.Modules
         internal static float goBeyondThreshold = 95f;
 
         //passive
+        //internal static float blackwhipPullGrappleMultiplier = 3f;
+        //internal static float blackwhipPullInputMultiplier = 2f;
         internal static float blackwhipPullDistance = 35f;
-        internal static float blackwhipPullSpeed = 25f;
+        internal static float blackwhipPullSpeed = 100f;
+        internal static float blackwhipPullAcceleration = 50f;
+        internal static float blackwhipPullLookAcceleration = 4f;
+        internal static float blackwhipPullMoveAcceleration = 4f;
+        internal static float blackwhipPullEscapeForce = 2f;
+        internal static float blackwhipPullLookImpulse = 5f;
+        internal static float blackwhipPullMoveImpulse = 5f;
+        internal static float blackwhipPulllookAccelerationRampUpDuration = 0.25f;
         internal static float blackwhipPullSpeedControl = 2f;
         internal static float blackwhipPullHop = 5f;
         internal static float blackwhipPullDuration = 0.3f;

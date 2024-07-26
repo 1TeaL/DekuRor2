@@ -29,8 +29,6 @@ namespace DekuMod.SkillStates.BlackWhip
         private float baseDistance = StaticValues.blackwhipPullDistance;
         private float movespeed;
         private float maxDistance;
-        private float initialDistance;
-        private float accelTime;
 
         private bool initiallyGrounded;
         private bool isRayCast;
@@ -45,16 +43,19 @@ namespace DekuMod.SkillStates.BlackWhip
         private Vector3 targetVelocity;
 
 
+
         private CameraParamsOverrideHandle camOverrideHandle;
         private CharacterCameraParamsData cameraParams = new CharacterCameraParamsData()
         {
             maxPitch = 70,
             minPitch = -70,
             pivotVerticalOffset = 1f,
-            idealLocalCameraPos = new Vector3(0f, 0f, -30f),
+            idealLocalCameraPos = new Vector3(0f, 0f, -20f),
             wallCushion = 0.1f,
             fov = 90f,
         };
+        private float lastDistance;
+        private float currentDistance;
 
         public override void OnEnter()
         {
@@ -91,29 +92,27 @@ namespace DekuMod.SkillStates.BlackWhip
             RaycastHit raycastHit;
             bool raycast = Physics.Raycast(aimRay.origin, aimRay.direction, out raycastHit, this.maxDistance, LayerIndex.world.mask);
 
+
+
+
             if (dekucon.GetTrackingTarget())
             {
                 isRayCast = true;
 
                 isEnemy = true;
                 enemyBody = dekucon.trackingTarget.healthComponent.body;
-                initialDistance = Vector3.Distance(enemyBody.corePosition, characterBody.corePosition);
 
                 this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
                 this.aimSphere.transform.localScale = new Vector3(this.radius, this.radius, this.radius);
 
-                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("LHand").transform);
                 blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
                 fireTime = (Vector2.Distance(enemyBody.corePosition, characterBody.corePosition) / maxDistance) * StaticValues.blackwhipPullDuration;
                 this.aimSphere.transform.position = enemyBody.corePosition;
                 this.aimSphere.transform.up = Vector3.up;
                 this.aimSphere.transform.forward = this.aimRay.direction;
                 Chat.AddMessage("enemybody position" + enemyBody.corePosition);
-                if(isGrounded)
-                {
-                    SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
-                    initiallyGrounded = true;
-                }
+                
 
 
                 CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
@@ -123,6 +122,19 @@ namespace DekuMod.SkillStates.BlackWhip
                 };
 
                 camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, StaticValues.blackwhipPullDuration);
+
+
+                this.lastDistance = Vector3.Distance(aimRay.origin, enemyBody.corePosition);
+                if (base.characterMotor)
+                {
+                    Vector3 direction = aimRay.direction;
+                    Vector3 vector = base.characterMotor.velocity;
+                    vector = ((Vector3.Dot(vector, direction) < 0f) ? Vector3.zero : Vector3.Project(vector, direction));
+                    vector += direction * StaticValues.blackwhipPullLookImpulse;
+                    vector += base.characterMotor.moveDirection * StaticValues.blackwhipPullMoveImpulse;
+                    base.characterMotor.velocity = vector;
+                }
+
             }
             else if (raycast)
             {
@@ -130,12 +142,11 @@ namespace DekuMod.SkillStates.BlackWhip
 
                 isWorld = true;
                 endPoint = raycastHit.point;
-                initialDistance = Vector3.Distance(endPoint, characterBody.corePosition);
 
 
                 this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
                 this.aimSphere.transform.localScale = new Vector3(this.radius, this.radius, this.radius);
-                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("LHand").transform);
                 blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
 
                 fireTime = (Vector2.Distance(endPoint, characterBody.corePosition) / maxDistance) * StaticValues.blackwhipPullDuration;
@@ -143,29 +154,9 @@ namespace DekuMod.SkillStates.BlackWhip
                 this.aimSphere.transform.up = raycastHit.normal;
                 this.aimSphere.transform.forward = this.aimRay.direction;
                 Chat.AddMessage("endPoint" + endPoint);
-                //if (StaticValues.Includes(LayerIndex.entityPrecise.mask, raycastHit.collider.gameObject.layer))
-                //{
-                //    isEnemy = true;
-                //    this.aimSphere.transform.position = enemyBody.corePosition;
-                //    this.aimSphere.transform.up = raycastHit.normal;
-                //    this.aimSphere.transform.forward = this.aimRay.direction;
-                //    Chat.AddMessage("enemybody position" + enemyBody.corePosition);
-                //}
-                //else if (StaticValues.Includes(LayerIndex.world.mask, raycastHit.collider.gameObject.layer))
-                //{
-                //    isWorld = true;
-                //    endPoint = raycastHit.point;
-                //    this.aimSphere.transform.position = raycastHit.point;
-                //    this.aimSphere.transform.up = raycastHit.normal;
-                //    this.aimSphere.transform.forward = this.aimRay.direction;
-                //    Chat.AddMessage("endPoint" + endPoint);
-                //}
-                if (isGrounded)
-                {
-                    SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
-                    initiallyGrounded = true;
-                }
+                
 
+                lastDistance = Vector3.Distance(transform.position, endPoint);
 
                 CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
                 {
@@ -174,6 +165,16 @@ namespace DekuMod.SkillStates.BlackWhip
                 };
 
                 camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, StaticValues.blackwhipPullDuration);
+
+                if (base.characterMotor)
+                {
+                    Vector3 direction = aimRay.direction;
+                    Vector3 vector = base.characterMotor.velocity;
+                    vector = ((Vector3.Dot(vector, direction) < 0f) ? Vector3.zero : Vector3.Project(vector, direction));
+                    vector += direction * StaticValues.blackwhipPullLookImpulse;
+                    vector += base.characterMotor.moveDirection * StaticValues.blackwhipPullMoveImpulse;
+                    base.characterMotor.velocity = vector;
+                }
             }
             else
             {
@@ -218,15 +219,13 @@ namespace DekuMod.SkillStates.BlackWhip
                 blackwhipLineRenderer.startWidth = 0.3f;
                 blackwhipLineRenderer.endWidth = 0.3f;
 
-                accelTime += Time.deltaTime;
-                Chat.AddMessage(accelTime + "accel time seconds");
 
                 if (!base.IsKeyDownAuthority())
                 {
-                    if (base.fixedAge > fireTime)
-                    {
-                        SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
-                    }
+                    //if (base.fixedAge > fireTime)
+                    //{
+                    //    SmallHop(characterMotor, StaticValues.blackwhipPullHop);
+                    //}
                     this.outer.SetNextStateToMain();
                     return;
                 }
@@ -234,191 +233,93 @@ namespace DekuMod.SkillStates.BlackWhip
                 {
                     if (base.fixedAge > fireTime)
                     {
-                        characterBody.characterMotor.Motor.RotateCharacter(Quaternion.LookRotation(base.GetAimRay().direction));
+                        //characterBody.characterMotor.Motor.RotateCharacter(Quaternion.LookRotation(base.GetAimRay().direction));
+                        Chat.AddMessage($"{characterBody.characterMotor.velocity}" + "velocity");
 
-                        //travel until get close enough, then slow down and also play animation change if needed
+
                         if (isEnemy)
                         {
-                            if (Vector2.Distance(enemyBody.corePosition, characterBody.corePosition) > 1f)
-                            {
-                                Vector3 directionToGrapple = (enemyBody.corePosition - characterBody.corePosition).normalized;
-                                Vector3 moveInput = characterBody.inputBank.moveVector.normalized;
-
-                                float currentDistance = Vector3.Distance(enemyBody.corePosition, characterBody.corePosition);
-
-                                // Calculate the target position to maintain the desired distance from the grapple point
-                                Vector3 targetPosition = enemyBody.corePosition - directionToGrapple * initialDistance;
-                                // Calculate the vector to move Deku towards the target position
-                                Vector3 moveToTarget = targetPosition - transform.position;
-                                // Lerp towards the target position to maintain distance smoothly
-
-
-                                if (base.inputBank.jump.down)
-                                {
-                                    Vector3 targetVelocity = directionToGrapple * movespeed * StaticValues.blackwhipPullSpeed;
-                                    if (initiallyGrounded && base.characterMotor.velocity.y <= 0f)
-                                    {
-                                        targetVelocity += Vector3.up * movespeed;
-                                    }
-                                    base.characterMotor.velocity = targetVelocity;
-                                    //play travel animation/ set animation bool 
-
-                                }
-                                else
-                                if (!base.inputBank.jump.down)
-                                {
-                                    if (currentDistance < initialDistance)
-                                    {
-                                        initialDistance = currentDistance;
-                                    }
-                                    Vector3 aimDirection = base.inputBank.aimDirection;
-                                    Vector3 normalized = new Vector3(aimDirection.x, 0f, aimDirection.z).normalized;
-                                    float forwardMultiplier = Vector3.Dot(base.inputBank.moveVector, normalized);
-                                    if (forwardMultiplier < 0.3f)
-                                    {
-                                        forwardMultiplier = 0.3f;
-                                    }
-
-                                    // Adjust movement vector with player input
-                                    Vector3 airControl = Vector3.zero;
-
-                                    if (base.inputBank.moveVector != Vector3.zero)
-                                    {
-                                        airControl = forwardMultiplier * moveInput * movespeed * StaticValues.blackwhipPullSpeedControl;
-                                    }
-
-
-                                    // Lerp towards the target position to maintain distance smoothly
-                                    //targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
-                                    targetVelocity = Vector3.SmoothDamp(characterBody.characterMotor.velocity, moveToTarget * StaticValues.blackwhipPullSpeed * movespeed, ref characterBody.characterMotor.velocity, 0.1f, movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
-                                    // Combine air control with target velocity
-                                    targetVelocity += airControl;
-
-                                    base.characterBody.characterMotor.velocity = targetVelocity;
-                                    //base.characterBody.characterMotor.velocity += airControl;
-                                    //base.characterMotor.velocity = targetVelocity;
-                                    //adjust animation based on ascend/descend?
-                                }
-                                //else
-                                //{
-                                //    Vector3 targetVelocity = directionToGrapple * movespeed * StaticValues.blackwhipPullSpeed;
-                                //    base.characterMotor.velocity = targetVelocity;
-
-                                //}
-                                //if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-                                //{
-                                //    Vector3 vector = (normalized * movespeed * StaticValues.blackwhipPullSpeed) + moveInput * movespeed;
-
-                                //    base.characterMotor.velocity = vector;
-                                //}
-                            }
-                            else
-                            {
-                                base.characterMotor.velocity = Vector3.zero;
-                                //Vector3 normalized = (enemyBody.corePosition - characterBody.corePosition).normalized;
-                                //if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-                                //{
-                                //    Vector3 vector = normalized * StaticValues.blackwhipPullSpeed;
-
-                                //    base.characterMotor.velocity = vector;
-                                //}
-                            }
+                            endPoint = enemyBody.corePosition;
                         }
-                        else if (isWorld)
+
+                        currentDistance = (endPoint - transform.position).magnitude;
+
+                        float acceleration = StaticValues.blackwhipPullAcceleration;
+                        if (this.currentDistance > this.lastDistance)
                         {
-                            if (Vector2.Distance(endPoint, characterBody.corePosition) > 1f)
-                            {
-                                Vector3 directionToGrapple = (endPoint - characterBody.corePosition).normalized;
-                                Vector3 moveInput = characterBody.inputBank.moveVector.normalized;
-
-                                float currentDistance = Vector3.Distance(endPoint, characterBody.corePosition);
-
-                                // Calculate the target position to maintain the desired distance from the grapple point
-                                Vector3 targetPosition = endPoint - directionToGrapple * initialDistance;
-                                // Calculate the vector to move Deku towards the target position
-                                Vector3 moveToTarget = targetPosition - transform.position;
-
-
-                                if (base.inputBank.jump.down)
-                                {
-                                    Vector3 targetVelocity = directionToGrapple * movespeed * StaticValues.blackwhipPullSpeed;
-                                    if (initiallyGrounded && base.characterMotor.velocity.y <= 0f)
-                                    {
-                                        targetVelocity += Vector3.up * movespeed;
-                                    }
-                                    base.characterMotor.velocity = targetVelocity;
-                                    //play travel animation/ set animation bool 
-
-                                }
-                                else
-                                if (!base.inputBank.jump.down)
-                                {
-                                    if (currentDistance < initialDistance)
-                                    {
-                                        initialDistance = currentDistance;
-                                    }
-                                    Vector3 aimDirection = base.inputBank.aimDirection;
-                                    Vector3 normalized = new Vector3(aimDirection.x, 0f, aimDirection.z).normalized;
-                                    float forwardMultiplier = Vector3.Dot(base.inputBank.moveVector, normalized);
-                                    if (forwardMultiplier < 0.3f)
-                                    {
-                                        forwardMultiplier = 0.3f;
-                                    }
-
-                                    // Adjust movement vector with player input
-                                    Vector3 airControl = Vector3.zero;
-
-                                    if (base.inputBank.moveVector != Vector3.zero)
-                                    {
-                                        airControl = forwardMultiplier * moveInput * movespeed * StaticValues.blackwhipPullSpeedControl;
-                                    }
-
-                                    // Lerp towards the target position to maintain distance smoothly
-                                    //targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget * movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
-                                    targetVelocity = Vector3.SmoothDamp(characterBody.characterMotor.velocity, moveToTarget * StaticValues.blackwhipPullSpeed * movespeed, ref characterBody.characterMotor.velocity, 0.1f, movespeed * StaticValues.blackwhipPullSpeed, Time.deltaTime);
-                                    // Combine air control with target velocity
-                                    targetVelocity += airControl;
-
-                                    
-                                    base.characterBody.characterMotor.velocity = targetVelocity;
-                                    //base.characterBody.characterMotor.velocity += airControl;
-                                    //adjust animation based on ascend/descend?
-                                }
-
-                                //else
-                                //{
-                                //    Vector3 targetVelocity = directionToGrapple * movespeed * StaticValues.blackwhipPullSpeed;
-                                //    base.characterMotor.velocity = targetVelocity;
-
-                                //}
-
-
-                                //    if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
-                                //    {
-                                //        Vector3 vector = (normalized * movespeed * StaticValues.blackwhipPullSpeed) + moveInput * movespeed;
-
-                                //        base.characterMotor.velocity = vector;
-
-                                //    }
-                            }
-                            else
-                            {
-                                base.characterMotor.velocity = Vector3.zero;
-                            }
+                            acceleration *= StaticValues.blackwhipPullEscapeForce;
                         }
+                        this.lastDistance = this.currentDistance;
+                        if (base.isAuthority && base.characterMotor && base.characterBody)
+                        {
+                            Ray ownerAimRay = base.GetAimRay();
+                            Vector3 normalized = (endPoint - characterBody.aimOrigin).normalized;
+                            Vector3 force = normalized * acceleration;
+                            float time = Mathf.Clamp01(base.fixedAge / StaticValues.blackwhipPulllookAccelerationRampUpDuration);
+                            float curveModifier = Mathf.Log10(time) + 1f;
+                            float aimRayRemap = Util.Remap(Vector3.Dot(ownerAimRay.direction, normalized), -1f, 1f, 1f, 0f);
+                            force += ownerAimRay.direction * (StaticValues.blackwhipPullLookAcceleration * curveModifier * aimRayRemap);
+                            force += base.characterMotor.moveDirection * StaticValues.blackwhipPullMoveAcceleration;
+                            base.characterMotor.ApplyForce(force * (base.characterMotor.mass * Time.deltaTime), true, true);
+                        }
+
+                        //Vector3 directionToGrapple = (endPoint - characterBody.corePosition).normalized;
+
+                        //// Calculate the target position to maintain the desired distance from the grapple point
+                        //Vector3 targetPosition = endPoint - directionToGrapple * initialDistance;
+                        //// Calculate the vector to move Deku towards the target position
+                        //Vector3 moveToTarget = targetPosition - transform.position;
+
+                        //Vector3 aimDirection = base.inputBank.aimDirection.normalized;
+                        //Vector3 moveInput = new Vector3(aimDirection.x, 0f, aimDirection.z);
+
+                        //float lookAngle = Vector3.Angle(moveInput, directionToGrapple);
+
+                        //if(lookAngle <= 90f)
+                        //{
+                        //    moveInput *= lookAngle / 90f;
+                        //}
+                        //else if (lookAngle > 90f)
+                        //{
+                        //    moveInput *= 1 - (lookAngle-90f / 90f);
+                        //}
+
+                        //float lerpValue = 0.5f;    
+                        //lerpValue = Mathf.Clamp(Vector3.Distance(transform.position, endPoint) / initialDistance, 0f, 1f);
+                        //float yDistance = Mathf.Lerp(1f, 0f, targetPosition.y - characterBody.corePosition.y);
+
+
+                        ////Vector3 totalDirection = (directionToGrapple * StaticValues.blackwhipPullGrappleMultiplier 
+                        ////    + airControl * StaticValues.blackwhipPullInputMultiplier).normalized;
+
+                        //// Blend the directions
+                        //Vector3 blendedDirection = Vector3.Lerp(moveInput, directionToGrapple, lerpValue).normalized;
+
+                        //Vector3 gravity = Physics.gravity;
+                        //float gravityStrength = gravity.magnitude;
+
+                        //targetVelocity = blendedDirection * StaticValues.blackwhipPullSpeed + gravity;
+                        //targetVelocity += yDistance * characterBody.characterMotor.velocity;
+
+                        //if(Vector3.Distance(transform.position, endPoint) > initialDistance)
+                        //{
+                        //    targetVelocity = blendedDirection * StaticValues.blackwhipPullSpeed;
+                        //}
+
+                        //// Lerp towards the target position to maintain distance smoothly
+                        ////targetVelocity = Vector3.Lerp(characterBody.characterMotor.velocity, moveToTarget  * StaticValues.blackwhipPullSpeed, Time.deltaTime);
+                        //Vector3.SmoothDamp(characterBody.characterMotor.velocity, targetVelocity, ref characterBody.characterMotor.velocity, 1f, StaticValues.blackwhipPullSpeed * 3f,  Time.deltaTime);                       
+
+                        ////base.characterBody.characterMotor.velocity = targetVelocity;
+                        ////base.characterBody.characterMotor.velocity += airControl;
+                        ////base.characterMotor.velocity = targetVelocity;
+                        ////adjust animation based on ascend/descend?                          
+
+
 
                     }
 
                 }
-                //else if(!extrainputBankTest.extraSkill4.down)
-                //{
-                //    if (base.fixedAge > fireTime)
-                //    {
-                //        SmallHop(characterMotor, movespeed * StaticValues.blackwhipPullHop);
-                //    }
-                //    this.outer.SetNextStateToMain();
-                //    return;
-                //}
                 
             }
             else
