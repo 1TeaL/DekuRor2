@@ -84,8 +84,7 @@ namespace DekuMod.SkillStates.Might
                     case 0:
 
                         if (fixedAge >= chargeThreshold && base.skillLocator.secondary.stock >= 1)
-                        {
-                            anim.SetBool("delawareCharged", true);
+                        {      
                             if (!consumeStock)
                             {
                                 //take extra stock 
@@ -98,7 +97,6 @@ namespace DekuMod.SkillStates.Might
 
                         if (fixedAge >= chargeThreshold && base.skillLocator.secondary.stock >= 1)
                         {
-                            anim.SetBool("delawareCharged", true);
                             if (!consumeStock)
                             {
                                 //take extra stock 
@@ -111,7 +109,6 @@ namespace DekuMod.SkillStates.Might
 
                         if (fixedAge >= chargeThreshold)
                         {
-                            anim.SetBool("delawareCharged", true);
                             //no need stock consumption
                             
                         }
@@ -124,6 +121,7 @@ namespace DekuMod.SkillStates.Might
                 {
                     if(!hasFired)
                     {
+                        anim.SetBool("delawareCharged", true);
                         hasFired = true;
                         if (fixedAge <= chargeThreshold && isAuthority)
                         {
