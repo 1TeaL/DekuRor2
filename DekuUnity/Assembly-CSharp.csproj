@@ -150,7 +150,7 @@
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\DiscardAlpha.shader" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\OpenGL.hlsl" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Lut2DBaker.shader" />
-     <None Include="Assets\Shaders\DekuOFAAura.shader" />
+     <None Include="Assets\DekuFinalForm\VFX\Material\DekuOFAAura.shader" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Readme.txt" />
      <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\CopyStd.shader" />
      <None Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\ProjectSettings\ProjectVersion.txt" />

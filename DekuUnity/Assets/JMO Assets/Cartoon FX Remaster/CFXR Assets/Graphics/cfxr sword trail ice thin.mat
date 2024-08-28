@@ -98,7 +98,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 4.237095, g: 4.237095, b: 4.237095, a: 1}
-    - _DissolveScroll: {r: -0.2, g: 0, b: 0, a: 0}
+    - _DissolveScroll: {r: -0.2, g: 1, b: 0, a: 0}
     - _DistortScrolling: {r: 0, g: 0, b: 1, a: 1}
     - _OverlayTex_Scroll: {r: 1, g: 0, b: 0.5, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
