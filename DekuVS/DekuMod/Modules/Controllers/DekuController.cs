@@ -176,9 +176,9 @@ namespace DekuMod.Modules.Survivors
             skillCDTimer = 0f;
 
 
-            if (Assets.blackwhipIndicator)
+            if (Asset.blackwhipIndicator)
             {
-                blackwhipReticle = UnityEngine.Object.Instantiate<GameObject>(Assets.blackwhipIndicator);
+                blackwhipReticle = UnityEngine.Object.Instantiate<GameObject>(Asset.blackwhipIndicator);
                 blackwhipReticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 blackwhipReticle.SetActive(true);
             }

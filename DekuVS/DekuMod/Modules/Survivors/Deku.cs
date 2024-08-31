@@ -970,7 +970,7 @@ namespace DekuMod.Modules.Survivors
             
             //black eye material
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(DekuPlugin.developerPrefix + "_DEKU_BODY_DEFAULT_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("Airforceskin"),
+                Asset.mainAssetBundle.LoadAsset<Sprite>("Airforceskin"),
                 defaultRendererInfo,
                 mainRenderer,
                 model);
@@ -1107,7 +1107,7 @@ namespace DekuMod.Modules.Survivors
                 matWristband
             });
             SkinDef eyeSkin = Modules.Skins.CreateSkinDef(DekuPlugin.developerPrefix + "_DEKU_BODY_EYE_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("Airforceskin"),
+                Asset.mainAssetBundle.LoadAsset<Sprite>("Airforceskin"),
                 eyeRendererInfo,
                 mainRenderer,
                 model);

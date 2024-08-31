@@ -102,7 +102,7 @@ namespace DekuMod
             DekuPlugin.instance = this;
             
             // load assets and read config
-            Modules.Assets.Initialize();
+            Modules.Asset.Initialize();
             Modules.Config.ReadConfig();
             Modules.Damage.SetupModdedDamage(); //setup modded damage
             Modules.States.RegisterStates(); // register states for networking

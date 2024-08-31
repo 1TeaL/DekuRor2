@@ -12,7 +12,7 @@ using EntityStates.Huntress;
 
 namespace DekuMod.Modules
 {
-    internal static class Assets
+    internal static class Asset
     {
         // the assetbundle to load assets from
         internal static AssetBundle mainAssetBundle;
@@ -202,7 +202,7 @@ namespace DekuMod.Modules
                 return;
             }
 
-            dekuCustomUI = Assets.mainAssetBundle.LoadAsset<GameObject>("dekuCustomUI");
+            dekuCustomUI = Asset.mainAssetBundle.LoadAsset<GameObject>("dekuCustomUI");
 
             Material bulletMat = null;
             delawareBullet = LoadEffect("delawareBullet");
@@ -236,8 +236,8 @@ namespace DekuMod.Modules
             gobeyondPulseEffect = LoadEffect("goBeyondPulse");
             gearshiftPierceEffect = LoadEffect("gearshiftPierce");
 
-            dekuKickEffect = Assets.LoadEffect("DekuKickEffect", true);
-            dekuHitImpactEffect = Assets.LoadEffect("ImpactDekuKick");            
+            dekuKickEffect = Asset.LoadEffect("DekuKickEffect", true);
+            dekuHitImpactEffect = Asset.LoadEffect("ImpactDekuKick");            
             kickHitSoundEvent = CreateNetworkSoundEventDef("shootstyedashcomboimpact");
 
 
@@ -263,7 +263,7 @@ namespace DekuMod.Modules
 
 
             //Creating spheres and adding the material to them
-            sphereIndicator = Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("spherePrefab");
+            sphereIndicator = Modules.Asset.mainAssetBundle.LoadAsset<GameObject>("spherePrefab");
             //sphereIndicator.AddComponent<NetworkIdentity>();
             if (!sphereIndicator.GetComponent<NetworkIdentity>()) sphereIndicator.AddComponent<NetworkIdentity>();
             PrefabAPI.RegisterNetworkPrefab(sphereIndicator);
@@ -442,7 +442,7 @@ namespace DekuMod.Modules
             if (!commandoMat) commandoMat = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
 
             Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);
-            Material tempMat = Assets.mainAssetBundle.LoadAsset<Material>(materialName);
+            Material tempMat = Asset.mainAssetBundle.LoadAsset<Material>(materialName);
 
             if (!tempMat)
             {
@@ -463,17 +463,17 @@ namespace DekuMod.Modules
 
         public static Material CreateMaterial(string materialName)
         {
-            return Assets.CreateMaterial(materialName, 0f);
+            return Asset.CreateMaterial(materialName, 0f);
         }
 
         public static Material CreateMaterial(string materialName, float emission)
         {
-            return Assets.CreateMaterial(materialName, emission, Color.white);
+            return Asset.CreateMaterial(materialName, emission, Color.white);
         }
 
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor)
         {
-            return Assets.CreateMaterial(materialName, emission, emissionColor, 0f);
+            return Asset.CreateMaterial(materialName, emission, emissionColor, 0f);
         }
 
 
@@ -487,7 +487,7 @@ namespace DekuMod.Modules
             if (tempMat)
                 return tempMat;
 
-            tempMat = Assets.mainAssetBundle.LoadAsset<Material>(materialName);
+            tempMat = Asset.mainAssetBundle.LoadAsset<Material>(materialName);
 
             if (!tempMat)
             {

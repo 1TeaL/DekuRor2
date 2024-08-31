@@ -24,7 +24,7 @@ namespace DekuMod.Modules.Networking
         GameObject charbodyObj;
         private BullseyeSearch search;
         private List<HurtBox> trackingTargets;
-        private GameObject blastEffectPrefab = Assets.loaderOmniImpactLightningEffect;
+        private GameObject blastEffectPrefab = Asset.loaderOmniImpactLightningEffect;
 
         public TakeDamageForceRequest()
         {
