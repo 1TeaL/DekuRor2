@@ -18,7 +18,7 @@
 //        public float baseDuration = 1f;
 //        public static float blastRadius = 10f;
 //        public static float succForce = 4.5f;
-//        //private GameObject effectPrefab = Modules.Assets.sEffect;
+//        //private GameObject effectPrefab = Modules.Asset.sEffect;
 
 //        public float range = 10f;
 //        public float rangeaddition = 15f;
@@ -69,7 +69,7 @@
 
 //            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 //            PlayCrossfade("FullBody, Override", "StLouis45", "Attack.playbackRate", duration/2, 0.01f);
-//            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing1", true);
+//            EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "Swing1", true);
 
 
 //            blastAttack = new BlastAttack();
@@ -113,14 +113,14 @@
 //                {
 //                    this.OnHitEnemyAuthority();
 //                }
-//                EffectManager.SpawnEffect(Modules.Assets.lightningNovaEffectPrefab, new EffectData
+//                EffectManager.SpawnEffect(Modules.Asset.lightningNovaEffectPrefab, new EffectData
 //                {
 //                    origin = theSpot,
 //                    scale = blastRadius,
 //                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
 //                }, true);
-//                EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
+//                EffectManager.SpawnEffect(Modules.Asset.sonicboomEffectPrefab, new EffectData
 //                {
 //                    origin = theSpot,
 //                    scale = blastRadius,

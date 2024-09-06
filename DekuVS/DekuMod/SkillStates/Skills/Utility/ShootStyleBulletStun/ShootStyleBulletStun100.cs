@@ -166,7 +166,7 @@ namespace DekuMod.SkillStates
                     if (body)
                     {
                         Ray aimRay = base.GetAimRay();
-                        EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
+                        EffectManager.SpawnEffect(Modules.Asset.airforce100impactEffect, new EffectData
                         {
                             origin = healthComponent.body.corePosition,
                             scale = 1f,

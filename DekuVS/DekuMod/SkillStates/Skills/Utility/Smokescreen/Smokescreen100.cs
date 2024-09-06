@@ -39,7 +39,7 @@
 
 //            Util.PlaySound(StealthMode.enterStealthSound, base.gameObject);
 
-//            EffectManager.SpawnEffect(Modules.Assets.smokebigEffect, new EffectData
+//            EffectManager.SpawnEffect(Modules.Asset.smokebigEffect, new EffectData
 //            {
 //                origin = base.transform.position,
 //                scale = radius,

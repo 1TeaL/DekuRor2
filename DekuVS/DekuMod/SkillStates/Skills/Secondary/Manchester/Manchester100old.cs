@@ -224,7 +224,7 @@
 //                Ray aimRay = base.GetAimRay();
 //                //if (dekucon.isMaxPower)
 //                //{
-//                //    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+//                //    EffectManager.SpawnEffect(Modules.Asset.impactEffect, new EffectData
 //                //    {
 //                //        origin = base.transform.position,
 //                //        scale = 1f,

@@ -106,7 +106,7 @@
 
 //            this.muzzleString = "LFoot";
 //            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, this.muzzleString, false);
-//            EffectManager.SimpleMuzzleFlash(Modules.Assets.muzzleflashMageLightningLargePrefab, base.gameObject, this.muzzleString, false);
+//            EffectManager.SimpleMuzzleFlash(Modules.Asset.muzzleflashMageLightningLargePrefab, base.gameObject, this.muzzleString, false);
 
 //            base.characterMotor.useGravity = false;
 //            this.previousMass = base.characterMotor.mass;

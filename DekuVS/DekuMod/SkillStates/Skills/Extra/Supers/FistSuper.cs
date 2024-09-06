@@ -146,7 +146,7 @@
 //			{
 //				animChange = true;
 //				AkSoundEngine.PostEvent("shootstyedashcomboimpact", this.gameObject);
-//				EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
+//				EffectManager.SpawnEffect(Modules.Asset.mageLightningBombEffectPrefab, new EffectData
 //				{
 //					origin = theSpot,
 //					scale = blastRadius,
@@ -160,7 +160,7 @@
 //                blastAttack.Fire();
 //				AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 
-//				EffectManager.SpawnEffect(Modules.Assets.detroitEffect, effectData2, true);
+//				EffectManager.SpawnEffect(Modules.Asset.detroitEffect, effectData2, true);
 
 //				this.outer.SetNextStateToMain();
 //				return;

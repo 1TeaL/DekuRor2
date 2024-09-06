@@ -174,7 +174,7 @@ namespace DekuMod
                 Debug.Log(item.bodyPrefab.name);
                 if (item.bodyPrefab.name == "DekuBody")
                 {
-                    CustomEmotesAPI.ImportArmature(item.bodyPrefab, Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("humanoidDeku"));
+                    CustomEmotesAPI.ImportArmature(item.bodyPrefab, Modules.Asset.mainAssetBundle.LoadAsset<GameObject>("humanoidDeku"));
                 }
             }
         }
@@ -209,7 +209,7 @@ namespace DekuMod
                         //deku mark system
                         if(body.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
                         {
-
+                            
                             //vulnerability modded damage
                             if (DamageAPI.HasModdedDamageType(damageInfo, Modules.Damage.blackwhipImmobilise))
                             {
@@ -264,12 +264,12 @@ namespace DekuMod
                             //        spreadPitchScale = 0f,
                             //        spreadYawScale = 0f,
                             //        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                            //        hitEffectPrefab = Modules.Assets.dekuHitImpactEffect,
+                            //        hitEffectPrefab = Modules.Asset.dekuHitImpactEffect,
 
                             //    };
                             //    bulletAttack.Fire();
 
-                            //    EffectManager.SpawnEffect(Modules.Assets.gearshiftPierceEffect, new EffectData
+                            //    EffectManager.SpawnEffect(Modules.Asset.gearshiftPierceEffect, new EffectData
                             //    {
                             //        origin = damageInfo.position,
                             //        scale = 1f,
@@ -310,7 +310,7 @@ namespace DekuMod
                             //        }
 
                             //        Vector3 enemyPos = victimBody.transform.position;
-                            //        EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+                            //        EffectManager.SpawnEffect(Modules.Asset.impactEffect, new EffectData
                             //        {
                             //            origin = enemyPos + ((body.transform.position - enemyPos) * number),
                             //            scale = 1f,
@@ -592,11 +592,11 @@ namespace DekuMod
             {
                 if (self.body)
                 {
-                    this.OverlayFunction(Modules.Assets.blackwhipDebuffMaterial, self.body.HasBuff(Modules.Buffs.blackwhipDebuff), self);
-                    this.OverlayFunction(Modules.Assets.redblinkingMaterial, self.body.HasBuff(Modules.Buffs.counterAttackBuff), self);
-                    this.OverlayFunction(Modules.Assets.whiteblinkingMaterial, self.body.HasBuff(Modules.Buffs.overlayBuff), self);
-                    this.OverlayFunction(Modules.Assets.yellowblinkingMaterial, self.body.HasBuff(Modules.Buffs.mightBuff), self);
-                    this.OverlayFunction(Modules.Assets.purpleblinkingMaterial, self.body.HasBuff(Modules.Buffs.blackwhipCDBuff), self);
+                    this.OverlayFunction(Modules.Asset.blackwhipDebuffMaterial, self.body.HasBuff(Modules.Buffs.blackwhipDebuff), self);
+                    this.OverlayFunction(Modules.Asset.redblinkingMaterial, self.body.HasBuff(Modules.Buffs.counterAttackBuff), self);
+                    this.OverlayFunction(Modules.Asset.whiteblinkingMaterial, self.body.HasBuff(Modules.Buffs.overlayBuff), self);
+                    this.OverlayFunction(Modules.Asset.yellowblinkingMaterial, self.body.HasBuff(Modules.Buffs.mightBuff), self);
+                    this.OverlayFunction(Modules.Asset.purpleblinkingMaterial, self.body.HasBuff(Modules.Buffs.blackwhipCDBuff), self);
                 }
             }
         }

@@ -38,6 +38,7 @@
 	<PackageReference Include="R2API.Networking" Version="1.0.2" />
 	<PackageReference Include="R2API.Language" Version="1.0.1" />
 	<PackageReference Include="R2API.DamageType" Version="1.1.1" />
+	<PackageReference Include="R2API.Sound" Version="1.0.3" />
 	<PackageReference Include="MMHOOK.RoR2" Version="2024.8.28">
 		<NoWarn>NU1701</NoWarn>
 	</PackageReference>
@@ -52,24 +53,6 @@
     </Reference>
     <Reference Include="MMHOOK_RoR2">
       <HintPath>bin\Debug\netstandard2.0\MMHOOK_RoR2.dll</HintPath>
-    </Reference>
-    <Reference Include="R2API.Core">
-      <HintPath>..\libs\R2API.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="R2API.DamageType">
-      <HintPath>..\libs\R2API.DamageType.dll</HintPath>
-    </Reference>
-    <Reference Include="R2API.Language">
-      <HintPath>..\libs\R2API.Language.dll</HintPath>
-    </Reference>
-    <Reference Include="R2API.Networking">
-      <HintPath>..\libs\R2API.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="R2API.Prefab">
-      <HintPath>..\libs\R2API.Prefab.dll</HintPath>
-    </Reference>
-    <Reference Include="R2API.Sound">
-      <HintPath>..\libs\R2API.Sound.dll</HintPath>
     </Reference>
     <Reference Include="ScrollableLobbyUI">
       <HintPath>bin\Debug\netstandard2.0\ScrollableLobbyUI.dll</HintPath>

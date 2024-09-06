@@ -17,7 +17,7 @@ namespace DekuMod.Modules
             //AddProjectile(blackwhipPrefab);
 
             ////bullet tracers
-            //airforceTracer = Modules.Assets.airforceEffect;
+            //airforceTracer = Modules.Asset.airforceEffect;
 
             //if (!airforceTracer.GetComponent<EffectComponent>()) airforceTracer.AddComponent<EffectComponent>();
             //if (!airforceTracer.GetComponent<VFXAttributes>()) airforceTracer.AddComponent<VFXAttributes>();
@@ -39,7 +39,7 @@ namespace DekuMod.Modules
             //}
             //Modules.Effects.AddEffect(airforceTracer);
 
-            //airforce100Tracer = Modules.Assets.airforce100Effect;
+            //airforce100Tracer = Modules.Asset.airforce100Effect;
 
             //if (!airforce100Tracer.GetComponent<EffectComponent>()) airforce100Tracer.AddComponent<EffectComponent>();
             //if (!airforce100Tracer.GetComponent<VFXAttributes>()) airforce100Tracer.AddComponent<VFXAttributes>();
@@ -60,7 +60,7 @@ namespace DekuMod.Modules
             //}
             //Modules.Effects.AddEffect(airforce100Tracer);
 
-            //delawareBullet = Modules.Assets.airforce45Effect;
+            //delawareBullet = Modules.Asset.airforce45Effect;
 
             //if (!delawareBullet.GetComponent<EffectComponent>()) delawareBullet.AddComponent<EffectComponent>();
             //if (!delawareBullet.GetComponent<VFXAttributes>()) delawareBullet.AddComponent<VFXAttributes>();
@@ -80,7 +80,7 @@ namespace DekuMod.Modules
             //}
             //Modules.Effects.AddEffect(delawareBullet);
 
-            //blackwhipTracer = Modules.Assets.blackwhipbullet;
+            //blackwhipTracer = Modules.Asset.blackwhipbullet;
 
             //if (!blackwhipTracer.GetComponent<EffectComponent>()) blackwhipTracer.AddComponent<EffectComponent>();
             //if (!blackwhipTracer.GetComponent<VFXAttributes>()) blackwhipTracer.AddComponent<VFXAttributes>();
@@ -100,11 +100,11 @@ namespace DekuMod.Modules
             //}
             //Modules.Effects.AddEffect(blackwhipTracer);
 
-            //delawareTracer = Modules.Assets.delawareEffect;
+            //delawareTracer = Modules.Asset.delawareEffect;
             //Modules.Effects.AddEffect(delawareTracer);
-            //detroitTracer = Modules.Assets.detroitEffect;
+            //detroitTracer = Modules.Asset.detroitEffect;
             //Modules.Effects.AddEffect(detroitTracer);
-            //detroitweakTracer = Modules.Assets.detroitweakEffect;
+            //detroitweakTracer = Modules.Asset.detroitweakEffect;
             //Modules.Effects.AddEffect(detroitweakTracer);
 
         }
@@ -126,14 +126,14 @@ namespace DekuMod.Modules
         //    blackwhip.blastRadius = 3f;
         //    blackwhip.destroyOnEnemy = true;
         //    blackwhip.lifetime = 6f;
-        //    //bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-        //    //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
+        //    //bombImpactExplosion.impactEffect = Modules.Asset.bombExplosionEffect;
+        //    //bombImpactExplosion.lifetimeExpiredSound = Modules.Asset.CreateNetworkSoundEventDef("HenryBombExplosion");
         //    blackwhip.timerAfterImpact = false;
         //    blackwhip.lifetimeAfterImpact = 0f;
         //    blackwhip.destroyOnWorld = true;
 
         //    ProjectileController bombController = blackwhipPrefab.GetComponent<ProjectileController>();
-        //    if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("blackwhipshootGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("blackwhipshootGhost");
+        //    if (Modules.Asset.mainAssetBundle.LoadAsset<GameObject>("blackwhipshootGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("blackwhipshootGhost");
         //    bombController.startSound = "";
 
         //    blackwhipPrefab.AddComponent<ProjectileImpactEventCaller>();
@@ -175,11 +175,11 @@ namespace DekuMod.Modules
 
         private static GameObject CreateGhostPrefab(string ghostName)
         {
-            GameObject ghostPrefab = Modules.Assets.mainAssetBundle.LoadAsset<GameObject>(ghostName);
+            GameObject ghostPrefab = Modules.Asset.mainAssetBundle.LoadAsset<GameObject>(ghostName);
             if (!ghostPrefab.GetComponent<NetworkIdentity>()) ghostPrefab.AddComponent<NetworkIdentity>();
             if (!ghostPrefab.GetComponent<ProjectileGhostController>()) ghostPrefab.AddComponent<ProjectileGhostController>();
 
-            Modules.Assets.ConvertAllRenderersToHopooShader(ghostPrefab);
+            Modules.Asset.ConvertAllRenderersToHopooShader(ghostPrefab);
 
             return ghostPrefab;
         }

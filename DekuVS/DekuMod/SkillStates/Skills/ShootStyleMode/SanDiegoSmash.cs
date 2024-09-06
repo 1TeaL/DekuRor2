@@ -135,7 +135,7 @@ namespace DekuMod.SkillStates.ShootStyle
             attack.pushAwayForce = pushForce;
             attack.hitBoxGroup = hitBoxGroup;
             attack.isCrit = RollCrit();
-            attack.impactSound = Modules.Assets.kickHitSoundEvent.index;
+            attack.impactSound = Modules.Asset.kickHitSoundEvent.index;
 
 
             detector = new OverlapAttack();
@@ -352,8 +352,8 @@ namespace DekuMod.SkillStates.ShootStyle
                 {
                     cameraTargetParams.fovOverride = -1f;
                 }
-                EffectManager.SimpleMuzzleFlash(Modules.Assets.boostJumpEffectPrefab, gameObject, "LFoot", false);
-                EffectManager.SimpleMuzzleFlash(Modules.Assets.muzzleflashMageLightningLargePrefab, gameObject, "LFoot", false);
+                EffectManager.SimpleMuzzleFlash(Modules.Asset.boostJumpEffectPrefab, gameObject, "LFoot", false);
+                EffectManager.SimpleMuzzleFlash(Modules.Asset.muzzleflashMageLightningLargePrefab, gameObject, "LFoot", false);
 
                 bool flag3 = characterMotor;
                 if (flag3)

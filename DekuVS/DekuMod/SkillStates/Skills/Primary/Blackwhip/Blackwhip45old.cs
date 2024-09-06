@@ -56,7 +56,7 @@
 
 
 
-//            EffectManager.SpawnEffect(Modules.Assets.blackwhipforward, new EffectData
+//            EffectManager.SpawnEffect(Modules.Asset.blackwhipforward, new EffectData
 //            {
 //                origin = aimRay.origin,
 //                scale = 1f,
@@ -165,7 +165,7 @@
 //                {
 //                    this.OnHitEnemyAuthority();
 //                }
-//                //EffectManager.SpawnEffect(Modules.Assets.blackwhipforward, new EffectData
+//                //EffectManager.SpawnEffect(Modules.Asset.blackwhipforward, new EffectData
 //                //{
 //                //    origin = theSpot,
 //                //    scale = 1f,

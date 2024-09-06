@@ -137,7 +137,7 @@
 //                        if (flag4)
 //                        {
 //                            base.PlayCrossfade("FullBody, Override", "ShootStyleCombo3", "Slash.playbackRate", 0.3f, 0.01f);
-//                            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing3", true);
+//                            EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "Swing3", true);
 //                            bool flag5 = this.HitResults.Count > 0;
 //                            if (flag5)
 //                            {

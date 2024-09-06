@@ -98,7 +98,7 @@ namespace DekuMod.Modules.Survivors
 
             if (RoRHUDObject && !plusUltraBar)
             {
-                plusUltraBar = UnityEngine.GameObject.Instantiate(Modules.Assets.dekuCustomUI, RoRHUDObject.transform.GetChild(0).GetChild(7).GetChild(2).GetChild(2).GetChild(0));
+                plusUltraBar = UnityEngine.GameObject.Instantiate(Modules.Asset.dekuCustomUI, RoRHUDObject.transform.GetChild(0).GetChild(7).GetChild(2).GetChild(2).GetChild(0));
             }
 
             plusUltraGlow = plusUltraBar.transform.GetChild(0).gameObject;

@@ -79,7 +79,7 @@ namespace DekuMod.SkillStates.BlackWhip
 
 
             //PlayCrossfade("FullBody, Override", "StLouis45", "Attack.playbackRate", 1f, 0.01f);
-            //EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing1", true);
+            //EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "Swing1", true);
 
 
 
@@ -258,7 +258,7 @@ namespace DekuMod.SkillStates.BlackWhip
             }
 
 
-            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Assets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Asset.blackwhipLineRenderer, child.FindChild("RHand").transform);
             blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
             Chat.AddMessage("blastPosition" + blastPosition);
 

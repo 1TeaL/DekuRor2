@@ -50,7 +50,7 @@
 
 //            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 //            base.PlayCrossfade("FullBody, Override", "ManchesterFlip", "Attack.playbackRate", 0.5f, 0.01f);
-//            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
+//            EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "DownSwing", true);
 
 //            if (base.isAuthority)
 //            {

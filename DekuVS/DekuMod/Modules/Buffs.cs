@@ -58,38 +58,38 @@ namespace DekuMod.Modules
 
         internal static void RegisterBuffs()
         {
-            //oklahomaBuff = Buffs.AddNewBuff("DekuArmor Buff", Assets.shieldBuffIcon, Color.green, false, false);
-            //manchesterBuff = Buffs.AddNewBuff("DekuArmor Buff", Assets.shieldBuffIcon, Color.green, false, false);
-            mightBuff = Buffs.AddNewBuff("DekuOFA Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightninggreen"), Color.white, false, false);
-            //supaofaBuff = Buffs.AddNewBuff("DekuInfiniteOFA Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningwhitegreen"), Color.white, false, false);
-            //kickBuff = Buffs.AddNewBuff("DekuKick Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("kickCount"), Color.white, true, false);
-            //blackwhipBuff = Buffs.AddNewBuff("blackwhip Buff", Assets.crippleBuffIcon, Color.white, false, false);
-            //ofaBuff45 = Buffs.AddNewBuff("DekuOFA45 Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningblue"), Color.white, false, false);
-            //supaofaBuff45 = Buffs.AddNewBuff("DekuInfiniteOFA45 Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("lightningwhiteblue"), Color.white, false, false);
-            goBeyondBuff = Buffs.AddNewBuff("goBeyond Buff", Assets.healBuffIcon, Color.green, false, false);
-            goBeyondBuffUsed = Buffs.AddNewBuff("goBeyondBuffUsed", Assets.healBuffIcon, Color.black, false, false);
+            //oklahomaBuff = Buffs.AddNewBuff("DekuArmor Buff", Asset.shieldBuffIcon, Color.green, false, false);
+            //manchesterBuff = Buffs.AddNewBuff("DekuArmor Buff", Asset.shieldBuffIcon, Color.green, false, false);
+            mightBuff = Buffs.AddNewBuff("DekuOFA Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("lightninggreen"), Color.white, false, false);
+            //supaofaBuff = Buffs.AddNewBuff("DekuInfiniteOFA Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("lightningwhitegreen"), Color.white, false, false);
+            //kickBuff = Buffs.AddNewBuff("DekuKick Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("kickCount"), Color.white, true, false);
+            //blackwhipBuff = Buffs.AddNewBuff("blackwhip Buff", Asset.crippleBuffIcon, Color.white, false, false);
+            //ofaBuff45 = Buffs.AddNewBuff("DekuOFA45 Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("lightningblue"), Color.white, false, false);
+            //supaofaBuff45 = Buffs.AddNewBuff("DekuInfiniteOFA45 Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("lightningwhiteblue"), Color.white, false, false);
+            goBeyondBuff = Buffs.AddNewBuff("goBeyond Buff", Asset.healBuffIcon, Color.green, false, false);
+            goBeyondBuffUsed = Buffs.AddNewBuff("goBeyondBuffUsed", Asset.healBuffIcon, Color.black, false, false);
 
-            //fajinBuff = Buffs.AddNewBuff("FaJin Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, false, false);
-            //floatBuff = Buffs.AddNewBuff("DekuFloat Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Float"), Color.white, false, false);
-            //gearshiftBuff = Buffs.AddNewBuff("gearshift Buff", Assets.speedBuffIcon, Color.white, false, false);
-            //gearshift45Buff = Buffs.AddNewBuff("gearshift45 Buff", Assets.speedBuffIcon, Color.blue, false, false);
-            //gearshift100Buff = Buffs.AddNewBuff("gearshift100 Buff", Assets.jumpBuffIcon, Color.white, true, false);
-            //gearshift100MovespeedBuff = Buffs.AddNewBuff("gearshift100Movespeed Buff", Assets.jumpBuffIcon, Color.blue, true, false);
+            //fajinBuff = Buffs.AddNewBuff("FaJin Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("armorgreen"), Color.white, false, false);
+            //floatBuff = Buffs.AddNewBuff("DekuFloat Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("Float"), Color.white, false, false);
+            //gearshiftBuff = Buffs.AddNewBuff("gearshift Buff", Asset.speedBuffIcon, Color.white, false, false);
+            //gearshift45Buff = Buffs.AddNewBuff("gearshift45 Buff", Asset.speedBuffIcon, Color.blue, false, false);
+            //gearshift100Buff = Buffs.AddNewBuff("gearshift100 Buff", Asset.jumpBuffIcon, Color.white, true, false);
+            //gearshift100MovespeedBuff = Buffs.AddNewBuff("gearshift100Movespeed Buff", Asset.jumpBuffIcon, Color.blue, true, false);
 
-            overlayBuff = Buffs.AddNewBuff("Blackwhip Overlay Buff", Assets.jumpBuffIcon, Color.black, false, false);
-            counterBuff = Buffs.AddNewBuff("Counter Buff", Assets.shieldBuffIcon, Color.cyan, false, false);
-            counterAttackBuff = Buffs.AddNewBuff("Counter Buff", Assets.shieldBuffIcon, Color.cyan, false, false);
-            blackwhipCDBuff = Buffs.AddNewBuff("Blackwhip CD Buff", Assets.critBuffIcon, Color.black, false, false);
+            overlayBuff = Buffs.AddNewBuff("Blackwhip Overlay Buff", Asset.jumpBuffIcon, Color.black, false, false);
+            counterBuff = Buffs.AddNewBuff("Counter Buff", Asset.shieldBuffIcon, Color.cyan, false, false);
+            counterAttackBuff = Buffs.AddNewBuff("Counter Buff", Asset.shieldBuffIcon, Color.cyan, false, false);
+            blackwhipCDBuff = Buffs.AddNewBuff("Blackwhip CD Buff", Asset.critBuffIcon, Color.black, false, false);
 
-            blackwhipDebuff = Buffs.AddNewBuff("Blackwhip Debuff", Assets.crippleBuffIcon, Color.black, false, true);
-            delayAttackDebuff = Buffs.AddNewBuff("delayAttack Debuff", Assets.crippleBuffIcon, Color.green, true, true);
+            blackwhipDebuff = Buffs.AddNewBuff("Blackwhip Debuff", Asset.crippleBuffIcon, Color.black, false, true);
+            delayAttackDebuff = Buffs.AddNewBuff("delayAttack Debuff", Asset.crippleBuffIcon, Color.green, true, true);
 
-            //dangersenseBuff = Buffs.AddNewBuff("DangerSense Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("DangerSense"), Color.white, false, false);
-            //dangersenseDebuff = Buffs.AddNewBuff("dangersenseDe Buff", Assets.lightningBuffIcon, Color.black, false, true);
-            ////dangersense45Buff = Buffs.AddNewBuff("DangerSense45 Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
-            ////dangersense100Buff = Buffs.AddNewBuff("DangerSense100 Buff", Assets.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
-            //healMark = Buffs.AddNewBuff("healMark", Assets.critBuffIcon, Color.green, true, true);
-            //barrierMark = Buffs.AddNewBuff("goBeyond BuffUsed", Assets.critBuffIcon, Color.yellow, true, true);
+            //dangersenseBuff = Buffs.AddNewBuff("DangerSense Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("DangerSense"), Color.white, false, false);
+            //dangersenseDebuff = Buffs.AddNewBuff("dangersenseDe Buff", Asset.lightningBuffIcon, Color.black, false, true);
+            ////dangersense45Buff = Buffs.AddNewBuff("DangerSense45 Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
+            ////dangersense100Buff = Buffs.AddNewBuff("DangerSense100 Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("Counter"), Color.white, false, false);
+            //healMark = Buffs.AddNewBuff("healMark", Asset.critBuffIcon, Color.green, true, true);
+            //barrierMark = Buffs.AddNewBuff("goBeyond BuffUsed", Asset.critBuffIcon, Color.yellow, true, true);
 
             //oklahomaBuff = Buffs.AddNewBuff("DekuArmor Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.green, false, false);
             //oklahomaBuff = Buffs.AddNewBuff("DekuArmor Buff", Addressables.LoadAssetAsync<Sprite>(key: "RoR2/Base/Textures/BuffIcons/texBuffGenericShield.prefab").WaitForCompletion(), Color.green, false, false);

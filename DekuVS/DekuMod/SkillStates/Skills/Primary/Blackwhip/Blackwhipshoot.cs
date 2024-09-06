@@ -93,7 +93,7 @@
 //            this.muzzleString = "RHand";
 //            //if (dekucon.isMaxPower)
 //            {
-//                EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+//                EffectManager.SpawnEffect(Modules.Asset.impactEffect, new EffectData
 //                {
 //                    origin = FindModelChild(this.muzzleString).position,
 //                    scale = 1f,
@@ -166,7 +166,7 @@
 //                teamIndex = base.GetTeam(),
 //                damage = Modules.StaticValues.blackwhipshootDamageCoefficient * this.damageStat * fajin,
 //                procCoefficient = 1f,
-//                hitEffectPrefab = Modules.Assets.detroitweakEffect,
+//                hitEffectPrefab = Modules.Asset.detroitweakEffect,
 //                forceVector = Vector3.zero,
 //                pushAwayForce = 1000f,
 //                hitBoxGroup = hitBoxGroup,
@@ -186,7 +186,7 @@
 //                teamIndex = base.GetTeam(),
 //                damage = Modules.StaticValues.blackwhipshootDamageCoefficient * this.damageStat,
 //                procCoefficient = 1f,
-//                hitEffectPrefab = Modules.Assets.detroitweakEffect,
+//                hitEffectPrefab = Modules.Asset.detroitweakEffect,
 //                forceVector = Vector3.zero,
 //                pushAwayForce = 1000f,
 //                hitBoxGroup = hitBoxGroup,

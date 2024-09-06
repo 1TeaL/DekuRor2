@@ -15,7 +15,7 @@ namespace DekuMod.SkillStates
         public float baseDuration = 1f;
         public static float blastRadius = 10f;
         public static float succForce = 4.5f;
-        //private GameObject effectPrefab = Modules.Assets.sEffect;
+        //private GameObject effectPrefab = Modules.Asset.sEffect;
 
         public float range = 5f;
         public float rangeaddition = 8f;
@@ -55,7 +55,7 @@ namespace DekuMod.SkillStates
             //}
             //if (dekucon.isMaxPower)
             //{
-            //    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+            //    EffectManager.SpawnEffect(Modules.Asset.impactEffect, new EffectData
             //    {
             //        origin = base.transform.position,
             //        scale = 1f,
@@ -77,7 +77,7 @@ namespace DekuMod.SkillStates
             base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             base.PlayCrossfade("Fullbody, Override", "LegSmash", "Attack.playbackate", duration / 2, 0.1f);
 
-            //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+            //EffectManager.SpawnEffect(Modules.Asset.blackwhip, new EffectData
             //{
             //    origin = theSpot,
             //    scale = 1f,       

@@ -28,7 +28,7 @@ namespace DekuMod.SkillStates
 		public void Start()
 		{
 			charbody = this.gameObject.GetComponent<CharacterBody>();
-			//effectObj = UnityEngine.Object.Instantiate<GameObject>(Modules.Assets.detroitEffect, charbody.footPosition, Quaternion.LookRotation(Vector3.up));
+			//effectObj = UnityEngine.Object.Instantiate<GameObject>(Modules.Asset.detroitEffect, charbody.footPosition, Quaternion.LookRotation(Vector3.up));
 			//effectObj.transform.parent = charbody.gameObject.transform;
 
 			currentNumber = 0f;

@@ -33,7 +33,7 @@
 //		private Animator animator;
 
 //		private GameObject areaIndicator;
-//		private GameObject explosionPrefab = Modules.Assets.detroitEffect;
+//		private GameObject explosionPrefab = Modules.Asset.detroitEffect;
 //		public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 //		private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
 //        private GameObject explosionPrefab2 = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
@@ -153,7 +153,7 @@
 //			if (isAuthority)
 //			{
 //				Ray aimRay = base.GetAimRay();
-//				EffectManager.SpawnEffect(Modules.Assets.bisonEffect, new EffectData
+//				EffectManager.SpawnEffect(Modules.Asset.bisonEffect, new EffectData
 //				{
 //					origin = base.transform.position,
 //					scale = 1f,
@@ -182,7 +182,7 @@
 //					this.animator.SetBool("detroitRelease", true);
 //					PlayAnimation("FullBody, Override", "Detroit100Smash");
 
-//					EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
+//					EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "DownSwing", true);
 //					for (int i = 0; i <= 10; i++)
 //					{
 //						float rand = 60f;

@@ -49,7 +49,7 @@ namespace DekuMod.SkillStates
             this.muzzleString = punchIndex % 2 == 0 ? "LFinger" : "RFinger";
             this.muzzleSwingString = punchIndex % 2 == 0 ? "LPunchSwing" : "RPunchSwing";
 
-            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, this.muzzleSwingString, true);
+            EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, this.muzzleSwingString, true);
 
             //base.PlayCrossfade("LeftArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", this.duration);
             //base.PlayCrossfade("RightArm, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", this.duration);
@@ -82,7 +82,7 @@ namespace DekuMod.SkillStates
                     if (body)
                     {
                         Ray aimRay = base.GetAimRay();
-                        EffectManager.SpawnEffect(Modules.Assets.airforce100impactEffect, new EffectData
+                        EffectManager.SpawnEffect(Modules.Asset.airforce100impactEffect, new EffectData
                         {
                             origin = healthComponent.body.corePosition,
                             scale = 1f,
@@ -169,7 +169,7 @@ namespace DekuMod.SkillStates
                     bulletAttack.spreadPitchScale = 0f;
                     bulletAttack.spreadYawScale = 0f;
                     bulletAttack.queryTriggerInteraction = QueryTriggerInteraction.UseGlobal;
-                    bulletAttack.hitEffectPrefab = Modules.Assets.airforce100impactEffect;
+                    bulletAttack.hitEffectPrefab = Modules.Asset.airforce100impactEffect;
                     bulletAttack.hitCallback = ApplyBlastAttackOnHit;
 
                     bulletAttack.Fire();

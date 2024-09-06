@@ -78,7 +78,7 @@ namespace DekuMod.SkillStates.ShootStyle
 
 
             //PlayCrossfade("FullBody, Override", "StLouis45", "Attack.playbackRate", 1f, 0.01f);
-            //EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing1", true);
+            //EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "Swing1", true);
 
 
 
@@ -171,7 +171,7 @@ namespace DekuMod.SkillStates.ShootStyle
             }
 
             EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, "LFoot", false);
-            EffectManager.SimpleMuzzleFlash(Modules.Assets.muzzleflashMageLightningLargePrefab, base.gameObject, "LFoot", false);
+            EffectManager.SimpleMuzzleFlash(Modules.Asset.muzzleflashMageLightningLargePrefab, base.gameObject, "LFoot", false);
 
             base.characterMotor.useGravity = false;
             this.previousMass = base.characterMotor.mass;
@@ -201,14 +201,14 @@ namespace DekuMod.SkillStates.ShootStyle
                         blastAttack.position = blastPosition;
                         
                         blastAttack.Fire();
-                        EffectManager.SpawnEffect(Modules.Assets.lightningNovaEffectPrefab, new EffectData
+                        EffectManager.SpawnEffect(Modules.Asset.lightningNovaEffectPrefab, new EffectData
                         {
                             origin = blastPosition,
                             scale = blastRadius,
                             rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                         }, true);
-                        EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
+                        EffectManager.SpawnEffect(Modules.Asset.sonicboomEffectPrefab, new EffectData
                         {
                             origin = blastPosition,
                             scale = blastRadius,
@@ -231,8 +231,8 @@ namespace DekuMod.SkillStates.ShootStyle
                     {
                         hasFired = true;
                         blastAttack.Fire();
-                        EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, effectData, true);
-                        EffectManager.SpawnEffect(Modules.Assets.detroitEffect, effectData2, true);
+                        EffectManager.SpawnEffect(Modules.Asset.mageLightningBombEffectPrefab, effectData, true);
+                        EffectManager.SpawnEffect(Modules.Asset.detroitEffect, effectData2, true);
 
                         AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 

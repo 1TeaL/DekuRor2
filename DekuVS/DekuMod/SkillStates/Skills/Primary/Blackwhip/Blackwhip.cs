@@ -46,7 +46,7 @@
 
 
 
-//            EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+//            EffectManager.SpawnEffect(Modules.Asset.blackwhip, new EffectData
 //            {
 //                origin = FindModelChild("RHand").transform.position,
 //                scale = 1f,

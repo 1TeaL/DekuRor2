@@ -213,7 +213,7 @@
 //                {
 //                    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (blastRadius * 0.5f));
 //                    effectPosition.y = base.characterBody.footPosition.y;
-//                    EffectManager.SpawnEffect(Modules.Assets.elderlemurianexplosionEffect, new EffectData
+//                    EffectManager.SpawnEffect(Modules.Asset.elderlemurianexplosionEffect, new EffectData
 //                    {
 //                        origin = effectPosition,
 //                        scale = blastRadius,

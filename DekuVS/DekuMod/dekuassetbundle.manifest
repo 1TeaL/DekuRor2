@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1423572337
+CRC: 1820034237
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4b81d47bc58f342f91ecf3226359ba7a
+    Hash: 0014c881e16d4eff18a9118925a6bd53
   TypeTreeHash:
     serializedVersion: 2
-    Hash: a9d6fa89e33a7d9e4bb0047084e33490
+    Hash: cadff3ebdf0e75a109758b617fa81642
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,6 +25,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
 - Class: 90
@@ -39,6 +41,12 @@ ClassTypes:
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 751bd37d2e55f5f448dbb0d97812d9ba, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9a68da65c907acb4eb4dbcd042f172e7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 120
@@ -46,6 +54,8 @@ ClassTypes:
 - Class: 136
   Script: {instanceID: 0}
 - Class: 137
+  Script: {instanceID: 0}
+- Class: 144
   Script: {instanceID: 0}
 - Class: 198
   Script: {instanceID: 0}
@@ -57,224 +67,315 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
-SerializeReferenceClassIdentifiers: []
+- Class: 319
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: ChildLocator/NameTransformPair
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
-- Assets/DekuFinalForm/Assets/Mesh/Shoes.mesh
-- Assets/DekuFinalForm/GUI/airforce45.png
-- Assets/DekuFinalForm/VFX/fajinRingEffect.prefab
-- Assets/DekuFinalForm/GUI/armorblue.tif
-- Assets/DekuFinalForm/Animations/animDekuFinal.controller
-- Assets/DekuFinalForm/VFX/delaware.prefab
-- Assets/DekuFinalForm/GUI/stlouis100.png
-- Assets/DekuFinalForm/VFX/airforce100impact.prefab
-- Assets/DekuFinalForm/GUI/GearShift.png
-- Assets/DekuFinalForm/VFX/gearshiftAura.prefab
-- Assets/DekuFinalForm/GUI/lightningwhitegreen.tif
-- Assets/DekuFinalForm/GUI/fistmodeIcon.png
-- Assets/DekuFinalForm/GUI/legmodeIcon.png
-- Assets/DekuFinalForm/Assets/Mesh/Body.mesh
-- Assets/DekuFinalForm/Assets/Materials/matGranMantle.mat
-- Assets/DekuFinalForm/Assets/Mesh/GoldenButtons.mesh
-- Assets/DekuFinalForm/VFX/Material/windline.mat
-- Assets/DekuFinalForm/Assets/Materials/UpscaledHood.jpg
-- Assets/DekuFinalForm/VFX/trail.prefab
-- Assets/DekuFinalForm/Assets/Materials/purpleBlinkingMat.mat
-- Assets/DekuFinalForm/VFX/Material/blackwhipspark.mat
-- Assets/DekuFinalForm/Assets/Materials/black Square.png
-- Assets/DekuFinalForm/Assets/Materials/matHands.mat
-- Assets/DekuFinalForm/VFX/detroit.prefab
-- Assets/DekuFinalForm/GUI/ultimateupgrade.png
-- Assets/DekuFinalForm/Assets/Materials/Mask1.png
-- Assets/DekuFinalForm/Assets/Materials/matLegs.mat
-- Assets/DekuFinalForm/VFX/limbAuraWorld.prefab
-- Assets/DekuFinalForm/VFX/Material/yellow.mat
-- Assets/DekuFinalForm/Assets/Mesh/ArmL.mesh
-- Assets/DekuFinalForm/Assets/Mesh/Eyes.mesh
-- Assets/DekuFinalForm/Assets/Materials/T_pl01_101_hood_D.png
-- Assets/DekuFinalForm/GUI/GearShift100.png
-- Assets/DekuFinalForm/Assets/Materials/matArmL.mat
-- Assets/DekuFinalForm/Assets/Mesh/Neck.mesh
-- Assets/DekuFinalForm/VFX/blackwhipLineRenderer.prefab
-- Assets/DekuFinalForm/VFX/Material/dangersense.mat
-- Assets/DekuFinalForm/Assets/Materials/Eye Emission.png
-- Assets/DekuFinalForm/VFX/ImpactDekuKick.prefab
-- Assets/DekuFinalForm/GUI/ultimateupgrade45.png
-- Assets/DekuFinalForm/VFX/blackwhipeffect 1.prefab
-- Assets/DekuFinalForm/VFX/airforce100trail.prefab
-- Assets/DekuFinalForm/GUI/fajinboost.png
-- Assets/DekuFinalForm/VFX/DangerSenseParticle.prefab
-- Assets/DekuFinalForm/Assets/Materials/matEyes.mat
-- Assets/DekuFinalForm/VFX/gearshiftPierce.prefab
-- Assets/DekuFinalForm/Assets/Materials/UpscaledMask.jpg
-- Assets/DekuFinalForm/GUI/oklahoma45.png
-- Assets/DekuFinalForm/GUI/dekuBevelRectangleWhite.png
-- Assets/DekuFinalForm/Assets/Materials/yellowBlinkingMat.mat
-- Assets/DekuFinalForm/Blender/DekuFinalAnimationsTest.fbx
-- Assets/DekuFinalForm/GUI/ultimate45.png
-- Assets/DekuFinalForm/Assets/SmearShader.shader
-- Assets/DekuFinalForm/VFX/Material/windspikering.mat
-- Assets/DekuFinalForm/GUI/detroit45.png
-- Assets/DekuFinalForm/VFX/Material/windbullet.mat
-- Assets/DekuFinalForm/Assets/Materials/T_pl01_100_hair_D.png
-- Assets/DekuFinalForm/VFX/windbullet45.prefab
-- Assets/DekuFinalForm/VFX/Material/Spark2Particlewhip.mat
-- Assets/DekuFinalForm/Assets/Materials/whiteBlinkingMat.mat
-- Assets/DekuFinalForm/GUI/meterfill.png
-- Assets/DekuFinalForm/GUI/ultimate100.png
-- Assets/DekuFinalForm/GUI/airforce.png
-- Assets/DekuFinalForm/VFX/forwardHuricane.prefab
-- Assets/DekuFinalForm/Assets/Mesh/GranCape.mesh
-- Assets/DekuFinalForm/VFX/blackwhipAura.prefab
-- Assets/DekuFinalForm/GUI/manchester45.png
-- Assets/DekuFinalForm/Blender/DekuFinal.fbx
-- Assets/DekuFinalForm/Assets/SmearMat.mat
-- Assets/DekuFinalForm/GUI/oklahoma.png
-- Assets/DekuFinalForm/Animations/DekuFinalAvatar.asset
-- Assets/DekuFinalForm/Assets/mdlDeku.prefab
-- Assets/DekuFinalForm/GUI/Floatactivate45.png
-- Assets/DekuFinalForm/GUI/ultimate.png
-- Assets/DekuFinalForm/VFX/leftEyeRibbonParticle.prefab
-- Assets/DekuFinalForm/VFX/blackwhipline.prefab
-- Assets/DekuFinalForm/VFX/Material/blackwhip.mat
-- Assets/DekuFinalForm/GUI/goBeyondE.png
-- Assets/DekuFinalForm/GUI/KickCount.tif
-- Assets/DekuFinalForm/GUI/dekuPlusUltraSegmentFill.png
-- Assets/DekuFinalForm/Assets/Materials/Eye texture.png
-- Assets/DekuFinalForm/Animations/Armature_WalkF.anim
-- Assets/DekuFinalForm/GUI/lightninggreen.tif
-- Assets/DekuFinalForm/GUI/manchester100.png
-- Assets/DekuFinalForm/GUI/armorgreen.tif
-- Assets/DekuFinalForm/GUI/lightningblue.tif
-- Assets/DekuFinalForm/GUI/manchester.png
-- Assets/DekuFinalForm/Blender/VigilanteDekuBegin.blend
-- Assets/DekuFinalForm/Animations/animDisplay.controller
-- Assets/DekuFinalForm/Assets/Mesh/Belt.mesh
-- Assets/DekuFinalForm/Assets/Materials/matBody.mat
-- Assets/DekuFinalForm/GUI/45 blank.png
-- Assets/DekuFinalForm/GUI/Counter.tif
-- Assets/DekuFinalForm/GUI/dekuPlusUltraSegment.png
-- Assets/DekuFinalForm/VFX/impact.prefab
-- Assets/DekuFinalForm/VFX/Material/blackwhipbullet.mat
-- Assets/DekuFinalForm/Assets/Mesh/MidGauntlets.mesh
-- Assets/DekuFinalForm/GUI/Float.tif
-- Assets/DekuFinalForm/VFX/detroitweak.prefab
-- Assets/DekuFinalForm/GUI/oklahoma100.png
-- Assets/DekuFinalForm/Blender/DekuFinalHumanoid.fbx
-- Assets/DekuFinalForm/GUI/DangerSense.png
-- Assets/DekuFinalForm/GUI/blackwhip45.png
-- Assets/DekuFinalForm/GUI/ultimateupgrade100.png
-- Assets/DekuFinalForm/GUI/detroit.png
-- Assets/DekuFinalForm/GUI/deku portrait.png
-- Assets/DekuFinalForm/GUI/Airforceskin.png
-- Assets/DekuFinalForm/GUI/stlouis45.png
-- Assets/DekuFinalForm/GUI/quirksprevious.png
-- Assets/DekuFinalForm/GUI/blackwhip100.png
-- Assets/DekuFinalForm/GUI/gobeyondD.png
-- Assets/DekuFinalForm/Assets/Smear2.shader
-- Assets/DekuFinalForm/VFX/OFA lightning.prefab
-- Assets/DekuFinalForm/Assets/Mesh/ArmR.mesh
-- Assets/DekuFinalForm/GUI/finalSmash.png
-- Assets/DekuFinalForm/VFX/smokebig.prefab
-- Assets/DekuFinalForm/GUI/gobeyondB.png
-- Assets/DekuFinalForm/GUI/fajin.png
-- Assets/DekuFinalForm/VFX/blackwhipexplosion.prefab
-- Assets/DekuFinalForm/VFX/Material/windtrail.mat
-- Assets/DekuFinalForm/GUI/stlouis.png
-- Assets/DekuFinalForm/VFX/circle.prefab
-- Assets/DekuFinalForm/VFX/eyeAuraWorld.prefab
-- Assets/DekuFinalForm/VFX/goBeyondAura.prefab
-- Assets/DekuFinalForm/GUI/shootstylekick100.png
-- Assets/DekuFinalForm/VFX/speedLines.prefab
-- Assets/DekuFinalForm/VFX/goBeyondPulse.prefab
-- Assets/DekuFinalForm/GUI/Floatcancel.png
-- Assets/DekuFinalForm/GUI/lightningwhiteblue.tif
-- Assets/DekuFinalForm/VFX/delawareBullet.prefab
-- Assets/DekuFinalForm/Assets/Materials/matArmR.mat
-- Assets/DekuFinalForm/VFX/windring.prefab
-- Assets/DekuFinalForm/VFX/smoke.prefab
-- Assets/DekuFinalForm/Assets/Materials/matShoes.mat
-- Assets/DekuFinalForm/Assets/spherePrefab.prefab
-- Assets/DekuFinalForm/VFX/limbAura.prefab
-- Assets/DekuFinalForm/Assets/Mesh/Mask.mesh
-- Assets/DekuFinalForm/Assets/Mesh/Wristband.mesh
-- Assets/DekuFinalForm/VFX/DekuKickEffect.prefab
-- Assets/DekuFinalForm/VFX/Material/windlineblack.mat
-- Assets/DekuFinalForm/GUI/blackwhipshoot.png
-- Assets/DekuFinalForm/Assets/Materials/greenBlinkingMat.mat
-- Assets/DekuFinalForm/GUI/typemodeIcon.png
-- Assets/DekuFinalForm/GUI/gobeyondY.png
-- Assets/DekuFinalForm/GUI/delaware.png
-- Assets/DekuFinalForm/GUI/GearShift45.png
-- Assets/DekuFinalForm/Assets/Materials/matGoldenButtons.mat
-- Assets/DekuFinalForm/Assets/Materials/matBackpack.mat
-- Assets/DekuFinalForm/Assets/Materials/matHair.mat
-- Assets/DekuFinalForm/Assets/Materials/Beta-Arms.png
-- Assets/DekuFinalForm/VFX/Material/blackwhipblack.mat
-- Assets/DekuFinalForm/GUI/airforce100.png
-- Assets/DekuFinalForm/Assets/Mesh/GranMantle.mesh
-- Assets/DekuFinalForm/Assets/Materials/Panner.shader
-- Assets/DekuFinalForm/Assets/dekuCustomUI.prefab
+- Assets/DekuFinalForm/Animations/DetroitSmash3End3.anim
+- Assets/DekuFinalForm/Animations/Cape.anim
+- Assets/DekuFinalForm/Animations/ManchesterSmashDown.anim
 - Assets/DekuFinalForm/GUI/Floatactivate.png
-- Assets/DekuFinalForm/VFX/Material/DekuOFAMat.mat
-- Assets/DekuFinalForm/GUI/Quirks.png
-- Assets/DekuFinalForm/VFX/windbullet.prefab
-- Assets/DekuFinalForm/Assets/Materials/UpScaledCape_Backpack.jpg
-- Assets/DekuFinalForm/VFX/blackwhipforward.prefab
-- Assets/DekuFinalForm/Assets/Mesh/MidGauntletR.mesh
-- Assets/DekuFinalForm/GUI/shootstylekick.png
-- Assets/DekuFinalForm/Assets/Materials/blueBlinkingMat.mat
-- Assets/DekuFinalForm/GUI/shootstylekick45.png
-- Assets/DekuFinalForm/Assets/Materials/matMask.mat
-- Assets/DekuFinalForm/VFX/OFA lightning eye.prefab
-- Assets/DekuFinalForm/Assets/Mesh/Legs.mesh
-- Assets/DekuFinalForm/Assets/Materials/AirForce.png
-- Assets/DekuFinalForm/Assets/DekuDisplay.prefab
-- Assets/DekuFinalForm/VFX/Material/white.mat
-- Assets/DekuFinalForm/Assets/Mesh/Hair.mesh
-- Assets/DekuFinalForm/GUI/DangerSense45.png
-- Assets/DekuFinalForm/VFX/blackwhipshootGhost.prefab
-- Assets/DekuFinalForm/GUI/texDekuIcon.png
-- Assets/DekuFinalForm/Animations/DanceMoves.anim
-- Assets/DekuFinalForm/Assets/Mesh/MidGauntletL.mesh
-- Assets/DekuFinalForm/Assets/Materials/Eye texture Emission.png
-- Assets/DekuFinalForm/Assets/Mesh/Face.mesh
-- Assets/DekuFinalForm/GUI/smokescreen.png
-- Assets/DekuFinalForm/VFX/Textures/SparkParticleblackwhip.tif
-- Assets/DekuFinalForm/Assets/Materials/matWristband.mat
-- Assets/DekuFinalForm/Assets/Materials/matFace.mat
-- Assets/DekuFinalForm/Blender/Armature_RunF.anim
-- Assets/DekuFinalForm/VFX/fajinaura.prefab
-- Assets/DekuFinalForm/VFX/blackwhipTrail.prefab
-- Assets/DekuFinalForm/VFX/blackwhip.prefab
-- Assets/DekuFinalForm/Assets/Materials/redBlinkingMat.mat
-- Assets/DekuFinalForm/VFX/goBeyondAuraWorld.prefab
-- Assets/DekuFinalForm/GUI/goBeyondO.png
-- Assets/DekuFinalForm/Assets/Materials/matGranCape.mat
-- Assets/DekuFinalForm/GUI/DangerSense100.png
-- Assets/DekuFinalForm/GUI/blackwhip.png
-- Assets/DekuFinalForm/Assets/Materials/UpscaledBody.jpg
-- Assets/DekuFinalForm/Assets/Materials/Blank.mat
+- Assets/DekuFinalForm/GUI/lightningwhitegreen.tif
+- Assets/DekuFinalForm/VFX/Material/windlineblack.mat
 - Assets/DekuFinalForm/GUI/gobeyondN.png
-- Assets/DekuFinalForm/GUI/gobeyondG.png
-- Assets/DekuFinalForm/Assets/Materials/matEyesParticle.mat
-- Assets/DekuFinalForm/Assets/Materials/matHood.mat
-- Assets/DekuFinalForm/GUI/detroit100.png
-- Assets/DekuFinalForm/Assets/Materials/matBelt.mat
-- Assets/DekuFinalForm/GUI/Floatactivate100.png
-- Assets/DekuFinalForm/VFX/spin.prefab
-- Assets/DekuFinalForm/Animations/Armature_Idle.anim
-- Assets/DekuFinalForm/Assets/Materials/UpscaledBodyLessSaturated.jpg
-- Assets/DekuFinalForm/VFX/windBlow.prefab
-- Assets/DekuFinalForm/VFX/Textures/dangersenseparticle.tif
-- Assets/DekuFinalForm/VFX/blackwhipeffect.prefab
-- Assets/DekuFinalForm/GUI/detroitdelawareSmash.PNG
+- Assets/DekuFinalForm/VFX/curvedSwingEffect.prefab
+- Assets/DekuFinalForm/VFX/limbAura.prefab
+- Assets/DekuFinalForm/VFX/detroitUpper.prefab
+- Assets/DekuFinalForm/Assets/Materials/redBlinkingMat.mat
+- Assets/DekuFinalForm/Assets/Materials/UpscaledMask.jpg
+- Assets/DekuFinalForm/Animations/TexasSmashAirDashing.anim
+- Assets/DekuFinalForm/Blender/DekuFinal.fbx
+- Assets/DekuFinalForm/Blender/DekuFinalAnimationsTest.fbx
+- Assets/DekuFinalForm/VFX/limbAuraWorld.prefab
+- Assets/DekuFinalForm/GUI/Floatcancel.png
+- Assets/DekuFinalForm/Animations/Descend.anim
+- Assets/DekuFinalForm/Animations/DekuFinalCape.mask
+- Assets/DekuFinalForm/Animations/SprintF.anim
+- Assets/DekuFinalForm/VFX/smoke.prefab
+- Assets/DekuFinalForm/VFX/blackwhip.prefab
 - Assets/DekuFinalForm/VFX/windringbig.prefab
-- Assets/DekuFinalForm/Assets/Materials/T_pl01_100_eye_D.png
-- Assets/DekuFinalForm/Assets/Materials/matMidGauntlet.mat
-- Assets/DekuFinalForm/Assets/Materials/matEyesBlack.mat
-- Assets/DekuFinalForm/Assets/Mesh/Hood.mesh
-- Assets/DekuFinalForm/Assets/humanoidDeku.prefab
+- Assets/DekuFinalForm/VFX/DangerSenseParticle.prefab
+- Assets/DekuFinalForm/GUI/oklahoma45.png
+- Assets/DekuFinalForm/VFX/DekuKickEffect.prefab
+- Assets/DekuFinalForm/VFX/Material/windspikering.mat
+- Assets/DekuFinalForm/Assets/Materials/matHands.mat
+- Assets/DekuFinalForm/Assets/Materials/matLegs.mat
+- Assets/DekuFinalForm/GUI/blackwhipshoot.png
+- Assets/DekuFinalForm/GUI/quirksprevious.png
+- Assets/DekuFinalForm/Assets/Mesh/GranMantle.mesh
+- Assets/DekuFinalForm/Assets/Materials/matBelt.mat
+- Assets/DekuFinalForm/GUI/lightninggreen.tif
+- Assets/DekuFinalForm/Assets/Mesh/Neck.mesh
 - Assets/DekuFinalForm/GUI/cyclemodeIcon.png
+- Assets/DekuFinalForm/Animations/ShootStyleRush3.anim
+- Assets/DekuFinalForm/GUI/ultimateupgrade.png
+- Assets/DekuFinalForm/VFX/Material/blackwhipbullet.mat
+- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_smaaaassshhhhhuuu.png
+- Assets/DekuFinalForm/GUI/shootstylekick.png
+- Assets/DekuFinalForm/VFX/texas.prefab
+- Assets/DekuFinalForm/Animations/DelawareSmashCharging.anim
+- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_smash.png
+- Assets/DekuFinalForm/Assets/Materials/T_pl01_101_hood_D.png
+- Assets/DekuFinalForm/VFX/windbullet45.prefab
+- Assets/DekuFinalForm/VFX/blackwhipline.prefab
+- Assets/DekuFinalForm/Assets/Materials/Mask1.png
+- Assets/DekuFinalForm/Animations/ManchesterSmashDownEnd.anim
+- Assets/DekuFinalForm/GUI/dekuPlusUltraSegment.png
+- Assets/DekuFinalForm/VFX/blackwhipshootGhost.prefab
+- Assets/DekuFinalForm/VFX/Material/Spark2Particlewhip.mat
+- Assets/DekuFinalForm/Assets/Materials/AirForce.png
+- Assets/DekuFinalForm/VFX/OFA lightning.prefab
+- Assets/DekuFinalForm/Assets/Mesh/Eyes.mesh
+- Assets/DekuFinalForm/Animations/DelawareSmashCharge.anim
+- Assets/DekuFinalForm/Animations/SmashRush2.anim
+- Assets/DekuFinalForm/GUI/legmodeIcon.png
+- Assets/DekuFinalForm/Animations/WalkL.anim
+- Assets/DekuFinalForm/Animations/DetroitSmash1.anim
+- Assets/DekuFinalForm/Assets/Materials/T_pl01_100_eye_D.png
+- Assets/DekuFinalForm/Assets/Materials/whiteBlinkingMat.mat
+- Assets/DekuFinalForm/Animations/animDekuFinal.controller
+- Assets/DekuFinalForm/GUI/gobeyondD.png
+- Assets/DekuFinalForm/VFX/speedLines.prefab
+- Assets/DekuFinalForm/GUI/ultimate100.png
+- Assets/DekuFinalForm/GUI/GearShift100.png
+- Assets/DekuFinalForm/Animations/OklahomaSmashDashEndV2.anim
+- Assets/DekuFinalForm/GUI/Floatactivate100.png
+- Assets/DekuFinalForm/Animations/WalkB.anim
+- Assets/DekuFinalForm/VFX/Material/blackwhipspark.mat
+- Assets/DekuFinalForm/GUI/manchester45.png
+- Assets/DekuFinalForm/GUI/meterfill.png
+- Assets/DekuFinalForm/Animations/DelawareSmashChargeEndDown.anim
+- Assets/DekuFinalForm/Animations/DetroitSmash3Dash.anim
+- Assets/DekuFinalForm/Animations/WalkR.anim
+- Assets/DekuFinalForm/Assets/Mesh/Body.mesh
+- Assets/DekuFinalForm/GUI/fajin.png
+- Assets/DekuFinalForm/VFX/detroit.prefab
+- Assets/DekuFinalForm/VFX/Material/blackwhip.mat
+- Assets/DekuFinalForm/VFX/goBeyondPulse.prefab
+- Assets/DekuFinalForm/VFX/windring.prefab
+- Assets/DekuFinalForm/Animations/WalkF.anim
+- Assets/DekuFinalForm/GUI/typemodeIcon.png
+- Assets/DekuFinalForm/Animations/TexasSmashAirDashEnd.anim
+- Assets/DekuFinalForm/Assets/Materials/Eye Emission.png
+- Assets/DekuFinalForm/GUI/stlouis.png
+- Assets/DekuFinalForm/GUI/gobeyondY.png
+- Assets/DekuFinalForm/VFX/detroitweak.prefab
+- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_foosh.png
+- Assets/DekuFinalForm/GUI/shootstylekick100.png
+- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_Pl06_thwip.png
+- Assets/DekuFinalForm/Assets/DekuDisplay.prefab
+- Assets/DekuFinalForm/Animations/OklahomaSmashDash.anim
+- Assets/DekuFinalForm/Assets/Materials/yellowBlinkingMat.mat
+- Assets/DekuFinalForm/GUI/delaware.png
+- Assets/DekuFinalForm/Animations/DetroitSmash3End2.anim
+- Assets/DekuFinalForm/Assets/Materials/matMidGauntlet.mat
+- Assets/DekuFinalForm/VFX/MultiStraightSwingEffect.prefab
+- Assets/DekuFinalForm/GUI/stlouis100.png
+- Assets/DekuFinalForm/VFX/fajinRingEffect.prefab
+- Assets/DekuFinalForm/Assets/Mesh/Legs.mesh
+- Assets/DekuFinalForm/Animations/OklahomaSmashDashEnd.anim
+- Assets/DekuFinalForm/Assets/Mesh/Hair.mesh
+- Assets/DekuFinalForm/Assets/Materials/matBackpack.mat
+- Assets/DekuFinalForm/GUI/armorgreen.tif
+- Assets/DekuFinalForm/Animations/EntranceLoop.anim
+- Assets/DekuFinalForm/Assets/Mesh/Mask.mesh
+- Assets/DekuFinalForm/GUI/dekuBevelRectangleWhite.png
+- Assets/DekuFinalForm/GUI/dekuPlusUltraSegmentFill.png
+- Assets/DekuFinalForm/VFX/Material/blackwhipblack.mat
+- Assets/DekuFinalForm/Blender/DekuFinalHumanoid.fbx
+- Assets/DekuFinalForm/GUI/ultimateupgrade45.png
+- Assets/DekuFinalForm/VFX/delawareBullet.prefab
+- Assets/DekuFinalForm/GUI/fajinboost.png
+- Assets/DekuFinalForm/VFX/blackwhipforward.prefab
+- Assets/DekuFinalForm/VFX/Material/GradientTest2 1.png
+- Assets/DekuFinalForm/Assets/Smear2.shader
+- Assets/DekuFinalForm/Assets/Materials/black Square.png
+- Assets/DekuFinalForm/Assets/Materials/matGranMantle.mat
+- Assets/DekuFinalForm/VFX/Material/white.mat
+- Assets/DekuFinalForm/VFX/spin.prefab
+- Assets/DekuFinalForm/Animations/SmashRushDashEnd.anim
+- Assets/DekuFinalForm/Animations/DetroitSmash2.anim
+- Assets/DekuFinalForm/Animations/GoBeyond.anim
+- Assets/DekuFinalForm/Assets/Materials/Panner.shader
+- Assets/DekuFinalForm/Assets/Materials/Eye texture Emission.png
+- Assets/DekuFinalForm/Assets/Materials/blueBlinkingMat.mat
+- Assets/DekuFinalForm/GUI/gobeyondG.png
+- Assets/DekuFinalForm/VFX/Textures/Lightning2.png
+- Assets/DekuFinalForm/VFX/Material/DekuOFAMat.mat
+- Assets/DekuFinalForm/Blender/VigilanteDekuBegin.blend
+- Assets/DekuFinalForm/VFX/blackwhipeffect 1.prefab
+- Assets/DekuFinalForm/GUI/ultimateupgrade100.png
+- Assets/DekuFinalForm/Animations/RunF.anim
 - Assets/DekuFinalForm/VFX/leftEyeParticle.prefab
+- Assets/DekuFinalForm/GUI/gobeyondB.png
+- Assets/DekuFinalForm/VFX/rightKickEffect.prefab
+- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_Pl13_thwip.png
+- Assets/DekuFinalForm/Animations/DetroitSmash3End.anim
+- Assets/DekuFinalForm/Animations/Airforce.anim
+- Assets/DekuFinalForm/VFX/airforce100trail.prefab
+- Assets/DekuFinalForm/GUI/GearShift45.png
+- Assets/DekuFinalForm/VFX/Material/gradient.png
+- Assets/DekuFinalForm/VFX/Material/windline.mat
+- Assets/DekuFinalForm/Assets/mdlDeku.prefab
+- Assets/DekuFinalForm/Assets/dekuCustomUI.prefab
+- Assets/DekuFinalForm/VFX/gearshiftPulse.prefab
+- Assets/DekuFinalForm/VFX/trail.prefab
+- Assets/DekuFinalForm/GUI/deku portrait.png
+- Assets/DekuFinalForm/Assets/Materials/Blank.mat
+- Assets/DekuFinalForm/VFX/blackwhipAura.prefab
+- Assets/DekuFinalForm/Animations/TexasSmash.anim
+- Assets/DekuFinalForm/Assets/Materials/T_pl01_100_hair_D.png
+- Assets/DekuFinalForm/Animations/ShootStyleRush2.anim
+- Assets/DekuFinalForm/Animations/DetroitSmash3.anim
+- Assets/DekuFinalForm/GUI/goBeyondO.png
+- Assets/DekuFinalForm/GUI/GearShift.png
+- Assets/DekuFinalForm/VFX/OFAAura.prefab
+- Assets/DekuFinalForm/Animations/StLouis2.anim
+- Assets/DekuFinalForm/Assets/Mesh/Shoes.mesh
+- Assets/DekuFinalForm/GUI/Airforceskin.png
+- Assets/DekuFinalForm/Assets/Mesh/MidGauntletR.mesh
+- Assets/DekuFinalForm/Animations/ManchesterSmashDownDashing.anim
+- Assets/DekuFinalForm/GUI/DangerSense.png
+- Assets/DekuFinalForm/Assets/Materials/matFace.mat
+- Assets/DekuFinalForm/VFX/eyeAuraWorld.prefab
+- Assets/DekuFinalForm/Animations/SmashRushR.anim
+- Assets/DekuFinalForm/Animations/StLouis3.anim
+- Assets/DekuFinalForm/VFX/gearshiftAura.prefab
+- Assets/DekuFinalForm/Assets/Materials/matArmL.mat
+- Assets/DekuFinalForm/VFX/leftKickEffect.prefab
+- Assets/DekuFinalForm/Animations/Ascend.anim
+- Assets/DekuFinalForm/Assets/Materials/matEyesParticle.mat
+- Assets/DekuFinalForm/GUI/45 blank.png
+- Assets/DekuFinalForm/Assets/Materials/matGranCape.mat
+- Assets/DekuFinalForm/Animations/DekuFinalAnimationsTestAvatar.asset
+- Assets/DekuFinalForm/VFX/windbullet.prefab
+- Assets/DekuFinalForm/GUI/manchester.png
+- Assets/DekuFinalForm/Animations/Entrance.anim
+- Assets/DekuFinalForm/GUI/lightningwhiteblue.tif
+- Assets/DekuFinalForm/GUI/ultimate45.png
+- Assets/DekuFinalForm/VFX/airforce100impact.prefab
+- Assets/DekuFinalForm/Assets/SmearShader.shader
+- Assets/DekuFinalForm/VFX/Textures/SparkParticleblackwhip.tif
+- Assets/DekuFinalForm/Animations/ShootStyleRush1.anim
+- Assets/DekuFinalForm/Assets/humanoidDeku.prefab
+- Assets/DekuFinalForm/Animations/StLouis1.anim
+- Assets/DekuFinalForm/VFX/OFA lightning eye.prefab
+- Assets/DekuFinalForm/Animations/TexasSmashAir.anim
+- Assets/DekuFinalForm/Assets/Mesh/Face.mesh
+- Assets/DekuFinalForm/Assets/Materials/UpscaledBody.jpg
+- Assets/DekuFinalForm/GUI/armorblue.tif
+- Assets/DekuFinalForm/GUI/manchester100.png
+- Assets/DekuFinalForm/GUI/oklahoma.png
+- Assets/DekuFinalForm/VFX/Material/yellow.mat
+- Assets/DekuFinalForm/VFX/leftEyeRibbonParticle.prefab
+- Assets/DekuFinalForm/Animations/Jump.anim
+- Assets/DekuFinalForm/VFX/Material/pSphere2.mesh
+- Assets/DekuFinalForm/Assets/Materials/UpScaledCape_Backpack.jpg
+- Assets/DekuFinalForm/Assets/Materials/purpleBlinkingMat.mat
+- Assets/DekuFinalForm/VFX/blackwhipTrail.prefab
+- Assets/DekuFinalForm/GUI/airforce45.png
+- Assets/DekuFinalForm/VFX/straightSwingEffect.prefab
+- Assets/DekuFinalForm/GUI/detroitdelawareSmash.PNG
+- Assets/DekuFinalForm/VFX/goBeyondAuraWorld.prefab
+- Assets/DekuFinalForm/VFX/ImpactDekuKick.prefab
+- Assets/DekuFinalForm/Animations/BlastDashF.anim
+- Assets/DekuFinalForm/Animations/DetroitSmash3Dashing.anim
+- Assets/DekuFinalForm/VFX/Material/dangersense.mat
+- Assets/DekuFinalForm/Animations/GoBeyondV2.anim
+- Assets/DekuFinalForm/GUI/blackwhip100.png
+- Assets/DekuFinalForm/Animations/DanceMoves.anim
+- Assets/DekuFinalForm/VFX/gearshift.prefab
+- Assets/DekuFinalForm/VFX/Material/windbullet.mat
+- Assets/DekuFinalForm/Assets/Mesh/MidGauntlets.mesh
+- Assets/DekuFinalForm/Assets/Materials/matHood.mat
+- Assets/DekuFinalForm/GUI/stlouis45.png
+- Assets/DekuFinalForm/Animations/TexasSmashAirEnd.anim
+- Assets/DekuFinalForm/GUI/lightningblue.tif
+- Assets/DekuFinalForm/GUI/airforce.png
+- Assets/DekuFinalForm/Assets/Mesh/ArmR.mesh
+- Assets/DekuFinalForm/VFX/Material/windtrail.mat
+- Assets/DekuFinalForm/GUI/detroit.png
+- Assets/DekuFinalForm/Assets/Materials/greenBlinkingMat.mat
+- Assets/DekuFinalForm/Assets/Materials/matBody.mat
+- Assets/DekuFinalForm/GUI/DangerSense100.png
+- Assets/DekuFinalForm/GUI/ultimate.png
+- Assets/DekuFinalForm/VFX/forwardHuricane.prefab
+- Assets/DekuFinalForm/Animations/ShootStyleRush3V2.anim
+- Assets/DekuFinalForm/Animations/Idle.anim
+- Assets/DekuFinalForm/VFX/limbEffect.prefab
+- Assets/DekuFinalForm/Assets/Materials/Beta-Arms.png
+- Assets/DekuFinalForm/GUI/shootstylekick45.png
+- Assets/DekuFinalForm/GUI/finalSmash.png
+- Assets/DekuFinalForm/Animations/Descend2.anim
+- Assets/DekuFinalForm/Assets/Materials/matMask.mat
+- Assets/DekuFinalForm/GUI/KickCount.tif
+- Assets/DekuFinalForm/Assets/SmearMat.mat
+- Assets/DekuFinalForm/Animations/StLouis3End.anim
+- Assets/DekuFinalForm/GUI/detroit45.png
+- Assets/DekuFinalForm/Assets/Materials/UpscaledHood.jpg
+- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_smaassh.png
+- Assets/DekuFinalForm/Assets/Mesh/Wristband.mesh
+- Assets/DekuFinalForm/GUI/goBeyondE.png
+- Assets/DekuFinalForm/Assets/spherePrefab.prefab
+- Assets/DekuFinalForm/VFX/blackwhipeffect.prefab
+- Assets/DekuFinalForm/Assets/Materials/matHair.mat
+- Assets/DekuFinalForm/VFX/Textures/dangersenseparticle.tif
+- Assets/DekuFinalForm/Assets/Materials/matShoes.mat
+- Assets/DekuFinalForm/Animations/DelawareSmashChargeEndUp.anim
+- Assets/DekuFinalForm/GUI/detroit100.png
+- Assets/DekuFinalForm/VFX/Material/pSphere3.mesh
+- Assets/DekuFinalForm/GUI/Float.tif
+- Assets/DekuFinalForm/GUI/oklahoma100.png
+- Assets/DekuFinalForm/Assets/Materials/UpscaledBodyLessSaturated.jpg
+- Assets/DekuFinalForm/VFX/rOFAAura.prefab
+- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_wham.png
+- Assets/DekuFinalForm/Assets/Materials/Eye texture.png
+- Assets/DekuFinalForm/Assets/Mesh/ArmL.mesh
+- Assets/DekuFinalForm/GUI/smokescreen.png
+- Assets/DekuFinalForm/GUI/airforce100.png
+- Assets/DekuFinalForm/Assets/Mesh/GranCape.mesh
+- Assets/DekuFinalForm/Assets/Mesh/MidGauntletL.mesh
+- Assets/DekuFinalForm/Assets/Mesh/Belt.mesh
+- Assets/DekuFinalForm/GUI/Counter.tif
+- Assets/DekuFinalForm/VFX/windBlow.prefab
+- Assets/DekuFinalForm/Animations/SmashRushDash.anim
+- Assets/DekuFinalForm/Animations/DekuFinalRightArm.mask
+- Assets/DekuFinalForm/Animations/SmashRushL.anim
+- Assets/DekuFinalForm/VFX/circle.prefab
+- Assets/DekuFinalForm/Assets/Materials/matWristband.mat
+- Assets/DekuFinalForm/VFX/blackwhipLineRenderer.prefab
+- Assets/DekuFinalForm/GUI/blackwhip.png
+- Assets/DekuFinalForm/Assets/Materials/OFAAuraMat.mat
+- Assets/DekuFinalForm/Assets/Materials/matArmR.mat
+- Assets/DekuFinalForm/VFX/blackwhipexplosion.prefab
 - Assets/DekuFinalForm/Assets/Mesh/Hands.mesh
+- Assets/DekuFinalForm/VFX/smokebig.prefab
+- Assets/DekuFinalForm/Animations/SmashRushFinisher.anim
+- Assets/DekuFinalForm/VFX/impact.prefab
+- Assets/DekuFinalForm/GUI/fistmodeIcon.png
+- Assets/DekuFinalForm/VFX/Material/DekuOFAAura.shader
+- Assets/DekuFinalForm/VFX/delaware.prefab
+- Assets/DekuFinalForm/VFX/fajinaura.prefab
+- Assets/DekuFinalForm/Assets/Mesh/GoldenButtons.mesh
+- Assets/DekuFinalForm/GUI/DangerSense45.png
+- Assets/DekuFinalForm/Animations/animDisplay.controller
+- Assets/DekuFinalForm/GUI/blackwhip45.png
+- Assets/DekuFinalForm/VFX/gearshiftPierce.prefab
+- Assets/DekuFinalForm/Animations/BlastDashU.anim
+- Assets/DekuFinalForm/GUI/Quirks.png
+- Assets/DekuFinalForm/Assets/Materials/matGoldenButtons.mat
+- Assets/DekuFinalForm/GUI/texDekuIcon.png
+- Assets/DekuFinalForm/Assets/Materials/matEyes.mat
+- Assets/DekuFinalForm/Assets/Materials/matEyesBlack.mat
+- Assets/DekuFinalForm/VFX/goBeyondAura.prefab
+- Assets/DekuFinalForm/GUI/Floatactivate45.png
+- Assets/DekuFinalForm/Assets/Materials/AuraShader.shader
+- Assets/DekuFinalForm/Animations/DelawareSmashChargeEnd.anim
+- Assets/DekuFinalForm/Assets/Mesh/Hood.mesh
 Dependencies: []

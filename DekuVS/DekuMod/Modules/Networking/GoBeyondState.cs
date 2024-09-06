@@ -198,7 +198,7 @@ namespace DekuMod.Modules.Networking
 				base.characterBody.ApplyBuff(Modules.Buffs.goBeyondBuff.buffIndex, 1, Modules.StaticValues.goBeyondBuffDuration);
 			}
 
-			EffectManager.SpawnEffect(Modules.Assets.gobeyondPulseEffect, new EffectData
+			EffectManager.SpawnEffect(Modules.Asset.gobeyondPulseEffect, new EffectData
 			{
 				origin = base.transform.position,
 				scale = blastRadius,

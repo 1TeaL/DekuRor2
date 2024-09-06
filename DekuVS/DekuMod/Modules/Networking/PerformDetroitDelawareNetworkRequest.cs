@@ -104,7 +104,7 @@ namespace DekuMod.Modules.Networking
                         GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
 
 
-                        EffectManager.SpawnEffect(Modules.Assets.dekuHitImpactEffect, new EffectData
+                        EffectManager.SpawnEffect(Modules.Asset.dekuHitImpactEffect, new EffectData
                         {
                             origin = singularTarget.healthComponent.body.gameObject.transform.position,
                             scale = 1f,

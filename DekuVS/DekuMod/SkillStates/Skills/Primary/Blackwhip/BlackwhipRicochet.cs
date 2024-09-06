@@ -35,7 +35,7 @@
 //            this.muzzleString = "Chest";
 //            base.PlayAnimation("Gesture, Override", "ShootRifle", "ShootRifle.playbackRate", 2f * this.duration);
 //            base.characterBody.AddSpreadBloom(1.5f);
-//            //EffectManager.SimpleMuzzleFlash(Modules.Assets.yokoRifleMuzzleSmallEffect, base.gameObject, this.muzzleString, false);
+//            //EffectManager.SimpleMuzzleFlash(Modules.Asset.yokoRifleMuzzleSmallEffect, base.gameObject, this.muzzleString, false);
 //            Util.PlaySound("TTGLTokoRifleFire", base.gameObject);
 //            base.AddRecoil(-1f * BlackwhipRicochet.recoil, -2f * BlackwhipRicochet.recoil, -0.5f * BlackwhipRicochet.recoil, 0.5f * BlackwhipRicochet.recoil);
 //            if (base.isAuthority)

@@ -13,7 +13,7 @@ namespace DekuMod.SkillStates
         public float baseDuration = 0.5f;
         public static float blastRadius = 15f;
         public static float succForce = 4.5f;
-        //private GameObject effectPrefab = Modules.Assets.blackwhipEffect;
+        //private GameObject effectPrefab = Modules.Asset.blackwhipEffect;
 
         private float duration;
         private float maxWeight;
@@ -53,7 +53,7 @@ namespace DekuMod.SkillStates
             //}
             //if (dekucon.isMaxPower)
             //{
-            //    EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+            //    EffectManager.SpawnEffect(Modules.Asset.impactEffect, new EffectData
             //    {
             //        origin = base.transform.position,
             //        scale = 1f,
@@ -73,7 +73,7 @@ namespace DekuMod.SkillStates
 
 
 
-            EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+            EffectManager.SpawnEffect(Modules.Asset.blackwhip, new EffectData
             {
                 origin = theSpot,
                 scale = 1f,       
@@ -190,7 +190,7 @@ namespace DekuMod.SkillStates
                 {
                     this.OnHitEnemyAuthority();
                 }
-                EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+                EffectManager.SpawnEffect(Modules.Asset.blackwhip, new EffectData
                 {
                     origin = theSpot,
                     scale = 1f,

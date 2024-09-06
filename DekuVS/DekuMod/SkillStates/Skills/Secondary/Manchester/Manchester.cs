@@ -16,7 +16,7 @@
 //        public GameObject blastEffectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/SonicBoomEffect");
 //        public float baseDuration = 1f;
 //        public float fireTime;
-//        //private GameObject effectPrefab = Modules.Assets.sEffect;
+//        //private GameObject effectPrefab = Modules.Asset.sEffect;
 
 //        public  float blastRadius = 6f;
 //        public float distance = 7f;
@@ -59,7 +59,7 @@
 //            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 //            base.PlayCrossfade("FullBody, Override", "ManchesterFlip", "Attack.playbackRate", fireTime, 0.01f);
 
-//            EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "DownSwing", true);
+//            EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "DownSwing", true);
 
 //            //move up a little
 //            base.characterMotor.velocity += Vector3.up * distance;

@@ -71,7 +71,7 @@
 //            {
 //                AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
 //            }
-//            //EffectManager.SpawnEffect(Modules.Assets.blackwhip, new EffectData
+//            //EffectManager.SpawnEffect(Modules.Asset.blackwhip, new EffectData
 //            //{
 //            //    origin = theSpot,
 //            //    scale = 1f,       
@@ -165,15 +165,15 @@
 //                {
 //                    this.OnHitEnemyAuthority();
 //                }
-//                EffectManager.SimpleMuzzleFlash(Modules.Assets.dekuKickEffect, base.gameObject, "Swing1", true);
-//                EffectManager.SpawnEffect(Modules.Assets.mageLightningBombEffectPrefab, new EffectData
+//                EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "Swing1", true);
+//                EffectManager.SpawnEffect(Modules.Asset.mageLightningBombEffectPrefab, new EffectData
 //                {
 //                    origin = theSpot,
 //                    scale = blastRadius,
 //                    rotation = Util.QuaternionSafeLookRotation(Vector3.down)
 
 //                }, true);
-//                EffectManager.SpawnEffect(Modules.Assets.detroitEffect, new EffectData
+//                EffectManager.SpawnEffect(Modules.Asset.detroitEffect, new EffectData
 //                {
 //                    origin = theSpot,
 //                    scale = blastRadius,
@@ -187,7 +187,7 @@
 //                    float num2 = 0.01f;
 //                    rotation.x += UnityEngine.Random.Range(-num2, num2) * num;
 //                    rotation.y += UnityEngine.Random.Range(-num2, num2) * num;
-//                    EffectManager.SpawnEffect(Modules.Assets.sonicboomEffectPrefab, new EffectData
+//                    EffectManager.SpawnEffect(Modules.Asset.sonicboomEffectPrefab, new EffectData
 //                    {
 //                        origin = theSpot,
 //                        scale = blastRadius,

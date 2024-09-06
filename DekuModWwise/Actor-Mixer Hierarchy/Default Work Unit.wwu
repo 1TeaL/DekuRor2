@@ -1,39 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}" SchemaVersion="97">
+<WwiseDocument Type="WorkUnit" ID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}" SchemaVersion="119">
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}" PersistMode="Standalone">
 			<ChildrenList>
 				<ActorMixer Name="Master Mixer" ID="{3F86AFC0-6099-4880-8EF7-2F9237788C29}" ShortID="826406146">
-					<PropertyList>
-						<Property Name="Volume" Type="Real64">
-							<RTPCList>
-								<RTPC Name="" ID="{76263484-BFDE-48BD-BA3C-C9E9C365EAF9}" ShortID="128961705">
-									<ReferenceList>
-										<Reference Name="ControlInput">
-											<ObjectRef Name="Volume_Master" ID="{26E7A7B0-FDC7-4577-BF10-6C03F199C8B4}" WorkUnitID="{ADC2CDD2-A345-4E7A-B811-CE180352A223}"/>
-										</Reference>
-									</ReferenceList>
-									<Curve Name="" ID="{83A7990A-1C1F-465D-BFE1-809E949F5ACC}">
-										<PropertyList>
-											<Property Name="Flags" Type="int32" Value="3"/>
-										</PropertyList>
-										<PointList>
-											<Point>
-												<XPos>0</XPos>
-												<YPos>-200</YPos>
-												<Flags>5</Flags>
-											</Point>
-											<Point>
-												<XPos>100</XPos>
-												<YPos>0</YPos>
-												<Flags>37</Flags>
-											</Point>
-										</PointList>
-									</Curve>
-								</RTPC>
-							</RTPCList>
-						</Property>
-					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Attenuation">
 							<ObjectRef Name="attenuation" ID="{ACADF2A6-364F-465B-B8A9-063DCB20768E}" WorkUnitID="{6A73AA2B-0A33-4047-8E5A-E78AE57EF7AF}"/>
@@ -47,36 +17,6 @@
 					</ReferenceList>
 					<ChildrenList>
 						<ActorMixer Name="Sfx Mixer" ID="{93C2C629-56F8-4EA5-BFD8-958CB9C72E74}" ShortID="644385191">
-							<PropertyList>
-								<Property Name="Volume" Type="Real64">
-									<RTPCList>
-										<RTPC Name="" ID="{47E04445-E05E-4DD0-A58A-3C002B2DA071}" ShortID="490556811">
-											<ReferenceList>
-												<Reference Name="ControlInput">
-													<ObjectRef Name="Volume_SFX" ID="{5B7A3356-F624-492B-9C91-B06B810F20EE}" WorkUnitID="{ADC2CDD2-A345-4E7A-B811-CE180352A223}"/>
-												</Reference>
-											</ReferenceList>
-											<Curve Name="" ID="{3EAE21FF-F773-4AED-8083-08C411EA0B87}">
-												<PropertyList>
-													<Property Name="Flags" Type="int32" Value="3"/>
-												</PropertyList>
-												<PointList>
-													<Point>
-														<XPos>0</XPos>
-														<YPos>-200</YPos>
-														<Flags>5</Flags>
-													</Point>
-													<Point>
-														<XPos>100</XPos>
-														<YPos>0</YPos>
-														<Flags>37</Flags>
-													</Point>
-												</PointList>
-											</Curve>
-										</RTPC>
-									</RTPCList>
-								</Property>
-							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{9A15F9F0-3C85-4A2C-A5DF-E26CFCB03729}"/>
@@ -4381,8 +4321,86 @@
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="RTPC">
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{47E04445-E05E-4DD0-A58A-3C002B2DA071}" ShortID="490556811">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Volume"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="Volume_SFX" ID="{5B7A3356-F624-492B-9C91-B06B810F20EE}" WorkUnitID="{ADC2CDD2-A345-4E7A-B811-CE180352A223}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{3EAE21FF-F773-4AED-8083-08C411EA0B87}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>100</XPos>
+																		<YPos>0</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
 						</ActorMixer>
 					</ChildrenList>
+					<ObjectLists>
+						<ObjectList Name="RTPC">
+							<Reference>
+								<Local>
+									<RTPC Name="" ID="{76263484-BFDE-48BD-BA3C-C9E9C365EAF9}" ShortID="128961705">
+										<PropertyList>
+											<Property Name="PropertyName" Type="string" Value="Volume"/>
+										</PropertyList>
+										<ReferenceList>
+											<Reference Name="ControlInput">
+												<ObjectRef Name="Volume_Master" ID="{26E7A7B0-FDC7-4577-BF10-6C03F199C8B4}" WorkUnitID="{ADC2CDD2-A345-4E7A-B811-CE180352A223}"/>
+											</Reference>
+											<Reference Name="Curve">
+												<Custom>
+													<Curve Name="" ID="{83A7990A-1C1F-465D-BFE1-809E949F5ACC}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="3"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>-200</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>100</XPos>
+																<YPos>0</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</Custom>
+											</Reference>
+										</ReferenceList>
+									</RTPC>
+								</Local>
+							</Reference>
+						</ObjectList>
+					</ObjectLists>
 				</ActorMixer>
 			</ChildrenList>
 		</WorkUnit>

@@ -85,7 +85,7 @@
 //                this.OnHitEnemyAuthority();
 
 //            }
-//            EffectManager.SpawnEffect(Modules.Assets.impactEffect, new EffectData
+//            EffectManager.SpawnEffect(Modules.Asset.impactEffect, new EffectData
 //            {
 //                origin = base.transform.position,
 //                scale = slamRadius,

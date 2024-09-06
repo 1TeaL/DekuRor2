@@ -14,7 +14,7 @@ namespace DekuMod.SkillStates.Might
 {
     public class DelawareSmash : BaseDekuSkillState
     {
-        private GameObject effectPrefab = Modules.Assets.banditmuzzleEffect;
+        private GameObject effectPrefab = Modules.Asset.banditmuzzleEffect;
         public float baseChargeThreshold = StaticValues.delawareChargeThreshold;
         private string muzzleName = "LFinger";
 
@@ -229,9 +229,9 @@ namespace DekuMod.SkillStates.Might
                     maxSpread = 0f,
                     force = force,
                     falloffModel = BulletAttack.FalloffModel.None,
-                    //tracerEffectPrefab = Modules.Assets.bandittracerEffectPrefab,
+                    //tracerEffectPrefab = Modules.Asset.bandittracerEffectPrefab,
                     muzzleName = muzzleName,
-                    hitEffectPrefab = Modules.Assets.banditimpactEffect,
+                    hitEffectPrefab = Modules.Asset.banditimpactEffect,
                     isCrit = RollCrit(),
                     HitEffectNormal = true,
                     radius = radius,
@@ -250,7 +250,7 @@ namespace DekuMod.SkillStates.Might
                 switch (level)
                 {
                     case 0:
-                        EffectManager.SpawnEffect(Modules.Assets.delawareBullet, new EffectData
+                        EffectManager.SpawnEffect(Modules.Asset.delawareBullet, new EffectData
                         {
                             origin = FindModelChild(muzzleName).position,
                             scale = 1f,
@@ -259,7 +259,7 @@ namespace DekuMod.SkillStates.Might
                         }, true);
                         break;
                     case 1:
-                        EffectManager.SpawnEffect(Modules.Assets.delawareBullet, new EffectData
+                        EffectManager.SpawnEffect(Modules.Asset.delawareBullet, new EffectData
                         {
                             origin = FindModelChild(muzzleName).position,
                             scale = 1f,
@@ -270,7 +270,7 @@ namespace DekuMod.SkillStates.Might
                     case 2:
                         //bulletAttack.tracerEffectPrefab = Assets.delawareBullet;
 
-                        EffectManager.SpawnEffect(Modules.Assets.delawareEffect, new EffectData
+                        EffectManager.SpawnEffect(Modules.Asset.delawareEffect, new EffectData
                         {
                             origin = FindModelChild(muzzleName).position,
                             scale = 1f,
