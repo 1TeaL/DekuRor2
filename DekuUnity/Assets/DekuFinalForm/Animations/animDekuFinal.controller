@@ -5939,10 +5939,10 @@ AnimatorStateMachine:
     m_Position: {x: -70, y: -420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4643394885456871616}
-    m_Position: {x: -70, y: -340, z: 0}
+    m_Position: {x: -80, y: -230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2204125414703568703}
-    m_Position: {x: -70, y: -280, z: 0}
+    m_Position: {x: -80, y: -280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2166236215922204626}
     m_Position: {x: -710, y: -20, z: 0}
@@ -6056,7 +6056,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102960202541341604}
-    m_Position: {x: 240, y: 170, z: 0}
+    m_Position: {x: 250, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102409033394723910}
     m_Position: {x: -10, y: 170, z: 0}
@@ -6897,9 +6897,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.08639285
   m_TransitionOffset: 0
-  m_ExitTime: 0.5
+  m_ExitTime: 0.6991601
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -8589,15 +8589,15 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: b4bce4ba011c4784faaab7146b1175dd, type: 2}
-    m_Threshold: -4
+    m_Motion: {fileID: 7400000, guid: a77da3f115a718e499aaaf704ca5504c, type: 2}
+    m_Threshold: 1.2773893
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: forwardSpeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a77da3f115a718e499aaaf704ca5504c, type: 2}
+    m_Motion: {fileID: 7400000, guid: b4bce4ba011c4784faaab7146b1175dd, type: 2}
     m_Threshold: 4
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -8606,7 +8606,7 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: upSpeed
   m_BlendParameterY: forwardSpeed
-  m_MinThreshold: -4
+  m_MinThreshold: 1.2773893
   m_MaxThreshold: 4
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0

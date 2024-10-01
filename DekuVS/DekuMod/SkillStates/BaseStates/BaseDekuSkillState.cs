@@ -39,28 +39,44 @@ namespace DekuMod.SkillStates.BaseStates
             switch (level)
             {
                 case 0:
+                    Level1();
                     break;
                 case 1:
+                    Level2();
                     break;
                 case 2:
+                    Level3();
                     break;
             }
 
             walkCancelTime = 2f;
         }
 
-        public override void Update()
+        public virtual void Level1()
         {
-            base.Update();
 
-            if (base.age > walkCancelTime &&
-                (base.inputBank.moveVector != Vector3.zero || base.inputBank.jump.down))
-            {
-                base.PlayCrossfade("Fullbody, Override", "BufferEmpty", 0.1f);
-                this.outer.SetNextStateToMain();
-                return;
-            }
         }
+        public virtual void Level2()
+        {
+
+        }
+        public virtual void Level3()
+        {
+
+        }
+
+        //public override void Update()
+        //{
+        //    base.Update();
+
+        //    if (base.age > walkCancelTime &&
+        //        (base.inputBank.moveVector != Vector3.zero || base.inputBank.jump.down))
+        //    {
+        //        base.PlayCrossfade("Fullbody, Override", "BufferEmpty", 0.1f);
+        //        this.outer.SetNextStateToMain();
+        //        return;
+        //    }
+        //}
 
         public override void FixedUpdate()
         {

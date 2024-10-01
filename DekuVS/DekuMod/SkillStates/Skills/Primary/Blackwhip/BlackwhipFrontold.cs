@@ -73,7 +73,7 @@ namespace DekuMod.SkillStates
 
 
 
-            EffectManager.SpawnEffect(Modules.Asset.blackwhip, new EffectData
+            EffectManager.SpawnEffect(Modules.DekuAssets.blackwhip, new EffectData
             {
                 origin = theSpot,
                 scale = 1f,       
@@ -190,7 +190,7 @@ namespace DekuMod.SkillStates
                 {
                     this.OnHitEnemyAuthority();
                 }
-                EffectManager.SpawnEffect(Modules.Asset.blackwhip, new EffectData
+                EffectManager.SpawnEffect(Modules.DekuAssets.blackwhip, new EffectData
                 {
                     origin = theSpot,
                     scale = 1f,

@@ -107,14 +107,14 @@ namespace DekuMod.SkillStates
                     {
                         if (Target.healthComponent.body.characterMotor.isGrounded)
                         {
-                            EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "Swing3", true);
+                            EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.dekuKickEffect, base.gameObject, "Swing3", true);
                             PlayCrossfade("RightArm, Override", "DetroitSmashUp", "Attack.playbackRate", fireTime, 0.01f);
                             blastAttack.Fire();
 
                         }
                         else if (!Target.healthComponent.body.characterMotor.isGrounded)
                         {
-                            EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "DownSwing", true);
+                            EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.dekuKickEffect, base.gameObject, "DownSwing", true);
                             PlayCrossfade("RightArm, Override", "DetroitSmashDown", "Attack.playbackRate", fireTime, 0.01f);
                             blastAttack.Fire();
                         }
@@ -122,19 +122,19 @@ namespace DekuMod.SkillStates
                     }
                     else if (!Target.healthComponent.body.rigidbody)
                     {
-                        EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "DownSwing", true);
+                        EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.dekuKickEffect, base.gameObject, "DownSwing", true);
                         PlayCrossfade("RightArm, Override", "DetroitSmashDown", "Attack.playbackRate", fireTime, 0.01f);
                         blastAttack.Fire();
                     }
 
 
-                    EffectManager.SpawnEffect(Modules.Asset.lightningNovaEffectPrefab, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.lightningNovaEffectPrefab, new EffectData
                     {
                         origin = base.transform.position,
                         scale = blastRadius,
 
                     }, true);
-                    EffectManager.SpawnEffect(Modules.Asset.sonicboomEffectPrefab, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.sonicboomEffectPrefab, new EffectData
                     {
                         origin = base.transform.position,
                         scale = blastRadius,

@@ -26,66 +26,21 @@ namespace DekuMod.SkillStates.Might
             this.pushForce = 500f;
             this.bonusForce = Vector3.zero;
             this.damageType = DamageType.Generic;
-            this.baseDuration = 1f;
-            this.attackStartTime = 0.2f;
-            this.attackEndTime = 0.4f;
-            this.baseEarlyExitTime = 0.4f;
+            this.baseDuration = 0.5f;
+            this.attackStartTime = 0.4f;
+            this.attackEndTime = 0.8f;
+            this.baseEarlyExitTime = 0.8f;
             this.hitStopDuration = 0.012f;
             this.attackRecoil = 0.5f;
-            this.hitHopVelocity = 9f;
+            this.hitHopVelocity = 7f;
 
             this.swingSoundString = "shootstyedashcombosfx";
             this.hitSoundString = "";
-            this.muzzleString = ChooseAnimationString();
-            this.swingEffectPrefab = Modules.Asset.dekuKickEffect;
-            this.hitEffectPrefab = Modules.Asset.dekuHitImpactEffect;
+            this.muzzleString = ChooseMuzzleString();
+            this.swingEffectPrefab = Modules.DekuAssets.dekuPunchEffect;
+            this.hitEffectPrefab = Modules.DekuAssets.dekuHitImpactEffect;
 
-            this.impactSound = Modules.Asset.kickHitSoundEvent.index;
-
-            switch (level)
-            {
-                case 0:
-                    if (swingIndex == 2)
-                    {
-                        this.pushForce = 500f;
-                        this.bonusForce = new Vector3(1000f, 10f, 0f);
-                        this.baseDuration = 1f;
-                        this.attackStartTime = 0.4f;
-                        this.attackEndTime = 0.6f;
-                        this.baseEarlyExitTime = 0.6f;
-                    }
-                    break;
-                case 1:
-
-                    this.baseDuration = 0.8f;
-                    if (swingIndex == 2)
-                    {
-                        damageCoefficient *= 2f;
-                        this.pushForce = 500f;
-                        this.bonusForce = new Vector3(1000f, 10f, 0f);
-                        this.baseDuration = 1f;
-                        this.attackStartTime = 0.4f;
-                        this.attackEndTime = 0.6f;
-                        this.baseEarlyExitTime = 0.6f;
-                    }
-                    break;
-                case 2:
-
-                    this.baseDuration = 0.6f;
-
-                    if (swingIndex == 2)
-                    {
-                        damageCoefficient *= 3f;
-                        this.pushForce = 1000f;
-                        this.bonusForce = new Vector3(1000f, 10f, 0f);
-                        this.baseDuration = 0.8f;
-                        this.attackStartTime = 0.4f;
-                        this.attackEndTime = 0.6f;
-                        this.baseEarlyExitTime = 0.6f;
-                    }
-                    break;
-            }
-
+            this.impactSound = Modules.DekuAssets.kickHitSoundEvent.index;
 
 
             dekucon = base.GetComponent<DekuController>();
@@ -95,6 +50,19 @@ namespace DekuMod.SkillStates.Might
             }
 
             base.OnEnter();
+        }
+
+        public override void Level1()
+        {
+
+        }
+        public override void Level2()
+        {
+
+        }
+        public override void Level3()
+        {
+
         }
 
 
@@ -128,19 +96,16 @@ namespace DekuMod.SkillStates.Might
             this.rollSpeed = num3 * Mathf.Lerp(SpeedCoefficient, finalSpeedCoefficient, base.fixedAge / (base.baseDuration * this.attackEndTime));
         }
 
-        private string ChooseAnimationString()
+        private string ChooseMuzzleString()
         {
-            string returnVal = "Swing1";
+            string returnVal = "mightSwingR";
             switch (this.swingIndex)
             {
                 case 0:
-                    returnVal = "Swing1";
+                    returnVal = "mightSwingR";
                     break;
                 case 1:
-                    returnVal = "Swing2";
-                    break;
-                case 2:
-                    returnVal = "Swing3";
+                    returnVal = "mightSwingL";
                     break;
             }
 
@@ -149,7 +114,15 @@ namespace DekuMod.SkillStates.Might
 
         protected override void PlayAttackAnimation()
         {
-
+            switch (this.swingIndex)
+            {
+                case 0:
+                    base.PlayCrossfade("FullBody, Override", "SmashRushR", "Slash.playbackRate", this.duration, 0.01f);
+                    break;
+                case 1:
+                    base.PlayCrossfade("FullBody, Override", "SmashRushL", "Slash.playbackRate", this.duration, 0.01f);
+                    break;
+            }
             switch (level)
             {
                 case 0:
@@ -159,7 +132,6 @@ namespace DekuMod.SkillStates.Might
                 case 2:
                     break;
             }
-            base.PlayCrossfade("FullBody, Override", "SmashRushCombo" + (1 + swingIndex), "Slash.playbackRate", this.duration, 0.01f);
         }
 
         protected override void PlaySwingEffect()
@@ -177,11 +149,8 @@ namespace DekuMod.SkillStates.Might
         protected override void SetNextState()
         {
             int index = this.swingIndex;
-            index += 1;
-            if (index > 2)
-            {
-                index = 0;
-            }
+            if (index == 0) index = 1;
+            else index = 0;
 
             if (Target)
             {

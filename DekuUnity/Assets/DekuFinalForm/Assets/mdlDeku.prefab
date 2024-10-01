@@ -683,7 +683,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340829367424440102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 2.53, z: 1.17}
+  m_LocalPosition: {x: 0.65, y: 2.53, z: 7.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10140,7 +10140,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 1
+    enabled: 0
     strength:
       serializedVersion: 2
       minMaxState: 3
@@ -33146,14 +33146,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6900353305938192872}
-  m_LocalRotation: {x: 0.44410357, y: -0.0000000192969, z: 0.000000007540652, w: 0.8959755}
+  m_LocalRotation: {x: 0.21829653, y: 0, z: 0, w: 0.9758825}
   m_LocalPosition: {x: 0.7, y: -0.8, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5047707092243375973}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 52.732002, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.218, y: 0, z: 0}
 --- !u!198 &2239951309625353799
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -35801,7 +35801,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 1
+    enabled: 0
     strength:
       serializedVersion: 2
       minMaxState: 3
@@ -38002,7 +38002,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7078263936170964185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.64, y: 2.53, z: 1.17}
+  m_LocalPosition: {x: -0.64, y: 2.53, z: 7.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38587,6 +38587,32 @@ MonoBehaviour:
     transform: {fileID: 5875110892486637082}
   - name: RHand
     transform: {fileID: 2550275340935208446}
+  - name: mightSwingL
+    transform: {fileID: 4645053804718168615}
+  - name: mightSwingR
+    transform: {fileID: 1192405726935750794}
+  - name: lLegEffect
+    transform: {fileID: 4585661770924875461}
+  - name: rLegEffect
+    transform: {fileID: 5019798924655129464}
+  - name: waistOFAAura
+    transform: {fileID: 7472347114377988691}
+  - name: lArmEffect
+    transform: {fileID: 6955407221233424545}
+  - name: lArmFajinaura
+    transform: {fileID: 2526185316558058088}
+  - name: lArmOFAAura
+    transform: {fileID: 8546744352092723103}
+  - name: lEyeAura
+    transform: {fileID: 3665872506906988482}
+  - name: rArmEffect
+    transform: {fileID: 1697339516849966281}
+  - name: rArmGearshift
+    transform: {fileID: 5725194430157758816}
+  - name: rArmFajinAura
+    transform: {fileID: 7714114153660331526}
+  - name: rArmOFAAura
+    transform: {fileID: 5369562906274795771}
 --- !u!114 &4314288287895277941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40509,11 +40535,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: a8134160c9be0aa42ad349f9232c6073, type: 2}
+      objectReference: {fileID: 2100000, guid: 3cc083982df3cf54fbce604867ef0cd9, type: 2}
+    - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
+        type: 3}
+      propertyPath: TrailModule.mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
       propertyPath: moveWithTransform
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
@@ -40528,7 +40559,7 @@ PrefabInstance:
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
       propertyPath: TrailModule.textureMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
@@ -40627,6 +40658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
+      propertyPath: TrailModule.splitSubEmitterRibbons
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
+        type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.16470589
       objectReference: {fileID: 0}
@@ -40664,6 +40700,11 @@ PrefabInstance:
         type: 3}
       propertyPath: VelocityModule.speedModifier.scalar
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
+        type: 3}
+      propertyPath: TrailModule.attachRibbonsToTransform
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
@@ -41394,11 +41435,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: a8134160c9be0aa42ad349f9232c6073, type: 2}
+      objectReference: {fileID: 2100000, guid: 3cc083982df3cf54fbce604867ef0cd9, type: 2}
+    - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
+        type: 3}
+      propertyPath: TrailModule.mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
       propertyPath: moveWithTransform
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
@@ -41413,7 +41459,7 @@ PrefabInstance:
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
       propertyPath: TrailModule.textureMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
@@ -41443,7 +41489,7 @@ PrefabInstance:
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}
       propertyPath: TrailModule.lifetime.scalar
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2367508869236984856, guid: 85000badf41390841aafd27344601143,
         type: 3}

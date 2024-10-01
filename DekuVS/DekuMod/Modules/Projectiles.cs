@@ -175,11 +175,11 @@ namespace DekuMod.Modules
 
         private static GameObject CreateGhostPrefab(string ghostName)
         {
-            GameObject ghostPrefab = Modules.Asset.mainAssetBundle.LoadAsset<GameObject>(ghostName);
+            GameObject ghostPrefab = Modules.DekuAssets.mainAssetBundle.LoadAsset<GameObject>(ghostName);
             if (!ghostPrefab.GetComponent<NetworkIdentity>()) ghostPrefab.AddComponent<NetworkIdentity>();
             if (!ghostPrefab.GetComponent<ProjectileGhostController>()) ghostPrefab.AddComponent<ProjectileGhostController>();
 
-            Modules.Asset.ConvertAllRenderersToHopooShader(ghostPrefab);
+            Modules.DekuAssets.ConvertAllRenderersToHopooShader(ghostPrefab);
 
             return ghostPrefab;
         }

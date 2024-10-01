@@ -39,7 +39,7 @@ namespace DekuMod.SkillStates.BlackWhip
             //effectObj.transform.parent = charbody.gameObject.transform;
 
             child = dekucharbody.gameObject.GetComponent<ModelLocator>().modelTransform.GetComponent<ChildLocator>();
-            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Asset.blackwhipLineRenderer, child.FindChild("RHand").transform);
+            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.DekuAssets.blackwhipLineRenderer, child.FindChild("RHand").transform);
             blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
             duration = totalDuration * (0.2f);
 

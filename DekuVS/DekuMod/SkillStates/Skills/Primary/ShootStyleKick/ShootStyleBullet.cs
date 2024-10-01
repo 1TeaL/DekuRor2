@@ -211,20 +211,20 @@ namespace DekuMod.SkillStates
 
             if (modelTransform)
             {
-                TemporaryOverlay temporaryOverlay = modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                temporaryOverlay.duration = 0.6f;
-                temporaryOverlay.animateShaderAlpha = true;
-                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                temporaryOverlay.destroyComponentOnEnd = true;
-                temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-                temporaryOverlay.AddToCharacerModel(modelTransform.GetComponent<CharacterModel>());
-                TemporaryOverlay temporaryOverlay2 = modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                temporaryOverlay2.duration = 0.7f;
-                temporaryOverlay2.animateShaderAlpha = true;
-                temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                temporaryOverlay2.destroyComponentOnEnd = true;
-                temporaryOverlay2.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-                temporaryOverlay2.AddToCharacerModel(modelTransform.GetComponent<CharacterModel>());
+                //TemporaryOverlay temporaryOverlay = modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                //temporaryOverlay.duration = 0.6f;
+                //temporaryOverlay.animateShaderAlpha = true;
+                //temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                //temporaryOverlay.destroyComponentOnEnd = true;
+                //temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                //temporaryOverlay.AddToCharacerModel(modelTransform.GetComponent<CharacterModel>());
+                //TemporaryOverlay temporaryOverlay2 = modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                //temporaryOverlay2.duration = 0.7f;
+                //temporaryOverlay2.animateShaderAlpha = true;
+                //temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                //temporaryOverlay2.destroyComponentOnEnd = true;
+                //temporaryOverlay2.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+                //temporaryOverlay2.AddToCharacerModel(modelTransform.GetComponent<CharacterModel>());
             }
 
             if (isAuthority && fixedAge >= duration)

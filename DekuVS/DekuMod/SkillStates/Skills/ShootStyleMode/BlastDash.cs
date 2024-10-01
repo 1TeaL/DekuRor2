@@ -47,7 +47,7 @@ namespace DekuMod.SkillStates.ShootStyle
                 case 0:
                     initialSpeedCoefficient = StaticValues.blastDashSpeed;
                     finalSpeedCoefficient = 0f;
-                    EffectManager.SpawnEffect(Modules.Asset.delawareEffect, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.delawareEffect, new EffectData
                     {
                         origin = FindModelChild(muzzleName).position,
                         scale = 1f,
@@ -58,7 +58,7 @@ namespace DekuMod.SkillStates.ShootStyle
                 case 1:
                     initialSpeedCoefficient = StaticValues.blastDashSpeed;
                     finalSpeedCoefficient = 0f;
-                    EffectManager.SpawnEffect(Modules.Asset.delawareEffect, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.delawareEffect, new EffectData
                     {
                         origin = FindModelChild(muzzleName).position,
                         scale = 1f,
@@ -69,7 +69,7 @@ namespace DekuMod.SkillStates.ShootStyle
                 case 2:
                     initialSpeedCoefficient = StaticValues.blastDashSpeed;
                     finalSpeedCoefficient = 0f;
-                    EffectManager.SpawnEffect(Modules.Asset.delawareEffect, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.delawareEffect, new EffectData
                     {
                         origin = FindModelChild(muzzleName).position,
                         scale = 1f,

@@ -102,7 +102,7 @@ namespace DekuMod
             DekuPlugin.instance = this;
             
             // load assets and read config
-            Modules.Asset.Initialize();
+            Modules.DekuAssets.Initialize();
             Modules.Config.ReadConfig();
             Modules.Damage.SetupModdedDamage(); //setup modded damage
             Modules.States.RegisterStates(); // register states for networking
@@ -174,7 +174,7 @@ namespace DekuMod
                 Debug.Log(item.bodyPrefab.name);
                 if (item.bodyPrefab.name == "DekuBody")
                 {
-                    CustomEmotesAPI.ImportArmature(item.bodyPrefab, Modules.Asset.mainAssetBundle.LoadAsset<GameObject>("humanoidDeku"));
+                    CustomEmotesAPI.ImportArmature(item.bodyPrefab, Modules.DekuAssets.mainAssetBundle.LoadAsset<GameObject>("humanoidDeku"));
                 }
             }
         }
@@ -592,11 +592,11 @@ namespace DekuMod
             {
                 if (self.body)
                 {
-                    this.OverlayFunction(Modules.Asset.blackwhipDebuffMaterial, self.body.HasBuff(Modules.Buffs.blackwhipDebuff), self);
-                    this.OverlayFunction(Modules.Asset.redblinkingMaterial, self.body.HasBuff(Modules.Buffs.counterAttackBuff), self);
-                    this.OverlayFunction(Modules.Asset.whiteblinkingMaterial, self.body.HasBuff(Modules.Buffs.overlayBuff), self);
-                    this.OverlayFunction(Modules.Asset.yellowblinkingMaterial, self.body.HasBuff(Modules.Buffs.mightBuff), self);
-                    this.OverlayFunction(Modules.Asset.purpleblinkingMaterial, self.body.HasBuff(Modules.Buffs.blackwhipCDBuff), self);
+                    this.OverlayFunction(Modules.DekuAssets.blackwhipDebuffMaterial, self.body.HasBuff(Modules.Buffs.blackwhipDebuff), self);
+                    this.OverlayFunction(Modules.DekuAssets.redblinkingMaterial, self.body.HasBuff(Modules.Buffs.counterAttackBuff), self);
+                    this.OverlayFunction(Modules.DekuAssets.whiteblinkingMaterial, self.body.HasBuff(Modules.Buffs.overlayBuff), self);
+                    this.OverlayFunction(Modules.DekuAssets.yellowblinkingMaterial, self.body.HasBuff(Modules.Buffs.mightBuff), self);
+                    this.OverlayFunction(Modules.DekuAssets.purpleblinkingMaterial, self.body.HasBuff(Modules.Buffs.blackwhipCDBuff), self);
                 }
             }
         }

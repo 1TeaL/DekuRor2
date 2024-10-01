@@ -86,6 +86,7 @@
     <Compile Include="Assets\HenryUnityProject\Assets\Scripts\DynamicBone.cs" />
     <Compile Include="Assets\HenryUnityProject\Assets\Scripts\DynamicBoneCollider.cs" />
     <Compile Include="Assets\VFX\EffectExamples\Shared\Scripts\GunAim.cs" />
+    <Compile Include="Assets\Travis Game Assets\Hit Impact Effects\Demo Scene\Scripts\HitImpactEffectsPreview.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\StdLib.hlsl" />

@@ -62,7 +62,7 @@ namespace DekuMod.Modules
 
             model.AddComponent<CharacterModel>().baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
-            Modules.Asset.ConvertAllRenderersToHopooShader(model);
+            Modules.DekuAssets.ConvertAllRenderersToHopooShader(model);
 
             return model.gameObject;
         }
@@ -204,13 +204,13 @@ namespace DekuMod.Modules
             DekuPlugin.DestroyImmediate(main.transform.Find("CameraPivot").gameObject);
             DekuPlugin.DestroyImmediate(main.transform.Find("AimOrigin").gameObject);
 
-            if (Modules.Asset.mainAssetBundle.LoadAsset<GameObject>(modelName) == null)
+            if (Modules.DekuAssets.mainAssetBundle.LoadAsset<GameObject>(modelName) == null)
             {
                 Debug.LogError("Trying to load a null model- check to see if the name in your code matches the name of the object in Unity");
                 return null;
             }
 
-            return GameObject.Instantiate(Modules.Asset.mainAssetBundle.LoadAsset<GameObject>(modelName));
+            return GameObject.Instantiate(Modules.DekuAssets.mainAssetBundle.LoadAsset<GameObject>(modelName));
         }
 
         internal static void SetupCharacterModel(GameObject prefab, CustomRendererInfo[] rendererInfo, int mainRendererIndex)

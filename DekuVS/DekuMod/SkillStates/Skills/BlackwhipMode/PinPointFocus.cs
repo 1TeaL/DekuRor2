@@ -65,7 +65,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 Ray aimRay = GetAimRay();
 
 
-                EffectManager.SpawnEffect(Modules.Asset.delawareBullet, new EffectData
+                EffectManager.SpawnEffect(Modules.DekuAssets.delawareBullet, new EffectData
                 {
                     origin = FindModelChild(this.muzzleString).position,
                     scale = 1f,
@@ -101,7 +101,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 bulletAttack.spreadPitchScale = 0f;
                 bulletAttack.spreadYawScale = 0f;
                 bulletAttack.queryTriggerInteraction = QueryTriggerInteraction.UseGlobal;
-                bulletAttack.hitEffectPrefab = Modules.Asset.airforce100impactEffect;
+                bulletAttack.hitEffectPrefab = Modules.DekuAssets.airforce100impactEffect;
                 bulletAttack.hitCallback = ApplyBlastAttackOnHit;
 
                 DamageAPI.AddModdedDamageType(bulletAttack, Damage.blackwhipImmobilise);
@@ -124,7 +124,7 @@ namespace DekuMod.SkillStates.BlackWhip
                     if (body)
                     {
                         Ray aimRay = base.GetAimRay();
-                        EffectManager.SpawnEffect(Modules.Asset.airforce100impactEffect, new EffectData
+                        EffectManager.SpawnEffect(Modules.DekuAssets.airforce100impactEffect, new EffectData
                         {
                             origin = healthComponent.body.corePosition,
                             scale = 1f,

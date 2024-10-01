@@ -92,7 +92,7 @@ namespace DekuMod.SkillStates
                 {
                     energySystem.currentPlusUltra += Modules.StaticValues.skillPlusUltraGain;
                     hasFired = true;
-                    EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "Swing1", true);
+                    EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.dekuKickEffect, base.gameObject, "Swing1", true);
                     PlayCrossfade("FullBody, Override", "StLouis", "Attack.playbackRate", duration - fireTime, 0.01f);
                     new PerformStLouisSmashNetworkRequest(base.characterBody.masterObjectId, Target.healthComponent.body.masterObjectId).Send(NetworkDestination.Clients);
 
@@ -110,13 +110,13 @@ namespace DekuMod.SkillStates
                     blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                     blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
 
-                    EffectManager.SpawnEffect(Modules.Asset.lightningNovaEffectPrefab, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.lightningNovaEffectPrefab, new EffectData
                     {
                         origin = base.transform.position,
                         scale = blastRadius,
 
                     }, true);
-                    EffectManager.SpawnEffect(Modules.Asset.sonicboomEffectPrefab, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.sonicboomEffectPrefab, new EffectData
                     {
                         origin = base.transform.position,
                         scale = blastRadius,

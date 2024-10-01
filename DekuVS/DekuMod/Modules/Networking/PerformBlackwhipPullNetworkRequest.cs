@@ -135,7 +135,7 @@ namespace DekuMod.Modules.Networking
                         GlobalEventManager.instance.OnHitEnemy(damageInfo, singularTarget.healthComponent.gameObject);
 
 
-                        EffectManager.SpawnEffect(Modules.Asset.blackwhipTrail, new EffectData
+                        EffectManager.SpawnEffect(Modules.DekuAssets.blackwhipTrail, new EffectData
                         {
                             origin = singularTarget.transform.position,
                             scale = 1f,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Newtonsoft.Json;
 using RoR2;
 using RoR2.CharacterAI;
 using RoR2.UI;
@@ -98,7 +99,17 @@ namespace DekuMod.Modules.Survivors
 
             if (RoRHUDObject && !plusUltraBar)
             {
-                plusUltraBar = UnityEngine.GameObject.Instantiate(Modules.Asset.dekuCustomUI, RoRHUDObject.transform.GetChild(0).GetChild(7).GetChild(2).GetChild(2).GetChild(0));
+                /// 
+                HUD hud = RoRHUDObject.GetComponent<HUD>();
+                if (hud.healthBar.barContainer)
+                {
+                    Transform healthbarTransform = hud.healthBar.barContainer.transform;
+                    if (healthbarTransform)
+                    {
+                        plusUltraBar = UnityEngine.GameObject.Instantiate(Modules.DekuAssets.dekuCustomUI, healthbarTransform);
+                    }
+                }
+
             }
 
             plusUltraGlow = plusUltraBar.transform.GetChild(0).gameObject;

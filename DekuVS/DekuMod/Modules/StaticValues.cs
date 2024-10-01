@@ -61,7 +61,7 @@ namespace DekuMod.Modules
         internal const float mightSwitchRadius = 20f;
         internal const float mightSwitchDamage = 2f;
         //Primary
-        internal const float smashRushDistance = 3f;
+        internal const float smashRushDistance = 5f;
         internal const float smashRushDamageCoefficient = 3f;
         //Secondary
         internal const float delawareChargeThreshold = 2f;

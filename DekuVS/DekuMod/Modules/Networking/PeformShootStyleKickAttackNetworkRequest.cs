@@ -115,7 +115,7 @@ namespace DekuMod.Modules.Networking
 
                 
 
-                EffectManager.SpawnEffect(Modules.Asset.dekuHitImpactEffect, new EffectData
+                EffectManager.SpawnEffect(Modules.DekuAssets.dekuHitImpactEffect, new EffectData
                 {
                     origin = charBody.transform.position,
                     scale = 1f,

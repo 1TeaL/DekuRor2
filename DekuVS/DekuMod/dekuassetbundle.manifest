@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1820034237
+CRC: 1801163564
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0014c881e16d4eff18a9118925a6bd53
+    Hash: 1d699d7d76371566fe577f6c383314a0
   TypeTreeHash:
     serializedVersion: 2
     Hash: cadff3ebdf0e75a109758b617fa81642
@@ -94,6 +94,7 @@ Assets:
 - Assets/DekuFinalForm/Blender/DekuFinalAnimationsTest.fbx
 - Assets/DekuFinalForm/VFX/limbAuraWorld.prefab
 - Assets/DekuFinalForm/GUI/Floatcancel.png
+- Assets/DekuFinalForm/VFX/Textures/matSmash1.mat
 - Assets/DekuFinalForm/Animations/Descend.anim
 - Assets/DekuFinalForm/Animations/DekuFinalCape.mask
 - Assets/DekuFinalForm/Animations/SprintF.anim
@@ -116,11 +117,11 @@ Assets:
 - Assets/DekuFinalForm/Animations/ShootStyleRush3.anim
 - Assets/DekuFinalForm/GUI/ultimateupgrade.png
 - Assets/DekuFinalForm/VFX/Material/blackwhipbullet.mat
-- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_smaaaassshhhhhuuu.png
+- Assets/DekuFinalForm/VFX/Textures/Smash3.png
 - Assets/DekuFinalForm/GUI/shootstylekick.png
 - Assets/DekuFinalForm/VFX/texas.prefab
 - Assets/DekuFinalForm/Animations/DelawareSmashCharging.anim
-- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_smash.png
+- Assets/DekuFinalForm/VFX/Textures/Smash1.png
 - Assets/DekuFinalForm/Assets/Materials/T_pl01_101_hood_D.png
 - Assets/DekuFinalForm/VFX/windbullet45.prefab
 - Assets/DekuFinalForm/VFX/blackwhipline.prefab
@@ -166,9 +167,9 @@ Assets:
 - Assets/DekuFinalForm/GUI/stlouis.png
 - Assets/DekuFinalForm/GUI/gobeyondY.png
 - Assets/DekuFinalForm/VFX/detroitweak.prefab
-- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_foosh.png
+- Assets/DekuFinalForm/VFX/Textures/Foosh.png
 - Assets/DekuFinalForm/GUI/shootstylekick100.png
-- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_Pl06_thwip.png
+- Assets/DekuFinalForm/VFX/Textures/Thwip.png
 - Assets/DekuFinalForm/Assets/DekuDisplay.prefab
 - Assets/DekuFinalForm/Animations/OklahomaSmashDash.anim
 - Assets/DekuFinalForm/Assets/Materials/yellowBlinkingMat.mat
@@ -215,7 +216,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/leftEyeParticle.prefab
 - Assets/DekuFinalForm/GUI/gobeyondB.png
 - Assets/DekuFinalForm/VFX/rightKickEffect.prefab
-- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_Pl13_thwip.png
+- Assets/DekuFinalForm/VFX/Textures/Thwip2.png
 - Assets/DekuFinalForm/Animations/DetroitSmash3End.anim
 - Assets/DekuFinalForm/Animations/Airforce.anim
 - Assets/DekuFinalForm/VFX/airforce100trail.prefab
@@ -283,7 +284,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/straightSwingEffect.prefab
 - Assets/DekuFinalForm/GUI/detroitdelawareSmash.PNG
 - Assets/DekuFinalForm/VFX/goBeyondAuraWorld.prefab
-- Assets/DekuFinalForm/VFX/ImpactDekuKick.prefab
+- Assets/DekuFinalForm/VFX/ImpactDekuEffect.prefab
 - Assets/DekuFinalForm/Animations/BlastDashF.anim
 - Assets/DekuFinalForm/Animations/DetroitSmash3Dashing.anim
 - Assets/DekuFinalForm/VFX/Material/dangersense.mat
@@ -319,7 +320,7 @@ Assets:
 - Assets/DekuFinalForm/Animations/StLouis3End.anim
 - Assets/DekuFinalForm/GUI/detroit45.png
 - Assets/DekuFinalForm/Assets/Materials/UpscaledHood.jpg
-- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_smaassh.png
+- Assets/DekuFinalForm/VFX/Textures/Smash2.png
 - Assets/DekuFinalForm/Assets/Mesh/Wristband.mesh
 - Assets/DekuFinalForm/GUI/goBeyondE.png
 - Assets/DekuFinalForm/Assets/spherePrefab.prefab
@@ -334,7 +335,7 @@ Assets:
 - Assets/DekuFinalForm/GUI/oklahoma100.png
 - Assets/DekuFinalForm/Assets/Materials/UpscaledBodyLessSaturated.jpg
 - Assets/DekuFinalForm/VFX/rOFAAura.prefab
-- Assets/DekuFinalForm/VFX/Textures/T_ef_moji_wham.png
+- Assets/DekuFinalForm/VFX/Textures/Wham.png
 - Assets/DekuFinalForm/Assets/Materials/Eye texture.png
 - Assets/DekuFinalForm/Assets/Mesh/ArmL.mesh
 - Assets/DekuFinalForm/GUI/smokescreen.png

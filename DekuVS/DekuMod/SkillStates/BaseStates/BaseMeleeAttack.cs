@@ -104,6 +104,7 @@ namespace DekuMod.SkillStates.BaseStates
             base.OnExit();
 
             this.animator.SetBool("attacking", false);
+            base.PlayCrossfade("Fullbody, Override", "BufferEmpty", 0.1f);
         }
 
         protected virtual void PlaySwingEffect()

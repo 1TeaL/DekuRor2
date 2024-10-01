@@ -21,9 +21,9 @@ namespace DekuMod.SkillStates.Might
             this.pushForce = 500f;
             this.bonusForce = Vector3.zero;
             this.damageType = DamageType.Generic;            
-            this.baseDuration = 1f;
-            this.attackStartTime = 0.2f;
-            this.attackEndTime = 0.4f;
+            this.baseDuration = 0.5f;
+            this.attackStartTime = 0.4f;
+            this.attackEndTime = 0.8f;
             this.baseEarlyExitTime = 0.4f;
             this.hitStopDuration = 0.012f;
             this.attackRecoil = 0.5f;
@@ -32,10 +32,10 @@ namespace DekuMod.SkillStates.Might
             this.swingSoundString = "shootstyedashcombosfx";
             this.hitSoundString = "";
             this.muzzleString = ChooseAnimationString();
-            this.swingEffectPrefab = Modules.Asset.dekuKickEffect;
-            this.hitEffectPrefab = Modules.Asset.dekuHitImpactEffect;
+            this.swingEffectPrefab = Modules.DekuAssets.dekuKickEffect;
+            this.hitEffectPrefab = Modules.DekuAssets.dekuHitImpactEffect;
 
-            this.impactSound = Modules.Asset.kickHitSoundEvent.index;
+            this.impactSound = Modules.DekuAssets.kickHitSoundEvent.index;
             
             switch (level)
             {

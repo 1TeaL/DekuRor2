@@ -105,7 +105,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
                 this.aimSphere.transform.localScale = new Vector3(this.radius, this.radius, this.radius);
 
-                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Asset.blackwhipLineRenderer, child.FindChild("LHand").transform);
+                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.DekuAssets.blackwhipLineRenderer, child.FindChild("LHand").transform);
                 blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
                 fireTime = (Vector2.Distance(enemyBody.corePosition, characterBody.corePosition) / maxDistance) * StaticValues.blackwhipPullDuration;
                 this.aimSphere.transform.position = enemyBody.corePosition;
@@ -146,7 +146,7 @@ namespace DekuMod.SkillStates.BlackWhip
 
                 this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
                 this.aimSphere.transform.localScale = new Vector3(this.radius, this.radius, this.radius);
-                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Asset.blackwhipLineRenderer, child.FindChild("LHand").transform);
+                blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.DekuAssets.blackwhipLineRenderer, child.FindChild("LHand").transform);
                 blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
 
                 fireTime = (Vector2.Distance(endPoint, characterBody.corePosition) / maxDistance) * StaticValues.blackwhipPullDuration;
@@ -234,7 +234,7 @@ namespace DekuMod.SkillStates.BlackWhip
                     if (base.fixedAge > fireTime)
                     {
                         //characterBody.characterMotor.Motor.RotateCharacter(Quaternion.LookRotation(base.GetAimRay().direction));
-                        Chat.AddMessage($"{characterBody.characterMotor.velocity}" + "velocity");
+                        //Chat.AddMessage($"{characterBody.characterMotor.velocity}" + "velocity");
 
 
                         if (isEnemy)

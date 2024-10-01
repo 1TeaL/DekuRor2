@@ -74,8 +74,8 @@ namespace DekuMod.Modules.Survivors
             bodyName = "DekuBody",
             bodyNameToken = DekuPlugin.developerPrefix + "_DEKU_BODY_NAME",
             bodyColor = Color.green,
-            characterPortrait = Modules.Asset.LoadCharacterIcon("Deku"),
-            crosshair = Modules.Asset.LoadCrosshair("Standard"),
+            characterPortrait = Modules.DekuAssets.LoadCharacterIcon("Deku"),
+            crosshair = Modules.DekuAssets.LoadCrosshair("Standard"),
             damage = 10f,
             healthGrowth = 19f,
             healthRegen = 1f,
@@ -86,24 +86,24 @@ namespace DekuMod.Modules.Survivors
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal static Material matArmL = Modules.Asset.CreateHopooMaterial("matArmL");
-        internal static Material matArmR = Modules.Asset.CreateHopooMaterial("matArmR");
-        internal static Material matBelt = Modules.Asset.CreateHopooMaterial("matBelt");
-        internal static Material matBody = Modules.Asset.CreateHopooMaterial("matBody");
-        internal static Material matEyes = Modules.Asset.CreateHopooMaterial("matEyes");
-        internal static Material matEyesBlack = Modules.Asset.CreateHopooMaterial("matEyesBlack");
-        internal static Material matFace = Modules.Asset.CreateHopooMaterial("matFace");
-        internal static Material matGoldenButtons = Modules.Asset.CreateHopooMaterial("matGoldenButtons");
-        internal static Material matGranCape = Modules.Asset.CreateHopooMaterial("matGranCape");
-        internal static Material matGranMantle = Modules.Asset.CreateHopooMaterial("matGranMantle");
-        internal static Material matHair = Modules.Asset.CreateHopooMaterial("matHair");
-        internal static Material matHands = Modules.Asset.CreateHopooMaterial("matHands");
-        internal static Material matHood = Modules.Asset.CreateHopooMaterial("matHood");
-        internal static Material matLegs = Modules.Asset.CreateHopooMaterial("matLegs");
-        internal static Material matMask = Modules.Asset.CreateHopooMaterial("matMask");
-        internal static Material matMidGauntlet = Modules.Asset.CreateHopooMaterial("matMidGauntlet");
-        internal static Material matShoes = Modules.Asset.CreateHopooMaterial("matShoes");
-        internal static Material matWristband = Modules.Asset.CreateHopooMaterial("matWristband");
+        internal static Material matArmL = Modules.DekuAssets.CreateHopooMaterial("matArmL");
+        internal static Material matArmR = Modules.DekuAssets.CreateHopooMaterial("matArmR");
+        internal static Material matBelt = Modules.DekuAssets.CreateHopooMaterial("matBelt");
+        internal static Material matBody = Modules.DekuAssets.CreateHopooMaterial("matBody");
+        internal static Material matEyes = Modules.DekuAssets.CreateHopooMaterial("matEyes");
+        internal static Material matEyesBlack = Modules.DekuAssets.CreateHopooMaterial("matEyesBlack");
+        internal static Material matFace = Modules.DekuAssets.CreateHopooMaterial("matFace");
+        internal static Material matGoldenButtons = Modules.DekuAssets.CreateHopooMaterial("matGoldenButtons");
+        internal static Material matGranCape = Modules.DekuAssets.CreateHopooMaterial("matGranCape");
+        internal static Material matGranMantle = Modules.DekuAssets.CreateHopooMaterial("matGranMantle");
+        internal static Material matHair = Modules.DekuAssets.CreateHopooMaterial("matHair");
+        internal static Material matHands = Modules.DekuAssets.CreateHopooMaterial("matHands");
+        internal static Material matHood = Modules.DekuAssets.CreateHopooMaterial("matHood");
+        internal static Material matLegs = Modules.DekuAssets.CreateHopooMaterial("matLegs");
+        internal static Material matMask = Modules.DekuAssets.CreateHopooMaterial("matMask");
+        internal static Material matMidGauntlet = Modules.DekuAssets.CreateHopooMaterial("matMidGauntlet");
+        internal static Material matShoes = Modules.DekuAssets.CreateHopooMaterial("matShoes");
+        internal static Material matWristband = Modules.DekuAssets.CreateHopooMaterial("matWristband");
 
         internal override int mainRendererIndex { get; set; } = 0;
 
@@ -272,7 +272,7 @@ namespace DekuMod.Modules.Survivors
             skillloc.passiveSkill.enabled = true;
             skillloc.passiveSkill.skillNameToken = prefix + "PASSIVE_NAME";
             skillloc.passiveSkill.skillDescriptionToken = prefix + "PASSIVE_DESCRIPTION";
-            skillloc.passiveSkill.icon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("ultimate");
+            skillloc.passiveSkill.icon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("ultimate");
             skillloc.passiveSkill.keywordToken = prefix + "KEYWORD_PASSIVE";
             #endregion
 
@@ -284,7 +284,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTPRIMARY_NAME",
                 skillNameToken = prefix + "MIGHTPRIMARY_NAME",
                 skillDescriptionToken = prefix + "MIGHTPRIMARY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(SmashRushStart)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -310,7 +310,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTSECONDARY_NAME",
                 skillNameToken = prefix + "MIGHTSECONDARY_NAME",
                 skillDescriptionToken = prefix + "MIGHTSECONDARY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(DelawareSmash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
@@ -336,7 +336,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTUTILITY_NAME",
                 skillNameToken = prefix + "MIGHTUTILITY_NAME",
                 skillDescriptionToken = prefix + "MIGHTUTILITY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(CounterSmash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -361,7 +361,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTSPECIAL_NAME",
                 skillNameToken = prefix + "MIGHTSPECIAL_NAME",
                 skillDescriptionToken = prefix + "MIGHTSPECIAL_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(MightSuper)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -389,7 +389,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLEPRIMARY_NAME",
                 skillNameToken = prefix + "SHOOTSTYLEPRIMARY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLEPRIMARY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(Airforce)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -415,7 +415,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLESECONDARY_NAME",
                 skillNameToken = prefix + "SHOOTSTYLESECONDARY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLESECONDARY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(BlastDash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
@@ -441,7 +441,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLEUTILITY_NAME",
                 skillNameToken = prefix + "SHOOTSTYLEUTILITY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLEUTILITY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(OklahomaSmash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -466,7 +466,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLESPECIAL_NAME",
                 skillNameToken = prefix + "SHOOTSTYLESPECIAL_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLESPECIAL_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(ShootStyleSuper)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -494,7 +494,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "BLACKWHIPSTYLEPRIMARY_NAME",
                 skillNameToken = prefix + "BLACKWHIPSTYLEPRIMARY_NAME",
                 skillDescriptionToken = prefix + "BLACKWHIPSTYLEPRIMARY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(BlackwhipStrike)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -520,7 +520,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "BLACKWHIPSTYLESECONDARY_NAME",
                 skillNameToken = prefix + "BLACKWHIPSTYLESECONDARY_NAME",
                 skillDescriptionToken = prefix + "BLACKWHIPSTYLESECONDARY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(PinPointFocus)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
@@ -546,7 +546,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "BLACKWHIPSTYLEUTILITY_NAME",
                 skillNameToken = prefix + "BLACKWHIPSTYLEUTILITY_NAME",
                 skillDescriptionToken = prefix + "BLACKWHIPSTYLEUTILITY_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(BlackwhipOverlay)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -571,7 +571,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "BLACKWHIPSTYLESPECIAL_NAME",
                 skillNameToken = prefix + "BLACKWHIPSTYLESPECIAL_NAME",
                 skillDescriptionToken = prefix + "BLACKWHIPSTYLESPECIAL_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(BlackwhipSuper)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -599,7 +599,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTMODE_NAME",
                 skillNameToken = prefix + "MIGHTMODE_NAME",
                 skillDescriptionToken = prefix + "MIGHTMODE_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(MightMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -623,7 +623,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLEMODE_NAME",
                 skillNameToken = prefix + "SHOOTSTYLEMODE_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLEMODE_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(ShootStyleMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -647,7 +647,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "BLACKWHIPMODE_NAME",
                 skillNameToken = prefix + "BLACKWHIPMODE_NAME",
                 skillDescriptionToken = prefix + "BLACKWHIPMODE_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(BlackwhipMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -671,7 +671,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "BLACKWHIPPULL_NAME",
                 skillNameToken = prefix + "BLACKWHIPPULL_NAME",
                 skillDescriptionToken = prefix + "BLACKWHIPPULL_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
                 activationState = new SerializableEntityStateType(typeof(BlackwhipPull)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -697,7 +697,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "GOBEYOND_NAME",
                 skillNameToken = prefix + "GOBEYOND_NAME",
                 skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("gobeyondG"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("gobeyondG"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GoBeyondEmptySkill)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -720,7 +720,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "GOBEYOND_NAME",
                 skillNameToken = prefix + "GOBEYOND_NAME",
                 skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("gobeyondO"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("gobeyondO"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GoBeyondEmptySkill)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -743,7 +743,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "GOBEYOND_NAME",
                 skillNameToken = prefix + "GOBEYOND_NAME",
                 skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("gobeyondB"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("gobeyondB"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GoBeyondEmptySkill)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -766,7 +766,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "GOBEYOND_NAME",
                 skillNameToken = prefix + "GOBEYOND_NAME",
                 skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("gobeyondE"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("gobeyondE"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GoBeyondEmptySkill)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -789,7 +789,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "GOBEYOND_NAME",
                 skillNameToken = prefix + "GOBEYOND_NAME",
                 skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("gobeyondY"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("gobeyondY"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GoBeyondEmptySkill)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -812,7 +812,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "GOBEYOND_NAME",
                 skillNameToken = prefix + "GOBEYOND_NAME",
                 skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("gobeyondO"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("gobeyondO"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GoBeyondEmptySkill)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -835,7 +835,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "GOBEYOND_NAME",
                 skillNameToken = prefix + "GOBEYOND_NAME",
                 skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("gobeyondN"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("gobeyondN"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GoBeyondEmptySkill)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -858,7 +858,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "GOBEYOND_NAME",
                 skillNameToken = prefix + "GOBEYOND_NAME",
                 skillDescriptionToken = prefix + "GOBEYOND_DESCRIPTION",
-                skillIcon = Modules.Asset.mainAssetBundle.LoadAsset<Sprite>("gobeyondD"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("gobeyondD"),
                 activationState = new SerializableEntityStateType(typeof(SkillStates.GoBeyondEmptySkill)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -970,7 +970,7 @@ namespace DekuMod.Modules.Survivors
             
             //black eye material
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(DekuPlugin.developerPrefix + "_DEKU_BODY_DEFAULT_SKIN_NAME",
-                Asset.mainAssetBundle.LoadAsset<Sprite>("Airforceskin"),
+                DekuAssets.mainAssetBundle.LoadAsset<Sprite>("Airforceskin"),
                 defaultRendererInfo,
                 mainRenderer,
                 model);
@@ -979,102 +979,102 @@ namespace DekuMod.Modules.Survivors
             {
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("ArmL"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("ArmL"),
                     renderer = defaultRendererInfo[0].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("ArmR"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("ArmR"),
                     renderer = defaultRendererInfo[1].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Belt"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Belt"),
                     renderer = defaultRendererInfo[2].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Body"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Body"),
                     renderer = defaultRendererInfo[3].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Eyes"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Eyes"),
                     renderer = defaultRendererInfo[4].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Face"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Face"),
                     renderer = defaultRendererInfo[5].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Neck"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Neck"),
                     renderer = defaultRendererInfo[6].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("GoldenButtons"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("GoldenButtons"),
                     renderer = defaultRendererInfo[7].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("GranCape"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("GranCape"),
                     renderer = defaultRendererInfo[8].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("GranMantle"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("GranMantle"),
                     renderer = defaultRendererInfo[9].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Hair"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Hair"),
                     renderer = defaultRendererInfo[10].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Hands"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Hands"),
                     renderer = defaultRendererInfo[11].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Hood"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Hood"),
                     renderer = defaultRendererInfo[12].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Legs"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Legs"),
                     renderer = defaultRendererInfo[13].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Mask"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Mask"),
                     renderer = defaultRendererInfo[14].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("MidGauntletL"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("MidGauntletL"),
                     renderer = defaultRendererInfo[15].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("MidGauntletR"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("MidGauntletR"),
                     renderer = defaultRendererInfo[16].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("MidGauntlets"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("MidGauntlets"),
                     renderer = defaultRendererInfo[17].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Shoes"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Shoes"),
                     renderer = defaultRendererInfo[18].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Wristband"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Wristband"),
                     renderer = defaultRendererInfo[19].renderer
                 },
             };
@@ -1107,7 +1107,7 @@ namespace DekuMod.Modules.Survivors
                 matWristband
             });
             SkinDef eyeSkin = Modules.Skins.CreateSkinDef(DekuPlugin.developerPrefix + "_DEKU_BODY_EYE_SKIN_NAME",
-                Asset.mainAssetBundle.LoadAsset<Sprite>("Airforceskin"),
+                DekuAssets.mainAssetBundle.LoadAsset<Sprite>("Airforceskin"),
                 eyeRendererInfo,
                 mainRenderer,
                 model);
@@ -1116,102 +1116,102 @@ namespace DekuMod.Modules.Survivors
             {
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("ArmL"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("ArmL"),
                     renderer = defaultRendererInfo[0].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("ArmR"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("ArmR"),
                     renderer = defaultRendererInfo[1].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Belt"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Belt"),
                     renderer = defaultRendererInfo[2].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Body"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Body"),
                     renderer = defaultRendererInfo[3].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Eyes"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Eyes"),
                     renderer = defaultRendererInfo[4].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Face"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Face"),
                     renderer = defaultRendererInfo[5].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Neck"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Neck"),
                     renderer = defaultRendererInfo[6].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("GoldenButtons"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("GoldenButtons"),
                     renderer = defaultRendererInfo[7].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("GranCape"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("GranCape"),
                     renderer = defaultRendererInfo[8].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("GranMantle"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("GranMantle"),
                     renderer = defaultRendererInfo[9].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Hair"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Hair"),
                     renderer = defaultRendererInfo[10].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Hands"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Hands"),
                     renderer = defaultRendererInfo[11].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Hood"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Hood"),
                     renderer = defaultRendererInfo[12].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Legs"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Legs"),
                     renderer = defaultRendererInfo[13].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Mask"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Mask"),
                     renderer = defaultRendererInfo[14].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("MidGauntletL"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("MidGauntletL"),
                     renderer = defaultRendererInfo[15].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("MidGauntletR"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("MidGauntletR"),
                     renderer = defaultRendererInfo[16].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("MidGauntlets"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("MidGauntlets"),
                     renderer = defaultRendererInfo[17].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Shoes"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Shoes"),
                     renderer = defaultRendererInfo[18].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Asset.mainAssetBundle.LoadAsset<Mesh>("Wristband"),
+                    mesh = Modules.DekuAssets.mainAssetBundle.LoadAsset<Mesh>("Wristband"),
                     renderer = defaultRendererInfo[19].renderer
                 },
             };

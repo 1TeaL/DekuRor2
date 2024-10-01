@@ -258,7 +258,7 @@ namespace DekuMod.SkillStates.BlackWhip
             }
 
 
-            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.Asset.blackwhipLineRenderer, child.FindChild("RHand").transform);
+            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.DekuAssets.blackwhipLineRenderer, child.FindChild("RHand").transform);
             blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
             Chat.AddMessage("blastPosition" + blastPosition);
 
@@ -359,20 +359,20 @@ namespace DekuMod.SkillStates.BlackWhip
 
                     if (this.modelTransform)
                     {
-                        TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                        temporaryOverlay.duration = duration;
-                        temporaryOverlay.animateShaderAlpha = true;
-                        temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                        temporaryOverlay.destroyComponentOnEnd = true;
-                        temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-                        temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-                        TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-                        temporaryOverlay2.duration = duration;
-                        temporaryOverlay2.animateShaderAlpha = true;
-                        temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                        temporaryOverlay2.destroyComponentOnEnd = true;
-                        temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-                        temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+                        //TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                        //temporaryOverlay.duration = duration;
+                        //temporaryOverlay.animateShaderAlpha = true;
+                        //temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                        //temporaryOverlay.destroyComponentOnEnd = true;
+                        //temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                        //temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+                        //TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                        //temporaryOverlay2.duration = duration;
+                        //temporaryOverlay2.animateShaderAlpha = true;
+                        //temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                        //temporaryOverlay2.destroyComponentOnEnd = true;
+                        //temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+                        //temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
                     }
 
                     //if (base.isAuthority && base.fixedAge >= duration)

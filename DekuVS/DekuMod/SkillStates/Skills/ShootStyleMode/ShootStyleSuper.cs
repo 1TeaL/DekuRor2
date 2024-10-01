@@ -171,7 +171,7 @@ namespace DekuMod.SkillStates.ShootStyle
             }
 
             EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, "LFoot", false);
-            EffectManager.SimpleMuzzleFlash(Modules.Asset.muzzleflashMageLightningLargePrefab, base.gameObject, "LFoot", false);
+            EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.muzzleflashMageLightningLargePrefab, base.gameObject, "LFoot", false);
 
             base.characterMotor.useGravity = false;
             this.previousMass = base.characterMotor.mass;
@@ -201,14 +201,14 @@ namespace DekuMod.SkillStates.ShootStyle
                         blastAttack.position = blastPosition;
                         
                         blastAttack.Fire();
-                        EffectManager.SpawnEffect(Modules.Asset.lightningNovaEffectPrefab, new EffectData
+                        EffectManager.SpawnEffect(Modules.DekuAssets.lightningNovaEffectPrefab, new EffectData
                         {
                             origin = blastPosition,
                             scale = blastRadius,
                             rotation = Util.QuaternionSafeLookRotation(aimRay.direction)
 
                         }, true);
-                        EffectManager.SpawnEffect(Modules.Asset.sonicboomEffectPrefab, new EffectData
+                        EffectManager.SpawnEffect(Modules.DekuAssets.sonicboomEffectPrefab, new EffectData
                         {
                             origin = blastPosition,
                             scale = blastRadius,
@@ -231,8 +231,8 @@ namespace DekuMod.SkillStates.ShootStyle
                     {
                         hasFired = true;
                         blastAttack.Fire();
-                        EffectManager.SpawnEffect(Modules.Asset.mageLightningBombEffectPrefab, effectData, true);
-                        EffectManager.SpawnEffect(Modules.Asset.detroitEffect, effectData2, true);
+                        EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, effectData, true);
+                        EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, effectData2, true);
 
                         AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 
@@ -269,20 +269,18 @@ namespace DekuMod.SkillStates.ShootStyle
 
                     if (this.modelTransform)
                     {
-                        TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                        TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
                         temporaryOverlay.duration = duration;
                         temporaryOverlay.animateShaderAlpha = true;
                         temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                         temporaryOverlay.destroyComponentOnEnd = true;
                         temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-                        temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-                        TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                        TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
                         temporaryOverlay2.duration = duration;
                         temporaryOverlay2.animateShaderAlpha = true;
                         temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                         temporaryOverlay2.destroyComponentOnEnd = true;
                         temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-                        temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
                     }
 
                     if (base.isAuthority && base.fixedAge >= duration)

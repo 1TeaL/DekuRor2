@@ -100,7 +100,7 @@ namespace DekuMod.Modules.Networking
                 {
                     direction = Vector3.up;
 
-                    EffectManager.SpawnEffect(Modules.Asset.detroitweakEffect, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.detroitweakEffect, new EffectData
                     {
                         origin = enemycharBody.transform.position,
                         scale = 1f,
@@ -118,7 +118,7 @@ namespace DekuMod.Modules.Networking
                 else if (!enemycharBody.characterMotor.isGrounded)
                 {
 
-                    EffectManager.SpawnEffect(Modules.Asset.detroitweakEffect, new EffectData
+                    EffectManager.SpawnEffect(Modules.DekuAssets.detroitweakEffect, new EffectData
                     {
                         origin = enemycharBody.transform.position,
                         scale = 1f,
@@ -137,7 +137,7 @@ namespace DekuMod.Modules.Networking
             else if (enemycharBody.rigidbody)
             {
 
-                EffectManager.SpawnEffect(Modules.Asset.detroitweakEffect, new EffectData
+                EffectManager.SpawnEffect(Modules.DekuAssets.detroitweakEffect, new EffectData
                 {
                     origin = enemycharBody.transform.position,
                     scale = 1f,

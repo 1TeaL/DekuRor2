@@ -40,10 +40,10 @@ namespace DekuMod.SkillStates
             this.swingSoundString = "shootstyedashcombosfx";
             this.hitSoundString = "";
             this.muzzleString = ChooseAnimationString();
-            this.swingEffectPrefab = Modules.Asset.dekuKickEffect;
-            this.hitEffectPrefab = Modules.Asset.dekuHitImpactEffect;
+            this.swingEffectPrefab = Modules.DekuAssets.dekuKickEffect;
+            this.hitEffectPrefab = Modules.DekuAssets.dekuHitImpactEffect;
 
-            this.impactSound = Modules.Asset.kickHitSoundEvent.index;
+            this.impactSound = Modules.DekuAssets.kickHitSoundEvent.index;
 
             base.OnEnter();
         }

@@ -164,8 +164,8 @@ namespace DekuMod.SkillStates.Might
 						hasFired = true;
 						blastAttack.Fire();
 
-                        EffectManager.SpawnEffect(Modules.Asset.mageLightningBombEffectPrefab, effectData, true);
-                        EffectManager.SpawnEffect(Modules.Asset.detroitEffect, effectData2, true);
+                        EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, effectData, true);
+                        EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, effectData2, true);
 
 
                         AkSoundEngine.PostEvent("impactsfx", this.gameObject);
@@ -181,8 +181,8 @@ namespace DekuMod.SkillStates.Might
                     {
                         hasFired = true;
                         blastAttack.Fire();
-                        EffectManager.SpawnEffect(Modules.Asset.mageLightningBombEffectPrefab, effectData, true);
-                        EffectManager.SpawnEffect(Modules.Asset.detroitEffect, effectData2, true);
+                        EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, effectData, true);
+                        EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, effectData2, true);
 
 
                         AkSoundEngine.PostEvent("impactsfx", this.gameObject);
@@ -228,7 +228,7 @@ namespace DekuMod.SkillStates.Might
             if (isAuthority)
             {
                 Ray aimRay = base.GetAimRay();
-                EffectManager.SpawnEffect(Modules.Asset.bisonEffect, new EffectData
+                EffectManager.SpawnEffect(Modules.DekuAssets.bisonEffect, new EffectData
                 {
                     origin = base.transform.position,
                     scale = 1f,
@@ -265,7 +265,7 @@ namespace DekuMod.SkillStates.Might
                     }
 
 
-                    EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "DownSwing", true);
+                    EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.dekuKickEffect, base.gameObject, "DownSwing", true);
                     for (int i = 0; i <= 10; i++)
                     {
                         float rand = 60f;
@@ -347,7 +347,7 @@ namespace DekuMod.SkillStates.Might
                 origin = base.characterBody.corePosition,
                 rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z)),
             };
-            EffectManager.SpawnEffect(Modules.Asset.mageLightningBombEffectPrefab, effectData, true);
+            EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, effectData, true);
 
             EffectData effectData2 = new EffectData
             {
@@ -355,7 +355,7 @@ namespace DekuMod.SkillStates.Might
                 origin = base.characterBody.corePosition,
                 rotation = Quaternion.LookRotation(new Vector3(aimRay.direction.x, aimRay.direction.y, aimRay.direction.z)),
             };
-            EffectManager.SpawnEffect(Modules.Asset.detroitEffect, effectData2, true);
+            EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, effectData2, true);
         }
         private void UpdateDirection()
         {

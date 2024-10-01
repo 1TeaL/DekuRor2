@@ -31,7 +31,7 @@ namespace DekuMod.SkillStates
 			base.characterMotor.rootMotion += this.moveVec;
 			base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 			PlayCrossfade("RightArm, Override", "DetroitSmash", "Attack.playbackRate", 0.3f, 0.01f);
-			EffectManager.SimpleMuzzleFlash(Modules.Asset.dekuKickEffect, base.gameObject, "RPunchSwing", true);
+			EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.dekuKickEffect, base.gameObject, "RPunchSwing", true);
 			//Util.PlaySound(FireMegaNova.novaSoundString, base.gameObject);
 			//EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.lMuzzleString, false);
 			EffectManager.SimpleMuzzleFlash(this.muzzlePrefab, base.gameObject, this.rMuzzleString, false);

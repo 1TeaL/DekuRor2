@@ -135,7 +135,7 @@ namespace DekuMod.SkillStates.ShootStyle
             attack.pushAwayForce = pushForce;
             attack.hitBoxGroup = hitBoxGroup;
             attack.isCrit = RollCrit();
-            attack.impactSound = Modules.Asset.kickHitSoundEvent.index;
+            attack.impactSound = Modules.DekuAssets.kickHitSoundEvent.index;
 
 
             detector = new OverlapAttack();
@@ -184,20 +184,18 @@ namespace DekuMod.SkillStates.ShootStyle
 
             if (modelTransform)
             {
-                TemporaryOverlay temporaryOverlay = modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
                 temporaryOverlay.duration = 0.6f;
                 temporaryOverlay.animateShaderAlpha = true;
                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                 temporaryOverlay.destroyComponentOnEnd = true;
                 temporaryOverlay.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-                temporaryOverlay.AddToCharacerModel(modelTransform.GetComponent<CharacterModel>());
-                TemporaryOverlay temporaryOverlay2 = modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+                TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
                 temporaryOverlay2.duration = 0.7f;
                 temporaryOverlay2.animateShaderAlpha = true;
                 temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                 temporaryOverlay2.destroyComponentOnEnd = true;
                 temporaryOverlay2.originalMaterial = LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-                temporaryOverlay2.AddToCharacerModel(modelTransform.GetComponent<CharacterModel>());
             }
             FireAttack();
             hitPauseTimer -= Time.fixedDeltaTime;
@@ -352,8 +350,8 @@ namespace DekuMod.SkillStates.ShootStyle
                 {
                     cameraTargetParams.fovOverride = -1f;
                 }
-                EffectManager.SimpleMuzzleFlash(Modules.Asset.boostJumpEffectPrefab, gameObject, "LFoot", false);
-                EffectManager.SimpleMuzzleFlash(Modules.Asset.muzzleflashMageLightningLargePrefab, gameObject, "LFoot", false);
+                EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.boostJumpEffectPrefab, gameObject, "LFoot", false);
+                EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.muzzleflashMageLightningLargePrefab, gameObject, "LFoot", false);
 
                 bool flag3 = characterMotor;
                 if (flag3)

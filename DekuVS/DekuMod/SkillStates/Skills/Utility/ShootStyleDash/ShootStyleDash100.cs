@@ -96,20 +96,20 @@ namespace DekuMod.SkillStates
 				this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 				if (this.modelTransform)
 				{
-					TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-					temporaryOverlay.duration = 0.6f;
-					temporaryOverlay.animateShaderAlpha = true;
-					temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-					temporaryOverlay.destroyComponentOnEnd = true;
-					temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-					temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
-					TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
-					temporaryOverlay2.duration = 0.7f;
-					temporaryOverlay2.animateShaderAlpha = true;
-					temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-					temporaryOverlay2.destroyComponentOnEnd = true;
-					temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-					temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+					//TemporaryOverlay temporaryOverlay = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+					//temporaryOverlay.duration = 0.6f;
+					//temporaryOverlay.animateShaderAlpha = true;
+					//temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+					//temporaryOverlay.destroyComponentOnEnd = true;
+					//temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+					//temporaryOverlay.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
+					//TemporaryOverlay temporaryOverlay2 = this.modelTransform.gameObject.AddComponent<TemporaryOverlay>();
+					//temporaryOverlay2.duration = 0.7f;
+					//temporaryOverlay2.animateShaderAlpha = true;
+					//temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+					//temporaryOverlay2.destroyComponentOnEnd = true;
+					//temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+					//temporaryOverlay2.AddToCharacerModel(this.modelTransform.GetComponent<CharacterModel>());
 				}
 			}
 			bool flag = this.stopwatch >= dashDuration + dashPrepDuration;
@@ -144,7 +144,7 @@ namespace DekuMod.SkillStates
 			Ray aimRay = base.GetAimRay();
 			if (base.isAuthority)
 			{
-				EffectManager.SpawnEffect(Modules.Asset.impactEffect, new EffectData
+				EffectManager.SpawnEffect(Modules.DekuAssets.impactEffect, new EffectData
 				{
 					origin = base.transform.position,
 					scale = 1f,

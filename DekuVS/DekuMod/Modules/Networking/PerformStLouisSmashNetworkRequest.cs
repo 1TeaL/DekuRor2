@@ -94,7 +94,7 @@ namespace DekuMod.Modules.Networking
 
             Vector3 direction = dekucharBody.characterDirection.forward;
             
-            EffectManager.SpawnEffect(Modules.Asset.detroitweakEffect, new EffectData
+            EffectManager.SpawnEffect(Modules.DekuAssets.detroitweakEffect, new EffectData
             {
                 origin = enemycharBody.transform.position,
                 scale = 1f,
