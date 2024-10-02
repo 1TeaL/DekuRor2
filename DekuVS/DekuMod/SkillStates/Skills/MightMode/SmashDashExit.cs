@@ -5,11 +5,13 @@ using RoR2;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DekuMod.Modules;
 
 namespace DekuMod.SkillStates.Might
 {
     public class SmashDashExit : BaseMeleeAttack
     {
+        public HurtBox Target;
         public override void OnEnter()
         {
 
@@ -22,17 +24,17 @@ namespace DekuMod.SkillStates.Might
             this.bonusForce = Vector3.zero;
             this.damageType = DamageType.Generic;            
             this.baseDuration = 0.5f;
-            this.attackStartTime = 0.4f;
-            this.attackEndTime = 0.8f;
-            this.baseEarlyExitTime = 0.4f;
-            this.hitStopDuration = 0.012f;
+            this.attackStartTime = 0.35f;
+            this.attackEndTime = 0.6f;
+            this.baseEarlyExitTime = 0.8f;
+            this.hitStopDuration = 0.2f;
             this.attackRecoil = 0.5f;
-            this.hitHopVelocity = 10f;
+            this.hitHopVelocity = 5f;
 
             this.swingSoundString = "shootstyedashcombosfx";
             this.hitSoundString = "";
-            this.muzzleString = ChooseAnimationString();
-            this.swingEffectPrefab = Modules.DekuAssets.dekuKickEffect;
+            this.muzzleString = "mightSwingR";
+            this.swingEffectPrefab = Modules.DekuAssets.dekuPunchEffect;
             this.hitEffectPrefab = Modules.DekuAssets.dekuHitImpactEffect;
 
             this.impactSound = Modules.DekuAssets.kickHitSoundEvent.index;
@@ -48,30 +50,21 @@ namespace DekuMod.SkillStates.Might
                     damageCoefficient *= 3f;
                     break;
             }
+            dekucon = base.GetComponent<DekuController>();
+            if (dekucon && base.isAuthority)
+            {
+                Target = dekucon.GetTrackingTarget();
+            }
+
             base.OnEnter();
         }
 
-        private string ChooseAnimationString()
-        {
-            string returnVal = "DashAttack";
-            switch (level)
-            {
-                case 0:
-                    returnVal = "DashAttack";
-                    break;
-                case 1:
-                    returnVal = "DashAttack";
-                    break;
-                case 2:
-                    returnVal = "TeleportAttack";
-                    break;
-            }
-
-            return returnVal;
-        }
 
         protected override void PlayAttackAnimation()
         {
+
+            base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+            base.PlayAnimation("FullBody, Override", "SmashRushDashEnd", "Slash.playbackRate", 0.01f);
             switch (level)
             {
                 case 0:
@@ -95,18 +88,43 @@ namespace DekuMod.SkillStates.Might
 
         protected override void SetNextState()
         {
-            //int index = this.swingIndex;
-            //index += 1;
-            //if (index > 2)
-            //{
-            //    index = 0;
-            //}
-
-            this.outer.SetNextState(new SmashRushCombo
+            int index = this.swingIndex;
+            if (index == 0) index = 1;
+            else index = 0;
+            
+            if (dekucon && base.isAuthority)
             {
-                //swingIndex = index
-            });
+                Target = dekucon.GetTrackingTarget();
+            }
+
+            if (Target.healthComponent.alive)
+            {
+                float num2 = Vector3.Distance(base.transform.position, Target.transform.position);
+                if (num2 >= StaticValues.smashRushDistance)
+                {
+                    //this.outer.SetNextState(new DashAttack
+                    //{
+
+                    //});
+                }
+                else
+                {
+                    this.outer.SetNextState(new SmashRushCombo
+                    {
+                        swingIndex = index
+                    });
+
+                }
+            }
+            else if (!Target)
+            {
+                this.outer.SetNextState(new SmashRushCombo
+                {
+                    swingIndex = index
+                });
+            }
         }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();

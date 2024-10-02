@@ -29,9 +29,16 @@ namespace DekuMod.Modules.Survivors
         public ParticleSystem LARM;
         public ParticleSystem LLEG;
         public ParticleSystem RLEG;
-        public ParticleSystem OFA;
-        public ParticleSystem OFAeye;
-        public ParticleSystem FAJIN;
+        public ParticleSystem WAISTOFA;
+        public ParticleSystem RARMOFA;
+        public ParticleSystem LARMOFA;
+        public ParticleSystem ROFAeye;
+        public ParticleSystem LOFAeye;
+        public ParticleSystem LARMFAJIN;
+        public ParticleSystem RARMFAJIN;
+        public ParticleSystem PLUSULTRA1;
+        public ParticleSystem PLUSULTRA2;
+        public ParticleSystem PLUSULTRA3;
         public ParticleSystem DANGERSENSE;
         public ParticleSystem WINDRING;
         public ParticleSystem BLACKWHIP;
@@ -74,10 +81,10 @@ namespace DekuMod.Modules.Survivors
         public float ofaHurtTimer;
 
         //Go Beyond
-        public float goBeyondTimer;
-        public bool goBeyondUsed;
-        public bool goBeyondOFAGiven;
-        public float goBeyondBuffTimer;
+        //public float goBeyondTimer;
+        //public bool goBeyondUsed;
+        //public bool goBeyondOFAGiven;
+        //public float goBeyondBuffTimer;
 
         //Indicator
         public float maxTrackingDistance = 70f;
@@ -101,6 +108,8 @@ namespace DekuMod.Modules.Survivors
 
         //skill cd
         public float skillCDTimer;
+        public bool resetSkill2;
+        public bool resetSkill3;
         private float buttonCooler;
 
         //blackwhip pull
@@ -137,12 +146,20 @@ namespace DekuMod.Modules.Survivors
             if (child)
             {
                 //GOBEYOND = child.FindChild("goBeyondAura").GetComponent<ParticleSystem>();
-                //LARM = child.FindChild("lArmAura").GetComponent<ParticleSystem>();
-                //RARM = child.FindChild("rArmAura").GetComponent<ParticleSystem>();
-                //LLEG = child.FindChild("lLegAura").GetComponent<ParticleSystem>();
-                //RLEG = child.FindChild("rLegAura").GetComponent<ParticleSystem>();
-                //OFA = child.FindChild("OFAlightning").GetComponent<ParticleSystem>();
-                //OFAeye = child.FindChild("OFAlightningeye").GetComponent<ParticleSystem>();
+                LARM = child.FindChild("lArmEffect").GetComponent<ParticleSystem>();
+                RARM = child.FindChild("rArmEffect").GetComponent<ParticleSystem>();
+                LLEG = child.FindChild("lLegEffect").GetComponent<ParticleSystem>();
+                RLEG = child.FindChild("rLegEffect").GetComponent<ParticleSystem>();
+                WAISTOFA = child.FindChild("waistOFAAura").GetComponent<ParticleSystem>();
+                LARMOFA = child.FindChild("lArmOFAAura").GetComponent<ParticleSystem>();
+                RARMOFA = child.FindChild("rArmOFAAura").GetComponent<ParticleSystem>();
+                ROFAeye = child.FindChild("rEyeAura").GetComponent<ParticleSystem>();
+                LOFAeye = child.FindChild("lEyeAura").GetComponent<ParticleSystem>();
+                LARMFAJIN = child.FindChild("lArmFajinAura").GetComponent<ParticleSystem>();
+                RARMFAJIN = child.FindChild("rArmFajinAura").GetComponent<ParticleSystem>();
+                PLUSULTRA1 = child.FindChild("PlusUltra1").GetComponent<ParticleSystem>();
+                PLUSULTRA2 = child.FindChild("PlusUltra1").GetComponent<ParticleSystem>();
+                PLUSULTRA3 = child.FindChild("PlusUltra1").GetComponent<ParticleSystem>();
                 //FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
                 //DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
                 //WINDRING = child.FindChild("windRing").GetComponent<ParticleSystem>();
@@ -165,22 +182,98 @@ namespace DekuMod.Modules.Survivors
             //GEARSHIFTIN.Stop();
             //GEARSHIFTOUT.Stop();
 
+            LARM.Stop();
+            RARM.Stop();
+            LLEG.Stop();
+            RLEG.Stop();
+            WAISTOFA.Stop();
+            LARMOFA.Stop();
+            RARMOFA.Stop();
+            ROFAeye.Stop();
+            LOFAeye.Stop();
+            LARMFAJIN.Stop();
+            RARMFAJIN.Stop();
+            PLUSULTRA1.Stop();
+            PLUSULTRA2.Stop();
+            PLUSULTRA3.Stop();
+
             StopGobeyondLoop();
 
             //anim = GetComponentInChildren<Animator>();
             //stopwatch = 0f;
 
             //On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
-            goBeyondUsed = false;
-            goBeyondOFAGiven = false;
+            //goBeyondUsed = false;
+            //goBeyondOFAGiven = false;
             skillCDTimer = 0f;
 
+            //activate ofa effect on set levels to showcase enhanced and mastered 
+            if (body.level >= 10f)
+            {
+                if (WAISTOFA.isStopped)
+                {
+                    WAISTOFA.Play();
+                }
+                if (LARMOFA.isStopped)
+                {
+                    LARMOFA.Play();
+                }
+                if (RARMOFA.isStopped)
+                {
+                    RARMOFA.Play();
+                }
+            }
+            if (body.level >= 20f)
+            {
+                if (ROFAeye.isStopped)
+                {
+                    ROFAeye.Play();
+                }
+                if (LOFAeye.isStopped)
+                {
+                    LOFAeye.Play();
+                }
+            }
+
+            On.RoR2.LevelUpEffectManager.OnCharacterLevelUp += LevelUpEffectManager_OnCharacterLevelUp;
 
             if (DekuAssets.blackwhipIndicator)
             {
                 blackwhipReticle = UnityEngine.Object.Instantiate<GameObject>(DekuAssets.blackwhipIndicator);
                 blackwhipReticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 blackwhipReticle.SetActive(true);
+            }
+        }
+
+        private void LevelUpEffectManager_OnCharacterLevelUp(On.RoR2.LevelUpEffectManager.orig_OnCharacterLevelUp orig, CharacterBody characterBody)
+        {
+            orig.Invoke(characterBody);
+
+            if(characterBody.level >= 10f )
+            {
+                if(WAISTOFA.isStopped)
+                {
+                    WAISTOFA.Play();
+                }
+                if (LARMOFA.isStopped)
+                {
+                    LARMOFA.Play();
+                }
+                if (RARMOFA.isStopped)
+                {
+                    RARMOFA.Play();
+                }
+            }
+            if (characterBody.level >= 20f)
+            {
+                if (ROFAeye.isStopped)
+                {
+                    ROFAeye.Play();
+                }
+                if (LOFAeye.isStopped)
+                {
+                    LOFAeye.Play();
+                }
             }
         }
 
@@ -292,7 +385,7 @@ namespace DekuMod.Modules.Survivors
         //                {
         //                    Chat.AddMessage($"You need {StaticValues.dangersensePlusUltraSpend} plus ultra.");
         //                }
-                        
+
 
 
         //            }
@@ -881,6 +974,7 @@ namespace DekuMod.Modules.Survivors
         private void OnDestroy()
         {
             StopGobeyondLoop();
+            On.RoR2.LevelUpEffectManager.OnCharacterLevelUp -= LevelUpEffectManager_OnCharacterLevelUp;
         }
 
     }

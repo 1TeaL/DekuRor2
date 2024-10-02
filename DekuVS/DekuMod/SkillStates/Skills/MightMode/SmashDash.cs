@@ -64,9 +64,9 @@ namespace DekuMod.SkillStates.Might
             this.attack.isCrit = base.RollCrit();
             this.attack.pushAwayForce = pushForce * 0.2f;
             //Util.PlaySound("Misc_StartDash", base.gameObject);
-            base.GetModelAnimator().SetBool("attacking", true);
+            base.GetModelAnimator().SetBool("smashRushDashEnd", false);
             base.GetModelAnimator().SetFloat("Slash.playbackRate", base.attackSpeedStat);
-            base.PlayAnimation("FullBody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
+            base.PlayAnimation("FullBody, Override", "SmashRushDash", "Slash.playbackRate", 0.01f);
 
 
             AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
@@ -74,7 +74,7 @@ namespace DekuMod.SkillStates.Might
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            base.PlayAnimation("FullBody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
+            //base.PlayAnimation("FullBody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
             if (Target)
             {
                 this.storedPosition = Target.transform.position;
@@ -86,7 +86,8 @@ namespace DekuMod.SkillStates.Might
                 {
                     base.characterMotor.Motor.SetPositionAndRotation(storedPosition - base.GetAimRay().direction.normalized * 2f, Quaternion.LookRotation(base.GetAimRay().direction));
 
-                    this.outer.SetNextState(new DashAttackExit
+                    base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+                    this.outer.SetNextState(new SmashDashExit
                     {
                     });
 
@@ -127,13 +128,15 @@ namespace DekuMod.SkillStates.Might
                                     {
                                     }
                                 }
-                                this.outer.SetNextState(new DashAttackExit
+                                base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+                                this.outer.SetNextState(new SmashDashExit
                                 {
                                 });
                             }
                             else
                             {
-                                this.outer.SetNextState(new DashAttackExit
+                                base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+                                this.outer.SetNextState(new SmashDashExit
                                 {
                                 });
                             }

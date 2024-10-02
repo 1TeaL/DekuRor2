@@ -71,6 +71,7 @@
     <Compile Include="Assets\HenryUnityProject\Assets\Scripts\FootstepHandler.cs" />
     <Compile Include="Assets\VFX\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\Travis Game Assets\Hit Impact Effects\Demo Scene\Scripts\HitImpactEffectsPreview.cs" />
     <Compile Include="Assets\ShaderForge-sf_1.40_for_unity_2019.x\Shader Forge\Assets\ShaderForge\Example Assets\Scripts\EnableCameraDepthInForward.cs" />
     <Compile Include="Assets\VFX\EffectExamples\Shared\Scripts\ParticleCollision.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDir.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Assets\HenryUnityProject\Assets\Scripts\DynamicBone.cs" />
     <Compile Include="Assets\HenryUnityProject\Assets\Scripts\DynamicBoneCollider.cs" />
     <Compile Include="Assets\VFX\EffectExamples\Shared\Scripts\GunAim.cs" />
-    <Compile Include="Assets\Travis Game Assets\Hit Impact Effects\Demo Scene\Scripts\HitImpactEffectsPreview.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\StdLib.hlsl" />

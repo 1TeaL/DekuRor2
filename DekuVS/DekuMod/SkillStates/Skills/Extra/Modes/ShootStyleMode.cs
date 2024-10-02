@@ -20,6 +20,9 @@ namespace DekuMod.SkillStates
         public SkillDef skilldef3;
         public SkillDef skilldef4;
 
+        private bool resetSwappedSkill2;
+        private bool resetSwappedSkill3;
+
         private bool isSwitch;
         private BlastAttack blastAttack;
         private float dropForce = StaticValues.shootSwitchDropForce;
@@ -40,9 +43,29 @@ namespace DekuMod.SkillStates
             skilldef3 = characterBody.skillLocator.utility.skillDef;
             skilldef4 = characterBody.skillLocator.special.skillDef;
 
+            if (dekucon.resetSkill2)
+            {
+                resetSwappedSkill2 = true;
+            }
+            if (dekucon.resetSkill3)
+            {
+                resetSwappedSkill3 = true;
+            }
 
+            if (base.skillLocator.secondary.cooldownRemaining > 0)
+            {
+                dekucon.resetSkill2 = false;
+            }
+            if (skilldef3 == Deku.mightUtilitySkillDef && base.skillLocator.utility.stock < base.skillLocator.utility.maxStock)
+            {
+                dekucon.resetSkill3 = false;
+            }
+            else if(base.skillLocator.utility.cooldownRemaining > 0)
+            {
+                dekucon.resetSkill3 = false;
+            }
 
-            if(skilldef1 != Deku.shootPrimarySkillDef)
+            if (skilldef1 != Deku.shootPrimarySkillDef)
             {
                 base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, skilldef1, GenericSkill.SkillOverridePriority.Contextual);
                 base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.shootPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
@@ -55,6 +78,20 @@ namespace DekuMod.SkillStates
 
                 base.skillLocator.special.UnsetSkillOverride(base.skillLocator.utility, skilldef4, GenericSkill.SkillOverridePriority.Contextual);
                 base.skillLocator.special.SetSkillOverride(base.skillLocator.utility, Deku.shootSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+                if (resetSwappedSkill2)
+                {
+                    base.skillLocator.secondary.AddOneStock();
+                }
+                if (resetSwappedSkill3)
+                {
+                    base.skillLocator.utility.AddOneStock();
+                }
+                if (!resetSwappedSkill2 || !resetSwappedSkill3)
+                {
+                    skillLocator.DeductCooldownFromAllSkillsAuthority(dekucon.skillCDTimer);
+                }
+                dekucon.skillCDTimer = 0f;
 
                 if (energySystem.currentPlusUltra > Modules.StaticValues.super1Cost)
                 {

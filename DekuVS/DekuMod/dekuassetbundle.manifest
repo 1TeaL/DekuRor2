@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1801163564
+CRC: 2674056360
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1d699d7d76371566fe577f6c383314a0
+    Hash: c1d11cb95a6254fd6eaa3dae27b94cfb
   TypeTreeHash:
     serializedVersion: 2
     Hash: cadff3ebdf0e75a109758b617fa81642
@@ -77,7 +77,7 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
-- Assets/DekuFinalForm/Animations/DetroitSmash3End3.anim
+- Assets/DekuFinalForm/Animations/DelawareSmashChargeEnd.anim
 - Assets/DekuFinalForm/Animations/Cape.anim
 - Assets/DekuFinalForm/Animations/ManchesterSmashDown.anim
 - Assets/DekuFinalForm/GUI/Floatactivate.png
@@ -101,10 +101,11 @@ Assets:
 - Assets/DekuFinalForm/VFX/smoke.prefab
 - Assets/DekuFinalForm/VFX/blackwhip.prefab
 - Assets/DekuFinalForm/VFX/windringbig.prefab
+- Assets/DekuFinalForm/Animations/DelawareWeakEndUp.anim
 - Assets/DekuFinalForm/VFX/DangerSenseParticle.prefab
 - Assets/DekuFinalForm/GUI/oklahoma45.png
 - Assets/DekuFinalForm/VFX/DekuKickEffect.prefab
-- Assets/DekuFinalForm/VFX/Material/windspikering.mat
+- Assets/DekuFinalForm/Animations/DekuFinalUpperBody.mask
 - Assets/DekuFinalForm/Assets/Materials/matHands.mat
 - Assets/DekuFinalForm/Assets/Materials/matLegs.mat
 - Assets/DekuFinalForm/GUI/blackwhipshoot.png
@@ -116,6 +117,7 @@ Assets:
 - Assets/DekuFinalForm/GUI/cyclemodeIcon.png
 - Assets/DekuFinalForm/Animations/ShootStyleRush3.anim
 - Assets/DekuFinalForm/GUI/ultimateupgrade.png
+- Assets/DekuFinalForm/VFX/Material/windspikering.mat
 - Assets/DekuFinalForm/VFX/Material/blackwhipbullet.mat
 - Assets/DekuFinalForm/VFX/Textures/Smash3.png
 - Assets/DekuFinalForm/GUI/shootstylekick.png
@@ -142,13 +144,15 @@ Assets:
 - Assets/DekuFinalForm/Assets/Materials/whiteBlinkingMat.mat
 - Assets/DekuFinalForm/Animations/animDekuFinal.controller
 - Assets/DekuFinalForm/GUI/gobeyondD.png
-- Assets/DekuFinalForm/VFX/speedLines.prefab
+- Assets/DekuFinalForm/Animations/DelawareWeakEndDown.anim
 - Assets/DekuFinalForm/GUI/ultimate100.png
 - Assets/DekuFinalForm/GUI/GearShift100.png
 - Assets/DekuFinalForm/Animations/OklahomaSmashDashEndV2.anim
 - Assets/DekuFinalForm/GUI/Floatactivate100.png
 - Assets/DekuFinalForm/Animations/WalkB.anim
 - Assets/DekuFinalForm/VFX/Material/blackwhipspark.mat
+- Assets/DekuFinalForm/VFX/speedLines.prefab
+- Assets/DekuFinalForm/Animations/FaJin.anim
 - Assets/DekuFinalForm/GUI/manchester45.png
 - Assets/DekuFinalForm/GUI/meterfill.png
 - Assets/DekuFinalForm/Animations/DelawareSmashChargeEndDown.anim
@@ -243,6 +247,7 @@ Assets:
 - Assets/DekuFinalForm/Assets/Mesh/MidGauntletR.mesh
 - Assets/DekuFinalForm/Animations/ManchesterSmashDownDashing.anim
 - Assets/DekuFinalForm/GUI/DangerSense.png
+- Assets/DekuFinalForm/Animations/DelawareWeakCharging.anim
 - Assets/DekuFinalForm/Assets/Materials/matFace.mat
 - Assets/DekuFinalForm/VFX/eyeAuraWorld.prefab
 - Assets/DekuFinalForm/Animations/SmashRushR.anim
@@ -316,6 +321,7 @@ Assets:
 - Assets/DekuFinalForm/Animations/Descend2.anim
 - Assets/DekuFinalForm/Assets/Materials/matMask.mat
 - Assets/DekuFinalForm/GUI/KickCount.tif
+- Assets/DekuFinalForm/VFX/delawareMax.prefab
 - Assets/DekuFinalForm/Assets/SmearMat.mat
 - Assets/DekuFinalForm/Animations/StLouis3End.anim
 - Assets/DekuFinalForm/GUI/detroit45.png
@@ -323,6 +329,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/Textures/Smash2.png
 - Assets/DekuFinalForm/Assets/Mesh/Wristband.mesh
 - Assets/DekuFinalForm/GUI/goBeyondE.png
+- Assets/DekuFinalForm/Animations/DelawareWeakCharge.anim
 - Assets/DekuFinalForm/Assets/spherePrefab.prefab
 - Assets/DekuFinalForm/VFX/blackwhipeffect.prefab
 - Assets/DekuFinalForm/Assets/Materials/matHair.mat
@@ -352,6 +359,7 @@ Assets:
 - Assets/DekuFinalForm/Assets/Materials/matWristband.mat
 - Assets/DekuFinalForm/VFX/blackwhipLineRenderer.prefab
 - Assets/DekuFinalForm/GUI/blackwhip.png
+- Assets/DekuFinalForm/Animations/DelawareWeakEnd.anim
 - Assets/DekuFinalForm/Assets/Materials/OFAAuraMat.mat
 - Assets/DekuFinalForm/Assets/Materials/matArmR.mat
 - Assets/DekuFinalForm/VFX/blackwhipexplosion.prefab
@@ -377,6 +385,6 @@ Assets:
 - Assets/DekuFinalForm/VFX/goBeyondAura.prefab
 - Assets/DekuFinalForm/GUI/Floatactivate45.png
 - Assets/DekuFinalForm/Assets/Materials/AuraShader.shader
-- Assets/DekuFinalForm/Animations/DelawareSmashChargeEnd.anim
+- Assets/DekuFinalForm/Animations/DetroitSmash3End3.anim
 - Assets/DekuFinalForm/Assets/Mesh/Hood.mesh
 Dependencies: []

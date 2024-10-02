@@ -38,6 +38,7 @@ namespace DekuMod.Modules
             entityStates.Add(typeof(SmashDash));
             entityStates.Add(typeof(SmashDashExit));
             entityStates.Add(typeof(DelawareSmash));
+            entityStates.Add(typeof(Fajin));
             entityStates.Add(typeof(CounterSmash));
             entityStates.Add(typeof(CounterFollowUp));
             entityStates.Add(typeof(MightSuper));

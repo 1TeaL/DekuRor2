@@ -11,6 +11,7 @@ namespace DekuMod.SkillStates.BaseStates
     public class BaseMeleeAttack : BaseDekuSkillState
     {
         public int swingIndex;
+        public bool keepMoving;
 
         protected string hitboxName = "SmashRushHitbox";
 

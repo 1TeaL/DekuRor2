@@ -9,19 +9,18 @@ using RoR2.UI;
 using DekuMod.Modules;
 using static UnityEngine.ParticleSystem.PlaybackState;
 using DekuMod.SkillStates.BaseStates;
+using System.Linq;
 
 namespace DekuMod.SkillStates.Might
 {
     public class DelawareSmash : BaseDekuSkillState
     {
         private GameObject effectPrefab = Modules.DekuAssets.banditmuzzleEffect;
-        public float baseChargeThreshold = StaticValues.delawareChargeThreshold;
-        private string muzzleName = "LFinger";
+        private string muzzleName = "RFinger";
 
-        public float chargeThreshold;
         public bool hasFired;
         public Animator anim;
-        public bool consumeStock = false;
+        //public bool consumeStock = false;
 
         private float recoilAmplitude = 4f;
         private float force;
@@ -29,6 +28,9 @@ namespace DekuMod.SkillStates.Might
         private float damage;
         private float range;
         private DamageType damageType;
+        private float chargePercent;
+        private float maxCharge;
+        private float baseMaxCharge = StaticValues.delawareMaxCharge;
 
         public override void OnEnter()
         {
@@ -36,32 +38,43 @@ namespace DekuMod.SkillStates.Might
             anim = base.GetModelAnimator();
             anim.SetBool("delawareCharged", false);
             hasFired = false;
-            chargeThreshold = baseChargeThreshold / attackSpeedStat;
+
             Ray aimRay = GetAimRay();
             characterBody.SetAimTimer(1f);
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            PlayCrossfade("FullBody, Override", "DelawareSmashBaseCharge", "Attack.playbackRate", 1f, 0.01f);
 
-            damage = StaticValues.delawareDamageCoefficient * damageStat;
-            force = 500f;
-            radius = 1f;
-            range = 20f;
-            damageType = DamageType.Generic;
 
-            switch (level)
+            float[] source = new float[]
             {
-                case 0:
-                    break;
-                case 1:
-                    chargeThreshold *= StaticValues.delawareCharge1;
-                    break;
-                case 2:
-                    chargeThreshold *= StaticValues.delawareCharge2;
-                    break;
-            }
+                this.attackSpeedStat,
+                4f
+            };
+            this.maxCharge = baseMaxCharge / source.Min();
 
             //PlayAnimation("RightArm, Override", "RightArmOut", "Attack.playbackRate", 1f);
 
+        }
+        public override void Level1()
+        {
+            damage = StaticValues.delawareDamageCoefficient * damageStat;
+            force = damage;
+            radius = StaticValues.delawareRadius;
+            damageType = DamageType.Generic;
+            PlayCrossfade("UpperBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
+        }
+        public override void Level2()
+        {
+            damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware2DamageMultiplier * damageStat;
+            radius = StaticValues.delawareRadius;
+            damageType = DamageType.Generic;
+            PlayCrossfade("UpperBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
+        }
+        public override void Level3()
+        {
+            damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware3DamageMultiplier * damageStat;
+            radius = StaticValues.delaware3Radius;
+            damageType = DamageType.Stun1s;
+            PlayCrossfade("UpperBody, Override", "DelawareCharge", "Attack.playbackRate", 0.5f, 0.01f);
         }
 
         public override void OnExit()
@@ -76,43 +89,12 @@ namespace DekuMod.SkillStates.Might
             base.FixedUpdate();
             if (IsKeyDownAuthority())
             {
-                //PlayCrossfade("FullBody, Override", "DelawareSmashBaseCharge", "Attack.playbackRate", 1f, 0.01f);
-                //PlayAnimation("RightArm, Override", "RightArmOut", "Attack.playbackRate", duration);
 
-                switch (level)
+                if (base.fixedAge < this.maxCharge)
                 {
-                    case 0:
+                    this.chargePercent = base.fixedAge / this.maxCharge;
 
-                        if (fixedAge >= chargeThreshold && base.skillLocator.secondary.stock >= 1)
-                        {      
-                            if (!consumeStock)
-                            {
-                                //take extra stock 
-                                base.skillLocator.secondary.DeductStock(1);
-                                consumeStock = true;
-                            }
-                        }
-                        break;
-                    case 1:
-
-                        if (fixedAge >= chargeThreshold && base.skillLocator.secondary.stock >= 1)
-                        {
-                            if (!consumeStock)
-                            {
-                                //take extra stock 
-                                base.skillLocator.secondary.DeductStock(1);
-                                consumeStock = true;
-                            }
-                        }
-                        break;
-                    case 2:
-
-                        if (fixedAge >= chargeThreshold)
-                        {
-                            //no need stock consumption
-                            
-                        }
-                        break;
+                    //base.characterMotor.walkSpeedPenaltyCoefficient = 1f - this.chargePercent / maxCharge;
                 }
             }
             else
@@ -123,75 +105,73 @@ namespace DekuMod.SkillStates.Might
                     {
                         anim.SetBool("delawareCharged", true);
                         hasFired = true;
-                        if (fixedAge <= chargeThreshold && isAuthority)
-                        {
-                            switch (level)
-                            {
-                                case 0:
 
-                                    Fire();
-                                    break;
-                                case 1:
-                                    damage = damageStat * StaticValues.delawareDamageCoefficient1;
-                                    Fire();
-                                    Fire();
-                                    break;
-                                case 2:
-                                    damageType = DamageType.Stun1s;
-                                    damage = damageStat * StaticValues.delawareDamageCoefficient2;
-                                    radius = 10f;
-                                    Fire();
-                                    break;
-                            }
+                        float angle = Vector3.Angle(new Vector3(0, -1, 0), base.GetAimRay().direction);
+                        switch (level)
+                        {
+                            case 0:
+                                damage += StaticValues.delawareDamageMultiplier * (this.chargePercent * Modules.StaticValues.delawareDamageCoefficient);
+                                
+                                Fire();
+                                if (angle < 60)
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp");
+                                }
+                                else if (angle > 120)
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown");
+                                }
+                                else
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd");
+                                }
+                                break;
+                            case 1:
+                                damage += StaticValues.delaware2DamageMultiplier * (this.chargePercent * Modules.StaticValues.delawareDamageCoefficient);
+                                
+                                Fire();
+                                if (angle < 60)
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp");
+                                }
+                                else if (angle > 120)
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown");
+                                }
+                                else
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd");
+                                }
+                                break;
+                            case 2:
+                                damage += StaticValues.delaware3DamageMultiplier * (this.chargePercent * Modules.StaticValues.delawareDamageCoefficient);
+                                
+                                Fire();
+                                if (angle < 60)
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndUp");
+                                }
+                                else if (angle > 120)
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndDown");
+                                }
+                                else
+                                {
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEnd");
+                                }
+                                break;
                         }
-                        else if (fixedAge >= chargeThreshold && isAuthority)
-                        {
-                            float angle = Vector3.Angle(new Vector3(0, -1, 0), base.GetAimRay().direction);
-                            if (angle < 60)
-                            {
-                                base.PlayAnimation("FullBody, Override", "DelawareSmashUp");
-                            }
-                            else if (angle > 120)
-                            {
-                                base.PlayAnimation("FullBody, Override", "DelawareSmashDown");
-                            }
-                            else
-                            {
-                                base.PlayAnimation("FullBody, Override", "DelawareSmash");
-                            }
-                            force = 4000f;
-                            range = 40f;
-                            damageType = DamageType.Stun1s;
+                        
 
-                            if (isAuthority)
+                            if (isAuthority && Config.allowVoice.Value)
                             {
                                 AkSoundEngine.PostEvent("delawarevoice", gameObject);
                             }
 
                             AkSoundEngine.PostEvent("delawaresfx", gameObject);
 
-                            switch (level)
-                            {
-                                case 0:
-                                    damage *= StaticValues.delawareChargeMultiplier;
-                                    Fire();
-                                    break;
-                                case 1:
-                                    Fire();
-                                    Fire();
-                                    Fire();
-                                    Fire();
-                                    Fire();
-                                    Fire();
-                                    break;
-                                case 2:
-                                    radius = 20f;
-                                    damage *= StaticValues.delawareChargeMultiplier;
-                                    Fire();
-                                    break;
-                            }
-                            base.characterMotor.velocity = StaticValues.stlouisDistance2 * (-base.GetAimRay().direction)* moveSpeedStat;
-                        }
+                            base.characterMotor.velocity = StaticValues.delawareDistance * (-base.GetAimRay().direction)* moveSpeedStat;
+                        
                         this.outer.SetNextStateToMain();
                     }
 
@@ -206,8 +186,25 @@ namespace DekuMod.SkillStates.Might
         public void Fire()
         {
             //AddRecoil(-3f * recoilAmplitude, -4f * recoilAmplitude, -0.5f * recoilAmplitude, 0.5f * recoilAmplitude);
-                      
 
+            BlastAttack blastAttack = new BlastAttack();
+
+            blastAttack.position = base.characterBody.corePosition;
+            blastAttack.baseDamage = this.damageStat * this.damage;
+            blastAttack.baseForce = force * this.damage;
+            blastAttack.radius = this.radius;
+            blastAttack.attacker = base.gameObject;
+            blastAttack.inflictor = base.gameObject;
+            blastAttack.teamIndex = base.teamComponent.teamIndex;
+            blastAttack.crit = base.RollCrit();
+            blastAttack.procChainMask = default(ProcChainMask);
+            blastAttack.procCoefficient = 1f;
+            blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+            blastAttack.damageColorIndex = DamageColorIndex.Default;
+            blastAttack.damageType = DamageType.Stun1s;
+            blastAttack.attackerFiltering = AttackerFiltering.Default;
+
+            blastAttack.Fire();
 
             if (effectPrefab)
             {
@@ -217,42 +214,13 @@ namespace DekuMod.SkillStates.Might
             if (isAuthority)
             {
 
-                BulletAttack bulletAttack = new BulletAttack
-                {
-
-                    bulletCount = 1,
-                    owner = gameObject,
-                    weapon = gameObject,
-                    origin = base.GetAimRay().origin,
-                    aimVector = base.GetAimRay().direction,
-                    minSpread = 0f,
-                    maxSpread = 0f,
-                    force = force,
-                    falloffModel = BulletAttack.FalloffModel.None,
-                    //tracerEffectPrefab = Modules.Asset.bandittracerEffectPrefab,
-                    muzzleName = muzzleName,
-                    hitEffectPrefab = Modules.DekuAssets.banditimpactEffect,
-                    isCrit = RollCrit(),
-                    HitEffectNormal = true,
-                    radius = radius,
-                    maxDistance = range,
-                    hitMask = LayerIndex.CommonMasks.bullet,
-                    stopperMask = LayerIndex.world.mask,
-                    procCoefficient = 1f,
-                    damage = damage,
-                    damageType = damageType,
-                    smartCollision = true,
-                    spreadPitchScale = 1f,
-                    spreadYawScale = 1f,
-                    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                };
 
                 switch (level)
                 {
                     case 0:
                         EffectManager.SpawnEffect(Modules.DekuAssets.delawareBullet, new EffectData
                         {
-                            origin = FindModelChild(muzzleName).position,
+                            origin = characterBody.footPosition,
                             scale = 1f,
                             rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
@@ -261,26 +229,24 @@ namespace DekuMod.SkillStates.Might
                     case 1:
                         EffectManager.SpawnEffect(Modules.DekuAssets.delawareBullet, new EffectData
                         {
-                            origin = FindModelChild(muzzleName).position,
+                            //origin = FindModelChild(muzzleName).position,
+                            origin = characterBody.footPosition,
                             scale = 1f,
                             rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
                         }, true);
                         break;
                     case 2:
-                        //bulletAttack.tracerEffectPrefab = Assets.delawareBullet;
 
                         EffectManager.SpawnEffect(Modules.DekuAssets.delawareEffect, new EffectData
                         {
-                            origin = FindModelChild(muzzleName).position,
+                            origin = characterBody.footPosition,
                             scale = 1f,
                             rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
                         }, true);
                         break;
                 }
-
-                bulletAttack.Fire();
 
             }
         }

@@ -9,7 +9,7 @@ namespace DekuMod.SkillStates.Might
     public class SmashRushCombo : BaseMeleeAttack
     {
         public HurtBox Target;
-        private bool keepMoving;
+        public int punchesDone;
         private float rollSpeed;
         private float SpeedCoefficient;
         public static float initialSpeedCoefficient = 10f;
@@ -28,9 +28,9 @@ namespace DekuMod.SkillStates.Might
             this.damageType = DamageType.Generic;
             this.baseDuration = 0.5f;
             this.attackStartTime = 0.4f;
-            this.attackEndTime = 0.8f;
+            this.attackEndTime = 0.6f;
             this.baseEarlyExitTime = 0.8f;
-            this.hitStopDuration = 0.012f;
+            this.hitStopDuration = 0.1f;
             this.attackRecoil = 0.5f;
             this.hitHopVelocity = 7f;
 
@@ -48,6 +48,7 @@ namespace DekuMod.SkillStates.Might
             {
                 Target = dekucon.GetTrackingTarget();
             }
+            Chat.AddMessage(swingIndex + "swing index");
 
             base.OnEnter();
         }
@@ -58,10 +59,17 @@ namespace DekuMod.SkillStates.Might
         }
         public override void Level2()
         {
-
+            damageCoefficient = StaticValues.smashRush2DamageCoefficient;
         }
         public override void Level3()
         {
+            damageCoefficient = StaticValues.smashRush2DamageCoefficient;
+            if (punchesDone > 20)
+            {
+                punchesDone = 20;
+            }
+            this.baseDuration = 0.5f / ((float)punchesDone / 10);
+            this.baseEarlyExitTime = 0.8f / ((float)punchesDone / 10);
 
         }
 
@@ -70,11 +78,11 @@ namespace DekuMod.SkillStates.Might
         {
             base.FixedUpdate();
 
-            if (swingIndex == 2 && this.stopwatch <= (this.baseDuration * this.attackStartTime) && keepMoving)
+            if (swingIndex == 1 && this.stopwatch <= (this.baseDuration * this.attackStartTime) && keepMoving)
             {
                 RecalculateRollSpeed();
                 Vector3 velocity = base.GetAimRay().direction.normalized * rollSpeed;
-                velocity.y = base.characterMotor.velocity.y;
+                //velocity.y = base.characterMotor.velocity.y;
                 base.characterMotor.velocity = velocity;
                 //base.characterDirection.forward = base.characterMotor.velocity.normalized;                
 
@@ -152,21 +160,23 @@ namespace DekuMod.SkillStates.Might
             if (index == 0) index = 1;
             else index = 0;
 
-            if (Target)
+            int actualPunchesDone = punchesDone + 1;
+
+            if (Target.healthComponent.alive)
             {
                 float num2 = Vector3.Distance(base.transform.position, Target.transform.position);
                 if (num2 >= StaticValues.smashRushDistance)
                 {
-                    //this.outer.SetNextState(new DashAttack
-                    //{
-
-                    //});
+                    this.outer.SetNextState(new SmashDash
+                    {
+                    });
                 }
                 else
                 {
                     this.outer.SetNextState(new SmashRushCombo
                     {
-                        swingIndex = index
+                        swingIndex = index,
+                        punchesDone = actualPunchesDone,
                     });
 
                 }
@@ -175,7 +185,8 @@ namespace DekuMod.SkillStates.Might
             {
                 this.outer.SetNextState(new SmashRushCombo
                 {
-                    swingIndex = index
+                    swingIndex = index,
+                    punchesDone = actualPunchesDone,
                 });
             }
         }

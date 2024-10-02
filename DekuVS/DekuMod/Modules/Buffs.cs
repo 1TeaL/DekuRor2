@@ -11,7 +11,7 @@ namespace DekuMod.Modules
     {
         internal static List<BuffDef> buffDefs = new List<BuffDef>();
 
-        //ofa
+        //buffs
         internal static BuffDef mightBuff;
         //internal static BuffDef supaofaBuff;
         //internal static BuffDef ofaBuff45;
@@ -20,7 +20,9 @@ namespace DekuMod.Modules
         ////skills
         //internal static BuffDef kickBuff;
         //internal static BuffDef floatBuff;
-        //internal static BuffDef fajinBuff;
+        internal static BuffDef fajinBuff;
+        internal static BuffDef fajinMaxBuff;
+        internal static BuffDef fajinStoredBuff;
 
         //go beyond
         internal static BuffDef goBeyondBuff;
@@ -99,7 +101,9 @@ namespace DekuMod.Modules
             //ofaBuff45 = Buffs.AddNewBuff("DekuOFA45 Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.blue, false, false);
             //supaofaBuff45 = Buffs.AddNewBuff("DekuInfiniteOFA45 Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffTeslaIcon"), Color.grey, false, false);
 
-            //fajinBuff = Buffs.AddNewBuff("FaJin Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffBodyArmorIcon"), Color.green, true, false);
+            fajinBuff = Buffs.AddNewBuff("FaJin Buff", DekuAssets.boostBuffIcon, Color.red, true, false);
+            fajinMaxBuff = Buffs.AddNewBuff("FaJin Mastered Buff", DekuAssets.boostBuffIcon, Color.red, true, false);
+            fajinStoredBuff = Buffs.AddNewBuff("FaJin Stored Buff", DekuAssets.boostBuffIcon, Color.white, true, false);
             //floatBuff = Buffs.AddNewBuff("DekuFloat Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texMovespeedBufficon"), Color.blue, false, false);
             //dangersenseBuff = Buffs.AddNewBuff("Dekudangersense Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffNullifyStackIcon"), Color.green, false, false);
         }

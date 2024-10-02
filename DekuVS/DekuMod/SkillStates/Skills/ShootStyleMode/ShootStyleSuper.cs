@@ -131,12 +131,6 @@ namespace DekuMod.SkillStates.ShootStyle
 
 			characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 1);
 
-            blastRadius = StaticValues.detroitRadius2 * attackSpeedStat;
-            blastDamage = StaticValues.detroitDamageCoefficient2 * damageStat * attackSpeedStat;
-            //set around deku
-            blastPosition = characterBody.corePosition;
-			blastType = DamageType.Stun1s;
-			blastForce = StaticValues.detroitForce2;
             //indicator
             this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);

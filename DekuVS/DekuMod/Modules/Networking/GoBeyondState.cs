@@ -39,7 +39,7 @@ namespace DekuMod.Modules.Networking
 
 		private CameraParamsOverrideHandle camOverrideHandle;
 		public DekuController dekucon;
-		public float duration = 8f;
+		public float duration = 2f;
 
 		private Animator animator;
 		private BlastAttack blastAttack;

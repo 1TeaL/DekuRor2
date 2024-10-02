@@ -57,7 +57,13 @@ namespace DekuMod.SkillStates
 
         protected virtual void NeutralSuper()
         {
-            if (energySystem.currentPlusUltra > Modules.StaticValues.super1Cost)
+
+            if (characterBody.HasBuff(Buffs.fajinStoredBuff))
+            {
+                //free- spend the fajin stack
+                characterBody.ApplyBuff(Buffs.fajinStoredBuff.buffIndex, characterBody.GetBuffCount(Buffs.fajinStoredBuff)-1);
+            }
+            else if (energySystem.currentPlusUltra > Modules.StaticValues.super1Cost)
             {
                 energySystem.SpendPlusUltra(Modules.StaticValues.super1Cost);
 
@@ -91,7 +97,12 @@ namespace DekuMod.SkillStates
         }
         protected virtual void BackwardSuper()
         {
-            if (energySystem.currentPlusUltra > Modules.StaticValues.super2Cost)
+            if (characterBody.HasBuff(Buffs.fajinStoredBuff))
+            {
+                //free- spend the fajin stack
+                characterBody.ApplyBuff(Buffs.fajinStoredBuff.buffIndex, characterBody.GetBuffCount(Buffs.fajinStoredBuff) - 1);
+            }
+            else if (energySystem.currentPlusUltra > Modules.StaticValues.super2Cost)
             {
                 energySystem.SpendPlusUltra(Modules.StaticValues.super2Cost);
 
@@ -127,7 +138,12 @@ namespace DekuMod.SkillStates
 
         protected virtual void ForwardSuper()
         {
-            if (energySystem.currentPlusUltra >= Modules.StaticValues.super3Cost)
+            if (characterBody.HasBuff(Buffs.fajinStoredBuff))
+            {
+                //free- spend the fajin stack
+                characterBody.ApplyBuff(Buffs.fajinStoredBuff.buffIndex, characterBody.GetBuffCount(Buffs.fajinStoredBuff) - 1);
+            }
+            else if (energySystem.currentPlusUltra >= Modules.StaticValues.super3Cost)
             {
                 energySystem.SpendPlusUltra(Modules.StaticValues.super3Cost);
 

@@ -310,7 +310,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTSECONDARY_NAME",
                 skillNameToken = prefix + "MIGHTSECONDARY_NAME",
                 skillDescriptionToken = prefix + "MIGHTSECONDARY_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("delaware"),
                 activationState = new SerializableEntityStateType(typeof(DelawareSmash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
@@ -336,11 +336,11 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTUTILITY_NAME",
                 skillNameToken = prefix + "MIGHTUTILITY_NAME",
                 skillDescriptionToken = prefix + "MIGHTUTILITY_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
-                activationState = new SerializableEntityStateType(typeof(CounterSmash)),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("fajin"),
+                activationState = new SerializableEntityStateType(typeof(Fajin)),
                 activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 4f,
+                baseMaxStock = 30,
+                baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -351,8 +351,8 @@ namespace DekuMod.Modules.Survivors
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
+                requiredStock = 30,
+                stockToConsume = 30,
             });
 
             mightSpecialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -361,7 +361,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTSPECIAL_NAME",
                 skillNameToken = prefix + "MIGHTSPECIAL_NAME",
                 skillDescriptionToken = prefix + "MIGHTSPECIAL_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
                 activationState = new SerializableEntityStateType(typeof(MightSuper)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -415,7 +415,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLESECONDARY_NAME",
                 skillNameToken = prefix + "SHOOTSTYLESECONDARY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLESECONDARY_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("shootstylekick"),
                 activationState = new SerializableEntityStateType(typeof(BlastDash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
@@ -441,7 +441,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLEUTILITY_NAME",
                 skillNameToken = prefix + "SHOOTSTYLEUTILITY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLEUTILITY_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("Floatactivate"),
                 activationState = new SerializableEntityStateType(typeof(OklahomaSmash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -599,7 +599,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTMODE_NAME",
                 skillNameToken = prefix + "MIGHTMODE_NAME",
                 skillDescriptionToken = prefix + "MIGHTMODE_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("fistmodeIcon"),
                 activationState = new SerializableEntityStateType(typeof(MightMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -623,7 +623,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLEMODE_NAME",
                 skillNameToken = prefix + "SHOOTSTYLEMODE_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLEMODE_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("legmodeIcon"),
                 activationState = new SerializableEntityStateType(typeof(ShootStyleMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -647,7 +647,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "BLACKWHIPMODE_NAME",
                 skillNameToken = prefix + "BLACKWHIPMODE_NAME",
                 skillDescriptionToken = prefix + "BLACKWHIPMODE_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("Quirks"),
                 activationState = new SerializableEntityStateType(typeof(BlackwhipMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -671,7 +671,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "BLACKWHIPPULL_NAME",
                 skillNameToken = prefix + "BLACKWHIPPULL_NAME",
                 skillDescriptionToken = prefix + "BLACKWHIPPULL_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("blackwhip"),
                 activationState = new SerializableEntityStateType(typeof(BlackwhipPull)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
@@ -904,7 +904,7 @@ namespace DekuMod.Modules.Survivors
 
             Skills.AddSecondExtraSkill(bodyPrefab, shootstyleModeSkillDef);
 
-            Skills.AddThirdExtraSkill(bodyPrefab, blackwhipModeSkillDef);
+            Skills.AddThirdExtraSkill(bodyPrefab, blackwhipPullSkillDef);
 
             Skills.AddFourthExtraSkill(bodyPrefab, blackwhipPullSkillDef);
             #endregion

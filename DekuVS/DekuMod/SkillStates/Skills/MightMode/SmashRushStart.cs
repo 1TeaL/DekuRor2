@@ -10,6 +10,7 @@ namespace DekuMod.SkillStates.Might
     public class SmashRushStart : BaseDekuSkillState
     {
         public HurtBox Target;
+        public int swingIndex;
 
         public override void OnEnter()
         {
@@ -33,7 +34,7 @@ namespace DekuMod.SkillStates.Might
                 {
                     this.outer.SetNextState(new SmashRushCombo
                     {
-
+                        swingIndex = swingIndex,
                     });
 
                 }
@@ -42,7 +43,7 @@ namespace DekuMod.SkillStates.Might
             {
                 this.outer.SetNextState(new SmashRushCombo
                 {
-
+                    swingIndex = swingIndex,
                 });
             }
 

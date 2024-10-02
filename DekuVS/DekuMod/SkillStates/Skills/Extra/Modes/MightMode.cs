@@ -20,6 +20,9 @@ namespace DekuMod.SkillStates
         public SkillDef skilldef3;
         public SkillDef skilldef4;
 
+        private bool resetSwappedSkill2;
+        private bool resetSwappedSkill3;
+
         private bool isSwitch;
         private float duration;
         private BlastAttack blastAttack;
@@ -33,9 +36,39 @@ namespace DekuMod.SkillStates
             skilldef3 = characterBody.skillLocator.utility.skillDef;
             skilldef4 = characterBody.skillLocator.special.skillDef;
 
+            if (dekucon.resetSkill2)
+            {
+                resetSwappedSkill2 = true;
+            }
+            if (dekucon.resetSkill3)
+            {
+                resetSwappedSkill3 = true;
+            }
+
+            if (base.skillLocator.secondary.stock >= 1)
+            {
+                dekucon.resetSkill2 = true;
+            }
+            else if (base.skillLocator.secondary.cooldownRemaining > 0)
+            {
+                dekucon.resetSkill2 = false;
+            }
+
+            if (skilldef3 == Deku.mightUtilitySkillDef && base.skillLocator.utility.stock >= base.skillLocator.utility.GetBaseMaxStock())
+            {
+                dekucon.resetSkill3 = true;
+            }
+            else if (skilldef3 == Deku.mightUtilitySkillDef && base.skillLocator.utility.stock < base.skillLocator.utility.maxStock)
+            {
+                dekucon.resetSkill3 = false;
+            }
+            else if (base.skillLocator.utility.cooldownRemaining > 0)
+            {
+                dekucon.resetSkill3 = false;
+            }
 
 
-            if(skilldef1 != Deku.mightPrimarySkillDef)
+            if (skilldef1 != Deku.mightPrimarySkillDef)
             {
                 base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, skilldef1, GenericSkill.SkillOverridePriority.Contextual);
                 base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, Deku.mightPrimarySkillDef, GenericSkill.SkillOverridePriority.Contextual);
@@ -48,6 +81,31 @@ namespace DekuMod.SkillStates
 
                 base.skillLocator.special.UnsetSkillOverride(base.skillLocator.utility, skilldef4, GenericSkill.SkillOverridePriority.Contextual);
                 base.skillLocator.special.SetSkillOverride(base.skillLocator.utility, Deku.mightSpecialSkillDef, GenericSkill.SkillOverridePriority.Contextual);
+
+                if (resetSwappedSkill2)
+                {
+                    base.skillLocator.secondary.AddOneStock();
+                }
+
+                //make sure all stocks get given back
+                if (resetSwappedSkill3)
+                {
+                    for (int i = 0; i < base.skillLocator.utility.GetBaseMaxStock(); i++)
+                    {
+                        base.skillLocator.utility.AddOneStock();
+                    }
+                }
+
+                if(!resetSwappedSkill2 || !resetSwappedSkill3)
+                {
+                    skillLocator.DeductCooldownFromAllSkillsAuthority(dekucon.skillCDTimer);
+                    //make sure number of stocks = time taken
+                    for (int i = 0; i < (int)dekucon.skillCDTimer; i++)
+                    {
+                        base.skillLocator.utility.AddOneStock();
+                    }
+                }
+                dekucon.skillCDTimer = 0f;
 
                 if (energySystem.currentPlusUltra > Modules.StaticValues.super1Cost)
                 {
@@ -63,6 +121,10 @@ namespace DekuMod.SkillStates
         {
             isSwitch = true;
             base.skillLocator.ResetSkills();
+            for (int i = 0; i < base.skillLocator.utility.maxStock; i++)
+            {
+                base.skillLocator.utility.AddOneStock();
+            }
 
             duration = 0.5f;
             characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);

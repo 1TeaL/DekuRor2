@@ -26,7 +26,7 @@ namespace DekuMod.Modules
         //public static Sprite tarBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Common/bdClayGoo.asset").WaitForCompletion().iconSprite;
         public static Sprite crippleBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Common/bdCripple.asset").WaitForCompletion().iconSprite;
         public static Sprite speedBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Bandit2/bdCloakSpeed.asset").WaitForCompletion().iconSprite;
-        //public static Sprite boostBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/RandomDamageZone/bdPowerBuff.asset").WaitForCompletion().iconSprite;
+        public static Sprite boostBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/RandomDamageZone/bdPowerBuff.asset").WaitForCompletion().iconSprite;
         //public static Sprite alphashieldonBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/DLC1/BearVoid/bdBearVoidReady.asset").WaitForCompletion().iconSprite;
         //public static Sprite alphashieldoffBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/DLC1/BearVoid/bdBearVoidCooldown.asset").WaitForCompletion().iconSprite;
         //public static Sprite decayBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Common/bdVoidFogStrong.asset").WaitForCompletion().iconSprite;
@@ -105,6 +105,7 @@ namespace DekuMod.Modules
         internal static GameObject blackwhipLineRenderer;
         internal static GameObject blackwhipforward;
         internal static GameObject detroitEffect;
+        internal static GameObject detroitUpperEffect;
         internal static GameObject detroitweakEffect;
         internal static GameObject delawareEffect;
         internal static GameObject airforceEffect;
@@ -205,21 +206,16 @@ namespace DekuMod.Modules
             dekuCustomUI = DekuAssets.mainAssetBundle.LoadAsset<GameObject>("dekuCustomUI");
 
             Material bulletMat = null;
+
             delawareBullet = LoadEffect("delawareBullet");
-
-
-            if (!delawareBullet.GetComponent<EffectComponent>()) delawareBullet.AddComponent<EffectComponent>();
-            if (!delawareBullet.GetComponent<VFXAttributes>()) delawareBullet.AddComponent<VFXAttributes>();
-            if (!delawareBullet.GetComponent<NetworkIdentity>()) delawareBullet.AddComponent<NetworkIdentity>();
-
-            Modules.Effects.AddEffect(delawareBullet);
-
-
+            delawareEffect = LoadEffect("delawareMax");
             airforceEffect = LoadEffect("windbullet");
             airforce45Effect = LoadEffect("windbullet45");
-            delawareEffect = LoadEffect("delaware");
+
             detroitEffect = LoadEffect("detroit");
+            detroitUpperEffect = LoadEffect("detroitUpper");
             detroitweakEffect = LoadEffect("detroitweak");
+
             blackwhipforward = LoadEffect("blackwhipforward");
             blackwhip = LoadEffect("blackwhipeffect");
             blackwhipTrail = LoadEffect("blackwhipTrail");
@@ -237,9 +233,15 @@ namespace DekuMod.Modules
             gearshiftPierceEffect = LoadEffect("gearshiftPierce");
 
 
-            dekuPunchEffect = DekuAssets.LoadEffect("MultiStraightSwingEffect", true);
+            dekuPunchEffect = DekuAssets.LoadEffect("MultiStraightSwingEffect");
             dekuKickEffect = DekuAssets.LoadEffect("DekuKickEffect", true);
-            dekuHitImpactEffect = DekuAssets.LoadEffect("ImpactDekuEffect");            
+            dekuHitImpactEffect = DekuAssets.LoadEffect("ImpactDekuEffect");
+            if (!dekuHitImpactEffect.GetComponent<EffectComponent>())
+            {
+                EffectComponent effectCom = dekuHitImpactEffect.AddComponent<EffectComponent>();
+            }
+
+
             kickHitSoundEvent = CreateNetworkSoundEventDef("shootstyedashcomboimpact");
 
 

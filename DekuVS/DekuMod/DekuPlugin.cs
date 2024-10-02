@@ -55,6 +55,7 @@ namespace DekuMod
 
 
     [BepInDependency("com.KingEnderBrine.ExtraSkillSlots", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     //[BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
     //[BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -219,6 +220,33 @@ namespace DekuMod
                             EnergySystem energySys = body.GetComponent<EnergySystem>();
                             energySys.plusUltraBoostTimer = 2f;
 
+                            //every hit reduces fajinbuff by 1 if it has proc chance
+                            if (body.HasBuff(Buffs.fajinBuff) && damageInfo.procCoefficient > 0)
+                            {
+                                damageInfo.damage *= StaticValues.fajinDamageCoefficient;
+                                body.healthComponent.AddBarrierAuthority(body.healthComponent.fullCombinedHealth * StaticValues.fajinBarrierMultiplier);
+                                body.ApplyBuff(Buffs.fajinBuff.buffIndex, body.GetBuffCount(Buffs.fajinBuff) - 1);
+                            }
+
+                            //every hit reduces fajin mastered buff by 1 if it has proc chance
+                            if (body.HasBuff(Buffs.fajinMaxBuff) && damageInfo.procCoefficient > 0)
+                            {
+                                damageInfo.damage *= StaticValues.fajinDamageCoefficient;
+                                body.healthComponent.AddBarrierAuthority(body.healthComponent.fullCombinedHealth * StaticValues.fajinBarrierMultiplier);
+                                body.ApplyBuff(Buffs.fajinMaxBuff.buffIndex, body.GetBuffCount(Buffs.fajinMaxBuff) - 1);
+                                if (body.GetBuffCount(Buffs.fajinMaxBuff) == 0)
+                                {
+                                    body.ApplyBuff(Buffs.fajinStoredBuff.buffIndex, body.GetBuffCount(Buffs.fajinStoredBuff) + 1);
+                                }
+                            }
+
+                            //if no fajin buff, reduce the cooldown of fajin
+                            if (!body.HasBuff(Buffs.fajinBuff) && !body.HasBuff(Buffs.fajinMaxBuff))
+                            {
+                                body.skillLocator.utility.AddOneStock();
+                            }
+
+
                             //gearshift buff
                             //if (body.HasBuff(Buffs.gearshiftBuff))
                             //{
@@ -325,7 +353,7 @@ namespace DekuMod
                             //if (damageInfo.damageType == DamageType.ClayGoo)
                             //{
                             //    victimBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhipDebuffDuration);
-                                
+
                             //}
                             //heal and armor mark for freeze
                             //if (damageInfo.damageType == DamageType.Freeze2s)
@@ -485,20 +513,12 @@ namespace DekuMod
 
                     //}
 
-                    bool goBeyond = self.HasBuff(Buffs.goBeyondBuff);
-                    if (goBeyond)
+                    if (self.HasBuff(Buffs.goBeyondBuff))
                     {
                         self.armor *= 5f;
                         self.moveSpeed *= 1.5f;
                     }
 
-                    //bool fajin = self.HasBuff(Modules.Buffs.fajinBuff);
-                    //if (fajin)
-                    //{
-                    //    self.damage *= StaticValues.fajinDamageMultiplier;
-                    //    self.moveSpeed *= StaticValues.fajinDamageMultiplier;
-
-                    //}
 
                     //bool ofa = self.HasBuff(Modules.Buffs.ofaBuff);
 
@@ -516,7 +536,7 @@ namespace DekuMod
                     //    self.armor *= 5f;
                     //    self.moveSpeed *= 1.5f;
                     //}
-                         
+
 
                     //bool ofa45 = self.HasBuff(Modules.Buffs.ofaBuff45);
                     //if (ofa45)

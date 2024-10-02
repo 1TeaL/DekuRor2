@@ -61,18 +61,26 @@ namespace DekuMod.Modules
         internal const float mightSwitchRadius = 20f;
         internal const float mightSwitchDamage = 2f;
         //Primary
-        internal const float smashRushDistance = 5f;
-        internal const float smashRushDamageCoefficient = 3f;
+        internal const float smashRushDistance = 6f;
+        internal const float smashRushDamageCoefficient = 2f;
+        internal const float smashRush2DamageCoefficient = 3f;
         //Secondary
-        internal const float delawareChargeThreshold = 2f;
-        internal const float delawareChargeMultiplier = 3f;
+        internal const float delawareMaxCharge = 3f;
+        internal const float delawareRadius = 7f;
+        internal const float delaware3Radius = 20f;
         internal const float delawareDamageCoefficient = 3f;
-        internal const float delawareDamageCoefficient1 = 2f;
-        internal const float delawareDamageCoefficient2 = 10f;
-        internal const float delawareCharge1 = 0.7f;
-        internal const float delawareCharge2 = 0.4f;
+        internal const float delawareDamageMultiplier = 2f;
+        internal const float delaware2DamageMultiplier = 3f;
+        internal const float delaware3DamageMultiplier = 4f;
+        internal const float delaware3Acceleration = 50f;
         internal const float delawareDistance = 20f;
         //Utility
+        internal const float fajinDamageMultiplier = 2f;
+        internal const float fajinBarrierMultiplier = 0.05f;
+        internal const int fajinHitAmount = 10;
+        internal const int fajin2HitAmount = 20;
+        internal const int fajin3HitAmount = 20;
+
         internal const float counterDamageReduction = 0.5f;
         internal const float counterDuration = 5f;
         internal const int counterBuffDuration = 5;
@@ -82,14 +90,18 @@ namespace DekuMod.Modules
         internal const float counterDamageCoefficient = 6f;
         //Special
         internal const float detroitForce = 10000f;
-        internal const float detroitForce2 = 20000f;
-        internal const float detroitForce3 = 10000f;
+        internal const float detroit3Force = 1000f;
         internal const float detroitRadius = 20f;
-        internal const float detroitRadius2 = 30f;
-        internal const float detroitRadius3 = 10f;
-        internal const float detroitDamageCoefficient = 6f;
-        internal const float detroitDamageCoefficient2 = 6f;
-        internal const float detroitDamageCoefficient3 = 6f;
+        internal const float detroit2Range = 100f;
+        internal const float detroit2Radius = 10f;
+        internal const int detroit2BaseHits = 4;
+        internal const float detroit3Radius = 7f;
+        internal const float detroit3Distance = 10f;
+        internal const int detroit3BaseCharge = 3;
+        internal const float detroitDamageCoefficient = 8f;
+        internal const float detroit2DamageCoefficient = 4f;
+        internal const float detroit3DamageCoefficient = 6f;
+        internal const float detroit3DamageMultiplier = 3f;
 
         //Shoot Style Mode
         internal const float shootSwitchRadius = 5f;
@@ -267,7 +279,6 @@ namespace DekuMod.Modules
         internal const float finalsmashBlastRadius = 15f;
         //quirk
         internal const float fajinDuration = 10f;
-        internal const float fajinDamageMultiplier = 1.5f;
         //gobeyond
         internal const float gobeyondDamageCoefficient = 10f;
         internal const float gobeyondHealCoefficient = 0.05f;
