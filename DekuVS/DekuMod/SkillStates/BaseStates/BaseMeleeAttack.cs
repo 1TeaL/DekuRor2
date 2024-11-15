@@ -207,21 +207,20 @@ namespace DekuMod.SkillStates.BaseStates
 
             if (this.stopwatch >= (this.duration * this.earlyExitTime) && base.isAuthority)
             {
-                if (base.IsKeyDownAuthority())
+                //if (base.IsKeyDownAuthority())
+                //{
+                //    if (!this.hasFired) this.FireAttack();
+                //    this.SetNextState();
+                //    return;
+                //}
+                
+                if (base.inputBank.skill1.down)
                 {
                     if (!this.hasFired) this.FireAttack();
                     this.SetNextState();
                     return;
                 }
-                //if (base.skillLocator.primary.skillNameToken == prefix + "LEGPRIMARY_NAME")
-                //{
-                //    if (base.inputBank.skill1.down)
-                //    {
-                //        if (!this.hasFired) this.FireAttack();
-                //        this.SetNextState();
-                //        return;
-                //    }
-                //}
+                
                 //else
                 //if (base.skillLocator.secondary.skillNameToken == prefix + "LEGPRIMARY_NAME")
                 //{

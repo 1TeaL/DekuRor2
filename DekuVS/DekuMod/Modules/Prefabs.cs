@@ -218,8 +218,8 @@ namespace DekuMod.Modules
             CharacterModel characterModel = prefab.GetComponent<ModelLocator>().modelTransform.gameObject.AddComponent<CharacterModel>();
             ChildLocator childLocator = characterModel.GetComponent<ChildLocator>();
             characterModel.body = prefab.GetComponent<CharacterBody>();
-            characterModel.body.overrideCoreTransform = childLocator.FindChild("Hips");
-            characterModel.body.coreTransform = childLocator.FindChild("Hips");
+            characterModel.body.overrideCoreTransform = childLocator.FindChild("Spine");
+            characterModel.body.coreTransform = childLocator.FindChild("Spine");
 
             if (!childLocator)
             {

@@ -118,6 +118,7 @@
     <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\API\PSSL.hlsl" />
     <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Debug\LightMeter.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR.cginc" />
+    <None Include="Assets\001_DoubleCats_Shader\DoubleCats_black_white_shader.shader" />
     <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\AutoExposure.compute" />
     <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\MultiScaleVORender.compute" />
     <None Include="Assets\VFX\PostProcessing-2\PostProcessing\Shaders\Builtins\Texture2DLerp.shader" />

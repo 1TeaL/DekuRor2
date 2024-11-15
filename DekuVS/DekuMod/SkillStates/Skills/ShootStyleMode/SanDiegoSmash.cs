@@ -10,6 +10,8 @@ using UnityEngine.Networking;
 using DekuMod.Modules.Survivors;
 using TMPro;
 using DekuMod.SkillStates.BaseStates;
+using R2API.Networking;
+using DekuMod.Modules;
 
 namespace DekuMod.SkillStates.ShootStyle
 {
@@ -23,19 +25,19 @@ namespace DekuMod.SkillStates.ShootStyle
         private Transform modelTransform;
         private CharacterModel characterModel;
 
-        public static float baseduration = 0.4f;
+        public static float baseduration = StaticValues.sandiegoDashDuration;
         public static float duration;
         public static float hitExtraDuration = 0.44f;
         public static float minExtraDuration = 0.2f;
-        public static float initialSpeedCoefficient = 12f;
+        public static float initialSpeedCoefficient = StaticValues.sandiegoSpeedCoefficient;
         public static float SpeedCoefficient;
-        public static float finalSpeedCoefficient = 0f;
-        public static float bounceForce = 2000f;
+        public static float finalSpeedCoefficient;
+        public static float bounceForce = 4000f;
         private Vector3 bounceVector;
         private float stopwatch;
         private OverlapAttack detector;
         private OverlapAttack attack;
-        protected string hitboxName2 = "SmashRushHitbox";
+        protected string hitboxName2 = "KickHitbox";
         protected string hitboxName = "SmashRushHitbox";
         protected float procCoefficient = 1f;
         protected float pushForce = 500f;
@@ -67,9 +69,10 @@ namespace DekuMod.SkillStates.ShootStyle
         private GameObject explosionPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/MageLightningBombExplosion");
 
         public float fajin;
-        protected DamageType damageType = DamageType.ResetCooldownsOnKill | DamageType.Generic;
+        protected DamageType damageType = DamageType.Generic;
         public DekuController dekucon;
         private BlastAttack blastAttack;
+
 
 
         public override void OnEnter()
@@ -79,6 +82,7 @@ namespace DekuMod.SkillStates.ShootStyle
 
             duration = baseduration / (attackSpeedStat / 2);
             SpeedCoefficient = initialSpeedCoefficient * (attackSpeedStat / 2);
+            finalSpeedCoefficient = SpeedCoefficient / 2f;
             dekucon = GetComponent<DekuController>();
             float num = moveSpeedStat;
             bool isSprinting = characterBody.isSprinting;
@@ -111,7 +115,7 @@ namespace DekuMod.SkillStates.ShootStyle
             }
 
             //EffectManager.SimpleMuzzleFlash(ShootStyleKick.muzzleEffectPrefab, base.gameObject, "LFoot", false);
-            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, gameObject, "LFoot", false);
+            EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, gameObject, "RFoot", false);
 
             bool flag2 = modelTransform;
             if (flag2)
@@ -154,7 +158,17 @@ namespace DekuMod.SkillStates.ShootStyle
             characterDirection.forward = characterMotor.velocity.normalized;
 
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-            PlayCrossfade("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", duration, 0.1f);
+            GetModelAnimator().SetBool("sandiegoSmashDashEnd", false);
+            if (characterMotor.isGrounded)
+            {
+                PlayCrossfade("FullBody, Override", "OklahomaSmashDash", "Attack.playbackRate", duration, 0.1f);
+
+            }
+            else
+            {
+                PlayCrossfade("FullBody, Override", "SanDiegoSmashAir", "Attack.playbackRate", duration, 0.1f);
+
+            }
 
             if (isAuthority)
             {
@@ -163,6 +177,18 @@ namespace DekuMod.SkillStates.ShootStyle
             AkSoundEngine.PostEvent("shootstyedashsfx", gameObject);
 
 
+            switch (level)
+            {
+                case 0:
+
+                    break;
+                case 1:
+                    SpeedCoefficient *= 2f;
+                    break;
+                case 2:
+                    SpeedCoefficient *= 3f;
+                    break;
+            }
         }
 
         private void RecalculateRollSpeed()
@@ -218,31 +244,22 @@ namespace DekuMod.SkillStates.ShootStyle
             else
             {
                 characterDirection.forward = bounceVector * -1f;
-                bool flag3 = characterMotor;
-                if (flag3)
+                if (characterMotor)
                 {
                     characterMotor.velocity = Vector3.zero;
                 }
-                bool flag4 = animator;
-                if (flag4)
+                if (animator)
                 {
                     animator.SetFloat("Attack.playbackRate", 0f);
                 }
             }
-            bool flag5 = !hasHopped;
-            if (flag5)
+            if (!hasHopped)
             {
                 characterDirection.forward = direction;
                 characterMotor.velocity = Vector3.zero;
                 characterMotor.rootMotion += direction * rollSpeed * Time.fixedDeltaTime;
             }
-            bool flag6 = cameraTargetParams;
-            if (flag6)
-            {
-                cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);
-            }
-            bool flag7 = isAuthority && stopwatch >= duration;
-            if (flag7)
+            if (isAuthority && stopwatch >= duration)
             {
                 outer.SetNextStateToMain();
             }
@@ -257,13 +274,10 @@ namespace DekuMod.SkillStates.ShootStyle
             {
                 modelTransform.gameObject.GetComponent<AimAnimator>().enabled = false;
             }
-            characterMotor.velocity /= 1.75f;
-            bool flag2 = cameraTargetParams;
-            if (flag2)
-            {
-                cameraTargetParams.fovOverride = -1f;
-            }
+            //characterMotor.velocity /= 1.75f;
             animator.SetBool("attacking", false);
+            
+
             base.OnExit();
         }
 
@@ -295,6 +309,12 @@ namespace DekuMod.SkillStates.ShootStyle
                         if (flag2)
                         {
                             ForceFlinch(hurtBox.healthComponent.body);
+
+                            //if(hurtBox.healthComponent.body.HasBuff(Modules.Buffs.comboDebuff))
+                            //{
+                            //    characterBody.skillLocator.DeductCooldownFromAllSkillsAuthority(6f);
+                            //}
+                            hurtBox.healthComponent.body.ApplyBuff(Modules.Buffs.comboDebuff.buffIndex, hurtBox.healthComponent.body.GetBuffCount(Modules.Buffs.comboDebuff) + 1);
                         }
                     }
                     OnHitEnemyAuthority();
@@ -314,7 +334,7 @@ namespace DekuMod.SkillStates.ShootStyle
         protected virtual void OnHitEnemyAuthority()
         {
 
-            //base.PlayAnimation("FullBody, Override", "Backflip", "Roll.playbackRate", RollBounce.duration * 0.9f);
+            GetModelAnimator().SetBool("sandiegoSmashDashEnd", true);
             characterBody.SetAimTimer(2f);
             //base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, ShootStyleKick45.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
             //base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, ShootStyleKick452.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
@@ -350,8 +370,8 @@ namespace DekuMod.SkillStates.ShootStyle
                 {
                     cameraTargetParams.fovOverride = -1f;
                 }
-                EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.boostJumpEffectPrefab, gameObject, "LFoot", false);
-                EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.muzzleflashMageLightningLargePrefab, gameObject, "LFoot", false);
+                EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.boostJumpEffectPrefab, gameObject, "RFoot", false);
+                EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.muzzleflashMageLightningLargePrefab, gameObject, "RFoot", false);
 
                 bool flag3 = characterMotor;
                 if (flag3)
@@ -394,10 +414,13 @@ namespace DekuMod.SkillStates.ShootStyle
                 if (canBeHitStunned)
                 {
                     component.SetPain();
-                    bool flag2 = body.characterMotor;
-                    if (flag2)
+                    if (body.characterMotor)
                     {
                         body.characterMotor.velocity = Vector3.zero;
+                    }
+                    if(body.rigidbody != null)
+                    {
+                        body.rigidbody.velocity = Vector3.zero;
                     }
                 }
             }

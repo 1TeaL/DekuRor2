@@ -53,6 +53,7 @@ namespace DekuMod.Modules
         internal static BuffDef delayAttackDebuff;
         //internal static BuffDef dangersenseDebuff;
         internal static BuffDef blackwhipDebuff;
+        internal static BuffDef comboDebuff;
 
         //marks
         //internal static BuffDef healMark;
@@ -85,6 +86,7 @@ namespace DekuMod.Modules
 
             blackwhipDebuff = Buffs.AddNewBuff("Blackwhip Debuff", DekuAssets.crippleBuffIcon, Color.black, false, true);
             delayAttackDebuff = Buffs.AddNewBuff("delayAttack Debuff", DekuAssets.crippleBuffIcon, Color.green, true, true);
+            comboDebuff = Buffs.AddNewBuff("Combo Debuff", DekuAssets.multiplierBuffIcon, Color.cyan, true, true);
 
             //dangersenseBuff = Buffs.AddNewBuff("DangerSense Buff", Asset.mainAssetBundle.LoadAsset<Sprite>("DangerSense"), Color.white, false, false);
             //dangersenseDebuff = Buffs.AddNewBuff("dangersenseDe Buff", Asset.lightningBuffIcon, Color.black, false, true);

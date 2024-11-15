@@ -15,8 +15,18 @@ namespace DekuMod.SkillStates.Might
         {
             dekucon = base.GetComponent<DekuController>();
 
-            PlayCrossfade("UpperBody, Override", "FaJin", "Attack.playbackRate", 0.8f, 0.01f);
+            PlayCrossfade("FullBody, Override", "FaJin", "Attack.playbackRate", 0.8f, 0.01f);
             base.OnEnter();
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            if(base.fixedAge > 0.8f)
+            {
+                this.outer.SetNextStateToMain();
+                return;
+            }
         }
 
         public override void Level1()
@@ -40,6 +50,7 @@ namespace DekuMod.SkillStates.Might
         public override void OnExit()
         {
             base.OnExit();
+            base.PlayCrossfade("UpperBody, Override", "BufferEmpty", 0.1f);
         }
         public override InterruptPriority GetMinimumInterruptPriority()
         {

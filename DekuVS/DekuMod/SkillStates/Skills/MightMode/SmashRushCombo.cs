@@ -9,7 +9,7 @@ namespace DekuMod.SkillStates.Might
     public class SmashRushCombo : BaseMeleeAttack
     {
         public HurtBox Target;
-        public int punchesDone;
+        public int punchesDone = 1;
         private float rollSpeed;
         private float SpeedCoefficient;
         public static float initialSpeedCoefficient = 10f;
@@ -68,8 +68,8 @@ namespace DekuMod.SkillStates.Might
             {
                 punchesDone = 20;
             }
-            this.baseDuration = 0.5f / ((float)punchesDone / 10);
-            this.baseEarlyExitTime = 0.8f / ((float)punchesDone / 10);
+            this.baseDuration = 0.5f / (1 + ((float)punchesDone / 10));
+            this.baseEarlyExitTime = 0.8f /(1 + ((float)punchesDone / 10));
 
         }
 
@@ -78,16 +78,16 @@ namespace DekuMod.SkillStates.Might
         {
             base.FixedUpdate();
 
-            if (swingIndex == 1 && this.stopwatch <= (this.baseDuration * this.attackStartTime) && keepMoving)
-            {
-                RecalculateRollSpeed();
-                Vector3 velocity = base.GetAimRay().direction.normalized * rollSpeed;
-                //velocity.y = base.characterMotor.velocity.y;
-                base.characterMotor.velocity = velocity;
-                //base.characterDirection.forward = base.characterMotor.velocity.normalized;                
+            //if (swingIndex == 1 && this.stopwatch <= (this.baseDuration * this.attackStartTime) && keepMoving)
+            //{
+            //    RecalculateRollSpeed();
+            //    Vector3 velocity = base.GetAimRay().direction.normalized * rollSpeed;
+            //    //velocity.y = base.characterMotor.velocity.y;
+            //    base.characterMotor.velocity = velocity;
+            //    //base.characterDirection.forward = base.characterMotor.velocity.normalized;                
 
 
-            }
+            //}
 
         }
 
@@ -156,13 +156,15 @@ namespace DekuMod.SkillStates.Might
 
         protected override void SetNextState()
         {
+            Chat.AddMessage("set next state");
             int index = this.swingIndex;
             if (index == 0) index = 1;
             else index = 0;
 
             int actualPunchesDone = punchesDone + 1;
 
-            if (Target.healthComponent.alive)
+
+            if (Target)
             {
                 float num2 = Vector3.Distance(base.transform.position, Target.transform.position);
                 if (num2 >= StaticValues.smashRushDistance)

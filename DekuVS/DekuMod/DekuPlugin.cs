@@ -246,6 +246,11 @@ namespace DekuMod
                                 body.skillLocator.utility.AddOneStock();
                             }
 
+                            //combo buff cooldown deduction for each stack of combo debuff
+                            if (victimBody.HasBuff(Buffs.comboDebuff) && damageInfo.procCoefficient > 0f)
+                            {
+                                body.skillLocator.DeductCooldownFromAllSkillsServer(victimBody.GetBuffCount(Buffs.comboDebuff));
+                            }
 
                             //gearshift buff
                             //if (body.HasBuff(Buffs.gearshiftBuff))

@@ -105,6 +105,15 @@ namespace DekuMod.SkillStates.BlackWhip
         public void FixedUpdate()
         {
             timer += Time.fixedDeltaTime;
+
+            if(timer > duration)
+            {
+                EntityState.Destroy(this);
+            }
+            if (!charbody)
+            {
+                EntityState.Destroy(this);
+            }
             //if (timer > duration && !hasFired)
             //{
             //    hasFired = true;

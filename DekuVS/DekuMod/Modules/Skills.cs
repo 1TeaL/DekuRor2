@@ -184,6 +184,7 @@ namespace DekuMod.Modules
             };
         }
 
+
         internal static void AddSecondarySkill(GameObject targetPrefab, SkillDef skillDef)
         {
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
@@ -348,4 +349,40 @@ internal class SkillDefInfo
     public int stockToConsume;
 
     public string[] keywordTokens;
+
+    #region constructors
+    public SkillDefInfo() { }
+    /// <summary>
+    /// Creates a skilldef for a typical primary.
+    /// <para>combat skill, cooldown: 0, required stock: 0, InterruptPriority: Any</para>
+    /// </summary>
+    public SkillDefInfo(string skillNameToken,
+                        string skillDescriptionToken,
+                        Sprite skillIcon,
+
+                        SerializableEntityStateType activationState,
+                        string activationStateMachineName = "Weapon",
+                        bool agile = false)
+    {
+        this.skillName = skillNameToken;
+        this.skillNameToken = skillNameToken;
+        this.skillDescriptionToken = skillDescriptionToken;
+        this.skillIcon = skillIcon;
+
+        this.activationState = activationState;
+        this.activationStateMachineName = activationStateMachineName;
+
+        this.interruptPriority = InterruptPriority.Any;
+        this.isCombatSkill = true;
+        this.baseRechargeInterval = 0;
+
+        this.requiredStock = 0;
+        this.stockToConsume = 0;
+
+        this.cancelSprintingOnActivation = !agile;
+
+        if (agile) this.keywordTokens = new string[] { "KEYWORD_AGILE" };
+
+    }
+    #endregion construction complete
 }

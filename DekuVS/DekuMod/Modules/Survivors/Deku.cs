@@ -277,6 +277,15 @@ namespace DekuMod.Modules.Survivors
             #endregion
 
             #region Might Mode Skills
+            SkillDef primarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo(prefix + "MIGHTPRIMARY_NAME",
+                                                                                      prefix + "MIGHTPRIMARY_NAME",
+                                                                                      Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
+                                                                                      new EntityStates.SerializableEntityStateType(typeof(SmashRushStart)),
+                                                                                      "Weapon",
+                                                                                      true));
+
+
+            Modules.Skills.AddPrimarySkill(bodyPrefab, primarySkillDef);
 
             mightPrimarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -284,7 +293,7 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTPRIMARY_NAME",
                 skillNameToken = prefix + "MIGHTPRIMARY_NAME",
                 skillDescriptionToken = prefix + "MIGHTPRIMARY_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
                 activationState = new SerializableEntityStateType(typeof(SmashRushStart)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -313,8 +322,8 @@ namespace DekuMod.Modules.Survivors
                 skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("delaware"),
                 activationState = new SerializableEntityStateType(typeof(DelawareSmash)),
                 activationStateMachineName = "Weapon",
-                baseMaxStock = 3,
-                baseRechargeInterval = 4F,
+                baseMaxStock = 1,
+                baseRechargeInterval = 6F,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -338,7 +347,7 @@ namespace DekuMod.Modules.Survivors
                 skillDescriptionToken = prefix + "MIGHTUTILITY_DESCRIPTION",
                 skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("fajin"),
                 activationState = new SerializableEntityStateType(typeof(Fajin)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Slide",
                 baseMaxStock = 30,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -361,9 +370,9 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "MIGHTSPECIAL_NAME",
                 skillNameToken = prefix + "MIGHTSPECIAL_NAME",
                 skillDescriptionToken = prefix + "MIGHTSPECIAL_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("detroit100"),
                 activationState = new SerializableEntityStateType(typeof(MightSuper)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -416,10 +425,10 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "SHOOTSTYLESECONDARY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLESECONDARY_DESCRIPTION",
                 skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("shootstylekick"),
-                activationState = new SerializableEntityStateType(typeof(BlastDash)),
+                activationState = new SerializableEntityStateType(typeof(SanDiegoSmash)),
                 activationStateMachineName = "Weapon",
-                baseMaxStock = 3,
-                baseRechargeInterval = 4F,
+                baseMaxStock = 1,
+                baseRechargeInterval = 8F,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -442,10 +451,10 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "SHOOTSTYLEUTILITY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLEUTILITY_DESCRIPTION",
                 skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("Floatactivate"),
-                activationState = new SerializableEntityStateType(typeof(OklahomaSmash)),
-                activationStateMachineName = "Weapon",
+                activationState = new SerializableEntityStateType(typeof(FloatStep)),
+                activationStateMachineName = "Slide",
                 baseMaxStock = 1,
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -466,9 +475,9 @@ namespace DekuMod.Modules.Survivors
                 skillName = prefix + "SHOOTSTYLESPECIAL_NAME",
                 skillNameToken = prefix + "SHOOTSTYLESPECIAL_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLESPECIAL_DESCRIPTION",
-                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("airforce"),
+                skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("stlouis"),
                 activationState = new SerializableEntityStateType(typeof(ShootStyleSuper)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -882,7 +891,7 @@ namespace DekuMod.Modules.Survivors
 
 
             #region Adding Skills
-            Modules.Skills.AddPrimarySkill(bodyPrefab, mightPrimarySkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, mightPrimarySkillDef);
 
 
             Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]

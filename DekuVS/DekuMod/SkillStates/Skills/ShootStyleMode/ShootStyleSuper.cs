@@ -17,6 +17,8 @@ using static UnityEngine.ParticleSystem.PlaybackState;
 using EntityStates.Huntress;
 using EntityStates.Loader;
 using static UnityEngine.UI.Image;
+using DekuMod.SkillStates.BlackWhip;
+using UnityEngine.UIElements;
 
 namespace DekuMod.SkillStates.ShootStyle
 {
@@ -35,8 +37,8 @@ namespace DekuMod.SkillStates.ShootStyle
         private Transform modelTransform;
         private CharacterModel characterModel;
         private float rollSpeed;
-        public static float initialSpeedCoefficient = 8f;
-        public static float finalSpeedCoefficient = 1f;
+        public static float initialSpeedCoefficient = StaticValues.stlouis3InitialSpeed;
+        public static float finalSpeedCoefficient = 0f;
         public static float SpeedCoefficient;
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
@@ -44,6 +46,7 @@ namespace DekuMod.SkillStates.ShootStyle
         public Vector3 final;
         private Vector3 theSpot;
         private readonly BullseyeSearch search = new BullseyeSearch();
+        private readonly BullseyeSearch blackwhipSearch = new BullseyeSearch();
         public int numberOfHits;
 
         private GameObject areaIndicator;
@@ -55,9 +58,13 @@ namespace DekuMod.SkillStates.ShootStyle
         private EffectData effectData2;
         private Animator animator;
         private float duration;
+        private float firetime;
         private int totalHits1;
         private float timer1;
         private float previousMass;
+        private float angle;
+
+        private GameObject aimSphere;
 
         public override void OnEnter()
 		{
@@ -115,27 +122,75 @@ namespace DekuMod.SkillStates.ShootStyle
 		protected override void NeutralSuper()
 		{
 			base.NeutralSuper();
+            characterDirection.forward = base.GetAimRay().direction;
+
             blastRadius = StaticValues.stlouisRadius * attackSpeedStat;
             blastDamage = StaticValues.stlouisDamageCoefficient * damageStat * attackSpeedStat;
 			//set in front of deku exactly
-			blastPosition = characterBody.corePosition + (characterDirection.forward * (StaticValues.stlouisRadius * attackSpeedStat * 0.5f));
+			blastPosition = characterBody.corePosition + (base.GetAimRay().direction* (StaticValues.stlouisRadius * attackSpeedStat * 0.5f));
             blastForce = 0f;
             duration = StaticValues.stlouisDuration;
             totalHits1 = StaticValues.stlouisTotalHits;
-            //play animation of quick punch
+            //play animation of kick
+
+            PlayCrossfade("FullBody, Override", "StLouis1", "Attack.playbackRate", duration, 0.1f);
 
         }
         protected override void BackwardSuper()
         {
 			base.BackwardSuper();
+            characterDirection.forward = base.GetAimRay().direction;
 
-			characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 1);
+            //characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 1);
 
             //indicator
-            this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
-            this.areaIndicator.SetActive(true);
-            duration = 1f;
-            //play animation of slam punch
+            //this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+            //this.areaIndicator.SetActive(true);
+            duration = StaticValues.stlouisDuration2;
+            firetime = duration * 0.5f;
+            blastRadius = StaticValues.stlouisRadius2 * attackSpeedStat;
+            blastPosition = GetAimRay().direction * blastRadius;
+
+            
+            //play animation of blackwhip lift up and slam
+            PlayCrossfade("FullBody, Override", "BlackwhipSmash", "Attack.playbackRate", duration, 0.1f);
+
+
+            switch (level)
+            {
+                case 0:
+                    angle = 60f;
+                    break;
+                case 1:
+                    angle = 180f;
+                    break;
+                case 2:
+                    angle = 360f;
+                    break;
+            }
+
+            BlackWhipSmashSearch(true);
+
+            if (base.isAuthority)
+            {
+                this.aimSphere.transform.localScale = new Vector3(4f, 4f, 4f);
+            }
+            RaycastHit raycastHit;
+            bool ray = Physics.Raycast(blastPosition, Vector3.down, out raycastHit, 200f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask) ;
+            
+            if (ray)
+            {
+                this.aimSphere.transform.position = raycastHit.point + Vector3.up;
+                this.aimSphere.transform.up = raycastHit.normal;
+                this.aimSphere.transform.forward = Vector3.up;
+            }
+            else
+            {
+                Vector3 position = blastPosition + 200f * Vector3.down;
+                this.aimSphere.transform.position = position;
+                this.aimSphere.transform.up = raycastHit.normal;
+                this.aimSphere.transform.forward = Vector3.up;
+            }
         }
         protected override void ForwardSuper()
         {
@@ -173,13 +228,15 @@ namespace DekuMod.SkillStates.ShootStyle
 
             characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 1);
 
-            duration = StaticValues.stlouisDuration;
+            duration = StaticValues.stlouisDuration3;
             totalHits1 = StaticValues.stlouisTotalHits;
-            duration = 1f;
 
 
             //play animation of beginning to jump and fly
         }
+
+
+
         public override void FixedUpdate()
 		{
 			base.FixedUpdate();
@@ -221,19 +278,15 @@ namespace DekuMod.SkillStates.ShootStyle
                     }
                     break;
 				case superState.SUPER2:
-                    if (!hasFired)
+                    characterDirection.forward = base.GetAimRay().direction;
+                    if (!hasFired && base.fixedAge > firetime)
                     {
                         hasFired = true;
-                        blastAttack.Fire();
-                        EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, effectData, true);
-                        EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, effectData2, true);
+                        blastRadius = 200f;
+                        BlackWhipSmashSearch(false);
 
-                        AkSoundEngine.PostEvent("impactsfx", this.gameObject);
-
-                        SmallHop(characterMotor, StaticValues.stlouisDistance2);
-                        base.characterMotor.velocity = -StaticValues.stlouisDistance2 * base.GetAimRay().direction * moveSpeedStat;
                     }
-                    if (base.fixedAge > 1f)
+                    if (base.fixedAge >= duration)
                     {
                         this.outer.SetNextStateToMain();
                         return;
@@ -295,6 +348,61 @@ namespace DekuMod.SkillStates.ShootStyle
             this.rollSpeed = this.moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, base.fixedAge / duration);
         }
 
+        public void BlackWhipSmashSearch(bool initial)
+        {
+            blackwhipSearch.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
+            blackwhipSearch.filterByLoS = false;
+            blackwhipSearch.searchOrigin = base.GetAimRay().origin;
+            blackwhipSearch.searchDirection = base.GetAimRay().direction;
+            blackwhipSearch.sortMode = BullseyeSearch.SortMode.Distance;
+            blackwhipSearch.maxDistanceFilter = blastRadius;
+            blackwhipSearch.maxAngleFilter = angle;
+
+
+            blackwhipSearch.RefreshCandidates();
+            blackwhipSearch.FilterOutGameObject(base.gameObject);
+
+
+
+            List<HurtBox> target = blackwhipSearch.GetResults().ToList<HurtBox>();
+            foreach (HurtBox singularTarget in target)
+            {
+                if (singularTarget.healthComponent.body && singularTarget.healthComponent)
+                {
+                    if (initial)
+                    {
+                        BlackwhipComponent blackwhipComponent = singularTarget.healthComponent.body.gameObject.GetComponent<BlackwhipComponent>();
+
+
+                        if (blackwhipComponent)
+                        {
+
+                        }
+                        if (!blackwhipComponent)
+                        {
+                            blackwhipComponent = singularTarget.healthComponent.body.gameObject.AddComponent<BlackwhipComponent>();
+                            blackwhipComponent.totalDuration = duration;
+                            blackwhipComponent.dekucharbody = characterBody;
+                            blackwhipComponent.charbody = singularTarget.healthComponent.body;
+
+                            new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.blackwhipOverdriveDamage * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                            new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, blastPosition + Vector3.up * blastRadius, 5f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+
+                        }
+                    }
+                    else
+                    {
+                        BlackwhipComponent blackwhipComponent = singularTarget.healthComponent.body.gameObject.GetComponent<BlackwhipComponent>();
+                        if (blackwhipComponent)
+                        {
+                            new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, aimSphere.transform.position, 5f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                        }
+
+                    }
+
+                }
+            }
+        }
         public void ApplyComponent()
         {
             blastPosition = Vector3.Lerp(origin, final, 0.5f);
@@ -394,6 +502,7 @@ namespace DekuMod.SkillStates.ShootStyle
                 case superState.SUPER1:
                     break;
                 case superState.SUPER2:
+                    EntityState.Destroy(this.aimSphere.gameObject);
                     break;
                 case superState.SUPER3:
                     Util.PlaySound(EvisDash.endSoundString, base.gameObject);

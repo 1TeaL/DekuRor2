@@ -435,44 +435,6 @@ namespace DekuMod.Modules.Survivors
                 }
             }
 
-            //if (blackwhipTimer > 0f)
-            //{
-            //    if (enemyBody)
-            //    {
-            //        MakeLine();
-            //    }
-            //    else
-            //    {
-            //        if (blackwhipAttachWorld)
-            //        {
-            //            MakeLine();
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    if (blackwhipLineEffect)
-            //    {
-            //        Destroy(blackwhipLineEffect);
-            //    }
-            //    blackwhipAttachWorld = false;
-            //    enemyBody = null;
-            //}
-
-            //if(blackwhipLineEffect && blackwhipLineRenderer)
-            //{
-            //    if (blackwhipTimer > 0f)
-            //    {
-            //        if (blackwhipAttachWorld)
-            //        {
-            //            LineVec(storedPos);
-            //        }
-            //        else if (enemyBody)
-            //        {
-            //            LineVec(enemyBody.transform.position);
-            //        }
-            //    }
-            //}
         }
         public void FixedUpdate()
         {

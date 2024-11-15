@@ -48362,6 +48362,10 @@ MonoBehaviour:
     transform: {fileID: 5875110892486637082}
   - name: RHand
     transform: {fileID: 2550275340935208446}
+  - name: LFoot
+    transform: {fileID: 7035981664964015278}
+  - name: RFoot
+    transform: {fileID: 9191103001464887721}
   - name: mightSwingL
     transform: {fileID: 4645053804718168615}
   - name: mightSwingR
@@ -48384,7 +48388,7 @@ MonoBehaviour:
     transform: {fileID: 3665872506906988482}
   - name: rEyeAura
     transform: {fileID: 5472155644921293253}
-  - name: lArmFajinaura
+  - name: lArmFajinAura
     transform: {fileID: 2526185316558058088}
   - name: rArmFajinAura
     transform: {fileID: 7714114153660331526}
@@ -49828,8 +49832,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8323065202772258004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.85}
-  m_LocalScale: {x: 1.9417717, y: 1.4019, z: 2.7086365}
+  m_LocalPosition: {x: 0, y: 0, z: 0.632}
+  m_LocalScale: {x: 1.9417717, y: 1.4019, z: 1.87}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1024871425405580807}

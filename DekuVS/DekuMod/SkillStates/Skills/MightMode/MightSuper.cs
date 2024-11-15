@@ -20,6 +20,7 @@ using static RoR2.BulletAttack;
 using EntityStates.VagrantMonster;
 using Random = UnityEngine.Random;
 using System.Net;
+using static RoR2.CameraTargetParams;
 
 namespace DekuMod.SkillStates.Might
 {
@@ -64,13 +65,42 @@ namespace DekuMod.SkillStates.Might
         private int randFreq;
         private bool reducerFlipFlop;
         private GameObject effectPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/LightningStakeNova");
-        private enum super3State { CHARGING, RELEASE, END};
+        private enum super3State { CHARGING, RELEASE, END};        
         private super3State detroit3state;
+        private float detroit3DashTime;
 
         private Transform modelTransform;
         private Animator animator;
         private CharacterModel characterModel;
         private HurtBoxGroup hurtboxGroup;
+
+        private CharacterCameraParamsData super1CameraParams = new CharacterCameraParamsData()
+        {
+            maxPitch = 70,
+            minPitch = -70,
+            pivotVerticalOffset = 1f,
+            idealLocalCameraPos = new Vector3(0, 0.0f, -40f),
+            wallCushion = 0.1f,
+        };
+        private CharacterCameraParamsData super2CameraParams = new CharacterCameraParamsData()
+        {
+            maxPitch = 70,
+            minPitch = -70,
+            pivotVerticalOffset = 1f,
+            idealLocalCameraPos = new Vector3(0, 50f, -100f),
+            wallCushion = 0.1f,
+        };
+        private CharacterCameraParamsData super3CameraParams = new CharacterCameraParamsData()
+        {
+            maxPitch = 70,
+            minPitch = -70,
+            pivotVerticalOffset = 1f,
+            idealLocalCameraPos = new Vector3(0, 0.0f, -100f),
+            wallCushion = 0.1f,
+        };
+
+        private CameraParamsOverrideHandle camOverrideHandle;
+
 
         public override void OnEnter()
 		{
@@ -92,10 +122,13 @@ namespace DekuMod.SkillStates.Might
 			blastAttack.attacker = base.gameObject;
 			blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
 			blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-			blastAttack.baseForce = 1000f;
+            blastAttack.baseForce = blastForce;
 			blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
 			blastAttack.damageType = blastType;
 			blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+            blastAttack.radius = blastRadius;
+            blastAttack.baseDamage = blastDamage;
+            blastAttack.position = blastPosition;
 
 
         }
@@ -103,6 +136,7 @@ namespace DekuMod.SkillStates.Might
 		protected override void NeutralSuper()
 		{
 			base.NeutralSuper();
+            characterBody.SetAimTimer(1f);
             blastRadius = StaticValues.detroitRadius;
             blastDamage = StaticValues.detroitDamageCoefficient * damageStat * attackSpeedStat;
 			//set in front of deku exactly
@@ -115,10 +149,36 @@ namespace DekuMod.SkillStates.Might
             //play animation of quick punch
             base.PlayAnimation("FullBody, Override", "DetroitSmash1");
 
+
+            this.modelTransform = base.GetModelTransform();
+            if (this.modelTransform)
+            {
+                this.animator = this.modelTransform.GetComponent<Animator>();
+                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+
+                TemporaryOverlay temporaryOverlay = transform.gameObject.AddComponent<TemporaryOverlay>();
+                temporaryOverlay.duration = duration;
+                temporaryOverlay.animateShaderAlpha = true;
+                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                temporaryOverlay.destroyComponentOnEnd = true;
+                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
+
+
+            }
+
+            CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
+            {
+                cameraParamsData = super1CameraParams,
+                priority = 0,
+            };
+
+            camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, attackStartTime);
+
         }
         protected override void BackwardSuper()
         {
 			base.BackwardSuper();
+            characterBody.SetAimTimer(1f);
             super2NumberOfHits = Mathf.RoundToInt(StaticValues.detroit2BaseHits * attackSpeedStat);
             if(super2NumberOfHits < StaticValues.detroit2BaseHits)
             {
@@ -132,10 +192,34 @@ namespace DekuMod.SkillStates.Might
             super2Interval = (duration-attackStartTime)/super2NumberOfHits;
             //play animation of uppercut
             base.PlayAnimation("FullBody, Override", "DetroitSmash2");
+
+            this.modelTransform = base.GetModelTransform();
+            if (this.modelTransform)
+            {
+                this.animator = this.modelTransform.GetComponent<Animator>();
+                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+
+                TemporaryOverlay temporaryOverlay = transform.gameObject.AddComponent<TemporaryOverlay>();
+                temporaryOverlay.duration = duration;
+                temporaryOverlay.animateShaderAlpha = true;
+                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                temporaryOverlay.destroyComponentOnEnd = true;
+                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
+
+            }
+
+            CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
+            {
+                cameraParamsData = super2CameraParams,
+                priority = 0,
+            };
+
+            camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, attackStartTime);
         }
         protected override void ForwardSuper()
         {
             base.ForwardSuper();
+            characterBody.SetAimTimer(1f);
 
             float[] source = new float[]
             {
@@ -145,13 +229,18 @@ namespace DekuMod.SkillStates.Might
             this.maxCharge = (float)this.baseMaxCharge / source.Min();
             this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
+            attackStartTime = 0.3f;
 
             Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
 
             //play animation of charging up
             base.PlayAnimation("FullBody, Override", "DetroitSmash3");
             base.animator.SetBool("detroitSmash3Dashing", false);
+            base.characterMotor.velocity = Vector3.zero;
+            base.characterMotor.useGravity = false;
             detroit3state = super3State.CHARGING;
+
+
         }
         public override void FixedUpdate()
 		{
@@ -165,6 +254,28 @@ namespace DekuMod.SkillStates.Might
 						hasFired = true;
 						blastAttack.Fire();
 
+
+                        this.modelTransform = base.GetModelTransform();
+                        if (this.modelTransform)
+                        {
+                            this.animator = this.modelTransform.GetComponent<Animator>();
+                            this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+
+                            TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
+                            temporaryOverlay.duration = 0.3f;
+                            temporaryOverlay.animateShaderAlpha = true;
+                            temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                            temporaryOverlay.destroyComponentOnEnd = true;
+                            temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                            TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
+                            temporaryOverlay2.duration = 0.3f;
+                            temporaryOverlay2.animateShaderAlpha = true;
+                            temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                            temporaryOverlay2.destroyComponentOnEnd = true;
+                            temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+
+                        }
+
                         EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, new EffectData
                         {
                             origin = blastPosition,
@@ -172,13 +283,20 @@ namespace DekuMod.SkillStates.Might
                             rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
                         }, true);
-                        EffectManager.SpawnEffect(Modules.DekuAssets.detroitweakEffect, new EffectData
+                        EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, new EffectData
                         {
                             origin = characterBody.corePosition,
                             scale = 1f,
                             rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
                         }, true);
+                        //EffectManager.SpawnEffect(Modules.DekuAssets.impactShaderEffect, new EffectData
+                        //{
+                        //    origin = characterBody.corePosition,
+                        //    scale = 1f,
+                        //    rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                        //}, true);
 
 
                         AkSoundEngine.PostEvent("impactsfx", this.gameObject);
@@ -195,7 +313,7 @@ namespace DekuMod.SkillStates.Might
                         super2Stopwatch += Time.fixedDeltaTime;
                         if(super2Stopwatch > super2Interval)
                         {
-                            super2Interval = 0f;
+                            super2Stopwatch = 0f;
 
                             var bulletAttack = new BulletAttack
                             {
@@ -234,7 +352,16 @@ namespace DekuMod.SkillStates.Might
 
                         if(!hasFired)
                         {
+                            hasFired = true;
 
+
+                            //EffectManager.SpawnEffect(Modules.DekuAssets.impactShaderEffect, new EffectData
+                            //{
+                            //    origin = characterBody.corePosition,
+                            //    scale = 1f,
+                            //    rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                            //}, true);
                             EffectManager.SpawnEffect(Modules.DekuAssets.detroitUpperEffect, new EffectData
                             {
                                 origin = characterBody.corePosition,
@@ -254,20 +381,24 @@ namespace DekuMod.SkillStates.Might
                     break; 
 				case superState.SUPER3:
 
-                    switch(detroit3state)
+
+                    base.characterMotor.velocity = Vector3.zero;
+                    characterDirection.forward = base.GetAimRay().direction;
+
+                    switch (detroit3state)
                     {
                         case super3State.CHARGING:
-                            if (base.fixedAge < this.maxCharge && base.IsKeyDownAuthority())
+                            if (base.fixedAge < this.maxCharge && base.inputBank.skill4.down)
                             {
+                                Chat.AddMessage("charging" + chargePercent);
                                 //base.PlayAnimation("FullBody, Override", "SmashFullCharge", "Attack.playbackRate", 1f);
                                 this.chargePercent = base.fixedAge / this.maxCharge;
                                 this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
-                                this.randFreq = Random.Range(baseMaxCharge * 50, this.baseMaxCharge * 100) / 100;
-                                bool flag2 = this.reducerFlipFlop;
-                                if (flag2)
+                                //this.randFreq = Random.Range(baseMaxCharge * 50, this.baseMaxCharge * 100) / 100;
+                                this.randFreq = Random.Range(1, this.baseMaxCharge * 100) / 100;
+                                if (reducerFlipFlop)
                                 {
-                                    bool flag3 = (float)this.randFreq <= this.chargePercent;
-                                    if (flag3)
+                                    if ((float)this.randFreq <= this.chargePercent)
                                     {
                                         EffectData effectData = new EffectData
                                         {
@@ -287,47 +418,104 @@ namespace DekuMod.SkillStates.Might
                             }
                             else
                             {
+                                base.animator.SetBool("detroitSmash3Dashing", true);
+                                CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
+                                {
+                                    cameraParamsData = super3CameraParams,
+                                    priority = 0,
+                                };
+
+                                camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, 0.2f);
+
                                 detroit3state = super3State.RELEASE;
+
                             }
                             break;
                         case super3State.RELEASE:
-                            if (base.isAuthority && base.characterMotor && base.characterBody)
+                            if (base.isAuthority)
                             {
-                                Ray ownerAimRay = base.GetAimRay();
-                                Vector3 normalized = (maxMoveVec - characterBody.corePosition).normalized;
-                                Vector3 force = normalized * StaticValues.delaware3Acceleration * moveSpeedStat/characterBody.baseMoveSpeed;
 
-
-                                if (this.characterModel)
-                                {
-                                    this.characterModel.invisibilityCount++;
-                                }
+                                //if (this.characterModel)
+                                //{
+                                //    this.characterModel.invisibilityCount++;
+                                //}
                                 if (this.hurtboxGroup)
                                 {
                                     HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
                                     int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter + 1;
                                     hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
                                 }
-                                if (base.characterMotor)
+
+                                //TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
+                                //temporaryOverlay.duration = 0.3f;
+                                //temporaryOverlay.animateShaderAlpha = true;
+                                //temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                                //temporaryOverlay.destroyComponentOnEnd = true;
+                                //temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                                //TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
+                                //temporaryOverlay2.duration = 0.3f;
+                                //temporaryOverlay2.animateShaderAlpha = true;
+                                //temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                                //temporaryOverlay2.destroyComponentOnEnd = true;
+                                //temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+
+                                TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
+                                temporaryOverlay.duration = 0.3f;
+                                temporaryOverlay.animateShaderAlpha = true;
+                                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                                temporaryOverlay.destroyComponentOnEnd = true;
+                                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
+
+                                //base.characterDirection.forward = finalDirection;
+                                //base.characterMotor.rootMotion += finalDirection * ( StaticValues.delaware3Acceleration * moveSpeedStat / characterBody.baseMoveSpeed) * Time.fixedDeltaTime;
+
+                                detroit3DashTime += Time.fixedDeltaTime;
+                                if (detroit3DashTime > 0.3f)
                                 {
-                                    base.characterMotor.enabled = false;
-                                }
+                                    base.characterMotor.rootMotion += this.maxMoveVec;
+
+                                    detroit3state = super3State.END;
+                                }                                
+
+                                //if (base.characterMotor)
+                                //{
+                                //    base.characterMotor.enabled = false;
+                                //}
 
                                 //keep going towards point until in range
-                                if (Vector2.Distance(maxMoveVec,characterBody.corePosition) > 5f)
-                                {
-                                    base.characterMotor.ApplyForce(force * (base.characterMotor.mass * Time.deltaTime), true, true);
-                                }
-                                else
-                                {
-                                    detroit3state = super3State.END;
-                                }
+                                //if (Vector2.Distance(this.areaIndicator.transform.localPosition, characterBody.corePosition) > 3f)
+                                //{
+                                //    TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
+                                //    temporaryOverlay.duration = 0.3f;
+                                //    temporaryOverlay.animateShaderAlpha = true;
+                                //    temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                                //    temporaryOverlay.destroyComponentOnEnd = true;
+                                //    temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
+                                //    //base.characterMotor.ApplyForce(force * (base.characterMotor.mass * Time.deltaTime), true, true);
+                                //    base.characterMotor.disableAirControlUntilCollision = true;
+                                //    base.characterMotor.useGravity = false;
+
+                                //    //base.characterDirection.forward = finalDirection;
+                                //    //base.characterMotor.rootMotion += finalDirection * ( StaticValues.delaware3Acceleration * moveSpeedStat / characterBody.baseMoveSpeed) * Time.fixedDeltaTime;
+
+                                //    base.characterMotor.rootMotion += this.maxMoveVec;
+                                //    detroit3state = super3State.END;
+
+                                //    Chat.AddMessage("moving towards point");
+                                //}
+                                //else if (Vector2.Distance(this.areaIndicator.transform.localPosition, characterBody.corePosition) <= 3f)
+                                //{
+
+                                //    detroit3state = super3State.END;
+                                //}
                             }
                             break;
                         case super3State.END:
 
-                            if (!hasFired)
+                            if (!hasFired && base.isAuthority)
                             {
+                                hasFired = true;
+
                                 if (this.modelTransform && EntityStates.ImpMonster.BlinkState.destealthMaterial)
                                 {
                                     TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
@@ -339,6 +527,8 @@ namespace DekuMod.SkillStates.Might
                                     temporaryOverlay.animateShaderAlpha = true;
 
                                 }
+                                base.characterMotor.disableAirControlUntilCollision = false;
+                                base.characterMotor.useGravity = true;
                                 if (this.characterModel)
                                 {
                                     this.characterModel.invisibilityCount--;
@@ -354,42 +544,55 @@ namespace DekuMod.SkillStates.Might
                                     base.characterMotor.enabled = true;
                                 }
 
-                                hasFired = true;
-                                int chooseAnim = Random.RandomRangeInt(0, 2);
+                                int chooseAnim = Random.RandomRangeInt(0, 1);
                                 switch(chooseAnim)
                                 {
                                     case 0:
                                         attackStartTime = 0.4f;
-                                        base.PlayAnimation("FullBody, Override", "DetroitSmash3End");
+                                        base.PlayAnimation("FullBody, Override", "DetroitSmash3End3");
                                         break;
                                     case 1:
                                         attackStartTime = 0.4f;
                                         base.PlayAnimation("FullBody, Override", "DetroitSmash3End2");
                                         break;
-                                    case 2:
-                                        attackStartTime = 0.4f;
-                                        base.PlayAnimation("FullBody, Override", "DetroitSmash3End3");
-                                        break;
+                                    //case 2:
+                                    //    attackStartTime = 0.4f;
+                                    //    base.PlayAnimation("FullBody, Override", "DetroitSmash3End3");
+                                    //    break;
                                 }
                             }
                             attackStopwatch += Time.fixedDeltaTime;
                             if(attackStopwatch > attackStartTime && hasFired)
                             {
+
                                 hasFired = false;
-                                blastDamage = damageMult;
-                                blastRadius = radius;
-                                blastPosition = maxMoveVec;
-                                blastType = DamageType.Stun1s;
+                                blastAttack.baseDamage = damageMult * characterBody.damage;
+                                blastAttack.radius = radius;
+                                blastAttack.position = characterBody.corePosition;
+                                blastAttack.damageType = DamageType.Stun1s;
                                 blastAttack.baseForce = damageMult * StaticValues.detroit3Force;
+                                blastAttack.Fire();
 
                                 EffectData effectData = new EffectData
                                 {
                                     scale = 1f,
-                                    origin = maxMoveVec,
+                                    origin = characterBody.corePosition,
                                     rotation = Quaternion.LookRotation(characterDirection.forward),
                                 };
+                                EffectManager.SpawnEffect(Modules.DekuAssets.impactShaderEffect, new EffectData
+                                {
+                                    origin = characterBody.corePosition,
+                                    scale = 1f,
+                                    rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                                }, true);
                                 EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData, true);
-                                blastAttack.Fire();
+                                EffectManager.SpawnEffect(DekuAssets.mageLightningBombEffectPrefab, effectData, true);
+                                EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
+
+                                AkSoundEngine.PostEvent("impactsfx", this.gameObject);
+
+
                                 this.outer.SetNextStateToMain();
                                 return;
                             }
@@ -405,7 +608,6 @@ namespace DekuMod.SkillStates.Might
         {
             Ray aimRay = base.GetAimRay();
             Vector3 direction = aimRay.direction;
-            aimRay.origin = base.characterBody.corePosition;
             this.maxDistance = (baseDistance + 4f * this.chargePercent) * this.baseDistance * (this.moveSpeedStat / 7f);
             Physics.Raycast(aimRay.origin, aimRay.direction, out this.raycastHit, this.maxDistance);
             this.hitDis = this.raycastHit.distance;
@@ -417,6 +619,12 @@ namespace DekuMod.SkillStates.Might
             this.damageMult = Modules.StaticValues.detroit3DamageCoefficient + StaticValues.detroit3DamageMultiplier * (this.chargePercent * Modules.StaticValues.detroit3DamageCoefficient);
             this.radius = (this.baseRadius * this.damageMult) / 4f;
             this.maxMoveVec = this.maxDistance * direction;
+
+            if (this.areaIndicator)
+            {
+                this.areaIndicator.transform.localScale = Vector3.one * this.radius;
+                this.areaIndicator.transform.localPosition = aimRay.origin + this.maxMoveVec;
+            }
         }
 
 
@@ -437,12 +645,6 @@ namespace DekuMod.SkillStates.Might
                     break;
                 case superState.SUPER3:
                     
-                    if (this.areaIndicator)
-                    {
-                        Ray aimRay = base.GetAimRay();
-                        this.areaIndicator.transform.localScale = Vector3.one * this.radius;
-                        this.areaIndicator.transform.localPosition = aimRay.origin + this.maxMoveVec;
-                    }
 
                     break;
 
@@ -457,6 +659,23 @@ namespace DekuMod.SkillStates.Might
                 this.areaIndicator.SetActive(false);
                 EntityState.Destroy(this.areaIndicator);
             }
+            base.characterMotor.disableAirControlUntilCollision = false;
+            base.characterMotor.useGravity = true;
+            if (this.characterModel)
+            {
+                this.characterModel.invisibilityCount--;
+            }
+            if (this.hurtboxGroup)
+            {
+                HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
+                int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter - 1;
+                hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
+            }
+            if (base.characterMotor)
+            {
+                base.characterMotor.enabled = true;
+            }
+            base.cameraTargetParams.RemoveParamsOverride(camOverrideHandle, 1f);
             //if (base.cameraTargetParams) base.cameraTargetParams.fovOverride = -1f;
         }
         public override InterruptPriority GetMinimumInterruptPriority()

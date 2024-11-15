@@ -42,6 +42,7 @@ namespace DekuMod.SkillStates.Might
             switch (level)
             {
                 case 0:
+                    damageCoefficient *= 1.5f;
                     break;
                 case 1:
                     damageCoefficient *= 2f;
@@ -91,38 +92,42 @@ namespace DekuMod.SkillStates.Might
             int index = this.swingIndex;
             if (index == 0) index = 1;
             else index = 0;
-            
-            if (dekucon && base.isAuthority)
-            {
-                Target = dekucon.GetTrackingTarget();
-            }
 
-            if (Target.healthComponent.alive)
+            this.outer.SetNextState(new SmashRushCombo
             {
-                float num2 = Vector3.Distance(base.transform.position, Target.transform.position);
-                if (num2 >= StaticValues.smashRushDistance)
-                {
-                    //this.outer.SetNextState(new DashAttack
-                    //{
+                swingIndex = index
+            });
+            //if (dekucon && base.isAuthority)
+            //{
+            //    Target = dekucon.GetTrackingTarget();
+            //}
 
-                    //});
-                }
-                else
-                {
-                    this.outer.SetNextState(new SmashRushCombo
-                    {
-                        swingIndex = index
-                    });
+            //if (Target)
+            //{
+            //    float num2 = Vector3.Distance(base.transform.position, Target.transform.position);
+            //    if (num2 >= StaticValues.smashRushDistance)
+            //    {
+            //        this.outer.SetNextState(new SmashDash
+            //        {
 
-                }
-            }
-            else if (!Target)
-            {
-                this.outer.SetNextState(new SmashRushCombo
-                {
-                    swingIndex = index
-                });
-            }
+            //        });
+            //    }
+            //    else
+            //    {
+            //        this.outer.SetNextState(new SmashRushCombo
+            //        {
+            //            swingIndex = index
+            //        });
+
+            //    }
+            //}
+            //else if (!Target)
+            //{
+            //    this.outer.SetNextState(new SmashRushCombo
+            //    {
+            //        swingIndex = index
+            //    });
+            //}
         }
 
         public override void FixedUpdate()

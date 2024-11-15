@@ -60,46 +60,60 @@ namespace DekuMod.SkillStates.Might
             force = damage;
             radius = StaticValues.delawareRadius;
             damageType = DamageType.Generic;
-            PlayCrossfade("UpperBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
+            PlayCrossfade("FullBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
         }
         public override void Level2()
         {
             damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware2DamageMultiplier * damageStat;
             radius = StaticValues.delawareRadius;
             damageType = DamageType.Generic;
-            PlayCrossfade("UpperBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
+            PlayCrossfade("FullBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
         }
         public override void Level3()
         {
             damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware3DamageMultiplier * damageStat;
             radius = StaticValues.delaware3Radius;
             damageType = DamageType.Stun1s;
-            PlayCrossfade("UpperBody, Override", "DelawareCharge", "Attack.playbackRate", 0.5f, 0.01f);
+            PlayCrossfade("FullBody, Override", "DelawareSmashCharge", "Attack.playbackRate", 0.5f, 0.01f);
         }
 
         public override void OnExit()
         {
             base.OnExit();
-            anim.SetBool("delawareCharged", true);
+            if (dekucon.RARM.isPlaying)
+            {
+                dekucon.RARM.Stop();
+            }
+            base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
+            base.PlayCrossfade("UpperBody, Override", "BufferEmpty", 0.1f);
         }
 
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            if (IsKeyDownAuthority())
+            if (IsKeyDownAuthority() || inputBank.skill2.down)
             {
 
                 if (base.fixedAge < this.maxCharge)
                 {
                     this.chargePercent = base.fixedAge / this.maxCharge;
 
+                    if(chargePercent > 1f)
+                    {
+                        chargePercent = 1f;
+                        if(dekucon.RARM.isStopped)
+                        {
+                            dekucon.RARM.Play();
+                        }
+                    }
+
                     //base.characterMotor.walkSpeedPenaltyCoefficient = 1f - this.chargePercent / maxCharge;
                 }
             }
             else
             {
-                if(!IsKeyDownAuthority())
+                if(!IsKeyDownAuthority() && !inputBank.skill2.down)
                 {
                     if(!hasFired)
                     {
@@ -110,7 +124,7 @@ namespace DekuMod.SkillStates.Might
                         switch (level)
                         {
                             case 0:
-                                damage += StaticValues.delawareDamageMultiplier * (this.chargePercent * Modules.StaticValues.delawareDamageCoefficient);
+                                damage += (this.chargePercent * Modules.StaticValues.delawareDamageMultiplier);
                                 
                                 Fire();
                                 if (angle < 60)
@@ -127,7 +141,7 @@ namespace DekuMod.SkillStates.Might
                                 }
                                 break;
                             case 1:
-                                damage += StaticValues.delaware2DamageMultiplier * (this.chargePercent * Modules.StaticValues.delawareDamageCoefficient);
+                                damage += (this.chargePercent * Modules.StaticValues.delaware3DamageMultiplier);
                                 
                                 Fire();
                                 if (angle < 60)
@@ -144,7 +158,7 @@ namespace DekuMod.SkillStates.Might
                                 }
                                 break;
                             case 2:
-                                damage += StaticValues.delaware3DamageMultiplier * (this.chargePercent * Modules.StaticValues.delawareDamageCoefficient);
+                                damage += (this.chargePercent * Modules.StaticValues.delawareDamageCoefficient);
                                 
                                 Fire();
                                 if (angle < 60)
@@ -173,6 +187,7 @@ namespace DekuMod.SkillStates.Might
                             base.characterMotor.velocity = StaticValues.delawareDistance * (-base.GetAimRay().direction)* moveSpeedStat;
                         
                         this.outer.SetNextStateToMain();
+                        return;
                     }
 
                 }
@@ -251,10 +266,6 @@ namespace DekuMod.SkillStates.Might
             }
         }
 
-        private void AddRecoil(object value1, object value2, object value3, object value4)
-        {
-            throw new NotImplementedException();
-        }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {

@@ -30,7 +30,7 @@ namespace DekuMod.Modules
         //public static Sprite alphashieldonBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/DLC1/BearVoid/bdBearVoidReady.asset").WaitForCompletion().iconSprite;
         //public static Sprite alphashieldoffBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/DLC1/BearVoid/bdBearVoidCooldown.asset").WaitForCompletion().iconSprite;
         //public static Sprite decayBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Common/bdVoidFogStrong.asset").WaitForCompletion().iconSprite;
-        //public static Sprite multiplierBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/DLC1/PrimarySkillShuriken/bdPrimarySkillShurikenBuff.asset").WaitForCompletion().iconSprite;
+        public static Sprite multiplierBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/DLC1/PrimarySkillShuriken/bdPrimarySkillShurikenBuff.asset").WaitForCompletion().iconSprite;
         public static Sprite jumpBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/DLC1/MoveSpeedOnKill/bdKillMoveSpeed.asset").WaitForCompletion().iconSprite;
         //public static Sprite sprintBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/SprintOutOfCombat/bdWhipBoost.asset").WaitForCompletion().iconSprite;
         //public static Sprite spikeBuffIcon = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/Grandparent/bdOverheat.asset").WaitForCompletion().iconSprite;
@@ -118,10 +118,12 @@ namespace DekuMod.Modules
         internal static GameObject airforce100impactEffect;
         internal static GameObject gobeyondPulseEffect;
         internal static GameObject gearshiftPierceEffect;
+        internal static GameObject blastdashWindEffect;
 
         internal static GameObject dekuPunchEffect;
         internal static GameObject dekuKickEffect;
         internal static GameObject dekuHitImpactEffect;
+        internal static GameObject impactShaderEffect;
 
         //Materials
         public static Material blackwhipDebuffMaterial;
@@ -231,7 +233,7 @@ namespace DekuMod.Modules
             airforce100impactEffect= LoadEffect("airforce100impact");
             gobeyondPulseEffect = LoadEffect("goBeyondPulse");
             gearshiftPierceEffect = LoadEffect("gearshiftPierce");
-
+            blastdashWindEffect = LoadEffect("blastdashWind", true);
 
             dekuPunchEffect = DekuAssets.LoadEffect("MultiStraightSwingEffect");
             dekuKickEffect = DekuAssets.LoadEffect("DekuKickEffect", true);
@@ -240,7 +242,7 @@ namespace DekuMod.Modules
             {
                 EffectComponent effectCom = dekuHitImpactEffect.AddComponent<EffectComponent>();
             }
-
+            impactShaderEffect = DekuAssets.LoadEffect("ImpactShader");
 
             kickHitSoundEvent = CreateNetworkSoundEventDef("shootstyedashcomboimpact");
 

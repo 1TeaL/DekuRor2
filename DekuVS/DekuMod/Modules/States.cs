@@ -45,8 +45,9 @@ namespace DekuMod.Modules
 
             //Shoot Style Mode
             entityStates.Add(typeof(Airforce));
-            entityStates.Add(typeof(BlastDash));
-            entityStates.Add(typeof(OklahomaSmash));
+            entityStates.Add(typeof(SanDiegoSmash));
+            entityStates.Add(typeof(FloatStep));
+            //entityStates.Add(typeof(OklahomaSmash));
             entityStates.Add(typeof(ShootStyleSuper));
 
             //Blackwhip Mode

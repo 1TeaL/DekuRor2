@@ -73,7 +73,7 @@ namespace DekuMod.Modules
         internal const float delaware2DamageMultiplier = 3f;
         internal const float delaware3DamageMultiplier = 4f;
         internal const float delaware3Acceleration = 50f;
-        internal const float delawareDistance = 20f;
+        internal const float delawareDistance = 10f;
         //Utility
         internal const float fajinDamageMultiplier = 2f;
         internal const float fajinBarrierMultiplier = 0.05f;
@@ -93,11 +93,11 @@ namespace DekuMod.Modules
         internal const float detroit3Force = 1000f;
         internal const float detroitRadius = 20f;
         internal const float detroit2Range = 100f;
-        internal const float detroit2Radius = 10f;
+        internal const float detroit2Radius = 20f;
         internal const int detroit2BaseHits = 4;
-        internal const float detroit3Radius = 7f;
+        internal const float detroit3Radius = 5f;
         internal const float detroit3Distance = 10f;
-        internal const int detroit3BaseCharge = 3;
+        internal const int detroit3BaseCharge = 4;
         internal const float detroitDamageCoefficient = 8f;
         internal const float detroit2DamageCoefficient = 4f;
         internal const float detroit3DamageCoefficient = 6f;
@@ -114,25 +114,26 @@ namespace DekuMod.Modules
         internal const int airforceMaxRicochet = 5;
         //Secondary
         internal const float stlouis45DamageCoefficient = 2f;
+        internal const float sandiegoSpeedCoefficient = 10f;
+        internal const float sandiegoDamageCoefficient = 3f;
+        internal const float sandiegoDashDuration = 0.5f;
+        internal const float sandiegoDashTotalDuration = 1f;
+        //Utility
         internal const float blastDashDamageCoefficient = 2f;
         internal const float blastDashSpeed = 20f;
         internal const float blastDashForce = 2000f;
         internal const float blastDashRadius = 10f;
         internal const float blastDashDuration = 0.6f;
-        //Utility
-        internal const float oklahomaSpeedCoefficient = 10f;
-        internal const float oklahomaDamageCoefficient = 3f;
-        internal const float oklahomaDashDuration = 0.5f;
-        internal const float oklahomaDashTotalDuration = 1f;
+        internal static float dodgeSpeed = 6f;
         //Special
         internal const int stlouisTotalHits = 5;
         internal const int stlouisTotalHits3 = 5;
         internal const float stlouisDistance2 = 10f;
         internal const float stlouisDuration = 1f;
-        internal const float stlouisDuration2 = 1f;
-        internal const float stlouisDuration3 = 1f;
+        internal const float stlouisDuration2 = 1.6f;
+        internal const float stlouisDuration3 = 0.5f;
         internal const float stlouisRadius = 5f;
-        internal const float stlouisRadius2 = 5f;
+        internal const float stlouisRadius2 = 20f;
         internal const float stlouisRadius3 = 5f;
         internal const float stlouisDamageCoefficient = 3f;
         internal const float stlouisDamageCoefficient2 = 3f;
@@ -140,6 +141,8 @@ namespace DekuMod.Modules
         internal const float stlouisDamageForce = 0f;
         internal const float stlouisDamageForce2 = 0f;
         internal const float stlouisDamageForce3 = 0f;
+        internal const float stlouis3InitialSpeed = 20f;
+
 
         //Blackwhip Mode
         internal const int blackwhipCDBuffDuration = 6;

@@ -57,7 +57,7 @@ namespace DekuMod.Modules.Survivors
 
         public void Start()
         {
-            dekucon = base.GetComponent<DekuController>();
+            dekucon = gameObject.GetComponent<DekuController>();
             baseAIPresent = false;
             characterBody = gameObject.GetComponent<CharacterBody>();
             anim = GetComponentInChildren<Animator>();
