@@ -97,7 +97,6 @@ namespace DekuMod.Modules
 
             bodyComponent.bodyFlags |= CharacterBody.BodyFlags.ImmuneToExecutes;
             bodyComponent.bodyFlags |= CharacterBody.BodyFlags.SprintAnyDirection;
-
             bodyComponent.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
             bodyComponent.rootMotionInMainState = false;

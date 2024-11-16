@@ -5,6 +5,10 @@
 			<ChildrenList>
 				<GameParameter Name="Volume_Master" ID="{26E7A7B0-FDC7-4577-BF10-6C03F199C8B4}"/>
 				<GameParameter Name="Volume_SFX" ID="{5B7A3356-F624-492B-9C91-B06B810F20EE}"/>
+				<GameParameter Name="Volume_MSX" ID="{4E4B72FB-7316-4CDE-88B9-0C8CE34297DC}"/>
+				<GameParameter Name="Volume_DekuSFX" ID="{6AA57A4B-E192-4D3C-BECB-BCFE3A45C4BB}"/>
+				<GameParameter Name="Volume_DekuVoice" ID="{217BDE99-1486-4242-B0D0-451761C83DD0}"/>
+				<GameParameter Name="Volume_DekuMusic" ID="{0B0BA46D-1762-4034-AABE-C9A557D29D72}"/>
 			</ChildrenList>
 		</WorkUnit>
 	</GameParameters>

@@ -156,7 +156,7 @@ namespace DekuMod.SkillStates.Might
                 this.animator = this.modelTransform.GetComponent<Animator>();
                 this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
 
-                TemporaryOverlay temporaryOverlay = transform.gameObject.AddComponent<TemporaryOverlay>();
+                TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
                 temporaryOverlay.duration = duration;
                 temporaryOverlay.animateShaderAlpha = true;
                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
@@ -585,7 +585,7 @@ namespace DekuMod.SkillStates.Might
                                     scale = 1f,
                                     rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
-                                }, true);
+                                }, false);
                                 EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData, true);
                                 EffectManager.SpawnEffect(DekuAssets.mageLightningBombEffectPrefab, effectData, true);
                                 EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);

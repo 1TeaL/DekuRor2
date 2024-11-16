@@ -139,6 +139,12 @@ namespace DekuMod.Modules.Survivors
 
         public void Start()
         {
+            if (AkSoundEngine.IsInitialized())
+            {
+                AkSoundEngine.SetRTPCValue("Volume_DekuMusic", Modules.Config.dekuMusic.Value);
+                AkSoundEngine.SetRTPCValue("Volume_DekuVoice", Modules.Config.dekuVoice.Value);
+                AkSoundEngine.SetRTPCValue("Volume_DekuSFX", Modules.Config.dekuSFX.Value);
+            }
             energySystem = gameObject.GetComponent<EnergySystem>();
             body = gameObject.GetComponent<CharacterBody>();
             child = gameObject.GetComponent<ModelLocator>().modelTransform.GetComponent<ChildLocator>();
@@ -237,7 +243,7 @@ namespace DekuMod.Modules.Survivors
 
             On.RoR2.LevelUpEffectManager.OnCharacterLevelUp += LevelUpEffectManager_OnCharacterLevelUp;
 
-            if (DekuAssets.blackwhipIndicator)
+            if (DekuAssets.blackwhipIndicator && body.hasEffectiveAuthority)
             {
                 blackwhipReticle = UnityEngine.Object.Instantiate<GameObject>(DekuAssets.blackwhipIndicator);
                 blackwhipReticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -884,6 +890,7 @@ namespace DekuMod.Modules.Survivors
         {
             if (body.hasEffectiveAuthority)
             {
+                StopGobeyondLoop();
                 gobeyondLoopID = AkSoundEngine.PostEvent("gobeyondost", body.gameObject);
             }
         }

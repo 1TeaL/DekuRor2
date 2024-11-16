@@ -44,7 +44,6 @@ namespace DekuMod.SkillStates.ShootStyle
         private Vector3 previousPosition;
         public Vector3 origin;
         public Vector3 final;
-        private Vector3 theSpot;
         private readonly BullseyeSearch search = new BullseyeSearch();
         private readonly BullseyeSearch blackwhipSearch = new BullseyeSearch();
         public int numberOfHits;
@@ -386,7 +385,7 @@ namespace DekuMod.SkillStates.ShootStyle
                             blackwhipComponent.charbody = singularTarget.healthComponent.body;
 
                             new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.blackwhipOverdriveDamage * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
-                            new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, blastPosition + Vector3.up * blastRadius, 5f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                            new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, blastPosition + Vector3.up * blastRadius, 3f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
 
                         }
                     }
@@ -395,7 +394,7 @@ namespace DekuMod.SkillStates.ShootStyle
                         BlackwhipComponent blackwhipComponent = singularTarget.healthComponent.body.gameObject.GetComponent<BlackwhipComponent>();
                         if (blackwhipComponent)
                         {
-                            new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, aimSphere.transform.position, 5f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                            new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, aimSphere.transform.position, 3f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
                         }
 
                     }
@@ -409,7 +408,7 @@ namespace DekuMod.SkillStates.ShootStyle
 
             search.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
             search.filterByLoS = false;
-            search.searchOrigin = theSpot;
+            search.searchOrigin = blastPosition;
             search.searchDirection = UnityEngine.Random.onUnitSphere;
             search.sortMode = BullseyeSearch.SortMode.Distance;
             search.maxDistanceFilter = (final - origin).magnitude / 2;

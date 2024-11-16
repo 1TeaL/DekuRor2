@@ -108,8 +108,8 @@ namespace DekuMod.SkillStates
             isSwitch = true;
             base.skillLocator.ResetSkills();
 
-            characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);
-            base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
+            //characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);
+            //base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
             base.characterMotor.Motor.ForceUnground();
             base.characterMotor.velocity = Vector3.zero;
 
@@ -147,11 +147,11 @@ namespace DekuMod.SkillStates
         protected virtual void OnHitEnemyAuthority(BlastAttack.Result result)
         {
             AkSoundEngine.PostEvent("impactsfx", this.gameObject);
-            foreach (BlastAttack.HitPoint hitpoint in result.hitPoints)
-            {
-                characterBody.skillLocator.secondary.AddOneStock();
-                characterBody.skillLocator.utility.AddOneStock();
-            }
+            //foreach (BlastAttack.HitPoint hitpoint in result.hitPoints)
+            //{
+            //    characterBody.skillLocator.secondary.AddOneStock();
+            //    characterBody.skillLocator.utility.AddOneStock();
+            //}
 
         }
         public override void FixedUpdate()
@@ -278,7 +278,7 @@ namespace DekuMod.SkillStates
 
 
 
-            base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
+            //base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
 
             base.gameObject.layer = LayerIndex.defaultLayer.intVal;
             base.characterMotor.Motor.RebuildCollidableLayers();

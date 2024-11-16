@@ -18,8 +18,9 @@ namespace DekuMod.Modules.Networking
         private float stopwatch;
         const string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
         private ExtraSkillLocator extraskillLocator;
+        public EnergySystem energySystem;
 
-		public SkillDef skilldef1;
+        public SkillDef skilldef1;
         public SkillDef skilldef2;
         public SkillDef skilldef3;
         public SkillDef skilldef4;
@@ -51,6 +52,8 @@ namespace DekuMod.Modules.Networking
         public override void OnEnter()
         {
             base.OnEnter();
+            energySystem = base.GetComponent<EnergySystem>();
+
             stopwatch = 0f;
             base.characterMotor.velocity = Vector3.zero;
 			dekucon = base.GetComponent<DekuController>();
@@ -186,9 +189,16 @@ namespace DekuMod.Modules.Networking
 
 			base.characterBody.inputBank.enabled = true;
 			blastAttack.Fire();
+            EffectManager.SpawnEffect(Modules.DekuAssets.impactShaderEffect, new EffectData
+            {
+                origin = characterBody.corePosition,
+                scale = 1f,
+                rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+            }, false);
 
 
-			if (base.GetAimAnimator()) base.GetAimAnimator().enabled = true;
+            if (base.GetAimAnimator()) base.GetAimAnimator().enabled = true;
 			base.characterBody.hideCrosshair = false;
 			base.cameraTargetParams.RemoveParamsOverride(camOverrideHandle, 0.5f);
 			if (NetworkServer.active)
@@ -196,7 +206,10 @@ namespace DekuMod.Modules.Networking
 				base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
 				base.characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 5);
 				base.characterBody.ApplyBuff(Modules.Buffs.goBeyondBuff.buffIndex, 1, Modules.StaticValues.goBeyondBuffDuration);
-			}
+                base.characterBody.ApplyBuff(Modules.Buffs.goBeyondBuffUsed.buffIndex, 1);
+            }
+			energySystem.currentPlusUltra = 0f;
+
 
 			EffectManager.SpawnEffect(Modules.DekuAssets.gobeyondPulseEffect, new EffectData
 			{
@@ -206,7 +219,7 @@ namespace DekuMod.Modules.Networking
 			}, true);
 
 
-			dekucon.GOBEYOND.Play();
+			//dekucon.GOBEYOND.Play();
 
 			extraskillLocator.extraFirst.UnsetSkillOverride(extraskillLocator.extraFirst, Deku.goBeyondSkillDef1, GenericSkill.SkillOverridePriority.Contextual);
 			extraskillLocator.extraSecond.UnsetSkillOverride(extraskillLocator.extraSecond, Deku.goBeyondSkillDef2, GenericSkill.SkillOverridePriority.Contextual);

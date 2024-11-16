@@ -17,6 +17,8 @@ using R2API.Networking.Interfaces;
 using static UnityEngine.ParticleSystem.PlaybackState;
 using static RoR2.Console;
 using R2API;
+using MonoMod.RuntimeDetour;
+using System;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -95,6 +97,8 @@ namespace DekuMod
         public static DekuPlugin instance;
         public static CharacterBody DekuCharacterBody;
 
+        public Hook AddBankAfterAKSoundEngineInit { get; private set; }
+
         private void Awake()
         {
             Log.Init(Logger);
@@ -105,6 +109,8 @@ namespace DekuMod
             // load assets and read config
             Modules.DekuAssets.Initialize();
             Modules.Config.ReadConfig();
+            Modules.Config.SetupRiskOfOptions(); //setup risk of options
+            Modules.Config.OnChangeHooks(); //on change hooks config
             Modules.Damage.SetupModdedDamage(); //setup modded damage
             Modules.States.RegisterStates(); // register states for networking
             Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
@@ -141,6 +147,34 @@ namespace DekuMod
             RoR2.ContentManagement.ContentManager.onContentPacksAssigned += LateSetup;
 
             Hook();
+        }
+
+        private void Start()
+        {
+            AddBankAfterAKSoundEngineInit = new Hook(
+                typeof(AkSoundEngineInitialization).GetMethodCached(nameof(AkSoundEngineInitialization.InitializeSoundEngine)),
+                typeof(DekuPlugin).GetMethodCached(nameof(AddBank)));
+
+            if (AkSoundEngine.IsInitialized())
+            {
+                AkSoundEngine.SetRTPCValue("Volume_DekuMusic", Modules.Config.dekuMusic.Value);
+                AkSoundEngine.SetRTPCValue("Volume_DekuVoice", Modules.Config.dekuVoice.Value);
+                AkSoundEngine.SetRTPCValue("Volume_DekuSFX", Modules.Config.dekuSFX.Value);
+            }
+        }
+        private static bool AddBank(Func<AkSoundEngineInitialization, bool> orig, AkSoundEngineInitialization self)
+        {
+            var res = orig(self);
+
+
+            if (AkSoundEngine.IsInitialized())
+            {
+                AkSoundEngine.SetRTPCValue("Volume_DekuMusic", Modules.Config.dekuMusic.Value);
+                AkSoundEngine.SetRTPCValue("Volume_DekuVoice", Modules.Config.dekuVoice.Value);
+                AkSoundEngine.SetRTPCValue("Volume_DekuSFX", Modules.Config.dekuSFX.Value);
+            }
+
+            return res;
         }
 
         private void LateSetup(HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj)
@@ -241,7 +275,7 @@ namespace DekuMod
                             }
 
                             //if no fajin buff, reduce the cooldown of fajin
-                            if (!body.HasBuff(Buffs.fajinBuff) && !body.HasBuff(Buffs.fajinMaxBuff))
+                            if (!body.HasBuff(Buffs.fajinBuff) && !body.HasBuff(Buffs.fajinMaxBuff) && body.skillLocator.utility.skillDef == Deku.mightUtilitySkillDef)
                             {
                                 body.skillLocator.utility.AddOneStock();
                             }

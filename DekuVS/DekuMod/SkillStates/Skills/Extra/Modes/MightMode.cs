@@ -31,6 +31,8 @@ namespace DekuMod.SkillStates
 		{
 			base.OnEnter();
 
+            base.PlayAnimation("FullBody, Override", "DetroitSmash3End");
+
             skilldef1 = characterBody.skillLocator.primary.skillDef;
             skilldef2 = characterBody.skillLocator.secondary.skillDef;
             skilldef3 = characterBody.skillLocator.utility.skillDef;
@@ -129,14 +131,15 @@ namespace DekuMod.SkillStates
             duration = 0.5f;
             characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);
 
-            if (dekucon.GetTrackingTarget())
-            {
-                characterBody.characterMotor.Motor.SetPositionAndRotation(dekucon.GetTrackingTarget().transform.position, Quaternion.LookRotation(base.GetAimRay().direction));
-            }
-            else
-            {
-                base.characterMotor.velocity = StaticValues.mightSwitchRadius * (base.GetAimRay().direction) * moveSpeedStat;
-            }
+            //if (dekucon.GetTrackingTarget())
+            //{
+            //    characterBody.characterMotor.Motor.SetPositionAndRotation(dekucon.GetTrackingTarget().transform.position, Quaternion.LookRotation(base.GetAimRay().direction));
+            //}
+            //else
+            //{
+            //    base.characterMotor.velocity = StaticValues.mightSwitchRadius * (base.GetAimRay().direction) * moveSpeedStat;
+            //    base.characterBody.characterMotor.rootMotion += StaticValues.mightSwitchRadius * (base.GetAimRay().direction) * moveSpeedStat;
+            //}
         }
 
         public override void FixedUpdate()
@@ -147,6 +150,7 @@ namespace DekuMod.SkillStates
             {
                 if(base.fixedAge > duration)
                 {
+
                     base.characterMotor.velocity *= 0.1f;
                     //blast attack
                     blastAttack = new BlastAttack();
@@ -163,6 +167,22 @@ namespace DekuMod.SkillStates
                     blastAttack.baseForce = 10000f;
 
                     blastAttack.Fire();
+
+
+                    EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, new EffectData
+                    {
+                        origin = characterBody.corePosition,
+                        scale = StaticValues.mightSwitchRadius * attackSpeedStat,
+                        rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                    }, true);
+                    EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, new EffectData
+                    {
+                        origin = characterBody.corePosition,
+                        scale = 1f,
+                        rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                    }, true);
 
                     this.outer.SetNextStateToMain();
                     return;

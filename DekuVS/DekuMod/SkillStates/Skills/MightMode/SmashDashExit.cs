@@ -14,6 +14,7 @@ namespace DekuMod.SkillStates.Might
         public HurtBox Target;
         public override void OnEnter()
         {
+            characterBody.SetAimTimer(1f);
 
             this.hitboxName = "SmashRushHitbox";
 
@@ -133,6 +134,11 @@ namespace DekuMod.SkillStates.Might
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
+            if (characterDirection)
+            {
+                characterDirection.forward = base.GetAimRay().direction;
+            }
 
             if (this.stopwatch >= this.duration && base.isAuthority)
             {

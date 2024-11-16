@@ -9,7 +9,7 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{6F1EB594-0C13-86C3-7FFE-F4E146F218EC}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{50500F2B-DD11-69EC-129B-CBD0C2B4387D}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -23,13 +23,17 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 			<GameParameters>
+				<GameParameter Id="364437579" Name="Volume_DekuVoice"/>
 				<GameParameter Id="796049864" Name="RPM"/>
 				<GameParameter Id="1524500807" Name="Playback_Rate"/>
+				<GameParameter Id="3631600932" Name="Volume_DekuMusic"/>
 				<GameParameter Id="3673881719" Name="Volume_SFX"/>
 				<GameParameter Id="3695994288" Name="Volume_Master"/>
+				<GameParameter Id="3729143042" Name="Volume_MSX"/>
+				<GameParameter Id="3781471980" Name="Volume_DekuSFX"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="1943384016" Type="User" Language="SFX" Hash="{36792F6B-D634-D42E-7CCC-087DCBCC36BA}">
+		<SoundBank Id="1943384016" Type="User" Language="SFX" Hash="{153103DF-8025-A832-6B56-B545F8B6548C}">
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
 			<Media>
@@ -276,10 +280,6 @@
 				<File Id="655583295" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>delaware\VoPl01_000000C0.wav</ShortName>
 					<CachePath>SFX/delaware/VoPl01_000000C0_C214D156.wem</CachePath>
-				</File>
-				<File Id="656494371" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>My Hero Academia OST - You Say Run.wav</ShortName>
-					<CachePath>SFX/My Hero Academia OST - You Say Run_8E324C96.wem</CachePath>
 				</File>
 				<File Id="657530836" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>blackwhip\VoPl01_00000047.wav</ShortName>
@@ -576,7 +576,6 @@
 					<MediaRefs>
 						<MediaRef Id="543457860"/>
 						<MediaRef Id="653751196"/>
-						<MediaRef Id="656494371"/>
 						<MediaRef Id="724948110"/>
 					</MediaRefs>
 				</Event>
@@ -733,10 +732,14 @@
 				</Event>
 			</Events>
 			<GameParameters>
+				<GameParameter Id="364437579" Name="Volume_DekuVoice"/>
+				<GameParameter Id="3631600932" Name="Volume_DekuMusic"/>
 				<GameParameter Id="3673881719" Name="Volume_SFX"/>
 				<GameParameter Id="3695994288" Name="Volume_Master"/>
+				<GameParameter Id="3729143042" Name="Volume_MSX"/>
+				<GameParameter Id="3781471980" Name="Volume_DekuSFX"/>
 			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{432BB7A6-41F7-1B54-2A66-C5DC7FE429C2}</FileHash>
+	<FileHash>{DD62B30E-2EA0-36B1-D9E1-38AE59A3E907}</FileHash>
 </SoundBanksInfo>

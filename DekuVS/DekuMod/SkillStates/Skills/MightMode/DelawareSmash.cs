@@ -56,7 +56,7 @@ namespace DekuMod.SkillStates.Might
         }
         public override void Level1()
         {
-            damage = StaticValues.delawareDamageCoefficient * damageStat;
+            damage = StaticValues.delawareDamageCoefficient;
             force = damage;
             radius = StaticValues.delawareRadius;
             damageType = DamageType.Generic;
@@ -64,14 +64,14 @@ namespace DekuMod.SkillStates.Might
         }
         public override void Level2()
         {
-            damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware2DamageMultiplier * damageStat;
+            damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware2DamageMultiplier;
             radius = StaticValues.delawareRadius;
             damageType = DamageType.Generic;
             PlayCrossfade("FullBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
         }
         public override void Level3()
         {
-            damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware3DamageMultiplier * damageStat;
+            damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware3DamageMultiplier;
             radius = StaticValues.delaware3Radius;
             damageType = DamageType.Stun1s;
             PlayCrossfade("FullBody, Override", "DelawareSmashCharge", "Attack.playbackRate", 0.5f, 0.01f);
@@ -141,7 +141,7 @@ namespace DekuMod.SkillStates.Might
                                 }
                                 break;
                             case 1:
-                                damage += (this.chargePercent * Modules.StaticValues.delaware3DamageMultiplier);
+                                damage += (this.chargePercent * Modules.StaticValues.delaware2DamageMultiplier);
                                 
                                 Fire();
                                 if (angle < 60)
@@ -158,7 +158,7 @@ namespace DekuMod.SkillStates.Might
                                 }
                                 break;
                             case 2:
-                                damage += (this.chargePercent * Modules.StaticValues.delawareDamageCoefficient);
+                                damage += (this.chargePercent * Modules.StaticValues.delaware3DamageMultiplier);
                                 
                                 Fire();
                                 if (angle < 60)
@@ -177,15 +177,25 @@ namespace DekuMod.SkillStates.Might
                         }
                         
 
-                            if (isAuthority && Config.allowVoice.Value)
-                            {
-                                AkSoundEngine.PostEvent("delawarevoice", gameObject);
-                            }
+                        if (isAuthority && Config.allowVoice.Value)
+                        {
+                            AkSoundEngine.PostEvent("delawarevoice", gameObject);
+                        }
 
-                            AkSoundEngine.PostEvent("delawaresfx", gameObject);
+                        AkSoundEngine.PostEvent("delawaresfx", gameObject);
 
-                            base.characterMotor.velocity = StaticValues.delawareDistance * (-base.GetAimRay().direction)* moveSpeedStat;
-                        
+                        if(characterMotor.isGrounded)
+                        {
+                            base.characterMotor.velocity = StaticValues.delawareDistance * (-base.GetAimRay().direction) * moveSpeedStat;
+
+                        }
+                        else 
+                        if (!characterMotor.isGrounded)
+                        {
+                            base.characterMotor.velocity = StaticValues.delawareDistance * (-base.GetAimRay().direction) * moveSpeedStat * 0.5f;
+
+                        }
+
                         this.outer.SetNextStateToMain();
                         return;
                     }

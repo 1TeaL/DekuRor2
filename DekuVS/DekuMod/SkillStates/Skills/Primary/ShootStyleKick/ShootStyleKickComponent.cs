@@ -42,20 +42,42 @@ namespace DekuMod.SkillStates
             if (charbody.healthComponent.alive)
 			{
 				timer += Time.fixedDeltaTime;
-				if (timer > 1f)
+				if (timer > 0.5f)
 				{
 					if (currentNumber < numberOfHits)
 					{
 						currentNumber += 1;
 						timer -= 0.1f;
 						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.up, 2f, damage, dekucharbody.masterObjectId).Send(NetworkDestination.Server);
-					}
+
+                        EffectManager.SpawnEffect(Modules.DekuAssets.impactEffect, new EffectData
+                        {
+                            origin = charbody.corePosition,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(charbody.characterDirection.forward)
+
+                        }, true);
+                    }
 					else if (currentNumber == numberOfHits)
 					{
 						AkSoundEngine.PostEvent("impactsfx", charbody.gameObject);
 						currentNumber += 1;
 						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f, damage, dekucharbody.masterObjectId).Send(NetworkDestination.Server);
-					}
+                        EffectManager.SpawnEffect(Modules.DekuAssets.impactEffect, new EffectData
+                        {
+                            origin = charbody.corePosition,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(charbody.characterDirection.forward)
+
+                        }, true);
+                        EffectManager.SpawnEffect(Modules.DekuAssets.impactShaderEffect, new EffectData
+                        {
+                            origin = charbody.corePosition,
+                            scale = 1f,
+                            rotation = Quaternion.LookRotation(charbody.characterDirection.forward)
+
+                        }, false);
+                    }
 					else if (currentNumber > numberOfHits)
 					{
 

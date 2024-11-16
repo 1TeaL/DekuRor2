@@ -263,7 +263,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="gobeyondmusic" ID="{EC825FAE-4F6F-4580-ADB2-8DA82EC685AC}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+									<ObjectRef Name="GoBeyondMusic" ID="{7CBC767E-196B-4139-A631-26688E64873F}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

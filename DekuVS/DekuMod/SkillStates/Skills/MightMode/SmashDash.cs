@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates.Might
         private float procCoefficient = 1f;
         private float pushForce = 0f;
         private Vector3 storedPosition;
-        public static float dashSpeed = 100f;       
+        public float dashSpeed = 100f;       
         public static float hopForce = 10f;
         public static float damageCoefficient = 0f;
         public float duration = 0.8f;
@@ -37,10 +37,10 @@ namespace DekuMod.SkillStates.Might
                 return;
             }
 
-            if (base.characterBody)
-            {
-                base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
-            }
+            //if (base.characterBody)
+            //{
+            //    base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
+            //}
             bool flag2 = this.Target && this.Target.healthComponent && this.Target.healthComponent.alive;
             if (flag2)
             {
@@ -70,7 +70,16 @@ namespace DekuMod.SkillStates.Might
 
 
             AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
+
+
         }
+
+        public override void Level2()
+        {
+            base.Level2();
+            dashSpeed = 150f;
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -78,6 +87,11 @@ namespace DekuMod.SkillStates.Might
             if (Target)
             {
                 this.storedPosition = Target.transform.position;
+            }
+            else if (!targetIsValid)
+            {
+                this.outer.SetNextStateToMain();
+                return;
             }
 
             if(level == 2)
@@ -95,10 +109,6 @@ namespace DekuMod.SkillStates.Might
             }
             else
             {
-                if(level == 1)
-                {
-                    dashSpeed *= 2f;
-                }
 
 
                 bool flag2 = base.isAuthority && this.targetIsValid;
@@ -155,7 +165,7 @@ namespace DekuMod.SkillStates.Might
         public override void OnExit()
         {
             base.OnExit();
-            base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
+            //base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
             base.characterMotor.velocity *= 0.1f;
             base.GetModelAnimator().SetBool("attacking", false);
             base.PlayAnimation("Fullbody, Override", "BufferEmpty");

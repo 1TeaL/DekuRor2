@@ -37,7 +37,7 @@ namespace DekuMod.SkillStates.ShootStyle
         private float stopwatch;
         private OverlapAttack detector;
         private OverlapAttack attack;
-        protected string hitboxName2 = "KickHitbox";
+        protected string hitboxName2 = "SmashRushHitbox";
         protected string hitboxName = "SmashRushHitbox";
         protected float procCoefficient = 1f;
         protected float pushForce = 500f;
@@ -82,7 +82,7 @@ namespace DekuMod.SkillStates.ShootStyle
 
             duration = baseduration / (attackSpeedStat / 2);
             SpeedCoefficient = initialSpeedCoefficient * (attackSpeedStat / 2);
-            finalSpeedCoefficient = SpeedCoefficient / 2f;
+            finalSpeedCoefficient = 0f;
             dekucon = GetComponent<DekuController>();
             float num = moveSpeedStat;
             bool isSprinting = characterBody.isSprinting;
@@ -158,6 +158,7 @@ namespace DekuMod.SkillStates.ShootStyle
             characterDirection.forward = characterMotor.velocity.normalized;
 
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            animator.SetBool("attacking", true);
             GetModelAnimator().SetBool("sandiegoSmashDashEnd", false);
             if (characterMotor.isGrounded)
             {
@@ -336,6 +337,15 @@ namespace DekuMod.SkillStates.ShootStyle
 
             GetModelAnimator().SetBool("sandiegoSmashDashEnd", true);
             characterBody.SetAimTimer(2f);
+
+            //if(characterMotor.isGrounded)
+            //{
+            //    PlayCrossfade("FullBody, Override", "SanDiegoSmashAir", "Attack.playbackRate", duration, 0.1f);
+            //}
+            //else
+            //{
+
+            //}
             //base.skillLocator.primary.UnsetSkillOverride(base.skillLocator.primary, ShootStyleKick45.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
             //base.skillLocator.primary.SetSkillOverride(base.skillLocator.primary, ShootStyleKick452.primaryDef, GenericSkill.SkillOverridePriority.Contextual);
 

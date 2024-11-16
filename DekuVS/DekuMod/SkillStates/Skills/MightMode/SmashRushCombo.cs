@@ -48,7 +48,7 @@ namespace DekuMod.SkillStates.Might
             {
                 Target = dekucon.GetTrackingTarget();
             }
-            Chat.AddMessage(swingIndex + "swing index");
+            //Chat.AddMessage(swingIndex + "swing index");
 
             base.OnEnter();
         }
@@ -156,7 +156,7 @@ namespace DekuMod.SkillStates.Might
 
         protected override void SetNextState()
         {
-            Chat.AddMessage("set next state");
+            //Chat.AddMessage("set next state");
             int index = this.swingIndex;
             if (index == 0) index = 1;
             else index = 0;

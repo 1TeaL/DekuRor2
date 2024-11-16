@@ -111,7 +111,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 this.aimSphere.transform.position = enemyBody.corePosition;
                 this.aimSphere.transform.up = Vector3.up;
                 this.aimSphere.transform.forward = this.aimRay.direction;
-                Chat.AddMessage("enemybody position" + enemyBody.corePosition);
+                //Chat.AddMessage("enemybody position" + enemyBody.corePosition);
                 
 
 
@@ -135,6 +135,7 @@ namespace DekuMod.SkillStates.BlackWhip
                     base.characterMotor.velocity = vector;
                 }
 
+
             }
             else if (raycast)
             {
@@ -153,7 +154,7 @@ namespace DekuMod.SkillStates.BlackWhip
                 this.aimSphere.transform.position = raycastHit.point;
                 this.aimSphere.transform.up = raycastHit.normal;
                 this.aimSphere.transform.forward = this.aimRay.direction;
-                Chat.AddMessage("endPoint" + endPoint);
+                //Chat.AddMessage("endPoint" + endPoint);
                 
 
                 lastDistance = Vector3.Distance(transform.position, endPoint);
@@ -354,9 +355,17 @@ namespace DekuMod.SkillStates.BlackWhip
             RaycastHit raycastHit;
             bool raycast = Physics.Raycast(aimRay.origin, aimRay.direction, out raycastHit, this.maxDistance, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
             
+
             if (isEnemy)
             {
-                this.aimSphere.transform.position = enemyBody.corePosition;
+                if (enemyBody)
+                {
+                    this.aimSphere.transform.position = enemyBody.corePosition;
+                }
+                else
+                {
+
+                }
                 this.aimSphere.transform.up = raycastHit.normal;
                 this.aimSphere.transform.forward = this.aimRay.direction;
             }
