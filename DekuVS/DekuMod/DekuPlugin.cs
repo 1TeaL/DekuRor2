@@ -654,6 +654,7 @@ namespace DekuMod
                     this.OverlayFunction(Modules.DekuAssets.blackwhipDebuffMaterial, self.body.HasBuff(Modules.Buffs.blackwhipDebuff), self);
                     this.OverlayFunction(Modules.DekuAssets.redblinkingMaterial, self.body.HasBuff(Modules.Buffs.counterAttackBuff), self);
                     this.OverlayFunction(Modules.DekuAssets.whiteblinkingMaterial, self.body.HasBuff(Modules.Buffs.overlayBuff), self);
+                    this.OverlayFunction(Modules.DekuAssets.whiteblinkingMaterial, self.body.HasBuff(Modules.Buffs.delayAttackDebuff), self);
                     this.OverlayFunction(Modules.DekuAssets.yellowblinkingMaterial, self.body.HasBuff(Modules.Buffs.mightBuff), self);
                     this.OverlayFunction(Modules.DekuAssets.purpleblinkingMaterial, self.body.HasBuff(Modules.Buffs.blackwhipCDBuff), self);
                 }

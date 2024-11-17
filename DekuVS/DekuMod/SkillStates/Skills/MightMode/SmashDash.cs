@@ -18,7 +18,7 @@ namespace DekuMod.SkillStates.Might
         private float procCoefficient = 1f;
         private float pushForce = 0f;
         private Vector3 storedPosition;
-        public float dashSpeed = 100f;       
+        public float dashSpeed = 50f;       
         public static float hopForce = 10f;
         public static float damageCoefficient = 0f;
         public float duration = 0.8f;
@@ -77,7 +77,7 @@ namespace DekuMod.SkillStates.Might
         public override void Level2()
         {
             base.Level2();
-            dashSpeed = 150f;
+            dashSpeed = 100f;
         }
 
         public override void FixedUpdate()
@@ -88,78 +88,113 @@ namespace DekuMod.SkillStates.Might
             {
                 this.storedPosition = Target.transform.position;
             }
-            else if (!targetIsValid)
+
+            switch (level)
             {
-                this.outer.SetNextStateToMain();
-                return;
-            }
-
-            if(level == 2)
-            {
-                if(base.fixedAge >= duration)
-                {
-                    base.characterMotor.Motor.SetPositionAndRotation(storedPosition - base.GetAimRay().direction.normalized * 2f, Quaternion.LookRotation(base.GetAimRay().direction));
-
-                    base.GetModelAnimator().SetBool("smashRushDashEnd", true);
-                    this.outer.SetNextState(new SmashDashExit
+                case 0:
+                    if (base.isAuthority && this.targetIsValid)
                     {
-                    });
-
-                }
-            }
-            else
-            {
-
-
-                bool flag2 = base.isAuthority && this.targetIsValid;
-                if (flag2)
-                {
-                    Vector3 velocity = (this.storedPosition - base.transform.position).normalized * dashSpeed;
-                    base.characterMotor.velocity = velocity;
-                    base.characterDirection.forward = base.characterMotor.velocity.normalized;
-                    bool flag3 = base.fixedAge >= duration;
-                    if (flag3)
-                    {
-                        this.outer.SetNextStateToMain();
-                    }
-                    else
-                    {
-                        this.attack.forceVector = base.characterMotor.velocity.normalized * pushForce;
-                        bool flag4 = this.attack.Fire(this.HitResults);
-                        if (flag4)
+                        Vector3 velocity = (this.storedPosition - base.transform.position).normalized * dashSpeed;
+                        base.characterMotor.velocity = velocity;
+                        base.characterDirection.forward = base.characterMotor.velocity.normalized;
+                        bool flag3 = base.fixedAge >= duration;
+                        if (flag3)
                         {
-                            bool flag5 = this.HitResults.Count > 0;
-                            if (flag5)
+                            this.outer.SetNextStateToMain();
+                        }
+                        else
+                        {
+                            this.attack.forceVector = base.characterMotor.velocity.normalized * pushForce;
+                            if (this.attack.Fire(this.HitResults))
                             {
-                                foreach (HurtBox hurtBox in this.HitResults)
+                                if (this.HitResults.Count > 0)
                                 {
-                                    bool flag6 = hurtBox.healthComponent && hurtBox.healthComponent.health > 0f;
-                                    if (flag6)
+                                    foreach (HurtBox hurtBox in this.HitResults)
                                     {
+                                        if (hurtBox.healthComponent && hurtBox.healthComponent.health > 0f)
+                                        {
+                                        }
                                     }
+                                    base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+                                    this.outer.SetNextState(new SmashDashExit
+                                    {
+                                    });
                                 }
-                                base.GetModelAnimator().SetBool("smashRushDashEnd", true);
-                                this.outer.SetNextState(new SmashDashExit
+                                else
                                 {
-                                });
-                            }
-                            else
-                            {
-                                base.GetModelAnimator().SetBool("smashRushDashEnd", true);
-                                this.outer.SetNextState(new SmashDashExit
-                                {
-                                });
+                                    base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+                                    this.outer.SetNextState(new SmashDashExit
+                                    {
+                                    });
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    this.outer.SetNextStateToMain();
-                    return;
-                }
+                    else
+                    {
+                        this.outer.SetNextStateToMain();
+                        return;
+                    }
+                    break;
+                case 1:
+                    if (base.isAuthority && this.targetIsValid)
+                    {
+                        Vector3 velocity = (this.storedPosition - base.transform.position).normalized * dashSpeed;
+                        base.characterMotor.velocity = velocity;
+                        base.characterDirection.forward = base.characterMotor.velocity.normalized;
+                        bool flag3 = base.fixedAge >= duration;
+                        if (flag3)
+                        {
+                            this.outer.SetNextStateToMain();
+                        }
+                        else
+                        {
+                            this.attack.forceVector = base.characterMotor.velocity.normalized * pushForce;
+                            if (this.attack.Fire(this.HitResults))
+                            {
+                                if (this.HitResults.Count > 0)
+                                {
+                                    foreach (HurtBox hurtBox in this.HitResults)
+                                    {
+                                        if (hurtBox.healthComponent && hurtBox.healthComponent.health > 0f)
+                                        {
+                                        }
+                                    }
+                                    base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+                                    this.outer.SetNextState(new SmashDashExit
+                                    {
+                                    });
+                                }
+                                else
+                                {
+                                    base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+                                    this.outer.SetNextState(new SmashDashExit
+                                    {
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.outer.SetNextStateToMain();
+                        return;
+                    }
+                    break;
+                case 2:
+                    if (base.fixedAge >= duration)
+                    {
+                        base.characterMotor.Motor.SetPositionAndRotation(storedPosition - base.GetAimRay().direction.normalized * 2f, Quaternion.LookRotation(base.GetAimRay().direction));
 
+                        base.GetModelAnimator().SetBool("smashRushDashEnd", true);
+                        this.outer.SetNextState(new SmashDashExit
+                        {
+                        });
+
+                    }
+                    break;
             }
+
 
         }
         public override void OnExit()

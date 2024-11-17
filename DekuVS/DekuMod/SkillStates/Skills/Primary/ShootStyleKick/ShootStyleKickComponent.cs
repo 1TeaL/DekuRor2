@@ -47,7 +47,7 @@ namespace DekuMod.SkillStates
 					if (currentNumber < numberOfHits)
 					{
 						currentNumber += 1;
-						timer -= 0.1f;
+						timer -= 0.05f;
 						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.up, 2f, damage, dekucharbody.masterObjectId).Send(NetworkDestination.Server);
 
                         EffectManager.SpawnEffect(Modules.DekuAssets.impactEffect, new EffectData
@@ -62,7 +62,7 @@ namespace DekuMod.SkillStates
 					{
 						AkSoundEngine.PostEvent("impactsfx", charbody.gameObject);
 						currentNumber += 1;
-						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 100f, damage, dekucharbody.masterObjectId).Send(NetworkDestination.Server);
+						new PeformShootStyleKickAttackNetworkRequest(charbody.masterObjectId, Vector3.down, 20f, damage, dekucharbody.masterObjectId).Send(NetworkDestination.Server);
                         EffectManager.SpawnEffect(Modules.DekuAssets.impactEffect, new EffectData
                         {
                             origin = charbody.corePosition,

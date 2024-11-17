@@ -33,7 +33,7 @@
 				<GameParameter Id="3781471980" Name="Volume_DekuSFX"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="1943384016" Type="User" Language="SFX" Hash="{153103DF-8025-A832-6B56-B545F8B6548C}">
+		<SoundBank Id="1943384016" Type="User" Language="SFX" Hash="{1B7F6039-EDCA-B21D-D5C9-752AC5E88585}">
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
 			<Media>
@@ -84,6 +84,10 @@
 				<File Id="78216023" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Death\VoPl01_00000099.wav</ShortName>
 					<CachePath>SFX/Death/VoPl01_00000099_C214D156.wem</CachePath>
+				</File>
+				<File Id="85998031" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>The Trinity.wav</ShortName>
+					<CachePath>SFX/The Trinity_8E324C96.wem</CachePath>
 				</File>
 				<File Id="89094593" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ofa\VoPl01_0000005F.wav</ShortName>
@@ -180,6 +184,10 @@
 				<File Id="374868213" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>smashpunch3.wav</ShortName>
 					<CachePath>SFX/smashpunch3_8E324C96.wem</CachePath>
+				</File>
+				<File Id="384763130" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Next it's our turn!.wav</ShortName>
+					<CachePath>SFX/Next it's our turn!_8E324C96.wem</CachePath>
 				</File>
 				<File Id="398014809" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>delaware\VoPl01_00000052.wav</ShortName>
@@ -574,6 +582,8 @@
 				</Event>
 				<Event Id="2412150284" Name="gobeyondost">
 					<MediaRefs>
+						<MediaRef Id="85998031"/>
+						<MediaRef Id="384763130"/>
 						<MediaRef Id="543457860"/>
 						<MediaRef Id="653751196"/>
 						<MediaRef Id="724948110"/>
@@ -741,5 +751,5 @@
 			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{DD62B30E-2EA0-36B1-D9E1-38AE59A3E907}</FileHash>
+	<FileHash>{C503D0CF-B8B6-7AA7-A854-A15140BDCA0C}</FileHash>
 </SoundBanksInfo>

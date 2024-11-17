@@ -71,6 +71,9 @@ namespace DekuMod.SkillStates.ShootStyle
             blastAttack.position = blastPosition;
             blastAttack.baseForce = blastForce;
 
+
+            this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
+
             if (characterBody.characterMotor.isGrounded)
             {
                 state = floatState.GROUND;
@@ -84,19 +87,25 @@ namespace DekuMod.SkillStates.ShootStyle
                     this.animator = this.modelTransform.GetComponent<Animator>();
                     this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
 
+                    //TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
+                    //temporaryOverlay.duration = 0.3f;
+                    //temporaryOverlay.animateShaderAlpha = true;
+                    //temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                    //temporaryOverlay.destroyComponentOnEnd = true;
+                    //temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+
+                    //TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
+                    //temporaryOverlay2.duration = 0.3f;
+                    //temporaryOverlay2.animateShaderAlpha = true;
+                    //temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                    //temporaryOverlay2.destroyComponentOnEnd = true;
+                    //temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
                     TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
-                    temporaryOverlay.duration = 0.3f;
+                    temporaryOverlay.duration = duration;
                     temporaryOverlay.animateShaderAlpha = true;
                     temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                     temporaryOverlay.destroyComponentOnEnd = true;
-                    temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-
-                    TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
-                    temporaryOverlay2.duration = 0.3f;
-                    temporaryOverlay2.animateShaderAlpha = true;
-                    temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                    temporaryOverlay2.destroyComponentOnEnd = true;
-                    temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+                    temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
 
                 }
 
@@ -200,7 +209,7 @@ namespace DekuMod.SkillStates.ShootStyle
                         if (fixedAge  <= duration)
                         {
                             this.RecalculateRollSpeed();
-                            this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
+                            //this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
 
                             base.characterMotor.rootMotion += dashDirection * this.rollSpeed * Time.fixedDeltaTime;

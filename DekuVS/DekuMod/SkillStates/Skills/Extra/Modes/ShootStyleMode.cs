@@ -8,6 +8,8 @@ using R2API.Networking;
 using UnityEngine;
 using EntityStates.Huntress;
 using DekuMod.SkillStates.BaseStates;
+using static RoR2.CameraTargetParams;
+using static UnityEngine.ParticleSystem.PlaybackState;
 
 namespace DekuMod.SkillStates
 {
@@ -26,12 +28,26 @@ namespace DekuMod.SkillStates
         private bool isSwitch;
         private BlastAttack blastAttack;
         private float dropForce = StaticValues.shootSwitchDropForce;
-        private float slamForce = StaticValues.shootSwitchSlamForce;
+        private float slamForce;
+        private float damage;
         private GameObject slamIndicatorInstance;
         private float dropTimer;
         private bool hasDropped;
         private float movespeedMultiplier;
         private float slamRadius;
+
+        private float attackTime;
+
+        private CharacterCameraParamsData manchesterCameraParams = new CharacterCameraParamsData()
+        {
+            maxPitch = 70,
+            minPitch = -70,
+            pivotVerticalOffset = 1f,
+            idealLocalCameraPos = new Vector3(0, 20.0f, -50f),
+            wallCushion = 0.1f,
+        };
+
+        private CameraParamsOverrideHandle camOverrideHandle;
 
         public override void OnEnter()
         {
@@ -108,6 +124,11 @@ namespace DekuMod.SkillStates
             isSwitch = true;
             base.skillLocator.ResetSkills();
 
+            attackTime = 0.5f / attackSpeedStat;
+
+            GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
+            GetModelAnimator().SetBool("manchesterDownEnd", false);
+
             //characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);
             //base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
             base.characterMotor.Motor.ForceUnground();
@@ -124,9 +145,19 @@ namespace DekuMod.SkillStates
             float num2 = (num / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
             movespeedMultiplier = num2 + 1f;
             dropForce *= movespeedMultiplier;
-            slamForce *= movespeedMultiplier;
-            slamRadius = StaticValues.shootSwitchRadius + (1 + dropTimer / 2) * movespeedMultiplier;
             base.characterMotor.disableAirControlUntilCollision = true;
+
+            switch (level)
+            {
+                case 0:
+                    break;
+                case 1:
+                    dropForce *= StaticValues.mightSwitchLevel2Multiplier;
+                    break;
+                case 2:
+                    dropForce *= StaticValues.mightSwitchLevel3Multiplier;
+                    break;
+            }
 
             if (dekucon.GetTrackingTarget())
             {
@@ -147,11 +178,17 @@ namespace DekuMod.SkillStates
         protected virtual void OnHitEnemyAuthority(BlastAttack.Result result)
         {
             AkSoundEngine.PostEvent("impactsfx", this.gameObject);
-            //foreach (BlastAttack.HitPoint hitpoint in result.hitPoints)
-            //{
-            //    characterBody.skillLocator.secondary.AddOneStock();
-            //    characterBody.skillLocator.utility.AddOneStock();
-            //}
+            foreach (BlastAttack.HitPoint hitpoint in result.hitPoints)
+            {
+                EffectManager.SpawnEffect(Modules.DekuAssets.dekuHitImpactEffect, new EffectData
+                {
+                    origin = hitpoint.hurtBox.healthComponent.body.gameObject.transform.position,
+                    scale = 1f,
+
+                }, true);
+                characterBody.skillLocator.secondary.AddOneStock();
+                characterBody.skillLocator.utility.AddOneStock();
+            }
 
         }
         public override void FixedUpdate()
@@ -160,27 +197,54 @@ namespace DekuMod.SkillStates
 
             if (isSwitch)
             {
-                dropTimer += Time.fixedDeltaTime;
-                slamRadius = StaticValues.shootSwitchRadius + (1 + dropTimer / 2) * movespeedMultiplier;
-                if (!this.hasDropped)
+                if(base.fixedAge > attackTime)
                 {
-                    this.StartDrop();
-                    base.PlayCrossfade("FullBody, Override", "ManchesterEnd", "Attack.playbackRate", 0.5f, 0.2f);
+
+                    dropTimer += Time.fixedDeltaTime;
+                    slamRadius = StaticValues.shootSwitchRadius + (1 + dropTimer / 2) * movespeedMultiplier;
+                    if (!this.hasDropped)
+                    {
+                        AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
+                        this.StartDrop();
+                    }
+
+                    if (!this.slamIndicatorInstance)
+                    {
+                        this.CreateIndicator();
+                    }
+                    if (this.slamIndicatorInstance)
+                    {
+                        this.UpdateSlamIndicator();
+                    }
+
+                    if (this.hasDropped && base.isAuthority && !base.characterMotor.disableAirControlUntilCollision)
+                    {
+                        GetModelAnimator().SetBool("manchesterDownEnd", true);
+                        switch (level)
+                        {
+                            case 0:
+                                LandingImpact();
+                                break;
+                            case 1:
+                                LandingImpact();
+                                LandingImpact();
+                                break;
+                            case 2:
+                                LandingImpact();
+                                LandingImpact();
+                                LandingImpact();
+                                break;
+                        }
+                        this.outer.SetNextStateToMain();
+                        return;
+                    }
                 }
 
-                if (!this.slamIndicatorInstance)
+                //incase player stuck
+                if (base.fixedAge > 6f)
                 {
-                    this.CreateIndicator();
-                }
-                if (this.slamIndicatorInstance)
-                {
-                    this.UpdateSlamIndicator();
-                }
-
-                if (this.hasDropped && base.isAuthority && !base.characterMotor.disableAirControlUntilCollision)
-                {
-                    this.LandingImpact();
                     this.outer.SetNextStateToMain();
+                    return;
                 }
             }
             else
@@ -224,20 +288,38 @@ namespace DekuMod.SkillStates
 
             if (base.isAuthority)
             {
-                AkSoundEngine.PostEvent(4108468048, base.gameObject);
+                //AkSoundEngine.PostEvent(4108468048, base.gameObject);
                 Ray aimRay = base.GetAimRay();
 
-                base.characterMotor.velocity *= 0.1f;
+                switch (level)
+                {
+                    case 0:
+                        slamRadius = StaticValues.shootSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
+                        damage = StaticValues.shootSwitchDamage * (1 + dropTimer / 2) * movespeedMultiplier;
+                        slamForce = StaticValues.shootSwitchSlamForce * (1 + dropTimer);
+                        break;
+                    case 1:
+                        slamRadius = StaticValues.shootSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.shootSwitchLevel2Multiplier;
+                        slamForce = StaticValues.shootSwitchSlamForce * (1 + dropTimer) * attackSpeedStat * StaticValues.shootSwitchLevel2Multiplier;
+                        damage = StaticValues.shootSwitchDamage * (1 + dropTimer / 2) * movespeedMultiplier * StaticValues.shootSwitchLevel2Multiplier;
+                        break;
+                    case 2:
+                        slamRadius = StaticValues.shootSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.shootSwitchLevel3Multiplier;
+                        slamForce = StaticValues.shootSwitchSlamForce * (1 + dropTimer) * attackSpeedStat * StaticValues.shootSwitchLevel3Multiplier;
+                        damage = StaticValues.shootSwitchDamage * (1 + dropTimer / 2) * movespeedMultiplier * StaticValues.shootSwitchLevel3Multiplier;
+                        break;
+                }
+
 
                 BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = slamRadius ;
+                blastAttack.radius = slamRadius;
                 blastAttack.procCoefficient = 1f;
                 blastAttack.position = base.characterBody.footPosition;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = base.RollCrit();
-                blastAttack.baseDamage = base.characterBody.damage * StaticValues.shootSwitchDamage * (1 + dropTimer / 2) * movespeedMultiplier;
+                blastAttack.baseDamage = base.characterBody.damage * damage;
                 blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                blastAttack.baseForce = slamForce * (1 + dropTimer);
+                blastAttack.baseForce = slamForce;
                 blastAttack.teamIndex = base.teamComponent.teamIndex;
                 blastAttack.damageType = DamageType.Generic;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
@@ -257,6 +339,13 @@ namespace DekuMod.SkillStates
                         scale = slamRadius * (1 + dropTimer / 2) * movespeedMultiplier,
                     }, true);
                 }
+                EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, new EffectData
+                {
+                    origin = characterBody.corePosition,
+                    scale = StaticValues.mightSwitchRadius * attackSpeedStat,
+                    rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                }, true);
 
                 //EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
                 //{

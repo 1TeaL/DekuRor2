@@ -60,6 +60,11 @@ namespace DekuMod.Modules
         internal const int mightBuffDuration = 6;
         internal const float mightSwitchRadius = 20f;
         internal const float mightSwitchDamage = 2f;
+        internal const float mightSwitchDropForce = 100f;
+        internal const float mightSwitchForce = 5000f;
+        internal const float mightSwitchForceAir = 1000f;
+        internal const float mightSwitchLevel2Multiplier = 1.5f;
+        internal const float mightSwitchLevel3Multiplier = 2f;
         //Primary
         internal const float smashRushDistance = 6f;
         internal const float smashRushDamageCoefficient = 2f;
@@ -95,6 +100,8 @@ namespace DekuMod.Modules
         internal const float detroit2Range = 100f;
         internal const float detroit2Radius = 20f;
         internal const int detroit2BaseHits = 4;
+        internal const float detroit2Level2Multiplier = 1.5f;
+        internal const float detroit2Level3Multiplier = 2f;
         internal const float detroit3Radius = 5f;
         internal const float detroit3Distance = 10f;
         internal const int detroit3BaseCharge = 4;
@@ -109,8 +116,11 @@ namespace DekuMod.Modules
         internal const float shootSwitchDropForce = 100f;
         internal const float shootSwitchHeightStart = 40f;
         internal const float shootSwitchDamage = 2f;
+        internal const float shootSwitchLevel2Multiplier = 1.5f;
+        internal const float shootSwitchLevel3Multiplier = 2f;
         //Primary
         internal const float airforceDamageCoefficient = 1f;
+        internal const float airforce3DamageCoefficient = 4f;
         internal const int airforceMaxRicochet = 5;
         //Secondary
         internal const float stlouis45DamageCoefficient = 2f;
@@ -129,7 +139,7 @@ namespace DekuMod.Modules
         internal const int stlouisTotalHits = 5;
         internal const int stlouisTotalHits3 = 5;
         internal const float stlouisDistance2 = 10f;
-        internal const float stlouisDuration = 1f;
+        internal const float stlouisDuration = 0.6f;
         internal const float stlouisDuration2 = 1.6f;
         internal const float stlouisDuration3 = 0.5f;
         internal const float stlouisRadius = 5f;
@@ -142,6 +152,8 @@ namespace DekuMod.Modules
         internal const float stlouisDamageForce2 = 0f;
         internal const float stlouisDamageForce3 = 0f;
         internal const float stlouis3InitialSpeed = 20f;
+        internal const float stlouis3Level2Multiplier = 1.5f;
+        internal const float stlouis3Level3Multiplier = 2f;
 
 
         //Blackwhip Mode

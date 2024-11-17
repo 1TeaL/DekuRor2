@@ -452,7 +452,7 @@ namespace DekuMod.Modules.Survivors
                 skillDescriptionToken = prefix + "SHOOTSTYLEUTILITY_DESCRIPTION",
                 skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("Floatactivate"),
                 activationState = new SerializableEntityStateType(typeof(FloatStep)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = false,

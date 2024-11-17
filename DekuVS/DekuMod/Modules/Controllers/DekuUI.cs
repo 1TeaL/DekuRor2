@@ -168,54 +168,76 @@ namespace DekuMod.Modules.Survivors
             if(plusUltraAmount/StaticValues.maxPlusUltra >= 1 / 3f)
             {
                 plusUltraFilled1.SetActive(true);
-                if (dekucon.PLUSULTRA1.isStopped)
+                if (dekucon)
                 {
-                    dekucon.PLUSULTRA1.Play();
+                    if (dekucon.PLUSULTRA1.isStopped)
+                    {
+                        dekucon.PLUSULTRA1.Play();
+                    }
+
                 }
             }
             else
             {
                 plusUltraFilled1.SetActive(false);
-                if (dekucon.PLUSULTRA1.isPlaying)
+                if (dekucon)
                 {
-                    dekucon.PLUSULTRA1.Stop();
+                    if (dekucon.PLUSULTRA1.isPlaying)
+                    {
+                        dekucon.PLUSULTRA1.Stop();
+                    }
+
                 }
             }
 
             if (plusUltraAmount / StaticValues.maxPlusUltra >= 2 / 3f)
             {
                 plusUltraFilled2.SetActive(true);
-                if (dekucon.PLUSULTRA2.isStopped)
+                if (dekucon)
                 {
-                    dekucon.PLUSULTRA2.Play();
+                    if (dekucon.PLUSULTRA2.isStopped)
+                    {
+                        dekucon.PLUSULTRA2.Play();
+                    }
+
                 }
             }
             else
             {
                 plusUltraFilled2.SetActive(false);
-
-                if (dekucon.PLUSULTRA2.isPlaying)
+                if (dekucon)
                 {
-                    dekucon.PLUSULTRA2.Stop();
+                    if (dekucon.PLUSULTRA2.isPlaying)
+                    {
+                        dekucon.PLUSULTRA2.Stop();
+                    }
+
                 }
             }
 
             if (plusUltraAmount / StaticValues.maxPlusUltra >= 3 / 3f)
             {
                 plusUltraFilled3.SetActive(true);
-                if (dekucon.PLUSULTRA3.isStopped)
+                if (dekucon)
                 {
-                    dekucon.PLUSULTRA3.Play();
+                    if (dekucon.PLUSULTRA3.isStopped)
+                    {
+                        dekucon.PLUSULTRA3.Play();
+                    }
+
                 }
 
             }
             else
             {
                 plusUltraFilled3.SetActive(false);
-
-                if (dekucon.PLUSULTRA3.isPlaying)
+                if (dekucon)
                 {
-                    dekucon.PLUSULTRA3.Stop();
+                    if (dekucon.PLUSULTRA3.isPlaying)
+                    {
+                        dekucon.PLUSULTRA3.Stop();
+                    }
+
                 }
             }
 

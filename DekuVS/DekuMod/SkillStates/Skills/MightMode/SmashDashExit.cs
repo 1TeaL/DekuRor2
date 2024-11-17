@@ -30,7 +30,7 @@ namespace DekuMod.SkillStates.Might
             this.baseEarlyExitTime = 0.8f;
             this.hitStopDuration = 0.2f;
             this.attackRecoil = 0.5f;
-            this.hitHopVelocity = 5f;
+            this.hitHopVelocity = 10f;
 
             this.swingSoundString = "shootstyedashcombosfx";
             this.hitSoundString = "";

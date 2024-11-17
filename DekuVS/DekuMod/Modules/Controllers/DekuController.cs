@@ -24,6 +24,7 @@ namespace DekuMod.Modules.Survivors
         private EnergySystem energySystem;
 
         //Particles
+        public ParticleSystem WINDTRAIL;
         public ParticleSystem GOBEYOND;
         public ParticleSystem RARM;
         public ParticleSystem LARM;
@@ -152,6 +153,7 @@ namespace DekuMod.Modules.Survivors
             if (child)
             {
                 //GOBEYOND = child.FindChild("goBeyondAura").GetComponent<ParticleSystem>();
+                WINDTRAIL = child.FindChild("windTrail").GetComponent<ParticleSystem>();
                 LARM = child.FindChild("lArmEffect").GetComponent<ParticleSystem>();
                 RARM = child.FindChild("rArmEffect").GetComponent<ParticleSystem>();
                 LLEG = child.FindChild("lLegEffect").GetComponent<ParticleSystem>();
@@ -164,8 +166,8 @@ namespace DekuMod.Modules.Survivors
                 LARMFAJIN = child.FindChild("lArmFajinAura").GetComponent<ParticleSystem>();
                 RARMFAJIN = child.FindChild("rArmFajinAura").GetComponent<ParticleSystem>();
                 PLUSULTRA1 = child.FindChild("PlusUltra1").GetComponent<ParticleSystem>();
-                PLUSULTRA2 = child.FindChild("PlusUltra1").GetComponent<ParticleSystem>();
-                PLUSULTRA3 = child.FindChild("PlusUltra1").GetComponent<ParticleSystem>();
+                PLUSULTRA2 = child.FindChild("PlusUltra2").GetComponent<ParticleSystem>();
+                PLUSULTRA3 = child.FindChild("PlusUltra3").GetComponent<ParticleSystem>();
                 //FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
                 //DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
                 //WINDRING = child.FindChild("windRing").GetComponent<ParticleSystem>();
@@ -188,6 +190,7 @@ namespace DekuMod.Modules.Survivors
             //GEARSHIFTIN.Stop();
             //GEARSHIFTOUT.Stop();
 
+            WINDTRAIL.Stop();
             LARM.Stop();
             RARM.Stop();
             LLEG.Stop();
@@ -259,6 +262,7 @@ namespace DekuMod.Modules.Survivors
             {
                 if(WAISTOFA.isStopped)
                 {
+                    AkSoundEngine.PostEvent("ofasfx", this.gameObject);
                     WAISTOFA.Play();
                 }
                 if (LARMOFA.isStopped)
@@ -272,6 +276,7 @@ namespace DekuMod.Modules.Survivors
             }
             if (characterBody.level >= 20f)
             {
+                AkSoundEngine.PostEvent("ofasfx", this.gameObject);
                 if (ROFAeye.isStopped)
                 {
                     ROFAeye.Play();

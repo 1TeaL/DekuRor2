@@ -8,6 +8,8 @@ using DekuMod.Modules;
 using R2API.Networking;
 using UnityEngine;
 using DekuMod.SkillStates.BaseStates;
+using static RoR2.CameraTargetParams;
+using EntityStates.Huntress;
 
 namespace DekuMod.SkillStates
 {
@@ -23,15 +25,38 @@ namespace DekuMod.SkillStates
         private bool resetSwappedSkill2;
         private bool resetSwappedSkill3;
 
+        private bool hasFired;
         private bool isSwitch;
         private float duration;
-        private BlastAttack blastAttack;
+        private float attackTime;
+
+        private float slamRadius;
+        private GameObject slamIndicatorInstance;
+        private float dropForce = StaticValues.mightSwitchDropForce;
+
+        public enum positionState { GROUND, AIR };
+        public positionState state;
+        private float dropTimer;
+        private bool hasDropped;
+
+
+        private CharacterCameraParamsData texasCameraParams = new CharacterCameraParamsData()
+        {
+            maxPitch = 70,
+            minPitch = -70,
+            pivotVerticalOffset = 1f,
+            idealLocalCameraPos = new Vector3(0, 20.0f, -50f),
+            wallCushion = 0.1f,
+        };
+
+        private CameraParamsOverrideHandle camOverrideHandle;
+        private float damage;
+        private float force;
 
         public override void OnEnter()
 		{
 			base.OnEnter();
 
-            base.PlayAnimation("FullBody, Override", "DetroitSmash3End");
 
             skilldef1 = characterBody.skillLocator.primary.skillDef;
             skilldef2 = characterBody.skillLocator.secondary.skillDef;
@@ -119,6 +144,7 @@ namespace DekuMod.SkillStates
 
         }
 
+
         protected virtual void SwitchAttack()
         {
             isSwitch = true;
@@ -127,19 +153,83 @@ namespace DekuMod.SkillStates
             {
                 base.skillLocator.utility.AddOneStock();
             }
+            
 
-            duration = 0.5f;
-            characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);
+            GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 
-            //if (dekucon.GetTrackingTarget())
-            //{
-            //    characterBody.characterMotor.Motor.SetPositionAndRotation(dekucon.GetTrackingTarget().transform.position, Quaternion.LookRotation(base.GetAimRay().direction));
-            //}
-            //else
-            //{
-            //    base.characterMotor.velocity = StaticValues.mightSwitchRadius * (base.GetAimRay().direction) * moveSpeedStat;
-            //    base.characterBody.characterMotor.rootMotion += StaticValues.mightSwitchRadius * (base.GetAimRay().direction) * moveSpeedStat;
-            //}
+            slamRadius = StaticValues.mightSwitchRadius * attackSpeedStat;
+            damage = StaticValues.mightSwitchRadius * attackSpeedStat;
+            force = StaticValues.mightSwitchForce;
+
+            if (characterMotor.isGrounded)
+            {
+                state = positionState.GROUND;
+                duration = 0.5f /attackSpeedStat;
+                attackTime = 0.25f /attackSpeedStat;
+
+                CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
+                {
+                    cameraParamsData = texasCameraParams,
+                    priority = 0,
+                };
+
+                camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, attackTime);
+
+                base.PlayCrossfade("FullBody, Override", "TexasSmash", "Attack.playbackRate", duration, 0.1f);
+
+                AkSoundEngine.PostEvent("shootstyedashcombosfx", this.gameObject);
+
+                switch (level)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        slamRadius *= StaticValues.mightSwitchLevel2Multiplier;
+                        force *= StaticValues.mightSwitchLevel2Multiplier;
+                        break;
+                    case 2:
+                        slamRadius *= StaticValues.mightSwitchLevel3Multiplier;
+                        force *= StaticValues.mightSwitchLevel3Multiplier;
+                        break;
+                }
+            }
+            else
+            {
+                state = positionState.AIR;
+                base.characterMotor.Motor.ForceUnground();
+                base.characterMotor.velocity = Vector3.zero;
+
+                //base.gameObject.layer = LayerIndex.fakeActor.intVal;
+                base.characterMotor.Motor.RebuildCollidableLayers();
+                base.characterMotor.disableAirControlUntilCollision = true;
+
+                base.PlayCrossfade("FullBody, Override", "TexasSmashAir", "Attack.playbackRate", duration, 0.1f);
+                GetModelAnimator().SetBool("texasSmashAirEnd", false);
+                GetModelAnimator().SetBool("texasSmashFalling", false);
+
+                attackTime = 0.8f / attackSpeedStat;
+
+                CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
+                {
+                    cameraParamsData = texasCameraParams,
+                    priority = 0,
+                };
+
+                camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, attackTime);
+
+                switch (level)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        dropForce *= StaticValues.mightSwitchLevel2Multiplier;
+                        break;
+                    case 2:
+                        dropForce *= StaticValues.mightSwitchLevel3Multiplier;
+                        break;
+                }
+
+            }
         }
 
         public override void FixedUpdate()
@@ -148,45 +238,96 @@ namespace DekuMod.SkillStates
 
             if(isSwitch)
             {
-                if(base.fixedAge > duration)
+                switch (state)
                 {
+                    case positionState.GROUND:
 
-                    base.characterMotor.velocity *= 0.1f;
-                    //blast attack
-                    blastAttack = new BlastAttack();
-                    blastAttack.procCoefficient = 1f;
-                    blastAttack.attacker = base.gameObject;
-                    blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
-                    blastAttack.falloffModel = BlastAttack.FalloffModel.None;
-                    blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
-                    blastAttack.damageType = DamageType.Generic;
-                    blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
-                    blastAttack.radius = StaticValues.mightSwitchRadius * attackSpeedStat;
-                    blastAttack.baseDamage = damageStat * StaticValues.mightSwitchDamage * attackSpeedStat;
-                    blastAttack.position = characterBody.corePosition + base.GetAimRay().direction * 3f;
-                    blastAttack.baseForce = 10000f;
+                        if (base.fixedAge > attackTime && !hasFired)
+                        {
+                            hasFired = true;
 
-                    blastAttack.Fire();
+                            switch (level)
+                            {
+                                case 0:
+                                    LandingImpact();
+                                    break;
+                                case 1:
+                                    LandingImpact();
+                                    LandingImpact();
+                                    break;
+                                case 2:
+                                    LandingImpact();
+                                    LandingImpact();
+                                    LandingImpact();
+                                    break;
+                            }
 
+                        }
+                        if (base.fixedAge > duration)
+                        {                                                    
 
-                    EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, new EffectData
-                    {
-                        origin = characterBody.corePosition,
-                        scale = StaticValues.mightSwitchRadius * attackSpeedStat,
-                        rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+                            this.outer.SetNextStateToMain();
+                            return;
+                        }
+                        break;
+                    case positionState.AIR:
 
-                    }, true);
-                    EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, new EffectData
-                    {
-                        origin = characterBody.corePosition,
-                        scale = 1f,
-                        rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+                        if(base.fixedAge > attackTime)
+                        {
+                            dropTimer += Time.fixedDeltaTime;
 
-                    }, true);
+                            if (!this.hasDropped)
+                            {
+                                this.StartDrop();
+                                GetModelAnimator().SetBool("texasSmashFalling", true);
 
-                    this.outer.SetNextStateToMain();
-                    return;
+                                AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
+                            }
+
+                            if (!this.slamIndicatorInstance)
+                            {
+                                this.CreateIndicator();
+                            }
+                            if (this.slamIndicatorInstance)
+                            {
+                                this.UpdateSlamIndicator();
+                            }
+
+                            if (this.hasDropped && base.isAuthority && !base.characterMotor.disableAirControlUntilCollision)
+                            {
+                                GetModelAnimator().SetBool("texasSmashAirEnd", true);
+                                switch (level)
+                                {
+                                    case 0:
+                                        LandingImpact();
+                                        break;
+                                    case 1:
+                                        LandingImpact();
+                                        LandingImpact();
+                                        break;
+                                    case 2:
+                                        LandingImpact();
+                                        LandingImpact();
+                                        LandingImpact();
+                                        break;
+                                }
+                                this.outer.SetNextStateToMain();
+                                return;
+                            }
+
+                        }
+                        
+                        //incase player stuck
+                        if(base.fixedAge > 6f)
+                        {
+                            this.outer.SetNextStateToMain();
+                            return;
+                        }
+
+                        break;
                 }
+                    
+
             }
             else
             {
@@ -195,7 +336,150 @@ namespace DekuMod.SkillStates
             }
 			
 		}
-		public override InterruptPriority GetMinimumInterruptPriority()
+
+        private void StartDrop()
+        {
+            this.hasDropped = true;
+
+            base.characterMotor.disableAirControlUntilCollision = true;
+            base.characterMotor.velocity.y = -dropForce * attackSpeedStat;
+
+
+
+        }
+
+        private void CreateIndicator()
+        {
+            if (EntityStates.Huntress.ArrowRain.areaIndicatorPrefab)
+            {
+                this.slamIndicatorInstance = Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+                this.slamIndicatorInstance.SetActive(true);
+
+            }
+        }
+        private void UpdateSlamIndicator()
+        {
+            if (this.slamIndicatorInstance)
+            {
+                this.slamIndicatorInstance.transform.localScale = Vector3.one * slamRadius;
+                this.slamIndicatorInstance.transform.localPosition = base.transform.position;
+            }
+        }
+        private void LandingImpact()
+        {
+
+            if (base.isAuthority)
+            {
+                Ray aimRay = base.GetAimRay();
+
+                if(state == positionState.AIR)
+                {
+                    base.characterMotor.velocity *= 0.1f;
+                    switch (level)
+                    {
+                        case 0:
+                            slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
+                            damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
+                            force = StaticValues.mightSwitchForce * (1 + dropTimer);
+                            break;
+                        case 1:
+                            slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
+                            force = StaticValues.mightSwitchForce * (1 + dropTimer) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
+                            damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
+                            break;
+                        case 2:
+                            slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
+                            force = StaticValues.mightSwitchForce * (1 + dropTimer) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
+                            damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
+                            break;
+                    }
+                }
+
+
+                BlastAttack blastAttack = new BlastAttack();
+                blastAttack.radius = slamRadius;
+                blastAttack.procCoefficient = 1f;
+                blastAttack.position = base.characterBody.footPosition;
+                blastAttack.attacker = base.gameObject;
+                blastAttack.crit = base.RollCrit();
+                blastAttack.baseDamage = base.characterBody.damage * damage;
+                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                blastAttack.baseForce = force;
+                blastAttack.bonusForce = new Vector3(0f, force/10f, 0f);
+                blastAttack.teamIndex = base.teamComponent.teamIndex;
+                blastAttack.damageType = DamageType.Generic;
+                blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
+
+                BlastAttack.Result result = blastAttack.Fire();
+                if (result.hitCount > 0)
+                {
+                    this.OnHitEnemyAuthority(result);
+                }
+                //for (int i = 0; i <= 2; i += 1)
+                //{
+                //    Vector3 effectPosition = base.characterBody.footPosition + (UnityEngine.Random.insideUnitSphere * (slamRadius));
+                //    effectPosition.y = base.characterBody.footPosition.y;
+                //    EffectManager.SpawnEffect(EntityStates.BeetleGuardMonster.GroundSlam.slamEffectPrefab, new EffectData
+                //    {
+                //        origin = effectPosition,
+                //        scale = slamRadius,
+                //    }, true);
+                //}
+
+                EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, new EffectData
+                {
+                    origin = characterBody.corePosition,
+                    scale = StaticValues.mightSwitchRadius * attackSpeedStat,
+                    rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                }, true);
+                EffectManager.SpawnEffect(Modules.DekuAssets.texasEffect, new EffectData
+                {
+                    origin = characterBody.corePosition,
+                    scale = 1f,
+                    rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+
+                }, true);
+
+            }
+        }
+
+        protected virtual void OnHitEnemyAuthority(BlastAttack.Result result)
+        {
+            AkSoundEngine.PostEvent("impactsfx", this.gameObject);
+            foreach (BlastAttack.HitPoint hitpoint in result.hitPoints)
+            {
+                EffectManager.SpawnEffect(Modules.DekuAssets.dekuHitImpactEffect, new EffectData
+                {
+                    origin = hitpoint.hurtBox.healthComponent.body.gameObject.transform.position,
+                    scale = 1f,
+
+                }, true);
+            }
+            base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 20));
+
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+
+            base.cameraTargetParams.RemoveParamsOverride(camOverrideHandle, 0.3f);
+            switch (level)
+            {
+                case 0:
+                    characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, StaticValues.mightBuffDuration);
+                    break;
+                case 1:
+                    characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, (int)(StaticValues.mightBuffDuration * StaticValues.mightSwitchLevel2Multiplier));
+                    break;
+                case 2:
+                    characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1,  (int)(StaticValues.mightBuffDuration * StaticValues.mightSwitchLevel3Multiplier));
+                    break;
+            }
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
 		{
 			return InterruptPriority.Frozen;
 		}

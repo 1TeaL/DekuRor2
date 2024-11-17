@@ -161,7 +161,7 @@ namespace DekuMod.SkillStates.Might
                 temporaryOverlay.animateShaderAlpha = true;
                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                 temporaryOverlay.destroyComponentOnEnd = true;
-                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
+                temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
 
 
             }
@@ -189,7 +189,19 @@ namespace DekuMod.SkillStates.Might
             //bullet attack going up 
             duration = 0.7f;
             attackStartTime = duration * 0.5f;
-            super2Interval = (duration-attackStartTime)/super2NumberOfHits;
+
+            switch (level)
+            {
+                case 0:
+                    super2Interval = (duration - attackStartTime) / super2NumberOfHits;
+                    break;
+                case 1:
+                    super2Interval = (duration - attackStartTime) / (super2NumberOfHits * StaticValues.detroit2Level2Multiplier);
+                    break;
+                case 2:
+                    super2Interval = (duration - attackStartTime) / (super2NumberOfHits * StaticValues.detroit2Level3Multiplier);
+                    break;
+            }
             //play animation of uppercut
             base.PlayAnimation("FullBody, Override", "DetroitSmash2");
 
@@ -199,12 +211,13 @@ namespace DekuMod.SkillStates.Might
                 this.animator = this.modelTransform.GetComponent<Animator>();
                 this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
 
-                TemporaryOverlay temporaryOverlay = transform.gameObject.AddComponent<TemporaryOverlay>();
+                TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
                 temporaryOverlay.duration = duration;
                 temporaryOverlay.animateShaderAlpha = true;
                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                 temporaryOverlay.destroyComponentOnEnd = true;
-                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
+                temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
+
 
             }
 
@@ -252,7 +265,46 @@ namespace DekuMod.SkillStates.Might
 					if(base.fixedAge > attackStartTime && !hasFired)
 					{
 						hasFired = true;
-						blastAttack.Fire();
+
+                        EffectData effectData = new EffectData
+                        {
+                            scale = radius,
+                            origin = characterBody.corePosition,
+                            rotation = Quaternion.LookRotation(characterDirection.forward),
+                        };
+                        EffectData effectData2 = new EffectData
+                        {
+                            scale = 1f,
+                            origin = characterBody.corePosition,
+                            rotation = Quaternion.LookRotation(characterDirection.forward),
+                        };
+                        switch (level)
+                        {
+                            case 0:
+                                blastAttack.Fire();
+                                EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData2, true);
+                                EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
+                                break;
+                            case 1:
+                                blastAttack.Fire();
+                                blastAttack.Fire();
+                                EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData2, true);
+                                EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
+                                EffectManager.SpawnEffect(DekuAssets.sonicboomEffectPrefab, effectData, true);
+                                break;
+                            case 2:
+                                blastAttack.Fire();
+                                blastAttack.Fire();
+                                blastAttack.Fire();
+                                blastAttack.Fire();
+                                blastAttack.Fire();
+                                EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData2, true);
+                                EffectManager.SpawnEffect(DekuAssets.mageLightningBombEffectPrefab, effectData, true);
+                                EffectManager.SpawnEffect(DekuAssets.mageLightningBombEffectPrefab, effectData, true);
+                                EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
+                                EffectManager.SpawnEffect(DekuAssets.sonicboomEffectPrefab, effectData, true);
+                                break;
+                        }
 
 
                         this.modelTransform = base.GetModelTransform();
@@ -275,21 +327,6 @@ namespace DekuMod.SkillStates.Might
                             temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
 
                         }
-
-                        EffectManager.SpawnEffect(Modules.DekuAssets.mageLightningBombEffectPrefab, new EffectData
-                        {
-                            origin = blastPosition,
-                            scale = blastRadius,
-                            rotation = Quaternion.LookRotation(base.GetAimRay().direction)
-
-                        }, true);
-                        EffectManager.SpawnEffect(Modules.DekuAssets.detroitEffect, new EffectData
-                        {
-                            origin = characterBody.corePosition,
-                            scale = 1f,
-                            rotation = Quaternion.LookRotation(base.GetAimRay().direction)
-
-                        }, true);
                         //EffectManager.SpawnEffect(Modules.DekuAssets.impactShaderEffect, new EffectData
                         //{
                         //    origin = characterBody.corePosition,
@@ -390,7 +427,7 @@ namespace DekuMod.SkillStates.Might
                         case super3State.CHARGING:
                             if (base.fixedAge < this.maxCharge && base.inputBank.skill4.down)
                             {
-                                Chat.AddMessage("charging" + chargePercent);
+                                //Chat.AddMessage("charging" + chargePercent);
                                 //base.PlayAnimation("FullBody, Override", "SmashFullCharge", "Attack.playbackRate", 1f);
                                 this.chargePercent = base.fixedAge / this.maxCharge;
                                 this.randRelPos = new Vector3((float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f, (float)Random.Range(-12, 12) / 4f);
@@ -571,24 +608,51 @@ namespace DekuMod.SkillStates.Might
                                 blastAttack.position = characterBody.corePosition;
                                 blastAttack.damageType = DamageType.Stun1s;
                                 blastAttack.baseForce = damageMult * StaticValues.detroit3Force;
-                                blastAttack.Fire();
 
                                 EffectData effectData = new EffectData
+                                {
+                                    scale = radius,
+                                    origin = characterBody.corePosition,
+                                    rotation = Quaternion.LookRotation(characterDirection.forward),
+                                };
+                                EffectData effectData2 = new EffectData
                                 {
                                     scale = 1f,
                                     origin = characterBody.corePosition,
                                     rotation = Quaternion.LookRotation(characterDirection.forward),
                                 };
-                                EffectManager.SpawnEffect(Modules.DekuAssets.impactShaderEffect, new EffectData
+                                switch (level)
                                 {
-                                    origin = characterBody.corePosition,
-                                    scale = 1f,
-                                    rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+                                    case 0:
+                                        blastAttack.Fire();
+                                        EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData2, true);
+                                        EffectManager.SpawnEffect(DekuAssets.sonicboomEffectPrefab, effectData, true);
+                                        EffectManager.SpawnEffect(DekuAssets.impactShaderEffect, effectData, false);
+                                        break;
+                                    case 1:
+                                        blastAttack.Fire();
+                                        blastAttack.Fire();
+                                        EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData2, true);
+                                        EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
+                                        EffectManager.SpawnEffect(DekuAssets.sonicboomEffectPrefab, effectData, true);
+                                        EffectManager.SpawnEffect(DekuAssets.impactShaderEffect, effectData2, false);
+                                        break;
+                                    case 2:
+                                        blastAttack.Fire();
+                                        blastAttack.Fire();
+                                        blastAttack.Fire();
+                                        blastAttack.Fire();
+                                        blastAttack.Fire();
+                                        EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData2, true);
+                                        EffectManager.SpawnEffect(DekuAssets.mageLightningBombEffectPrefab, effectData, true);
+                                        EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
+                                        EffectManager.SpawnEffect(DekuAssets.sonicboomEffectPrefab, effectData, true);
+                                        EffectManager.SpawnEffect(DekuAssets.impactShaderEffect, effectData2, false);
+                                        break;
+                                }
 
-                                }, false);
-                                EffectManager.SpawnEffect(DekuAssets.detroitEffect, effectData, true);
-                                EffectManager.SpawnEffect(DekuAssets.mageLightningBombEffectPrefab, effectData, true);
-                                EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
+
+
 
                                 AkSoundEngine.PostEvent("impactsfx", this.gameObject);
 

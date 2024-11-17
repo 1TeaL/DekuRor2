@@ -262,7 +262,7 @@ namespace DekuMod.SkillStates.ShootStyle
                         blastAttack.position = healthComponent.body.corePosition;
                         blastAttack.attacker = base.gameObject;
                         blastAttack.crit = base.RollCrit();
-                        blastAttack.baseDamage = Modules.StaticValues.airforceDamageCoefficient * this.damageStat;
+                        blastAttack.baseDamage = Modules.StaticValues.airforce3DamageCoefficient * this.damageStat;
                         blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                         blastAttack.baseForce = force;
                         blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);

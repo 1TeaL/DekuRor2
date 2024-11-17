@@ -119,13 +119,16 @@ namespace DekuMod.Modules
         internal static GameObject gobeyondPulseEffect;
         internal static GameObject gearshiftPierceEffect;
         internal static GameObject blastdashWindEffect;
+        internal static GameObject texasEffect;
 
         internal static GameObject dekuPunchEffect;
         internal static GameObject dekuKickEffect;
         internal static GameObject dekuHitImpactEffect;
         internal static GameObject impactShaderEffect;
+        internal static GameObject slashEffect;
 
         //Materials
+        public static Material mercDashMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/Merc/matMercEvisTarget.mat").WaitForCompletion();
         public static Material blackwhipDebuffMaterial;
         public static Material fullCowlingMaterial;
         public static Material blueblinkingMaterial;
@@ -234,6 +237,8 @@ namespace DekuMod.Modules
             gobeyondPulseEffect = LoadEffect("goBeyondPulse");
             gearshiftPierceEffect = LoadEffect("gearshiftPierce");
             blastdashWindEffect = LoadEffect("blastdashWind", true);
+            texasEffect = LoadEffect("texas");
+            slashEffect = LoadEffect("SlashEffect");
 
             dekuPunchEffect = DekuAssets.LoadEffect("MultiStraightSwingEffect");
             dekuKickEffect = DekuAssets.LoadEffect("DekuKickEffect", true);
@@ -258,6 +263,7 @@ namespace DekuMod.Modules
             blackwhipDebuffMaterial = mainAssetBundle.LoadAsset<Material>("blackwhipbullet");
             fullCowlingMaterial = UnityEngine.GameObject.Instantiate<Material>(RoR2.LegacyResourcesAPI.Load<Material>("Materials/matEnergyShield"));
             fullCowlingMaterial.SetColor("_TintColor", new Color(27/255f, 1f, 213/255f));
+            
 
             //blackwhipbullet = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
 

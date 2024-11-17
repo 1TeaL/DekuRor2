@@ -12,10 +12,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 107913104504496332, guid: bf232bd535bc321449615a6c185a9685,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 670031118905529718, guid: bf232bd535bc321449615a6c185a9685,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818904910404300354, guid: bf232bd535bc321449615a6c185a9685,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2559921627587781004, guid: bf232bd535bc321449615a6c185a9685,
         type: 3}
@@ -57,10 +67,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6900353305938192872, guid: bf232bd535bc321449615a6c185a9685,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7037872622272440936, guid: bf232bd535bc321449615a6c185a9685,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062109665706916417, guid: bf232bd535bc321449615a6c185a9685,
+        type: 3}
+      propertyPath: transformPairs.Array.data[49].name
+      value: windTrail
       objectReference: {fileID: 0}
     - target: {fileID: 7247987450500578778, guid: bf232bd535bc321449615a6c185a9685,
         type: 3}
