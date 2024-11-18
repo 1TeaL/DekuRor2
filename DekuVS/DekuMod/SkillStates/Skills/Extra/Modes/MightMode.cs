@@ -45,7 +45,7 @@ namespace DekuMod.SkillStates
             maxPitch = 70,
             minPitch = -70,
             pivotVerticalOffset = 1f,
-            idealLocalCameraPos = new Vector3(0, 20.0f, -50f),
+            idealLocalCameraPos = new Vector3(0, 0f, -20f),
             wallCushion = 0.1f,
         };
 
@@ -177,7 +177,7 @@ namespace DekuMod.SkillStates
 
                 base.PlayCrossfade("FullBody, Override", "TexasSmash", "Attack.playbackRate", duration, 0.1f);
 
-                AkSoundEngine.PostEvent("shootstyedashcombosfx", this.gameObject);
+                AkSoundEngine.PostEvent("shootstyledashcombosfx", this.gameObject);
 
                 switch (level)
                 {
@@ -193,8 +193,9 @@ namespace DekuMod.SkillStates
                         break;
                 }
             }
-            else
+            else if(!characterMotor.isGrounded)
             {
+
                 state = positionState.AIR;
                 base.characterMotor.Motor.ForceUnground();
                 base.characterMotor.velocity = Vector3.zero;
@@ -203,9 +204,8 @@ namespace DekuMod.SkillStates
                 base.characterMotor.Motor.RebuildCollidableLayers();
                 base.characterMotor.disableAirControlUntilCollision = true;
 
-                base.PlayCrossfade("FullBody, Override", "TexasSmashAir", "Attack.playbackRate", duration, 0.1f);
+                base.PlayAnimation("FullBody, Override", "TexasSmashAir", "Attack.playbackRate", duration, 0.01f);
                 GetModelAnimator().SetBool("texasSmashAirEnd", false);
-                GetModelAnimator().SetBool("texasSmashFalling", false);
 
                 attackTime = 0.8f / attackSpeedStat;
 
@@ -272,14 +272,42 @@ namespace DekuMod.SkillStates
                         break;
                     case positionState.AIR:
 
+                        Chat.AddMessage("air");
+                        if (base.fixedAge <= attackTime)
+                        {
+                            characterMotor.velocity.y = 0f;
+                        }
+
                         if(base.fixedAge > attackTime)
                         {
+                            TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
+                            temporaryOverlay.duration = 0.3f;
+                            temporaryOverlay.animateShaderAlpha = true;
+                            temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                            temporaryOverlay.destroyComponentOnEnd = true;
+                            temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
                             dropTimer += Time.fixedDeltaTime;
-
+                            switch (level)
+                            {
+                                case 0:
+                                    slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
+                                    damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
+                                    force = StaticValues.mightSwitchForce * (1 + dropTimer);
+                                    break;
+                                case 1:
+                                    slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
+                                    force = StaticValues.mightSwitchForce * (1 + dropTimer/2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
+                                    damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
+                                    break;
+                                case 2:
+                                    slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
+                                    force = StaticValues.mightSwitchForce * (1 + dropTimer/2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
+                                    damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
+                                    break;
+                            }
                             if (!this.hasDropped)
                             {
                                 this.StartDrop();
-                                GetModelAnimator().SetBool("texasSmashFalling", true);
 
                                 AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
                             }
@@ -375,24 +403,7 @@ namespace DekuMod.SkillStates
                 if(state == positionState.AIR)
                 {
                     base.characterMotor.velocity *= 0.1f;
-                    switch (level)
-                    {
-                        case 0:
-                            slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
-                            damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
-                            force = StaticValues.mightSwitchForce * (1 + dropTimer);
-                            break;
-                        case 1:
-                            slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
-                            force = StaticValues.mightSwitchForce * (1 + dropTimer) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
-                            damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
-                            break;
-                        case 2:
-                            slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
-                            force = StaticValues.mightSwitchForce * (1 + dropTimer) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
-                            damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
-                            break;
-                    }
+                    
                 }
 
 
@@ -465,17 +476,28 @@ namespace DekuMod.SkillStates
             base.OnExit();
 
             base.cameraTargetParams.RemoveParamsOverride(camOverrideHandle, 0.3f);
-            switch (level)
+
+            if (slamIndicatorInstance)
             {
-                case 0:
-                    characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, StaticValues.mightBuffDuration);
-                    break;
-                case 1:
-                    characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, (int)(StaticValues.mightBuffDuration * StaticValues.mightSwitchLevel2Multiplier));
-                    break;
-                case 2:
-                    characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1,  (int)(StaticValues.mightBuffDuration * StaticValues.mightSwitchLevel3Multiplier));
-                    break;
+                this.slamIndicatorInstance.SetActive(false);
+                EntityState.Destroy(this.slamIndicatorInstance);
+            }
+
+            if (isSwitch)
+            {
+                switch (level)
+                {
+                    case 0:
+                        characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, StaticValues.mightBuffDuration);
+                        break;
+                    case 1:
+                        characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, (int)(StaticValues.mightBuffDuration * StaticValues.mightSwitchLevel2Multiplier));
+                        break;
+                    case 2:
+                        characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, (int)(StaticValues.mightBuffDuration * StaticValues.mightSwitchLevel3Multiplier));
+                        break;
+                }
+
             }
         }
 

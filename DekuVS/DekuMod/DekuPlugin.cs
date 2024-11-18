@@ -257,7 +257,6 @@ namespace DekuMod
                             //every hit reduces fajinbuff by 1 if it has proc chance
                             if (body.HasBuff(Buffs.fajinBuff) && damageInfo.procCoefficient > 0)
                             {
-                                damageInfo.damage *= StaticValues.fajinDamageCoefficient;
                                 body.healthComponent.AddBarrierAuthority(body.healthComponent.fullCombinedHealth * StaticValues.fajinBarrierMultiplier);
                                 body.ApplyBuff(Buffs.fajinBuff.buffIndex, body.GetBuffCount(Buffs.fajinBuff) - 1);
                             }
@@ -265,7 +264,6 @@ namespace DekuMod
                             //every hit reduces fajin mastered buff by 1 if it has proc chance
                             if (body.HasBuff(Buffs.fajinMaxBuff) && damageInfo.procCoefficient > 0)
                             {
-                                damageInfo.damage *= StaticValues.fajinDamageCoefficient;
                                 body.healthComponent.AddBarrierAuthority(body.healthComponent.fullCombinedHealth * StaticValues.fajinBarrierMultiplier);
                                 body.ApplyBuff(Buffs.fajinMaxBuff.buffIndex, body.GetBuffCount(Buffs.fajinMaxBuff) - 1);
                                 if (body.GetBuffCount(Buffs.fajinMaxBuff) == 0)
@@ -512,6 +510,7 @@ namespace DekuMod
                 {
                     self.moveSpeed *= StaticValues.blackwhipDebuffMultiplier;
                     self.attackSpeed *= StaticValues.blackwhipDebuffMultiplier;
+                    
                 }
 
                 if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
@@ -532,6 +531,14 @@ namespace DekuMod
                     {
                         self.skillLocator.secondary.cooldownScale *= StaticValues.blackwhipCDMultiplier;
                         self.skillLocator.utility.cooldownScale *= StaticValues.blackwhipCDMultiplier;
+                    }
+                    if (self.HasBuff(Buffs.fajinBuff))
+                    {
+                        self.damage *= StaticValues.fajinDamageMultiplier;
+                    }
+                    if (self.HasBuff(Buffs.fajinMaxBuff))
+                    {
+                        self.damage *= StaticValues.fajinMaxDamageMultiplier;
                     }
 
                     //if (self.HasBuff(Buffs.gearshiftBuff))
@@ -638,7 +645,11 @@ namespace DekuMod
             orig(self);
             if (self.gameObject.name.Contains("DekuDisplay"))
             {
-                AkSoundEngine.PostEvent("dekuEntrance", self.gameObject);
+                if (Modules.Config.allowVoice.Value)
+                {
+                    AkSoundEngine.PostEvent("dekuEntrance", self.gameObject);
+
+                }
             }
 
         }

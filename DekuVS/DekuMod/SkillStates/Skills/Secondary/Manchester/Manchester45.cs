@@ -60,9 +60,9 @@
 //            base.PlayCrossfade("Body", "Jump", "Attack.playbackRate", jumpDuration, 0.1f);
 //            if (base.isAuthority)
 //            {
-//                AkSoundEngine.PostEvent("shootstyedashvoice", this.gameObject);
+//                AkSoundEngine.PostEvent("shootstyledashvoice", this.gameObject);
 //            }
-//            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
+//            AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
 
 //            base.characterMotor.Motor.ForceUnground();
 //            base.characterMotor.velocity = Vector3.zero;

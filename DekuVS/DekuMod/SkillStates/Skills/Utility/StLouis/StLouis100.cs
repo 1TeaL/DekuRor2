@@ -65,7 +65,7 @@
 //            }
 
 //            base.GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
-//            PlayCrossfade("FullBody, Override", "StLouis100Charge", "Attack.playbackRate",fireTime, 0.01f);
+//            PlayCrossfade("FullBody, Override", "StLouis100Charge", "Attack.playbackRate", fireTime, 0.01f);
 
 //            if (base.isAuthority)
 //            {
@@ -197,7 +197,7 @@
 //                }
 
 //                AkSoundEngine.PostEvent("stlouisexitsfx", this.gameObject);
-                
+
 //                this.outer.SetNextStateToMain();
 //            }
 

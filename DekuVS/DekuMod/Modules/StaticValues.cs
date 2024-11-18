@@ -80,7 +80,8 @@ namespace DekuMod.Modules
         internal const float delaware3Acceleration = 50f;
         internal const float delawareDistance = 10f;
         //Utility
-        internal const float fajinDamageMultiplier = 2f;
+        internal const float fajinDamageMultiplier = 1.5f;
+        internal const float fajinMaxDamageMultiplier = 2f;
         internal const float fajinBarrierMultiplier = 0.05f;
         internal const int fajinHitAmount = 10;
         internal const int fajin2HitAmount = 20;
@@ -147,11 +148,11 @@ namespace DekuMod.Modules
         internal const float stlouisRadius3 = 5f;
         internal const float stlouisDamageCoefficient = 3f;
         internal const float stlouisDamageCoefficient2 = 3f;
-        internal const float stlouisDamageCoefficient3 = 3f;
+        internal const float stlouisDamageCoefficient3 = 2f;
         internal const float stlouisDamageForce = 0f;
         internal const float stlouisDamageForce2 = 0f;
         internal const float stlouisDamageForce3 = 0f;
-        internal const float stlouis3InitialSpeed = 20f;
+        internal const float stlouis3InitialSpeed = 60f;
         internal const float stlouis3Level2Multiplier = 1.5f;
         internal const float stlouis3Level3Multiplier = 2f;
 

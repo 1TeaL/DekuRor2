@@ -66,7 +66,7 @@
 //            base.PlayAnimation("FullBody, Override", "ShootStyleComboDash", "Slash.playbackRate", 1f);
 
 
-//            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
+//            AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
 //            base.OnEnter();
 //        }
 //        public override void FixedUpdate()

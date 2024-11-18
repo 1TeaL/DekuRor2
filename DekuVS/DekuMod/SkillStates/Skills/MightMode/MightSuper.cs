@@ -87,7 +87,7 @@ namespace DekuMod.SkillStates.Might
             maxPitch = 70,
             minPitch = -70,
             pivotVerticalOffset = 1f,
-            idealLocalCameraPos = new Vector3(0, 50f, -100f),
+            idealLocalCameraPos = new Vector3(0, 20f, -100f),
             wallCushion = 0.1f,
         };
         private CharacterCameraParamsData super3CameraParams = new CharacterCameraParamsData()
@@ -95,7 +95,7 @@ namespace DekuMod.SkillStates.Might
             maxPitch = 70,
             minPitch = -70,
             pivotVerticalOffset = 1f,
-            idealLocalCameraPos = new Vector3(0, 0.0f, -100f),
+            idealLocalCameraPos = new Vector3(0, 0.0f, -70f),
             wallCushion = 0.1f,
         };
 
@@ -403,7 +403,7 @@ namespace DekuMod.SkillStates.Might
                             {
                                 origin = characterBody.corePosition,
                                 scale = 1f,
-                                rotation = Quaternion.LookRotation(base.GetAimRay().direction)
+                                rotation = Quaternion.LookRotation(characterDirection.forward)
 
                             }, true);
                             AkSoundEngine.PostEvent("impactsfx", this.gameObject);
@@ -501,7 +501,7 @@ namespace DekuMod.SkillStates.Might
                                 temporaryOverlay.animateShaderAlpha = true;
                                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                                 temporaryOverlay.destroyComponentOnEnd = true;
-                                temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
+                                temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
 
                                 //base.characterDirection.forward = finalDirection;
                                 //base.characterMotor.rootMotion += finalDirection * ( StaticValues.delaware3Acceleration * moveSpeedStat / characterBody.baseMoveSpeed) * Time.fixedDeltaTime;

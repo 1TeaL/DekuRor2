@@ -38,8 +38,11 @@ namespace DekuMod.SkillStates.BlackWhip
             //effectObj = UnityEngine.Object.Instantiate<GameObject>(Modules.Asset.detroitEffect, charbody.footPosition, Quaternion.LookRotation(Vector3.up));
             //effectObj.transform.parent = charbody.gameObject.transform;
 
+            charbody = GetComponent<CharacterBody>();
+
             child = dekucharbody.gameObject.GetComponent<ModelLocator>().modelTransform.GetComponent<ChildLocator>();
-            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.DekuAssets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+            //blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.DekuAssets.blackwhipLineRenderer, child.FindChild("RHand").transform);
+            blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.DekuAssets.blackwhipLineRenderer, dekucharbody.transform);
             blackwhipLineRenderer = blackwhipLineEffect.GetComponent<LineRenderer>();
             duration = totalDuration * (0.2f);
 
@@ -55,8 +58,20 @@ namespace DekuMod.SkillStates.BlackWhip
             float t = Mathf.Clamp01(elapsedTime / duration); // Calculate the interpolation factor (0 to 1)
             int currentSegments = Mathf.FloorToInt(t * segments); // Calculate the current number of segments
 
-            Vector3[] segmentPoints = new Vector3[currentSegments];
+            //Vector3[] segmentPoints = new Vector3[currentSegments];
+            Vector3[] vector3s = new Vector3[2];
             Vector3 startPoint = child.FindChild("RHand").transform.position;
+
+
+            // Lerp from the start point to the end point
+            Vector3 lerpedPosition = Vector3.Lerp(startPoint, charbody.corePosition, t);
+
+            vector3s[0] = startPoint;
+            vector3s[1] = lerpedPosition;
+            blackwhipLineRenderer.positionCount = vector3s.Length;
+            blackwhipLineRenderer.SetPositions(vector3s);
+            blackwhipLineRenderer.startWidth = 0.3f;
+            blackwhipLineRenderer.endWidth = 0.3f;
 
             // Lerp from the start point to the end point
             //Vector3 lerpedPosition = Vector3.Lerp(startPoint, charbody.corePosition, t);
@@ -69,21 +84,21 @@ namespace DekuMod.SkillStates.BlackWhip
             //blackwhipLineRenderer.positionCount = vector3s.Length;
             //blackwhipLineRenderer.SetPositions(vector3s);
 
-            for (int i = 0; i < currentSegments; i++)
-            {
-                //Vector3 startPoint = child.FindChild("RHand").transform.position;
-                Vector3 endPoint = charbody.corePosition;
-                float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
-                Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2 + Vector3.up * heightDifference, endPoint); // Calculate Bezier point
+            //for (int i = 0; i < currentSegments; i++)
+            //{
+            //    //Vector3 startPoint = child.FindChild("RHand").transform.position;
+            //    Vector3 endPoint = charbody.corePosition;
+            //    float segmentT = (float)i / segments; // Calculate the interpolation factor for this segment
+            //    Vector3 pointOnCurve = CalculateBezierPoint(segmentT, startPoint, (startPoint + endPoint) / 2 + Vector3.up * heightDifference, endPoint); // Calculate Bezier point
 
-                segmentPoints[i] = pointOnCurve;
-            }
+            //    segmentPoints[i] = pointOnCurve;
+            //}
 
-            blackwhipLineRenderer.startWidth = 0.3f;
-            blackwhipLineRenderer.endWidth = 0.3f;
+            //blackwhipLineRenderer.startWidth = 0.3f;
+            //blackwhipLineRenderer.endWidth = 0.3f;
 
-            blackwhipLineRenderer.positionCount = currentSegments;
-            blackwhipLineRenderer.SetPositions(segmentPoints); // Set the position of the segment
+            //blackwhipLineRenderer.positionCount = currentSegments;
+            //blackwhipLineRenderer.SetPositions(segmentPoints); // Set the position of the segment
         }
 
         // Function to calculate a point on a quadratic Bezier curve
@@ -106,11 +121,11 @@ namespace DekuMod.SkillStates.BlackWhip
         {
             timer += Time.fixedDeltaTime;
 
-            if(timer > duration)
+            if(timer > totalDuration)
             {
                 EntityState.Destroy(this);
             }
-            if (!charbody)
+            if (!charbody | !charbody.healthComponent.alive)
             {
                 EntityState.Destroy(this);
             }

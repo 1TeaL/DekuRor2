@@ -50,9 +50,9 @@
 //            theSpot = base.transform.position;
 //            if (base.isAuthority)
 //            {
-//                AkSoundEngine.PostEvent("shootstyedashvoice", this.gameObject);
+//                AkSoundEngine.PostEvent("shootstyledashvoice", this.gameObject);
 //            }
-//            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
+//            AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
 //            base.StartAimMode(duration, true);
 
 

@@ -94,9 +94,9 @@
 
 //            if (base.isAuthority)
 //            {
-//                AkSoundEngine.PostEvent("shootstyedashvoice", this.gameObject);
+//                AkSoundEngine.PostEvent("shootstyledashvoice", this.gameObject);
 //            }
-//            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
+//            AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
 //            //base.PlayAnimation("FullBody, Override", "ShootStyleDash", "Attack.playbackRate", 0.1f);
 //            //base.PlayAnimation("FullBody, Override", "ShootStyleKick", "Attack.playbackRate", 0.1f);
 //            this.animator.SetBool("attacking", true);

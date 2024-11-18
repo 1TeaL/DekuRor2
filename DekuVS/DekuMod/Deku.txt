@@ -1,25 +1,25 @@
 Event	ID	Name			Wwise Object Path	Notes
-	240596017	shootstyedashcombovoice			\Default Work Unit\shootstyedashcombovoice	
+	72575306	shootstyledashsfx			\Default Work Unit\shootstyledashsfx	
 	459820003	detroitexitsfx			\Default Work Unit\detroitexitsfx	
 	480488529	stlouisexitsfx			\Default Work Unit\stlouisexitsfx	
 	687990298	stlouisvoice			\Default Work Unit\stlouisvoice	
+	750323469	shootstyledashvoice			\Default Work Unit\shootstyledashvoice	
 	792953415	detroitchargesfxvoice			\Default Work Unit\detroitchargesfxvoice	
 	876996991	manchester			\Default Work Unit\manchester	
-	940773961	shootstyedashvoice			\Default Work Unit\shootstyedashvoice	
 	1063047365	airforcesfx			\Default Work Unit\airforcesfx	
 	1074439307	delawaresfx			\Default Work Unit\delawaresfx	
+	1215624114	shootstyledashcombosfx			\Default Work Unit\shootstyledashcombosfx	
 	1356252224	delawarevoice			\Default Work Unit\delawarevoice	
-	1485257246	shootstyedashcombosfx			\Default Work Unit\shootstyedashcombosfx	
 	1918362945	stlouissfx			\Default Work Unit\stlouissfx	
-	2082540294	shootstyedashsfx			\Default Work Unit\shootstyedashsfx	
+	2063685189	shootstyledashcombovoice			\Default Work Unit\shootstyledashcombovoice	
 	2145546858	dekuEntrance			\Default Work Unit\dekuEntrance	
 	2232132915	delawaredetroitvoice			\Default Work Unit\delawaredetroitvoice	
 	2412150284	gobeyondost			\Default Work Unit\gobeyondost	
 	2493696431	ofavoice			\Default Work Unit\ofavoice	
 	2586644684	finalsmashsfxvoice			\Default Work Unit\finalsmashsfxvoice	
-	2853938439	shootstyedashcomboimpact			\Default Work Unit\shootstyedashcomboimpact	
 	3062535197	blackwhipsfx			\Default Work Unit\blackwhipsfx	
 	3298394996	impactsfx			\Default Work Unit\impactsfx	
+	3518326907	shootstyledashcomboimpact			\Default Work Unit\shootstyledashcomboimpact	
 	3709822086	blackwhipvoice			\Default Work Unit\blackwhipvoice	
 	3940341776	ofasfx			\Default Work Unit\ofasfx	
 	4073174054	dekudeath			\Default Work Unit\dekudeath	

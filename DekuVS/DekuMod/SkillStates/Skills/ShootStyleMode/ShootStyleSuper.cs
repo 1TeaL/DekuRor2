@@ -38,9 +38,7 @@ namespace DekuMod.SkillStates.ShootStyle
 
         private Transform modelTransform;
         private CharacterModel characterModel;
-        private float rollSpeed;
         public static float initialSpeedCoefficient = StaticValues.stlouis3InitialSpeed;
-        public static float finalSpeedCoefficient = 0.1f;
         public static float SpeedCoefficient;
         private Vector3 forwardDirection;
         private Vector3 previousPosition;
@@ -50,7 +48,6 @@ namespace DekuMod.SkillStates.ShootStyle
         private readonly BullseyeSearch blackwhipSearch = new BullseyeSearch();
         public int numberOfHits;
 
-        private GameObject areaIndicator;
 
         private bool animChange;
 		private GameObject muzzlePrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/effects/muzzleflashes/MuzzleflashMageLightningLarge");
@@ -107,11 +104,6 @@ namespace DekuMod.SkillStates.ShootStyle
 
 			Ray aimRay = base.GetAimRay();
 			characterBody.SetAimTimer(2f);
-            if (base.isAuthority)
-            {
-                AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
-            }
-            AkSoundEngine.PostEvent("stlouissfx", this.gameObject);
 
 
             this.animator = base.GetModelAnimator();
@@ -167,6 +159,21 @@ namespace DekuMod.SkillStates.ShootStyle
 
             GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
             PlayCrossfade("FullBody, Override", "StLouis1", "Attack.playbackRate", duration, 0.1f);
+            if (base.isAuthority && Config.allowVoice.Value)
+            {
+                AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
+            }
+            AkSoundEngine.PostEvent("stlouissfx", this.gameObject);
+
+            EffectManager.SpawnEffect(Modules.DekuAssets.dekuLeftKickEffect, new EffectData
+            {
+                origin = characterBody.corePosition,
+                scale = 1f,
+                rotation = Util.QuaternionSafeLookRotation(base.GetAimRay().direction)
+
+            }, true);
+            dekucon.RLEG.Play();
+
             switch (level)
             {
                 case 0:
@@ -191,18 +198,25 @@ namespace DekuMod.SkillStates.ShootStyle
             //characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, 1);
 
             //indicator
-            //this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
-            //this.areaIndicator.SetActive(true);
+            this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
+            this.aimSphere.SetActive(true);
             duration = StaticValues.stlouisDuration2;
             firetime = duration * 0.5f;
             blastRadius = StaticValues.stlouisRadius2 * attackSpeedStat;
-            blastPosition = GetAimRay().direction * blastRadius;
+            blastPosition = base.GetAimRay().origin + base.GetAimRay().direction * blastRadius * 2f;
 
 
             //play animation of blackwhip lift up and slam
             GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
             PlayCrossfade("FullBody, Override", "BlackwhipSmash", "Attack.playbackRate", duration, 0.1f);
 
+            dekucon.RARM.Play();
+            dekucon.LARM.Play();
+            //if (base.isAuthority && Config.allowVoice.Value)
+            //{
+            //    AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
+            //}
+            AkSoundEngine.PostEvent("blackwhipsfx", this.gameObject);
 
             switch (level)
             {
@@ -218,16 +232,22 @@ namespace DekuMod.SkillStates.ShootStyle
             }
 
             BlackWhipSmashSearch(true);
+            this.UpdateAreaIndicator();
+        }
 
-            this.aimSphere = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
-            if (base.isAuthority)
+        private void UpdateAreaIndicator()
+        {
+            bool isAuthority = base.isAuthority;
+            bool flag = isAuthority;
+            if (flag)
             {
-                this.aimSphere.transform.localScale = new Vector3(4f, 4f, 4f);
+                this.aimSphere.transform.localScale = new Vector3(3f, 3f, 3f);
             }
             RaycastHit raycastHit;
-            bool ray = Physics.Raycast(blastPosition, Vector3.down, out raycastHit, 200f, LayerIndex.world.mask) ;
-            
-            if (ray)
+            bool flag2 = Physics.Raycast(base.GetAimRay().origin, base.GetAimRay().direction, out raycastHit, blastRadius*2f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
+            //bool flag2 = Physics.Raycast(blastPosition, Vector3.down, out raycastHit, 200f, LayerIndex.world.mask | LayerIndex.entityPrecise.mask);
+            bool flag3 = flag2;
+            if (flag3)
             {
                 this.aimSphere.transform.position = raycastHit.point + Vector3.up;
                 this.aimSphere.transform.up = raycastHit.normal;
@@ -235,7 +255,7 @@ namespace DekuMod.SkillStates.ShootStyle
             }
             else
             {
-                Vector3 position = blastPosition + 200f * Vector3.down;
+                Vector3 position = base.GetAimRay().origin + base.GetAimRay().direction * blastRadius * 2f;
                 this.aimSphere.transform.position = position;
                 this.aimSphere.transform.up = raycastHit.normal;
                 this.aimSphere.transform.forward = Vector3.up;
@@ -247,24 +267,11 @@ namespace DekuMod.SkillStates.ShootStyle
 
             base.characterMotor.disableAirControlUntilCollision = false;
 
-
-            if (base.isAuthority && base.inputBank && base.characterDirection)
-            {
-                this.forwardDirection = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
-            }
-
-            Vector3 rhs = base.characterDirection ? base.characterDirection.forward : this.forwardDirection;
-            Vector3 rhs2 = Vector3.Cross(Vector3.up, rhs);
-
-            float num = Vector3.Dot(this.forwardDirection, rhs);
-            float num2 = Vector3.Dot(this.forwardDirection, rhs2);
-
-            this.RecalculateRollSpeed();
-
+            forwardDirection = base.GetAimRay().direction;
             if (base.characterMotor && base.characterDirection)
             {
                 base.characterMotor.velocity.y = 0f;
-                base.characterMotor.velocity = this.forwardDirection * this.rollSpeed;
+                base.characterMotor.velocity = this.forwardDirection * SpeedCoefficient;
             }
 
 
@@ -287,17 +294,33 @@ namespace DekuMod.SkillStates.ShootStyle
             float basemovespeedMultiplier = (currentMovespeed / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
             float movespeedMultiplier = basemovespeedMultiplier + 1f;
 
+            SpeedCoefficient = initialSpeedCoefficient * movespeedMultiplier;
+
+            TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
+            temporaryOverlay.duration = 1f;
+            temporaryOverlay.animateShaderAlpha = true;
+            temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+            temporaryOverlay.destroyComponentOnEnd = true;
+            temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
+
+            TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
+            temporaryOverlay2.duration = 1f;
+            temporaryOverlay2.animateShaderAlpha = true;
+            temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+            temporaryOverlay2.destroyComponentOnEnd = true;
+            temporaryOverlay2.originalMaterial = DekuAssets.fullCowlingMaterial;
+
             switch (level)
             {
                 case 0:
                     numberOfHits = Mathf.RoundToInt(StaticValues.stlouisTotalHits3 * movespeedMultiplier);
                     break;
                 case 1:
-                    initialSpeedCoefficient *= StaticValues.stlouis3Level2Multiplier;
+                    SpeedCoefficient *= StaticValues.stlouis3Level2Multiplier;
                     numberOfHits = Mathf.RoundToInt(StaticValues.stlouisTotalHits3 * movespeedMultiplier * StaticValues.stlouis3Level2Multiplier);
                     break;
                 case 2:
-                    initialSpeedCoefficient *= StaticValues.stlouis3Level3Multiplier;
+                    SpeedCoefficient *= StaticValues.stlouis3Level3Multiplier;
                     numberOfHits = Mathf.RoundToInt(StaticValues.stlouisTotalHits3 * movespeedMultiplier * StaticValues.stlouis3Level3Multiplier);
                     break;
             }
@@ -305,6 +328,11 @@ namespace DekuMod.SkillStates.ShootStyle
             GetModelAnimator().SetFloat("Attack.playbackRate", 1f);
             PlayCrossfade("FullBody, Override", "StLouis3", "Attack.playbackRate", duration, 0.1f);
 
+            if (base.isAuthority && Config.allowVoice.Value)
+            {
+                AkSoundEngine.PostEvent("stlouisvoice", this.gameObject);
+            }
+            AkSoundEngine.PostEvent("stlouissfx", this.gameObject);
         }
 
 
@@ -351,6 +379,7 @@ namespace DekuMod.SkillStates.ShootStyle
                     break;
 				case superState.SUPER2:
                     characterDirection.forward = base.GetAimRay().direction;
+            blastPosition = base.GetAimRay().origin + base.GetAimRay().direction * blastRadius * 2f;
                     if (!hasFired && base.fixedAge > firetime)
                     {
                         hasFired = true;
@@ -369,23 +398,27 @@ namespace DekuMod.SkillStates.ShootStyle
                     switch (stlouis3)
                     {
                         case stlouis3State.STARTUP:
-                            attackTimer += Time.fixedDeltaTime;
-                            if(attackTimer > 0.4f)
+                            if(base.fixedAge > 0.4f)
                             {
-                                attackTimer = 0f;
                                 AkSoundEngine.PostEvent("ofasfx", this.gameObject);
                                 Util.PlaySound(EvisDash.endSoundString, base.gameObject);
 
-                                if (this.characterModel)
+                                if (base.isAuthority)
                                 {
-                                    this.characterModel.invisibilityCount++;
+                                    if (this.characterModel)
+                                    {
+                                        this.characterModel.invisibilityCount++;
+                                    }
+                                    if (this.hurtboxGroup)
+                                    {
+                                        HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
+                                        int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter + 1;
+                                        hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
+                                    }
+
                                 }
-                                if (this.hurtboxGroup)
-                                {
-                                    HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
-                                    int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter + 1;
-                                    hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
-                                }
+
+                                dekucon.RLEG.Play();
                                 stlouis3 = stlouis3State.DASH;
                             }
                             break;
@@ -396,31 +429,44 @@ namespace DekuMod.SkillStates.ShootStyle
                                 dekucon.WINDTRAIL.Play();
                             }
 
-                            this.RecalculateRollSpeed();
                             this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
 
-                            if (base.characterDirection) base.characterDirection.forward = this.forwardDirection;
-
-                            Vector3 normalized = (base.transform.position - this.previousPosition).normalized;
-                            if (base.characterMotor && base.characterDirection && normalized != Vector3.zero)
+                            switch (level)
                             {
-                                Vector3 vector = normalized * this.rollSpeed;
-                                float d = Mathf.Max(Vector3.Dot(vector, this.forwardDirection), 0f);
-                                vector = this.forwardDirection * d;
-                                vector.y = 0f;
+                                case 0:
+                                    characterMotor.velocity.y = 0f;
+                                    base.characterMotor.rootMotion += forwardDirection * SpeedCoefficient * Time.fixedDeltaTime;
+                                    break;
+                                case 1:
+                                    characterMotor.velocity.y = 0f;
+                                    base.characterMotor.rootMotion += forwardDirection * SpeedCoefficient * Time.fixedDeltaTime;
+                                    break;
+                                case 2:
 
-                                base.characterMotor.velocity = vector;
+                                    characterMotor.velocity = Vector3.zero;
+                                    break;
                             }
-                            this.previousPosition = base.transform.position;
 
-                            
-                            attackTimer += Time.fixedDeltaTime;
-                            if(attackTimer > 0.4f)
+                            if(base.fixedAge > 0.8f)
                             {
-                                attackTimer = 0f;
+
+                                switch (level)
+                                {
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        break;
+                                    case 2:
+                                        base.characterMotor.rootMotion += forwardDirection * SpeedCoefficient;
+                                        break;
+                                }
+
                                 PlayCrossfade("FullBody, Override", "StLouis3End", "Attack.playbackRate", duration, 0.01f);
 
+
+                                EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, "RFoot", false);
+                                EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.muzzleflashMageLightningLargePrefab, base.gameObject, "RFoot", false);
 
                                 if (this.modelTransform)
                                 {
@@ -457,12 +503,24 @@ namespace DekuMod.SkillStates.ShootStyle
                             break;
                         case stlouis3State.ATTACK:
 
-                            attackTimer += Time.fixedDeltaTime;
-                            if(attackTimer > 0.5f)
+                            if(base.isAuthority)
                             {
-
-                                EffectManager.SimpleMuzzleFlash(EvisDash.blinkPrefab, base.gameObject, "RFoot", false);
-                                EffectManager.SimpleMuzzleFlash(Modules.DekuAssets.muzzleflashMageLightningLargePrefab, base.gameObject, "RFoot", false);
+                                if (this.characterModel)
+                                {
+                                    this.characterModel.invisibilityCount--;
+                                }
+                                if (this.hurtboxGroup)
+                                {
+                                    HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
+                                    int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter - 1;
+                                    hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
+                                }
+                            }
+                            //attackTimer += Time.fixedDeltaTime;
+                            characterMotor.velocity.y = 0f;
+                            characterMotor.velocity *= 0.1f;
+                            if (base.fixedAge > 1.3f)
+                            {
                                 EffectData effectData = new EffectData
                                 {
                                     scale = 1f,
@@ -486,17 +544,12 @@ namespace DekuMod.SkillStates.ShootStyle
 			
 		}
 
-
-        private void RecalculateRollSpeed()
-        {
-            this.rollSpeed = this.moveSpeedStat * Mathf.Lerp(initialSpeedCoefficient, finalSpeedCoefficient, base.fixedAge / duration);
-        }
-
+        
         public void BlackWhipSmashSearch(bool initial)
         {
             blackwhipSearch.teamMaskFilter = TeamMask.GetEnemyTeams(base.GetTeam());
             blackwhipSearch.filterByLoS = false;
-            blackwhipSearch.searchOrigin = base.GetAimRay().origin;
+            blackwhipSearch.searchOrigin = blastPosition;
             blackwhipSearch.searchDirection = base.GetAimRay().direction;
             blackwhipSearch.sortMode = BullseyeSearch.SortMode.Distance;
             blackwhipSearch.maxDistanceFilter = blastRadius;
@@ -517,14 +570,22 @@ namespace DekuMod.SkillStates.ShootStyle
                     {
                         BlackwhipComponent blackwhipComponent = singularTarget.healthComponent.body.gameObject.GetComponent<BlackwhipComponent>();
 
+                        if (singularTarget.healthComponent.body.characterMotor)
+                        {
+                            singularTarget.healthComponent.body.characterMotor.Motor.SetPositionAndRotation(blastPosition + Vector3.up * 15f,
+                                                    Util.QuaternionSafeLookRotation(characterBody.characterDirection.forward), true);
+                        }
+                        else if (singularTarget.healthComponent.body.rigidbody)
+                        {
+                            singularTarget.healthComponent.body.rigidbody.MovePosition(blastPosition + Vector3.up * 15f);
+                        }
+
 
                         if (blackwhipComponent)
                         {
-                            blackwhipComponent.totalDuration = duration;
-                            blackwhipComponent.dekucharbody = characterBody;
-                            blackwhipComponent.charbody = singularTarget.healthComponent.body;
+                            blackwhipComponent.elapsedTime = 0f;
 
-                            new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.stlouisDamageCoefficient3 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                            new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
 
                         }
                         if (!blackwhipComponent)
@@ -532,19 +593,17 @@ namespace DekuMod.SkillStates.ShootStyle
                             blackwhipComponent = singularTarget.healthComponent.body.gameObject.AddComponent<BlackwhipComponent>();
                             blackwhipComponent.totalDuration = duration;
                             blackwhipComponent.dekucharbody = characterBody;
-                            blackwhipComponent.charbody = singularTarget.healthComponent.body;
 
-                            new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.stlouisDamageCoefficient3 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                            new BlackwhipImmobilizeRequest(singularTarget.healthComponent.body.masterObjectId, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
                             //new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, blastPosition + Vector3.up * blastRadius, 3f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
 
                         }
                     }
                     else
                     {
-                        BlackwhipComponent blackwhipComponent = singularTarget.healthComponent.body.gameObject.GetComponent<BlackwhipComponent>();
-                        if (blackwhipComponent)
+                        if (singularTarget.healthComponent.body.HasBuff(Buffs.blackwhipDebuff))
                         {
-                            new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, aimSphere.transform.position, 3f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
+                            new TakeDamageForceRequest(singularTarget.healthComponent.body.masterObjectId, aimSphere.transform.position- singularTarget.healthComponent.body.corePosition, 50f, StaticValues.stlouisDamageCoefficient2 * damageStat, characterBody.masterObjectId).Send(NetworkDestination.Clients);
                         }
 
                     }
@@ -612,11 +671,7 @@ namespace DekuMod.SkillStates.ShootStyle
                     
                     break;
                 case superState.SUPER2:
-                    if (this.areaIndicator)
-                    {
-                        this.areaIndicator.transform.localScale = Vector3.one * blastRadius * (attackSpeedStat);
-                        this.areaIndicator.transform.localPosition = blastPosition;
-                    }
+                    UpdateAreaIndicator();
                     break;
                 case superState.SUPER3:
                     
@@ -637,11 +692,12 @@ namespace DekuMod.SkillStates.ShootStyle
         public override void OnExit()
         {
             base.OnExit();
+
             characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 0);
-            if (areaIndicator)
+            if (aimSphere)
             {
-                this.areaIndicator.SetActive(false);
-                EntityState.Destroy(this.areaIndicator);
+                this.aimSphere.SetActive(false);
+                EntityState.Destroy(this.aimSphere);
 
             }
             base.characterBody.characterMotor.useGravity = true;
@@ -657,7 +713,6 @@ namespace DekuMod.SkillStates.ShootStyle
                 case superState.SUPER1:
                     break;
                 case superState.SUPER2:
-                    EntityState.Destroy(this.aimSphere.gameObject);
                     break;
                 case superState.SUPER3:
 

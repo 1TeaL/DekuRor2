@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 995732726
+CRC: 1581853086
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bc56fa737228889463b782995c602c57
+    Hash: cc228cfc31df3f9a51c1443a9e0ed599
   TypeTreeHash:
     serializedVersion: 2
     Hash: cadff3ebdf0e75a109758b617fa81642
@@ -78,15 +78,15 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
 - Assets/DekuFinalForm/Animations/DelawareSmashChargeEnd.anim
-- Assets/DekuFinalForm/Animations/Cape.anim
+- Assets/DekuFinalForm/GUI/gobeyondN.png
 - Assets/DekuFinalForm/GUI/lightningwhitegreen.tif
 - Assets/DekuFinalForm/GUI/Floatactivate.png
 - Assets/DekuFinalForm/VFX/curvedSwingEffect.prefab
 - Assets/DekuFinalForm/VFX/Material/windlineblack.mat
-- Assets/DekuFinalForm/GUI/gobeyondN.png
+- Assets/DekuFinalForm/VFX/detroitUpper.prefab
 - Assets/DekuFinalForm/VFX/limbAura.prefab
 - Assets/DekuFinalForm/VFX/WordWham.prefab
-- Assets/DekuFinalForm/VFX/detroitUpper.prefab
+- Assets/DekuFinalForm/VFX/Material/windspikering.mat
 - Assets/DekuFinalForm/Assets/Materials/redBlinkingMat.mat
 - Assets/DekuFinalForm/Assets/Materials/UpscaledMask.jpg
 - Assets/DekuFinalForm/Animations/TexasSmashAirDashing.anim
@@ -120,7 +120,6 @@ Assets:
 - Assets/DekuFinalForm/GUI/cyclemodeIcon.png
 - Assets/DekuFinalForm/Animations/ShootStyleRush3.anim
 - Assets/DekuFinalForm/GUI/ultimateupgrade.png
-- Assets/DekuFinalForm/VFX/Material/windspikering.mat
 - Assets/DekuFinalForm/VFX/Material/blackwhipbullet.mat
 - Assets/DekuFinalForm/VFX/Textures/Smash3.png
 - Assets/DekuFinalForm/GUI/shootstylekick.png
@@ -132,6 +131,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/blackwhipline.prefab
 - Assets/DekuFinalForm/Animations/ManchesterSmashDown.anim
 - Assets/DekuFinalForm/Assets/Materials/Mask1.png
+- Assets/DekuFinalForm/Animations/TexasSmashAir.anim
 - Assets/DekuFinalForm/GUI/dekuPlusUltraSegment.png
 - Assets/DekuFinalForm/VFX/blackwhipshootGhost.prefab
 - Assets/DekuFinalForm/VFX/Material/Spark2Particlewhip.mat
@@ -235,9 +235,10 @@ Assets:
 - Assets/DekuFinalForm/VFX/blackwhipeffect 1.prefab
 - Assets/DekuFinalForm/GUI/ultimateupgrade100.png
 - Assets/DekuFinalForm/Animations/RunF.anim
-- Assets/DekuFinalForm/VFX/leftEyeParticle.prefab
+- Assets/DekuFinalForm/Animations/Cape.anim
 - Assets/DekuFinalForm/GUI/gobeyondB.png
 - Assets/DekuFinalForm/VFX/rightKickEffect.prefab
+- Assets/DekuFinalForm/VFX/leftEyeParticle.prefab
 - Assets/DekuFinalForm/VFX/Textures/Thwip2.png
 - Assets/DekuFinalForm/Animations/DetroitSmash3End.anim
 - Assets/DekuFinalForm/Animations/Airforce.anim
@@ -290,11 +291,10 @@ Assets:
 - Assets/DekuFinalForm/Assets/humanoidDeku.prefab
 - Assets/DekuFinalForm/VFX/leftEyeRibbonParticle.prefab
 - Assets/DekuFinalForm/VFX/OFA lightning eye.prefab
-- Assets/DekuFinalForm/Animations/TexasSmashAir.anim
 - Assets/DekuFinalForm/Assets/Mesh/Face.mesh
+- Assets/DekuFinalForm/GUI/manchester100.png
 - Assets/DekuFinalForm/Assets/Materials/UpscaledBody.jpg
 - Assets/DekuFinalForm/GUI/armorblue.tif
-- Assets/DekuFinalForm/GUI/manchester100.png
 - Assets/DekuFinalForm/GUI/oklahoma.png
 - Assets/DekuFinalForm/VFX/Material/yellow.mat
 - Assets/DekuFinalForm/Animations/Jump.anim

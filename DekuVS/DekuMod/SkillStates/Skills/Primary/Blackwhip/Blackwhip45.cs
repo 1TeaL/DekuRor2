@@ -92,7 +92,7 @@
 //                AkSoundEngine.PostEvent("blackwhipvoice", this.gameObject);
 //            }
 //            AkSoundEngine.PostEvent("blackwhipsfx", this.gameObject);
-//            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
+//            AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
 //        }
 
 //        protected override void DontDoSkill()

@@ -37,7 +37,7 @@ namespace DekuMod.SkillStates
             this.attackRecoil = 0.5f;
             this.hitHopVelocity = 10f;
 
-            this.swingSoundString = "shootstyedashcombosfx";
+            this.swingSoundString = "shootstyledashcombosfx";
             this.hitSoundString = "";
             this.muzzleString = ChooseAnimationString();
             this.swingEffectPrefab = Modules.DekuAssets.dekuKickEffect;

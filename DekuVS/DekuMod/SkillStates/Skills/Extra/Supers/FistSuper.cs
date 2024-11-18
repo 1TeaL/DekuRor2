@@ -145,7 +145,7 @@
 //            if (base.fixedAge > exitDuration && !animChange && base.isAuthority)
 //			{
 //				animChange = true;
-//				AkSoundEngine.PostEvent("shootstyedashcomboimpact", this.gameObject);
+//				AkSoundEngine.PostEvent("shootstyledashcomboimpact", this.gameObject);
 //				EffectManager.SpawnEffect(Modules.Asset.mageLightningBombEffectPrefab, new EffectData
 //				{
 //					origin = theSpot,

@@ -69,7 +69,7 @@ namespace DekuMod.SkillStates.Might
             base.PlayAnimation("FullBody, Override", "SmashRushDash", "Slash.playbackRate", 0.01f);
 
 
-            AkSoundEngine.PostEvent("shootstyedashsfx", this.gameObject);
+            AkSoundEngine.PostEvent("shootshootdashsfx", this.gameObject);
 
 
         }

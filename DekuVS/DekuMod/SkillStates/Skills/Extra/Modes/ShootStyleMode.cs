@@ -128,6 +128,7 @@ namespace DekuMod.SkillStates
 
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             GetModelAnimator().SetBool("manchesterDownEnd", false);
+            PlayAnimation("FullBody, Override", "ManchesterSmashDown", "Attack.playbackRate", attackTime);
 
             //characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);
             //base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;

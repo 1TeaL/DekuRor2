@@ -33,7 +33,7 @@
 				<GameParameter Id="3781471980" Name="Volume_DekuSFX"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="1943384016" Type="User" Language="SFX" Hash="{1B7F6039-EDCA-B21D-D5C9-752AC5E88585}">
+		<SoundBank Id="1943384016" Type="User" Language="SFX" Hash="{984B8B61-FA33-6EE2-0CC7-A566CE3326F8}">
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
 			<Media>
@@ -634,21 +634,21 @@
 						</Custom>
 					</PluginRefs>
 				</Event>
-				<Event Id="2853938439" Name="shootstyedashcomboimpact">
+				<Event Id="3518326907" Name="shootstyledashcomboimpact">
 					<MediaRefs>
 						<MediaRef Id="206582851"/>
 						<MediaRef Id="374868213"/>
 						<MediaRef Id="873117885"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1485257246" Name="shootstyedashcombosfx">
+				<Event Id="1215624114" Name="shootstyledashcombosfx">
 					<MediaRefs>
 						<MediaRef Id="5132529"/>
 						<MediaRef Id="815080430"/>
 						<MediaRef Id="1049779095"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="240596017" Name="shootstyedashcombovoice">
+				<Event Id="2063685189" Name="shootstyledashcombovoice">
 					<MediaRefs>
 						<MediaRef Id="134648371"/>
 						<MediaRef Id="519379338"/>
@@ -659,7 +659,7 @@
 						</Custom>
 					</PluginRefs>
 				</Event>
-				<Event Id="2082540294" Name="shootstyedashsfx">
+				<Event Id="72575306" Name="shootstyledashsfx">
 					<MediaRefs>
 						<MediaRef Id="189355726"/>
 						<MediaRef Id="644011312"/>
@@ -668,7 +668,7 @@
 						<MediaRef Id="922481399"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="940773961" Name="shootstyedashvoice">
+				<Event Id="750323469" Name="shootstyledashvoice">
 					<MediaRefs>
 						<MediaRef Id="14386378"/>
 						<MediaRef Id="34808390"/>
@@ -751,5 +751,5 @@
 			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{C503D0CF-B8B6-7AA7-A854-A15140BDCA0C}</FileHash>
+	<FileHash>{EC190CD4-B24B-C4BD-06EE-A8A57FCD9BB9}</FileHash>
 </SoundBanksInfo>

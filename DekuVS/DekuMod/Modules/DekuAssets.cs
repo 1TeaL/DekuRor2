@@ -123,12 +123,13 @@ namespace DekuMod.Modules
 
         internal static GameObject dekuPunchEffect;
         internal static GameObject dekuKickEffect;
+        internal static GameObject dekuLeftKickEffect;
         internal static GameObject dekuHitImpactEffect;
         internal static GameObject impactShaderEffect;
         internal static GameObject slashEffect;
 
         //Materials
-        public static Material mercDashMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/Merc/matMercEvisTarget.mat").WaitForCompletion();
+        public static Material mercDashMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/Merc/matMercEnergized.mat").WaitForCompletion();
         public static Material blackwhipDebuffMaterial;
         public static Material fullCowlingMaterial;
         public static Material blueblinkingMaterial;
@@ -242,6 +243,7 @@ namespace DekuMod.Modules
 
             dekuPunchEffect = DekuAssets.LoadEffect("MultiStraightSwingEffect");
             dekuKickEffect = DekuAssets.LoadEffect("DekuKickEffect", true);
+            dekuLeftKickEffect = DekuAssets.LoadEffect("leftKickEffect", true);
             dekuHitImpactEffect = DekuAssets.LoadEffect("ImpactDekuEffect");
             if (!dekuHitImpactEffect.GetComponent<EffectComponent>())
             {
@@ -249,7 +251,7 @@ namespace DekuMod.Modules
             }
             impactShaderEffect = DekuAssets.LoadEffect("ImpactShader");
 
-            kickHitSoundEvent = CreateNetworkSoundEventDef("shootstyedashcomboimpact");
+            kickHitSoundEvent = CreateNetworkSoundEventDef("shootstyledashcomboimpact");
 
 
             //Materials

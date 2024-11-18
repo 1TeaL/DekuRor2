@@ -5,6 +5,7 @@ using DekuMod.Modules;
 using DekuMod.SkillStates.BaseStates;
 using EntityStates.Merc;
 using static UnityEngine.ParticleSystem.PlaybackState;
+using R2API.Networking;
 
 namespace DekuMod.SkillStates.ShootStyle
 {
@@ -74,6 +75,11 @@ namespace DekuMod.SkillStates.ShootStyle
 
             this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
+            if(dekucon.WINDTRAIL.isStopped)
+            {
+                dekucon.WINDTRAIL.Play();
+            }
+
             if (characterBody.characterMotor.isGrounded)
             {
                 state = floatState.GROUND;
@@ -114,14 +120,17 @@ namespace DekuMod.SkillStates.ShootStyle
                     case 0:
                         initialSpeedCoefficient = StaticValues.dodgeSpeed;
                         finalSpeedCoefficient = 0.1f;
-                        
+                        characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, duration/4f);
+
                         break;
                     case 1:
                         initialSpeedCoefficient = StaticValues.dodgeSpeed * attackSpeedStat;
+                        characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, duration / 3f);
                         finalSpeedCoefficient = 0.1f;
                         break;
                     case 2:
                         initialSpeedCoefficient = StaticValues.dodgeSpeed * attackSpeedStat;
+                        characterBody.ApplyBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex, 1, duration / 2f);
                         finalSpeedCoefficient = 0.1f;
                         break;
                 }
@@ -181,6 +190,10 @@ namespace DekuMod.SkillStates.ShootStyle
         {
             base.OnExit();
             base.characterBody.characterMotor.useGravity = true;
+            if (dekucon.WINDTRAIL.isPlaying)
+            {
+                dekucon.WINDTRAIL.Stop();
+            }
         }
 
         private void RecalculateRollSpeed()

@@ -465,6 +465,32 @@ namespace DekuMod.Modules.Survivors
             //skill CD timer
             skillCDTimer += Time.fixedDeltaTime;
 
+            //PARTICLE checks
+            if(body.HasBuff(Buffs.fajinBuff) | body.HasBuff(Buffs.fajinMaxBuff))
+            {
+                if(LARMFAJIN.isStopped)
+                {
+                    LARMFAJIN.Play();
+                }
+                if (RARMFAJIN.isStopped)
+                {
+                    RARMFAJIN.Play();
+                }
+            }
+            else if(!body.HasBuff(Buffs.fajinBuff) && !body.HasBuff(Buffs.fajinMaxBuff))
+            {
+                if (LARMFAJIN.isPlaying)
+                {
+                    LARMFAJIN.Stop();
+                }
+                if (RARMFAJIN.isPlaying)
+                {
+                    RARMFAJIN.Stop();
+                }
+
+            }
+
+
             //blackwhip timer
             //if (!blackwhipActivated)
             //{

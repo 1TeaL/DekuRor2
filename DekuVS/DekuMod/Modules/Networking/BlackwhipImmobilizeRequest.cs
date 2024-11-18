@@ -101,7 +101,7 @@ namespace DekuMod.Modules.Networking
 
                 };
 
-                enemycharBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, enemycharBody.GetBuffCount(Buffs.blackwhipDebuff) + StaticValues.blackwhipDebuffDuration);
+                enemycharBody.ApplyBuff(Buffs.blackwhipDebuff.buffIndex, 1, StaticValues.blackwhipDebuffDuration);
                 //enemycharBody.healthComponent.TakeDamageForce(direction * force * (Weight), true, true);
                 enemycharBody.healthComponent.TakeDamage(damageInfo);
                 GlobalEventManager.instance.OnHitEnemy(damageInfo, enemycharBody.healthComponent.gameObject);

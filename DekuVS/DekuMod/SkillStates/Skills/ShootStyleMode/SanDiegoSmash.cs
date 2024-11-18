@@ -171,11 +171,11 @@ namespace DekuMod.SkillStates.ShootStyle
 
             }
 
-            if (isAuthority)
+            if (isAuthority && Config.allowVoice.Value)
             {
-                AkSoundEngine.PostEvent("shootstyedashvoice", gameObject);
+                AkSoundEngine.PostEvent("shootstyledashvoice", gameObject);
             }
-            AkSoundEngine.PostEvent("shootstyedashsfx", gameObject);
+            AkSoundEngine.PostEvent("shootstyledashsfx", gameObject);
 
 
             switch (level)
