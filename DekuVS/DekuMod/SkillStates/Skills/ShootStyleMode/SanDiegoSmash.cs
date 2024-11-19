@@ -82,7 +82,7 @@ namespace DekuMod.SkillStates.ShootStyle
 
             duration = baseduration / (attackSpeedStat / 2);
             SpeedCoefficient = initialSpeedCoefficient * (attackSpeedStat / 2);
-            finalSpeedCoefficient = 0f;
+            finalSpeedCoefficient = SpeedCoefficient * 0.8f;
             dekucon = GetComponent<DekuController>();
             float num = moveSpeedStat;
             bool isSprinting = characterBody.isSprinting;

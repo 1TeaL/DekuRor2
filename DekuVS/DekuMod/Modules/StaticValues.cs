@@ -152,7 +152,7 @@ namespace DekuMod.Modules
         internal const float stlouisDamageForce = 0f;
         internal const float stlouisDamageForce2 = 0f;
         internal const float stlouisDamageForce3 = 0f;
-        internal const float stlouis3InitialSpeed = 60f;
+        internal const float stlouis3InitialSpeed = 100f;
         internal const float stlouis3Level2Multiplier = 1.5f;
         internal const float stlouis3Level3Multiplier = 2f;
 

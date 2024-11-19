@@ -22,6 +22,7 @@ namespace DekuMod.SkillStates.BlackWhip
         public GameObject blackwhipLineEffect;
         public LineRenderer blackwhipLineRenderer;
 
+        public Vector3 originalPosition;
         public float timer;
         public float duration;
         public float totalDuration;
@@ -39,6 +40,7 @@ namespace DekuMod.SkillStates.BlackWhip
             //effectObj.transform.parent = charbody.gameObject.transform;
 
             charbody = GetComponent<CharacterBody>();
+            originalPosition = charbody.corePosition;
 
             child = dekucharbody.gameObject.GetComponent<ModelLocator>().modelTransform.GetComponent<ChildLocator>();
             //blackwhipLineEffect = UnityEngine.Object.Instantiate(Modules.DekuAssets.blackwhipLineRenderer, child.FindChild("RHand").transform);
@@ -123,10 +125,12 @@ namespace DekuMod.SkillStates.BlackWhip
 
             if(timer > totalDuration)
             {
+                if (blackwhipLineEffect) Destroy(blackwhipLineEffect);
                 EntityState.Destroy(this);
             }
             if (!charbody | !charbody.healthComponent.alive)
             {
+                if (blackwhipLineEffect) Destroy(blackwhipLineEffect);
                 EntityState.Destroy(this);
             }
             //if (timer > duration && !hasFired)

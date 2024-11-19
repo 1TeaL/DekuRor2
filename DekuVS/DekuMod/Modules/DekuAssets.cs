@@ -100,6 +100,7 @@ namespace DekuMod.Modules
         //own effects
         internal static GameObject delawareBullet;
         internal static GameObject blackwhip;
+        internal static GameObject blackwhipSmashEffect;
         internal static GameObject blackwhipTrail;
         internal static GameObject blackwhipbullet;
         internal static GameObject blackwhipLineRenderer;
@@ -129,7 +130,7 @@ namespace DekuMod.Modules
         internal static GameObject slashEffect;
 
         //Materials
-        public static Material mercDashMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/Merc/matMercEnergized.mat").WaitForCompletion();
+        public static Material mercDashMaterial = Addressables.LoadAssetAsync<Material>(key: "RoR2/Base/Merc/matMercEnergized.mat").WaitForCompletion();
         public static Material blackwhipDebuffMaterial;
         public static Material fullCowlingMaterial;
         public static Material blueblinkingMaterial;
@@ -213,7 +214,7 @@ namespace DekuMod.Modules
 
             Material bulletMat = null;
 
-            delawareBullet = LoadEffect("delawareBullet");
+            delawareBullet = LoadEffect("delaware");
             delawareEffect = LoadEffect("delawareMax");
             airforceEffect = LoadEffect("windbullet");
             airforce45Effect = LoadEffect("windbullet45");
@@ -224,6 +225,7 @@ namespace DekuMod.Modules
 
             blackwhipforward = LoadEffect("blackwhipforward");
             blackwhip = LoadEffect("blackwhipeffect");
+            blackwhipSmashEffect = LoadEffect("blackwhipSmashEffect");
             blackwhipTrail = LoadEffect("blackwhipTrail");
             blackwhipLineRenderer = mainAssetBundle.LoadAsset<GameObject>("blackwhipLineRenderer");
 
@@ -263,7 +265,7 @@ namespace DekuMod.Modules
             purpleblinkingMaterial = mainAssetBundle.LoadAsset<Material>("purpleBlinkingMat");
 
             blackwhipDebuffMaterial = mainAssetBundle.LoadAsset<Material>("blackwhipbullet");
-            fullCowlingMaterial = UnityEngine.GameObject.Instantiate<Material>(RoR2.LegacyResourcesAPI.Load<Material>("Materials/matEnergyShield"));
+            fullCowlingMaterial = Addressables.LoadAssetAsync<Material>(key: "RoR2/Base/Common/matEnergyShield.mat").WaitForCompletion();
             fullCowlingMaterial.SetColor("_TintColor", new Color(27/255f, 1f, 213/255f));
             
 

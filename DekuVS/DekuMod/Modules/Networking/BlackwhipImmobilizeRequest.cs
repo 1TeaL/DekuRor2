@@ -96,7 +96,7 @@ namespace DekuMod.Modules.Networking
                     damage = damage,
                     position = enemycharBody.transform.position,
                     procCoefficient = StaticValues.blackwhipProc,
-                    damageType = DamageType.Freeze2s,
+                    damageType = DamageType.Stun1s,
                     crit = charcharBody.RollCrit(),
 
                 };

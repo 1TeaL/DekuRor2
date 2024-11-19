@@ -126,6 +126,13 @@ namespace DekuMod.SkillStates
 
             attackTime = 0.5f / attackSpeedStat;
 
+            this.modelTransform = base.GetModelTransform();
+            if (this.modelTransform)
+            {
+                this.animator = this.modelTransform.GetComponent<Animator>();
+                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+                this.hurtboxGroup = this.modelTransform.GetComponent<HurtBoxGroup>();
+            }
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             GetModelAnimator().SetBool("manchesterDownEnd", false);
             PlayAnimation("FullBody, Override", "ManchesterSmashDown", "Attack.playbackRate", attackTime);
@@ -168,6 +175,13 @@ namespace DekuMod.SkillStates
             {
                 characterBody.characterMotor.Motor.SetPositionAndRotation(characterBody.footPosition + Vector3.up * StaticValues.shootSwitchHeightStart, Quaternion.LookRotation(base.GetAimRay().direction));
             }
+            TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
+            temporaryOverlay.duration = 1f;
+            temporaryOverlay.animateShaderAlpha = true;
+            temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+            temporaryOverlay.destroyComponentOnEnd = true;
+            temporaryOverlay.originalMaterial = DekuAssets.fullCowlingMaterial;
+            temporaryOverlay.inspectorCharacterModel = this.animator.gameObject.GetComponent<CharacterModel>();
         }
 
         public override void Update()

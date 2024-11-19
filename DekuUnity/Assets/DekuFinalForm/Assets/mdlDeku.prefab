@@ -48396,6 +48396,8 @@ MonoBehaviour:
     transform: {fileID: 7714114153660331526}
   - name: rArmGearshift
     transform: {fileID: 5725194430157758816}
+  - name: bodyGearShift
+    transform: {fileID: 2274237032659302833}
   - name: PlusUltra1
     transform: {fileID: 935103861499649401}
   - name: PlusUltra2
@@ -48404,8 +48406,6 @@ MonoBehaviour:
     transform: {fileID: 5095947494584676735}
   - name: windTrail
     transform: {fileID: 107913104504496331}
-  - name: bodyGearShift
-    transform: {fileID: 2274237032659302833}
 --- !u!114 &4314288287895277941
 MonoBehaviour:
   m_ObjectHideFlags: 0

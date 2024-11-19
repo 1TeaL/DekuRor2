@@ -197,28 +197,6 @@ namespace DekuMod.SkillStates.BlackWhip
             
             if(isRayCast)
             {
-                if (elapsedTime < fireTime)
-                {
-                    elapsedTime += Time.deltaTime; // Increment the elapsed time
-                }
-                float t = Mathf.Clamp01(elapsedTime / fireTime); // Calculate the interpolation factor (0 to 1)
-
-                Vector3[] vector3s = new Vector3[2];
-                Vector3 startPoint = child.FindChild("LHand").transform.position;
-                if (isEnemy)
-                {
-                    endPoint = enemyBody.corePosition;
-                }
-
-                // Lerp from the start point to the end point
-                Vector3 lerpedPosition = Vector3.Lerp(startPoint, endPoint, t);
-                
-                vector3s[0] = startPoint;
-                vector3s[1] = lerpedPosition;
-                blackwhipLineRenderer.positionCount = vector3s.Length;
-                blackwhipLineRenderer.SetPositions(vector3s);
-                blackwhipLineRenderer.startWidth = 0.3f;
-                blackwhipLineRenderer.endWidth = 0.3f;
 
 
                 if (!base.IsKeyDownAuthority())
@@ -227,11 +205,38 @@ namespace DekuMod.SkillStates.BlackWhip
                     //{
                     //    SmallHop(characterMotor, StaticValues.blackwhipPullHop);
                     //}
+                    if (blackwhipLineEffect) Destroy(blackwhipLineEffect);
                     this.outer.SetNextStateToMain();
                     return;
                 }
                 else
                 {
+
+                    if (elapsedTime < fireTime)
+                    {
+                        elapsedTime += Time.deltaTime; // Increment the elapsed time
+                    }
+                    float t = Mathf.Clamp01(elapsedTime / fireTime); // Calculate the interpolation factor (0 to 1)
+
+                    Vector3[] vector3s = new Vector3[2];
+                    Vector3 startPoint = child.FindChild("LHand").transform.position;
+                    if (isEnemy)
+                    {
+                        endPoint = enemyBody.corePosition;
+                    }
+
+                    // Lerp from the start point to the end point
+                    Vector3 lerpedPosition = Vector3.Lerp(startPoint, endPoint, t);
+
+                    vector3s[0] = startPoint;
+                    vector3s[1] = lerpedPosition;
+                    blackwhipLineRenderer.positionCount = vector3s.Length;
+                    blackwhipLineRenderer.SetPositions(vector3s);
+                    blackwhipLineRenderer.startWidth = 0.3f;
+                    blackwhipLineRenderer.endWidth = 0.3f;
+
+
+
                     if (base.fixedAge > fireTime)
                     {
                         //characterBody.characterMotor.Motor.RotateCharacter(Quaternion.LookRotation(base.GetAimRay().direction));

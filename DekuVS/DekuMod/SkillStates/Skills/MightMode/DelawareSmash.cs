@@ -15,7 +15,7 @@ namespace DekuMod.SkillStates.Might
 {
     public class DelawareSmash : BaseDekuSkillState
     {
-        private GameObject effectPrefab = Modules.DekuAssets.banditmuzzleEffect;
+        private GameObject effectPrefab = DekuAssets.muzzleflashMageLightningLargePrefab;
         private string muzzleName = "RFinger";
 
         public bool hasFired;
@@ -95,20 +95,24 @@ namespace DekuMod.SkillStates.Might
             if (IsKeyDownAuthority() || inputBank.skill2.down)
             {
 
-                if (base.fixedAge < this.maxCharge)
+                if (base.fixedAge <= this.maxCharge)
                 {
                     this.chargePercent = base.fixedAge / this.maxCharge;
 
-                    if(chargePercent > 1f)
-                    {
-                        chargePercent = 1f;
-                        if(dekucon.RARM.isStopped)
-                        {
-                            dekucon.RARM.Play();
-                        }
-                    }
 
                     //base.characterMotor.walkSpeedPenaltyCoefficient = 1f - this.chargePercent / maxCharge;
+                }
+                else if (base.fixedAge > this.maxCharge)
+                {
+                    if (chargePercent > 1f)
+                    {
+                        chargePercent = 1f;
+                    }
+                    if (dekucon.RARM.isStopped)
+                    {
+                        dekucon.RARM.Play();
+                    }
+
                 }
             }
             else

@@ -61,6 +61,7 @@ namespace DekuMod.SkillStates.Might
         private float radius;
         private float baseRadius = StaticValues.detroit3Radius;
         private Vector3 maxMoveVec;
+        private Vector3 startPos;
         private Vector3 randRelPos;
         private int randFreq;
         private bool reducerFlipFlop;
@@ -148,7 +149,10 @@ namespace DekuMod.SkillStates.Might
             this.areaIndicator.SetActive(true);
             //play animation of quick punch
             base.PlayAnimation("FullBody, Override", "DetroitSmash1");
-
+            if (dekucon.RARM.isStopped)
+            {
+                dekucon.RARM.Play();
+            }
 
             this.modelTransform = base.GetModelTransform();
             if (this.modelTransform)
@@ -161,7 +165,8 @@ namespace DekuMod.SkillStates.Might
                 temporaryOverlay.animateShaderAlpha = true;
                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                 temporaryOverlay.destroyComponentOnEnd = true;
-                temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
+                temporaryOverlay.originalMaterial = DekuAssets.fullCowlingMaterial;
+                temporaryOverlay.inspectorCharacterModel = this.animator.gameObject.GetComponent<CharacterModel>();
 
 
             }
@@ -189,6 +194,7 @@ namespace DekuMod.SkillStates.Might
             //bullet attack going up 
             duration = 0.7f;
             attackStartTime = duration * 0.5f;
+            dekucon.RARM.Play();
 
             switch (level)
             {
@@ -217,6 +223,7 @@ namespace DekuMod.SkillStates.Might
                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                 temporaryOverlay.destroyComponentOnEnd = true;
                 temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
+                temporaryOverlay.inspectorCharacterModel = this.animator.gameObject.GetComponent<CharacterModel>();
 
 
             }
@@ -243,7 +250,7 @@ namespace DekuMod.SkillStates.Might
             this.areaIndicator = UnityEngine.Object.Instantiate<GameObject>(ArrowRain.areaIndicatorPrefab);
             this.areaIndicator.SetActive(true);
             attackStartTime = 0.3f;
-
+            startPos = base.transform.position;
             Util.PlaySound(ChargeTrackingBomb.chargingSoundString, base.gameObject);
 
             //play animation of charging up
@@ -278,6 +285,7 @@ namespace DekuMod.SkillStates.Might
                             origin = characterBody.corePosition,
                             rotation = Quaternion.LookRotation(characterDirection.forward),
                         };
+                        EffectManager.SimpleMuzzleFlash(DekuAssets.mageLightningBombEffectPrefab, gameObject, "RHand", false);
                         switch (level)
                         {
                             case 0:
@@ -303,6 +311,10 @@ namespace DekuMod.SkillStates.Might
                                 EffectManager.SpawnEffect(DekuAssets.mageLightningBombEffectPrefab, effectData, true);
                                 EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
                                 EffectManager.SpawnEffect(DekuAssets.sonicboomEffectPrefab, effectData, true);
+                                if (dekucon.RARMGEARSHIFT.isStopped)
+                                {
+                                    dekucon.RARMGEARSHIFT.Play();
+                                }
                                 break;
                         }
 
@@ -319,12 +331,14 @@ namespace DekuMod.SkillStates.Might
                             temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                             temporaryOverlay.destroyComponentOnEnd = true;
                             temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
+                            temporaryOverlay.inspectorCharacterModel = this.animator.gameObject.GetComponent<CharacterModel>();
                             TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
                             temporaryOverlay2.duration = 0.3f;
                             temporaryOverlay2.animateShaderAlpha = true;
                             temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                             temporaryOverlay2.destroyComponentOnEnd = true;
                             temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
+                            temporaryOverlay2.inspectorCharacterModel = this.animator.gameObject.GetComponent<CharacterModel>();
 
                         }
                         //EffectManager.SpawnEffect(Modules.DekuAssets.impactShaderEffect, new EffectData
@@ -464,6 +478,23 @@ namespace DekuMod.SkillStates.Might
 
                                 camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, 0.2f);
 
+                                dekucon.RARM.Play();
+                                int chooseAnim = Random.RandomRangeInt(0, 1);
+                                switch (chooseAnim)
+                                {
+                                    case 0:
+                                        attackStartTime = 0.4f;
+                                        base.PlayAnimation("FullBody, Override", "DetroitSmash3End3");
+                                        break;
+                                    case 1:
+                                        attackStartTime = 0.4f;
+                                        base.PlayAnimation("FullBody, Override", "DetroitSmash3End2");
+                                        break;
+                                        //case 2:
+                                        //    attackStartTime = 0.4f;
+                                        //    base.PlayAnimation("FullBody, Override", "DetroitSmash3End3");
+                                        //    break;
+                                }
                                 detroit3state = super3State.RELEASE;
 
                             }
@@ -472,10 +503,11 @@ namespace DekuMod.SkillStates.Might
                             if (base.isAuthority)
                             {
 
-                                //if (this.characterModel)
-                                //{
-                                //    this.characterModel.invisibilityCount++;
-                                //}
+                                this.modelTransform = base.GetModelTransform();
+                                if (this.characterModel)
+                                {
+                                    //this.characterModel.invisibilityCount++;
+                                }
                                 if (this.hurtboxGroup)
                                 {
                                     HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
@@ -483,68 +515,27 @@ namespace DekuMod.SkillStates.Might
                                     hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
                                 }
 
-                                //TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
-                                //temporaryOverlay.duration = 0.3f;
-                                //temporaryOverlay.animateShaderAlpha = true;
-                                //temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                                //temporaryOverlay.destroyComponentOnEnd = true;
-                                //temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashBright");
-                                //TemporaryOverlayInstance temporaryOverlay2 = TemporaryOverlayManager.AddOverlay(new GameObject());
-                                //temporaryOverlay2.duration = 0.3f;
-                                //temporaryOverlay2.animateShaderAlpha = true;
-                                //temporaryOverlay2.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                                //temporaryOverlay2.destroyComponentOnEnd = true;
-                                //temporaryOverlay2.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matHuntressFlashExpanded");
-
                                 TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
                                 temporaryOverlay.duration = 0.3f;
                                 temporaryOverlay.animateShaderAlpha = true;
                                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                                 temporaryOverlay.destroyComponentOnEnd = true;
-                                temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
+                                temporaryOverlay.originalMaterial = DekuAssets.fullCowlingMaterial;
+                                temporaryOverlay.inspectorCharacterModel = this.animator.gameObject.GetComponent<CharacterModel>();
 
                                 //base.characterDirection.forward = finalDirection;
                                 //base.characterMotor.rootMotion += finalDirection * ( StaticValues.delaware3Acceleration * moveSpeedStat / characterBody.baseMoveSpeed) * Time.fixedDeltaTime;
 
+                                this.SetPosition(Vector3.Lerp(startPos, areaIndicator.transform.position, detroit3DashTime / 0.3f));
+
                                 detroit3DashTime += Time.fixedDeltaTime;
-                                if (detroit3DashTime > 0.3f)
+                                if (detroit3DashTime > 0.2f)
                                 {
-                                    base.characterMotor.rootMotion += this.maxMoveVec;
+                                    //base.characterMotor.rootMotion += this.maxMoveVec;
 
                                     detroit3state = super3State.END;
                                 }                                
 
-                                //if (base.characterMotor)
-                                //{
-                                //    base.characterMotor.enabled = false;
-                                //}
-
-                                //keep going towards point until in range
-                                //if (Vector2.Distance(this.areaIndicator.transform.localPosition, characterBody.corePosition) > 3f)
-                                //{
-                                //    TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
-                                //    temporaryOverlay.duration = 0.3f;
-                                //    temporaryOverlay.animateShaderAlpha = true;
-                                //    temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
-                                //    temporaryOverlay.destroyComponentOnEnd = true;
-                                //    temporaryOverlay.originalMaterial = RoR2.LegacyResourcesAPI.Load<Material>("Materials/matMercEvisTarget");
-                                //    //base.characterMotor.ApplyForce(force * (base.characterMotor.mass * Time.deltaTime), true, true);
-                                //    base.characterMotor.disableAirControlUntilCollision = true;
-                                //    base.characterMotor.useGravity = false;
-
-                                //    //base.characterDirection.forward = finalDirection;
-                                //    //base.characterMotor.rootMotion += finalDirection * ( StaticValues.delaware3Acceleration * moveSpeedStat / characterBody.baseMoveSpeed) * Time.fixedDeltaTime;
-
-                                //    base.characterMotor.rootMotion += this.maxMoveVec;
-                                //    detroit3state = super3State.END;
-
-                                //    Chat.AddMessage("moving towards point");
-                                //}
-                                //else if (Vector2.Distance(this.areaIndicator.transform.localPosition, characterBody.corePosition) <= 3f)
-                                //{
-
-                                //    detroit3state = super3State.END;
-                                //}
                             }
                             break;
                         case super3State.END:
@@ -553,6 +544,7 @@ namespace DekuMod.SkillStates.Might
                             {
                                 hasFired = true;
 
+                                this.modelTransform = base.GetModelTransform();
                                 if (this.modelTransform && EntityStates.ImpMonster.BlinkState.destealthMaterial)
                                 {
                                     TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
@@ -566,9 +558,12 @@ namespace DekuMod.SkillStates.Might
                                 }
                                 base.characterMotor.disableAirControlUntilCollision = false;
                                 base.characterMotor.useGravity = true;
+
                                 if (this.characterModel)
                                 {
-                                    this.characterModel.invisibilityCount--;
+                                    Chat.AddMessage("invisibility--");
+                                    //this.characterModel.invisibilityCount--;
+                                    //this.characterModel.visibility = VisibilityLevel.Visible;
                                 }
                                 if (this.hurtboxGroup)
                                 {
@@ -581,25 +576,9 @@ namespace DekuMod.SkillStates.Might
                                     base.characterMotor.enabled = true;
                                 }
 
-                                int chooseAnim = Random.RandomRangeInt(0, 1);
-                                switch(chooseAnim)
-                                {
-                                    case 0:
-                                        attackStartTime = 0.4f;
-                                        base.PlayAnimation("FullBody, Override", "DetroitSmash3End3");
-                                        break;
-                                    case 1:
-                                        attackStartTime = 0.4f;
-                                        base.PlayAnimation("FullBody, Override", "DetroitSmash3End2");
-                                        break;
-                                    //case 2:
-                                    //    attackStartTime = 0.4f;
-                                    //    base.PlayAnimation("FullBody, Override", "DetroitSmash3End3");
-                                    //    break;
-                                }
                             }
                             attackStopwatch += Time.fixedDeltaTime;
-                            if(attackStopwatch > attackStartTime && hasFired)
+                            if(attackStopwatch > 0.2f && hasFired)
                             {
 
                                 hasFired = false;
@@ -648,6 +627,10 @@ namespace DekuMod.SkillStates.Might
                                         EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
                                         EffectManager.SpawnEffect(DekuAssets.sonicboomEffectPrefab, effectData, true);
                                         EffectManager.SpawnEffect(DekuAssets.impactShaderEffect, effectData2, false);
+                                        if (dekucon.BODYGEARSHIFT.isStopped)
+                                        {
+                                            dekucon.BODYGEARSHIFT.Play();
+                                        }
                                         break;
                                 }
 
@@ -667,6 +650,14 @@ namespace DekuMod.SkillStates.Might
 
 			
 		}
+
+        private void SetPosition(Vector3 newPosition)
+        {
+            if (base.characterMotor)
+            {
+                base.characterMotor.Motor.SetPositionAndRotation(newPosition, Quaternion.identity, true);
+            }
+        }
 
         public void IndicatorUpdator()
         {
@@ -725,9 +716,12 @@ namespace DekuMod.SkillStates.Might
             }
             base.characterMotor.disableAirControlUntilCollision = false;
             base.characterMotor.useGravity = true;
+            this.modelTransform = base.GetModelTransform();
+
             if (this.characterModel)
             {
                 this.characterModel.invisibilityCount--;
+                this.characterModel.visibility = VisibilityLevel.Visible;
             }
             if (this.hurtboxGroup)
             {

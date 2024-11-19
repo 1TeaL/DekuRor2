@@ -3,6 +3,7 @@ using EntityStates;
 using DekuMod.Modules;
 using DekuMod.Modules.Survivors;
 using UnityEngine;
+using RoR2;
 
 namespace DekuMod.SkillStates.BaseStates
 {
@@ -13,6 +14,9 @@ namespace DekuMod.SkillStates.BaseStates
         public DekuController dekucon;
         public EnergySystem energySystem;
         public Animator animator;
+        public Transform modelTransform;
+        public CharacterModel characterModel;
+        public HurtBoxGroup hurtboxGroup;
 
         public float walkCancelTime;
 
@@ -22,6 +26,13 @@ namespace DekuMod.SkillStates.BaseStates
             animator = base.GetModelAnimator();
             dekucon = base.GetComponent<DekuController>();
             energySystem = base.GetComponent<EnergySystem>();
+            this.modelTransform = base.GetModelTransform();
+            if (this.modelTransform)
+            {
+                this.animator = this.modelTransform.GetComponent<Animator>();
+                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+                this.hurtboxGroup = this.modelTransform.GetComponent<HurtBoxGroup>();
+            }
             if (characterBody.level >= 20)
             {
                 level = 2;

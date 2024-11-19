@@ -153,7 +153,14 @@ namespace DekuMod.SkillStates
             {
                 base.skillLocator.utility.AddOneStock();
             }
-            
+
+            this.modelTransform = base.GetModelTransform();
+            if (this.modelTransform)
+            {
+                this.animator = this.modelTransform.GetComponent<Animator>();
+                this.characterModel = this.modelTransform.GetComponent<CharacterModel>();
+                this.hurtboxGroup = this.modelTransform.GetComponent<HurtBoxGroup>();
+            }
 
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 
@@ -175,7 +182,7 @@ namespace DekuMod.SkillStates
 
                 camOverrideHandle = base.cameraTargetParams.AddParamsOverride(request, attackTime);
 
-                base.PlayCrossfade("FullBody, Override", "TexasSmash", "Attack.playbackRate", duration, 0.1f);
+                base.PlayCrossfade("FullBody, Override", "TexasSmash", "Attack.playbackRate", duration, 0.01f);
 
                 AkSoundEngine.PostEvent("shootstyledashcombosfx", this.gameObject);
 
@@ -204,10 +211,10 @@ namespace DekuMod.SkillStates
                 base.characterMotor.Motor.RebuildCollidableLayers();
                 base.characterMotor.disableAirControlUntilCollision = true;
 
-                base.PlayAnimation("FullBody, Override", "TexasSmashAir", "Attack.playbackRate", duration, 0.01f);
                 GetModelAnimator().SetBool("texasSmashAirEnd", false);
 
                 attackTime = 0.8f / attackSpeedStat;
+                base.PlayAnimation("FullBody, Override", "TexasSmashAir", "Attack.playbackRate", attackTime);
 
                 CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
                 {
@@ -272,7 +279,6 @@ namespace DekuMod.SkillStates
                         break;
                     case positionState.AIR:
 
-                        Chat.AddMessage("air");
                         if (base.fixedAge <= attackTime)
                         {
                             characterMotor.velocity.y = 0f;
@@ -280,12 +286,18 @@ namespace DekuMod.SkillStates
 
                         if(base.fixedAge > attackTime)
                         {
+                            if (dekucon.RARM.isStopped)
+                            {
+                                dekucon.RARM.Play();
+                            }
                             TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
-                            temporaryOverlay.duration = 0.3f;
+                            temporaryOverlay.duration = 1f;
                             temporaryOverlay.animateShaderAlpha = true;
                             temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
                             temporaryOverlay.destroyComponentOnEnd = true;
-                            temporaryOverlay.originalMaterial = DekuAssets.mercDashMaterial;
+                            temporaryOverlay.originalMaterial = DekuAssets.fullCowlingMaterial;
+                            temporaryOverlay.inspectorCharacterModel = this.animator.gameObject.GetComponent<CharacterModel>();
+
                             dropTimer += Time.fixedDeltaTime;
                             switch (level)
                             {
@@ -337,6 +349,10 @@ namespace DekuMod.SkillStates
                                         LandingImpact();
                                         LandingImpact();
                                         LandingImpact();
+                                        if (dekucon.RARMGEARSHIFT.isStopped)
+                                        {
+                                            dekucon.RARMGEARSHIFT.Play();
+                                        }
                                         break;
                                 }
                                 this.outer.SetNextStateToMain();

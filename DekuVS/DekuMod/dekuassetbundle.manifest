@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1581853086
+CRC: 490614119
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cc228cfc31df3f9a51c1443a9e0ed599
+    Hash: 2942e2f6d62d0c1296e7bccd41f9c006
   TypeTreeHash:
     serializedVersion: 2
     Hash: cadff3ebdf0e75a109758b617fa81642
@@ -232,7 +232,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/Textures/Lightning2.png
 - Assets/DekuFinalForm/VFX/Material/DekuOFAMat.mat
 - Assets/DekuFinalForm/Blender/VigilanteDekuBegin.blend
-- Assets/DekuFinalForm/VFX/blackwhipeffect 1.prefab
+- Assets/DekuFinalForm/VFX/blackwhipSmashEffect.prefab
 - Assets/DekuFinalForm/GUI/ultimateupgrade100.png
 - Assets/DekuFinalForm/Animations/RunF.anim
 - Assets/DekuFinalForm/Animations/Cape.anim
