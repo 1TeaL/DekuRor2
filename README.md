@@ -4,7 +4,7 @@ Go beyond!
 Get it Here -> https://thunderstore.io/package/TeaL/DekuMod/
 
 ## Deku
-Adds Deku from My Hero Academia, a multiple quirk using survivor which can access numerous skills at a cost.
+Adds Deku from My Hero Academia, a multi option survivor with differing playstyles depending on which mode he's in.
 #### Multiplayer works (hopefully). Risk of Options Support!
 #### CustomEmotesAPI support!
 #### Message me on the Risk of Rain 2 Modding Discord if there are any issues- TeaL#5571. 
