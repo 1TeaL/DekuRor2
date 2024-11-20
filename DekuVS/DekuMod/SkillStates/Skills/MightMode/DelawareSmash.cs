@@ -65,7 +65,7 @@ namespace DekuMod.SkillStates.Might
         }
         public override void Level2()
         {
-            damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware2DamageMultiplier;
+            damage = StaticValues.delaware2DamageCoefficient;
             radius = StaticValues.delawareRadius * attackSpeedStat;
             damageType = DamageType.Generic;
             distance = StaticValues.delawareDistance * attackSpeedStat;
@@ -73,7 +73,7 @@ namespace DekuMod.SkillStates.Might
         }
         public override void Level3()
         {
-            damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware3DamageMultiplier;
+            damage = StaticValues.delaware3DamageCoefficient;
             radius = StaticValues.delaware3Radius * attackSpeedStat;
             damageType = DamageType.Stun1s;
             distance = StaticValues.delawareDistance * attackSpeedStat;

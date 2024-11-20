@@ -69,7 +69,10 @@ namespace DekuMod.SkillStates.Might
                 punchesDone = 20;
             }
             this.baseDuration = 0.5f / (1 + ((float)punchesDone / 10));
-            this.baseEarlyExitTime = 0.8f /(1 + ((float)punchesDone / 10));
+            if (baseDuration < 0.05f)
+            {
+                baseDuration = 0.05f;
+            }
             dekucon.RARM.Play();
             dekucon.LARM.Play();
 

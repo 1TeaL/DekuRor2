@@ -45,8 +45,8 @@ namespace DekuMod.Modules
 
             //Shoot Style Mode
             entityStates.Add(typeof(Airforce));
-            entityStates.Add(typeof(SanDiegoSmash));
-            entityStates.Add(typeof(FloatStep));
+            entityStates.Add(typeof(ShootStyleSmash));
+            entityStates.Add(typeof(FloatSense));
             //entityStates.Add(typeof(OklahomaSmash));
             entityStates.Add(typeof(ShootStyleSuper));
 

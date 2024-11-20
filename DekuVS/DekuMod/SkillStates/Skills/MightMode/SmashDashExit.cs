@@ -43,13 +43,13 @@ namespace DekuMod.SkillStates.Might
             switch (level)
             {
                 case 0:
-                    damageCoefficient *= 1.5f;
+                    damageCoefficient *= StaticValues.smashRushDashMultiplier;
                     break;
                 case 1:
-                    damageCoefficient *= 2f;
+                    damageCoefficient *= StaticValues.smashRushDash2Multiplier;
                     break;
                 case 2:
-                    damageCoefficient *= 3f;
+                    damageCoefficient *= StaticValues.smashRushDash3Multiplier;
                     break;
             }
             dekucon = base.GetComponent<DekuController>();

@@ -40,15 +40,77 @@ namespace DekuMod.Modules
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Ninth One For All User");
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", 
-            Helpers.Passive("[Plus Ultra Meter] [Marks] [Float] [Danger Sense]") +"." + Environment.NewLine
+            Helpers.Passive("[Plus Ultra Meter]") +"." + Environment.NewLine
             + "<style=cIsUtility>He has a double jump. He can sprint in any direction. </style>");
             #endregion
 
             #region Might Mode
+            LanguageAPI.Add(prefix + "MIGHTMODE_NAME", "Might Mode");
+            LanguageAPI.Add(prefix + "MIGHTMODE_DESCRIPTION", $"Change into Might Mode, a mode focused on high damage." + Helpers.Passive("If Deku has at least 1 plus ultra bar, Deku performs a mode switch attack, resetting all cooldowns.")+ $"Texas Smash the ground if grounded, or dash and slam the ground from the air, dealing <style=cIsDamage>{StaticValues.mightSwitchDamage * 100f}%, scaling with air time. Deku gains a Might Buff, temporarily increasing damage by {StaticValues.mightBuffMultiplier * 100f}% for {StaticValues.mightBuffDuration} seconds</style>." + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Number of hits increased by 2x, Might Buff duration increased by {StaticValues.mightSwitchLevel2Multiplier * 100f}%</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsDamage>Number of hits increased by 5x, Might Buff duration increased by {StaticValues.mightSwitchLevel3Multiplier * 100f}%</style>" + ".");
+
             LanguageAPI.Add(prefix + "MIGHTPRIMARY_NAME", "Smash Rush");
-            LanguageAPI.Add(prefix + "MIGHTPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Smash enemies in front of you. If far away, dash towards them. " + Environment.NewLine +
-                $"Enhanced: " + Environment.NewLine +
-                $"Mastered: " + " .");
+            LanguageAPI.Add(prefix + "MIGHTPRIMARY_DESCRIPTION", $"Smash enemies in front of you, dealing <style=cIsDamage>{StaticValues.smashRushDamageCoefficient * 100f}%</style>. If far away, dash towards them, multiplying damage by <style=cIsDamage>{StaticValues.smashRushDashMultiplier * 100f}%</style>. " + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage increased to {StaticValues.smashRush2DamageCoefficient * 100f}%, dash multiplier increased to {StaticValues.smashRushDash2Multiplier}%</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Deku teleports to far targets instead. Attack speed increases as you hold the button down</style>. <style=cIsDamage>Damage increased to {StaticValues.smashRush2DamageCoefficient * 100f}%, dash multiplier increased to {StaticValues.smashRushDash3Multiplier}%</style>" + ".");
+
+            LanguageAPI.Add(prefix + "MIGHTSECONDARY_NAME", "Delaware Smash");
+            LanguageAPI.Add(prefix + "MIGHTSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold the button to aim, then release to shoot a Delaware smash in front, dealing <style=cIsDamage>{100f * StaticValues.delawareDamageCoefficient}% damage. Charging can increase the damage by up to 2x</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage increased to {StaticValues.delaware2DamageCoefficient * 100f}%" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Blast greatly increased</style>. <style=cIsDamage>Damage increased to {StaticValues.delaware3DamageCoefficient * 100f}%</style>" + ".");
+
+            LanguageAPI.Add(prefix + "MIGHTUTILITY_NAME", "Fa Jin");
+            LanguageAPI.Add(prefix + "MIGHTUTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate Fa Jin, <style=cIsDamage>for 10 hits, deal {100f * StaticValues.fajinDamageMultiplier}% damage. Each hit also provides {StaticValues.fajinBarrierMultiplier * 100f}% of your max HP as barrier</style>. Costs 30 stocks to use, hitting enemies provides 1 stock per hit" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Number of hits increased to {StaticValues.fajin2HitAmount * 100f}" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Once all stocks are spent, gain a stored Fajin charge- enabling a free costing super</style>. <style=cIsDamage>Damage increased to {StaticValues.fajinMaxDamageMultiplier * 100f}%</style>" + ".");
+
+            LanguageAPI.Add(prefix + "MIGHTSPECIAL_NAME", "Detroit Smash Super");
+            LanguageAPI.Add(prefix + "MIGHTSPECIAL_DESCRIPTION", $" Detroit Smash," + Helpers.Passive("depending on your inputs (neutral and backward, forward) Deku will spend 1, 2 or 3 bars of Plus Ultra") + ". " + Environment.NewLine +
+                $"Neutral (1 cost): Detroit Smash on the spot, dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}% damage.</style>" + "." + Environment.NewLine +
+                $"Backward (2 cost): Detroit Smash upwards, dealing <style=cIsDamage>{StaticValues.detroit2BaseHits} x {100f * StaticValues.detroit2DamageCoefficient}% damage. Number of hits scales with attackspeed</style>" + "." + Environment.NewLine +
+                $"Forward (3 cost): Hold the button to charge a dashing Detroit Smash. Upon release, travel to the spot, dealing <style=cIsDamage>{100f * StaticValues.detroit3DamageCoefficient}% - {100f * (Modules.StaticValues.detroit3DamageCoefficient + StaticValues.detroit3DamageMultiplier * Modules.StaticValues.detroit3DamageCoefficient)}% damage</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Number of hits increased by 2x</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsDamage>Number of hits increased by 5x</style>" + ".");
+            #endregion
+
+            #region Shoot Style Mode
+            LanguageAPI.Add(prefix + "SHOOTSTYLEMODE_NAME", "Shoot Style Mode");
+            LanguageAPI.Add(prefix + "SHOOTSTYLEMODE_DESCRIPTION", $"Change into Shoot Style Mode, a mode focused on mobility." + Helpers.Passive("If Deku has at least 1 plus ultra bar, Deku performs a mode switch attack, resetting all cooldowns.") + $"Manchester Smash, jumping up then slaming the ground if grounded, jumping above a target then slamming down towards them, dealing <style=cIsDamage>{StaticValues.shootSwitchDamage * 100f}%, scaling with air time. For each enemy hit, add one stock to Deku's secondary and utility</style>." + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage, speed and aoe increased by {StaticValues.shootSwitchLevel2Multiplier * 100f}%</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsDamage>Damage, speed and aoe increased by {StaticValues.shootSwitchLevel2Multiplier * 100f}%</style>. Gain 3 stacks of Fajin stored buff as well." + ".");
+
+            LanguageAPI.Add(prefix + "SHOOTSTYLEPRIMARY_NAME", "Airforce");
+            LanguageAPI.Add(prefix + "SHOOTSTYLEPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}% damage. On Crit, ricochet to {StaticValues.airforceMaxRicochet} additional enemies. Also ricochet off enemies with the Combo debuff equal to the number of stacks</style>" + "." 
+                + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage increased to 2x{StaticValues.airforceDamageCoefficient * 100f}%</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Standing still enters a stance- Attack speed increases as you hold the button down and hitting enemies cause an AOE around them</style>. <style=cIsDamage>Damage increased to {StaticValues.airforce3DamageCoefficient * 100f}% for both hit and blast</style>" + ".");
+
+            LanguageAPI.Add(prefix + "SHOOTSTYLESECONDARY_NAME", "Shoot Style Smash");
+            LanguageAPI.Add(prefix + "SHOOTSTYLESECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Dash and kick, on hitting an enemy, flip back and deal <style=cIsDamage>{100f * StaticValues.shootstyleDamageCoefficient}% damage, applying a Combo debuff</style>. Every attack on the enemy will reduce cooldowns based on the number of stacks" + "."
+                + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsUtility>Speed increased by {StaticValues.shootstyle2Multiplier* 100f}%, hitbox size increased</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Speed increased by {StaticValues.shootstyle3Multiplier * 100f}%, now applies 2 stacks of combo debuff at a time</style>" + ".");
+
+            LanguageAPI.Add(prefix + "SHOOTSTYLEUTILITY_NAME", "Float Sense");
+            LanguageAPI.Add(prefix + "SHOOTSTYLEUTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Using this skill on the ground causes <style=cIsUtility>Deku to dodge in his movement direction, granting invincibility initially and Danger Sense for {StaticValues.dangersenseBuffTimer} second</style>. While Danger sense is active, reduce damage taken by enemies by Deku's armor x level, potentially healing him" + Environment.NewLine + $"Using this skill in the air causes <style=cIsUtility>Deku to dash with an air blast in his movement direction and activate Float. Float allows deku to move quickly in the air without falling</style>. The air blast deals <style=cIsDamage>{100f * StaticValues.blastDashDamageCoefficient}% damage at his previous position." + " ."
+                + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsUtility>Grounded invincibility and Danger Sense duration increased by {StaticValues.dangersense2Multiplier * 100f}%. Aerial speed and Float duration increased by {StaticValues.blastDash2Multiplier}%</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Grounded invincibility and Danger Sense duration increased by {StaticValues.dangersense3Multiplier * 100f}%. Danger Sense ensures no damage is dealt. Aerial speed and Float duration increased by {StaticValues.blastDash3Multiplier}%</style>. Hitting enemies with the initial blast resets the cooldown" + ".");
+
+            LanguageAPI.Add(prefix + "SHOOTSTYLESPECIAL_NAME", "Shoot Style Super");
+            LanguageAPI.Add(prefix + "SHOOTSTYLESPECIAL_DESCRIPTION", $"Use Various Shoot Style moves," + Helpers.Passive("depending on your inputs (neutral and backward, forward) Deku will spend 1, 2 or 3 bars of Plus Ultra") + ". " + Environment.NewLine +
+                $"Neutral (1 cost): St Louis Airforce, creating multiple blasts, each dealing <style=cIsDamage>{100f * StaticValues.stlouisDamageCoefficient}% damage</style>" + "." + Environment.NewLine +
+                $"Backward (2 cost): Blackwhip Smash, grabbing enemies and slamming them down, stunning and dealing <style=cIsDamage>{StaticValues.stlouisDamageCoefficient2 * 100f}% damage</style>" + "." + Environment.NewLine +
+                $"Forward (3 cost): St Louis Smash, dashing and hitting all enemies behind Deku for <style=cIsDamage>{StaticValues.stlouisTotalHits3} x {100f * StaticValues.stlouisDamageCoefficient3}% damage. Number of hits scales with movespeed</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>For Neutral and Forward: Number of hits/speed increased by {StaticValues.stlouisLevel2Multiplier * 100f}%. Backward: damage increased by {StaticValues.stlouisLevel2Multiplier * 100f}%, now Freezes instead of Stuns</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsDamage>For Neutral and Forward: Number of hits/speed increased by {StaticValues.stlouisLevel3Multiplier * 100f}%</style>. Backward: instead of a single AOE, now every enemy emits an AOE" + ".");
+            #endregion
+
+            #region Blackwhip
+
+            LanguageAPI.Add(prefix + "BLACKWHIPPULL_NAME", "Blackwhip Pull");
+            LanguageAPI.Add(prefix + "BLACKWHIPPULL_DESCRIPTION", $"<style=cIsDamage>Agile.</style> <style=cIsUtility>Blackwhip to an enemy or the world (based on the green sphere location</style>. Lasts as long as you hold the button. You also can control the movement through input or aim direction.");
             #endregion
 
             #region Primary
@@ -208,26 +270,26 @@ namespace DekuMod.Modules
             #endregion
 
             #region Keywords
-            LanguageAPI.Add(prefix + "KEYWORD_PASSIVE", $"<style=cKeywordName>Plus Ultra Meter</style>" 
-                + "Deku has a" + Helpers.Passive(" meter that builds up through movement and using base form skills. Changing modes, using quirk skills and using supers cost plus ultra. At Max Plus Ultra, once a stage, prevent death and Go Beyond, negating health costs as well as heal over time for 60 seconds") + "." 
-                + Environment.NewLine
-                + Environment.NewLine
-            + $"<style=cKeywordName>Marks</style>" 
-                + "Shocking attacks apply a heal mark that on hit," + Helpers.Passive($" heals {100f * StaticValues.healMarkCoefficient} of the damage dealt") + "."  
-                + "Stunning attacks apply a barrier mark that on hit," + Helpers.Passive($" gain barrier based on {100f * StaticValues.barrierMarkCoefficient} of your max health") + "." 
-                + "Freezing and Igniting attacks apply both. Both are removed after 3 hits."
-                + Environment.NewLine
-                + Environment.NewLine
-            + $"<style=cKeywordName>Float</style>" 
-                + "<style=cIsUtility>Holding jump in the air after 0.5 seconds let's him Float, flying up or slowing his descent while using a skill</style>." 
-                + Helpers.Passive(" Drains plus ultra")
-                + Environment.NewLine
-                + Environment.NewLine
-            + $"<style=cKeywordName>Danger Sense</style>"
-                + $"<style=cIsUtility>Take reduced damage based on your armor every 10 seconds</style>, <style=cIsDamage>freezing the attacker for {100f * StaticValues.dangersenseDamageCoefficient}% damage</style>." 
-                + Helpers.Passive(" If the damage is fully negated, heal for the damage dealt.")
-                + $" If not using a skill, <style=cIsUtility>dodge out of the way</style> and <style=cIsDamage>shock enemies around you for {100f * StaticValues.dangersenseDamageCoefficient}% more damage</style> as well." 
-                + Helpers.Passive($" Costs {StaticValues.dangersensePlusUltraSpend} plus ultra") + ".");
+            LanguageAPI.Add(prefix + "KEYWORD_PASSIVE", $"<style=cKeywordName>Plus Ultra Meter</style>"
+                + "Deku has a" + Helpers.Passive($" meter that builds up passively. Attacking enemies doubles the regen rate. The Plus Ultra Meter is split into 3 bars, Specials costs 1, 2 or 3 bars, and if not enough is available, health will be spent instead at a rate of {100f * StaticValues.plusUltraHealthCost}%, {100f * StaticValues.plusUltraHealthCost2}% and {100f * StaticValues.plusUltraHealthCost3}% for each missing bar required."  + Environment.NewLine + "At Max Plus Ultra, once a stage, prevent death and Go Beyond, negating health costs as well as heal over time for 60 seconds") + "."); 
+                //+ Environment.NewLine
+                //+ Environment.NewLine
+            //+ $"<style=cKeywordName>Marks</style>" 
+            //    + "Shocking attacks apply a heal mark that on hit," + Helpers.Passive($" heals {100f * StaticValues.healMarkCoefficient} of the damage dealt") + "."  
+            //    + "Stunning attacks apply a barrier mark that on hit," + Helpers.Passive($" gain barrier based on {100f * StaticValues.barrierMarkCoefficient} of your max health") + "." 
+            //    + "Freezing and Igniting attacks apply both. Both are removed after 3 hits."
+            //    + Environment.NewLine
+            //    + Environment.NewLine
+            //+ $"<style=cKeywordName>Float</style>" 
+            //    + "<style=cIsUtility>Holding jump in the air after 0.5 seconds let's him Float, flying up or slowing his descent while using a skill</style>." 
+            //    + Helpers.Passive(" Drains plus ultra")
+            //    + Environment.NewLine
+            //    + Environment.NewLine
+            //+ $"<style=cKeywordName>Danger Sense</style>"
+            //    + $"<style=cIsUtility>Take reduced damage based on your armor every 10 seconds</style>, <style=cIsDamage>freezing the attacker for {100f * StaticValues.dangersenseDamageCoefficient}% damage</style>." 
+            //    + Helpers.Passive(" If the damage is fully negated, heal for the damage dealt.")
+            //    + $" If not using a skill, <style=cIsUtility>dodge out of the way</style> and <style=cIsDamage>shock enemies around you for {100f * StaticValues.dangersenseDamageCoefficient}% more damage</style> as well." 
+            //    + Helpers.Passive($" Costs {StaticValues.dangersensePlusUltraSpend} plus ultra") + ".");
 
             #endregion
 

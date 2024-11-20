@@ -2,6 +2,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	72575306	shootstyledashsfx			\Default Work Unit\shootstyledashsfx	
 	459820003	detroitexitsfx			\Default Work Unit\detroitexitsfx	
 	480488529	stlouisexitsfx			\Default Work Unit\stlouisexitsfx	
+	582463863	dangersensesfx			\Default Work Unit\dangersensesfx	
 	687990298	stlouisvoice			\Default Work Unit\stlouisvoice	
 	750323469	shootstyledashvoice			\Default Work Unit\shootstyledashvoice	
 	792953415	detroitchargesfxvoice			\Default Work Unit\detroitchargesfxvoice	
@@ -112,6 +113,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	576498875	smashKO	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\smashKO_8E324C96.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\DekuSFX Mixer\stlouis\sfx\stlouisexitsfx\smashKO		18189
 	579125949	smashvoice	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\detroit\exit\smashvoice_C214D156.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\DekuVoice Mixer\detroitexitvoice\smashvoice		17460
 	592007255	dekusmashnomuDone	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\dekusmashnomuDone_8E324C96.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\DekuVoice Mixer\stlouisvoice\dekusmashnomuDone		43496
+	603234921	Dangersense	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\Dangersense_079FF39D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\DekuSFX Mixer\dangersense\Dangersense		8441
 	604310980	VoPl01_0000004F	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\stlouis\VoPl01_0000004F_C214D156.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\DekuVoice Mixer\stlouisvoice\VoPl01_0000004F		14157
 	612985191	VoPl01_000000FD	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\Entrance\VoPl01_000000FD_C214D156.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\DekuVoice Mixer\entrance\VoPl01_000000FD		14401
 	615323603	airforceshotlong	F:\Theodore 3\GameDev\Mods\DekuRor2\DekuModWwise\.cache\Windows\SFX\airforceshotlong_C214D156.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\Sfx Mixer\DekuSFX Mixer\airforce\sfx\airforcesfx\airforceshotlong		9062

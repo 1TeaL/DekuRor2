@@ -37,6 +37,7 @@ namespace DekuMod.SkillStates
         private float slamRadius;
 
         private float attackTime;
+        private bool hasJumped;
 
         private CharacterCameraParamsData manchesterCameraParams = new CharacterCameraParamsData()
         {
@@ -48,6 +49,8 @@ namespace DekuMod.SkillStates
         };
 
         private CameraParamsOverrideHandle camOverrideHandle;
+        private Vector3 startPos;
+        private Vector3 endPos;
 
         public override void OnEnter()
         {
@@ -135,12 +138,13 @@ namespace DekuMod.SkillStates
             }
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
             GetModelAnimator().SetBool("manchesterDownEnd", false);
-            PlayAnimation("FullBody, Override", "ManchesterSmashDown", "Attack.playbackRate", attackTime);
+            PlayAnimation("Body", "Jump", "Attack.playbackRate", attackTime);
 
             //characterBody.ApplyBuff(Buffs.mightBuff.buffIndex, 1, characterBody.GetBuffCount(Buffs.mightBuff) + StaticValues.mightBuffDuration);
             //base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
             base.characterMotor.Motor.ForceUnground();
             base.characterMotor.velocity = Vector3.zero;
+            startPos = characterBody.corePosition;
 
             //base.gameObject.layer = LayerIndex.fakeActor.intVal;
             base.characterMotor.Motor.RebuildCollidableLayers();
@@ -164,16 +168,20 @@ namespace DekuMod.SkillStates
                     break;
                 case 2:
                     dropForce *= StaticValues.mightSwitchLevel3Multiplier;
+
+                    characterBody.ApplyBuff(Buffs.fajinStoredBuff.buffIndex, characterBody.GetBuffCount(Buffs.fajinStoredBuff) + StaticValues.shootSwitchFajinStacks);
                     break;
             }
 
             if (dekucon.GetTrackingTarget())
             {
-                characterBody.characterMotor.Motor.SetPositionAndRotation(dekucon.GetTrackingTarget().transform.position + Vector3.up * StaticValues.shootSwitchHeightStart, Quaternion.LookRotation(base.GetAimRay().direction));
+                //characterBody.characterMotor.Motor.SetPositionAndRotation(dekucon.GetTrackingTarget().transform.position + Vector3.up * StaticValues.shootSwitchHeightStart, Quaternion.LookRotation(base.GetAimRay().direction));
+                endPos = dekucon.GetTrackingTarget().transform.position + Vector3.up * StaticValues.shootSwitchHeightStart;
             }
             else
             {
-                characterBody.characterMotor.Motor.SetPositionAndRotation(characterBody.footPosition + Vector3.up * StaticValues.shootSwitchHeightStart, Quaternion.LookRotation(base.GetAimRay().direction));
+                //characterBody.characterMotor.Motor.SetPositionAndRotation(characterBody.footPosition + Vector3.up * StaticValues.shootSwitchHeightStart, Quaternion.LookRotation(base.GetAimRay().direction));
+                endPos = characterBody.footPosition + Vector3.up * StaticValues.shootSwitchHeightStart;
             }
             TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
             temporaryOverlay.duration = 1f;
@@ -206,12 +214,42 @@ namespace DekuMod.SkillStates
             }
 
         }
+        private void SetPosition(Vector3 newPosition)
+        {
+            if (base.characterMotor)
+            {
+                base.characterMotor.Motor.SetPositionAndRotation(newPosition, Quaternion.identity, true);
+            }
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
             if (isSwitch)
             {
+                if(base.fixedAge <= 0.2f)
+                {
+                    this.SetPosition(Vector3.Lerp(startPos, endPos, base.fixedAge / 0.2f));
+
+                }
+                else if (base.fixedAge > 0.2f)
+                {
+                    if (!hasJumped)
+                    {
+                        hasJumped = true;
+                        PlayAnimation("FullBody, Override", "ManchesterSmashDown", "Attack.playbackRate", attackTime);
+
+                        if(level == 2)
+                        {
+                            if (dekucon.BODYGEARSHIFT.isStopped)
+                            {
+                                dekucon.BODYGEARSHIFT.Play();
+                            }
+                        }
+                    }
+                }
+
                 if(base.fixedAge > attackTime)
                 {
 
@@ -242,11 +280,8 @@ namespace DekuMod.SkillStates
                                 break;
                             case 1:
                                 LandingImpact();
-                                LandingImpact();
                                 break;
                             case 2:
-                                LandingImpact();
-                                LandingImpact();
                                 LandingImpact();
                                 break;
                         }

@@ -275,7 +275,10 @@ namespace DekuMod
                             //if no fajin buff, reduce the cooldown of fajin
                             if (!body.HasBuff(Buffs.fajinBuff) && !body.HasBuff(Buffs.fajinMaxBuff) && body.skillLocator.utility.skillDef == Deku.mightUtilitySkillDef)
                             {
-                                body.skillLocator.utility.AddOneStock();
+                                if(body.skillLocator.utility.stock < body.skillLocator.utility.maxStock)
+                                {
+                                    body.skillLocator.utility.AddOneStock();
+                                }
                             }
 
                             //combo buff cooldown deduction for each stack of combo debuff
@@ -486,11 +489,61 @@ namespace DekuMod
                             && energysys.currentPlusUltra > StaticValues.goBeyondThreshold
                             && !self.body.HasBuff(Buffs.goBeyondBuffUsed))
                         {
-                            energysys.currentPlusUltra -= energysys.currentPlusUltra;
+                            energysys.currentPlusUltra = 0f;
                             damageInfo.rejected = true;
                             self.body.healthComponent.health = 1f;
                             new ServerForceGoBeyondStateNetworkRequest(self.body.masterObjectId).Send(NetworkDestination.Clients);
-                            
+
+                        }
+                        //dangersense base
+                        if (!flag && self.body.HasBuff(Buffs.dangersenseBuff.buffIndex) && !self.body.HasBuff(RoR2Content.Buffs.HiddenInvincibility))
+                        {
+                            self.body.ApplyBuff(Buffs.dangersenseBuff.buffIndex, 0);
+
+                            AkSoundEngine.PostEvent("dangersensesfx", self.gameObject);                            
+
+                            damageInfo.force = Vector3.zero;
+
+                            if(self.body.level >= 20)
+                            {
+                                damageInfo.damage = 0f;
+                            }
+
+                            damageInfo.damage -= self.body.armor * self.body.level;
+                            if (damageInfo.damage < 0f)
+                            {
+                                self.Heal(Mathf.Abs(damageInfo.damage), default(RoR2.ProcChainMask), true);
+                                damageInfo.damage = 0f;
+                            }
+
+                            var damageInfo2 = new DamageInfo();
+
+                            damageInfo2.damage = self.body.damage * Modules.StaticValues.dangersenseDamageCoefficient;
+                            damageInfo2.position = damageInfo.attacker.transform.position;
+                            damageInfo2.force = Vector3.zero;
+                            damageInfo2.damageColorIndex = DamageColorIndex.Default;
+                            damageInfo2.crit = Util.CheckRoll(self.body.crit, self.body.master);
+                            damageInfo2.attacker = self.body.gameObject;
+                            damageInfo2.inflictor = self.body.gameObject;
+                            damageInfo2.damageType = DamageType.Freeze2s;
+                            damageInfo2.procCoefficient = 1f;
+                            damageInfo2.procChainMask = default(ProcChainMask);
+
+                            if (damageInfo.attacker.gameObject.GetComponent<CharacterBody>().baseNameToken
+                                != DekuPlugin.developerPrefix + "_DEKU_BODY_NAME" && damageInfo.attacker != null)
+                            {
+                                damageInfo.attacker.GetComponent<CharacterBody>().healthComponent.TakeDamage(damageInfo2);
+                            }
+
+                            EffectManager.SpawnEffect(DekuAssets.airforceEffect, new EffectData
+                            {
+                                origin = self.body.corePosition,
+                                scale = 1f,
+                                rotation = Quaternion.LookRotation(damageInfo.attacker.transform.position - self.body.corePosition)
+
+                            }, true);
+                            Vector3 enemyPos = damageInfo.attacker.transform.position;
+
                         }
                     }
 
@@ -551,13 +604,18 @@ namespace DekuMod
                     //    self.armor += StaticValues.manchesterArmor;
                     //}
 
-                    //bool floatbuff = self.HasBuff(Buffs.floatBuff);
-                    //if (floatbuff)
-                    //{
-                    //    self.moveSpeed *= 1.5f;
-                    //    self.acceleration *= 2f;
+                    bool floatbuff = self.HasBuff(Buffs.floatBuff);
+                    if (floatbuff)
+                    {
+                        if(self.level >= 20)
+                        {
+                            self.moveSpeed *= 2f;
+                            self.acceleration *= 3f;
+                        }
+                        self.moveSpeed *= 1.5f;
+                        self.acceleration *= 2f;
 
-                    //}
+                    }
 
                     if (self.HasBuff(Buffs.goBeyondBuff))
                     {
@@ -617,7 +675,11 @@ namespace DekuMod
             orig(self);
             if (self.baseNameToken == DekuPlugin.developerPrefix + "_DEKU_BODY_NAME")
             {
-                AkSoundEngine.PostEvent("dekudeath", this.gameObject);
+                if (Modules.Config.allowVoice.Value)
+                {
+                    AkSoundEngine.PostEvent("dekudeath", self.gameObject);
+
+                }
             }
 
         }

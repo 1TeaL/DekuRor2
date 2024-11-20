@@ -59,7 +59,7 @@ namespace DekuMod.Modules
         internal const float mightBuffMultiplier = 2f;
         internal const int mightBuffDuration = 6;
         internal const float mightSwitchRadius = 20f;
-        internal const float mightSwitchDamage = 2f;
+        internal const float mightSwitchDamage = 6f;
         internal const float mightSwitchDropForce = 100f;
         internal const float mightSwitchForce = 5000f;
         internal const float mightSwitchForceAir = 1000f;
@@ -67,13 +67,18 @@ namespace DekuMod.Modules
         internal const float mightSwitchLevel3Multiplier = 2f;
         //Primary
         internal const float smashRushDistance = 6f;
-        internal const float smashRushDamageCoefficient = 2f;
-        internal const float smashRush2DamageCoefficient = 3f;
+        internal const float smashRushDamageCoefficient = 1f;
+        internal const float smashRush2DamageCoefficient = 1.5f;
+        internal const float smashRushDashMultiplier = 1.5f;
+        internal const float smashRushDash2Multiplier = 2f;
+        internal const float smashRushDash3Multiplier = 3f;
         //Secondary
         internal const float delawareMaxCharge = 3f;
         internal const float delawareRadius = 7f;
         internal const float delaware3Radius = 20f;
         internal const float delawareDamageCoefficient = 3f;
+        internal const float delaware2DamageCoefficient = 4f;
+        internal const float delaware3DamageCoefficient = 8f;
         internal const float delawareDamageMultiplier = 2f;
         internal const float delaware2DamageMultiplier = 3f;
         internal const float delaware3DamageMultiplier = 4f;
@@ -101,13 +106,13 @@ namespace DekuMod.Modules
         internal const float detroit2Range = 100f;
         internal const float detroit2Radius = 20f;
         internal const int detroit2BaseHits = 4;
-        internal const float detroit2Level2Multiplier = 1.5f;
-        internal const float detroit2Level3Multiplier = 2f;
+        internal const float detroit2Level2Multiplier = 2f;
+        internal const float detroit2Level3Multiplier = 5f;
         internal const float detroit3Radius = 5f;
         internal const float detroit3Distance = 10f;
         internal const int detroit3BaseCharge = 4;
         internal const float detroitDamageCoefficient = 8f;
-        internal const float detroit2DamageCoefficient = 4f;
+        internal const float detroit2DamageCoefficient = 3f;
         internal const float detroit3DamageCoefficient = 6f;
         internal const float detroit3DamageMultiplier = 3f;
 
@@ -116,25 +121,34 @@ namespace DekuMod.Modules
         internal const float shootSwitchSlamForce = 1000f;
         internal const float shootSwitchDropForce = 100f;
         internal const float shootSwitchHeightStart = 40f;
-        internal const float shootSwitchDamage = 2f;
+        internal const float shootSwitchDamage = 6f;
         internal const float shootSwitchLevel2Multiplier = 1.5f;
         internal const float shootSwitchLevel3Multiplier = 2f;
+        internal const int shootSwitchFajinStacks = 3;
         //Primary
         internal const float airforceDamageCoefficient = 1f;
         internal const float airforce3DamageCoefficient = 4f;
         internal const int airforceMaxRicochet = 5;
         //Secondary
         internal const float stlouis45DamageCoefficient = 2f;
-        internal const float sandiegoSpeedCoefficient = 10f;
-        internal const float sandiegoDamageCoefficient = 3f;
-        internal const float sandiegoDashDuration = 0.5f;
-        internal const float sandiegoDashTotalDuration = 1f;
+        internal const float shootstyleSpeedCoefficient = 10f;
+        internal const float shootstyleDamageCoefficient = 3f;
+        internal const float shootstyleDashDuration = 0.5f;
+        internal const float shootstyleDashTotalDuration = 1f;
+        internal const float shootstyle2Multiplier = 2f;
+        internal const float shootstyle3Multiplier = 3f;
         //Utility
         internal const float blastDashDamageCoefficient = 2f;
         internal const float blastDashSpeed = 20f;
         internal const float blastDashForce = 2000f;
         internal const float blastDashRadius = 10f;
         internal const float blastDashDuration = 0.6f;
+        internal const float blastDash2Multiplier = 1.5f;
+        internal const float blastDash3Multiplier = 2f;
+        internal const float floatBuffDuration = 3f;
+        internal const float dangersenseBuffDuration = 1f;
+        internal const float dangersense2Multiplier = 1.5f;
+        internal const float dangersense3Multiplier = 2f;
         internal static float dodgeSpeed = 6f;
         //Special
         internal const int stlouisTotalHits = 5;
@@ -143,7 +157,7 @@ namespace DekuMod.Modules
         internal const float stlouisDuration = 0.6f;
         internal const float stlouisDuration2 = 1.6f;
         internal const float stlouisDuration3 = 0.5f;
-        internal const float stlouisRadius = 5f;
+        internal const float stlouisRadius = 7f;
         internal const float stlouisRadius2 = 20f;
         internal const float stlouisRadius3 = 5f;
         internal const float stlouisDamageCoefficient = 3f;
@@ -153,6 +167,8 @@ namespace DekuMod.Modules
         internal const float stlouisDamageForce2 = 0f;
         internal const float stlouisDamageForce3 = 0f;
         internal const float stlouis3InitialSpeed = 100f;
+        internal const float stlouisLevel2Multiplier = 1.5f;
+        internal const float stlouisLevel3Multiplier = 2f;
         internal const float stlouis3Level2Multiplier = 1.5f;
         internal const float stlouis3Level3Multiplier = 2f;
 

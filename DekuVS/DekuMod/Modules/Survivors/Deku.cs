@@ -253,6 +253,9 @@ namespace DekuMod.Modules.Survivors
             Transform SmashRushHitboxTransform = childLocator.FindChild("SmashRushHitbox");
             Modules.Prefabs.SetupHitbox(model, SmashRushHitboxTransform, "SmashRushHitbox");
 
+            Transform ShootStyleHitboxBigTransform = childLocator.FindChild("ShootStyleHitboxBig");
+            Modules.Prefabs.SetupHitbox(model, ShootStyleHitboxBigTransform, "ShootStyleHitboxBig");
+
         }
 
 
@@ -277,15 +280,15 @@ namespace DekuMod.Modules.Survivors
             #endregion
 
             #region Might Mode Skills
-            SkillDef primarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo(prefix + "MIGHTPRIMARY_NAME",
-                                                                                      prefix + "MIGHTPRIMARY_NAME",
-                                                                                      Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
-                                                                                      new EntityStates.SerializableEntityStateType(typeof(SmashRushStart)),
-                                                                                      "Weapon",
-                                                                                      true));
+            //SkillDef primarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo(prefix + "MIGHTPRIMARY_NAME",
+            //                                                                          prefix + "MIGHTPRIMARY_NAME",
+            //                                                                          Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("detroit"),
+            //                                                                          new EntityStates.SerializableEntityStateType(typeof(SmashRushStart)),
+            //                                                                          "Weapon",
+            //                                                                          true));
 
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, primarySkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, primarySkillDef);
 
             mightPrimarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -425,7 +428,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "SHOOTSTYLESECONDARY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLESECONDARY_DESCRIPTION",
                 skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("shootstylekick"),
-                activationState = new SerializableEntityStateType(typeof(SanDiegoSmash)),
+                activationState = new SerializableEntityStateType(typeof(ShootStyleSmash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 8F,
@@ -451,7 +454,7 @@ namespace DekuMod.Modules.Survivors
                 skillNameToken = prefix + "SHOOTSTYLEUTILITY_NAME",
                 skillDescriptionToken = prefix + "SHOOTSTYLEUTILITY_DESCRIPTION",
                 skillIcon = Modules.DekuAssets.mainAssetBundle.LoadAsset<Sprite>("Floatactivate"),
-                activationState = new SerializableEntityStateType(typeof(FloatStep)),
+                activationState = new SerializableEntityStateType(typeof(FloatSense)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 8f,
@@ -891,7 +894,7 @@ namespace DekuMod.Modules.Survivors
 
 
             #region Adding Skills
-            //Modules.Skills.AddPrimarySkill(bodyPrefab, mightPrimarySkillDef);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, mightPrimarySkillDef);
 
 
             Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]

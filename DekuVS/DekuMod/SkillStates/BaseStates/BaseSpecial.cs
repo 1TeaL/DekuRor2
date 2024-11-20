@@ -90,7 +90,7 @@ namespace DekuMod.SkillStates
 
                 if (base.isAuthority)
                 {
-                    new SpendHealthNetworkRequest(base.characterBody.masterObjectId, characterBody.healthComponent.fullCombinedHealth * healthCost).Send(NetworkDestination.Clients);
+                    new SpendHealthNetworkRequest(base.characterBody.masterObjectId, characterBody.healthComponent.fullHealth * healthCost).Send(NetworkDestination.Clients);
 
                 }
             }
@@ -130,7 +130,7 @@ namespace DekuMod.SkillStates
 
                 if (base.isAuthority)
                 {
-                    new SpendHealthNetworkRequest(base.characterBody.masterObjectId, characterBody.healthComponent.fullCombinedHealth * healthCost).Send(NetworkDestination.Clients);
+                    new SpendHealthNetworkRequest(base.characterBody.masterObjectId, characterBody.healthComponent.fullHealth * healthCost).Send(NetworkDestination.Clients);
 
                 }
             }
@@ -172,7 +172,7 @@ namespace DekuMod.SkillStates
 
                 if (base.isAuthority)
                 {
-                    new SpendHealthNetworkRequest(base.characterBody.masterObjectId, characterBody.healthComponent.fullCombinedHealth * healthCost).Send(NetworkDestination.Clients);
+                    new SpendHealthNetworkRequest(base.characterBody.masterObjectId, characterBody.healthComponent.fullHealth * healthCost).Send(NetworkDestination.Clients);
 
                 }
             }

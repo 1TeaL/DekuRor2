@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2219245823
+CRC: 2402978311
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7086a2c22949e363fb10b518e460145d
+    Hash: e6900180a3cec3f6729f126b21e8dfda
   TypeTreeHash:
     serializedVersion: 2
     Hash: cadff3ebdf0e75a109758b617fa81642
@@ -105,7 +105,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/windringbig.prefab
 - Assets/DekuFinalForm/Animations/DelawareWeakEndUp.anim
 - Assets/DekuFinalForm/VFX/DangerSenseParticle.prefab
-- Assets/DekuFinalForm/Animations/SanDiegoSmashAir.anim
+- Assets/DekuFinalForm/Animations/ShootStyleSmashAir.anim
 - Assets/DekuFinalForm/GUI/oklahoma45.png
 - Assets/DekuFinalForm/VFX/DekuKickEffect.prefab
 - Assets/DekuFinalForm/Animations/DekuFinalUpperBody.mask
@@ -153,7 +153,7 @@ Assets:
 - Assets/DekuFinalForm/Animations/DelawareWeakEndDown.anim
 - Assets/DekuFinalForm/GUI/ultimate100.png
 - Assets/DekuFinalForm/GUI/GearShift100.png
-- Assets/DekuFinalForm/Animations/OklahomaSmashDashEndV2.anim
+- Assets/DekuFinalForm/Animations/ShootStyleSmashDashEndV2.anim
 - Assets/DekuFinalForm/GUI/Floatactivate100.png
 - Assets/DekuFinalForm/VFX/WordFoosh.prefab
 - Assets/DekuFinalForm/Animations/WalkB.anim
@@ -189,7 +189,7 @@ Assets:
 - Assets/DekuFinalForm/GUI/shootstylekick100.png
 - Assets/DekuFinalForm/VFX/Textures/Thwip.png
 - Assets/DekuFinalForm/Assets/DekuDisplay.prefab
-- Assets/DekuFinalForm/Animations/OklahomaSmashDash.anim
+- Assets/DekuFinalForm/Animations/ShootStyleSmashDash.anim
 - Assets/DekuFinalForm/Animations/StLouis1.anim
 - Assets/DekuFinalForm/Assets/Materials/yellowBlinkingMat.mat
 - Assets/DekuFinalForm/GUI/delaware.png
@@ -223,7 +223,7 @@ Assets:
 - Assets/DekuFinalForm/VFX/spin.prefab
 - Assets/DekuFinalForm/Animations/SmashRushDashEnd.anim
 - Assets/DekuFinalForm/Animations/DetroitSmash2.anim
-- Assets/DekuFinalForm/Animations/SanDiegoSmashAirEnd.anim
+- Assets/DekuFinalForm/Animations/ShootStyleSmashAirEnd.anim
 - Assets/DekuFinalForm/Assets/Materials/Panner.shader
 - Assets/DekuFinalForm/Animations/GoBeyond.anim
 - Assets/DekuFinalForm/Assets/Materials/Eye texture Emission.png

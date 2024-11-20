@@ -496,6 +496,31 @@ namespace DekuMod.Modules.Survivors
 
             }
 
+            //float buff
+            if (body.HasBuff(Buffs.floatBuff))
+            {
+                if (body.inputBank.moveVector != Vector3.zero)
+                {
+                    Vector3 aimDirection = inputBank.aimDirection;
+                    Vector3 normalized = new Vector3(aimDirection.x, 0f, aimDirection.z).normalized;
+                    //check if the direction you're holding is your aim direction, then go in that direction (allowing you to go up or down)
+                    if (Vector3.Dot(inputBank.moveVector, normalized) >= 0.8f)
+                    {
+                        body.characterMotor.velocity = body.inputBank.aimDirection * body.moveSpeed * 2f;
+                        //characterBody.characterMotor.rootMotion += characterBody.inputBank.aimDirection * characterBody.moveSpeed * Time.fixedDeltaTime;
+                    }
+                    else
+                    {
+                        //otherwise if not then maintain height        
+                        if (body.characterMotor.velocity.y <= 0f)
+                        {
+                            body.characterMotor.velocity.y = 0f;
+                        }
+                        body.characterMotor.rootMotion += body.inputBank.moveVector * body.moveSpeed * Time.deltaTime;
+                    }
+                }
+            }
+
 
             //blackwhip timer
             //if (!blackwhipActivated)

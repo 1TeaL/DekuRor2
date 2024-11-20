@@ -151,7 +151,10 @@ namespace DekuMod.SkillStates
             base.skillLocator.ResetSkills();
             for (int i = 0; i < base.skillLocator.utility.maxStock; i++)
             {
-                base.skillLocator.utility.AddOneStock();
+                if(base.skillLocator.utility.stock < base.skillLocator.utility.maxStock)
+                {
+                    base.skillLocator.utility.AddOneStock();
+                }
             }
 
             this.modelTransform = base.GetModelTransform();
@@ -165,7 +168,7 @@ namespace DekuMod.SkillStates
             GetModelAnimator().SetFloat("Attack.playbackRate", attackSpeedStat);
 
             slamRadius = StaticValues.mightSwitchRadius * attackSpeedStat;
-            damage = StaticValues.mightSwitchRadius * attackSpeedStat;
+            damage = StaticValues.mightSwitchDamage * attackSpeedStat;
             force = StaticValues.mightSwitchForce;
 
             if (characterMotor.isGrounded)
@@ -197,6 +200,10 @@ namespace DekuMod.SkillStates
                     case 2:
                         slamRadius *= StaticValues.mightSwitchLevel3Multiplier;
                         force *= StaticValues.mightSwitchLevel3Multiplier;
+                        if (dekucon.RARMGEARSHIFT.isStopped)
+                        {
+                            dekucon.RARMGEARSHIFT.Play();
+                        }
                         break;
                 }
             }
@@ -266,6 +273,8 @@ namespace DekuMod.SkillStates
                                     LandingImpact();
                                     LandingImpact();
                                     LandingImpact();
+                                    LandingImpact();
+                                    LandingImpact();
                                     break;
                             }
 
@@ -303,18 +312,18 @@ namespace DekuMod.SkillStates
                             {
                                 case 0:
                                     slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
-                                    damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat;
+                                    damage = StaticValues.mightSwitchDamage + (1 + dropTimer / 2) * attackSpeedStat;
                                     force = StaticValues.mightSwitchForce * (1 + dropTimer);
                                     break;
                                 case 1:
                                     slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
                                     force = StaticValues.mightSwitchForce * (1 + dropTimer/2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
-                                    damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
+                                    damage = StaticValues.mightSwitchDamage + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel2Multiplier;
                                     break;
                                 case 2:
                                     slamRadius = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
                                     force = StaticValues.mightSwitchForce * (1 + dropTimer/2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
-                                    damage = StaticValues.mightSwitchRadius + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
+                                    damage = StaticValues.mightSwitchDamage + (1 + dropTimer / 2) * attackSpeedStat * StaticValues.mightSwitchLevel3Multiplier;
                                     break;
                             }
                             if (!this.hasDropped)
@@ -346,6 +355,8 @@ namespace DekuMod.SkillStates
                                         LandingImpact();
                                         break;
                                     case 2:
+                                        LandingImpact();
+                                        LandingImpact();
                                         LandingImpact();
                                         LandingImpact();
                                         LandingImpact();
@@ -483,7 +494,7 @@ namespace DekuMod.SkillStates
 
                 }, true);
             }
-            base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 20));
+            //base.healthComponent.AddBarrierAuthority((healthComponent.fullCombinedHealth / 20));
 
         }
 

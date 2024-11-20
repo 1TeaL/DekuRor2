@@ -149,10 +149,18 @@ namespace DekuMod.SkillStates.ShootStyle
 			base.NeutralSuper();
             characterDirection.forward = base.GetAimRay().direction;
 
-            blastRadius = StaticValues.stlouisRadius * attackSpeedStat;
-            blastDamage = StaticValues.stlouisDamageCoefficient * damageStat * attackSpeedStat;
+            float currentMovespeed = this.moveSpeedStat;
+            bool isSprinting = base.characterBody.isSprinting;
+            if (isSprinting)
+            {
+                currentMovespeed /= base.characterBody.sprintingSpeedMultiplier;
+            }
+            float basemovespeedMultiplier = (currentMovespeed / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+            float movespeedMultiplier = basemovespeedMultiplier + 1f;
+            blastRadius = StaticValues.stlouisRadius * movespeedMultiplier;
+            blastDamage = StaticValues.stlouisDamageCoefficient * damageStat * movespeedMultiplier;
 			//set in front of deku exactly
-			blastPosition = characterBody.corePosition + (base.GetAimRay().direction* (StaticValues.stlouisRadius * attackSpeedStat * 0.5f));
+			blastPosition = characterBody.corePosition + (base.GetAimRay().direction* (blastRadius * 0.5f));
             blastForce = 0f;
             duration = StaticValues.stlouisDuration;
             //play animation of kick
@@ -184,15 +192,13 @@ namespace DekuMod.SkillStates.ShootStyle
             switch (level)
             {
                 case 0:
-                    totalHits1 = Mathf.RoundToInt(StaticValues.stlouisTotalHits * attackSpeedStat);
+                    totalHits1 = Mathf.RoundToInt(StaticValues.stlouisTotalHits * movespeedMultiplier);
                     break;
                 case 1:
-                    initialSpeedCoefficient *= StaticValues.stlouis3Level2Multiplier;
-                    totalHits1 = Mathf.RoundToInt(StaticValues.stlouisTotalHits * attackSpeedStat * StaticValues.stlouis3Level2Multiplier);
+                    totalHits1 = Mathf.RoundToInt(StaticValues.stlouisTotalHits * movespeedMultiplier * StaticValues.stlouisLevel2Multiplier);
                     break;
                 case 2:
-                    initialSpeedCoefficient *= StaticValues.stlouis3Level3Multiplier;
-                    totalHits1 = Mathf.RoundToInt(StaticValues.stlouisTotalHits * attackSpeedStat * StaticValues.stlouis3Level3Multiplier);
+                    totalHits1 = Mathf.RoundToInt(StaticValues.stlouisTotalHits * movespeedMultiplier * StaticValues.stlouisLevel3Multiplier);
                     break;
             }
             CameraParamsOverrideRequest request = new CameraParamsOverrideRequest
@@ -447,7 +453,7 @@ namespace DekuMod.SkillStates.ShootStyle
                         blastAttack.falloffModel = BlastAttack.FalloffModel.None;
                         blastAttack.baseForce = 1000f;
                         blastAttack.teamIndex = base.teamComponent.teamIndex;
-                        blastAttack.damageType = DamageType.Freeze2s;
+                        blastAttack.damageType = DamageType.Stun1s;
                         blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
                         EffectData effectData = new EffectData
                         {
@@ -468,13 +474,14 @@ namespace DekuMod.SkillStates.ShootStyle
                                 EffectManager.SpawnEffect(DekuAssets.blackwhipSmashEffect, effectData2, true);
                                 break;
                             case 1:
+                                blastAttack.baseDamage = base.characterBody.damage * StaticValues.stlouisDamageCoefficient2 * StaticValues.stlouisLevel2Multiplier;
+                                blastAttack.damageType = DamageType.Freeze2s;
                                 blastAttack.Fire();
                                 EffectManager.SpawnEffect(DekuAssets.blackwhipSmashEffect, effectData2, true);
                                 EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
                                 break;
                             case 2:
                                 EffectManager.SpawnEffect(DekuAssets.blackwhipSmashEffect, effectData2, true);
-                                EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
                                 EffectManager.SpawnEffect(DekuAssets.sonicboomEffectPrefab, effectData, true);
                                 break;
                         }
@@ -491,7 +498,7 @@ namespace DekuMod.SkillStates.ShootStyle
                     switch (stlouis3)
                     {
                         case stlouis3State.STARTUP:
-                            Chat.AddMessage("startup");
+                            //Chat.AddMessage("startup");
 
                             if(base.fixedAge <= 0.4f)
                             {
@@ -500,6 +507,13 @@ namespace DekuMod.SkillStates.ShootStyle
                             if (dekucon.WINDTRAIL.isStopped)
                             {
                                 dekucon.WINDTRAIL.Play();
+                            }
+                            if(level == 2)
+                            {
+                                if (dekucon.BODYGEARSHIFT.isStopped)
+                                {
+                                    dekucon.BODYGEARSHIFT.Play();
+                                }
                             }
                             if (base.fixedAge > 0.4f && base.isAuthority)
                             {
@@ -739,6 +753,14 @@ namespace DekuMod.SkillStates.ShootStyle
 
                                     blastAttack.position = singularTarget.healthComponent.body.corePosition;
                                     blastAttack.Fire();
+
+                                    EffectData effectData = new EffectData
+                                    {
+                                        scale = blastRadius,
+                                        origin = singularTarget.healthComponent.body.corePosition,
+                                        rotation = Quaternion.LookRotation(characterDirection.forward),
+                                    };
+                                    EffectManager.SpawnEffect(DekuAssets.lightningNovaEffectPrefab, effectData, true);
                                 }
                                 break;
 

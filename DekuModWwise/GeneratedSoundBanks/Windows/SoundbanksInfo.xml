@@ -33,7 +33,7 @@
 				<GameParameter Id="3781471980" Name="Volume_DekuSFX"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="1943384016" Type="User" Language="SFX" Hash="{984B8B61-FA33-6EE2-0CC7-A566CE3326F8}">
+		<SoundBank Id="1943384016" Type="User" Language="SFX" Hash="{0186B583-76B8-4413-F1CC-ACA159220CD3}">
 			<ShortName>Deku</ShortName>
 			<Path>Deku.bnk</Path>
 			<Media>
@@ -260,6 +260,10 @@
 				<File Id="592007255" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>dekusmashnomuDone.wav</ShortName>
 					<CachePath>SFX/dekusmashnomuDone_8E324C96.wem</CachePath>
+				</File>
+				<File Id="603234921" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Dangersense.wav</ShortName>
+					<CachePath>SFX/Dangersense_079FF39D.wem</CachePath>
 				</File>
 				<File Id="604310980" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>stlouis\VoPl01_0000004F.wav</ShortName>
@@ -508,6 +512,11 @@
 						</Custom>
 					</PluginRefs>
 				</Event>
+				<Event Id="582463863" Name="dangersensesfx">
+					<MediaRefs>
+						<MediaRef Id="603234921"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="4073174054" Name="dekudeath">
 					<MediaRefs>
 						<MediaRef Id="78216023"/>
@@ -751,5 +760,5 @@
 			</GameParameters>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{EC190CD4-B24B-C4BD-06EE-A8A57FCD9BB9}</FileHash>
+	<FileHash>{EEB1CEB6-4928-0143-B64D-4E849BFFC087}</FileHash>
 </SoundBanksInfo>

@@ -138,7 +138,11 @@ namespace DekuMod.SkillStates.Might
 		{
 			base.NeutralSuper();
             characterBody.SetAimTimer(1f);
-            blastRadius = StaticValues.detroitRadius;
+            blastRadius = StaticValues.detroitRadius * attackSpeedStat;
+            if(blastRadius < StaticValues.detroitRadius)
+            {
+                blastRadius = StaticValues.detroitRadius;
+            }
             blastDamage = StaticValues.detroitDamageCoefficient * damageStat * attackSpeedStat;
 			//set in front of deku exactly
 			blastPosition = characterBody.corePosition + (characterDirection.forward * (StaticValues.detroitRadius * 0.5f));
@@ -280,7 +284,11 @@ namespace DekuMod.SkillStates.Might
 					if(base.fixedAge > attackStartTime && !hasFired)
 					{
 						hasFired = true;
-
+                        float radiusRatio = radius / StaticValues.detroitRadius;
+                        if(radiusRatio < 1)
+                        {
+                            radiusRatio = 1f;
+                        }
                         EffectData effectData = new EffectData
                         {
                             scale = radius,
@@ -289,7 +297,7 @@ namespace DekuMod.SkillStates.Might
                         };
                         EffectData effectData2 = new EffectData
                         {
-                            scale = 1f,
+                            scale = radiusRatio,
                             origin = characterBody.corePosition,
                             rotation = Quaternion.LookRotation(characterDirection.forward),
                         };

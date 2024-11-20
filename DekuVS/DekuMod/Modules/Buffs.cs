@@ -19,7 +19,7 @@ namespace DekuMod.Modules
 
         ////skills
         //internal static BuffDef kickBuff;
-        //internal static BuffDef floatBuff;
+        internal static BuffDef floatBuff;
         internal static BuffDef fajinBuff;
         internal static BuffDef fajinMaxBuff;
         internal static BuffDef fajinStoredBuff;
@@ -106,8 +106,8 @@ namespace DekuMod.Modules
             fajinBuff = Buffs.AddNewBuff("FaJin Buff", DekuAssets.boostBuffIcon, Color.red, true, false);
             fajinMaxBuff = Buffs.AddNewBuff("FaJin Mastered Buff", DekuAssets.boostBuffIcon, Color.red, true, false);
             fajinStoredBuff = Buffs.AddNewBuff("FaJin Stored Buff", DekuAssets.boostBuffIcon, Color.white, true, false);
-            //floatBuff = Buffs.AddNewBuff("DekuFloat Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texMovespeedBufficon"), Color.blue, false, false);
-            //dangersenseBuff = Buffs.AddNewBuff("Dekudangersense Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffNullifyStackIcon"), Color.green, false, false);
+            floatBuff = Buffs.AddNewBuff("Deku Float Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texMovespeedBufficon"), Color.blue, false, false);
+            dangersenseBuff = Buffs.AddNewBuff("Dangersense Buff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffNullifyStackIcon"), Color.green, false, false);
         }
 
         // simple helper method

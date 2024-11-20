@@ -77,6 +77,13 @@ namespace DekuMod.SkillStates.ShootStyle
                         //    shotsFired = 20;
                         //}
                         this.duration = baseDuration / (this.attackSpeedStat * (1 +(float)shotsFired / 10));
+
+                        if(duration < 0.05f)
+                        {
+                            duration = 0.05f;
+                        }
+
+
                         base.PlayAnimation("FullBody, Override", punchIndex % 2 == 0 ? "AirforceMaxL" : "AirforceMaxR", "Attack.playbackRate", this.duration);
                         muzzleString = punchIndex % 2 == 0 ?  "LFinger" :  "RFinger";
                         if(punchIndex % 2 == 0)
