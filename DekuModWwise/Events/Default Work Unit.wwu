@@ -73,7 +73,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="shootstyedashsfx" ID="{4E06D5F1-137F-4FB4-A5AC-C69D29B67BB3}">
+				<Event Name="shootstyledashsfx" ID="{4E06D5F1-137F-4FB4-A5AC-C69D29B67BB3}">
 					<ChildrenList>
 						<Action Name="" ID="{3047B189-DCBA-4007-9EC3-967F2CC3CAAD}" ShortID="933111016">
 							<PropertyList>
@@ -87,7 +87,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="shootstyedashvoice" ID="{64B6DB43-0555-4238-8E0D-2C6ADCBC1056}">
+				<Event Name="shootstyledashvoice" ID="{64B6DB43-0555-4238-8E0D-2C6ADCBC1056}">
 					<ChildrenList>
 						<Action Name="" ID="{27A51D56-2B49-41C9-B8EB-E50A65E28077}" ShortID="959833888">
 							<PropertyList>
@@ -213,7 +213,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="shootstyedashcombosfx" ID="{2B34676C-CADA-43A6-B5E8-93D95CCC2E8F}">
+				<Event Name="shootstyledashcombosfx" ID="{2B34676C-CADA-43A6-B5E8-93D95CCC2E8F}">
 					<ChildrenList>
 						<Action Name="" ID="{0BD62AB5-B2E4-44CF-ABD9-754D63A24DA4}" ShortID="706700900">
 							<PropertyList>
@@ -227,7 +227,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="shootstyedashcombovoice" ID="{545CB135-269A-43BF-8389-C54B70AFD0D8}">
+				<Event Name="shootstyledashcombovoice" ID="{545CB135-269A-43BF-8389-C54B70AFD0D8}">
 					<ChildrenList>
 						<Action Name="" ID="{C257A33A-479E-4AD2-B9AA-74FD49E63279}" ShortID="369616731">
 							<PropertyList>
@@ -241,7 +241,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="shootstyedashcomboimpact" ID="{31AA75C3-850A-4B82-B27C-E54C2D40AB99}">
+				<Event Name="shootstyledashcomboimpact" ID="{31AA75C3-850A-4B82-B27C-E54C2D40AB99}">
 					<ChildrenList>
 						<Action Name="" ID="{A58C447E-217E-42E3-80E2-7441F5D9160D}" ShortID="543535834">
 							<PropertyList>
@@ -348,6 +348,20 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="manchestersfx+voice" ID="{D8CF788B-741E-499E-9AE5-5977895D6D7D}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="dangersensesfx" ID="{0E92BEF0-9C9B-4BAD-B259-0A11FDDAF5A2}">
+					<ChildrenList>
+						<Action Name="" ID="{7A774387-498A-4DA9-A138-3F1BF3CE187E}" ShortID="979552830">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="dangersense" ID="{628020F7-B73F-455E-8939-2B97A597F3E1}" WorkUnitID="{7A2A7AB7-4882-45C9-B8AE-FB8A248CB8B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

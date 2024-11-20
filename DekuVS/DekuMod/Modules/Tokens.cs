@@ -52,17 +52,17 @@ namespace DekuMod.Modules
 
             LanguageAPI.Add(prefix + "MIGHTPRIMARY_NAME", "Smash Rush");
             LanguageAPI.Add(prefix + "MIGHTPRIMARY_DESCRIPTION", $"Smash enemies in front of you, dealing <style=cIsDamage>{StaticValues.smashRushDamageCoefficient * 100f}%</style>. If far away, dash towards them, multiplying damage by <style=cIsDamage>{StaticValues.smashRushDashMultiplier * 100f}%</style>. " + Environment.NewLine +
-                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage increased to {StaticValues.smashRush2DamageCoefficient * 100f}%, dash multiplier increased to {StaticValues.smashRushDash2Multiplier}%</style>" + "." + Environment.NewLine +
-                $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Deku teleports to far targets instead. Attack speed increases as you hold the button down</style>. <style=cIsDamage>Damage increased to {StaticValues.smashRush2DamageCoefficient * 100f}%, dash multiplier increased to {StaticValues.smashRushDash3Multiplier}%</style>" + ".");
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage increased by {StaticValues.smashRush2DamageCoefficient * 100f}%, dash multiplier increased by {StaticValues.smashRushDash2Multiplier * 100f}%</style>" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Deku teleports to far targets instead. Attack speed increases as you hold the button down</style>. <style=cIsDamage>Damage increased by {StaticValues.smashRush2DamageCoefficient * 100f}%, dash multiplier increased by {StaticValues.smashRushDash3Multiplier * 100f}%</style>" + ".");
 
             LanguageAPI.Add(prefix + "MIGHTSECONDARY_NAME", "Delaware Smash");
             LanguageAPI.Add(prefix + "MIGHTSECONDARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Hold the button to aim, then release to shoot a Delaware smash in front, dealing <style=cIsDamage>{100f * StaticValues.delawareDamageCoefficient}% damage. Charging can increase the damage by up to 2x</style>" + "." + Environment.NewLine +
-                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage increased to {StaticValues.delaware2DamageCoefficient * 100f}%" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage increased to {StaticValues.delaware2DamageCoefficient * 100f}%</style>" + "." + Environment.NewLine +
                 $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Blast greatly increased</style>. <style=cIsDamage>Damage increased to {StaticValues.delaware3DamageCoefficient * 100f}%</style>" + ".");
 
             LanguageAPI.Add(prefix + "MIGHTUTILITY_NAME", "Fa Jin");
             LanguageAPI.Add(prefix + "MIGHTUTILITY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Activate Fa Jin, <style=cIsDamage>for 10 hits, deal {100f * StaticValues.fajinDamageMultiplier}% damage. Each hit also provides {StaticValues.fajinBarrierMultiplier * 100f}% of your max HP as barrier</style>. Costs 30 stocks to use, hitting enemies provides 1 stock per hit" + "." + Environment.NewLine +
-                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Number of hits increased to {StaticValues.fajin2HitAmount * 100f}" + "." + Environment.NewLine +
+                $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Number of hits increased to {StaticValues.fajin2HitAmount  }</style>" + "." + Environment.NewLine +
                 $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Once all stocks are spent, gain a stored Fajin charge- enabling a free costing super</style>. <style=cIsDamage>Damage increased to {StaticValues.fajinMaxDamageMultiplier * 100f}%</style>" + ".");
 
             LanguageAPI.Add(prefix + "MIGHTSPECIAL_NAME", "Detroit Smash Super");
@@ -78,7 +78,7 @@ namespace DekuMod.Modules
             LanguageAPI.Add(prefix + "SHOOTSTYLEMODE_NAME", "Shoot Style Mode");
             LanguageAPI.Add(prefix + "SHOOTSTYLEMODE_DESCRIPTION", $"Change into Shoot Style Mode, a mode focused on mobility." + Helpers.Passive("If Deku has at least 1 plus ultra bar, Deku performs a mode switch attack, resetting all cooldowns.") + $"Manchester Smash, jumping up then slaming the ground if grounded, jumping above a target then slamming down towards them, dealing <style=cIsDamage>{StaticValues.shootSwitchDamage * 100f}%, scaling with air time. For each enemy hit, add one stock to Deku's secondary and utility</style>." + Environment.NewLine +
                 $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Damage, speed and aoe increased by {StaticValues.shootSwitchLevel2Multiplier * 100f}%</style>" + "." + Environment.NewLine +
-                $"<style=cKeywordName>Mastered</style>: <style=cIsDamage>Damage, speed and aoe increased by {StaticValues.shootSwitchLevel2Multiplier * 100f}%</style>. Gain 3 stacks of Fajin stored buff as well." + ".");
+                $"<style=cKeywordName>Mastered</style>: <style=cIsDamage>Damage, speed and aoe increased by {StaticValues.shootSwitchLevel2Multiplier * 100f}%</style>. Gain 3 stacks of Fajin stored buff as well" + ".");
 
             LanguageAPI.Add(prefix + "SHOOTSTYLEPRIMARY_NAME", "Airforce");
             LanguageAPI.Add(prefix + "SHOOTSTYLEPRIMARY_DESCRIPTION", $"<style=cIsDamage>Agile.</style> Shoot a bullet, dealing <style=cIsDamage>{100f * StaticValues.airforceDamageCoefficient}% damage. On Crit, ricochet to {StaticValues.airforceMaxRicochet} additional enemies. Also ricochet off enemies with the Combo debuff equal to the number of stacks</style>" + "." 
