@@ -1,6 +1,7 @@
 # DekuRor2
 Deku mod for Ror2
 Go beyond!
+Get it Here -> https://thunderstore.io/package/TeaL/DekuMod/
 
 ## Deku
 Adds Deku from My Hero Academia, a multiple quirk using survivor which can access numerous skills at a cost.
@@ -70,52 +71,56 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
-
 - 5.0.0- Deku Final Form Rework! SOTS Patch!
 - Changes/Rework
     - Most if not all skills have been reworked and changed
-    - 
-
+    - Plus Ultra meter has been reworked:
+    	- Deku now gains it at a set rate and when attacking enemies, the rate is doubled
+     	- It is now split into 3 bars, and Deku's specials cost 1, 2 or 3 bars based on a neutral, backward or forward directional input.
+      	- If Deku does not have enough bars, he can still use the special at an exponentially increasing cost of health for each missing bar.
+        - When Deku switches modes, if he has atleast 1 bar, he will spend it for a Mode Switch attack with additional bonuses.
+      	- Deku still can Go Beyond! when at max meter and takes a fatal hit.
+    - Deku no longer has his old One For All special. Instead, at levels 10 and 20 he gains enhanced and mastered versions of his skills indicating his mastery over OFA. 
+    - The overall aim of this rework is to streamline some of his clunkyness with the OFA special switching. It also aims to give deku a more coherent moveset, previously it was all about just cramming as many skills as I could but it was not clear what Deku should do and it was a bit messy trying to incorporate everything. Now he still has that feel of a lot of skills but he has a clearer gameplan in both his Modes and they should interact with each other in a cool way. Furthermore, I was able to still incorporate all his quirks in here, you'll see Fa Jin, even Danger Sense and Float like before but in more balanced forms. There's also gearshift but it's more flavour with the pretense of how skills get enhanced.
 
 - Next update(s)
-    -  Skill reworks
+    -  New Skills - New Mode (?Quirk Combo Mode?)
     -  Balance changes
     -  Bug fixes
-    -  More icons
-
-<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030126209281032272/unknown.png" width="400">
-<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030131285743652905/unknown.png" width="400">
-<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030132342670508093/unknown.png" width="400">
-<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030134285170122843/unknown.png" width="400">
-<img src="https://cdn.discordapp.com/attachments/399901440023330816/1030137288761540658/unknown.png" width="400">
+    -  Improved Animations and Effects
+    -  Better Sound Effects
 
 ## Known Issues 
-1,000,000% Detroit Delaware Smash and Final Smash can bug out some times, causing Deku to be stuck for a bit.
+
 
 ## Overview
 
-- Deku's game plan is to use his base form with skills that have higher utility, good control and plus ultra gain. 
-- OFA 100% and 45% enable him to have higher damage, armor and mobility, limited by health costs.
-- Changing modes also enable him to have more solutions to different situations in combat, limited by his plus ultra meter.
-- Attackspeed and Movespeed scales fairly well with him as most skills scale with it.
-- OFA 100%'s self-damage is based on your current health, so lower total health will lead to less self-damage. However, 100% skills are based on max health.
-- Power Mode focuses on high damage, Shoot Style Mode focuses on higher mobility for less damage, Quirk mode focuses on buffs and utility at a plus ultra cost.
+- Deku's game plan depends on which Mode he is in:
+- Might mode focuses on getting into an enemy's face and dealing high damage. FaJin provides both offense and defense through it's damage boost and barrier gain, and working towards a high-uptime allows Deku to stay in the fight for a longer. 
+- Shoot Style mode focuses on mobility, evasion and range. With the combo debuff from Shoot Style Smash, it enables deku to lower his cooldowns, allowing for a fast-paced style of play.
+- Deku gains Enhanced and Mastered versions of all his skills at levels 10 and 20 respectively, these offer numerical changes but also functional changes as well depending on the skill.
+- In any mode, Deku has access to Blackwhip, enabling him to grapple onto walls or enemies and swing. Deku can move based on his directional inputs and his aim direction.
 
 ## Skills
-### Passive
+### Passive/Extra Skills
 <table>
 <thead>
   <tr>
     <th>Passive</th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>Icon</th>
     <th>Description</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td>Base <br>Abilities</td>
-    <td><img src="https://user-images.githubusercontent.com/93917577/195306847-a364766a-020e-49e7-8eb0-380407601980.png" alt="Image" width="100" height="100"></td>
-    <td><img src="https://github.com/user-attachments/assets/fdfdefee-14ec-422a-9cdf-d2d94be229af" alt = "Image"</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306847-a364766a-020e-49e7-8eb0-380407601980.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/fdfdefee-14ec-422a-9cdf-d2d94be229af"</td>
+  </tr>
+  <tr>
+    <td>Blackwhip</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306889-cbc0b1b6-44ae-49f9-885b-b1d29e9d4009.png" ></td>
+    <td><img src="https://github.com/user-attachments/assets/8e94fd7a-ab32-4835-af7a-2760c5cdec0b"</td>
   </tr>
 </tbody>
 </table>
@@ -133,35 +138,75 @@ If you enjoy my work, support me on Ko-fi!
 </thead>
 <tbody>
   <tr>
-    <td>All For One</td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/blob/main/ShiggyUnity/Assets/Shigaraki/GUI/Base/allforone.png?raw=true" alt="Image"></td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/assets/93917577/94c409bd-fe00-4e02-bbcb-ac8c4bdf5e13"></td>
+    <td>Smash Rush</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306948-1443a24e-5ff7-4f96-80ce-f35ee2ceb792.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/fa1c0bae-008a-4c3e-86a4-d45a64372966"></td>
   </tr>
   <tr>
-    <td>Decay</td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/blob/main/ShiggyUnity/Assets/Shigaraki/GUI/BaseSkills/decay.jpg?raw=true"></td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/assets/93917577/6e05d78c-c471-4c59-ad86-c248db977fa4"></td>
+    <td>Delaware Smash</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306943-31c72a0c-c73e-4ae6-afe0-d3633c140fcd.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/5aa8ac45-efa5-44f1-9cec-11e1e963da2e"></td>
   </tr>
   <tr>
-    <td>Bullet Laser<br></td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/blob/main/ShiggyUnity/Assets/Shigaraki/GUI/BaseSkills/bulletlaser.jpg?raw=true"></td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/assets/93917577/cff3ea37-9def-469b-9de0-32d3b84e4d11"></td>
+    <td>Fa Jin<br></td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306963-eddc0a2e-f9a1-49fd-a168-88415b7ba538.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/d21356be-363b-4dd6-896f-1cdd6067355c"></td>
   </tr>
   <tr>
-    <td>Air Cannon</td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/blob/main/ShiggyUnity/Assets/Shigaraki/GUI/BaseSkills/aircannon.jpg?raw=true"></td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/assets/93917577/28fc6fea-c70c-4d9f-b28b-bcf1c767ccbd"></td>
+    <td>Detroit Smash Super</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306953-3567abdc-409a-468b-aca1-ec76412f879d.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/4f43f39f-4b18-4d14-acc6-fa8a1616cd79"></td>
   </tr>
   <tr>
-    <td>Multiplier</td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/blob/main/ShiggyUnity/Assets/Shigaraki/GUI/BaseSkills/multiplier.jpg?raw=true"></td>
-    <td><img src="https://github.com/1TeaL/Shigaraki/assets/93917577/672195fb-94ca-45af-a3e4-850234f3e560"></td>
+    <td>Might Mode Switch</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306969-e968e385-6ec9-40a1-9fd7-208555124140.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/46927a8f-20d0-452e-8b1a-c31204809729"></td>
   </tr>
 </tbody>
 </table>
 </details>
 
 
+## Shoot Style Mode Skills
+<details>
+<summary>Click to expand base skills</summary>	
+<table>
+<thead>
+  <tr>
+    <th>Skill</th>
+    <th>Icon</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Airforce</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306872-6cc54878-d7e9-4c2b-86c7-28d131e7040f.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/54974b1b-e02a-4840-bce1-3ddecee11666"></td>
+  </tr>
+  <tr>
+    <td>Shoot Style Smash</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306819-76dec328-3433-42cd-bd8a-fb6b57f14ad5.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/54beaee4-739b-440e-9195-ef9a8cab8fde"></td>
+  </tr>
+  <tr>
+    <td>Float Sense<br></td>
+    <td><img src="thttps://user-images.githubusercontent.com/93917577/195306971-f4657190-44d6-4ec7-b12c-44debe528f53.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/d9cb0873-dad3-4c4d-8078-c89d686b6dbc"></td>
+  </tr>
+  <tr>
+    <td>Shoot Style Smash Super</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306830-10a11ed8-4097-476f-ae6d-10ce62531eb5.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/efb14425-0794-42e7-9e37-4a3c9be2f89f"></td>
+  </tr>
+  <tr>
+    <td>Shoot Style Mode Switch</td>
+    <td><img src="https://user-images.githubusercontent.com/93917577/195306790-5e8be721-f6a2-44fc-8e7d-442007355d54.png"></td>
+    <td><img src="https://github.com/user-attachments/assets/4fce3cf7-c576-4fd9-935b-bf2b65678ed6"></td>
+  </tr>
+</tbody>
+</table>
+</details>
 
 
 
@@ -177,22 +222,16 @@ These stats are prone to change.
 
 ## Future plans
 ##### Better animations.
-##### Still more Alt skills (tried to use loader hook code for blackwhip and..yea, similarly might try to implement artificer's hover for float).
 ##### Code clean-up (lots of leftover code that I commented out).
 ##### Alt skins 
 
 ## Credits
-##### Big thanks to Mr.Bones for icons and unique skins.
-##### Big thanks to TCoolDzn for the 3D Model and animations.
+##### Big thanks to Mr.Bones for icons and old unique skin- unable to get it out for now.
+##### Big thanks to TCoolDzn for the old 3D Model and animations.
 ##### Smash sounds, JoJo sounds.
 ##### HenryMod for the template.
 ##### Ganondorf for some networking.
-##### Enforcer/Nemesis Enforcer mod for nemesis enforcer passive code, heatcrash and shotgun code.
-##### EggSkills for the alternate artificer utility, used for detroit smash.
-##### MinerUnearthed for partial utility/alt utility code for blackwhip and delaware smash.
-##### Ninja for partial utility code for st louis smash.
-##### Daredevil for bounce code for shoot style kick.
-##### TTGL for crit ricochet orb code for airforce crit buff.
+##### Finally, Thank you Horikoshi Sensei for creating this legendary franchise.
 
 ### Rest of Changelog on Github
 
