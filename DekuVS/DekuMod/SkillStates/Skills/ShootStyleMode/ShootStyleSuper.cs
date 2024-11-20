@@ -435,8 +435,9 @@ namespace DekuMod.SkillStates.ShootStyle
                         BlackWhipSmashSearch(2);
 
                     }
-                    if (base.fixedAge >= firetime + 0.2f)
+                    if (base.fixedAge >= firetime + 0.2f && !hasFired)
                     {
+                        hasFired = true;
                         blastAttack.radius = blastRadius;
                         blastAttack.procCoefficient = 1f;
                         blastAttack.position = aimSphere.transform.position;
@@ -490,6 +491,12 @@ namespace DekuMod.SkillStates.ShootStyle
                     switch (stlouis3)
                     {
                         case stlouis3State.STARTUP:
+                            Chat.AddMessage("startup");
+
+                            if(base.fixedAge <= 0.4f)
+                            {
+                                characterMotor.velocity = Vector3.zero;
+                            }
                             if (dekucon.WINDTRAIL.isStopped)
                             {
                                 dekucon.WINDTRAIL.Play();
@@ -522,7 +529,8 @@ namespace DekuMod.SkillStates.ShootStyle
                                     goneInvis = true;
                                     if (this.characterModel)
                                     {
-                                        this.characterModel.invisibilityCount++;
+                                        //this.characterModel.invisibilityCount++;
+                                        this.characterModel.invisibilityCount = 1;
                                         //this.characterModel.visibility = VisibilityLevel.Invisible;
                                     }
                                     if (this.hurtboxGroup)
@@ -559,7 +567,7 @@ namespace DekuMod.SkillStates.ShootStyle
                                     break;
                             }
 
-                            if(base.fixedAge > 0.3f && base.isAuthority)
+                            if(base.fixedAge > 0.8f && base.isAuthority)
                             {
 
                                 switch (level)
@@ -598,7 +606,8 @@ namespace DekuMod.SkillStates.ShootStyle
                                 goneInvis = false;
                                 if (this.characterModel)
                                 {
-                                    this.characterModel.invisibilityCount--;
+                                    //this.characterModel.invisibilityCount--;
+                                    this.characterModel.invisibilityCount = 0;
                                     //this.characterModel.visibility = VisibilityLevel.Invisible;
                                 }
                                 if (this.hurtboxGroup)
@@ -788,11 +797,20 @@ namespace DekuMod.SkillStates.ShootStyle
                     }
                     if (!shootStyleKickComponent)
                     {
+                        float currentMovespeed = this.moveSpeedStat;
+                        bool isSprinting = base.characterBody.isSprinting;
+                        if (isSprinting)
+                        {
+                            currentMovespeed /= base.characterBody.sprintingSpeedMultiplier;
+                        }
+                        float basemovespeedMultiplier = (currentMovespeed / base.characterBody.baseMoveSpeed - 1f) * 0.67f;
+                        float movespeedMultiplier = basemovespeedMultiplier + 1f;
+
                         shootStyleKickComponent = singularTarget.healthComponent.body.gameObject.AddComponent<ShootStyleKickComponent>();
                         shootStyleKickComponent.charbody = singularTarget.healthComponent.body;
                         shootStyleKickComponent.dekucharbody = characterBody;
                         shootStyleKickComponent.numberOfHits = numberOfHits;
-                        shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.stlouisDamageCoefficient3 * attackSpeedStat;
+                        shootStyleKickComponent.damage = base.damageStat * Modules.StaticValues.stlouisDamageCoefficient3 * movespeedMultiplier;
                     }
 
 

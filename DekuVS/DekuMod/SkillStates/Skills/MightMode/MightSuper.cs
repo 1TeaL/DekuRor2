@@ -149,6 +149,10 @@ namespace DekuMod.SkillStates.Might
             this.areaIndicator.SetActive(true);
             //play animation of quick punch
             base.PlayAnimation("FullBody, Override", "DetroitSmash1");
+            if (isAuthority && Config.allowVoice.Value)
+            {
+                AkSoundEngine.PostEvent("detroitexitvoice", gameObject);
+            }
             if (dekucon.RARM.isStopped)
             {
                 dekucon.RARM.Play();
@@ -210,6 +214,10 @@ namespace DekuMod.SkillStates.Might
             }
             //play animation of uppercut
             base.PlayAnimation("FullBody, Override", "DetroitSmash2");
+            if (isAuthority && Config.allowVoice.Value)
+            {
+                AkSoundEngine.PostEvent("detroitexitvoice", gameObject);
+            }
 
             this.modelTransform = base.GetModelTransform();
             if (this.modelTransform)
@@ -495,6 +503,10 @@ namespace DekuMod.SkillStates.Might
                                         //    base.PlayAnimation("FullBody, Override", "DetroitSmash3End3");
                                         //    break;
                                 }
+                                if (isAuthority && Config.allowVoice.Value)
+                                {
+                                    AkSoundEngine.PostEvent("ofavoice", gameObject);
+                                }
                                 detroit3state = super3State.RELEASE;
 
                             }
@@ -561,7 +573,7 @@ namespace DekuMod.SkillStates.Might
 
                                 if (this.characterModel)
                                 {
-                                    Chat.AddMessage("invisibility--");
+                                    //Chat.AddMessage("invisibility--");
                                     //this.characterModel.invisibilityCount--;
                                     //this.characterModel.visibility = VisibilityLevel.Visible;
                                 }

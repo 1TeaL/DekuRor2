@@ -69,7 +69,7 @@ namespace DekuMod.SkillStates.Might
             base.PlayAnimation("FullBody, Override", "SmashRushDash", "Slash.playbackRate", 0.01f);
 
 
-            AkSoundEngine.PostEvent("shootshootdashsfx", this.gameObject);
+            AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
 
 
         }
@@ -78,6 +78,11 @@ namespace DekuMod.SkillStates.Might
         {
             base.Level2();
             dashSpeed = 100f;
+        }
+        public override void Level3()
+        {
+            base.Level3();
+            duration = 0.2f;
         }
 
         public override void FixedUpdate()

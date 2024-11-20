@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 490614119
+CRC: 2219245823
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2942e2f6d62d0c1296e7bccd41f9c006
+    Hash: 7086a2c22949e363fb10b518e460145d
   TypeTreeHash:
     serializedVersion: 2
     Hash: cadff3ebdf0e75a109758b617fa81642
@@ -77,7 +77,7 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
-- Assets/DekuFinalForm/Animations/DelawareSmashChargeEnd.anim
+- Assets/DekuFinalForm/Animations/DetroitSmash3End3.anim
 - Assets/DekuFinalForm/GUI/gobeyondN.png
 - Assets/DekuFinalForm/GUI/lightningwhitegreen.tif
 - Assets/DekuFinalForm/GUI/Floatactivate.png
@@ -157,10 +157,11 @@ Assets:
 - Assets/DekuFinalForm/GUI/Floatactivate100.png
 - Assets/DekuFinalForm/VFX/WordFoosh.prefab
 - Assets/DekuFinalForm/Animations/WalkB.anim
-- Assets/DekuFinalForm/VFX/Material/blackwhipspark.mat
+- Assets/DekuFinalForm/Animations/AirforceMaxL.anim
 - Assets/DekuFinalForm/VFX/speedLines.prefab
 - Assets/DekuFinalForm/VFX/ImpactShader.prefab
 - Assets/DekuFinalForm/Animations/FaJin.anim
+- Assets/DekuFinalForm/VFX/Material/blackwhipspark.mat
 - Assets/DekuFinalForm/VFX/WordSmash.prefab
 - Assets/DekuFinalForm/GUI/manchester45.png
 - Assets/DekuFinalForm/GUI/meterfill.png
@@ -222,12 +223,12 @@ Assets:
 - Assets/DekuFinalForm/VFX/spin.prefab
 - Assets/DekuFinalForm/Animations/SmashRushDashEnd.anim
 - Assets/DekuFinalForm/Animations/DetroitSmash2.anim
-- Assets/DekuFinalForm/Animations/GoBeyond.anim
 - Assets/DekuFinalForm/Animations/SanDiegoSmashAirEnd.anim
+- Assets/DekuFinalForm/Assets/Materials/Panner.shader
+- Assets/DekuFinalForm/Animations/GoBeyond.anim
 - Assets/DekuFinalForm/Assets/Materials/Eye texture Emission.png
 - Assets/DekuFinalForm/VFX/windTrailEffect.prefab
 - Assets/DekuFinalForm/Assets/Materials/blueBlinkingMat.mat
-- Assets/DekuFinalForm/Assets/Materials/Panner.shader
 - Assets/DekuFinalForm/GUI/gobeyondG.png
 - Assets/DekuFinalForm/VFX/Textures/Lightning2.png
 - Assets/DekuFinalForm/VFX/Material/DekuOFAMat.mat
@@ -303,11 +304,11 @@ Assets:
 - Assets/DekuFinalForm/Assets/Materials/UpScaledCape_Backpack.jpg
 - Assets/DekuFinalForm/Assets/Materials/purpleBlinkingMat.mat
 - Assets/DekuFinalForm/GUI/airforce45.png
-- Assets/DekuFinalForm/VFX/blackwhipTrail.prefab
+- Assets/DekuFinalForm/Animations/AirforceMaxR.anim
 - Assets/DekuFinalForm/GUI/detroitdelawareSmash.PNG
 - Assets/DekuFinalForm/VFX/straightSwingEffect.prefab
+- Assets/DekuFinalForm/VFX/blackwhipTrail.prefab
 - Assets/DekuFinalForm/VFX/blastdashWind.prefab
-- Assets/DekuFinalForm/VFX/goBeyondAuraWorld.prefab
 - Assets/DekuFinalForm/Animations/BlastDashF.anim
 - Assets/DekuFinalForm/Animations/DetroitSmash3Dashing.anim
 - Assets/DekuFinalForm/VFX/Material/dangersense.mat
@@ -315,11 +316,11 @@ Assets:
 - Assets/DekuFinalForm/GUI/blackwhip100.png
 - Assets/DekuFinalForm/Animations/DanceMoves.anim
 - Assets/DekuFinalForm/VFX/gearshift.prefab
-- Assets/DekuFinalForm/VFX/ImpactDekuEffect.prefab
+- Assets/DekuFinalForm/VFX/goBeyondAuraWorld.prefab
 - Assets/DekuFinalForm/Assets/Mesh/MidGauntlets.mesh
 - Assets/DekuFinalForm/Assets/Materials/matHood.mat
 - Assets/DekuFinalForm/GUI/stlouis45.png
-- Assets/DekuFinalForm/VFX/Material/windbullet.mat
+- Assets/DekuFinalForm/VFX/ImpactDekuEffect.prefab
 - Assets/DekuFinalForm/Animations/TexasSmashAirEnd.anim
 - Assets/DekuFinalForm/GUI/lightningblue.tif
 - Assets/DekuFinalForm/GUI/airforce.png
@@ -347,6 +348,7 @@ Assets:
 - Assets/DekuFinalForm/GUI/detroit45.png
 - Assets/DekuFinalForm/Animations/StLouis3.anim
 - Assets/DekuFinalForm/Assets/Materials/UpscaledHood.jpg
+- Assets/DekuFinalForm/VFX/Material/windbullet.mat
 - Assets/DekuFinalForm/VFX/Textures/Smash2.png
 - Assets/DekuFinalForm/Assets/Mesh/Wristband.mesh
 - Assets/DekuFinalForm/GUI/goBeyondE.png
@@ -411,6 +413,6 @@ Assets:
 - Assets/DekuFinalForm/VFX/goBeyondAura.prefab
 - Assets/DekuFinalForm/GUI/Floatactivate45.png
 - Assets/DekuFinalForm/Assets/Materials/AuraShader.shader
-- Assets/DekuFinalForm/Animations/DetroitSmash3End3.anim
+- Assets/DekuFinalForm/Animations/DelawareSmashChargeEnd.anim
 - Assets/DekuFinalForm/Assets/Mesh/Hood.mesh
 Dependencies: []

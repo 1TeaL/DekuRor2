@@ -26,7 +26,7 @@ namespace DekuMod.SkillStates.Might
         private float force;
         private float radius;
         private float damage;
-        private float range;
+        private float distance;
         private DamageType damageType;
         private float chargePercent;
         private float maxCharge;
@@ -58,22 +58,25 @@ namespace DekuMod.SkillStates.Might
         {
             damage = StaticValues.delawareDamageCoefficient;
             force = damage;
-            radius = StaticValues.delawareRadius;
+            radius = StaticValues.delawareRadius * attackSpeedStat;
             damageType = DamageType.Generic;
+            distance = StaticValues.delawareDistance;
             PlayCrossfade("FullBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
         }
         public override void Level2()
         {
             damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware2DamageMultiplier;
-            radius = StaticValues.delawareRadius;
+            radius = StaticValues.delawareRadius * attackSpeedStat;
             damageType = DamageType.Generic;
+            distance = StaticValues.delawareDistance * attackSpeedStat;
             PlayCrossfade("FullBody, Override", "DelawareWeakCharge", "Attack.playbackRate", 0.5f, 0.01f);
         }
         public override void Level3()
         {
             damage = StaticValues.delawareDamageCoefficient * StaticValues.delaware3DamageMultiplier;
-            radius = StaticValues.delaware3Radius;
+            radius = StaticValues.delaware3Radius * attackSpeedStat;
             damageType = DamageType.Stun1s;
+            distance = StaticValues.delawareDistance * attackSpeedStat;
             PlayCrossfade("FullBody, Override", "DelawareSmashCharge", "Attack.playbackRate", 0.5f, 0.01f);
         }
 
@@ -133,15 +136,15 @@ namespace DekuMod.SkillStates.Might
                                 Fire();
                                 if (angle < 60)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp");
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp", "Attack.playbackRate", 0.5f);
                                 }
                                 else if (angle > 120)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown");
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown", "Attack.playbackRate", 0.5f);
                                 }
                                 else
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd");
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd", "Attack.playbackRate", 0.5f);
                                 }
                                 break;
                             case 1:
@@ -150,15 +153,15 @@ namespace DekuMod.SkillStates.Might
                                 Fire();
                                 if (angle < 60)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp");
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp", "Attack.playbackRate", 0.5f);
                                 }
                                 else if (angle > 120)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown");
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown", "Attack.playbackRate", 0.5f);
                                 }
                                 else
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd");
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd", "Attack.playbackRate", 0.5f);
                                 }
                                 break;
                             case 2:
@@ -167,15 +170,15 @@ namespace DekuMod.SkillStates.Might
                                 Fire();
                                 if (angle < 60)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndUp");
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndUp", "Attack.playbackRate", 0.7f);
                                 }
                                 else if (angle > 120)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndDown");
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndDown", "Attack.playbackRate", 0.7f);
                                 }
                                 else
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEnd");
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEnd", "Attack.playbackRate", 0.7f);
                                 }
                                 break;
                         }
@@ -190,13 +193,13 @@ namespace DekuMod.SkillStates.Might
 
                         if(characterMotor.isGrounded)
                         {
-                            base.characterMotor.velocity = StaticValues.delawareDistance * (-base.GetAimRay().direction) * moveSpeedStat;
+                            base.characterMotor.velocity = distance * (-base.GetAimRay().direction) * moveSpeedStat;
 
                         }
                         else 
                         if (!characterMotor.isGrounded)
                         {
-                            base.characterMotor.velocity = StaticValues.delawareDistance * (-base.GetAimRay().direction) * moveSpeedStat * 0.5f;
+                            base.characterMotor.velocity = distance * (-base.GetAimRay().direction) * moveSpeedStat * 0.5f;
 
                         }
 
@@ -249,8 +252,8 @@ namespace DekuMod.SkillStates.Might
                     case 0:
                         EffectManager.SpawnEffect(Modules.DekuAssets.delawareBullet, new EffectData
                         {
-                            origin = characterBody.footPosition,
-                            scale = 1f,
+                            origin = characterBody.corePosition,
+                            scale = 1f * attackSpeedStat,
                             rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
                         }, true);
@@ -259,8 +262,8 @@ namespace DekuMod.SkillStates.Might
                         EffectManager.SpawnEffect(Modules.DekuAssets.delawareBullet, new EffectData
                         {
                             //origin = FindModelChild(muzzleName).position,
-                            origin = characterBody.footPosition,
-                            scale = 1f,
+                            origin = characterBody.corePosition,
+                            scale = 1f * attackSpeedStat,
                             rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
                         }, true);
@@ -269,8 +272,8 @@ namespace DekuMod.SkillStates.Might
 
                         EffectManager.SpawnEffect(Modules.DekuAssets.delawareEffect, new EffectData
                         {
-                            origin = characterBody.footPosition,
-                            scale = 1f,
+                            origin = characterBody.corePosition,
+                            scale = 1f * attackSpeedStat,
                             rotation = Quaternion.LookRotation(base.GetAimRay().direction)
 
                         }, true);

@@ -44,6 +44,10 @@ namespace DekuMod.SkillStates.ShootStyle
             fireTime = 0.2f * duration;
             characterBody.SetAimTimer(duration);
             muzzleString = "RFinger";
+            if (shotsFired > 20)
+            {
+                shotsFired = 20;
+            }
 
             hasFired = false;
 
@@ -62,7 +66,7 @@ namespace DekuMod.SkillStates.ShootStyle
                     PlayAnimation("RightArm, Override", "Airforce", "Attack.playbackRate", duration);
                     break;
                 case 2:
-                    bulletCount = 2;
+                    bulletCount = 1;
 
                     //if stand still go into machine gun mode
                     if(base.inputBank.moveVector == Vector3.zero)
@@ -73,11 +77,21 @@ namespace DekuMod.SkillStates.ShootStyle
                         //    shotsFired = 20;
                         //}
                         this.duration = baseDuration / (this.attackSpeedStat * (1 +(float)shotsFired / 10));
-                        base.PlayAnimation("FullBody, Override", punchIndex % 2 == 0 ? "DekurapidpunchL" : "DekurapidpunchR", "Attack.playbackRate", this.duration);
+                        base.PlayAnimation("FullBody, Override", punchIndex % 2 == 0 ? "AirforceMaxL" : "AirforceMaxR", "Attack.playbackRate", this.duration);
                         muzzleString = punchIndex % 2 == 0 ?  "LFinger" :  "RFinger";
+                        if(punchIndex % 2 == 0)
+                        {
+                            dekucon.LARM.Play();
+                        }
+                        else
+                        {
+                            dekucon.RARM.Play();
+                        }
+                        //punchIndex % 2 == 0 ? dekucon.LARM.Play() : dekucon.RARM.Play();    
                     }
                     else
                     {
+                        hasMoved = true;
                         PlayAnimation("RightArm, Override", "Airforce", "Attack.playbackRate", duration);
                     }
 
@@ -144,7 +158,7 @@ namespace DekuMod.SkillStates.ShootStyle
                 bulletAttack.hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab;
 
 
-                if (!hasMoved && level == 3)
+                if (!hasMoved && level == 2)
                 {
 
                     EffectManager.SpawnEffect(DekuAssets.airforce100Effect, new EffectData
@@ -286,15 +300,15 @@ namespace DekuMod.SkillStates.ShootStyle
                 Fire();
             }
 
-            //check if any movement from player
-            if(base.inputBank.moveVector != Vector3.zero)
-            {
-                hasMoved = true;
-            }
+            //check if any movement from player-maybe no need
+            //if(base.inputBank.moveVector != Vector3.zero)
+            //{
+            //    hasMoved = true;
+            //}
 
             if (fixedAge >= duration && isAuthority)
             {
-                if (inputBank.skill1.down && level == 3 && !hasMoved)
+                if (inputBank.skill1.down && level == 2 && !hasMoved)
                 {
                     this.SetNextState();
                     return;

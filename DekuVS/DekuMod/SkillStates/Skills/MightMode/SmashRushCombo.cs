@@ -34,7 +34,7 @@ namespace DekuMod.SkillStates.Might
             this.attackRecoil = 0.5f;
             this.hitHopVelocity = 7f;
 
-            this.swingSoundString = "shootshootdashcombosfx";
+            this.swingSoundString = "shootstyledashcombosfx";
             this.hitSoundString = "";
             this.muzzleString = ChooseMuzzleString();
             this.swingEffectPrefab = Modules.DekuAssets.dekuPunchEffect;
@@ -70,6 +70,8 @@ namespace DekuMod.SkillStates.Might
             }
             this.baseDuration = 0.5f / (1 + ((float)punchesDone / 10));
             this.baseEarlyExitTime = 0.8f /(1 + ((float)punchesDone / 10));
+            dekucon.RARM.Play();
+            dekucon.LARM.Play();
 
         }
 

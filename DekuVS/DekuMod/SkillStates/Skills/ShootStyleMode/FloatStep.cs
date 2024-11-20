@@ -72,6 +72,7 @@ namespace DekuMod.SkillStates.ShootStyle
             blastAttack.position = blastPosition;
             blastAttack.baseForce = blastForce;
 
+            AkSoundEngine.PostEvent("shootstyledashsfx", this.gameObject);
 
             this.CreateBlinkEffect(Util.GetCorePosition(base.gameObject));
 
