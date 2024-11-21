@@ -87,6 +87,10 @@ namespace DekuMod.SkillStates.ShootStyle
 
                 characterDirection.forward = base.GetAimRay().direction;
                 PlayAnimation("FullBody, Override", "Dodge", "Attack.playbackRate", duration, 0.01f);
+                if (dekucon.DANGERSENSE.isStopped)
+                {
+                    dekucon.DANGERSENSE.Play();
+                }
 
                 this.modelTransform = base.GetModelTransform();
                 if (this.modelTransform)

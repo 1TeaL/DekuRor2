@@ -895,21 +895,25 @@ namespace DekuMod.Modules.Survivors
 
             #region Adding Skills
             Modules.Skills.AddPrimarySkill(bodyPrefab, mightPrimarySkillDef);
+            //Modules.Skills.AddPrimarySkill(bodyPrefab, shootPrimarySkillDef);
 
 
             Skills.AddSecondarySkills(this.bodyPrefab, new SkillDef[]
             {
                 mightSecondarySkillDef,
+                //shootSecondarySkillDef,
             });
 
             Skills.AddUtilitySkills(this.bodyPrefab, new SkillDef[]
             {
                 mightUtilitySkillDef,
+                //shootUtilitySkillDef,
             });
 
             Skills.AddSpecialSkills(this.bodyPrefab, new SkillDef[]
             {
                 mightSpecialSkillDef,
+                //shootSpecialSkillDef,
             });
 
             Skills.AddFirstExtraSkill(bodyPrefab, mightModeSkillDef);

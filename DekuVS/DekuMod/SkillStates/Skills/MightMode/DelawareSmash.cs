@@ -10,6 +10,7 @@ using DekuMod.Modules;
 using static UnityEngine.ParticleSystem.PlaybackState;
 using DekuMod.SkillStates.BaseStates;
 using System.Linq;
+using UnityEngine.UIElements;
 
 namespace DekuMod.SkillStates.Might
 {
@@ -31,6 +32,7 @@ namespace DekuMod.SkillStates.Might
         private float chargePercent;
         private float maxCharge;
         private float baseMaxCharge = StaticValues.delawareMaxCharge;
+        private float animTimer;
 
         public override void OnEnter()
         {
@@ -131,58 +133,65 @@ namespace DekuMod.SkillStates.Might
                         switch (level)
                         {
                             case 0:
-                                damage += (this.chargePercent * Modules.StaticValues.delawareDamageMultiplier);
+                                //damage += (this.chargePercent * Modules.StaticValues.delawareDamageMultiplier);
                                 
-                                Fire();
+                                //Fire();
                                 if (angle < 60)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp", "Attack.playbackRate", 0.5f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp", "Attack.playbackRate", 0.5f/attackSpeedStat);
                                 }
                                 else if (angle > 120)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown", "Attack.playbackRate", 0.5f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown", "Attack.playbackRate", 0.5f / attackSpeedStat);
                                 }
                                 else
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd", "Attack.playbackRate", 0.5f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd", "Attack.playbackRate", 0.5f / attackSpeedStat);
                                 }
                                 break;
                             case 1:
-                                damage += (this.chargePercent * Modules.StaticValues.delaware2DamageMultiplier);
+                                //damage += (this.chargePercent * Modules.StaticValues.delaware2DamageMultiplier);
                                 
-                                Fire();
+                                //Fire();
                                 if (angle < 60)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp", "Attack.playbackRate", 0.5f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndUp", "Attack.playbackRate", 0.5f / attackSpeedStat);
                                 }
                                 else if (angle > 120)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown", "Attack.playbackRate", 0.5f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEndDown", "Attack.playbackRate", 0.5f / attackSpeedStat);
                                 }
                                 else
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd", "Attack.playbackRate", 0.5f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareWeakEnd", "Attack.playbackRate", 0.5f / attackSpeedStat);
                                 }
                                 break;
                             case 2:
-                                damage += (this.chargePercent * Modules.StaticValues.delaware3DamageMultiplier);
+                                //damage += (this.chargePercent * Modules.StaticValues.delaware3DamageMultiplier);
                                 
-                                Fire();
+                                //Fire();
                                 if (angle < 60)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndUp", "Attack.playbackRate", 0.7f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndUp", "Attack.playbackRate", 0.5f / attackSpeedStat);
                                 }
                                 else if (angle > 120)
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndDown", "Attack.playbackRate", 0.7f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEndDown", "Attack.playbackRate", 0.5f / attackSpeedStat);
                                 }
                                 else
                                 {
-                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEnd", "Attack.playbackRate", 0.7f);
+                                    base.PlayAnimation("FullBody, Override", "DelawareSmashChargeEnd", "Attack.playbackRate", 0.5f / attackSpeedStat);
                                 }
                                 break;
                         }
                         
+
+
+                    }
+                    animTimer += Time.fixedDeltaTime;
+                    
+                    if (animTimer > 0.25f / attackSpeedStat)
+                    {
 
                         if (isAuthority && Config.allowVoice.Value)
                         {
@@ -191,18 +200,39 @@ namespace DekuMod.SkillStates.Might
 
                         AkSoundEngine.PostEvent("delawaresfx", gameObject);
 
-                        if(characterMotor.isGrounded)
+                        if (characterMotor.isGrounded)
                         {
                             base.characterMotor.velocity = distance * (-base.GetAimRay().direction) * moveSpeedStat;
 
                         }
-                        else 
+                        else
                         if (!characterMotor.isGrounded)
                         {
                             base.characterMotor.velocity = distance * (-base.GetAimRay().direction) * moveSpeedStat * 0.5f;
 
                         }
+                        switch (level)
+                        {
+                            case 0:
+                                damage += (this.chargePercent * Modules.StaticValues.delawareDamageMultiplier);
 
+                                Fire();
+                                break;
+                            case 1:
+                                damage += (this.chargePercent * Modules.StaticValues.delaware2DamageMultiplier);
+
+                                Fire();
+                                break;
+                            case 2:
+                                damage += (this.chargePercent * Modules.StaticValues.delaware3DamageMultiplier);
+
+                                Fire();
+                                break;
+                        }
+
+                    }
+                    if(animTimer > 0.5f / attackSpeedStat)
+                    {
                         this.outer.SetNextStateToMain();
                         return;
                     }

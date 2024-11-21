@@ -10,15 +10,12 @@ namespace DekuMod.Modules
             #region Deku
             string prefix = DekuPlugin.developerPrefix + "_DEKU_BODY_";
 
-            string desc = "Deku is a multi-option, high risk survivor that can change his skills and boost his stats but with detrimental health regen and health costs.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            string desc = "Deku is a multi-option survivor with differing playstyles depending on which mode he's in.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > He scales with attackspeed and movespeed on multiple of his skills" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > The Plus Ultra Meter in the middle increases as you walk and use base skills, it is used for specific skills and for Going Beyond." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Base form focuses on control, as well as allowing him to build up Plus Ultra Meter." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > OFA 100% focuses on pure power at the cost of self-damage." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > OFA 45% is a mid ground between 100% and base, with no health regeneration." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Deku's can switch his skills between 3 loadouts- Power, Shoot Style, Quirks, he can also cycle skills between the 3 loadouts or within the same loadout." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Deku's 4th extra skill depends on his loadout, and costs 50 Plus Ultra Meter. He can also run all super skills in the 1st, 2nd and 3rd slots as well." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Ancient Scepter will give 10% Lifesteal for OFA 100% and 5% Lifesteal for OFA 45%." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > The Plus Ultra Meter in the middle increases naturally, used for his specials and for Going Beyond." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Deku's can switch his skills between Modes- Might, Shoot Style." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Deku's 4th extra skill(and 3rd as well for now) is Blackwhip Pull, enabling him to grapple onto surfaces or enemies in any mode." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Deku gains enhanced and mastered versions of his skills at Level 10 and Level 20." + Environment.NewLine + Environment.NewLine;
 
 
 
@@ -66,7 +63,7 @@ namespace DekuMod.Modules
                 $"<style=cKeywordName>Mastered</style>: <style=cIsUtility>Once all stocks are spent, gain a stored Fajin charge- enabling a free costing super</style>. <style=cIsDamage>Damage increased to {StaticValues.fajinMaxDamageMultiplier * 100f}%</style>" + ".");
 
             LanguageAPI.Add(prefix + "MIGHTSPECIAL_NAME", "Detroit Smash Super");
-            LanguageAPI.Add(prefix + "MIGHTSPECIAL_DESCRIPTION", $" Detroit Smash," + Helpers.Passive("depending on your inputs (neutral and backward, forward) Deku will spend 1, 2 or 3 bars of Plus Ultra") + ". " + Environment.NewLine +
+            LanguageAPI.Add(prefix + "MIGHTSPECIAL_DESCRIPTION", $" Detroit Smash," + Helpers.Passive(" depending on your inputs (neutral and backward, forward) Deku will spend 1, 2 or 3 bars of Plus Ultra") + ". " + Environment.NewLine +
                 $"Neutral (1 cost): Detroit Smash on the spot, dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}% damage.</style>" + "." + Environment.NewLine +
                 $"Backward (2 cost): Detroit Smash upwards, dealing <style=cIsDamage>{StaticValues.detroit2BaseHits} x {100f * StaticValues.detroit2DamageCoefficient}% damage. Number of hits scales with attackspeed</style>" + "." + Environment.NewLine +
                 $"Forward (3 cost): Hold the button to charge a dashing Detroit Smash. Upon release, travel to the spot, dealing <style=cIsDamage>{100f * StaticValues.detroit3DamageCoefficient}% - {100f * (Modules.StaticValues.detroit3DamageCoefficient + StaticValues.detroit3DamageMultiplier * Modules.StaticValues.detroit3DamageCoefficient)}% damage</style>" + "." + Environment.NewLine +
