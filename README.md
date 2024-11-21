@@ -71,6 +71,8 @@ If you enjoy my work, support me on Ko-fi!
 
 ## Latest Changelog, Next update(s)
 
+- 5.0.1- Fixes
+    - Delaware smash release animation now plays
 - 5.0.0- Deku Final Form Rework! SOTS Patch!
 - Changes/Rework
     - Most if not all skills have been reworked and changed
