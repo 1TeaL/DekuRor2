@@ -118,7 +118,7 @@ If you enjoy my work, support me on Ko-fi!
     <td><img src="https://github.com/user-attachments/assets/fdfdefee-14ec-422a-9cdf-d2d94be229af"</td>
   </tr>
   <tr>
-    <td>Blackwhip</td>
+    <td>Blackwhip Pull</td>
     <td><img src="https://user-images.githubusercontent.com/93917577/195306889-cbc0b1b6-44ae-49f9-885b-b1d29e9d4009.png" ></td>
     <td><img src="https://github.com/user-attachments/assets/8e94fd7a-ab32-4835-af7a-2760c5cdec0b"</td>
   </tr>
