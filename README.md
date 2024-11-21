@@ -70,7 +70,8 @@ If you enjoy my work, support me on Ko-fi!
 </details>
 
 ## Latest Changelog, Next update(s)
-
+- 5.0.2- Fixes
+    - Made sure to check if risk of options is installed as it isn't a hard dependency
 - 5.0.1- Fixes
     - Delaware smash release animation now plays
 - 5.0.0- Deku Final Form Rework! SOTS Patch!
