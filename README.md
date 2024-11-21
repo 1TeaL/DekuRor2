@@ -94,6 +94,7 @@ If you enjoy my work, support me on Ko-fi!
 
 
 ## Overview
+![image](https://github.com/user-attachments/assets/a40c5209-94aa-44c7-a371-545263d5c065)
 
 - Deku's game plan depends on which Mode he is in:
 - Might mode focuses on getting into an enemy's face and dealing high damage. FaJin provides both offense and defense through it's damage boost and barrier gain, and working towards a high-uptime allows Deku to stay in the fight for a longer. 
