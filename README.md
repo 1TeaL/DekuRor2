@@ -70,6 +70,9 @@ If you enjoy my work, support me on Ko-fi!
 </details>
 
 ## Latest Changelog, Next update(s)
+- 5.0.4- Fixes/Changes
+    - Fixed Float Sense grounded version not working.
+    - Made it so Shoot Style Smash can't animation cancel itself, either the animation has to finish or Deku can use Float Sense to cancel.
 - 5.0.3- Fixes
     - Made sure Delaware only did 1 instance of damage
     - Fixed Detroit Smash Special Forward from making Deku invincible after using it.
