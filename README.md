@@ -70,6 +70,10 @@ If you enjoy my work, support me on Ko-fi!
 </details>
 
 ## Latest Changelog, Next update(s)
+- 5.0.3- Fixes
+    - Made sure Delaware only did 1 instance of damage
+    - Fixed Detroit Smash Special Forward from making Deku invincible after using it.
+    - Fixed calculations for health costs for Deku's supers. Previously was only doing the 10% health cost (aka as if only 1 bar was missing).	
 - 5.0.2- Fixes
     - Made sure to check if risk of options is installed as it isn't a hard dependency
 - 5.0.1- Fixes
@@ -80,7 +84,7 @@ If you enjoy my work, support me on Ko-fi!
     - Plus Ultra meter has been reworked:
     	- Deku now gains it at a set rate and when attacking enemies, the rate is doubled
      	- It is now split into 3 bars, and Deku's specials cost 1, 2 or 3 bars based on a neutral, backward or forward directional input.
-      	- If Deku does not have enough bars, he can still use the special at an exponentially increasing cost of health for each missing bar.
+      	- If Deku does not have enough bars, he can still use the special at an exponentially increasing cost of health for each missing bar. (10%, 30%, 60%)
         - When Deku switches modes, if he has atleast 1 bar, he will spend it for a Mode Switch attack with additional bonuses.
       	- Deku still can Go Beyond! when at max meter and takes a fatal hit.
     - Deku no longer has his old One For All special. Instead, at levels 10 and 20 he gains enhanced and mastered versions of his skills indicating his mastery over OFA. 
@@ -235,7 +239,7 @@ These stats are prone to change.
 ##### Smash sounds, JoJo sounds.
 ##### HenryMod for the template.
 ##### Ganondorf for some networking.
-##### Finally, Thank you Horikoshi Sensei for creating this legendary franchise.
+##### Finally, Thank you Horikoshi Sensei for creating this legendary series.
 
 ### Rest of Changelog on Github
 
