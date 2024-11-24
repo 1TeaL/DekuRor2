@@ -530,9 +530,9 @@ namespace DekuMod.SkillStates.Might
                                 }
                                 if (this.hurtboxGroup)
                                 {
-                                    HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
-                                    int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter + 1;
-                                    hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
+                                    //HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
+                                    //int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter + 1;
+                                    //hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
                                 }
 
                                 TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(new GameObject());
@@ -587,9 +587,9 @@ namespace DekuMod.SkillStates.Might
                                 }
                                 if (this.hurtboxGroup)
                                 {
-                                    HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
-                                    int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter - 1;
-                                    hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
+                                    //HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
+                                    //int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter - 1;
+                                    //hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
                                 }
                                 if (base.characterMotor)
                                 {
@@ -738,17 +738,17 @@ namespace DekuMod.SkillStates.Might
             base.characterMotor.useGravity = true;
             this.modelTransform = base.GetModelTransform();
 
-            if (this.characterModel)
-            {
-                this.characterModel.invisibilityCount--;
-                this.characterModel.visibility = VisibilityLevel.Visible;
-            }
-            if (this.hurtboxGroup)
-            {
-                HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
-                int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter - 1;
-                hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
-            }
+            //if (this.characterModel)
+            //{
+            //    this.characterModel.invisibilityCount--;
+            //    this.characterModel.visibility = VisibilityLevel.Visible;
+            //}
+            //if (this.hurtboxGroup)
+            //{
+            //    HurtBoxGroup hurtBoxGroup = this.hurtboxGroup;
+            //    int hurtBoxesDeactivatorCounter = hurtBoxGroup.hurtBoxesDeactivatorCounter - 1;
+            //    hurtBoxGroup.hurtBoxesDeactivatorCounter = hurtBoxesDeactivatorCounter;
+            //}
             if (base.characterMotor)
             {
                 base.characterMotor.enabled = true;

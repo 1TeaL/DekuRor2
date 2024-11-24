@@ -71,10 +71,12 @@ namespace DekuMod.SkillStates
             else
             {
                 //check how many segments missing
-                int missingSegment = Mathf.FloorToInt(energySystem.currentPlusUltra / StaticValues.super1Cost);
+                float missingMeter = StaticValues.super1Cost - energySystem.currentPlusUltra;
+                float barsMissing = Mathf.FloorToInt((float)missingMeter / StaticValues.barCostCheck);
+
 
                 float healthCost = 0.1f;
-                switch (missingSegment)
+                switch (barsMissing)
                 {
                     case 1:
                         healthCost = StaticValues.plusUltraHealthCost;
@@ -110,10 +112,13 @@ namespace DekuMod.SkillStates
             else
             {
                 //check how many segments missing
-                int missingSegment = Mathf.FloorToInt(energySystem.currentPlusUltra / StaticValues.super1Cost);
+                float missingMeter = StaticValues.super2Cost - energySystem.currentPlusUltra;
+                float barsMissing = Mathf.FloorToInt((float)missingMeter / StaticValues.barCostCheck);
+
+                Chat.AddMessage("bars missing = " + barsMissing);
 
                 float healthCost = 0.1f;
-                switch (missingSegment)
+                switch (barsMissing)
                 {
                     case 1:
                         healthCost = StaticValues.plusUltraHealthCost;
@@ -151,10 +156,13 @@ namespace DekuMod.SkillStates
             else
             {
                 //check how many segments missing
-                int missingSegment = Mathf.FloorToInt(energySystem.currentPlusUltra / StaticValues.super1Cost);
+                float missingMeter = StaticValues.super3Cost - energySystem.currentPlusUltra;
+                float barsMissing = Mathf.FloorToInt((float)missingMeter / StaticValues.barCostCheck);
+
+                Chat.AddMessage("bars missing = " + barsMissing);
 
                 float healthCost = 0.1f;
-                switch (missingSegment)
+                switch (barsMissing)
                 {
                     case 1:
                         healthCost = StaticValues.plusUltraHealthCost;

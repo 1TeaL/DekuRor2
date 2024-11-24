@@ -18,6 +18,7 @@ namespace DekuMod.Modules
 
 
         //Energy
+        internal static float barCostCheck = 32f;
         internal static float super1Cost = 33f;
         internal static float super2Cost = 66f;
         internal static float super3Cost = 100f;

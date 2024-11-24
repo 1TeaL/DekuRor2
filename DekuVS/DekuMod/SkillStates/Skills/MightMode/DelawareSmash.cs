@@ -124,7 +124,7 @@ namespace DekuMod.SkillStates.Might
             {
                 if(!IsKeyDownAuthority() && !inputBank.skill2.down)
                 {
-                    if(!hasFired)
+                    if(!hasFired && animTimer < 0.2f)
                     {
                         anim.SetBool("delawareCharged", true);
                         hasFired = true;
@@ -190,9 +190,9 @@ namespace DekuMod.SkillStates.Might
                     }
                     animTimer += Time.fixedDeltaTime;
                     
-                    if (animTimer > 0.25f / attackSpeedStat)
+                    if (animTimer > 0.25f / attackSpeedStat && hasFired)
                     {
-
+                        hasFired = false;
                         if (isAuthority && Config.allowVoice.Value)
                         {
                             AkSoundEngine.PostEvent("delawarevoice", gameObject);

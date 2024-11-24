@@ -34,6 +34,7 @@ namespace DekuMod
     [BepInDependency("com.bepis.r2api.prefab", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.bepis.r2api.networking", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.bepis.r2api.damagetype", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.bepis.r2api.damagetype", BepInDependency.DependencyFlags.HardDependency)]
 
     //don't need 
     //[BepInDependency("com.bepis.r2api.loadout", BepInDependency.DependencyFlags.HardDependency)]
@@ -86,7 +87,7 @@ namespace DekuMod
 
         public const string MODUID = "com.TeaL.DekuMod";
         public const string MODNAME = "DekuMod";
-        public const string MODVERSION = "5.0.1";
+        public const string MODVERSION = "5.0.3";
         public const float passiveRegenBonus = 0.035f;
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
@@ -109,7 +110,10 @@ namespace DekuMod
             // load assets and read config
             Modules.DekuAssets.Initialize();
             Modules.Config.ReadConfig();
-            Modules.Config.SetupRiskOfOptions(); //setup risk of options
+            if (Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))//setup risk of options
+            {
+                Modules.Config.SetupRiskOfOptions();
+            } 
             Modules.Config.OnChangeHooks(); //on change hooks config
             Modules.Damage.SetupModdedDamage(); //setup modded damage
             Modules.States.RegisterStates(); // register states for networking
