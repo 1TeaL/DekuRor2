@@ -172,6 +172,7 @@ namespace DekuMod.Modules.Survivors
                 PLUSULTRA3 = child.FindChild("PlusUltra3").GetComponent<ParticleSystem>();
                 RARMGEARSHIFT = child.FindChild("rArmGearshift").GetComponent<ParticleSystem>();
                 BODYGEARSHIFT = child.FindChild("bodyGearShift").GetComponent<ParticleSystem>();
+                DANGERSENSE = child.FindChild("dangersense").GetComponent<ParticleSystem>();
                 //FAJIN = child.FindChild("FAJINaura").GetComponent<ParticleSystem>();
                 //DANGERSENSE = child.FindChild("Dangersense").GetComponent<ParticleSystem>();
                 //WINDRING = child.FindChild("windRing").GetComponent<ParticleSystem>();
@@ -211,6 +212,7 @@ namespace DekuMod.Modules.Survivors
             PLUSULTRA3.Stop();
             RARMGEARSHIFT.Stop();
             BODYGEARSHIFT.Stop();
+            DANGERSENSE.Stop();
 
             StopGobeyondLoop();
 

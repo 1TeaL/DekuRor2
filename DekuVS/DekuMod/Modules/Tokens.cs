@@ -64,7 +64,7 @@ namespace DekuMod.Modules
 
             LanguageAPI.Add(prefix + "MIGHTSPECIAL_NAME", "Detroit Smash Super");
             LanguageAPI.Add(prefix + "MIGHTSPECIAL_DESCRIPTION", $" Detroit Smash," + Helpers.Passive(" depending on your inputs (neutral and backward, forward) Deku will spend 1, 2 or 3 bars of Plus Ultra") + ". " + Environment.NewLine +
-                $"Neutral (1 cost): Detroit Smash on the spot, dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}% damage.</style>" + "." + Environment.NewLine +
+                $"Neutral (1 cost): Detroit Smash on the spot, dealing <style=cIsDamage>{100f * StaticValues.detroitDamageCoefficient}% damage</style>" + "." + Environment.NewLine +
                 $"Backward (2 cost): Detroit Smash upwards, dealing <style=cIsDamage>{StaticValues.detroit2BaseHits} x {100f * StaticValues.detroit2DamageCoefficient}% damage. Number of hits scales with attackspeed</style>" + "." + Environment.NewLine +
                 $"Forward (3 cost): Hold the button to charge a dashing Detroit Smash. Upon release, travel to the spot, dealing <style=cIsDamage>{100f * StaticValues.detroit3DamageCoefficient}% - {100f * (Modules.StaticValues.detroit3DamageCoefficient + StaticValues.detroit3DamageMultiplier * Modules.StaticValues.detroit3DamageCoefficient)}% damage</style>" + "." + Environment.NewLine +
                 $"<style=cKeywordName>Enhanced</style>: <style=cIsDamage>Number of hits increased by 2x</style>" + "." + Environment.NewLine +

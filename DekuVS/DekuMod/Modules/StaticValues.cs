@@ -140,7 +140,7 @@ namespace DekuMod.Modules
         internal const float shootstyle3Multiplier = 3f;
         //Utility
         internal const float blastDashDamageCoefficient = 2f;
-        internal const float blastDashSpeed = 20f;
+        internal const float blastDashSpeed = 10f;
         internal const float blastDashForce = 2000f;
         internal const float blastDashRadius = 10f;
         internal const float blastDashDuration = 0.6f;

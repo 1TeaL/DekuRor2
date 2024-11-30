@@ -429,7 +429,7 @@ namespace DekuMod.SkillStates.ShootStyle
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            return InterruptPriority.Pain;
         }
         protected virtual void ForceFlinch(CharacterBody body)
         {
