@@ -70,6 +70,8 @@ If you enjoy my work, support me on Ko-fi!
 </details>
 
 ## Latest Changelog, Next update(s)
+- 5.0.6- Changes
+    - Updated damage handling to match new methods in the game
 - 5.0.5- Fixes/Changes
     - Enable holding of the skill buttons so that skills will be used at earliest available. Previously it was not enabled due to the Shoot Style Smash cancels but now to balance that everything can just be held down beside the special buttons to chain.
 - 5.0.4- Fixes/Changes
