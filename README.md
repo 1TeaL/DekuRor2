@@ -70,33 +70,8 @@ If you enjoy my work, support me on Ko-fi!
 </details>
 
 ## Latest Changelog, Next update(s)
-- 5.0.6- Changes
-    - Updated damage handling to match new methods in the game
-- 5.0.5- Fixes/Changes
-    - Enable holding of the skill buttons so that skills will be used at earliest available. Previously it was not enabled due to the Shoot Style Smash cancels but now to balance that everything can just be held down beside the special buttons to chain.
-- 5.0.4- Fixes/Changes
-    - Fixed Float Sense grounded version not working.
-    - Made it so Shoot Style Smash can't animation cancel itself, either the animation has to finish or Deku can use Float Sense to cancel.
-- 5.0.3- Fixes
-    - Made sure Delaware only did 1 instance of damage
-    - Fixed Detroit Smash Special Forward from making Deku invincible after using it.
-    - Fixed calculations for health costs for Deku's supers. Previously was only doing the 10% health cost (aka as if only 1 bar was missing).	
-- 5.0.2- Fixes
-    - Made sure to check if risk of options is installed as it isn't a hard dependency
-- 5.0.1- Fixes
-    - Delaware smash release animation now plays
-- 5.0.0- Deku Final Form Rework! SOTS Patch!
-- Changes/Rework
-    - Most if not all skills have been reworked and changed
-    - Plus Ultra meter has been reworked:
-    	- Deku now gains it at a set rate and when attacking enemies, the rate is doubled
-     	- It is now split into 3 bars, and Deku's specials cost 1, 2 or 3 bars based on a neutral, backward or forward directional input.
-      	- If Deku does not have enough bars, he can still use the special at an exponentially increasing cost of health for each missing bar. (10%, 30%, 60%)
-        - When Deku switches modes, if he has atleast 1 bar, he will spend it for a Mode Switch attack with additional bonuses.
-      	- Deku still can Go Beyond! when at max meter and takes a fatal hit.
-    - Deku no longer has his old One For All special. Instead, at levels 10 and 20 he gains enhanced and mastered versions of his skills indicating his mastery over OFA. 
-    - The overall aim of this rework is to streamline some of his clunkyness with the OFA special switching. It also aims to give deku a more coherent moveset, previously it was all about just cramming as many skills as I could but it was not clear what Deku should do and it was a bit messy trying to incorporate everything. Now he still has that feel of a lot of skills but he has a clearer gameplan in both his Modes and they should interact with each other in a cool way. Furthermore, I was able to still incorporate all his quirks in here, you'll see Fa Jin, even Danger Sense and Float like before but in more balanced forms. There's also gearshift but it's more flavour with the pretense of how skills get enhanced.
-
+- 5.1.0- Update
+    - Updated deku to latest dlc
 - Next update(s)
     -  New Skills - New Mode (?Quirk Combo Mode?)
     -  Balance changes
@@ -252,6 +227,32 @@ These stats are prone to change.
 
 <details>
 <summary>Click to expand previous patch notes:</summary>
+- 5.0.6- Changes
+    - Updated damage handling to match new methods in the game
+- 5.0.5- Fixes/Changes
+    - Enable holding of the skill buttons so that skills will be used at earliest available. Previously it was not enabled due to the Shoot Style Smash cancels but now to balance that everything can just be held down beside the special buttons to chain.
+- 5.0.4- Fixes/Changes
+    - Fixed Float Sense grounded version not working.
+    - Made it so Shoot Style Smash can't animation cancel itself, either the animation has to finish or Deku can use Float Sense to cancel.
+- 5.0.3- Fixes
+    - Made sure Delaware only did 1 instance of damage
+    - Fixed Detroit Smash Special Forward from making Deku invincible after using it.
+    - Fixed calculations for health costs for Deku's supers. Previously was only doing the 10% health cost (aka as if only 1 bar was missing).	
+- 5.0.2- Fixes
+    - Made sure to check if risk of options is installed as it isn't a hard dependency
+- 5.0.1- Fixes
+    - Delaware smash release animation now plays
+- 5.0.0- Deku Final Form Rework! SOTS Patch!
+- Changes/Rework
+    - Most if not all skills have been reworked and changed
+    - Plus Ultra meter has been reworked:
+    	- Deku now gains it at a set rate and when attacking enemies, the rate is doubled
+     	- It is now split into 3 bars, and Deku's specials cost 1, 2 or 3 bars based on a neutral, backward or forward directional input.
+      	- If Deku does not have enough bars, he can still use the special at an exponentially increasing cost of health for each missing bar. (10%, 30%, 60%)
+        - When Deku switches modes, if he has atleast 1 bar, he will spend it for a Mode Switch attack with additional bonuses.
+      	- Deku still can Go Beyond! when at max meter and takes a fatal hit.
+    - Deku no longer has his old One For All special. Instead, at levels 10 and 20 he gains enhanced and mastered versions of his skills indicating his mastery over OFA. 
+    - The overall aim of this rework is to streamline some of his clunkyness with the OFA special switching. It also aims to give deku a more coherent moveset, previously it was all about just cramming as many skills as I could but it was not clear what Deku should do and it was a bit messy trying to incorporate everything. Now he still has that feel of a lot of skills but he has a clearer gameplan in both his Modes and they should interact with each other in a cool way. Furthermore, I was able to still incorporate all his quirks in here, you'll see Fa Jin, even Danger Sense and Float like before but in more balanced forms. There's also gearshift but it's more flavour with the pretense of how skills get enhanced.
 
 - 4.1.2- Bug fixes/Skill changes
     - Changed all quirk skills to cost 5 instead to reduce the price for toggling a skill off.
